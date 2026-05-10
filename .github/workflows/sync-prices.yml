@@ -1,0 +1,37 @@
+name: Sync model prices
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "20 19 * * *"
+
+permissions:
+  contents: write
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: llm-model-prices
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Sync prices
+        run: python scripts/sync_prices.py
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: sync model prices"
+          branch: llm-model-prices
+          file_pattern: prices/prices.json prices/metadata.json
