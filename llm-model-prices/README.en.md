@@ -1,0 +1,79 @@
+# LLM Model Prices
+
+English | [简体中文](README.md)
+
+Sync model pricing from Portkey and generate a One Hub / One API compatible `prices.json`.
+
+## Output
+
+Generated file:
+
+```text
+prices/prices.json
+```
+
+Format:
+
+```json
+[
+  {
+    "model": "gpt-4o",
+    "type": "tokens",
+    "channel_type": 1,
+    "input": 2.5,
+    "output": 10
+  }
+]
+```
+
+`input` and `output` are USD prices per 1M tokens.
+
+## Flow
+
+1. Fetch Portkey model pricing data.
+2. Normalize prices to USD per 1M tokens.
+3. Map upstream providers to One Hub `channel_type` values.
+4. Generate `prices/prices.json`.
+5. Generate `prices/metadata.json` for audit and debugging.
+6. Run daily with GitHub Actions.
+7. If generated files changed, commit and push automatically.
+
+## Current Sources
+
+Source:
+
+```text
+https://configs.portkey.ai/pricing/{provider}.json
+```
+
+Portkey prices are published as cents per token, and the script converts them to USD per 1M tokens.
+
+## Local Run
+
+```bash
+python scripts/sync_prices.py
+```
+
+Generated files:
+
+```text
+prices/prices.json
+prices/metadata.json
+```
+
+## GitHub Action
+
+Workflow file:
+
+```text
+.github/workflows/sync-prices.yml
+```
+
+It runs daily and can also be triggered manually from the GitHub Actions page.
+
+## Notes
+
+- Provider to `channel_type` mapping is maintained in `config/provider_channel_map.json`.
+- Unknown providers are skipped by default to avoid polluting output with incorrect mappings.
+- Non-token pricing such as image, session, and search pricing is skipped for now.
+- The script only uses Python standard library.

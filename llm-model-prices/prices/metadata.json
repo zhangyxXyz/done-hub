@@ -1,0 +1,17 @@
+{
+  "generated_at": "2026-05-10T13:22:46.050698+00:00",
+  "sources": {
+    "litellm": "https://raw.githubusercontent.com/BerriAI/litellm/main/model_prices_and_context_window.json",
+    "one_api_reference": "https://raw.githubusercontent.com/MartialBE/one-api/prices/prices.json"
+  },
+  "reference_count": 183,
+  "litellm_converted_count": 855,
+  "output_count": 1011,
+  "skipped": {
+    "sample_spec": 1,
+    "missing_provider": 0,
+    "unknown_provider": 1332,
+    "unsupported_mode": 471,
+    "missing_input_price": 48
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "portkey_base": "https://configs.portkey.ai/pricing",
+  "portkey_providers": [
+    "anthropic",
+    "bedrock",
+    "cohere",
+    "dashscope",
+    "deepseek",
+    "google",
+    "groq",
+    "jina",
+    "mistral-ai",
+    "openai",
+    "openrouter",
+    "palm",
+    "perplexity-ai",
+    "stability-ai",
+    "vertex-ai",
+    "x-ai",
+    "zhipu"
+  ]
+}
