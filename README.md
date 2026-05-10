@@ -38,6 +38,27 @@ prices/prices.json
 6. GitHub Actions 每天自动执行。
 7. 如果生成文件发生变化，自动 commit 并 push。
 
+## 模型价格 fallback
+
+如果某个模型是通过特殊配置支持，但上游价格源暂时没有该模型的价格，可以在
+`config/model_price_fallbacks.json` 中配置复用另一个模型的价格。
+
+示例：
+
+```json
+[
+  {
+    "model": "gpt-5.3-codex-spark",
+    "fallback_model": "gpt-5.3-codex",
+    "channel_type": 1
+  }
+]
+```
+
+同步脚本会在拉取并转换完上游价格后应用 fallback：如果目标模型已经存在，会保留上游价格；
+如果目标模型缺失且 fallback 模型存在，会复制 fallback 模型的 `type`、`input`、`output`
+和 `channel_type`，并把模型名替换为目标模型。应用结果会记录在 `prices/metadata.json`。
+
 ## 当前数据源
 
 数据源：

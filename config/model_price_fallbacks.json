@@ -1,0 +1,7 @@
+[
+  {
+    "model": "gpt-5.3-codex-spark",
+    "fallback_model": "gpt-5.3-codex",
+    "channel_type": 1
+  }
+]

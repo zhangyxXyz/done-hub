@@ -38,6 +38,28 @@ Format:
 6. Run daily with GitHub Actions.
 7. If generated files changed, commit and push automatically.
 
+## Model Price Fallbacks
+
+If a model is supported by special configuration but is temporarily missing from the upstream pricing source,
+add an entry to `config/model_price_fallbacks.json` to reuse another model's price.
+
+Example:
+
+```json
+[
+  {
+    "model": "gpt-5.3-codex-spark",
+    "fallback_model": "gpt-5.3-codex",
+    "channel_type": 1
+  }
+]
+```
+
+The sync script applies fallbacks after upstream prices are fetched and converted. If the target model already
+exists, the upstream price is kept. If the target is missing and the fallback model exists, the script copies the
+fallback model's `type`, `input`, `output`, and `channel_type`, replacing only the model name. Results are recorded
+in `prices/metadata.json`.
+
 ## Current Sources
 
 Source:

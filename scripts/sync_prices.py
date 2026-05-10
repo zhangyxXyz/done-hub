@@ -12,9 +12,16 @@ CONFIG_DIR = ROOT / "config"
 PRICES_DIR = ROOT / "prices"
 OUTPUT_PATH = PRICES_DIR / "prices.json"
 METADATA_PATH = PRICES_DIR / "metadata.json"
+MODEL_PRICE_FALLBACKS_PATH = CONFIG_DIR / "model_price_fallbacks.json"
 
 def load_json(path):
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def load_optional_json(path, default):
+    if not path.exists():
+        return default
+    return load_json(path)
 
 
 def fetch_json(url):
@@ -112,9 +119,56 @@ def sort_prices(prices):
     )
 
 
+def apply_model_price_fallbacks(prices, fallbacks):
+    results = []
+    for fallback in fallbacks:
+        model = fallback.get("model")
+        fallback_model = fallback.get("fallback_model")
+        channel_type = fallback.get("channel_type")
+        if not model or not fallback_model or channel_type is None:
+            results.append(
+                {
+                    "model": model,
+                    "fallback_model": fallback_model,
+                    "channel_type": channel_type,
+                    "status": "invalid_config",
+                }
+            )
+            continue
+
+        target_key = price_key(model, channel_type)
+        source_key = price_key(fallback_model, channel_type)
+        result = {
+            "model": model,
+            "fallback_model": fallback_model,
+            "channel_type": channel_type,
+        }
+
+        if target_key in prices:
+            result["status"] = "exists"
+            results.append(result)
+            continue
+
+        source = prices.get(source_key)
+        if source is None:
+            result["status"] = "missing_fallback_model"
+            results.append(result)
+            continue
+
+        prices[target_key] = {
+            **source,
+            "model": model,
+        }
+        result["status"] = "applied"
+        results.append(result)
+
+    return results
+
+
 def main():
     sources = load_json(CONFIG_DIR / "sources.json")
     provider_channel_map = load_json(CONFIG_DIR / "provider_channel_map.json")
+    model_price_fallbacks = load_optional_json(MODEL_PRICE_FALLBACKS_PATH, [])
 
     prices = {}
     portkey_counts = {}
@@ -138,6 +192,7 @@ def main():
         portkey_skipped[provider] = provider_skipped
         portkey_total += len(provider_prices)
 
+    fallback_results = apply_model_price_fallbacks(prices, model_price_fallbacks)
     output_rows = sort_prices(prices)
 
     PRICES_DIR.mkdir(parents=True, exist_ok=True)
@@ -154,6 +209,7 @@ def main():
         "portkey_errors": portkey_errors,
         "output_count": len(output_rows),
         "skipped": portkey_skipped,
+        "model_price_fallbacks": fallback_results,
     }
     METADATA_PATH.write_text(
         json.dumps(metadata, ensure_ascii=False, indent=2) + "\n",
