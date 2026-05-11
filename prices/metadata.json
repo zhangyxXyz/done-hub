@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-10T19:43:07.544574+00:00",
+  "generated_at": "2026-05-11T20:00:06.928205+00:00",
   "sources": {
     "portkey_base": "https://configs.portkey.ai/pricing",
     "portkey_providers": [
@@ -22,28 +22,28 @@
       "zhipu"
     ]
   },
-  "portkey_converted_count": 1449,
+  "portkey_converted_count": 1453,
   "portkey_provider_counts": {
     "anthropic": 29,
     "bedrock": 131,
     "cohere": 19,
     "dashscope": 141,
     "deepseek": 2,
-    "google": 120,
+    "google": 122,
     "groq": 21,
     "jina": 10,
     "mistral-ai": 53,
     "openai": 168,
-    "openrouter": 505,
+    "openrouter": 506,
     "palm": 2,
     "perplexity-ai": 28,
     "stability-ai": 0,
-    "vertex-ai": 127,
+    "vertex-ai": 128,
     "x-ai": 77,
     "zhipu": 16
   },
   "portkey_errors": {},
-  "output_count": 1450,
+  "output_count": 1454,
   "skipped": {
     "anthropic": {
       "unknown_provider": 0,

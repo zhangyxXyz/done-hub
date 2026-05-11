@@ -3493,6 +3493,13 @@
     "output": 3
   },
   {
+    "model": "google/gemini-3.1-flash-lite",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.25,
+    "output": 1.5
+  },
+  {
     "model": "google/gemini-3.1-flash-lite-preview",
     "type": "tokens",
     "channel_type": 20,
@@ -6783,6 +6790,20 @@
     "output": 3
   },
   {
+    "model": "gemini-3.1-flash-lite-gt-128k",
+    "type": "tokens",
+    "channel_type": 25,
+    "input": 0.25,
+    "output": 1.5
+  },
+  {
+    "model": "gemini-3.1-flash-lite-lte-128k",
+    "type": "tokens",
+    "channel_type": 25,
+    "input": 0.25,
+    "output": 1.5
+  },
+  {
     "model": "gemini-3.1-flash-lite-preview-gt-128k",
     "type": "tokens",
     "channel_type": 25,
@@ -9189,6 +9210,13 @@
     "channel_type": 42,
     "input": 0.5,
     "output": 3
+  },
+  {
+    "model": "gemini-3.1-flash-lite",
+    "type": "tokens",
+    "channel_type": 42,
+    "input": 0.25,
+    "output": 1.5
   },
   {
     "model": "gemini-3.1-flash-lite-preview",
