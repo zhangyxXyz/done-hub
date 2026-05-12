@@ -29,6 +29,53 @@ import i18n from 'i18n/i18n';
 const App = () => {
   const dispatch = useDispatch();
   const customization = useSelector((state) => state.customization);
+  const siteInfo = useSelector((state) => state.siteInfo);
+
+  useEffect(() => {
+    const syncResolvedTheme = () => {
+      const storedTheme = localStorage.getItem('theme');
+      const resolvedTheme =
+        storedTheme === 'dark' || storedTheme === 'light'
+          ? storedTheme
+          : window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'dark'
+            : 'light';
+
+      document.documentElement.dataset.theme = resolvedTheme;
+      document.documentElement.dataset.themeMode = storedTheme || 'auto';
+      document.documentElement.style.colorScheme = resolvedTheme;
+      localStorage.setItem('resolved_theme', resolvedTheme);
+    };
+
+    syncResolvedTheme();
+
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    mediaQuery.addEventListener('change', syncResolvedTheme);
+
+    return () => {
+      mediaQuery.removeEventListener('change', syncResolvedTheme);
+    };
+  }, [customization.theme]);
+
+  useEffect(() => {
+    const styleId = 'custom-css';
+    let style = document.getElementById(styleId);
+
+    if (!siteInfo.custom_css) {
+      style?.remove();
+      localStorage.removeItem('custom_css');
+      return;
+    }
+
+    if (!style) {
+      style = document.createElement('style');
+      style.id = styleId;
+      document.head.appendChild(style);
+    }
+
+    style.textContent = siteInfo.custom_css;
+    localStorage.setItem('custom_css', siteInfo.custom_css);
+  }, [siteInfo.custom_css]);
 
   useEffect(() => {
     const storedTheme = localStorage.getItem('theme');

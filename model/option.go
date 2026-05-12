@@ -63,6 +63,7 @@ func InitOptionMap() {
 	config.GlobalOption.RegisterValue("Notice")
 	config.GlobalOption.RegisterValue("About")
 	config.GlobalOption.RegisterValue("HomePageContent")
+	config.GlobalOption.RegisterValue("CustomCSS")
 	config.GlobalOption.RegisterString("Footer", &config.Footer)
 	config.GlobalOption.RegisterString("SystemName", &config.SystemName)
 	config.GlobalOption.RegisterString("Logo", &config.Logo)

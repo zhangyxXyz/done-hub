@@ -21,6 +21,7 @@ import { API } from 'utils/api';
 import { marked } from 'marked';
 import { LoadStatusContext } from 'contexts/StatusContext';
 import { useTranslation } from 'react-i18next';
+import { PROJECT_REPOSITORY_API_URL, PROJECT_REPOSITORY_URL } from 'constants/CommonConstants';
 
 const OtherSetting = () => {
   const { t } = useTranslation();
@@ -31,6 +32,7 @@ const OtherSetting = () => {
     SystemName: '',
     Logo: '',
     HomePageContent: '',
+    CustomCSS: '',
     AnalyticsCode: ''
   });
   let [loading, setLoading] = useState(false);
@@ -121,7 +123,7 @@ const OtherSetting = () => {
   };
 
   const openGitHubRelease = () => {
-    window.location = 'https://github.com/deanxv/done-hub/releases/latest';
+    window.location = `${PROJECT_REPOSITORY_URL}/releases/latest`;
   };
 
   const checkUpdate = async () => {
@@ -130,10 +132,9 @@ const OtherSetting = () => {
         showError('无法获取当前版本号');
         return;
       }
-
       // 如果版本前缀是v开头的
       if (import.meta.env.VITE_APP_VERSION.startsWith('v')) {
-        const res = await API.get('https://api.github.com/repos/deanxv/done-hub/releases/latest');
+        const res = await API.get(`${PROJECT_REPOSITORY_API_URL}/releases/latest`);
         const { tag_name, body } = res.data;
         if (tag_name === import.meta.env.VITE_APP_VERSION) {
           showSuccess(`已是最新版本：${tag_name}`);
@@ -145,7 +146,9 @@ const OtherSetting = () => {
           setShowUpdateModal(true);
         }
       } else {
-        const res = await API.get('https://api.github.com/repos/deanxv/done-hub/commits/main');
+        const repoRes = await API.get(PROJECT_REPOSITORY_API_URL);
+        const defaultBranch = repoRes.data.default_branch || 'dev';
+        const res = await API.get(`${PROJECT_REPOSITORY_API_URL}/commits/${defaultBranch}`);
         const { sha, commit } = res.data;
         const newVersion = 'dev-' + sha.substr(0, 7);
         if (newVersion === import.meta.env.VITE_APP_VERSION) {
@@ -319,6 +322,26 @@ const OtherSetting = () => {
             <Grid xs={12}>
               <Button variant="contained" onClick={submitAnalyticsCode}>
                 保存统计代码
+              </Button>
+            </Grid>
+            <Grid xs={12}>
+              <FormControl fullWidth>
+                <TextField
+                  multiline
+                  maxRows={15}
+                  id="CustomCSS"
+                  label="自定义 CSS"
+                  value={inputs.CustomCSS}
+                  name="CustomCSS"
+                  onChange={handleInputChange}
+                  minRows={10}
+                  placeholder="在此输入全局自定义 CSS，可覆盖首页、关于、页脚等自定义内容和站点样式"
+                />
+              </FormControl>
+            </Grid>
+            <Grid xs={12}>
+              <Button variant="contained" onClick={() => submitOption('CustomCSS')}>
+                保存自定义 CSS
               </Button>
             </Grid>
           </Grid>

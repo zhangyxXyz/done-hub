@@ -65,7 +65,7 @@ _This project is a secondary development based on [one-hub](https://github.com/M
 
 ## Deployment
 
-> Follow the original deployment tutorial and replace the image with `deanxv/done-hub`.
+> Follow the original deployment tutorial and replace the image with `ghcr.io/zhangyxx/done-hub`.
 
 > Database-compatible; the original version can directly pull this image for migration.
 

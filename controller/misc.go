@@ -37,6 +37,7 @@ func GetStatus(c *gin.Context) {
 			"logo":                 config.Logo,
 			"language":             config.Language,
 			"footer_html":          config.Footer,
+			"custom_css":           config.GlobalOption.Get("CustomCSS"),
 			"analytics_code":       config.AnalyticsCode,
 			"wechat_qrcode":        config.WeChatAccountQRCodeImageURL,
 			"register_enabled":     config.RegisterEnabled,

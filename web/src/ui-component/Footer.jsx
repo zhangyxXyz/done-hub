@@ -3,6 +3,7 @@ import { Link, Container, Box } from '@mui/material';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { PROJECT_REPOSITORY_URL } from 'constants/CommonConstants';
 
 // ==============================|| FOOTER - AUTHENTICATION 2 & 3 ||============================== //
 
@@ -17,12 +18,12 @@ const Footer = () => {
           <div className="custom-footer" dangerouslySetInnerHTML={{ __html: siteInfo.footer_html }}></div>
         ) : (
           <>
-            <Link href="https://github.com/deanxv/done-hub" target="_blank">
+            <Link href={PROJECT_REPOSITORY_URL} target="_blank">
               {siteInfo.system_name} {import.meta.env.VITE_APP_VERSION}{' '}
             </Link>
             {t('footer.developedBy')}{' '}
-            <Link href="https://github.com/deanxv" target="_blank">
-              deanxv
+            <Link href="https://github.com/zhangyxXyz" target="_blank">
+              zhangyxXyz
             </Link>
             ，{t('footer.basedOn')}{' '}
             <Link href="https://github.com/MartialBE" target="_blank">

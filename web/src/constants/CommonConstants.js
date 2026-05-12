@@ -1,5 +1,8 @@
 export const ITEMS_PER_PAGE = 10; // this value must keep same as the one defined in backend!
 export const PAGE_SIZE_OPTIONS = [10, 30, 50, 100];
+export const PROJECT_REPOSITORY = 'zhangyxXyz/done-hub';
+export const PROJECT_REPOSITORY_URL = `https://github.com/${PROJECT_REPOSITORY}`;
+export const PROJECT_REPOSITORY_API_URL = `https://api.github.com/repos/${PROJECT_REPOSITORY}`;
 
 // 页面分页大小本地存储键
 const PAGE_SIZE_STORAGE_KEY = 'user_page_sizes';

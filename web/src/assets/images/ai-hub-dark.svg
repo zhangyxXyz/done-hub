@@ -1,0 +1,48 @@
+<svg width="32" height="32" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="AI HUB Avatar Split Aura">
+  <defs>
+    <linearGradient id="hubGradient" x1="8%" y1="10%" x2="92%" y2="90%">
+      <stop offset="0%" stop-color="#8e83f5"/>
+      <stop offset="52%" stop-color="#63b8f5"/>
+      <stop offset="100%" stop-color="#43e0c1"/>
+    </linearGradient>
+    <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="38%" stop-color="#8e83f5" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#63b8f5" stop-opacity="0.2"/>
+    </radialGradient>
+    <clipPath id="leftSplit">
+      <rect x="0" y="0" width="49" height="100"/>
+    </clipPath>
+    <clipPath id="rightSplit">
+      <rect x="51" y="0" width="49" height="100"/>
+    </clipPath>
+  </defs>
+
+  <g transform="translate(50 50)">
+    <ellipse rx="40" ry="15" transform="rotate(20)" fill="none" stroke="url(#hubGradient)" stroke-width="1.2" stroke-opacity="0.55"/>
+    <ellipse rx="35" ry="28" transform="rotate(-30)" fill="none" stroke="url(#hubGradient)" stroke-width="1.15" stroke-opacity="0.75"/>
+    <ellipse rx="25" ry="25" fill="none" stroke="url(#hubGradient)" stroke-width="0.8" stroke-opacity="0.38"/>
+  </g>
+
+  <g clip-path="url(#leftSplit)" stroke="url(#hubGradient)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 63 L32 42 L42 63" fill="none" stroke-width="4"/>
+    <path d="M27 53 H37" stroke-width="3"/>
+    <path d="M47 38 V64" stroke-width="4"/>
+    <circle cx="22" cy="63" r="2.5" fill="url(#hubGradient)" stroke="none"/>
+    <circle cx="32" cy="42" r="2.5" fill="url(#hubGradient)" stroke="none"/>
+    <circle cx="42" cy="63" r="2.5" fill="url(#hubGradient)" stroke="none"/>
+  </g>
+
+  <g clip-path="url(#rightSplit)" stroke="url(#hubGradient)" stroke-linecap="round">
+    <path d="M58 50 H78" stroke-width="4"/>
+    <path d="M68 40 V60" stroke-width="4"/>
+    <circle cx="58" cy="50" r="4.2" fill="url(#hubGradient)" stroke="none"/>
+    <circle cx="78" cy="50" r="4.2" fill="url(#hubGradient)" stroke="none"/>
+    <circle cx="68" cy="40" r="4.2" fill="url(#hubGradient)" stroke="none"/>
+    <circle cx="68" cy="60" r="4.2" fill="url(#hubGradient)" stroke="none"/>
+  </g>
+
+  <path d="M50 24 V76" stroke="url(#hubGradient)" stroke-width="1.4" stroke-opacity="0.55" stroke-linecap="round"/>
+  <circle cx="50" cy="50" r="9" fill="url(#coreGlow)"/>
+  <circle cx="67.2" cy="23.2" r="2.7" fill="url(#hubGradient)" transform="rotate(-30 50 50)"/>
+</svg>
