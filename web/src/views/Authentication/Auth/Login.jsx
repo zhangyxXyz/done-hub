@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -18,6 +19,8 @@ const Login = () => {
   const { t } = useTranslation();
   const theme = useTheme();
   const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
+  const siteInfo = useSelector((state) => state.siteInfo);
+  const registerEnabled = siteInfo.register_enabled !== false;
 
   return (
     <AuthWrapper>
@@ -46,16 +49,20 @@ const Login = () => {
                   <Grid item xs={12}>
                     <AuthLogin />
                   </Grid>
-                  <Grid item xs={12}>
-                    <Divider />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Grid item container direction="column" alignItems="center" xs={12}>
-                      <Typography component={Link} to="/register" variant="subtitle1" sx={{ textDecoration: 'none' }}>
-                        {t('menu.signup')}
-                      </Typography>
-                    </Grid>
-                  </Grid>
+                  {registerEnabled && (
+                    <>
+                      <Grid item xs={12}>
+                        <Divider />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Grid item container direction="column" alignItems="center" xs={12}>
+                          <Typography component={Link} to="/register" variant="subtitle1" sx={{ textDecoration: 'none' }}>
+                            {t('menu.signup')}
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                    </>
+                  )}
                 </Grid>
               </AuthCardWrapper>
             </Grid>

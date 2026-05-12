@@ -6,11 +6,17 @@ import { useState } from 'react';
 import { API } from 'utils/api';
 import { showError, copy } from 'utils/common';
 import { useTranslation } from 'react-i18next'; // Import useTranslation hook
+import { useSelector } from 'react-redux';
 
 const InviteCard = () => {
   const { t } = useTranslation(); // Initialize useTranslation hook
   const theme = useTheme();
+  const siteInfo = useSelector((state) => state.siteInfo);
   const [inviteUrl, setInviteUrl] = useState('');
+
+  if (siteInfo.register_enabled === false) {
+    return null;
+  }
 
   const handleInviteUrl = async () => {
     if (inviteUrl) {

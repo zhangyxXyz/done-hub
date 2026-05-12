@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -19,6 +20,11 @@ const Register = () => {
   const { t } = useTranslation();
   const theme = useTheme();
   const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
+  const siteInfo = useSelector((state) => state.siteInfo);
+
+  if (!siteInfo.isLoading && siteInfo.register_enabled === false) {
+    return <Navigate to="/login" replace />;
+  }
 
   return (
     <AuthWrapper>

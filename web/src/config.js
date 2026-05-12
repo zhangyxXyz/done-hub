@@ -28,6 +28,7 @@ const config = {
     system_name: 'Done Hub',
     language: 'zh_CN',
     top_up_link: '',
+    register_enabled: true,
     turnstile_check: false,
     turnstile_site_key: '',
     version: '',
