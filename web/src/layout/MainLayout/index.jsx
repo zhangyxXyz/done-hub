@@ -103,6 +103,7 @@ const MainLayout = () => {
 
   return (
     <Box
+      data-layout="main"
       sx={{
         display: 'flex',
         overflow: 'hidden',

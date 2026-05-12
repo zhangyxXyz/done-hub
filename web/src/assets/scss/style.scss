@@ -136,3 +136,133 @@
     transform: rotate(360deg);
   }
 }
+
+// ==============================|| AI HUB GLASS THEME ||============================== //
+
+:root {
+  --aihub-bg:
+    radial-gradient(circle at 22% 18%, rgba(59, 130, 246, 0.18), transparent 28%),
+    radial-gradient(circle at 78% 22%, rgba(20, 184, 166, 0.16), transparent 26%),
+    linear-gradient(135deg, #f8fbff 0%, #eef6ff 46%, #eaf7f4 100%);
+  --aihub-text: #172033;
+  --aihub-muted: rgba(23, 32, 51, 0.68);
+  --aihub-panel: rgba(255, 255, 255, 0.34);
+  --aihub-panel-strong: rgba(255, 255, 255, 0.42);
+  --aihub-border: rgba(30, 64, 175, 0.14);
+  --aihub-soft: rgba(255, 255, 255, 0.28);
+  --aihub-link: #0877c8;
+  --aihub-link-hover: #005a9e;
+  --aihub-shadow: 0 24px 70px rgba(15, 23, 42, 0.13);
+  --aihub-header: rgba(255, 255, 255, 0.24);
+  --aihub-scroll-thumb: rgba(23, 32, 51, 0.2);
+}
+
+html[data-theme='dark'] {
+  --aihub-bg:
+    radial-gradient(circle at 22% 18%, rgba(96, 165, 250, 0.22), transparent 28%),
+    radial-gradient(circle at 78% 22%, rgba(45, 212, 191, 0.16), transparent 26%),
+    linear-gradient(135deg, #0b1220 0%, #102238 48%, #0f2f35 100%);
+  --aihub-text: #f8fbff;
+  --aihub-muted: rgba(248, 251, 255, 0.72);
+  --aihub-panel: rgba(255, 255, 255, 0.1);
+  --aihub-panel-strong: rgba(15, 23, 42, 0.34);
+  --aihub-border: rgba(255, 255, 255, 0.16);
+  --aihub-soft: rgba(255, 255, 255, 0.08);
+  --aihub-link: #4db4ff;
+  --aihub-link-hover: #8bd0ff;
+  --aihub-shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
+  --aihub-header: rgba(15, 23, 42, 0.22);
+  --aihub-scroll-thumb: rgba(248, 251, 255, 0.24);
+}
+
+body,
+#root,
+#root > [data-layout='main'],
+#root > [data-layout='minimal'] {
+  background: var(--aihub-bg) !important;
+  color: var(--aihub-text);
+}
+
+#root > [data-layout='main'] > header,
+#root > [data-layout='minimal'] > header {
+  background: var(--aihub-header) !important;
+  border-bottom: 1px solid var(--aihub-border) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(135%);
+  backdrop-filter: blur(18px) saturate(135%);
+}
+
+#root > [data-layout='main'] main,
+#root > [data-layout='minimal'] > .MuiBox-root {
+  background: transparent !important;
+}
+
+#root > [data-layout='main'] .MuiDrawer-paper {
+  background: var(--aihub-panel) !important;
+  border-right: 1px solid var(--aihub-border) !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: blur(22px) saturate(135%);
+  backdrop-filter: blur(22px) saturate(135%);
+  background-clip: padding-box;
+}
+
+#root > [data-layout='main'] :is(.MuiCard-root, .MuiPaper-root):not(header):not(.MuiMenu-paper):not(.MuiPopover-paper):not(.MuiDialog-paper):not(.MuiDrawer-paper),
+#root > [data-layout='minimal'] :is(.MuiCard-root, .MuiPaper-root):not(header):not(.MuiMenu-paper):not(.MuiPopover-paper):not(.MuiDialog-paper):not(.MuiDrawer-paper) {
+  background: var(--aihub-panel-strong) !important;
+  border: 1px solid var(--aihub-border) !important;
+  box-shadow: var(--aihub-shadow) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(135%);
+  backdrop-filter: blur(22px) saturate(135%);
+  background-clip: padding-box;
+}
+
+#root > [data-layout='main'] :is(.MuiCardContent-root, .MuiCardHeader-root, .MuiDataGrid-root, .MuiTableContainer-root),
+#root > [data-layout='minimal'] :is(.MuiCardContent-root, .MuiCardHeader-root, .MuiDataGrid-root, .MuiTableContainer-root) {
+  background: transparent !important;
+}
+
+#root > [data-layout='main'] :is(.MuiInputBase-root, .MuiToggleButton-root, .MuiChip-root, .MuiAvatar-root, .MuiButtonBase-root:not(.MuiButton-root)),
+#root > [data-layout='minimal'] :is(.MuiInputBase-root, .MuiToggleButton-root, .MuiChip-root, .MuiAvatar-root, .MuiButtonBase-root:not(.MuiButton-root)) {
+  background: var(--aihub-soft) !important;
+  border-color: var(--aihub-border) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  backdrop-filter: blur(14px) saturate(130%);
+}
+
+#root > [data-layout='main'] :is(.MuiDataGrid-columnHeaders, .MuiTableHead-root .MuiTableCell-root),
+#root > [data-layout='minimal'] :is(.MuiDataGrid-columnHeaders, .MuiTableHead-root .MuiTableCell-root) {
+  background: var(--aihub-soft) !important;
+  color: var(--aihub-text) !important;
+}
+
+#root > [data-layout='main'] :is(.MuiDivider-root, .MuiDataGrid-withBorderColor, .MuiTableCell-root),
+#root > [data-layout='minimal'] :is(.MuiDivider-root, .MuiDataGrid-withBorderColor, .MuiTableCell-root) {
+  border-color: var(--aihub-border) !important;
+}
+
+#root > [data-layout='main'] :is(a, .MuiLink-root),
+#root > [data-layout='minimal'] :is(a, .MuiLink-root) {
+  color: var(--aihub-link);
+}
+
+#root > [data-layout='main'] :is(a, .MuiLink-root):hover,
+#root > [data-layout='minimal'] :is(a, .MuiLink-root):hover {
+  color: var(--aihub-link-hover);
+}
+
+#root > [data-layout='main'] ::-webkit-scrollbar-thumb,
+#root > [data-layout='minimal'] ::-webkit-scrollbar-thumb {
+  background: var(--aihub-scroll-thumb) !important;
+}
+
+#root > [data-layout='minimal'] .auth-wrapper {
+  background: transparent !important;
+}
+
+#root > [data-layout='minimal'] .auth-card.MuiCard-root,
+#root > [data-layout='minimal'] .auth-card.MuiPaper-root {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
