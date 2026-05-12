@@ -27,6 +27,6 @@ _AI Hub fork 自 [done-hub](https://github.com/deanxv/done-hub)，done-hub 是�
 ## Thanks
 
 <p dir="auto">
-  <a href="https://github.com/deanxv/done-hub"><img src="https://img.shields.io/badge/Done--Hub-github.com%2Fdeanxv%2Fdone--hub-1f6feb?style=flat-square&logo=github&logoColor=white" alt="Done-Hub"></a>
+  <a href="https://github.com/deanxv/done-hub"><img src="https://img.shields.io/badge/Done--Hub-github.com%2Fdeanxv%2Fdone--hub-1f6feb?style=flat-square&logo=github&logoColor=white" alt="Done-Hub"></a><br>
   <a href="https://github.com/MartialBE/one-api"><img src="https://img.shields.io/badge/One--Hub-github.com%2FMartialBE%2Fone--api-1f6feb?style=flat-square&logo=github&logoColor=white" alt="One-Hub"></a>
 </p>
