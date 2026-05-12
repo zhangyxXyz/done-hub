@@ -27,7 +27,7 @@ const AuthWrapper = ({ children }) => {
     return <AuthStyle>加载中...</AuthStyle>;
   }
 
-  return <AuthStyle> {children} </AuthStyle>;
+  return <AuthStyle className="auth-wrapper"> {children} </AuthStyle>;
 };
 
 export default AuthWrapper;
