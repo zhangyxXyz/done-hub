@@ -26,13 +26,13 @@ _AI Hub fork 自 [done-hub](https://github.com/deanxv/done-hub)，done-hub 是�
 
 ## Thanks
 
-<table>
+<table style="border: 0;">
   <tr>
-    <td valign="middle" width="24"><img src="https://cdn.simpleicons.org/github/1f6feb" width="18" height="18" alt="GitHub"></td>
-    <td valign="middle"><a href="https://github.com/deanxv/done-hub"><strong>Done-Hub</strong></a> · <a href="https://github.com/deanxv/done-hub">https://github.com/deanxv/done-hub</a></td>
+    <td valign="middle" width="24" style="border: 0;"><img src="https://cdn.simpleicons.org/github/1f6feb" width="18" height="18" alt="GitHub"></td>
+    <td valign="middle" style="border: 0;"><a href="https://github.com/deanxv/done-hub"><strong>Done-Hub</strong></a> · <a href="https://github.com/deanxv/done-hub">https://github.com/deanxv/done-hub</a></td>
   </tr>
   <tr>
-    <td valign="middle" width="24"><img src="https://cdn.simpleicons.org/github/1f6feb" width="18" height="18" alt="GitHub"></td>
-    <td valign="middle"><a href="https://github.com/MartialBE/one-api"><strong>One-Hub</strong></a> · <a href="https://github.com/MartialBE/one-api">https://github.com/MartialBE/one-api</a></td>
+    <td valign="middle" width="24" style="border: 0;"><img src="https://cdn.simpleicons.org/github/1f6feb" width="18" height="18" alt="GitHub"></td>
+    <td valign="middle" style="border: 0;"><a href="https://github.com/MartialBE/one-api"><strong>One-Hub</strong></a> · <a href="https://github.com/MartialBE/one-api">https://github.com/MartialBE/one-api</a></td>
   </tr>
 </table>
