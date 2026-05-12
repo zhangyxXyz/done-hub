@@ -52,4 +52,4 @@ jobs:
           draft: true
           generate_release_notes: true
         env:
-          GITHUB_TOKEN: ${{ secrets.GT_Token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
