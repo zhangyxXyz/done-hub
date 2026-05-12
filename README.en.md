@@ -19,30 +19,16 @@ _AI Hub is forked from [done-hub](https://github.com/deanxv/done-hub), an upstre
 
 ## Our Changes
 
-- Updated project branding, logo, footer, and default repository links.
-- Improved theme presentation for visitor pages including home, pricing, about, and chat.
-- Added global custom CSS settings for shared customization across custom pages, footer, and site styles.
+- Personalized style adjustments with global custom CSS for custom pages, footer, and site-wide overrides.
 - Added system theme support for custom HTML / iframe content.
 - Improved GitHub Actions, update checks, and release links for forked deployments.
 - Fixed the registration entry still showing when registration is disabled.
 
 ## Thanks
 
-<table align="center">
-  <tr>
-    <td align="center" width="220">
-      <a href="https://github.com/deanxv/done-hub">
-        <img src="https://cdn.simpleicons.org/github/1f6feb" width="22" height="22" alt="GitHub">
-        <br>
-        <strong>done-hub</strong>
-      </a>
-    </td>
-    <td align="center" width="220">
-      <a href="https://github.com/MartialBE/one-api">
-        <img src="https://cdn.simpleicons.org/github/1f6feb" width="22" height="22" alt="GitHub">
-        <br>
-        <strong>one-hub</strong>
-      </a>
-    </td>
-  </tr>
-</table>
+<p>
+  <img src="https://cdn.simpleicons.org/github/1f6feb" width="18" height="18" alt="GitHub"> <a href="https://github.com/deanxv/done-hub"><strong>Done-Hub</strong></a> · <a href="https://github.com/deanxv/done-hub">https://github.com/deanxv/done-hub</a>
+</p>
+<p>
+  <img src="https://cdn.simpleicons.org/github/1f6feb" width="18" height="18" alt="GitHub"> <a href="https://github.com/MartialBE/one-api"><strong>One-Hub</strong></a> · <a href="https://github.com/MartialBE/one-api">https://github.com/MartialBE/one-api</a>
+</p>
