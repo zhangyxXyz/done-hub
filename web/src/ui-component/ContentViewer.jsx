@@ -69,6 +69,10 @@ const customRuntimeScript = `<script data-aihub-runtime>
 })();
 </script>`;
 
+const iframeScrollStyle = `<style data-aihub-iframe-scroll>
+html,body{min-height:100%;height:auto!important;overflow:auto!important;-webkit-overflow-scrolling:touch;}
+</style>`;
+
 const appendToHead = (html, insertion) => {
   if (!insertion || html.includes(insertion.slice(0, insertion.indexOf('>') + 1))) {
     return html;
@@ -139,7 +143,7 @@ const injectCustomCss = (html, customCss, resolvedTheme, language) => {
 
     doc.querySelectorAll('iframe[srcdoc]').forEach((iframe) => {
       const srcdoc = setHtmlRuntimeAttributes(iframe.getAttribute('srcdoc') || '', resolvedTheme, language);
-      iframe.setAttribute('srcdoc', appendToHead(appendToHead(srcdoc, customRuntimeScript), styleTag));
+      iframe.setAttribute('srcdoc', appendToHead(appendToHead(appendToHead(srcdoc, customRuntimeScript), styleTag), iframeScrollStyle));
     });
 
     return doc.body.innerHTML;
@@ -253,7 +257,7 @@ const ContentViewer = ({
     <Paper
       elevation={0}
       sx={{
-        overflow: 'hidden',
+        overflow: disablePadding ? 'auto' : 'hidden',
         backgroundColor: disablePadding ? theme.palette.background.default : 'transparent',
         borderRadius: disablePadding ? 0 : undefined,
         m: disablePadding ? 0 : undefined,
@@ -291,7 +295,8 @@ const ContentViewer = ({
             m: disablePadding ? '0 !important' : undefined,
             width: disablePadding ? '100vw' : undefined,
             height: disablePadding ? '100dvh' : undefined,
-            overflow: disablePadding ? 'hidden' : undefined,
+            overflow: disablePadding ? 'auto' : undefined,
+            WebkitOverflowScrolling: disablePadding ? 'touch' : undefined,
             '& img': {
               maxWidth: '100%',
               height: 'auto'
