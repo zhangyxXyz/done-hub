@@ -110,7 +110,6 @@ func GetTokenModel(key string) (token *Token, err error) {
 
 	switch len(key) {
 	case 48:
-		validUser = true
 		if config.RedisEnabled {
 			exists, _ := redis.RedisSIsMember(OldUserTokensCacheKey, key)
 			if !exists {
@@ -119,12 +118,12 @@ func GetTokenModel(key string) (token *Token, err error) {
 		}
 	case 59:
 		tokenId, userId, err = common.ValidateToken(key)
-		if err != nil || userId == 0 || tokenId == 0 {
-			return nil, ErrTokenInvalid
+		if err == nil && userId != 0 && tokenId != 0 {
+			if userEnabled, err := CacheIsUserEnabled(userId); err != nil || !userEnabled {
+				return nil, ErrTokenInvalid
+			}
 		}
-		if userEnabled, err := CacheIsUserEnabled(userId); err != nil || !userEnabled {
-			return nil, ErrTokenInvalid
-		}
+		validUser = true
 	default:
 		return nil, ErrTokenInvalid
 	}
@@ -236,6 +235,25 @@ func (token *Token) Update() error {
 	// 防止Redis缓存不生效，直接删除
 	if err == nil && config.RedisEnabled {
 		redis.RedisDel(fmt.Sprintf(UserTokensKey, token.Key))
+	}
+
+	return err
+}
+
+func (token *Token) RefreshKey() error {
+	oldKey := token.Key
+	tokenKey, err := common.GenerateRandomToken()
+	if err != nil {
+		return err
+	}
+
+	err = DB.Model(token).Select("key").Update("key", tokenKey).Error
+	if err == nil {
+		token.Key = tokenKey
+	}
+	if err == nil && config.RedisEnabled {
+		redis.RedisDel(fmt.Sprintf(UserTokensKey, oldKey))
+		redis.RedisDel(fmt.Sprintf(UserTokensKey, tokenKey))
 	}
 
 	return err

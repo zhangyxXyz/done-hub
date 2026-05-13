@@ -48,7 +48,9 @@ export default function TokensTableRow({ item, manageToken, handleOpenModal, set
   const [open, setOpen] = useState(null)
   const [menuItems, setMenuItems] = useState(null)
   const [openDelete, setOpenDelete] = useState(false)
+  const [openRefreshKey, setOpenRefreshKey] = useState(false)
   const [deleting, setDeleting] = useState(false)
+  const [refreshingKey, setRefreshingKey] = useState(false)
   const [statusSwitch, setStatusSwitch] = useState(item.status)
   const siteInfo = useSelector((state) => state.siteInfo)
   const chatLinks = getChatLinks()
@@ -62,6 +64,15 @@ export default function TokensTableRow({ item, manageToken, handleOpenModal, set
 
   const handleDeleteClose = () => {
     setOpenDelete(false)
+  }
+
+  const handleRefreshKeyOpen = () => {
+    handleCloseMenu()
+    setOpenRefreshKey(true)
+  }
+
+  const handleRefreshKeyClose = () => {
+    setOpenRefreshKey(false)
   }
 
   const handleOpenMenu = (event, type) => {
@@ -103,6 +114,19 @@ export default function TokensTableRow({ item, manageToken, handleOpenModal, set
     }
   }
 
+  const handleRefreshKey = async() => {
+    if (refreshingKey) return
+
+    handleCloseMenu()
+    setRefreshingKey(true)
+    try {
+      await manageToken(item.id, 'refresh_key', '')
+    } finally {
+      setRefreshingKey(false)
+      setOpenRefreshKey(false)
+    }
+  }
+
   const actionItems = createMenu([
     {
       text: t('common.edit'),
@@ -112,6 +136,12 @@ export default function TokensTableRow({ item, manageToken, handleOpenModal, set
         handleOpenModal()
         setModalTokenId(item.id)
       },
+      color: undefined
+    },
+    {
+      text: t('token_index.refreshKey'),
+      icon: <Icon icon="solar:key-minimalistic-square-2-bold-duotone" style={{ marginRight: '16px' }}/>,
+      onClick: handleRefreshKeyOpen,
       color: undefined
     },
     {
@@ -259,6 +289,23 @@ export default function TokensTableRow({ item, manageToken, handleOpenModal, set
             disabled={deleting}
           >
             {deleting ? '删除中...' : t('token_index.delete')}
+          </Button>
+        }
+      />
+
+      <ConfirmDialog
+        open={openRefreshKey}
+        onClose={handleRefreshKeyClose}
+        title={t('token_index.refreshKey')}
+        content={t('token_index.refreshKeyConfirm', { title: item.name })}
+        action={
+          <Button
+            variant="contained"
+            color="warning"
+            onClick={handleRefreshKey}
+            disabled={refreshingKey}
+          >
+            {refreshingKey ? t('token_index.refreshingKey') : t('token_index.refreshKey')}
           </Button>
         }
       />

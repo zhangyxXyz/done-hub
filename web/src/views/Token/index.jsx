@@ -7,7 +7,6 @@ import TableContainer from '@mui/material/TableContainer';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import TablePagination from '@mui/material/TablePagination';
 import LinearProgress from '@mui/material/LinearProgress';
-import Alert from '@mui/material/Alert';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Toolbar from '@mui/material/Toolbar';
 
@@ -42,6 +41,12 @@ export default function Token() {
   const [selectedApiType, setSelectedApiType] = useState('openai');
   const siteInfo = useSelector((state) => state.siteInfo);
   const { userGroup } = useSelector((state) => state.account);
+  const apiMap = {
+    openai: { url: siteInfo.server_address, label: 'OpenAI API地址' },
+    gemini: { url: `${siteInfo.server_address}/gemini`, label: 'Gemini API地址' },
+    claude: { url: `${siteInfo.server_address}/claude`, label: 'Claude API地址' }
+  };
+  const selectedApi = apiMap[selectedApiType] || apiMap.openai;
 
   const handleSort = (event, id) => {
     const isAsc = orderBy === id && order === 'asc';
@@ -135,11 +140,20 @@ export default function Token() {
             status: value
           });
           break;
+        case 'refresh_key':
+          res = await API.put(url + `${id}/key`);
+          break;
       }
-      const { success, message } = res.data;
+      const { success, message, data: responseData } = res.data;
       if (success) {
-        showSuccess('操作成功完成！');
-        if (action === 'delete') {
+        if (action !== 'refresh_key') {
+          showSuccess('操作成功完成');
+        }
+        if (action === 'refresh_key' && responseData?.key) {
+          copy(`sk-${responseData.key}`, t('token_index.token'));
+          showSuccess(t('token_index.refreshKeySuccess'));
+        }
+        if (action === 'delete' || action === 'refresh_key') {
           await handleRefresh();
         }
       } else {
@@ -191,14 +205,18 @@ export default function Token() {
         </Button>
       </Stack>
       <Stack mb={2}>
-        <Alert
-          severity="info"
+        <Box
           sx={{
-            py: 1.5,
-            '& .MuiAlert-message': {
-              width: '100%',
-              py: 0
-            }
+            px: 2.5,
+            py: 2,
+            border: '1px solid',
+            borderColor: 'var(--aihub-border)',
+            borderRadius: 1,
+            background: 'var(--aihub-panel-strong)',
+            boxShadow: 'var(--aihub-shadow)',
+            backdropFilter: 'blur(22px) saturate(135%)',
+            WebkitBackdropFilter: 'blur(22px) saturate(135%)',
+            backgroundClip: 'padding-box'
           }}
         >
           <Tabs
@@ -220,9 +238,9 @@ export default function Token() {
               }
             }}
           >
-            <Tab label={t('token_index.openaiApi')} value="openai" />
-            {siteInfo.GeminiAPIEnabled && <Tab label={t('token_index.geminiApi')} value="gemini" />}
-            {siteInfo.ClaudeAPIEnabled && <Tab label={t('token_index.claudeApi')} value="claude" />}
+            <Tab key="openai" label={t('token_index.openaiApi')} value="openai" />
+            {siteInfo.GeminiAPIEnabled && <Tab key="gemini" label={t('token_index.geminiApi')} value="gemini" />}
+            {siteInfo.ClaudeAPIEnabled && <Tab key="claude" label={t('token_index.claudeApi')} value="claude" />}
           </Tabs>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Typography variant="body2" sx={{ mr: 1.5, color: 'text.secondary', fontSize: '0.875rem' }}>
@@ -233,33 +251,26 @@ export default function Token() {
               sx={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                backgroundColor: 'rgba(0, 0, 0, 0.08)',
+                background: 'var(--aihub-field)',
                 padding: '4px 10px',
                 borderRadius: '4px',
                 cursor: 'pointer',
                 fontSize: '0.875rem',
+                backdropFilter: 'blur(14px) saturate(130%)',
+                WebkitBackdropFilter: 'blur(14px) saturate(130%)',
                 '&:hover': {
-                  backgroundColor: 'rgba(0, 0, 0, 0.12)'
+                  background: 'var(--aihub-field-hover)'
                 }
               }}
               onClick={() => {
-                const apiMap = {
-                  openai: { url: siteInfo.server_address, label: 'OpenAI API地址' },
-                  gemini: { url: `${siteInfo.server_address}/gemini`, label: 'Gemini API地址' },
-                  claude: { url: `${siteInfo.server_address}/claude`, label: 'Claude API地址' }
-                };
-                copy(apiMap[selectedApiType].url, apiMap[selectedApiType].label);
+                copy(selectedApi.url, selectedApi.label);
               }}
             >
-              <b>
-                {selectedApiType === 'openai' && siteInfo.server_address}
-                {selectedApiType === 'gemini' && `${siteInfo.server_address}/gemini`}
-                {selectedApiType === 'claude' && `${siteInfo.server_address}/claude`}
-              </b>
+              <b>{selectedApi.url}</b>
               <Icon icon="solar:copy-line-duotone" style={{ marginLeft: '6px', fontSize: '16px' }} />
             </Box>
           </Box>
-        </Alert>
+        </Box>
       </Stack>
       <Card>
         <Box component="form" onSubmit={searchTokens} noValidate>
