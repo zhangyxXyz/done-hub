@@ -211,7 +211,12 @@ export default function Multiple({ prices, reloadData, ownedby, noPriceModels })
         sx={{
           p: 2,
           mb: 2,
-          borderRadius: 1
+          borderRadius: 1,
+          background: 'var(--aihub-panel)',
+          borderColor: 'var(--aihub-border)',
+          boxShadow: 'none',
+          backdropFilter: 'blur(18px) saturate(130%)',
+          backgroundClip: 'padding-box'
         }}
       >
         <Box
@@ -301,13 +306,23 @@ export default function Multiple({ prices, reloadData, ownedby, noPriceModels })
       </Paper>
 
       {/* 数据表格 */}
-      <Card>
+      <Card
+        sx={{
+          overflow: 'hidden',
+          background: 'var(--aihub-panel)',
+          borderColor: 'var(--aihub-border)',
+          boxShadow: 'none',
+          backdropFilter: 'blur(18px) saturate(130%)',
+          backgroundClip: 'padding-box'
+        }}
+      >
         <PerfectScrollbar component="div">
           <TableContainer sx={{ overflow: 'unset' }}>
             <Table
               sx={{
                 minWidth: 800,
                 tableLayout: 'fixed',
+                background: theme.palette.mode === 'dark' ? 'rgba(8, 18, 32, 0.2)' : 'rgba(255, 255, 255, 0.16)',
                 '& th:first-of-type': {
                   width: 50,
                   maxWidth: 50,
@@ -354,7 +369,8 @@ export default function Multiple({ prices, reloadData, ownedby, noPriceModels })
               justifyContent: 'space-between',
               px: 2,
               py: 1.5,
-              borderTop: `1px solid ${alpha(theme.palette.divider, 0.5)}`
+              background: 'var(--aihub-table-footer)',
+              borderTop: '1px solid var(--aihub-border)'
             }}
           >
             <Typography variant="caption" color="text.secondary">

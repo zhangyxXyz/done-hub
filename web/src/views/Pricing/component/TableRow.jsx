@@ -102,7 +102,7 @@ const PricesTableRow = ({ item, onEdit, onDelete, ownedby, unit = 'K' }) => {
   return (
     <TableRow
       sx={{
-        borderBottom: `1px solid ${alpha(theme.palette.divider, 0.08)}`,
+        borderBottom: '1px solid var(--aihub-border)',
         position: 'relative',
         '&:hover': {
           bgcolor: alpha(theme.palette.primary.main, 0.05)
@@ -277,8 +277,8 @@ const PricesTableRow = ({ item, onEdit, onDelete, ownedby, unit = 'K' }) => {
                   height: 20,
                   fontSize: '0.68rem',
                   borderRadius: '3px',
-                  bgcolor: alpha(theme.palette.background.paper, 0.5),
-                  border: `1px solid ${alpha(theme.palette.divider, 0.08)}`
+                  background: 'var(--aihub-soft)',
+                  border: '1px solid var(--aihub-border)'
                 }}
                 label={
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>

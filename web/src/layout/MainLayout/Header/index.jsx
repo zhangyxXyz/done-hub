@@ -14,17 +14,12 @@ import ThemeButton from 'ui-component/ThemeButton';
 import I18nButton from 'ui-component/i18nButton';
 import { NoticeButton } from 'ui-component/notice';
 
-// assets
-// import { Icon } from '@iconify/react';
-
 // ==============================|| MAIN NAVBAR / HEADER ||============================== //
 
 const Header = ({ handleLeftDrawerToggle, toggleProfileDrawer }) => {
   const theme = useTheme();
   const [isDrawerOpen, setIsDrawerOpen] = useState(true);
   const location = useLocation();
-  
-  // 检查当前路径是否为面板/控制台页面
   const isConsoleRoute = location.pathname.startsWith('/panel');
 
   return (
@@ -32,15 +27,13 @@ const Header = ({ handleLeftDrawerToggle, toggleProfileDrawer }) => {
       {/* logo & toggler button */}
       <Box
         sx={{
-          width: isDrawerOpen ? 255 : 150,
+          width: 'auto',
           display: 'flex',
           alignItems: 'center',
-          [theme.breakpoints.down('md')]: {
-            width: 'auto'
-          }
+          gap: 2
         }}
       >
-        <Box component="span" sx={{ display: { xs: 'none', md: 'block' }, flexGrow: 1 }}>
+        <Box component="span" sx={{ display: { xs: 'none', md: 'block' }, flexShrink: 0 }}>
           <LogoSection />
         </Box>
         <IconButton
@@ -49,7 +42,7 @@ const Header = ({ handleLeftDrawerToggle, toggleProfileDrawer }) => {
           color="inherit"
           aria-label="menu"
           sx={{
-            width: '38',
+            width: '38px',
             height: '38px',
             borderRadius: '8px',
             backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.03)',
@@ -74,7 +67,6 @@ const Header = ({ handleLeftDrawerToggle, toggleProfileDrawer }) => {
 
       <Box sx={{ flexGrow: 1 }} />
 
-      {/* 右侧功能按钮区 */}
       <Stack direction="row" spacing={1} alignItems="center">
         <NoticeButton />
         <ThemeButton />

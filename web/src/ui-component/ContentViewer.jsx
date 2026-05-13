@@ -4,29 +4,68 @@ import { marked } from 'marked';
 import { Box, Paper, Typography, CircularProgress } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import 'assets/css/content-viewer.css';
 
-const themeSyncScript = `<script data-aihub-theme-sync>
+const customRuntimeScript = `<script data-aihub-runtime>
 (function(){
-  function syncTheme(){
-    var theme = "light";
+  function readState(){
+    var state = {
+      theme: "light",
+      themeMode: "auto",
+      language: "zh_CN",
+      defaultLanguage: "zh_CN"
+    };
+
     try {
-      theme =
-        parent.document.documentElement.dataset.theme ||
-        parent.localStorage.getItem("resolved_theme") ||
-        parent.localStorage.getItem("theme") ||
-        "";
+      if (parent.window.AIHub && typeof parent.window.AIHub.getState === "function") {
+        state = Object.assign(state, parent.window.AIHub.getState());
+      } else {
+        state.theme =
+          parent.document.documentElement.dataset.theme ||
+          parent.localStorage.getItem("resolved_theme") ||
+          parent.localStorage.getItem("theme") ||
+          state.theme;
+        state.themeMode = parent.document.documentElement.dataset.themeMode || parent.localStorage.getItem("theme") || state.themeMode;
+        state.language = parent.document.documentElement.dataset.language || parent.localStorage.getItem("appLanguage") || state.language;
+        state.defaultLanguage = parent.localStorage.getItem("default_language") || state.defaultLanguage;
+      }
     } catch(e) {}
 
-    if (!theme || theme === "system" || theme === "auto") {
-      theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    if (!state.theme || state.theme === "system" || state.theme === "auto") {
+      state.theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
     }
 
-    document.documentElement.setAttribute("data-theme", theme === "dark" ? "dark" : "light");
+    state.theme = state.theme === "dark" ? "dark" : "light";
+    state.language = state.language || state.defaultLanguage || "zh_CN";
+    return state;
   }
 
-  syncTheme();
-  setInterval(syncTheme, 500);
+  function applyState(){
+    var state = readState();
+    document.documentElement.setAttribute("data-theme", state.theme);
+    document.documentElement.setAttribute("data-theme-mode", state.themeMode || "auto");
+    document.documentElement.setAttribute("data-language", state.language);
+    document.documentElement.setAttribute("lang", String(state.language).replace("_", "-"));
+
+    window.AIHub = Object.assign(window.AIHub || {}, {
+      state: state,
+      getState: readState,
+      setLanguage: function(language) {
+        try {
+          if (parent.window.AIHub && typeof parent.window.AIHub.setLanguage === "function") {
+            parent.window.AIHub.setLanguage(language);
+          }
+        } catch(e) {}
+      }
+    });
+
+    window.dispatchEvent(new CustomEvent("aihub:change", { detail: state }));
+    window.dispatchEvent(new CustomEvent("aihub:language-change", { detail: { language: state.language, state: state } }));
+  }
+
+  applyState();
+  setInterval(applyState, 500);
 })();
 </script>`;
 
@@ -42,8 +81,10 @@ const appendToHead = (html, insertion) => {
   return `${insertion}${html}`;
 };
 
-const setHtmlTheme = (html, resolvedTheme) => {
-  if (!resolvedTheme) {
+const htmlLang = (language) => (language || 'zh_CN').replace('_', '-');
+
+const setHtmlRuntimeAttributes = (html, resolvedTheme, language) => {
+  if (!resolvedTheme && !language) {
     return html;
   }
 
@@ -52,48 +93,64 @@ const setHtmlTheme = (html, resolvedTheme) => {
   }
 
   return html.replace(/<html\b([^>]*)>/i, (match, attrs) => {
-    if (/data-theme\s*=/.test(attrs)) {
-      return `<html${attrs.replace(/data-theme\s*=\s*["'][^"']*["']/i, `data-theme="${resolvedTheme}"`)}>`;
-    }
+    const setAttribute = (nextAttrs, name, value) => {
+      if (!value) {
+        return nextAttrs;
+      }
 
-    return `<html${attrs} data-theme="${resolvedTheme}">`;
+      const attrRegex = new RegExp(`${name}\\s*=\\s*["'][^"']*["']`, 'i');
+      if (attrRegex.test(nextAttrs)) {
+        return nextAttrs.replace(attrRegex, `${name}="${value}"`);
+      }
+
+      return `${nextAttrs} ${name}="${value}"`;
+    };
+
+    let nextAttrs = attrs;
+    nextAttrs = setAttribute(nextAttrs, 'data-theme', resolvedTheme);
+    nextAttrs = setAttribute(nextAttrs, 'data-language', language);
+    nextAttrs = setAttribute(nextAttrs, 'lang', htmlLang(language));
+
+    return `<html${nextAttrs}>`;
   });
 };
 
-const injectCustomCss = (html, customCss, resolvedTheme) => {
+const injectCustomCss = (html, customCss, resolvedTheme, language) => {
   if (typeof window === 'undefined' || !html.trim().startsWith('<')) {
     return html;
   }
 
   const styleTag = customCss ? `<style data-aihub-custom-css>${customCss}</style>` : '';
-  const themedHtml = setHtmlTheme(html, resolvedTheme);
+  const themedHtml = setHtmlRuntimeAttributes(html, resolvedTheme, language);
 
   try {
     const parser = new DOMParser();
     const doc = parser.parseFromString(themedHtml, 'text/html');
     doc.documentElement.setAttribute('data-theme', resolvedTheme);
+    doc.documentElement.setAttribute('data-language', language);
+    doc.documentElement.setAttribute('lang', htmlLang(language));
 
-    if (!doc.head.querySelector('[data-aihub-theme-sync]')) {
-      doc.head.insertAdjacentHTML('beforeend', themeSyncScript);
+    if (!doc.head.querySelector('[data-aihub-runtime]')) {
+      doc.head.insertAdjacentHTML('beforeend', customRuntimeScript);
     }
     if (styleTag && !doc.head.querySelector('[data-aihub-custom-css]')) {
       doc.head.insertAdjacentHTML('beforeend', styleTag);
     }
 
     doc.querySelectorAll('iframe[srcdoc]').forEach((iframe) => {
-      const srcdoc = setHtmlTheme(iframe.getAttribute('srcdoc') || '', resolvedTheme);
-      iframe.setAttribute('srcdoc', appendToHead(appendToHead(srcdoc, themeSyncScript), styleTag));
+      const srcdoc = setHtmlRuntimeAttributes(iframe.getAttribute('srcdoc') || '', resolvedTheme, language);
+      iframe.setAttribute('srcdoc', appendToHead(appendToHead(srcdoc, customRuntimeScript), styleTag));
     });
 
     return doc.body.innerHTML;
   } catch (error) {
-    return appendToHead(appendToHead(themedHtml, themeSyncScript), styleTag);
+    return appendToHead(appendToHead(themedHtml, customRuntimeScript), styleTag);
   }
 };
 
 /**
  * ContentViewer component for displaying Markdown or HTML content
- * 
+ *
  * @param {Object} props - Component props
  * @param {string} props.content - The content to display (Markdown, HTML, or URL)
  * @param {boolean} props.loading - Whether the content is loading
@@ -103,18 +160,21 @@ const injectCustomCss = (html, customCss, resolvedTheme) => {
  * @param {number} props.iframeHeight - Height for iframe (when content is a URL)
  * @returns {React.ReactElement} The rendered component
  */
-const ContentViewer = ({ 
-  content, 
-  loading = false, 
-  errorMessage = '', 
-  containerStyle = {}, 
+const ContentViewer = ({
+  content,
+  loading = false,
+  errorMessage = '',
+  containerStyle = {},
   contentStyle = {},
   disablePadding = false,
   iframeHeight = '100vh'
 }) => {
   const theme = useTheme();
   const customCss = useSelector((state) => state.siteInfo.custom_css);
+  const siteInfo = useSelector((state) => state.siteInfo);
+  const { i18n } = useTranslation();
   const resolvedTheme = theme.palette.mode === 'dark' ? 'dark' : 'light';
+  const language = i18n.language || localStorage.getItem('appLanguage') || siteInfo.language || 'zh_CN';
   const [parsedContent, setParsedContent] = useState('');
   const [isUrl, setIsUrl] = useState(false);
 
@@ -135,7 +195,7 @@ const ContentViewer = ({
     // Check if content is already HTML
     if (content.trim().startsWith('<') && content.includes('</')) {
       setIsUrl(false);
-      setParsedContent(injectCustomCss(content, customCss, resolvedTheme));
+      setParsedContent(injectCustomCss(content, customCss, resolvedTheme, language));
       return;
     }
 
@@ -149,15 +209,15 @@ const ContentViewer = ({
       setParsedContent(content); // Fallback to raw content
       setIsUrl(false);
     }
-  }, [content, customCss, resolvedTheme]);
+  }, [content, customCss, resolvedTheme, language]);
 
   if (loading) {
     return (
-      <Box 
-        sx={{ 
-          display: 'flex', 
-          justifyContent: 'center', 
-          alignItems: 'center', 
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
           minHeight: '200px',
           ...containerStyle
         }}
@@ -169,16 +229,18 @@ const ContentViewer = ({
 
   if (errorMessage) {
     return (
-      <Box 
-        sx={{ 
-          display: 'flex', 
-          justifyContent: 'center', 
-          alignItems: 'center', 
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
           minHeight: '200px',
           ...containerStyle
         }}
       >
-        <Typography color="error" variant="body1">{errorMessage}</Typography>
+        <Typography color="error" variant="body1">
+          {errorMessage}
+        </Typography>
       </Box>
     );
   }
@@ -188,9 +250,9 @@ const ContentViewer = ({
   }
 
   return (
-    <Paper 
-      elevation={0} 
-      sx={{ 
+    <Paper
+      elevation={0}
+      sx={{
         overflow: 'hidden',
         backgroundColor: disablePadding ? theme.palette.background.default : 'transparent',
         borderRadius: disablePadding ? 0 : undefined,
@@ -205,20 +267,24 @@ const ContentViewer = ({
       }}
     >
       {isUrl ? (
-        <iframe 
-          title="content-frame" 
-          src={parsedContent} 
-          style={{ 
-            width: '100%', 
-            height: iframeHeight, 
+        <iframe
+          title="content-frame"
+          src={parsedContent}
+          data-theme={resolvedTheme}
+          data-language={language}
+          style={{
+            width: '100%',
+            height: iframeHeight,
             border: 'none',
             ...contentStyle
-          }} 
+          }}
         />
       ) : (
-        <Box 
+        <Box
           className="content-viewer"
-          sx={{ 
+          data-theme={resolvedTheme}
+          data-language={language}
+          sx={{
             fontSize: 'inherit',
             lineHeight: 1.6,
             p: disablePadding ? '0 !important' : undefined,
@@ -243,7 +309,7 @@ const ContentViewer = ({
                 }
               : {}),
             ...contentStyle
-          }} 
+          }}
           dangerouslySetInnerHTML={{ __html: parsedContent }}
         />
       )}

@@ -6,7 +6,6 @@ import {
   Stack,
   Typography,
   Box,
-  InputBase,
   Paper,
   IconButton,
   Fade,
@@ -216,9 +215,9 @@ export default function ModelPrice() {
         const hasAccess = model.groups.includes(selectedGroup);
         const price = hasAccess
           ? {
-            input: group.ratio * model.price.input,
-            output: group.ratio * model.price.output
-          }
+              input: group.ratio * model.price.input,
+              output: group.ratio * model.price.output
+            }
           : { input: t('modelpricePage.noneGroup'), output: t('modelpricePage.noneGroup') };
 
         // 计算所有用户组的价格 - 只包含模型实际存在的分组
@@ -232,10 +231,9 @@ export default function ModelPrice() {
               output: grp.ratio * model.price.output,
               type: model.price.type,
               ratio: grp.ratio,
-              extraRatios:
-                model.price.extra_ratios
-                  ? Object.fromEntries(Object.entries(model.price.extra_ratios).map(([k, v]) => [k, (grp.ratio * v).toFixed(6)]))
-                  : null
+              extraRatios: model.price.extra_ratios
+                ? Object.fromEntries(Object.entries(model.price.extra_ratios).map(([k, v]) => [k, (grp.ratio * v).toFixed(6)]))
+                : null
             };
           });
 
@@ -257,7 +255,20 @@ export default function ModelPrice() {
         const ownerB = ownedby?.find((item) => item.name === b.provider);
         return (ownerA?.id || 0) - (ownerB?.id || 0);
       });
-  }, [availableModels, selectedOwnedBy, onlyShowAvailable, selectedGroup, searchQuery, modelInfoMap, selectedModality, selectedTag, userGroupMap, ownedby, t, unit]);
+  }, [
+    availableModels,
+    selectedOwnedBy,
+    onlyShowAvailable,
+    selectedGroup,
+    searchQuery,
+    modelInfoMap,
+    selectedModality,
+    selectedTag,
+    userGroupMap,
+    ownedby,
+    t,
+    unit
+  ]);
 
   // 分页处理
   const paginatedModels = useMemo(() => {
@@ -429,16 +440,35 @@ export default function ModelPrice() {
               alignItems: 'center',
               width: isMobile ? '100%' : 300,
               borderRadius: '8px',
-              border: 'none',
               boxShadow: theme.palette.mode === 'dark' ? '0 2px 8px rgba(0,0,0,0.2)' : '0 2px 8px rgba(0,0,0,0.05)',
-              backgroundColor:
-                theme.palette.mode === 'dark' ? alpha(theme.palette.background.default, 0.6) : theme.palette.background.default
+              background: 'var(--aihub-soft)',
+              border: '1px solid var(--aihub-border)'
             }}
           >
             <IconButton sx={{ p: '8px' }} aria-label="search">
               <Icon icon="eva:search-fill" width={18} height={18} />
             </IconButton>
-            <InputBase sx={{ ml: 1, flex: 1 }} placeholder={t('modelpricePage.search')} value={searchQuery} onChange={handleSearchChange} />
+            <Box
+              component="input"
+              sx={{
+                ml: 1,
+                flex: 1,
+                width: 0,
+                minWidth: 0,
+                border: 0,
+                outline: 0,
+                background: 'transparent',
+                color: 'text.primary',
+                font: 'inherit',
+                '&::placeholder': {
+                  color: 'text.secondary',
+                  opacity: 0.75
+                }
+              }}
+              placeholder={t('modelpricePage.search')}
+              value={searchQuery}
+              onChange={handleSearchChange}
+            />
             {searchQuery && (
               <IconButton sx={{ p: '8px' }} aria-label="clear" onClick={clearSearch}>
                 <Icon icon="eva:close-fill" width={16} height={16} />
@@ -458,12 +488,17 @@ export default function ModelPrice() {
               size="small"
               sx={{
                 '& .MuiToggleButtonGroup-grouped': {
-                  borderRadius: '6px !important',
+                  borderRadius: '6px',
                   mx: 0.5,
                   border: 0,
                   boxShadow: theme.palette.mode === 'dark' ? '0 1px 4px rgba(0,0,0,0.2)' : '0 1px 4px rgba(0,0,0,0.05)',
                   '&.Mui-selected': {
+                    backgroundColor: theme.palette.primary.main,
+                    color: theme.palette.primary.contrastText,
                     boxShadow: `0 0 0 1px ${theme.palette.primary.main}`
+                  },
+                  '&.Mui-selected:hover': {
+                    backgroundColor: theme.palette.primary.dark
                   }
                 }
               }}
@@ -1155,11 +1190,7 @@ export default function ModelPrice() {
                                 <Typography variant="caption" color="text.secondary" sx={{ minWidth: 40 }}>
                                   {groupPrice.groupName}:
                                 </Typography>
-                                <Typography
-                                  variant="body2"
-                                  color='success.main'
-                                  fontWeight="bold"
-                                >
+                                <Typography variant="body2" color="success.main" fontWeight="bold">
                                   {groupPrice.input > 0
                                     ? formatPrice(groupPrice.input, model.type === 'tokens' ? 'tokens' : 'times')
                                     : t('modelpricePage.free')}
@@ -1180,11 +1211,7 @@ export default function ModelPrice() {
                                 <Typography variant="caption" color="text.secondary" sx={{ minWidth: 40 }}>
                                   {groupPrice.groupName}:
                                 </Typography>
-                                <Typography
-                                  variant="body2"
-                                  color= 'success.main'
-                                  fontWeight="bold"
-                                >
+                                <Typography variant="body2" color="success.main" fontWeight="bold">
                                   {groupPrice.output > 0
                                     ? formatPrice(groupPrice.output, model.type === 'tokens' ? 'tokens' : 'times')
                                     : t('modelpricePage.free')}

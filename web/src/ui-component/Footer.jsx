@@ -9,13 +9,14 @@ import { PROJECT_REPOSITORY_URL } from 'constants/CommonConstants';
 
 const Footer = () => {
   const siteInfo = useSelector((state) => state.siteInfo);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const language = i18n.language || localStorage.getItem('appLanguage') || siteInfo.language || 'zh_CN';
 
   return (
     <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '64px', borderRadius: 0 }}>
       <Box sx={{ textAlign: 'center' }}>
         {siteInfo.footer_html ? (
-          <div className="custom-footer" dangerouslySetInnerHTML={{ __html: siteInfo.footer_html }}></div>
+          <div className="custom-footer" data-language={language} dangerouslySetInnerHTML={{ __html: siteInfo.footer_html }}></div>
         ) : (
           <>
             <Link href={PROJECT_REPOSITORY_URL} target="_blank">

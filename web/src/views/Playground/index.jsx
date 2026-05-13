@@ -3,6 +3,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { API } from 'utils/api';
 import { getChatLinks, showError, replaceChatPlaceholders } from 'utils/common';
 import { Typography, Tabs, Tab, Box, Card } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import SubCard from 'ui-component/cards/SubCard';
 // import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -41,12 +42,64 @@ function a11yProps(index) {
 }
 
 const Playground = () => {
+  const theme = useTheme();
   const [value, setValue] = useState('');
   const [tabIndex, setTabIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const siteInfo = useSelector((state) => state.siteInfo);
   const chatLinks = getChatLinks(true);
   const [iframeSrc, setIframeSrc] = useState(null);
+
+  const applyChatTheme = useCallback((rawUrl, mode) => {
+    const normalizedMode = mode === 'dark' ? 'dark' : 'light';
+
+    try {
+      const url = new URL(rawUrl);
+      url.searchParams.set('theme', normalizedMode);
+
+      const hash = url.hash || '';
+      const queryIndex = hash.indexOf('?');
+      if (queryIndex !== -1) {
+        const hashPath = hash.slice(0, queryIndex);
+        const hashSearch = new URLSearchParams(hash.slice(queryIndex + 1));
+        hashSearch.set('theme', normalizedMode);
+
+        const settings = hashSearch.get('settings');
+        if (settings) {
+          try {
+            const parsedSettings = JSON.parse(settings);
+            parsedSettings.theme = normalizedMode;
+            parsedSettings.mode = normalizedMode;
+            hashSearch.set('settings', JSON.stringify(parsedSettings));
+          } catch (error) {
+            // Keep the original settings when a third-party link uses a non-JSON shape.
+          }
+        }
+
+        url.hash = `${hashPath}?${hashSearch.toString()}`;
+      }
+
+      return url.toString();
+    } catch (error) {
+      return rawUrl;
+    }
+  }, []);
+
+  const buildIframeSrc = useCallback(
+    (index, tokenValue, mode) => {
+      let server = '';
+      if (siteInfo?.server_address) {
+        server = siteInfo.server_address;
+      } else {
+        server = window.location.host;
+      }
+      server = encodeURIComponent(server);
+      const key = 'sk-' + tokenValue;
+
+      return applyChatTheme(replaceChatPlaceholders(chatLinks[index].url, key, server), mode);
+    },
+    [applyChatTheme, chatLinks, siteInfo]
+  );
 
   const loadTokens = useCallback(async () => {
     setIsLoading(true);
@@ -63,18 +116,9 @@ const Playground = () => {
   const handleTabChange = useCallback(
     (event, newIndex) => {
       setTabIndex(newIndex);
-      let server = '';
-      if (siteInfo?.server_address) {
-        server = siteInfo.server_address;
-      } else {
-        server = window.location.host;
-      }
-      server = encodeURIComponent(server);
-      const key = 'sk-' + value;
-
-      setIframeSrc(replaceChatPlaceholders(chatLinks[newIndex].url, key, server));
+      setIframeSrc(buildIframeSrc(newIndex, value, theme.palette.mode));
     },
-    [siteInfo, value, chatLinks]
+    [buildIframeSrc, theme.palette.mode, value]
   );
 
   useEffect(() => {
@@ -86,6 +130,12 @@ const Playground = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loadTokens, value]);
 
+  useEffect(() => {
+    if (value !== '' && chatLinks.length > 0) {
+      setIframeSrc(buildIframeSrc(tabIndex, value, theme.palette.mode));
+    }
+  }, [buildIframeSrc, chatLinks.length, tabIndex, theme.palette.mode, value]);
+
   if (chatLinks.length === 0 || isLoading || value === '') {
     return (
       <SubCard title="Playground">
@@ -94,7 +144,12 @@ const Playground = () => {
     );
   } else if (chatLinks.length === 1) {
     return (
-      <iframe title="playground" src={iframeSrc} style={{ width: '100%', height: '85vh', border: 'none' }} />
+      <iframe
+        key={`${theme.palette.mode}-${iframeSrc}`}
+        title="playground"
+        src={iframeSrc}
+        style={{ width: '100%', height: '85vh', border: 'none' }}
+      />
     );
   } else {
     return (
@@ -103,7 +158,12 @@ const Playground = () => {
           {chatLinks.map((link, index) => link.show && <Tab label={link.name} {...a11yProps(index)} key={index} />)}
         </Tabs>
         <Box>
-          <iframe title="playground" src={iframeSrc} style={{ width: '100%', height: '85vh', border: 'none' }} />
+          <iframe
+            key={`${theme.palette.mode}-${iframeSrc}`}
+            title="playground"
+            src={iframeSrc}
+            style={{ width: '100%', height: '85vh', border: 'none' }}
+          />
         </Box>
       </Card>
     );

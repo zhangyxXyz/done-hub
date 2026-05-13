@@ -32,7 +32,7 @@ const App = () => {
   const siteInfo = useSelector((state) => state.siteInfo);
 
   useEffect(() => {
-    const syncResolvedTheme = () => {
+    const getRuntimeState = () => {
       const storedTheme = localStorage.getItem('theme');
       const resolvedTheme =
         storedTheme === 'dark' || storedTheme === 'light'
@@ -40,22 +40,49 @@ const App = () => {
           : window.matchMedia('(prefers-color-scheme: dark)').matches
             ? 'dark'
             : 'light';
+      const defaultLanguage = localStorage.getItem('default_language') || siteInfo.language || 'zh_CN';
+      const language = i18n.language || localStorage.getItem('appLanguage') || defaultLanguage;
 
-      document.documentElement.dataset.theme = resolvedTheme;
-      document.documentElement.dataset.themeMode = storedTheme || 'auto';
-      document.documentElement.style.colorScheme = resolvedTheme;
-      localStorage.setItem('resolved_theme', resolvedTheme);
+      return {
+        theme: resolvedTheme,
+        themeMode: storedTheme || 'auto',
+        language,
+        defaultLanguage
+      };
     };
 
-    syncResolvedTheme();
+    const syncCustomRuntime = () => {
+      const state = getRuntimeState();
+
+      document.documentElement.dataset.theme = state.theme;
+      document.documentElement.dataset.themeMode = state.themeMode;
+      document.documentElement.dataset.language = state.language;
+      document.documentElement.lang = state.language.replace('_', '-');
+      document.documentElement.style.colorScheme = state.theme;
+      localStorage.setItem('resolved_theme', state.theme);
+
+      window.AIHub = {
+        ...(window.AIHub || {}),
+        state,
+        getState: getRuntimeState,
+        setLanguage: (language) => i18n.changeLanguage(language)
+      };
+
+      window.dispatchEvent(new CustomEvent('aihub:change', { detail: state }));
+      window.dispatchEvent(new CustomEvent('aihub:language-change', { detail: { language: state.language, state } }));
+    };
+
+    syncCustomRuntime();
 
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    mediaQuery.addEventListener('change', syncResolvedTheme);
+    mediaQuery.addEventListener('change', syncCustomRuntime);
+    i18n.on('languageChanged', syncCustomRuntime);
 
     return () => {
-      mediaQuery.removeEventListener('change', syncResolvedTheme);
+      mediaQuery.removeEventListener('change', syncCustomRuntime);
+      i18n.off('languageChanged', syncCustomRuntime);
     };
-  }, [customization.theme]);
+  }, [customization.theme, siteInfo.language]);
 
   useEffect(() => {
     const styleId = 'custom-css';

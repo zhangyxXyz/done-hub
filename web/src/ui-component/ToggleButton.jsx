@@ -1,39 +1,40 @@
-import { styled } from '@mui/material';
-import { ToggleButton, ToggleButtonGroup as MuiToggleButtonGroup } from '@mui/material';
+import { Box, ButtonBase, styled } from '@mui/material';
 import PropTypes from 'prop-types';
 
-const StyledToggleButtonGroup = styled(MuiToggleButtonGroup)(({ theme }) => ({
-  backgroundColor: theme.palette.background.paper,
-  border: `1px solid ${theme.palette.divider}`,
+const StyledToggleButtonGroup = styled(Box)(({ theme }) => ({
+  display: 'inline-flex',
+  alignItems: 'center',
+  background: 'var(--aihub-soft, rgba(255, 255, 255, 0.08))',
+  border: `1px solid var(--aihub-border, ${theme.palette.divider})`,
   borderRadius: '8px',
   padding: '2px',
-  '& .MuiToggleButton-root': {
-    border: 'none',
-    borderRadius: '6px',
-    padding: '4px 12px',
-    fontSize: '13px',
-    fontWeight: 500,
-    color: theme.palette.text.secondary,
-    '&:hover': {
-      backgroundColor: theme.palette.action.hover
-    },
-    '&.Mui-selected': {
-      backgroundColor: theme.palette.primary.main,
-      color: theme.palette.common.white,
-      '&:hover': {
-        backgroundColor: theme.palette.primary.dark
-      }
-    }
-  }
+  backdropFilter: 'blur(14px) saturate(130%)',
+  WebkitBackdropFilter: 'blur(14px) saturate(130%)'
 }));
 
-const StyledToggleButton = styled(ToggleButton)({
-  '&.MuiToggleButton-root': {
-    textTransform: 'none',
-    minWidth: '36px',
-    transition: 'all 0.2s ease-in-out'
+const StyledToggleButton = styled(ButtonBase, {
+  shouldForwardProp: (prop) => prop !== 'selected' && prop !== 'buttonSize'
+})(({ theme, selected, buttonSize }) => ({
+  minWidth: buttonSize === 'small' ? '36px' : '44px',
+  minHeight: buttonSize === 'small' ? '28px' : '34px',
+  borderRadius: '6px',
+  padding: buttonSize === 'small' ? '4px 12px' : '6px 14px',
+  margin: '0 2px',
+  fontSize: buttonSize === 'small' ? '13px' : '14px',
+  fontWeight: 500,
+  lineHeight: 1.4,
+  color: selected ? theme.palette.primary.contrastText : 'var(--aihub-text, currentColor)',
+  background: selected ? theme.palette.primary.main : 'transparent',
+  boxShadow: selected ? `0 0 0 1px ${theme.palette.primary.main}` : 'none',
+  transition: 'background 0.2s ease-in-out, color 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
+  '&:hover': {
+    background: selected ? theme.palette.primary.dark : 'var(--aihub-soft, rgba(255, 255, 255, 0.08))'
+  },
+  '&.Mui-disabled': {
+    opacity: 0.45,
+    pointerEvents: 'none'
   }
-});
+}));
 
 export default function ToggleButtonGroup({
   value,
@@ -44,19 +45,39 @@ export default function ToggleButtonGroup({
   'aria-label': ariaLabel,
   ...other
 }) {
-  const handleChange = (event, newValue) => {
-    if (newValue !== null) {
-      onChange(event, newValue);
+  const handleChange = (event, optionValue) => {
+    if (exclusive) {
+      if (optionValue !== value) {
+        onChange(event, optionValue);
+      }
+      return;
     }
+
+    const currentValue = Array.isArray(value) ? value : [];
+    const nextValue = currentValue.includes(optionValue)
+      ? currentValue.filter((item) => item !== optionValue)
+      : [...currentValue, optionValue];
+    onChange(event, nextValue);
   };
 
   return (
-    <StyledToggleButtonGroup value={value} exclusive={exclusive} onChange={handleChange} size={size} aria-label={ariaLabel} {...other}>
-      {options.map((option) => (
-        <StyledToggleButton key={option.value} value={option.value} disabled={option.disabled}>
-          {option.label}
-        </StyledToggleButton>
-      ))}
+    <StyledToggleButtonGroup role="group" aria-label={ariaLabel} {...other}>
+      {options.map((option) => {
+        const selected = exclusive ? option.value === value : Array.isArray(value) && value.includes(option.value);
+
+        return (
+          <StyledToggleButton
+            key={option.value}
+            selected={selected}
+            buttonSize={size}
+            disabled={option.disabled}
+            aria-pressed={selected}
+            onClick={(event) => handleChange(event, option.value)}
+          >
+            {option.label}
+          </StyledToggleButton>
+        );
+      })}
     </StyledToggleButtonGroup>
   );
 }
