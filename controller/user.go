@@ -4,14 +4,17 @@ import (
 	"done-hub/common"
 	"done-hub/common/config"
 	"done-hub/common/limit"
+	"done-hub/common/storage"
 	"done-hub/common/utils"
 	"done-hub/model"
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"math"
 	"net/http"
 	"os"
+	"path/filepath"
 	"strconv"
 	"strings"
 
@@ -669,6 +672,117 @@ func UpdateSelf(c *gin.Context) {
 		"success": true,
 		"message": "",
 	})
+}
+
+func UpdateSelfAvatar(c *gin.Context) {
+	file, err := c.FormFile("avatar")
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"success": false,
+			"message": "请选择头像文件",
+		})
+		return
+	}
+
+	const maxAvatarSize = 2 << 20
+	if file.Size <= 0 || file.Size > maxAvatarSize {
+		c.JSON(http.StatusOK, gin.H{
+			"success": false,
+			"message": "头像文件大小不能超过 2MB",
+		})
+		return
+	}
+
+	src, err := file.Open()
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"success": false,
+			"message": err.Error(),
+		})
+		return
+	}
+	defer src.Close()
+
+	data, err := io.ReadAll(io.LimitReader(src, maxAvatarSize+1))
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"success": false,
+			"message": err.Error(),
+		})
+		return
+	}
+	if len(data) == 0 || len(data) > maxAvatarSize {
+		c.JSON(http.StatusOK, gin.H{
+			"success": false,
+			"message": "头像文件大小不能超过 2MB",
+		})
+		return
+	}
+
+	contentType := http.DetectContentType(data)
+	extensionByType := map[string]string{
+		"image/jpeg": ".jpg",
+		"image/png":  ".png",
+		"image/webp": ".webp",
+	}
+	ext, ok := extensionByType[contentType]
+	if !ok {
+		c.JSON(http.StatusOK, gin.H{
+			"success": false,
+			"message": "仅支持 JPG、PNG、WEBP 格式的头像",
+		})
+		return
+	}
+
+	originExt := strings.ToLower(filepath.Ext(file.Filename))
+	if originExt == ".jpeg" {
+		originExt = ".jpg"
+	}
+	if originExt != "" && originExt != ext {
+		c.JSON(http.StatusOK, gin.H{
+			"success": false,
+			"message": "头像文件扩展名与图片格式不一致",
+		})
+		return
+	}
+
+	avatarFileName := "avatars/" + strconv.Itoa(c.GetInt("id")) + "-" + utils.GetUUID() + ext
+	avatarUrl := storage.Upload(data, avatarFileName)
+	if avatarUrl == "" {
+		avatarUrl, err = saveAvatarLocally(data, avatarFileName)
+		if err != nil {
+			c.JSON(http.StatusOK, gin.H{
+				"success": false,
+				"message": "头像上传失败，请检查图片存储配置",
+			})
+			return
+		}
+	}
+
+	if err := model.UpdateUser(c.GetInt("id"), map[string]interface{}{"avatar_url": avatarUrl}); err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"success": false,
+			"message": err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"success": true,
+		"message": "",
+		"data":    avatarUrl,
+	})
+}
+
+func saveAvatarLocally(data []byte, fileName string) (string, error) {
+	filePath := filepath.Join("uploads", fileName)
+	if err := os.MkdirAll(filepath.Dir(filePath), 0755); err != nil {
+		return "", err
+	}
+	if err := os.WriteFile(filePath, data, 0644); err != nil {
+		return "", err
+	}
+	return "/" + filepath.ToSlash(filePath), nil
 }
 
 func DeleteUser(c *gin.Context) {

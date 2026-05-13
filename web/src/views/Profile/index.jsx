@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Alert,
@@ -20,6 +20,7 @@ import {
   ListItemAvatar,
   ListItemText,
   OutlinedInput,
+  Slider,
   Stack,
   Tab,
   Tabs,
@@ -31,7 +32,18 @@ import { keyframes } from '@emotion/react';
 import Grid from '@mui/material/Unstable_Grid2';
 import SubCard from 'ui-component/cards/SubCard';
 import MainCard from 'ui-component/cards/MainCard';
-import { IconBrandWechat, IconBrandGithub, IconMail, IconBrandTelegram, IconBrandOauth, IconSettings, IconLink, IconShieldLock, IconKey } from '@tabler/icons-react';
+import {
+  IconBrandWechat,
+  IconBrandGithub,
+  IconMail,
+  IconBrandTelegram,
+  IconBrandOauth,
+  IconSettings,
+  IconLink,
+  IconShieldLock,
+  IconKey,
+  IconCamera
+} from '@tabler/icons-react';
 import { API } from 'utils/api';
 import {
   copy,
@@ -47,11 +59,12 @@ import {
 } from 'utils/common';
 import * as Yup from 'yup';
 import WechatModal from 'views/Authentication/AuthForms/WechatModal';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import EmailModal from './component/EmailModal';
 import LarkIcon from 'assets/images/icons/lark.svg';
 import LinuxDoIcon from 'assets/images/icons/LinuxDoIcon';
 import { useTheme } from '@mui/material/styles';
+import { LOGIN } from 'store/actions';
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().required('用户名 不能为空').min(3, '用户名 不能小于 3 个字符'),
@@ -89,6 +102,65 @@ function a11yProps(index) {
   };
 }
 
+const AVATAR_CROP_SIZE = 260;
+const AVATAR_OUTPUT_SIZE = 512;
+
+const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+const getAvatarDisplaySize = (imageSize, zoom) => {
+  if (!imageSize.width || !imageSize.height) {
+    return { width: 0, height: 0 };
+  }
+  const baseScale = Math.max(AVATAR_CROP_SIZE / imageSize.width, AVATAR_CROP_SIZE / imageSize.height);
+  return {
+    width: imageSize.width * baseScale * zoom,
+    height: imageSize.height * baseScale * zoom
+  };
+};
+
+const constrainAvatarCrop = (crop, imageSize, zoom) => {
+  const displaySize = getAvatarDisplaySize(imageSize, zoom);
+  if (!displaySize.width || !displaySize.height) {
+    return crop;
+  }
+  const maxX = Math.max(0, (displaySize.width - AVATAR_CROP_SIZE) / 2);
+  const maxY = Math.max(0, (displaySize.height - AVATAR_CROP_SIZE) / 2);
+  return {
+    x: clamp(crop.x, -maxX, maxX),
+    y: clamp(crop.y, -maxY, maxY)
+  };
+};
+
+const createCroppedAvatarBlob = (image, imageSize, crop, zoom) =>
+  new Promise((resolve, reject) => {
+    const canvas = document.createElement('canvas');
+    canvas.width = AVATAR_OUTPUT_SIZE;
+    canvas.height = AVATAR_OUTPUT_SIZE;
+    const context = canvas.getContext('2d');
+    if (!context) {
+      reject(new Error('Canvas is not supported'));
+      return;
+    }
+
+    const baseScale = Math.max(AVATAR_CROP_SIZE / imageSize.width, AVATAR_CROP_SIZE / imageSize.height);
+    const displayScale = baseScale * zoom;
+    const sourceX = (imageSize.width * displayScale / 2 - crop.x - AVATAR_CROP_SIZE / 2) / displayScale;
+    const sourceY = (imageSize.height * displayScale / 2 - crop.y - AVATAR_CROP_SIZE / 2) / displayScale;
+    const sourceSize = AVATAR_CROP_SIZE / displayScale;
+
+    context.drawImage(image, sourceX, sourceY, sourceSize, sourceSize, 0, 0, AVATAR_OUTPUT_SIZE, AVATAR_OUTPUT_SIZE);
+    canvas.toBlob(
+      (blob) => {
+        if (blob) {
+          resolve(blob);
+        } else {
+          reject(new Error('Avatar crop failed'));
+        }
+      },
+      'image/png'
+    );
+  });
+
 export default function Profile() {
   const { t } = useTranslation();
   const [inputs, setInputs] = useState({});
@@ -103,8 +175,16 @@ export default function Profile() {
   const [openUnbindDialog, setOpenUnbindDialog] = useState(false);
   const [unbindType, setUnbindType] = useState('');
   const [userGroupMap, setUserGroupMap] = useState({});
+  const [avatarUploading, setAvatarUploading] = useState(false);
+  const [avatarEditor, setAvatarEditor] = useState(null);
+  const [avatarZoom, setAvatarZoom] = useState(1);
+  const [avatarCrop, setAvatarCrop] = useState({ x: 0, y: 0 });
+  const [avatarImageSize, setAvatarImageSize] = useState({ width: 0, height: 0 });
+  const [avatarDragStart, setAvatarDragStart] = useState(null);
+  const avatarImageRef = useRef(null);
   const status = useSelector((state) => state.siteInfo);
   const account = useSelector((state) => state.account);
+  const dispatch = useDispatch();
   const theme = useTheme();
   const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
   const [value, setValue] = useState(0);
@@ -145,6 +225,7 @@ export default function Profile() {
       const { success, message, data } = res.data;
       if (success) {
         setInputs(data);
+        dispatch({ type: LOGIN, payload: data });
       } else {
         showError(message);
       }
@@ -302,6 +383,117 @@ export default function Profile() {
     }
   };
 
+  const uploadAvatarFile = async (file) => {
+    const formData = new FormData();
+    formData.append('avatar', file);
+    setAvatarUploading(true);
+    try {
+      const res = await API.put('/api/user/avatar', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      const { success, message, data } = res.data;
+      if (success) {
+        const updatedUser = { ...(account.user || inputs), avatar_url: data };
+        setInputs((inputs) => ({ ...inputs, avatar_url: data }));
+        dispatch({ type: LOGIN, payload: updatedUser });
+        showSuccess(t('profilePage.avatarUpdateSuccess'));
+      } else {
+        showError(message);
+      }
+    } catch (err) {
+      showError(err.message);
+    } finally {
+      setAvatarUploading(false);
+    }
+  };
+
+  const closeAvatarEditor = () => {
+    if (avatarEditor?.url) {
+      URL.revokeObjectURL(avatarEditor.url);
+    }
+    setAvatarEditor(null);
+    setAvatarZoom(1);
+    setAvatarCrop({ x: 0, y: 0 });
+    setAvatarImageSize({ width: 0, height: 0 });
+    setAvatarDragStart(null);
+  };
+
+  const handleAvatarChange = (event) => {
+    const file = event.target.files?.[0];
+    event.target.value = '';
+    if (!file) return;
+
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+    if (!allowedTypes.includes(file.type)) {
+      showError(t('profilePage.avatarTypeError'));
+      return;
+    }
+
+    if (file.size > 2 * 1024 * 1024) {
+      showError(t('profilePage.avatarSizeError'));
+      return;
+    }
+
+    if (avatarEditor?.url) {
+      URL.revokeObjectURL(avatarEditor.url);
+    }
+    setAvatarEditor({ file, url: URL.createObjectURL(file) });
+    setAvatarZoom(1);
+    setAvatarCrop({ x: 0, y: 0 });
+    setAvatarImageSize({ width: 0, height: 0 });
+  };
+
+  const handleAvatarImageLoad = (event) => {
+    const image = event.currentTarget;
+    setAvatarImageSize({ width: image.naturalWidth, height: image.naturalHeight });
+    setAvatarCrop({ x: 0, y: 0 });
+  };
+
+  const handleAvatarPointerDown = (event) => {
+    if (!avatarEditor || avatarUploading) return;
+    event.currentTarget.setPointerCapture(event.pointerId);
+    setAvatarDragStart({
+      pointerId: event.pointerId,
+      x: event.clientX,
+      y: event.clientY,
+      crop: avatarCrop
+    });
+  };
+
+  const handleAvatarPointerMove = (event) => {
+    if (!avatarDragStart || avatarDragStart.pointerId !== event.pointerId) return;
+    const nextCrop = {
+      x: avatarDragStart.crop.x + event.clientX - avatarDragStart.x,
+      y: avatarDragStart.crop.y + event.clientY - avatarDragStart.y
+    };
+    setAvatarCrop(constrainAvatarCrop(nextCrop, avatarImageSize, avatarZoom));
+  };
+
+  const handleAvatarPointerUp = (event) => {
+    if (avatarDragStart?.pointerId === event.pointerId) {
+      setAvatarDragStart(null);
+    }
+  };
+
+  const handleAvatarZoomChange = (event, value) => {
+    setAvatarZoom(value);
+    setAvatarCrop((crop) => constrainAvatarCrop(crop, avatarImageSize, value));
+  };
+
+  const confirmAvatarCrop = async () => {
+    if (!avatarImageRef.current || !avatarEditor) return;
+    try {
+      const blob = await createCroppedAvatarBlob(avatarImageRef.current, avatarImageSize, avatarCrop, avatarZoom);
+      const croppedFile = new File([blob], 'avatar.png', { type: 'image/png' });
+      await uploadAvatarFile(croppedFile);
+      closeAvatarEditor();
+    } catch (err) {
+      showError(err.message);
+    }
+  };
+
   useEffect(() => {
     if (status) {
       if (status.turnstile_check) {
@@ -314,6 +506,14 @@ export default function Profile() {
     loadWebAuthnCredentials().then();
   }, [status]);
 
+  useEffect(() => {
+    return () => {
+      if (avatarEditor?.url) {
+        URL.revokeObjectURL(avatarEditor.url);
+      }
+    };
+  }, [avatarEditor]);
+
   const getGroupInfo = () => {
     if (!inputs.group || !userGroupMap[inputs.group]) {
       return inputs.group || 'default';
@@ -321,6 +521,8 @@ export default function Profile() {
     const group = userGroupMap[inputs.group];
     return `${t('profilePage.group')}: ${group.name} (${t('profilePage.rate')}: ${group.ratio} / ${t('profilePage.speed')}: ${group.api_rate})`;
   };
+
+  const avatarDisplaySize = getAvatarDisplaySize(avatarImageSize, avatarZoom);
 
   return (
     <>
@@ -360,7 +562,7 @@ export default function Profile() {
                     }}
                   >
                     <Avatar
-                      src={account.user?.avatar_url}
+                      src={inputs.avatar_url || account.user?.avatar_url}
                       sx={{
                         width: 100,
                         height: 100,
@@ -374,6 +576,17 @@ export default function Profile() {
                       }}
                     />
                   </Box>
+                  <Button
+                    component="label"
+                    size="small"
+                    variant="outlined"
+                    startIcon={<IconCamera size={18} />}
+                    disabled={avatarUploading}
+                    sx={{ borderRadius: '4px' }}
+                  >
+                    {avatarUploading ? t('profilePage.avatarUploading') : t('profilePage.changeAvatar')}
+                    <input hidden accept="image/jpeg,image/png,image/webp" type="file" onChange={handleAvatarChange} />
+                  </Button>
                   <Typography variant="h3">{inputs.username}</Typography>
                   <Typography variant="body2" color="textSecondary">{inputs.email}</Typography>
                   <Chip label={getGroupInfo()} color="primary" variant="outlined" />
@@ -816,6 +1029,82 @@ export default function Profile() {
         }}
       />
       {/* 别名输入对话框 */}
+      <Dialog open={Boolean(avatarEditor)} onClose={avatarUploading ? undefined : closeAvatarEditor} maxWidth="xs" fullWidth>
+        <DialogTitle>{t('profilePage.avatarCropTitle')}</DialogTitle>
+        <DialogContent>
+          <Stack spacing={2.5} alignItems="center" sx={{ pt: 1 }}>
+            <Box
+              onPointerDown={handleAvatarPointerDown}
+              onPointerMove={handleAvatarPointerMove}
+              onPointerUp={handleAvatarPointerUp}
+              onPointerCancel={handleAvatarPointerUp}
+              sx={{
+                position: 'relative',
+                width: AVATAR_CROP_SIZE,
+                height: AVATAR_CROP_SIZE,
+                overflow: 'hidden',
+                borderRadius: '50%',
+                bgcolor: 'grey.900',
+                cursor: avatarUploading ? 'default' : avatarDragStart ? 'grabbing' : 'grab',
+                touchAction: 'none',
+                userSelect: 'none',
+                boxShadow: `0 0 0 1px ${theme.palette.divider}, 0 0 0 999px rgba(0, 0, 0, 0.03)`,
+                '&::after': {
+                  content: '""',
+                  position: 'absolute',
+                  inset: 0,
+                  borderRadius: '50%',
+                  border: '2px solid rgba(255,255,255,0.9)',
+                  boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.18)',
+                  pointerEvents: 'none'
+                }
+              }}
+            >
+              {avatarEditor && (
+                <Box
+                  component="img"
+                  ref={avatarImageRef}
+                  src={avatarEditor.url}
+                  alt=""
+                  draggable={false}
+                  onLoad={handleAvatarImageLoad}
+                  sx={{
+                    position: 'absolute',
+                    left: '50%',
+                    top: '50%',
+                    width: avatarDisplaySize.width || 'auto',
+                    height: avatarDisplaySize.height || 'auto',
+                    maxWidth: 'none',
+                    transform: `translate(-50%, -50%) translate(${avatarCrop.x}px, ${avatarCrop.y}px)`,
+                    pointerEvents: 'none'
+                  }}
+                />
+              )}
+            </Box>
+            <Box sx={{ width: '100%' }}>
+              <Typography variant="caption" color="text.secondary">
+                {t('profilePage.avatarZoom')}
+              </Typography>
+              <Slider
+                value={avatarZoom}
+                min={1}
+                max={3}
+                step={0.01}
+                onChange={handleAvatarZoomChange}
+                disabled={avatarUploading || !avatarImageSize.width}
+              />
+            </Box>
+          </Stack>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={closeAvatarEditor} disabled={avatarUploading}>
+            {t('profilePage.cancel')}
+          </Button>
+          <Button variant="contained" onClick={confirmAvatarCrop} disabled={avatarUploading || !avatarImageSize.width}>
+            {avatarUploading ? t('profilePage.avatarUploading') : t('profilePage.avatarCropConfirm')}
+          </Button>
+        </DialogActions>
+      </Dialog>
       <Dialog
         open={openAliasDialog}
         onClose={closeAliasDialog}
