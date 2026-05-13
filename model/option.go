@@ -121,6 +121,11 @@ func InitOptionMap() {
 	config.GlobalOption.RegisterString("CFWorkerImageKey", &config.CFWorkerImageKey)
 	config.GlobalOption.RegisterInt("OldTokenMaxId", &config.OldTokenMaxId)
 	config.GlobalOption.RegisterBool("GitHubOldIdCloseEnabled", &config.GitHubOldIdCloseEnabled)
+	config.GlobalOption.RegisterBool("AutoPriceUpdates", &config.AutoPriceUpdates)
+	config.GlobalOption.RegisterString("AutoPriceUpdatesMode", &config.AutoPriceUpdatesMode)
+	config.GlobalOption.RegisterInt("AutoPriceUpdatesInterval", &config.AutoPriceUpdatesInterval)
+	config.GlobalOption.RegisterString("AutoPriceUpdatesCron", &config.AutoPriceUpdatesCron)
+	config.GlobalOption.RegisterString("UpdatePriceService", &config.UpdatePriceService)
 
 	config.GlobalOption.RegisterBool("GeminiAPIEnabled", &config.GeminiAPIEnabled)
 	config.GlobalOption.RegisterBool("ClaudeAPIEnabled", &config.ClaudeAPIEnabled)

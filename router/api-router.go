@@ -301,6 +301,8 @@ func SetApiRouter(router *gin.Engine) {
 			pricesRoute.PUT("/multiple/delete", controller.BatchDeletePrices)
 			pricesRoute.POST("/sync", controller.SyncPricing)
 			pricesRoute.GET("/updateService", controller.GetUpdatePriceService)
+			pricesRoute.GET("/schedule", controller.GetPriceSchedule)
+			pricesRoute.PUT("/schedule", controller.UpdatePriceSchedule)
 
 		}
 

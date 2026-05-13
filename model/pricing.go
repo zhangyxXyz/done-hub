@@ -13,8 +13,6 @@ import (
 	"strings"
 	"sync"
 	"time"
-
-	"github.com/spf13/viper"
 )
 
 // PricingInstance is the Pricing instance
@@ -44,7 +42,7 @@ type BatchPrices struct {
 // NewPricing creates a new Pricing instance
 func NewPricing() {
 	logger.SysLog("Initializing Pricing")
-	logger.SysLog("Update Price Mode:" + viper.GetString("auto_price_updates_mode"))
+	logger.SysLog("Update Price Mode:" + config.AutoPriceUpdatesMode)
 	PricingInstance = &Pricing{
 		Prices: make(map[string]*Price),
 		Match:  make([]string, 0),
@@ -58,7 +56,7 @@ func NewPricing() {
 	}
 
 	// 初始化时，需要检测是否有更新
-	if viper.GetString("auto_price_updates_mode") == "system" && (viper.GetBool("auto_price_updates") || len(PricingInstance.Prices) == 0) {
+	if config.AutoPriceUpdatesMode == "system" && (config.AutoPriceUpdates || len(PricingInstance.Prices) == 0) {
 		logger.SysLog("Checking for pricing updates")
 		prices := GetDefaultPrice()
 		PricingInstance.SyncPricing(prices, "system")
@@ -265,7 +263,7 @@ func (p *Pricing) SyncPricing(pricing []*Price, mode string) error {
 }
 
 func UpdatePriceByPriceService() error {
-	updatePriceMode := viper.GetString("auto_price_updates_mode")
+	updatePriceMode := config.AutoPriceUpdatesMode
 	if updatePriceMode == string(PriceUpdateModeSystem) {
 		// 使用程序内置更新
 		return nil
@@ -330,7 +328,7 @@ func UpdatePriceByPriceService() error {
 
 // GetPriceByPriceService 只插入系统没有的数据
 func GetPriceByPriceService() ([]*Price, error) {
-	api := viper.GetString("update_price_service")
+	api := config.UpdatePriceService
 	if api == "" {
 		return nil, errors.New("update_price_service is not configured")
 	}

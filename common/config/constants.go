@@ -16,6 +16,11 @@ var PaymentCallbackAddress = ""
 var Debug = false
 
 var OldTokenMaxId = 0
+var AutoPriceUpdates = false
+var AutoPriceUpdatesMode = "system"
+var AutoPriceUpdatesInterval = 1440
+var AutoPriceUpdatesCron = ""
+var UpdatePriceService = "https://raw.githubusercontent.com/MartialBE/one-api/prices/prices.json"
 
 var Language = ""
 var Footer = ""

@@ -29,7 +29,7 @@ var (
 func init() {
 	scheduler, err := gocron.NewScheduler()
 	if err != nil {
-		logger.SysError("初始化调度器失败: " + err.Error())
+		logger.SysError("init scheduler failed: " + err.Error())
 		return
 	}
 
@@ -45,7 +45,6 @@ func (tm *TaskManager) AddJob(name string, definition gocron.JobDefinition, task
 	tm.mu.Lock()
 	defer tm.mu.Unlock()
 
-	// 如果任务已存在，先移除
 	if oldJob, exists := tm.jobs[name]; exists {
 		tm.scheduler.RemoveJob(oldJob.Job.ID())
 	}
@@ -57,7 +56,7 @@ func (tm *TaskManager) AddJob(name string, definition gocron.JobDefinition, task
 	)
 
 	if err != nil {
-		return fmt.Errorf("添加任务失败: %v", err)
+		return fmt.Errorf("add job failed: %v", err)
 	}
 
 	tm.jobs[name] = &JobInfo{
@@ -71,7 +70,19 @@ func (tm *TaskManager) AddJob(name string, definition gocron.JobDefinition, task
 	return nil
 }
 
-// 获取所有任务信息
+func (tm *TaskManager) RemoveJob(name string) error {
+	tm.mu.Lock()
+	defer tm.mu.Unlock()
+
+	oldJob, exists := tm.jobs[name]
+	if !exists {
+		return nil
+	}
+	err := tm.scheduler.RemoveJob(oldJob.Job.ID())
+	delete(tm.jobs, name)
+	return err
+}
+
 func (tm *TaskManager) GetJob(name string) *JobInfo {
 	tm.mu.RLock()
 	defer tm.mu.RUnlock()
