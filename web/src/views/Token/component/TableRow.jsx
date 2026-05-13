@@ -257,7 +257,7 @@ export default function TokensTableRow({ item, manageToken, handleOpenModal, set
                 <IconCaretDownFilled size={'16px'}/>
               </Button>
             </ButtonGroup>
-            <IconButton onClick={(e) => handleOpenMenu(e, 'action')} sx={{ color: 'rgb(99, 115, 129)' }}>
+            <IconButton onClick={(e) => handleOpenMenu(e, 'action')} sx={{ color: 'var(--aihub-link)' }}>
               <Icon icon="solar:menu-dots-circle-bold-duotone" width={20}/>
             </IconButton>
           </Stack>

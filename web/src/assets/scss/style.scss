@@ -145,19 +145,25 @@
     linear-gradient(135deg, #f8fbff 0%, #eef6ff 46%, #eaf7f4 100%);
   --aihub-text: #172033;
   --aihub-muted: rgba(23, 32, 51, 0.68);
-  --aihub-panel: rgba(255, 255, 255, 0.28);
-  --aihub-panel-strong: rgba(255, 255, 255, 0.38);
+  --aihub-panel: rgba(255, 255, 255, 0.36);
+  --aihub-panel-strong: rgba(255, 255, 255, 0.46);
+  --aihub-drawer: linear-gradient(135deg, rgba(255, 255, 255, 0.78), rgba(219, 237, 255, 0.62), rgba(214, 243, 238, 0.52));
   --aihub-field: linear-gradient(135deg, rgba(255, 255, 255, 0.42), rgba(216, 236, 255, 0.24), rgba(212, 242, 237, 0.2));
   --aihub-field-hover: linear-gradient(135deg, rgba(255, 255, 255, 0.54), rgba(208, 233, 255, 0.28), rgba(205, 240, 235, 0.24));
   --aihub-border: rgba(30, 64, 175, 0.14);
   --aihub-soft: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(203, 232, 255, 0.18), rgba(203, 244, 238, 0.16));
   --aihub-link: #0877c8;
   --aihub-link-hover: #005a9e;
+  --aihub-selected: linear-gradient(135deg, rgba(219, 238, 255, 0.92), rgba(187, 225, 255, 0.78));
+  --aihub-selected-hover: linear-gradient(135deg, rgba(204, 231, 255, 0.96), rgba(166, 214, 255, 0.84));
   --aihub-shadow: 0 24px 70px rgba(15, 23, 42, 0.13);
   --aihub-header: rgba(255, 255, 255, 0.24);
   --aihub-scroll-thumb: rgba(23, 32, 51, 0.2);
   --aihub-table-head: linear-gradient(90deg, rgba(214, 232, 255, 0.56), rgba(224, 243, 255, 0.48), rgba(211, 242, 237, 0.46));
   --aihub-table-footer: linear-gradient(90deg, rgba(204, 226, 252, 0.48), rgba(215, 238, 250, 0.42), rgba(204, 238, 233, 0.4));
+  --aihub-switch-track: rgba(100, 116, 139, 0.28);
+  --aihub-switch-thumb-checked: #14a58c;
+  --aihub-switch-track-checked: rgba(20, 165, 140, 0.42);
 }
 
 html[data-theme='dark'] {
@@ -168,17 +174,23 @@ html[data-theme='dark'] {
   --aihub-muted: rgba(248, 251, 255, 0.72);
   --aihub-panel: rgba(255, 255, 255, 0.1);
   --aihub-panel-strong: rgba(15, 23, 42, 0.34);
+  --aihub-drawer: rgba(255, 255, 255, 0.1);
   --aihub-field: rgba(255, 255, 255, 0.08);
   --aihub-field-hover: rgba(255, 255, 255, 0.12);
   --aihub-border: rgba(255, 255, 255, 0.16);
   --aihub-soft: rgba(255, 255, 255, 0.08);
   --aihub-link: #4db4ff;
   --aihub-link-hover: #8bd0ff;
+  --aihub-selected: linear-gradient(135deg, rgba(77, 180, 255, 0.32), rgba(38, 139, 230, 0.42));
+  --aihub-selected-hover: linear-gradient(135deg, rgba(90, 188, 255, 0.42), rgba(50, 152, 240, 0.52));
   --aihub-shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
   --aihub-header: rgba(15, 23, 42, 0.22);
   --aihub-scroll-thumb: rgba(248, 251, 255, 0.24);
   --aihub-table-head: linear-gradient(90deg, rgba(44, 70, 105, 0.56), rgba(27, 75, 91, 0.46), rgba(20, 88, 89, 0.4));
   --aihub-table-footer: linear-gradient(90deg, rgba(34, 60, 92, 0.5), rgba(24, 70, 86, 0.42), rgba(17, 76, 80, 0.38));
+  --aihub-switch-track: rgba(248, 251, 255, 0.24);
+  --aihub-switch-thumb-checked: #4db4ff;
+  --aihub-switch-track-checked: rgba(77, 180, 255, 0.48);
 }
 
 body,
@@ -203,7 +215,7 @@ body,
 }
 
 #root > [data-layout='main'] .MuiDrawer-paper {
-  background: var(--aihub-panel) !important;
+  background: var(--aihub-drawer) !important;
   border-right: 1px solid var(--aihub-border) !important;
   box-shadow: none !important;
   -webkit-backdrop-filter: blur(22px) saturate(135%);
@@ -425,7 +437,7 @@ body .MuiTooltip-arrow {
 }
 
 body .MuiDrawer-paper {
-  background: var(--aihub-panel) !important;
+  background: var(--aihub-drawer) !important;
   border-color: var(--aihub-border) !important;
   -webkit-backdrop-filter: blur(22px) saturate(135%);
   backdrop-filter: blur(22px) saturate(135%);
@@ -553,6 +565,19 @@ body :is(.MuiPickersArrowSwitcher-button, .MuiPickersCalendarHeader-switchViewBu
   color: var(--aihub-text) !important;
 }
 
+#root > [data-layout='main'] .MuiToggleButton-root.Mui-selected,
+#root > [data-layout='minimal'] .MuiToggleButton-root.Mui-selected {
+  background: var(--aihub-selected) !important;
+  color: var(--aihub-link) !important;
+  box-shadow: 0 0 0 1px rgba(8, 119, 200, 0.72), 0 10px 24px rgba(8, 119, 200, 0.14) !important;
+}
+
+#root > [data-layout='main'] .MuiToggleButton-root.Mui-selected:hover,
+#root > [data-layout='minimal'] .MuiToggleButton-root.Mui-selected:hover {
+  background: var(--aihub-selected-hover) !important;
+  color: var(--aihub-link-hover) !important;
+}
+
 #root > [data-layout='main'] .MuiToggleButton-root:not(.Mui-selected):hover,
 #root > [data-layout='minimal'] .MuiToggleButton-root:not(.Mui-selected):hover {
   background: var(--aihub-field-hover) !important;
@@ -618,7 +643,17 @@ body :is(.MuiPickersArrowSwitcher-button, .MuiPickersCalendarHeader-switchViewBu
 
 #root > [data-layout='main'] .MuiSwitch-track,
 #root > [data-layout='minimal'] .MuiSwitch-track {
-  background: var(--aihub-muted) !important;
+  background: var(--aihub-switch-track) !important;
+}
+
+#root > [data-layout='main'] .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track,
+#root > [data-layout='minimal'] .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track {
+  background: var(--aihub-switch-track-checked) !important;
+}
+
+#root > [data-layout='main'] .MuiSwitch-switchBase.Mui-checked .MuiSwitch-thumb,
+#root > [data-layout='minimal'] .MuiSwitch-switchBase.Mui-checked .MuiSwitch-thumb {
+  background: var(--aihub-switch-thumb-checked) !important;
 }
 
 #root > [data-layout='main'] .MuiSlider-rail,

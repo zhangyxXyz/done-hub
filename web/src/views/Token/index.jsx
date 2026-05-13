@@ -251,7 +251,8 @@ export default function Token() {
               sx={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                background: 'var(--aihub-field)',
+                background: 'linear-gradient(135deg, rgba(218, 235, 255, 0.48), rgba(207, 240, 235, 0.36))',
+                border: '1px solid var(--aihub-border)',
                 padding: '4px 10px',
                 borderRadius: '4px',
                 cursor: 'pointer',

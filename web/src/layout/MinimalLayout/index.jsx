@@ -120,7 +120,11 @@ const MinimalLayout = () => {
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundColor: customContent ? 'transparent' : theme.palette.background.default,
+          height: customContent ? footerHeight : undefined,
+          background: customContent ? 'var(--aihub-header)' : theme.palette.background.default,
+          borderTop: customContent ? '1px solid var(--aihub-border)' : undefined,
+          backdropFilter: customContent ? 'blur(18px) saturate(135%)' : undefined,
+          WebkitBackdropFilter: customContent ? 'blur(18px) saturate(135%)' : undefined,
           pointerEvents: 'auto'
         }}
       >

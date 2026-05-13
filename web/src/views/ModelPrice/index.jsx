@@ -441,8 +441,14 @@ export default function ModelPrice() {
               width: isMobile ? '100%' : 300,
               borderRadius: '8px',
               boxShadow: theme.palette.mode === 'dark' ? '0 2px 8px rgba(0,0,0,0.2)' : '0 2px 8px rgba(0,0,0,0.05)',
-              background: 'var(--aihub-soft)',
-              border: '1px solid var(--aihub-border)'
+              background: 'var(--aihub-field)',
+              border: '1px solid var(--aihub-border)',
+              backdropFilter: 'blur(14px) saturate(130%)',
+              WebkitBackdropFilter: 'blur(14px) saturate(130%)',
+              '&:focus-within': {
+                background: 'var(--aihub-field-hover)',
+                borderColor: 'var(--aihub-link)'
+              }
             }}
           >
             <IconButton sx={{ p: '8px' }} aria-label="search">
@@ -487,18 +493,21 @@ export default function ModelPrice() {
               aria-label="unit toggle"
               size="small"
               sx={{
+                background: 'var(--aihub-field)',
+                borderColor: 'var(--aihub-border)',
                 '& .MuiToggleButtonGroup-grouped': {
                   borderRadius: '6px',
                   mx: 0.5,
                   border: 0,
                   boxShadow: theme.palette.mode === 'dark' ? '0 1px 4px rgba(0,0,0,0.2)' : '0 1px 4px rgba(0,0,0,0.05)',
                   '&.Mui-selected': {
-                    backgroundColor: theme.palette.primary.main,
-                    color: theme.palette.primary.contrastText,
-                    boxShadow: `0 0 0 1px ${theme.palette.primary.main}`
+                    background: 'var(--aihub-selected)',
+                    color: 'var(--aihub-link)',
+                    boxShadow: '0 0 0 1px rgba(8, 119, 200, 0.72), 0 8px 18px rgba(8, 119, 200, 0.14)'
                   },
                   '&.Mui-selected:hover': {
-                    backgroundColor: theme.palette.primary.dark
+                    background: 'var(--aihub-selected-hover)',
+                    color: 'var(--aihub-link-hover)'
                   }
                 }
               }}

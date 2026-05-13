@@ -9,7 +9,7 @@ import ContentViewer from 'ui-component/ContentViewer';
 
 const Home = () => {
   const { t } = useTranslation();
-  const { setCustomContent } = useOutletContext() || {};
+  const { setCustomContent, footerHeight } = useOutletContext() || {};
   const [homePageContentLoaded, setHomePageContentLoaded] = useState(false);
   const [homePageContent, setHomePageContent] = useState('');
   const hasCustomContent = homePageContentLoaded && homePageContent !== '' && homePageContent !== t('home.loadingErr');
@@ -54,8 +54,15 @@ const Home = () => {
             content={homePageContent}
             loading={!homePageContentLoaded}
             errorMessage={homePageContent === t('home.loadingErr') ? t('home.loadingErr') : ''}
-            containerStyle={{ minHeight: hasCustomContent ? '100vh' : 'calc(100vh - 136px)' }}
-            contentStyle={{ fontSize: 'larger' }}
+            containerStyle={{
+              minHeight: hasCustomContent ? `calc(100dvh - ${footerHeight || '0px'})` : 'calc(100vh - 136px)',
+              height: hasCustomContent ? `calc(100dvh - ${footerHeight || '0px'})` : undefined,
+              bottom: hasCustomContent ? footerHeight : undefined
+            }}
+            contentStyle={{
+              fontSize: 'larger',
+              height: hasCustomContent ? `calc(100dvh - ${footerHeight || '0px'})` : undefined
+            }}
             disablePadding={hasCustomContent}
           />
         </Box>

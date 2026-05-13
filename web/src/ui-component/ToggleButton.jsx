@@ -23,12 +23,12 @@ const StyledToggleButton = styled(ButtonBase, {
   fontSize: buttonSize === 'small' ? '13px' : '14px',
   fontWeight: 500,
   lineHeight: 1.4,
-  color: selected ? theme.palette.primary.contrastText : 'var(--aihub-text, currentColor)',
-  background: selected ? theme.palette.primary.main : 'transparent',
-  boxShadow: selected ? `0 0 0 1px ${theme.palette.primary.main}` : 'none',
+  color: selected ? 'var(--aihub-link, #0877c8)' : 'var(--aihub-text, currentColor)',
+  background: selected ? 'var(--aihub-selected, rgba(219, 238, 255, 0.92))' : 'transparent',
+  boxShadow: selected ? `0 0 0 1px var(--aihub-link, ${theme.palette.primary.main})` : 'none',
   transition: 'background 0.2s ease-in-out, color 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
   '&:hover': {
-    background: selected ? theme.palette.primary.dark : 'var(--aihub-soft, rgba(255, 255, 255, 0.08))'
+    background: selected ? 'var(--aihub-selected-hover, rgba(204, 231, 255, 0.96))' : 'var(--aihub-soft, rgba(255, 255, 255, 0.08))'
   },
   '&.Mui-disabled': {
     opacity: 0.45,

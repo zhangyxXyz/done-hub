@@ -10,7 +10,7 @@ import { PROJECT_REPOSITORY_URL } from 'constants/CommonConstants';
 
 const About = () => {
   const { t } = useTranslation();
-  const { setCustomContent } = useOutletContext() || {};
+  const { setCustomContent, footerHeight } = useOutletContext() || {};
   const [about, setAbout] = useState('');
   const [aboutLoaded, setAboutLoaded] = useState(false);
   const hasCustomContent = aboutLoaded && about !== '' && about !== t('about.loadingError');
@@ -66,8 +66,15 @@ const About = () => {
             content={about}
             loading={!aboutLoaded}
             errorMessage={about === t('about.loadingError') ? t('about.loadingError') : ''}
-            containerStyle={{ minHeight: hasCustomContent ? '100vh' : 'calc(100vh - 136px)' }}
-            contentStyle={{ fontSize: 'larger' }}
+            containerStyle={{
+              minHeight: hasCustomContent ? `calc(100dvh - ${footerHeight || '0px'})` : 'calc(100vh - 136px)',
+              height: hasCustomContent ? `calc(100dvh - ${footerHeight || '0px'})` : undefined,
+              bottom: hasCustomContent ? footerHeight : undefined
+            }}
+            contentStyle={{
+              fontSize: 'larger',
+              height: hasCustomContent ? `calc(100dvh - ${footerHeight || '0px'})` : undefined
+            }}
             disablePadding={hasCustomContent}
           />
         </Box>

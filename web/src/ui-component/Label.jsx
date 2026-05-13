@@ -106,8 +106,11 @@ const StyledLabel = styled(Box)(({ theme, ownerState }) => {
       }),
       // SOFT
       ...(softVariant && {
-        color: theme.palette.text.secondary,
-        backgroundColor: alpha(theme.palette.grey[500], 0.16)
+        color: theme.palette.mode === 'light' ? 'rgba(51, 82, 115, 0.82)' : theme.palette.text.secondary,
+        background: theme.palette.mode === 'light'
+          ? 'linear-gradient(135deg, rgba(222, 237, 255, 0.72), rgba(218, 244, 239, 0.52))'
+          : alpha(theme.palette.grey[500], 0.16),
+        border: theme.palette.mode === 'light' ? '1px solid rgba(30, 64, 175, 0.08)' : '1px solid transparent'
       })
     })
   };

@@ -70,7 +70,21 @@ const customRuntimeScript = `<script data-aihub-runtime>
 </script>`;
 
 const iframeScrollStyle = `<style data-aihub-iframe-scroll>
-html,body{min-height:100%;height:auto!important;overflow:auto!important;-webkit-overflow-scrolling:touch;}
+html,body{min-height:100%;height:auto!important;width:100%;max-width:100%;overflow-x:hidden!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch;overscroll-behavior-x:none;}
+*,*::before,*::after{box-sizing:border-box;}
+img,svg,video,canvas{max-width:100%;height:auto;}
+html body .aihub-page.aihub-page{width:100%!important;max-width:100%!important;overflow-x:clip!important;}
+html body .aihub-page.aihub-page > *{max-width:100%!important;}
+::-webkit-scrollbar:horizontal{height:0!important;display:none!important;}
+html body .aihub-card.aihub-card,html body .aihub-home__wrap.aihub-home__wrap{width:min(100%,1120px)!important;max-width:calc(100% - 32px)!important;margin-left:auto!important;margin-right:auto!important;}
+@media (max-width:600px){
+  html body .aihub-card.aihub-card,html body .aihub-home__wrap.aihub-home__wrap{max-width:calc(100% - 24px)!important;}
+  html body .aihub-home__wrap.aihub-home__wrap{display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;text-align:center!important;min-height:calc(100dvh - 160px)!important;padding-left:clamp(18px,6vw,28px)!important;padding-right:clamp(18px,6vw,28px)!important;}
+  html body .aihub-home__wrap.aihub-home__wrap > *{margin-left:auto!important;margin-right:auto!important;}
+  html body .aihub-home__wrap.aihub-home__wrap :is(h1,h2,h3,p,div,span){text-align:center!important;}
+  html body .aihub-home__wrap.aihub-home__wrap :is(.aihub-home__actions,.aihub-actions){justify-content:center!important;}
+  .aihub-title{font-size:clamp(32px,12vw,56px)!important;}
+}
 </style>`;
 
 const appendToHead = (html, insertion) => {
@@ -140,6 +154,9 @@ const injectCustomCss = (html, customCss, resolvedTheme, language) => {
     if (styleTag && !doc.head.querySelector('[data-aihub-custom-css]')) {
       doc.head.insertAdjacentHTML('beforeend', styleTag);
     }
+    if (!doc.head.querySelector('[data-aihub-iframe-scroll]')) {
+      doc.head.insertAdjacentHTML('beforeend', iframeScrollStyle);
+    }
 
     doc.querySelectorAll('iframe[srcdoc]').forEach((iframe) => {
       const srcdoc = setHtmlRuntimeAttributes(iframe.getAttribute('srcdoc') || '', resolvedTheme, language);
@@ -148,7 +165,7 @@ const injectCustomCss = (html, customCss, resolvedTheme, language) => {
 
     return doc.body.innerHTML;
   } catch (error) {
-    return appendToHead(appendToHead(themedHtml, customRuntimeScript), styleTag);
+    return appendToHead(appendToHead(appendToHead(themedHtml, customRuntimeScript), styleTag), iframeScrollStyle);
   }
 };
 
@@ -257,7 +274,8 @@ const ContentViewer = ({
     <Paper
       elevation={0}
       sx={{
-        overflow: disablePadding ? 'auto' : 'hidden',
+        overflowX: 'hidden',
+        overflowY: disablePadding ? 'auto' : 'hidden',
         backgroundColor: disablePadding ? theme.palette.background.default : 'transparent',
         borderRadius: disablePadding ? 0 : undefined,
         m: disablePadding ? 0 : undefined,
@@ -265,8 +283,14 @@ const ContentViewer = ({
         position: disablePadding ? 'fixed' : undefined,
         inset: disablePadding ? 0 : undefined,
         zIndex: disablePadding ? 0 : undefined,
-        width: disablePadding ? '100vw' : undefined,
+        width: disablePadding ? '100%' : undefined,
+        maxWidth: disablePadding ? '100vw' : undefined,
         height: disablePadding ? '100dvh' : undefined,
+        boxSizing: 'border-box',
+        '&::-webkit-scrollbar:horizontal': {
+          height: '0 !important',
+          display: 'none'
+        },
         ...containerStyle
       }}
     >
@@ -293,10 +317,17 @@ const ContentViewer = ({
             lineHeight: 1.6,
             p: disablePadding ? '0 !important' : undefined,
             m: disablePadding ? '0 !important' : undefined,
-            width: disablePadding ? '100vw' : undefined,
+            width: disablePadding ? '100%' : undefined,
+            maxWidth: disablePadding ? '100vw' : undefined,
             height: disablePadding ? '100dvh' : undefined,
-            overflow: disablePadding ? 'auto' : undefined,
+            boxSizing: 'border-box',
+            overflowX: disablePadding ? 'hidden !important' : undefined,
+            overflowY: disablePadding ? 'auto' : undefined,
             WebkitOverflowScrolling: disablePadding ? 'touch' : undefined,
+            '&::-webkit-scrollbar:horizontal': {
+              height: '0 !important',
+              display: 'none'
+            },
             '& img': {
               maxWidth: '100%',
               height: 'auto'
@@ -305,10 +336,10 @@ const ContentViewer = ({
               ? {
                   '& > iframe:only-child': {
                     display: 'block',
-                    width: '100vw !important',
-                    maxWidth: '100vw !important',
-                    minHeight: '100vh',
-                    height: '100dvh !important',
+                    width: '100% !important',
+                    maxWidth: '100% !important',
+                    minHeight: '100%',
+                    height: '100% !important',
                     border: '0 !important'
                   }
                 }
