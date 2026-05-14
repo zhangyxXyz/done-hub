@@ -11,9 +11,8 @@ const MinimalLayout = () => {
   const theme = useTheme();
   const [customContent, setCustomContent] = useState(false);
   const matchDownSm = useMediaQuery(theme.breakpoints.down('sm'));
-  const matchDownMd = useMediaQuery(theme.breakpoints.down('md'));
   const headerHeight = matchDownSm ? '56px' : '64px';
-  const footerHeight = matchDownMd ? '80px' : '60px';
+  const footerHeight = '64px';
 
   useEffect(() => {
     const root = document.getElementById('root');
@@ -56,9 +55,9 @@ const MinimalLayout = () => {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        height: customContent ? '100vh' : 'auto',
+        height: '100vh',
         minHeight: '100vh',
-        overflow: customContent ? 'hidden' : 'visible',
+        overflow: 'hidden',
         backgroundColor: customContent ? 'transparent' : theme.palette.background.default
       }}
     >
@@ -88,14 +87,19 @@ const MinimalLayout = () => {
       </AppBar>
       <Box
         sx={{
-          flex: '1 1 auto',
+          flex: 'none',
           overflow: customContent ? 'hidden' : 'auto',
-          marginTop: customContent ? 0 : { xs: '56px', sm: '64px' },
+          marginTop: 0,
           backgroundColor: customContent ? 'transparent' : theme.palette.background.default,
           // padding: { xs: '16px', sm: '20px', md: '24px' },
-          position: 'relative',
-          height: customContent ? '100vh' : 'auto',
-          minHeight: customContent ? '100vh' : `calc(100vh - ${headerHeight} - ${footerHeight})`,
+          position: 'fixed',
+          top: customContent ? 0 : headerHeight,
+          right: 0,
+          bottom: customContent ? 0 : footerHeight,
+          left: 0,
+          height: 'auto',
+          minHeight: 0,
+          boxSizing: 'border-box',
           scrollbarWidth: 'thin',
           '&::-webkit-scrollbar': {
             width: '8px',
@@ -115,16 +119,16 @@ const MinimalLayout = () => {
       <Box
         sx={{
           flex: 'none',
-          position: customContent ? 'fixed' : 'relative',
+          position: 'fixed',
           zIndex: 1,
           left: 0,
           right: 0,
           bottom: 0,
-          height: customContent ? footerHeight : undefined,
-          background: customContent ? 'var(--aihub-header)' : theme.palette.background.default,
-          borderTop: customContent ? '1px solid var(--aihub-border)' : undefined,
-          backdropFilter: customContent ? 'blur(18px) saturate(135%)' : undefined,
-          WebkitBackdropFilter: customContent ? 'blur(18px) saturate(135%)' : undefined,
+          height: footerHeight,
+          background: 'var(--aihub-header)',
+          borderTop: '1px solid var(--aihub-border)',
+          backdropFilter: 'blur(18px) saturate(135%)',
+          WebkitBackdropFilter: 'blur(18px) saturate(135%)',
           pointerEvents: 'auto'
         }}
       >

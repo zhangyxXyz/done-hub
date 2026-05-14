@@ -13,7 +13,7 @@ const Footer = () => {
   const language = i18n.language || localStorage.getItem('appLanguage') || siteInfo.language || 'zh_CN';
 
   return (
-    <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '64px', borderRadius: 0 }}>
+    <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '64px', height: '100%', borderRadius: 0 }}>
       <Box sx={{ textAlign: 'center' }}>
         {siteInfo.footer_html ? (
           <div className="custom-footer" data-language={language} dangerouslySetInnerHTML={{ __html: siteInfo.footer_html }}></div>

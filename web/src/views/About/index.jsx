@@ -10,7 +10,7 @@ import { PROJECT_REPOSITORY_URL } from 'constants/CommonConstants';
 
 const About = () => {
   const { t } = useTranslation();
-  const { setCustomContent, footerHeight } = useOutletContext() || {};
+  const { setCustomContent, headerHeight, footerHeight } = useOutletContext() || {};
   const [about, setAbout] = useState('');
   const [aboutLoaded, setAboutLoaded] = useState(false);
   const hasCustomContent = aboutLoaded && about !== '' && about !== t('about.loadingError');
@@ -67,13 +67,14 @@ const About = () => {
             loading={!aboutLoaded}
             errorMessage={about === t('about.loadingError') ? t('about.loadingError') : ''}
             containerStyle={{
-              minHeight: hasCustomContent ? `calc(100dvh - ${footerHeight || '0px'})` : 'calc(100vh - 136px)',
-              height: hasCustomContent ? `calc(100dvh - ${footerHeight || '0px'})` : undefined,
+              top: hasCustomContent ? headerHeight : undefined,
+              minHeight: hasCustomContent ? `calc(100dvh - ${headerHeight || '0px'} - ${footerHeight || '0px'})` : 'calc(100vh - 136px)',
+              height: hasCustomContent ? `calc(100dvh - ${headerHeight || '0px'} - ${footerHeight || '0px'})` : undefined,
               bottom: hasCustomContent ? footerHeight : undefined
             }}
             contentStyle={{
               fontSize: 'larger',
-              height: hasCustomContent ? `calc(100dvh - ${footerHeight || '0px'})` : undefined
+              height: hasCustomContent ? `calc(100dvh - ${headerHeight || '0px'} - ${footerHeight || '0px'})` : undefined
             }}
             disablePadding={hasCustomContent}
           />

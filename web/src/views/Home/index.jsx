@@ -9,7 +9,7 @@ import ContentViewer from 'ui-component/ContentViewer';
 
 const Home = () => {
   const { t } = useTranslation();
-  const { setCustomContent, footerHeight } = useOutletContext() || {};
+  const { setCustomContent, headerHeight, footerHeight } = useOutletContext() || {};
   const [homePageContentLoaded, setHomePageContentLoaded] = useState(false);
   const [homePageContent, setHomePageContent] = useState('');
   const hasCustomContent = homePageContentLoaded && homePageContent !== '' && homePageContent !== t('home.loadingErr');
@@ -55,15 +55,18 @@ const Home = () => {
             loading={!homePageContentLoaded}
             errorMessage={homePageContent === t('home.loadingErr') ? t('home.loadingErr') : ''}
             containerStyle={{
-              minHeight: hasCustomContent ? `calc(100dvh - ${footerHeight || '0px'})` : 'calc(100vh - 136px)',
-              height: hasCustomContent ? `calc(100dvh - ${footerHeight || '0px'})` : undefined,
+              top: hasCustomContent ? headerHeight : undefined,
+              minHeight: hasCustomContent ? `calc(100dvh - ${headerHeight || '0px'} - ${footerHeight || '0px'})` : 'calc(100vh - 136px)',
+              height: hasCustomContent ? `calc(100dvh - ${headerHeight || '0px'} - ${footerHeight || '0px'})` : undefined,
               bottom: hasCustomContent ? footerHeight : undefined
             }}
             contentStyle={{
               fontSize: 'larger',
-              height: hasCustomContent ? `calc(100dvh - ${footerHeight || '0px'})` : undefined
+              height: hasCustomContent ? `calc(100dvh - ${headerHeight || '0px'} - ${footerHeight || '0px'})` : undefined,
+              overflowY: hasCustomContent ? 'hidden' : undefined
             }}
             disablePadding={hasCustomContent}
+            autoResizeEmbeddedFrames={!hasCustomContent}
           />
         </Box>
       )}

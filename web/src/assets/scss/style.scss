@@ -158,7 +158,8 @@
   --aihub-selected-hover: linear-gradient(135deg, rgba(204, 231, 255, 0.96), rgba(166, 214, 255, 0.84));
   --aihub-shadow: 0 24px 70px rgba(15, 23, 42, 0.13);
   --aihub-header: rgba(255, 255, 255, 0.24);
-  --aihub-scroll-thumb: rgba(23, 32, 51, 0.2);
+  --aihub-scroll-thumb: rgba(14, 116, 144, 0.26);
+  --aihub-scroll-thumb-hover: rgba(8, 119, 200, 0.46);
   --aihub-table-head: linear-gradient(90deg, rgba(214, 232, 255, 0.56), rgba(224, 243, 255, 0.48), rgba(211, 242, 237, 0.46));
   --aihub-table-footer: linear-gradient(90deg, rgba(204, 226, 252, 0.48), rgba(215, 238, 250, 0.42), rgba(204, 238, 233, 0.4));
   --aihub-switch-track: rgba(100, 116, 139, 0.28);
@@ -185,7 +186,8 @@ html[data-theme='dark'] {
   --aihub-selected-hover: linear-gradient(135deg, rgba(90, 188, 255, 0.42), rgba(50, 152, 240, 0.52));
   --aihub-shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
   --aihub-header: rgba(15, 23, 42, 0.22);
-  --aihub-scroll-thumb: rgba(248, 251, 255, 0.24);
+  --aihub-scroll-thumb: rgba(77, 180, 255, 0.42);
+  --aihub-scroll-thumb-hover: rgba(139, 208, 255, 0.68);
   --aihub-table-head: linear-gradient(90deg, rgba(44, 70, 105, 0.56), rgba(27, 75, 91, 0.46), rgba(20, 88, 89, 0.4));
   --aihub-table-footer: linear-gradient(90deg, rgba(34, 60, 92, 0.5), rgba(24, 70, 86, 0.42), rgba(17, 76, 80, 0.38));
   --aihub-switch-track: rgba(248, 251, 255, 0.24);
@@ -341,25 +343,30 @@ body,
 }
 
 *::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
 }
 
 *::-webkit-scrollbar-track {
-  background: transparent;
+  background: transparent !important;
 }
 
 *::-webkit-scrollbar-thumb {
   background: var(--aihub-scroll-thumb);
-  border: 2px solid transparent;
+  border: 3px solid transparent;
   border-radius: 999px;
   background-clip: padding-box;
+  min-height: 44px;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background: var(--aihub-link);
-  border: 2px solid transparent;
+  background: var(--aihub-scroll-thumb-hover);
+  border: 3px solid transparent;
   background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent !important;
 }
 
 #root > [data-layout='main'] :is(.MuiPopover-paper, .MuiMenu-paper),
@@ -684,6 +691,15 @@ body :is(.MuiPickersArrowSwitcher-button, .MuiPickersCalendarHeader-switchViewBu
 #root > [data-layout='main'] ::-webkit-scrollbar-thumb,
 #root > [data-layout='minimal'] ::-webkit-scrollbar-thumb {
   background: var(--aihub-scroll-thumb) !important;
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background-clip: padding-box;
+}
+
+#root > [data-layout='main'] ::-webkit-scrollbar-thumb:hover,
+#root > [data-layout='minimal'] ::-webkit-scrollbar-thumb:hover {
+  background: var(--aihub-scroll-thumb-hover) !important;
+  background-clip: padding-box;
 }
 
 #root > [data-layout='minimal'] .auth-wrapper {

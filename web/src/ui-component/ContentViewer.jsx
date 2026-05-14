@@ -9,6 +9,30 @@ import 'assets/css/content-viewer.css';
 
 const customRuntimeScript = `<script data-aihub-runtime>
 (function(){
+  var legacyHitokotoEndpoints = [
+    "https://service.onlyzyx.com/oneword/",
+    "http://service.onlyzyx.com/oneword/"
+  ];
+  var hitokotoFallbackUrl = "https://v1.hitokoto.cn/?encode=json";
+
+  if (!window.__aihubHitokotoFetchPatched && typeof window.fetch === "function") {
+    var nativeFetch = window.fetch.bind(window);
+    window.fetch = function(input, init) {
+      var url = "";
+
+      try {
+        url = typeof input === "string" ? input : input && input.url;
+      } catch(e) {}
+
+      if (legacyHitokotoEndpoints.indexOf(url) !== -1) {
+        return nativeFetch(hitokotoFallbackUrl, init);
+      }
+
+      return nativeFetch(input, init);
+    };
+    window.__aihubHitokotoFetchPatched = true;
+  }
+
   function readState(){
     var state = {
       theme: "light",
@@ -64,16 +88,41 @@ const customRuntimeScript = `<script data-aihub-runtime>
     window.dispatchEvent(new CustomEvent("aihub:language-change", { detail: { language: state.language, state: state } }));
   }
 
+  function syncFrameHeight(){
+    try {
+      if (!window.frameElement) return;
+      if (window.frameElement.getAttribute("data-aihub-auto-height") === "false") {
+        window.frameElement.setAttribute("scrolling", "no");
+        window.frameElement.style.height = "100%";
+        return;
+      }
+      var doc = document.documentElement;
+      var body = document.body;
+      var height = Math.max(
+        doc ? doc.scrollHeight : 0,
+        doc ? doc.offsetHeight : 0,
+        body ? body.scrollHeight : 0,
+        body ? body.offsetHeight : 0
+      );
+      window.frameElement.setAttribute("scrolling", "no");
+      window.frameElement.style.height = height + "px";
+    } catch(e) {}
+  }
+
   applyState();
+  syncFrameHeight();
   setInterval(applyState, 500);
+  setInterval(syncFrameHeight, 500);
+  window.addEventListener("load", syncFrameHeight);
+  window.addEventListener("resize", syncFrameHeight);
 })();
 </script>`;
 
 const iframeScrollStyle = `<style data-aihub-iframe-scroll>
-html,body{min-height:100%;height:auto!important;width:100%;max-width:100%;overflow-x:hidden!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch;overscroll-behavior-x:none;}
+html,body{min-height:100%;width:100%;max-width:100%;overflow-x:hidden!important;overflow-y:hidden!important;overscroll-behavior-x:none;}
 *,*::before,*::after{box-sizing:border-box;}
 img,svg,video,canvas{max-width:100%;height:auto;}
-html body .aihub-page.aihub-page{width:100%!important;max-width:100%!important;overflow-x:clip!important;}
+html body .aihub-page.aihub-page{width:100%!important;max-width:100%!important;min-height:100%!important;overflow-x:clip!important;}
 html body .aihub-page.aihub-page > *{max-width:100%!important;}
 ::-webkit-scrollbar:horizontal{height:0!important;display:none!important;}
 html body .aihub-card.aihub-card,html body .aihub-home__wrap.aihub-home__wrap{width:min(100%,1120px)!important;max-width:calc(100% - 32px)!important;margin-left:auto!important;margin-right:auto!important;}
@@ -133,7 +182,7 @@ const setHtmlRuntimeAttributes = (html, resolvedTheme, language) => {
   });
 };
 
-const injectCustomCss = (html, customCss, resolvedTheme, language) => {
+const injectCustomCss = (html, customCss, resolvedTheme, language, autoResizeEmbeddedFrames = true) => {
   if (typeof window === 'undefined' || !html.trim().startsWith('<')) {
     return html;
   }
@@ -160,6 +209,7 @@ const injectCustomCss = (html, customCss, resolvedTheme, language) => {
 
     doc.querySelectorAll('iframe[srcdoc]').forEach((iframe) => {
       const srcdoc = setHtmlRuntimeAttributes(iframe.getAttribute('srcdoc') || '', resolvedTheme, language);
+      iframe.setAttribute('data-aihub-auto-height', autoResizeEmbeddedFrames ? 'true' : 'false');
       iframe.setAttribute('srcdoc', appendToHead(appendToHead(appendToHead(srcdoc, customRuntimeScript), styleTag), iframeScrollStyle));
     });
 
@@ -188,7 +238,8 @@ const ContentViewer = ({
   containerStyle = {},
   contentStyle = {},
   disablePadding = false,
-  iframeHeight = '100vh'
+  iframeHeight = '100vh',
+  autoResizeEmbeddedFrames = true
 }) => {
   const theme = useTheme();
   const customCss = useSelector((state) => state.siteInfo.custom_css);
@@ -216,7 +267,7 @@ const ContentViewer = ({
     // Check if content is already HTML
     if (content.trim().startsWith('<') && content.includes('</')) {
       setIsUrl(false);
-      setParsedContent(injectCustomCss(content, customCss, resolvedTheme, language));
+      setParsedContent(injectCustomCss(content, customCss, resolvedTheme, language, autoResizeEmbeddedFrames));
       return;
     }
 
@@ -230,7 +281,7 @@ const ContentViewer = ({
       setParsedContent(content); // Fallback to raw content
       setIsUrl(false);
     }
-  }, [content, customCss, resolvedTheme, language]);
+  }, [content, customCss, resolvedTheme, language, autoResizeEmbeddedFrames]);
 
   if (loading) {
     return (
@@ -275,7 +326,7 @@ const ContentViewer = ({
       elevation={0}
       sx={{
         overflowX: 'hidden',
-        overflowY: disablePadding ? 'auto' : 'hidden',
+        overflowY: 'hidden',
         backgroundColor: disablePadding ? theme.palette.background.default : 'transparent',
         borderRadius: disablePadding ? 0 : undefined,
         m: disablePadding ? 0 : undefined,
@@ -285,7 +336,7 @@ const ContentViewer = ({
         zIndex: disablePadding ? 0 : undefined,
         width: disablePadding ? '100%' : undefined,
         maxWidth: disablePadding ? '100vw' : undefined,
-        height: disablePadding ? '100dvh' : undefined,
+        height: disablePadding ? '100%' : undefined,
         boxSizing: 'border-box',
         '&::-webkit-scrollbar:horizontal': {
           height: '0 !important',
@@ -319,7 +370,7 @@ const ContentViewer = ({
             m: disablePadding ? '0 !important' : undefined,
             width: disablePadding ? '100%' : undefined,
             maxWidth: disablePadding ? '100vw' : undefined,
-            height: disablePadding ? '100dvh' : undefined,
+            height: disablePadding ? '100%' : undefined,
             boxSizing: 'border-box',
             overflowX: disablePadding ? 'hidden !important' : undefined,
             overflowY: disablePadding ? 'auto' : undefined,
@@ -338,8 +389,9 @@ const ContentViewer = ({
                     display: 'block',
                     width: '100% !important',
                     maxWidth: '100% !important',
-                    minHeight: '100%',
-                    height: '100% !important',
+                    minHeight: autoResizeEmbeddedFrames ? '100% !important' : undefined,
+                    height: autoResizeEmbeddedFrames ? undefined : '100% !important',
+                    maxHeight: autoResizeEmbeddedFrames ? undefined : '100% !important',
                     border: '0 !important'
                   }
                 }
@@ -360,7 +412,8 @@ ContentViewer.propTypes = {
   containerStyle: PropTypes.object,
   contentStyle: PropTypes.object,
   disablePadding: PropTypes.bool,
-  iframeHeight: PropTypes.string
+  iframeHeight: PropTypes.string,
+  autoResizeEmbeddedFrames: PropTypes.bool
 };
 
 export default ContentViewer;
