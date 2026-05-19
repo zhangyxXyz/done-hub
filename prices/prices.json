@@ -2982,6 +2982,13 @@
     "output": 15
   },
   {
+    "model": "anthropic/claude-sonnet-4-6",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 3,
+    "output": 15
+  },
+  {
     "model": "anthropic/claude-sonnet-4.5",
     "type": "tokens",
     "channel_type": 20,
