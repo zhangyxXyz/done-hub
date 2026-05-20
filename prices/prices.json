@@ -3528,6 +3528,13 @@
     "output": 12
   },
   {
+    "model": "google/gemini-3.5-flash",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 1.5,
+    "output": 9
+  },
+  {
     "model": "google/gemini-embedding-001",
     "type": "tokens",
     "channel_type": 20,
@@ -6881,6 +6888,20 @@
     "output": 12
   },
   {
+    "model": "gemini-3.5-flash-gt-128k",
+    "type": "tokens",
+    "channel_type": 25,
+    "input": 1.5,
+    "output": 9
+  },
+  {
+    "model": "gemini-3.5-flash-lte-128k",
+    "type": "tokens",
+    "channel_type": 25,
+    "input": 1.5,
+    "output": 9
+  },
+  {
     "model": "gemini-embedding-001",
     "type": "tokens",
     "channel_type": 25,
@@ -9252,6 +9273,13 @@
     "channel_type": 42,
     "input": 2,
     "output": 12
+  },
+  {
+    "model": "gemini-3.5-flash",
+    "type": "tokens",
+    "channel_type": 42,
+    "input": 1.5,
+    "output": 9
   },
   {
     "model": "gemini-embedding-001",
