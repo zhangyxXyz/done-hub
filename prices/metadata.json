@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-20T20:04:22.679532+00:00",
+  "generated_at": "2026-05-21T20:01:38.792260+00:00",
   "sources": {
     "portkey_base": "https://configs.portkey.ai/pricing",
     "portkey_providers": [
@@ -22,13 +22,13 @@
       "zhipu"
     ]
   },
-  "portkey_converted_count": 1458,
+  "portkey_converted_count": 1460,
   "portkey_provider_counts": {
     "anthropic": 29,
     "bedrock": 131,
     "cohere": 19,
     "dashscope": 141,
-    "deepseek": 2,
+    "deepseek": 4,
     "google": 124,
     "groq": 21,
     "jina": 10,
@@ -43,7 +43,7 @@
     "zhipu": 16
   },
   "portkey_errors": {},
-  "output_count": 1459,
+  "output_count": 1461,
   "skipped": {
     "anthropic": {
       "unknown_provider": 0,

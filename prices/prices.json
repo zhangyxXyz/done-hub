@@ -7133,6 +7133,20 @@
     "output": 0.42
   },
   {
+    "model": "deepseek-v4-flash",
+    "type": "tokens",
+    "channel_type": 28,
+    "input": 0.14,
+    "output": 0.28
+  },
+  {
+    "model": "deepseek-v4-pro",
+    "type": "tokens",
+    "channel_type": 28,
+    "input": 1.74,
+    "output": 3.48
+  },
+  {
     "model": "codestral-2501",
     "type": "tokens",
     "channel_type": 30,
