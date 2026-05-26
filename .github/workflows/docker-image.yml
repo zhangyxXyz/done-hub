@@ -1,15 +1,7 @@
 name: done-hub docker image
 
 on:
-  push:
-    branches:
-      - main
-    tags:
-      - "v*"
-    paths-ignore:
-      - "README.md"
-      - "README.en.md"
-      - "docs/**"
+  workflow_dispatch:
 
 jobs:
   build-and-push:
