@@ -10,8 +10,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_DIR = ROOT / "config"
 PRICES_DIR = ROOT / "prices"
+MODEL_INFO_DIR = ROOT / "model_info"
 OUTPUT_PATH = PRICES_DIR / "prices.json"
 METADATA_PATH = PRICES_DIR / "metadata.json"
+MODEL_INFO_OUTPUT_PATH = MODEL_INFO_DIR / "model_info.json"
+MODEL_INFO_METADATA_PATH = MODEL_INFO_DIR / "metadata.json"
 MODEL_PRICE_FALLBACKS_PATH = CONFIG_DIR / "model_price_fallbacks.json"
 
 def load_json(path):
@@ -67,6 +70,67 @@ def dollars_per_token_to_per_million(value):
         return None
     amount = Decimal(str(value)) * Decimal("1000000")
     return float(amount.quantize(Decimal("0.000001"), rounding=ROUND_HALF_UP))
+
+
+def compact_int(value):
+    if value is None:
+        return 0
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return 0
+
+
+def normalize_list(value):
+    if not isinstance(value, list):
+        return []
+    normalized = []
+    seen = set()
+    for item in value:
+        if item is None:
+            continue
+        text = str(item).strip()
+        if not text or text in seen:
+            continue
+        seen.add(text)
+        normalized.append(text)
+    return normalized
+
+
+def openrouter_model_url(model_id):
+    return f"https://openrouter.ai/models/{model_id}"
+
+
+def openrouter_support_urls(spec):
+    model_id = spec.get("id")
+    urls = []
+    if model_id:
+        urls.append(openrouter_model_url(model_id))
+
+    details = (spec.get("links") or {}).get("details")
+    if details:
+        if details.startswith("http://") or details.startswith("https://"):
+            urls.append(details)
+        else:
+            urls.append("https://openrouter.ai" + details)
+
+    return normalize_list(urls)
+
+
+def openrouter_tags(spec, input_modalities, output_modalities):
+    tags = ["openrouter"]
+    supported_parameters = set(normalize_list(spec.get("supported_parameters")))
+    if "image" in input_modalities:
+        tags.append("vision")
+    if "audio" in input_modalities or "audio" in output_modalities:
+        tags.append("audio")
+    if "tools" in supported_parameters or "tool_choice" in supported_parameters:
+        tags.append("tools")
+    if "reasoning" in supported_parameters or "include_reasoning" in supported_parameters:
+        tags.append("reasoning")
+    if "structured_outputs" in supported_parameters or "response_format" in supported_parameters:
+        tags.append("structured_outputs")
+    return tags
 
 
 def convert_portkey_prices(provider, portkey_data, provider_channel_map):
@@ -171,10 +235,52 @@ def convert_openrouter_models(openrouter_data, provider_channel_map):
     return converted, skipped
 
 
+def convert_openrouter_model_info(openrouter_data):
+    converted = {}
+    skipped = {
+        "missing_model_id": 0,
+    }
+
+    for spec in openrouter_data.get("data", []):
+        if not isinstance(spec, dict):
+            continue
+
+        model = spec.get("id")
+        if not model:
+            skipped["missing_model_id"] += 1
+            continue
+
+        architecture = spec.get("architecture") or {}
+        top_provider = spec.get("top_provider") or {}
+        input_modalities = normalize_list(architecture.get("input_modalities"))
+        output_modalities = normalize_list(architecture.get("output_modalities"))
+
+        converted[model] = {
+            "model": model,
+            "name": spec.get("name") or model,
+            "description": spec.get("description") or "",
+            "context_length": compact_int(spec.get("context_length") or top_provider.get("context_length")),
+            "max_tokens": compact_int(top_provider.get("max_completion_tokens")),
+            "input_modalities": input_modalities,
+            "output_modalities": output_modalities,
+            "tags": openrouter_tags(spec, input_modalities, output_modalities),
+            "support_url": openrouter_support_urls(spec),
+        }
+
+    return converted, skipped
+
+
 def sort_prices(prices):
     return sorted(
         prices.values(),
         key=lambda item: (int(item.get("channel_type", 0)), str(item.get("model", ""))),
+    )
+
+
+def sort_model_info(model_info):
+    return sorted(
+        model_info.values(),
+        key=lambda item: str(item.get("model", "")),
     )
 
 
@@ -255,6 +361,8 @@ def main():
     openrouter_api_added_count = 0
     openrouter_api_overridden_count = 0
     openrouter_api_skipped = {}
+    openrouter_model_info = {}
+    openrouter_model_info_skipped = {}
     openrouter_api_error = None
     openrouter_api_url = sources.get("openrouter_models_api")
     if openrouter_api_url:
@@ -271,6 +379,7 @@ def main():
                 else:
                     openrouter_api_added_count += 1
                 prices[key] = price
+            openrouter_model_info, openrouter_model_info_skipped = convert_openrouter_model_info(openrouter_data)
         except Exception as exc:
             openrouter_api_error = str(exc)
 
@@ -278,8 +387,28 @@ def main():
     output_rows = sort_prices(prices)
 
     PRICES_DIR.mkdir(parents=True, exist_ok=True)
+    MODEL_INFO_DIR.mkdir(parents=True, exist_ok=True)
     OUTPUT_PATH.write_text(
         json.dumps(output_rows, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
+    model_info_rows = sort_model_info(openrouter_model_info)
+    MODEL_INFO_OUTPUT_PATH.write_text(
+        json.dumps(
+            {
+                "data": [
+                    {
+                        "model": item["model"],
+                        "model_info": item,
+                    }
+                    for item in model_info_rows
+                ]
+            },
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n",
         encoding="utf-8",
         newline="\n",
     )
@@ -294,6 +423,8 @@ def main():
         "openrouter_api_added_count": openrouter_api_added_count,
         "openrouter_api_overridden_count": openrouter_api_overridden_count,
         "openrouter_api_error": openrouter_api_error,
+        "openrouter_model_info_count": len(model_info_rows),
+        "openrouter_model_info_skipped": openrouter_model_info_skipped,
         "output_count": len(output_rows),
         "skipped": portkey_skipped,
         "openrouter_api_skipped": openrouter_api_skipped,
@@ -304,9 +435,28 @@ def main():
         encoding="utf-8",
         newline="\n",
     )
+    MODEL_INFO_METADATA_PATH.write_text(
+        json.dumps(
+            {
+                "generated_at": metadata["generated_at"],
+                "sources": {
+                    "openrouter_models_api": sources.get("openrouter_models_api"),
+                },
+                "openrouter_model_info_count": len(model_info_rows),
+                "openrouter_model_info_skipped": openrouter_model_info_skipped,
+            },
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
 
     print(f"wrote {OUTPUT_PATH.relative_to(ROOT)} ({len(output_rows)} rows)")
     print(f"wrote {METADATA_PATH.relative_to(ROOT)}")
+    print(f"wrote {MODEL_INFO_OUTPUT_PATH.relative_to(ROOT)} ({len(model_info_rows)} rows)")
+    print(f"wrote {MODEL_INFO_METADATA_PATH.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":
