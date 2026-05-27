@@ -3265,8 +3265,8 @@
     "model": "deepseek/deepseek-chat",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.32,
-    "output": 0.89
+    "input": 0.2288,
+    "output": 0.9144
   },
   {
     "model": "deepseek/deepseek-chat-v3-0324",
@@ -3279,8 +3279,8 @@
     "model": "deepseek/deepseek-chat-v3.1",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.15,
-    "output": 0.75
+    "input": 0.21,
+    "output": 0.79
   },
   {
     "model": "deepseek/deepseek-prover-v2",
@@ -3377,8 +3377,8 @@
     "model": "deepseek/deepseek-v4-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.14,
-    "output": 0.28
+    "input": 0.1,
+    "output": 0.2
   },
   {
     "model": "deepseek/deepseek-v4-flash:free",
@@ -3664,8 +3664,8 @@
     "model": "google/gemma-4-31b-it",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.13,
-    "output": 0.38
+    "input": 0.12,
+    "output": 0.37
   },
   {
     "model": "google/gemma-4-31b-it:free",
@@ -3700,7 +3700,7 @@
     "type": "tokens",
     "channel_type": 20,
     "input": 0.017,
-    "output": 0.11
+    "output": 0.112
   },
   {
     "model": "ibm-granite/granite-4.1-8b",
@@ -3748,8 +3748,8 @@
     "model": "inclusionai/ling-2.6-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.08,
-    "output": 0.24
+    "input": 0.01,
+    "output": 0.03
   },
   {
     "model": "inclusionai/ring-2.6-1t",
@@ -3931,14 +3931,14 @@
     "type": "tokens",
     "channel_type": 20,
     "input": 0.027,
-    "output": 0.2
+    "output": 0.201
   },
   {
     "model": "meta-llama/llama-3.2-3b-instruct",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.051,
-    "output": 0.34
+    "input": 0.0509,
+    "output": 0.335
   },
   {
     "model": "meta-llama/llama-3.2-3b-instruct:free",
@@ -3993,7 +3993,7 @@
     "model": "meta-llama/llama-guard-3-8b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.48,
+    "input": 0.484,
     "output": 0.03
   },
   {
@@ -4126,7 +4126,7 @@
     "model": "minimax/minimax-m2.7",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.3,
+    "input": 0.279,
     "output": 1.2
   },
   {
@@ -4336,8 +4336,8 @@
     "model": "mistralai/mistral-small-3.1-24b-instruct",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.35,
-    "output": 0.56
+    "input": 0.351,
+    "output": 0.555
   },
   {
     "model": "mistralai/mistral-small-3.1-24b-instruct:free",
@@ -4420,8 +4420,8 @@
     "model": "moonshotai/kimi-k2-0905",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.4,
-    "output": 2
+    "input": 0.6,
+    "output": 2.5
   },
   {
     "model": "moonshotai/kimi-k2-0905:exacto",
@@ -4441,15 +4441,15 @@
     "model": "moonshotai/kimi-k2.5",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.44,
-    "output": 2
+    "input": 0.4,
+    "output": 1.9
   },
   {
     "model": "moonshotai/kimi-k2.6",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.75,
-    "output": 3.5
+    "input": 0.73,
+    "output": 3.49
   },
   {
     "model": "moonshotai/kimi-k2:free",
@@ -5414,7 +5414,7 @@
     "model": "qwen/qwen3-14b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.06,
+    "input": 0.1,
     "output": 0.24
   },
   {
@@ -5471,7 +5471,7 @@
     "type": "tokens",
     "channel_type": 20,
     "input": 0.08,
-    "output": 0.24
+    "output": 0.28
   },
   {
     "model": "qwen/qwen3-4b",
@@ -5659,7 +5659,7 @@
     "model": "qwen/qwen3.5-35b-a3b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.15,
+    "input": 0.139,
     "output": 1
   },
   {
@@ -5673,7 +5673,7 @@
     "model": "qwen/qwen3.5-9b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.1,
+    "input": 0.04,
     "output": 0.15
   },
   {
@@ -5694,29 +5694,29 @@
     "model": "qwen/qwen3.5-plus-20260420",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.4,
-    "output": 2.4
+    "input": 0.3,
+    "output": 1.8
   },
   {
     "model": "qwen/qwen3.6-27b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.32,
+    "input": 0.29,
     "output": 3.2
   },
   {
     "model": "qwen/qwen3.6-35b-a3b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.15,
+    "input": 0.14,
     "output": 1
   },
   {
     "model": "qwen/qwen3.6-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.25,
-    "output": 1.5
+    "input": 0.1875,
+    "output": 1.125
   },
   {
     "model": "qwen/qwen3.6-max-preview",
@@ -5862,7 +5862,7 @@
     "model": "stepfun/step-3.5-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.1,
+    "input": 0.09,
     "output": 0.3
   },
   {
@@ -6128,8 +6128,8 @@
     "model": "xiaomi/mimo-v2-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.09,
-    "output": 0.29
+    "input": 0.1,
+    "output": 0.3
   },
   {
     "model": "xiaomi/mimo-v2-omni",
@@ -6149,15 +6149,15 @@
     "model": "xiaomi/mimo-v2.5",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.4,
-    "output": 2
+    "input": 0.14,
+    "output": 0.28
   },
   {
     "model": "xiaomi/mimo-v2.5-pro",
     "type": "tokens",
     "channel_type": 20,
-    "input": 1,
-    "output": 3
+    "input": 0.435,
+    "output": 0.87
   },
   {
     "model": "z-ai/glm-4-32b",
@@ -6177,8 +6177,8 @@
     "model": "z-ai/glm-4.5-air",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.13,
-    "output": 0.85
+    "input": 0.125,
+    "output": 0.84
   },
   {
     "model": "z-ai/glm-4.5-air:free",
@@ -6198,8 +6198,8 @@
     "model": "z-ai/glm-4.6",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.39,
-    "output": 1.9
+    "input": 0.43,
+    "output": 1.74
   },
   {
     "model": "z-ai/glm-4.6:exacto",
@@ -6219,8 +6219,8 @@
     "model": "z-ai/glm-4.7",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.38,
-    "output": 1.74
+    "input": 0.4,
+    "output": 1.75
   },
   {
     "model": "z-ai/glm-4.7-flash",
@@ -6247,8 +6247,8 @@
     "model": "z-ai/glm-5.1",
     "type": "tokens",
     "channel_type": 20,
-    "input": 1.05,
-    "output": 3.5
+    "input": 0.98,
+    "output": 3.08
   },
   {
     "model": "z-ai/glm-5v-turbo",
@@ -6282,8 +6282,8 @@
     "model": "~google/gemini-flash-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.5,
-    "output": 3
+    "input": 1.5,
+    "output": 9
   },
   {
     "model": "~google/gemini-pro-latest",
@@ -6296,8 +6296,8 @@
     "model": "~moonshotai/kimi-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.75,
-    "output": 3.5
+    "input": 0.73,
+    "output": 3.49
   },
   {
     "model": "~openai/gpt-latest",

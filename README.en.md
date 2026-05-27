@@ -31,10 +31,10 @@ Format:
 ## Flow
 
 1. Fetch Portkey model pricing data.
-2. Fetch OpenRouter's public models API as a supplemental source.
+2. Fetch OpenRouter's public models API as the highest-priority source for OpenRouter models.
 3. Normalize prices to USD per 1M tokens.
 4. Map upstream providers to One Hub `channel_type` values.
-5. Keep Portkey prices when a model already exists, and use OpenRouter only to fill missing OpenRouter models.
+5. Use OpenRouter API prices to override matching OpenRouter entries from Portkey, and to fill missing OpenRouter models.
 6. Generate `prices/prices.json`.
 7. Generate `prices/metadata.json` for audit and debugging.
 8. Run daily with GitHub Actions.

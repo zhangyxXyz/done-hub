@@ -127,6 +127,7 @@ def convert_openrouter_models(openrouter_data, provider_channel_map):
         "missing_model_id": 0,
         "missing_pricing": 0,
         "missing_input_price": 0,
+        "negative_price": 0,
     }
 
     if channel_type is None:
@@ -155,6 +156,9 @@ def convert_openrouter_models(openrouter_data, provider_channel_map):
             continue
         if output_price is None:
             output_price = input_price
+        if input_price < 0 or output_price < 0:
+            skipped["negative_price"] += 1
+            continue
 
         converted[price_key(model, channel_type)] = {
             "model": model,
@@ -249,6 +253,7 @@ def main():
 
     openrouter_api_count = 0
     openrouter_api_added_count = 0
+    openrouter_api_overridden_count = 0
     openrouter_api_skipped = {}
     openrouter_api_error = None
     openrouter_api_url = sources.get("openrouter_models_api")
@@ -262,9 +267,10 @@ def main():
             openrouter_api_count = len(openrouter_prices)
             for key, price in openrouter_prices.items():
                 if key in prices:
-                    continue
+                    openrouter_api_overridden_count += 1
+                else:
+                    openrouter_api_added_count += 1
                 prices[key] = price
-                openrouter_api_added_count += 1
         except Exception as exc:
             openrouter_api_error = str(exc)
 
@@ -286,6 +292,7 @@ def main():
         "portkey_errors": portkey_errors,
         "openrouter_api_converted_count": openrouter_api_count,
         "openrouter_api_added_count": openrouter_api_added_count,
+        "openrouter_api_overridden_count": openrouter_api_overridden_count,
         "openrouter_api_error": openrouter_api_error,
         "output_count": len(output_rows),
         "skipped": portkey_skipped,
