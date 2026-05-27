@@ -2975,6 +2975,13 @@
     "output": 25
   },
   {
+    "model": "anthropic/claude-opus-4.7-fast",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 30,
+    "output": 150
+  },
+  {
     "model": "anthropic/claude-sonnet-4",
     "type": "tokens",
     "channel_type": 20,
@@ -3134,6 +3141,13 @@
     "channel_type": 20,
     "input": 0.42,
     "output": 1.25
+  },
+  {
+    "model": "baidu/qianfan-ocr-fast",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.68,
+    "output": 2.81
   },
   {
     "model": "baidu/qianfan-ocr-fast:free",
@@ -3365,6 +3379,13 @@
     "channel_type": 20,
     "input": 0.14,
     "output": 0.28
+  },
+  {
+    "model": "deepseek/deepseek-v4-flash:free",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0,
+    "output": 0
   },
   {
     "model": "deepseek/deepseek-v4-pro",
@@ -3710,6 +3731,13 @@
     "output": 0.75
   },
   {
+    "model": "inclusionai/ling-2.6-1t",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.075,
+    "output": 0.625
+  },
+  {
     "model": "inclusionai/ling-2.6-1t:free",
     "type": "tokens",
     "channel_type": 20,
@@ -3722,6 +3750,13 @@
     "channel_type": 20,
     "input": 0.08,
     "output": 0.24
+  },
+  {
+    "model": "inclusionai/ring-2.6-1t",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.075,
+    "output": 0.625
   },
   {
     "model": "inflection/inflection-3-pi",
@@ -5187,6 +5222,13 @@
     "output": 0
   },
   {
+    "model": "perceptron/perceptron-mk1",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.15,
+    "output": 1.5
+  },
+  {
     "model": "perplexity/pplx-embed-v1-0.6b",
     "type": "tokens",
     "channel_type": 20,
@@ -5691,6 +5733,13 @@
     "output": 1.95
   },
   {
+    "model": "qwen/qwen3.7-max",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 1.25,
+    "output": 3.75
+  },
+  {
     "model": "qwen/qwq-32b",
     "type": "tokens",
     "channel_type": 20,
@@ -5836,6 +5885,13 @@
     "channel_type": 20,
     "input": 0.14,
     "output": 0.57
+  },
+  {
+    "model": "tencent/hy3-preview",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.066,
+    "output": 0.26
   },
   {
     "model": "tencent/hy3-preview:free",
@@ -6053,6 +6109,13 @@
     "channel_type": 20,
     "input": 1.25,
     "output": 2.5
+  },
+  {
+    "model": "x-ai/grok-build-0.1",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 1,
+    "output": 2
   },
   {
     "model": "x-ai/grok-code-fast-1",

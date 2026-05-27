@@ -62,6 +62,13 @@ def portkey_cents_per_token_to_per_million(value):
     return float(amount.quantize(Decimal("0.000001"), rounding=ROUND_HALF_UP))
 
 
+def dollars_per_token_to_per_million(value):
+    if value is None:
+        return None
+    amount = Decimal(str(value)) * Decimal("1000000")
+    return float(amount.quantize(Decimal("0.000001"), rounding=ROUND_HALF_UP))
+
+
 def convert_portkey_prices(provider, portkey_data, provider_channel_map):
     provider_key = normalize_provider(provider)
     channel_type = provider_channel_map.get(provider_key)
@@ -94,6 +101,54 @@ def convert_portkey_prices(provider, portkey_data, provider_channel_map):
         response_token = pay_as_you_go.get("response_token", {})
         input_price = portkey_cents_per_token_to_per_million(request_token.get("price"))
         output_price = portkey_cents_per_token_to_per_million(response_token.get("price"))
+
+        if input_price is None:
+            skipped["missing_input_price"] += 1
+            continue
+        if output_price is None:
+            output_price = input_price
+
+        converted[price_key(model, channel_type)] = {
+            "model": model,
+            "type": "tokens",
+            "channel_type": channel_type,
+            "input": compact_price(input_price),
+            "output": compact_price(output_price),
+        }
+
+    return converted, skipped
+
+
+def convert_openrouter_models(openrouter_data, provider_channel_map):
+    channel_type = provider_channel_map.get("openrouter")
+    converted = {}
+    skipped = {
+        "unknown_provider": 0,
+        "missing_model_id": 0,
+        "missing_pricing": 0,
+        "missing_input_price": 0,
+    }
+
+    if channel_type is None:
+        skipped["unknown_provider"] = len(openrouter_data.get("data", []))
+        return converted, skipped
+
+    for spec in openrouter_data.get("data", []):
+        if not isinstance(spec, dict):
+            continue
+
+        model = spec.get("id")
+        if not model:
+            skipped["missing_model_id"] += 1
+            continue
+
+        pricing = spec.get("pricing", {})
+        if not pricing:
+            skipped["missing_pricing"] += 1
+            continue
+
+        input_price = dollars_per_token_to_per_million(pricing.get("prompt"))
+        output_price = dollars_per_token_to_per_million(pricing.get("completion"))
 
         if input_price is None:
             skipped["missing_input_price"] += 1
@@ -192,6 +247,27 @@ def main():
         portkey_skipped[provider] = provider_skipped
         portkey_total += len(provider_prices)
 
+    openrouter_api_count = 0
+    openrouter_api_added_count = 0
+    openrouter_api_skipped = {}
+    openrouter_api_error = None
+    openrouter_api_url = sources.get("openrouter_models_api")
+    if openrouter_api_url:
+        try:
+            openrouter_data = fetch_json(openrouter_api_url)
+            openrouter_prices, openrouter_api_skipped = convert_openrouter_models(
+                openrouter_data,
+                provider_channel_map,
+            )
+            openrouter_api_count = len(openrouter_prices)
+            for key, price in openrouter_prices.items():
+                if key in prices:
+                    continue
+                prices[key] = price
+                openrouter_api_added_count += 1
+        except Exception as exc:
+            openrouter_api_error = str(exc)
+
     fallback_results = apply_model_price_fallbacks(prices, model_price_fallbacks)
     output_rows = sort_prices(prices)
 
@@ -199,6 +275,7 @@ def main():
     OUTPUT_PATH.write_text(
         json.dumps(output_rows, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
+        newline="\n",
     )
 
     metadata = {
@@ -207,13 +284,18 @@ def main():
         "portkey_converted_count": portkey_total,
         "portkey_provider_counts": portkey_counts,
         "portkey_errors": portkey_errors,
+        "openrouter_api_converted_count": openrouter_api_count,
+        "openrouter_api_added_count": openrouter_api_added_count,
+        "openrouter_api_error": openrouter_api_error,
         "output_count": len(output_rows),
         "skipped": portkey_skipped,
+        "openrouter_api_skipped": openrouter_api_skipped,
         "model_price_fallbacks": fallback_results,
     }
     METADATA_PATH.write_text(
         json.dumps(metadata, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
+        newline="\n",
     )
 
     print(f"wrote {OUTPUT_PATH.relative_to(ROOT)} ({len(output_rows)} rows)")

@@ -31,12 +31,14 @@ Format:
 ## Flow
 
 1. Fetch Portkey model pricing data.
-2. Normalize prices to USD per 1M tokens.
-3. Map upstream providers to One Hub `channel_type` values.
-4. Generate `prices/prices.json`.
-5. Generate `prices/metadata.json` for audit and debugging.
-6. Run daily with GitHub Actions.
-7. If generated files changed, commit and push automatically.
+2. Fetch OpenRouter's public models API as a supplemental source.
+3. Normalize prices to USD per 1M tokens.
+4. Map upstream providers to One Hub `channel_type` values.
+5. Keep Portkey prices when a model already exists, and use OpenRouter only to fill missing OpenRouter models.
+6. Generate `prices/prices.json`.
+7. Generate `prices/metadata.json` for audit and debugging.
+8. Run daily with GitHub Actions.
+9. If generated files changed, commit and push automatically.
 
 ## Model Price Fallbacks
 
@@ -62,13 +64,15 @@ in `prices/metadata.json`.
 
 ## Current Sources
 
-Source:
+Sources:
 
 ```text
 https://configs.portkey.ai/pricing/{provider}.json
+https://openrouter.ai/api/v1/models
 ```
 
 Portkey prices are published as cents per token, and the script converts them to USD per 1M tokens.
+OpenRouter prices are published as USD per token, and the script converts them to USD per 1M tokens.
 
 ## Local Run
 

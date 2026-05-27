@@ -1,4 +1,5 @@
 {
+  "openrouter_models_api": "https://openrouter.ai/api/v1/models",
   "portkey_base": "https://configs.portkey.ai/pricing",
   "portkey_providers": [
     "anthropic",
