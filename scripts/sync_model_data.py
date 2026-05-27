@@ -31,7 +31,7 @@ def fetch_json(url):
     req = urllib.request.Request(
         url,
         headers={
-            "User-Agent": "ai-hub-price-sync/1.0",
+            "User-Agent": "ai-hub-model-data-sync/1.0",
             "Accept": "application/json",
         },
     )
