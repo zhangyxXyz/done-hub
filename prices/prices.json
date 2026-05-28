@@ -1568,6 +1568,13 @@
     "output": 25
   },
   {
+    "model": "claude-opus-4-8",
+    "type": "tokens",
+    "channel_type": 14,
+    "input": 5,
+    "output": 25
+  },
+  {
     "model": "claude-sonnet-4-0",
     "type": "tokens",
     "channel_type": 14,
@@ -2989,6 +2996,20 @@
     "output": 150
   },
   {
+    "model": "anthropic/claude-opus-4.8",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 5,
+    "output": 25
+  },
+  {
+    "model": "anthropic/claude-opus-4.8-fast",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 10,
+    "output": 50
+  },
+  {
     "model": "anthropic/claude-sonnet-4",
     "type": "tokens",
     "channel_type": 20,
@@ -3148,13 +3169,6 @@
     "channel_type": 20,
     "input": 0.42,
     "output": 1.25
-  },
-  {
-    "model": "baidu/qianfan-ocr-fast",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 0.68,
-    "output": 2.81
   },
   {
     "model": "baidu/qianfan-ocr-fast:free",
@@ -6192,7 +6206,7 @@
     "type": "tokens",
     "channel_type": 20,
     "input": 0.125,
-    "output": 0.84
+    "output": 0.85
   },
   {
     "model": "z-ai/glm-4.5-air:free",
@@ -7938,6 +7952,20 @@
     "output": 25
   },
   {
+    "model": "anthropic.claude-opus-4-8",
+    "type": "tokens",
+    "channel_type": 32,
+    "input": 5,
+    "output": 25
+  },
+  {
+    "model": "anthropic.claude-opus-4-8-v1",
+    "type": "tokens",
+    "channel_type": 32,
+    "input": 5,
+    "output": 25
+  },
+  {
     "model": "anthropic.claude-sonnet-4-20250514-v1:0",
     "type": "tokens",
     "channel_type": 32,
@@ -8225,6 +8253,20 @@
     "output": 25
   },
   {
+    "model": "eu.anthropic.claude-opus-4-8",
+    "type": "tokens",
+    "channel_type": 32,
+    "input": 5,
+    "output": 25
+  },
+  {
+    "model": "eu.anthropic.claude-opus-4-8-v1",
+    "type": "tokens",
+    "channel_type": 32,
+    "input": 5,
+    "output": 25
+  },
+  {
     "model": "eu.anthropic.claude-sonnet-4-6",
     "type": "tokens",
     "channel_type": 32,
@@ -8261,6 +8303,20 @@
   },
   {
     "model": "global.anthropic.claude-opus-4-7-v1",
+    "type": "tokens",
+    "channel_type": 32,
+    "input": 5,
+    "output": 25
+  },
+  {
+    "model": "global.anthropic.claude-opus-4-8",
+    "type": "tokens",
+    "channel_type": 32,
+    "input": 5,
+    "output": 25
+  },
+  {
+    "model": "global.anthropic.claude-opus-4-8-v1",
     "type": "tokens",
     "channel_type": 32,
     "input": 5,
@@ -8617,6 +8673,20 @@
     "output": 25
   },
   {
+    "model": "us.anthropic.claude-opus-4-8",
+    "type": "tokens",
+    "channel_type": 32,
+    "input": 5,
+    "output": 25
+  },
+  {
+    "model": "us.anthropic.claude-opus-4-8-v1",
+    "type": "tokens",
+    "channel_type": 32,
+    "input": 5,
+    "output": 25
+  },
+  {
     "model": "us.anthropic.claude-sonnet-4-6",
     "type": "tokens",
     "channel_type": 32,
@@ -8806,6 +8876,13 @@
     "output": 25
   },
   {
+    "model": "anthropic.claude-opus-4-8",
+    "type": "tokens",
+    "channel_type": 42,
+    "input": 5,
+    "output": 25
+  },
+  {
     "model": "chirp-3-hd",
     "type": "tokens",
     "channel_type": 42,
@@ -8940,6 +9017,13 @@
   },
   {
     "model": "claude-opus-4-7",
+    "type": "tokens",
+    "channel_type": 42,
+    "input": 5,
+    "output": 25
+  },
+  {
+    "model": "claude-opus-4-8",
     "type": "tokens",
     "channel_type": 42,
     "input": 5,

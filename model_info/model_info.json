@@ -607,6 +607,64 @@
       }
     },
     {
+      "model": "anthropic/claude-opus-4.8",
+      "model_info": {
+        "model": "anthropic/claude-opus-4.8",
+        "name": "Anthropic: Claude Opus 4.8",
+        "description": "Claude Opus 4.8 is Anthropic's most capable generally available model in the Opus family. It supports text, image, and file inputs with text output, with reasoning support and a 1M-token...",
+        "context_length": 1000000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "text",
+          "image",
+          "file"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/anthropic/claude-opus-4.8",
+          "https://openrouter.ai/api/v1/models/anthropic/claude-4.8-opus-20260528/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "anthropic/claude-opus-4.8-fast",
+      "model_info": {
+        "model": "anthropic/claude-opus-4.8-fast",
+        "name": "Anthropic: Claude Opus 4.8 (Fast)",
+        "description": "Fast-mode variant of [Opus 4.8](/anthropic/claude-opus-4.8) - identical capabilities with higher output speed at 2x pricing relative to regular Opus 4.8.\n\nLearn more in Anthropic's docs: https://platform.claude.com/docs/en/build-with-claude/fast-mode",
+        "context_length": 1000000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "text",
+          "image",
+          "file"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/anthropic/claude-opus-4.8-fast",
+          "https://openrouter.ai/api/v1/models/anthropic/claude-4.8-opus-fast-20260528/endpoints"
+        ]
+      }
+    },
+    {
       "model": "anthropic/claude-sonnet-4",
       "model_info": {
         "model": "anthropic/claude-sonnet-4",
@@ -961,32 +1019,6 @@
         "support_url": [
           "https://openrouter.ai/models/baidu/ernie-4.5-vl-424b-a47b",
           "https://openrouter.ai/api/v1/models/baidu/ernie-4.5-vl-424b-a47b/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "baidu/qianfan-ocr-fast",
-      "model_info": {
-        "model": "baidu/qianfan-ocr-fast",
-        "name": "Baidu: Qianfan-OCR-Fast",
-        "description": "Qianfan-OCR-Fast is a domain-specific multimodal large model purpose-built for OCR. By leveraging specialized OCR training data while preserving versatile multimodal intelligence, it provides a powerful performance upgrade over Qianfan-OCR.",
-        "context_length": 65536,
-        "max_tokens": 28672,
-        "input_modalities": [
-          "image",
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/baidu/qianfan-ocr-fast",
-          "https://openrouter.ai/api/v1/models/baidu/qianfan-ocr-fast-20260420/endpoints"
         ]
       }
     },
