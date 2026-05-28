@@ -840,31 +840,6 @@
       }
     },
     {
-      "model": "baidu/cobuddy:free",
-      "model_info": {
-        "model": "baidu/cobuddy:free",
-        "name": "Baidu Qianfan: CoBuddy (free)",
-        "description": "CoBuddy is a code generation model from Baidu, optimized for coding tasks and AI Agent workflows. It features high inference throughput and low end-to-end latency, with native support for tool...",
-        "context_length": 131072,
-        "max_tokens": 65536,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/baidu/cobuddy:free",
-          "https://openrouter.ai/api/v1/models/baidu/cobuddy-20260430/endpoints"
-        ]
-      }
-    },
-    {
       "model": "baidu/ernie-4.5-21b-a3b",
       "model_info": {
         "model": "baidu/ernie-4.5-21b-a3b",
@@ -3425,7 +3400,7 @@
         "model": "minimax/minimax-m2.5:free",
         "name": "MiniMax: MiniMax M2.5 (free)",
         "description": "MiniMax-M2.5 is a SOTA large language model designed for real-world productivity. Trained in a diverse range of complex real-world digital working environments, M2.5 builds upon the coding expertise of M2.1...",
-        "context_length": 204800,
+        "context_length": 262144,
         "max_tokens": 8192,
         "input_modalities": [
           "text"
@@ -4234,6 +4209,33 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/moonshotai/kimi-k2.6",
+          "https://openrouter.ai/api/v1/models/moonshotai/kimi-k2.6-20260420/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "moonshotai/kimi-k2.6:free",
+      "model_info": {
+        "model": "moonshotai/kimi-k2.6:free",
+        "name": "MoonshotAI: Kimi K2.6 (free)",
+        "description": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and...",
+        "context_length": 262144,
+        "max_tokens": 0,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/moonshotai/kimi-k2.6:free",
           "https://openrouter.ai/api/v1/models/moonshotai/kimi-k2.6-20260420/endpoints"
         ]
       }
@@ -5512,7 +5514,7 @@
         "name": "OpenAI: GPT-5.1 Chat",
         "description": "GPT-5.1 Chat (AKA Instant is the fast, lightweight member of the 5.1 family, optimized for low-latency chat while retaining strong general intelligence. It uses adaptive reasoning to selectively “think” on...",
         "context_length": 128000,
-        "max_tokens": 16384,
+        "max_tokens": 32000,
         "input_modalities": [
           "file",
           "image",
@@ -5596,7 +5598,7 @@
         "name": "OpenAI: GPT-5.1-Codex-Mini",
         "description": "GPT-5.1-Codex-Mini is a smaller and faster version of GPT-5.1-Codex",
         "context_length": 400000,
-        "max_tokens": 128000,
+        "max_tokens": 100000,
         "input_modalities": [
           "image",
           "text"
@@ -5653,7 +5655,7 @@
         "name": "OpenAI: GPT-5.2 Chat",
         "description": "GPT-5.2 Chat (AKA Instant) is the fast, lightweight member of the 5.2 family, optimized for low-latency chat while retaining strong general intelligence. It uses adaptive reasoning to selectively “think” on...",
         "context_length": 128000,
-        "max_tokens": 32000,
+        "max_tokens": 16384,
         "input_modalities": [
           "file",
           "image",
@@ -8427,7 +8429,7 @@
         "name": "Tencent: Hy3 preview",
         "description": "Hy3 preview is a high-efficiency Mixture-of-Experts model from Tencent designed for agentic workflows and production use. It supports configurable reasoning levels across disabled, low, and high modes, allowing it to...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 0,
         "input_modalities": [
           "text"
         ],
