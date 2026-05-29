@@ -1573,7 +1573,7 @@
         "name": "DeepSeek: DeepSeek V4 Flash",
         "description": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and...",
         "context_length": 1048576,
-        "max_tokens": 16384,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -1674,7 +1674,7 @@
         "model": "google/gemini-2.0-flash-001",
         "name": "Google: Gemini 2.0 Flash",
         "description": "Gemini Flash 2.0 offers a significantly faster time to first token (TTFT) compared to [Gemini Flash 1.5](/google/gemini-flash-1.5), while maintaining quality on par with larger models like [Gemini Pro 1.5](/google/gemini-pro-1.5). It...",
-        "context_length": 1000000,
+        "context_length": 1048576,
         "max_tokens": 8192,
         "input_modalities": [
           "text",
@@ -4199,7 +4199,7 @@
         "name": "MoonshotAI: Kimi K2.6",
         "description": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and...",
         "context_length": 262144,
-        "max_tokens": 262142,
+        "max_tokens": 262144,
         "input_modalities": [
           "text",
           "image"
@@ -9406,7 +9406,7 @@
         "name": "MoonshotAI Kimi Latest",
         "description": "This model always redirects to the latest model in the MoonshotAI Kimi family.",
         "context_length": 262144,
-        "max_tokens": 262142,
+        "max_tokens": 262144,
         "input_modalities": [
           "text",
           "image"

@@ -3398,8 +3398,8 @@
     "model": "deepseek/deepseek-v4-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.1,
-    "output": 0.2
+    "input": 0.0983,
+    "output": 0.1966
   },
   {
     "model": "deepseek/deepseek-v4-flash:free",
@@ -4469,8 +4469,8 @@
     "model": "moonshotai/kimi-k2.6",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.73,
-    "output": 3.49
+    "input": 0.684,
+    "output": 3.42
   },
   {
     "model": "moonshotai/kimi-k2.6:free",
@@ -6331,8 +6331,8 @@
     "model": "~moonshotai/kimi-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.73,
-    "output": 3.49
+    "input": 0.684,
+    "output": 3.42
   },
   {
     "model": "~openai/gpt-latest",
