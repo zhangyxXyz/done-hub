@@ -5901,6 +5901,13 @@
     "output": 0
   },
   {
+    "model": "stepfun/step-3.7-flash",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.2,
+    "output": 1.15
+  },
+  {
     "model": "switchpoint/router",
     "type": "tokens",
     "channel_type": 20,
