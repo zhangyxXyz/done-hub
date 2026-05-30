@@ -4147,7 +4147,7 @@
     "model": "minimax/minimax-m2.7",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.279,
+    "input": 0.26,
     "output": 1.2
   },
   {
@@ -5071,7 +5071,7 @@
     "model": "openai/gpt-oss-20b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.03,
+    "input": 0.029,
     "output": 0.14
   },
   {

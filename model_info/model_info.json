@@ -3434,7 +3434,7 @@
         "name": "MiniMax: MiniMax M2.7",
         "description": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent...",
         "context_length": 204800,
-        "max_tokens": 131072,
+        "max_tokens": 0,
         "input_modalities": [
           "text"
         ],
@@ -3635,29 +3635,6 @@
         "support_url": [
           "https://openrouter.ai/models/mistralai/ministral-8b-2512",
           "https://openrouter.ai/api/v1/models/mistralai/ministral-8b-2512/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "mistralai/mistral-7b-instruct-v0.1",
-      "model_info": {
-        "model": "mistralai/mistral-7b-instruct-v0.1",
-        "name": "Mistral: Mistral 7B Instruct v0.1",
-        "description": "A 7.3B parameter model that outperforms Llama 2 13B on all benchmarks, with optimizations for speed and context length.",
-        "context_length": 4096,
-        "max_tokens": 2824,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/mistralai/mistral-7b-instruct-v0.1",
-          "https://openrouter.ai/api/v1/models/mistralai/mistral-7b-instruct-v0.1/endpoints"
         ]
       }
     },
@@ -6114,7 +6091,7 @@
         "name": "OpenAI: gpt-oss-20b",
         "description": "gpt-oss-20b is an open-weight 21B parameter model released by OpenAI under the Apache 2.0 license. It uses a Mixture-of-Experts (MoE) architecture with 3.6B active parameters per forward pass, optimized for...",
         "context_length": 131072,
-        "max_tokens": 131072,
+        "max_tokens": 0,
         "input_modalities": [
           "text"
         ],
