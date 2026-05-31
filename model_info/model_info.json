@@ -121,29 +121,6 @@
       }
     },
     {
-      "model": "alfredpros/codellama-7b-instruct-solidity",
-      "model_info": {
-        "model": "alfredpros/codellama-7b-instruct-solidity",
-        "name": "AlfredPros: CodeLLaMa 7B Instruct Solidity",
-        "description": "A finetuned 7 billion parameters Code LLaMA - Instruct model to generate Solidity smart contract using 4-bit QLoRA finetuning provided by PEFT library.",
-        "context_length": 4096,
-        "max_tokens": 4096,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/alfredpros/codellama-7b-instruct-solidity",
-          "https://openrouter.ai/api/v1/models/alfredpros/codellama-7b-instruct-solidity/endpoints"
-        ]
-      }
-    },
-    {
       "model": "allenai/olmo-3-32b-think",
       "model_info": {
         "model": "allenai/olmo-3-32b-think",
@@ -894,54 +871,6 @@
         "support_url": [
           "https://openrouter.ai/models/arcee-ai/virtuoso-large",
           "https://openrouter.ai/api/v1/models/arcee-ai/virtuoso-large/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "baidu/ernie-4.5-21b-a3b",
-      "model_info": {
-        "model": "baidu/ernie-4.5-21b-a3b",
-        "name": "Baidu: ERNIE 4.5 21B A3B",
-        "description": "A sophisticated text-based Mixture-of-Experts (MoE) model featuring 21B total parameters with 3B activated per token, delivering exceptional multimodal understanding and generation through heterogeneous MoE structures and modality-isolated routing. Supporting an...",
-        "context_length": 131072,
-        "max_tokens": 8000,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/baidu/ernie-4.5-21b-a3b",
-          "https://openrouter.ai/api/v1/models/baidu/ernie-4.5-21b-a3b/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "baidu/ernie-4.5-21b-a3b-thinking",
-      "model_info": {
-        "model": "baidu/ernie-4.5-21b-a3b-thinking",
-        "name": "Baidu: ERNIE 4.5 21B A3B Thinking",
-        "description": "ERNIE-4.5-21B-A3B-Thinking is Baidu's upgraded lightweight MoE model, refined to boost reasoning depth and quality for top-tier performance in logical puzzles, math, science, coding, text generation, and expert-level academic benchmarks.",
-        "context_length": 131072,
-        "max_tokens": 65536,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/baidu/ernie-4.5-21b-a3b-thinking",
-          "https://openrouter.ai/api/v1/models/baidu/ernie-4.5-21b-a3b-thinking/endpoints"
         ]
       }
     },
@@ -3094,6 +3023,7 @@
         "tags": [
           "openrouter",
           "vision",
+          "tools",
           "structured_outputs"
         ],
         "support_url": [
@@ -3397,32 +3327,6 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/minimax/minimax-m2.5",
-          "https://openrouter.ai/api/v1/models/minimax/minimax-m2.5-20260211/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "minimax/minimax-m2.5:free",
-      "model_info": {
-        "model": "minimax/minimax-m2.5:free",
-        "name": "MiniMax: MiniMax M2.5 (free)",
-        "description": "MiniMax-M2.5 is a SOTA large language model designed for real-world productivity. Trained in a diverse range of complex real-world digital working environments, M2.5 builds upon the coding expertise of M2.1...",
-        "context_length": 204800,
-        "max_tokens": 8192,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/minimax/minimax-m2.5:free",
           "https://openrouter.ai/api/v1/models/minimax/minimax-m2.5-20260211/endpoints"
         ]
       }
@@ -6849,9 +6753,7 @@
           "text"
         ],
         "tags": [
-          "openrouter",
-          "tools",
-          "structured_outputs"
+          "openrouter"
         ],
         "support_url": [
           "https://openrouter.ai/models/qwen/qwen-2.5-7b-instruct",
@@ -7068,7 +6970,7 @@
         "name": "Qwen: Qwen3 235B A22B Thinking 2507",
         "description": "Qwen3-235B-A22B-Thinking-2507 is a high-performance, open-weight Mixture-of-Experts (MoE) language model optimized for complex reasoning tasks. It activates 22B of its 235B parameters per forward pass and natively supports up to 262,144...",
         "context_length": 262144,
-        "max_tokens": 0,
+        "max_tokens": 262144,
         "input_modalities": [
           "text"
         ],
@@ -8549,32 +8451,6 @@
         "support_url": [
           "https://openrouter.ai/models/undi95/remm-slerp-l2-13b",
           "https://openrouter.ai/api/v1/models/undi95/remm-slerp-l2-13b/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "upstage/solar-pro-3",
-      "model_info": {
-        "model": "upstage/solar-pro-3",
-        "name": "Upstage: Solar Pro 3",
-        "description": "Solar Pro 3 is Upstage's powerful Mixture-of-Experts (MoE) language model. With 102B total parameters and 12B active parameters per forward pass, it delivers exceptional performance while maintaining computational efficiency. Optimized...",
-        "context_length": 128000,
-        "max_tokens": 0,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/upstage/solar-pro-3",
-          "https://openrouter.ai/api/v1/models/upstage/solar-pro-3/endpoints"
         ]
       }
     },
