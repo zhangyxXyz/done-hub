@@ -3402,13 +3402,6 @@
     "output": 0.1966
   },
   {
-    "model": "deepseek/deepseek-v4-flash:free",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 0,
-    "output": 0
-  },
-  {
     "model": "deepseek/deepseek-v4-pro",
     "type": "tokens",
     "channel_type": 20,
@@ -3776,8 +3769,8 @@
     "model": "inclusionai/ring-2.6-1t",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.075,
-    "output": 0.625
+    "input": 0.3,
+    "output": 2.5
   },
   {
     "model": "inflection/inflection-3-pi",
