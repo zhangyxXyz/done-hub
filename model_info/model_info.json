@@ -3333,6 +3333,35 @@
       }
     },
     {
+      "model": "minimax/minimax-m3",
+      "model_info": {
+        "model": "minimax/minimax-m3",
+        "name": "MiniMax: MiniMax M3",
+        "description": "MiniMax-M3 is a multimodal foundation model from MiniMax. It supports text, image, and video inputs with text output, a 1M-token context window, and is suited for long-horizon agentic work, coding,...",
+        "context_length": 1048576,
+        "max_tokens": 512000,
+        "input_modalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/minimax/minimax-m3",
+          "https://openrouter.ai/api/v1/models/minimax/minimax-m3-20260531/endpoints"
+        ]
+      }
+    },
+    {
       "model": "mistralai/codestral-2508",
       "model_info": {
         "model": "mistralai/codestral-2508",
@@ -8320,6 +8349,32 @@
         "support_url": [
           "https://openrouter.ai/models/undi95/remm-slerp-l2-13b",
           "https://openrouter.ai/api/v1/models/undi95/remm-slerp-l2-13b/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "upstage/solar-pro-3",
+      "model_info": {
+        "model": "upstage/solar-pro-3",
+        "name": "Upstage: Solar Pro 3",
+        "description": "Solar Pro 3 is Upstage's powerful Mixture-of-Experts (MoE) language model. With 102B total parameters and 12B active parameters per forward pass, it delivers exceptional performance while maintaining computational efficiency. Optimized...",
+        "context_length": 128000,
+        "max_tokens": 0,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/upstage/solar-pro-3",
+          "https://openrouter.ai/api/v1/models/upstage/solar-pro-3/endpoints"
         ]
       }
     },
