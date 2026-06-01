@@ -1450,7 +1450,7 @@
         "name": "DeepSeek: DeepSeek V3.2",
         "description": "DeepSeek-V3.2 is a large language model designed to harmonize high computational efficiency with strong reasoning and agentic tool-use performance. It introduces DeepSeek Sparse Attention (DSA), a fine-grained sparse attention mechanism...",
         "context_length": 131072,
-        "max_tokens": 65536,
+        "max_tokens": 64000,
         "input_modalities": [
           "text"
         ],
@@ -1569,68 +1569,6 @@
         "support_url": [
           "https://openrouter.ai/models/essentialai/rnj-1-instruct",
           "https://openrouter.ai/api/v1/models/essentialai/rnj-1-instruct/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "google/gemini-2.0-flash-001",
-      "model_info": {
-        "model": "google/gemini-2.0-flash-001",
-        "name": "Google: Gemini 2.0 Flash",
-        "description": "Gemini Flash 2.0 offers a significantly faster time to first token (TTFT) compared to [Gemini Flash 1.5](/google/gemini-flash-1.5), while maintaining quality on par with larger models like [Gemini Pro 1.5](/google/gemini-pro-1.5). It...",
-        "context_length": 1048576,
-        "max_tokens": 8192,
-        "input_modalities": [
-          "text",
-          "image",
-          "file",
-          "audio",
-          "video"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "audio",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/google/gemini-2.0-flash-001",
-          "https://openrouter.ai/api/v1/models/google/gemini-2.0-flash-001/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "google/gemini-2.0-flash-lite-001",
-      "model_info": {
-        "model": "google/gemini-2.0-flash-lite-001",
-        "name": "Google: Gemini 2.0 Flash Lite",
-        "description": "Gemini 2.0 Flash Lite offers a significantly faster time to first token (TTFT) compared to [Gemini Flash 1.5](/google/gemini-flash-1.5), while maintaining quality on par with larger models like [Gemini Pro 1.5](/google/gemini-pro-1.5),...",
-        "context_length": 1048576,
-        "max_tokens": 8192,
-        "input_modalities": [
-          "text",
-          "image",
-          "file",
-          "audio",
-          "video"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "audio",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/google/gemini-2.0-flash-lite-001",
-          "https://openrouter.ai/api/v1/models/google/gemini-2.0-flash-lite-001/endpoints"
         ]
       }
     },
@@ -3313,7 +3251,7 @@
         "name": "MiniMax: MiniMax M2.7",
         "description": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent...",
         "context_length": 204800,
-        "max_tokens": 0,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -6919,8 +6857,8 @@
         "model": "qwen/qwen3-30b-a3b-instruct-2507",
         "name": "Qwen: Qwen3 30B A3B Instruct 2507",
         "description": "Qwen3-30B-A3B-Instruct-2507 is a 30.5B-parameter mixture-of-experts language model from Qwen, with 3.3B active parameters per inference. It operates in non-thinking mode and is designed for high-quality instruction following, multilingual understanding, and...",
-        "context_length": 262144,
-        "max_tokens": 262144,
+        "context_length": 131072,
+        "max_tokens": 32000,
         "input_modalities": [
           "text"
         ],
@@ -8214,7 +8152,7 @@
         "name": "Tencent: Hy3 preview",
         "description": "Hy3 preview is a high-efficiency Mixture-of-Experts model from Tencent designed for agentic workflows and production use. It supports configurable reasoning levels across disabled, low, and high modes, allowing it to...",
         "context_length": 262144,
-        "max_tokens": 0,
+        "max_tokens": 262144,
         "input_modalities": [
           "text"
         ],
@@ -8840,7 +8778,7 @@
         "name": "Z.ai: GLM 5",
         "description": "GLM-5 is Z.ai’s flagship open-source foundation model engineered for complex systems design and long-horizon agent workflows. Built for expert developers, it delivers production-grade performance on large-scale programming tasks, rivaling leading...",
         "context_length": 202752,
-        "max_tokens": 0,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -8892,7 +8830,7 @@
         "name": "Z.ai: GLM 5.1",
         "description": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on...",
         "context_length": 202752,
-        "max_tokens": 0,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
