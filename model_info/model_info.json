@@ -875,30 +875,6 @@
       }
     },
     {
-      "model": "baidu/ernie-4.5-300b-a47b",
-      "model_info": {
-        "model": "baidu/ernie-4.5-300b-a47b",
-        "name": "Baidu: ERNIE 4.5 300B A47B ",
-        "description": "ERNIE-4.5-300B-A47B is a 300B parameter Mixture-of-Experts (MoE) language model developed by Baidu as part of the ERNIE 4.5 series. It activates 47B parameters per token and supports text generation in...",
-        "context_length": 131072,
-        "max_tokens": 12000,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/baidu/ernie-4.5-300b-a47b",
-          "https://openrouter.ai/api/v1/models/baidu/ernie-4.5-300b-a47b/endpoints"
-        ]
-      }
-    },
-    {
       "model": "baidu/ernie-4.5-vl-28b-a3b",
       "model_info": {
         "model": "baidu/ernie-4.5-vl-28b-a3b",
@@ -8152,7 +8128,7 @@
         "name": "Tencent: Hy3 preview",
         "description": "Hy3 preview is a high-efficiency Mixture-of-Experts model from Tencent designed for agentic workflows and production use. It supports configurable reasoning levels across disabled, low, and high modes, allowing it to...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 0,
         "input_modalities": [
           "text"
         ],

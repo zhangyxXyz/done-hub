@@ -5925,8 +5925,8 @@
     "model": "tencent/hy3-preview",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.066,
-    "output": 0.26
+    "input": 0.063,
+    "output": 0.21
   },
   {
     "model": "tencent/hy3-preview:free",
