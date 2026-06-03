@@ -7822,6 +7822,34 @@
       }
     },
     {
+      "model": "qwen/qwen3.7-plus",
+      "model_info": {
+        "model": "qwen/qwen3.7-plus",
+        "name": "Qwen: Qwen3.7 Plus",
+        "description": "Qwen3.7-Plus is a cost-effective model in Alibaba's Qwen3.7 series. It supports text and image input with text output, building on the series' text capabilities with a comprehensive upgrade to its...",
+        "context_length": 1000000,
+        "max_tokens": 65536,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/qwen/qwen3.7-plus",
+          "https://openrouter.ai/api/v1/models/qwen/qwen3.7-plus-20260602/endpoints"
+        ]
+      }
+    },
+    {
       "model": "rekaai/reka-edge",
       "model_info": {
         "model": "rekaai/reka-edge",
@@ -8777,7 +8805,7 @@
         "name": "Z.ai: GLM 5",
         "description": "GLM-5 is Z.ai’s flagship open-source foundation model engineered for complex systems design and long-horizon agent workflows. Built for expert developers, it delivers production-grade performance on large-scale programming tasks, rivaling leading...",
         "context_length": 202752,
-        "max_tokens": 16384,
+        "max_tokens": 0,
         "input_modalities": [
           "text"
         ],
@@ -8829,7 +8857,7 @@
         "name": "Z.ai: GLM 5.1",
         "description": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on...",
         "context_length": 202752,
-        "max_tokens": 131072,
+        "max_tokens": 0,
         "input_modalities": [
           "text"
         ],
