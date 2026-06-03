@@ -6247,6 +6247,29 @@
       }
     },
     {
+      "model": "openrouter/fusion",
+      "model_info": {
+        "model": "openrouter/fusion",
+        "name": "OpenRouter: Fusion",
+        "description": "Fusion turns your prompt into a small multi-model deliberation. A panel of expert models (see below) analyzes your prompt in parallel with web search and web fetch enabled, then a...",
+        "context_length": 128000,
+        "max_tokens": 0,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/openrouter/fusion",
+          "https://openrouter.ai/api/v1/models/openrouter/fusion/endpoints"
+        ]
+      }
+    },
+    {
       "model": "openrouter/owl-alpha",
       "model_info": {
         "model": "openrouter/owl-alpha",
