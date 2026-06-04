@@ -4316,6 +4316,83 @@
       }
     },
     {
+      "model": "nvidia/nemotron-3-ultra-550b-a55b",
+      "model_info": {
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "name": "NVIDIA: Nemotron 3 Ultra",
+        "description": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it...",
+        "context_length": 1000000,
+        "max_tokens": 16384,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/nvidia/nemotron-3-ultra-550b-a55b",
+          "https://openrouter.ai/api/v1/models/nvidia/nemotron-3-ultra-550b-a55b-20260604/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "model_info": {
+        "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+        "name": "NVIDIA: Nemotron 3 Ultra (free)",
+        "description": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it...",
+        "context_length": 1000000,
+        "max_tokens": 65536,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/nvidia/nemotron-3-ultra-550b-a55b:free",
+          "https://openrouter.ai/api/v1/models/nvidia/nemotron-3-ultra-550b-a55b-20260604/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "nvidia/nemotron-3.5-content-safety:free",
+      "model_info": {
+        "model": "nvidia/nemotron-3.5-content-safety:free",
+        "name": "NVIDIA: Nemotron 3.5 Content Safety (free)",
+        "description": "NVIDIA Nemotron 3.5 Content Safety is a compact 4B-parameter multimodal guardrail model from NVIDIA, fine-tuned from Google Gemma-3-4B. It moderates both inputs to and responses from LLMs and VLMs, accepting...",
+        "context_length": 128000,
+        "max_tokens": 8192,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "reasoning"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/nvidia/nemotron-3.5-content-safety:free",
+          "https://openrouter.ai/api/v1/models/nvidia/nemotron-3.5-content-safety-20260604/endpoints"
+        ]
+      }
+    },
+    {
       "model": "nvidia/nemotron-nano-12b-v2-vl:free",
       "model_info": {
         "model": "nvidia/nemotron-nano-12b-v2-vl:free",
