@@ -910,6 +910,13 @@
     "output": 16
   },
   {
+    "model": "gpt-realtime-2",
+    "type": "tokens",
+    "channel_type": 1,
+    "input": 4,
+    "output": 24
+  },
+  {
     "model": "gpt-realtime-2025-08-28",
     "type": "tokens",
     "channel_type": 1,
