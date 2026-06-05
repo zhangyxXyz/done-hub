@@ -2206,7 +2206,7 @@
         "name": "Google: Gemma 4 31B",
         "description": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function...",
         "context_length": 262144,
-        "max_tokens": 16384,
+        "max_tokens": 8192,
         "input_modalities": [
           "image",
           "text",
@@ -4008,30 +4008,6 @@
         "support_url": [
           "https://openrouter.ai/models/nex-agi/deepseek-v3.1-nex-n1",
           "https://openrouter.ai/api/v1/models/nex-agi/deepseek-v3.1-nex-n1/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "nousresearch/hermes-2-pro-llama-3-8b",
-      "model_info": {
-        "model": "nousresearch/hermes-2-pro-llama-3-8b",
-        "name": "NousResearch: Hermes 2 Pro - Llama-3 8B",
-        "description": "Hermes 2 Pro is an upgraded, retrained version of Nous Hermes 2, consisting of an updated and cleaned version of the OpenHermes 2.5 Dataset, as well as a newly introduced...",
-        "context_length": 8192,
-        "max_tokens": 8192,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/nousresearch/hermes-2-pro-llama-3-8b",
-          "https://openrouter.ai/api/v1/models/nousresearch/hermes-2-pro-llama-3-8b/endpoints"
         ]
       }
     },
@@ -6883,7 +6859,7 @@
         "name": "Qwen: Qwen3 30B A3B",
         "description": "Qwen3, the latest generation in the Qwen large language model series, features both dense and mixture-of-experts (MoE) architectures to excel in reasoning, multilingual support, and advanced agent tasks. Its unique...",
         "context_length": 131072,
-        "max_tokens": 20000,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -7997,30 +7973,6 @@
         "support_url": [
           "https://openrouter.ai/models/relace/relace-search",
           "https://openrouter.ai/api/v1/models/relace/relace-search-20251208/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "sao10k/l3-euryale-70b",
-      "model_info": {
-        "model": "sao10k/l3-euryale-70b",
-        "name": "Sao10k: Llama 3 Euryale 70B v2.1",
-        "description": "Euryale 70B v2.1 is a model focused on creative roleplay from [Sao10k](https://ko-fi.com/sao10k). - Better prompt adherence. - Better anatomy / spatial awareness. - Adapts much better to unique and custom...",
-        "context_length": 8192,
-        "max_tokens": 8192,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/sao10k/l3-euryale-70b",
-          "https://openrouter.ai/api/v1/models/sao10k/l3-euryale-70b/endpoints"
         ]
       }
     },

@@ -3686,7 +3686,7 @@
     "type": "tokens",
     "channel_type": 20,
     "input": 0.12,
-    "output": 0.37
+    "output": 0.36
   },
   {
     "model": "google/gemma-4-31b-it:free",
