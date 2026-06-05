@@ -3938,7 +3938,7 @@
     "type": "tokens",
     "channel_type": 20,
     "input": 0.02,
-    "output": 0.05
+    "output": 0.03
   },
   {
     "model": "meta-llama/llama-3.2-11b-vision-instruct",
