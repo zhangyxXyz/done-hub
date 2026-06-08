@@ -3934,27 +3934,30 @@
       }
     },
     {
-      "model": "nex-agi/deepseek-v3.1-nex-n1",
+      "model": "nex-agi/Nex-N2-Pro:free",
       "model_info": {
-        "model": "nex-agi/deepseek-v3.1-nex-n1",
-        "name": "Nex AGI: DeepSeek V3.1 Nex N1",
-        "description": "DeepSeek V3.1 Nex-N1 is the flagship release of the Nex-N1 series — a post-trained model designed to highlight agent autonomy, tool use, and real-world productivity. Nex-N1 demonstrates competitive performance across...",
-        "context_length": 131072,
-        "max_tokens": 163840,
+        "model": "nex-agi/Nex-N2-Pro:free",
+        "name": "Nex AGI: Nex-N2-Pro (free)",
+        "description": "Nex-N2-Pro is an agentic mixture-of-experts model from Nex AGI, with 17B active parameters out of 397B total. Built on the Qwen3.5 architecture, it accepts text and image input and produces...",
+        "context_length": 262144,
+        "max_tokens": 262144,
         "input_modalities": [
-          "text"
+          "text",
+          "image"
         ],
         "output_modalities": [
           "text"
         ],
         "tags": [
           "openrouter",
+          "vision",
           "tools",
+          "reasoning",
           "structured_outputs"
         ],
         "support_url": [
-          "https://openrouter.ai/models/nex-agi/deepseek-v3.1-nex-n1",
-          "https://openrouter.ai/api/v1/models/nex-agi/deepseek-v3.1-nex-n1/endpoints"
+          "https://openrouter.ai/models/nex-agi/Nex-N2-Pro:free",
+          "https://openrouter.ai/api/v1/models/nex-agi/Nex-N2-Pro/endpoints"
         ]
       }
     },

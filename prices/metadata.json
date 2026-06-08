@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-08T06:31:42.093274+00:00",
+  "generated_at": "2026-06-08T17:59:30.539114+00:00",
   "sources": {
     "openrouter_models_api": "https://openrouter.ai/api/v1/models",
     "portkey_base": "https://configs.portkey.ai/pricing",
@@ -45,14 +45,14 @@
   },
   "portkey_errors": {},
   "openrouter_api_converted_count": 337,
-  "openrouter_api_added_count": 14,
-  "openrouter_api_overridden_count": 323,
+  "openrouter_api_added_count": 15,
+  "openrouter_api_overridden_count": 322,
   "openrouter_api_error": null,
   "openrouter_model_info_count": 341,
   "openrouter_model_info_skipped": {
     "missing_model_id": 0
   },
-  "output_count": 1492,
+  "output_count": 1493,
   "skipped": {
     "anthropic": {
       "unknown_provider": 0,

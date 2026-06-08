@@ -4529,6 +4529,13 @@
     "output": 1.75
   },
   {
+    "model": "nex-agi/Nex-N2-Pro:free",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0,
+    "output": 0
+  },
+  {
     "model": "nex-agi/deepseek-v3.1-nex-n1",
     "type": "tokens",
     "channel_type": 20,
