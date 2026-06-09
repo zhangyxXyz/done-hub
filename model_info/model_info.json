@@ -3934,9 +3934,9 @@
       }
     },
     {
-      "model": "nex-agi/Nex-N2-Pro:free",
+      "model": "nex-agi/nex-n2-pro:free",
       "model_info": {
-        "model": "nex-agi/Nex-N2-Pro:free",
+        "model": "nex-agi/nex-n2-pro:free",
         "name": "Nex AGI: Nex-N2-Pro (free)",
         "description": "Nex-N2-Pro is an agentic mixture-of-experts model from Nex AGI, with 17B active parameters out of 397B total. Built on the Qwen3.5 architecture, it accepts text and image input and produces...",
         "context_length": 262144,
@@ -3956,8 +3956,8 @@
           "structured_outputs"
         ],
         "support_url": [
-          "https://openrouter.ai/models/nex-agi/Nex-N2-Pro:free",
-          "https://openrouter.ai/api/v1/models/nex-agi/Nex-N2-Pro/endpoints"
+          "https://openrouter.ai/models/nex-agi/nex-n2-pro:free",
+          "https://openrouter.ai/api/v1/models/nex-agi/nex-n2-pro/endpoints"
         ]
       }
     },
