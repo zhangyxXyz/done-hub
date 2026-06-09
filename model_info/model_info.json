@@ -353,6 +353,35 @@
       }
     },
     {
+      "model": "anthropic/claude-fable-5",
+      "model_info": {
+        "model": "anthropic/claude-fable-5",
+        "name": "Anthropic: Claude Fable 5",
+        "description": "Claude Fable 5 is a Mythos-class model from Anthropic, built for autonomous knowledge work and coding. It supports text, image, and file inputs with text output, with reasoning support and...",
+        "context_length": 1000000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "text",
+          "image",
+          "file"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/anthropic/claude-fable-5",
+          "https://openrouter.ai/api/v1/models/anthropic/claude-5-fable-20260609/endpoints"
+        ]
+      }
+    },
+    {
       "model": "anthropic/claude-haiku-4.5",
       "model_info": {
         "model": "anthropic/claude-haiku-4.5",
@@ -747,29 +776,6 @@
         "support_url": [
           "https://openrouter.ai/models/arcee-ai/coder-large",
           "https://openrouter.ai/api/v1/models/arcee-ai/coder-large/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "arcee-ai/maestro-reasoning",
-      "model_info": {
-        "model": "arcee-ai/maestro-reasoning",
-        "name": "Arcee AI: Maestro Reasoning",
-        "description": "Maestro Reasoning is Arcee's flagship analysis model: a 32 B‑parameter derivative of Qwen 2.5‑32 B tuned with DPO and chain‑of‑thought RL for step‑by‑step logic. Compared to the earlier 7 B...",
-        "context_length": 131072,
-        "max_tokens": 32000,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/arcee-ai/maestro-reasoning",
-          "https://openrouter.ai/api/v1/models/arcee-ai/maestro-reasoning/endpoints"
         ]
       }
     },
@@ -3174,7 +3180,7 @@
         "name": "MiniMax: MiniMax M2.7",
         "description": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent...",
         "context_length": 204800,
-        "max_tokens": 196608,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
