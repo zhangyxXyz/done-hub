@@ -1200,7 +1200,7 @@
         "model": "deepseek/deepseek-chat-v3-0324",
         "name": "DeepSeek: DeepSeek V3 0324",
         "description": "DeepSeek V3, a 685B-parameter, mixture-of-experts model, is the latest iteration of the flagship chat model family from the DeepSeek team. It succeeds the [DeepSeek V3](/deepseek/deepseek-chat-v3) model and performs really well...",
-        "context_length": 163840,
+        "context_length": 131072,
         "max_tokens": 16384,
         "input_modalities": [
           "text"
@@ -3817,7 +3817,7 @@
         "name": "MoonshotAI: Kimi K2.5",
         "description": "Kimi K2.5 is Moonshot AI's native multimodal model, delivering state-of-the-art visual coding capability and a self-directed agent swarm paradigm. Built on Kimi K2 with continued pretraining over approximately 15T mixed...",
         "context_length": 262144,
-        "max_tokens": 0,
+        "max_tokens": 262144,
         "input_modalities": [
           "text",
           "image"
@@ -3862,33 +3862,6 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/moonshotai/kimi-k2.6",
-          "https://openrouter.ai/api/v1/models/moonshotai/kimi-k2.6-20260420/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "moonshotai/kimi-k2.6:free",
-      "model_info": {
-        "model": "moonshotai/kimi-k2.6:free",
-        "name": "MoonshotAI: Kimi K2.6 (free)",
-        "description": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and...",
-        "context_length": 262144,
-        "max_tokens": 0,
-        "input_modalities": [
-          "text",
-          "image"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/moonshotai/kimi-k2.6:free",
           "https://openrouter.ai/api/v1/models/moonshotai/kimi-k2.6-20260420/endpoints"
         ]
       }

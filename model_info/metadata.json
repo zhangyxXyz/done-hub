@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-06-10T06:29:46.651725+00:00",
+  "generated_at": "2026-06-10T18:00:14.631099+00:00",
   "sources": {
     "openrouter_models_api": "https://openrouter.ai/api/v1/models"
   },
-  "openrouter_model_info_count": 339,
+  "openrouter_model_info_count": 338,
   "openrouter_model_info_skipped": {
     "missing_model_id": 0
   }
