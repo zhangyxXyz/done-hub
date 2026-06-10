@@ -1505,6 +1505,13 @@
     "output": 15
   },
   {
+    "model": "claude-fable-5",
+    "type": "tokens",
+    "channel_type": 14,
+    "input": 10,
+    "output": 50
+  },
+  {
     "model": "claude-haiku-4-5",
     "type": "tokens",
     "channel_type": 14,
@@ -4476,8 +4483,8 @@
     "model": "moonshotai/kimi-k2.5",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.4,
-    "output": 1.9
+    "input": 0.35,
+    "output": 1.89
   },
   {
     "model": "moonshotai/kimi-k2.6",
@@ -6342,6 +6349,13 @@
     "output": 4
   },
   {
+    "model": "~anthropic/claude-fable-latest",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 10,
+    "output": 50
+  },
+  {
     "model": "~anthropic/claude-haiku-latest",
     "type": "tokens",
     "channel_type": 20,
@@ -7945,6 +7959,20 @@
     "output": 15
   },
   {
+    "model": "anthropic.claude-fable-5",
+    "type": "tokens",
+    "channel_type": 32,
+    "input": 10,
+    "output": 50
+  },
+  {
+    "model": "anthropic.claude-fable-5-v1",
+    "type": "tokens",
+    "channel_type": 32,
+    "input": 10,
+    "output": 50
+  },
+  {
     "model": "anthropic.claude-haiku-4-5-20251001-v1:0",
     "type": "tokens",
     "channel_type": 32,
@@ -8281,6 +8309,20 @@
     "output": 1.85
   },
   {
+    "model": "eu.anthropic.claude-fable-5",
+    "type": "tokens",
+    "channel_type": 32,
+    "input": 10,
+    "output": 50
+  },
+  {
+    "model": "eu.anthropic.claude-fable-5-v1",
+    "type": "tokens",
+    "channel_type": 32,
+    "input": 10,
+    "output": 50
+  },
+  {
     "model": "eu.anthropic.claude-opus-4-6-v1",
     "type": "tokens",
     "channel_type": 32,
@@ -8342,6 +8384,20 @@
     "channel_type": 32,
     "input": 3,
     "output": 15
+  },
+  {
+    "model": "global.anthropic.claude-fable-5",
+    "type": "tokens",
+    "channel_type": 32,
+    "input": 10,
+    "output": 50
+  },
+  {
+    "model": "global.anthropic.claude-fable-5-v1",
+    "type": "tokens",
+    "channel_type": 32,
+    "input": 10,
+    "output": 50
   },
   {
     "model": "global.anthropic.claude-opus-4-6-v1",
@@ -8701,6 +8757,20 @@
     "output": 3.2
   },
   {
+    "model": "us.anthropic.claude-fable-5",
+    "type": "tokens",
+    "channel_type": 32,
+    "input": 10,
+    "output": 50
+  },
+  {
+    "model": "us.anthropic.claude-fable-5-v1",
+    "type": "tokens",
+    "channel_type": 32,
+    "input": 10,
+    "output": 50
+  },
+  {
     "model": "us.anthropic.claude-opus-4-6-v1",
     "type": "tokens",
     "channel_type": 32,
@@ -8953,6 +9023,13 @@
     "output": 0
   },
   {
+    "model": "anthropic.claude-fable-5",
+    "type": "tokens",
+    "channel_type": 42,
+    "input": 10,
+    "output": 50
+  },
+  {
     "model": "anthropic.claude-opus-4-6",
     "type": "tokens",
     "channel_type": 42,
@@ -9035,6 +9112,13 @@
     "channel_type": 42,
     "input": 3,
     "output": 15
+  },
+  {
+    "model": "claude-fable-5",
+    "type": "tokens",
+    "channel_type": 42,
+    "input": 10,
+    "output": 50
   },
   {
     "model": "claude-haiku-4-5",

@@ -3817,7 +3817,7 @@
         "name": "MoonshotAI: Kimi K2.5",
         "description": "Kimi K2.5 is Moonshot AI's native multimodal model, delivering state-of-the-art visual coding capability and a self-directed agent swarm paradigm. Built on Kimi K2 with continued pretraining over approximately 15T mixed...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 0,
         "input_modalities": [
           "text",
           "image"
@@ -8498,30 +8498,6 @@
       }
     },
     {
-      "model": "z-ai/glm-4-32b",
-      "model_info": {
-        "model": "z-ai/glm-4-32b",
-        "name": "Z.ai: GLM 4 32B ",
-        "description": "GLM 4 32B is a cost-effective foundation language model. It can efficiently perform complex tasks and has significantly enhanced capabilities in tool use, online search, and code-related intelligent tasks. It...",
-        "context_length": 128000,
-        "max_tokens": 0,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/z-ai/glm-4-32b",
-          "https://openrouter.ai/api/v1/models/z-ai/glm-4-32b-0414/endpoints"
-        ]
-      }
-    },
-    {
       "model": "z-ai/glm-4.5",
       "model_info": {
         "model": "z-ai/glm-4.5",
@@ -8569,31 +8545,6 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/z-ai/glm-4.5-air",
-          "https://openrouter.ai/api/v1/models/z-ai/glm-4.5-air/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "z-ai/glm-4.5-air:free",
-      "model_info": {
-        "model": "z-ai/glm-4.5-air:free",
-        "name": "Z.ai: GLM 4.5 Air (free)",
-        "description": "GLM-4.5-Air is the lightweight variant of our latest flagship model family, also purpose-built for agent-centric applications. Like GLM-4.5, it adopts the Mixture-of-Experts (MoE) architecture but with a more compact parameter...",
-        "context_length": 131072,
-        "max_tokens": 96000,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/z-ai/glm-4.5-air:free",
           "https://openrouter.ai/api/v1/models/z-ai/glm-4.5-air/endpoints"
         ]
       }
@@ -8659,7 +8610,7 @@
         "name": "Z.ai: GLM 4.6V",
         "description": "GLM-4.6V is a large multimodal model designed for high-fidelity visual understanding and long-context reasoning across images, documents, and mixed media. It supports up to 128K tokens, processes complex page layouts...",
         "context_length": 131072,
-        "max_tokens": 24000,
+        "max_tokens": 32768,
         "input_modalities": [
           "image",
           "text",
@@ -8765,7 +8716,7 @@
         "model": "z-ai/glm-5-turbo",
         "name": "Z.ai: GLM 5 Turbo",
         "description": "GLM-5 Turbo is a new model from Z.ai designed for fast inference and strong performance in agent-driven environments such as OpenClaw scenarios. It is deeply optimized for real-world agent workflows...",
-        "context_length": 202752,
+        "context_length": 262144,
         "max_tokens": 131072,
         "input_modalities": [
           "text"
@@ -8812,17 +8763,17 @@
       }
     },
     {
-      "model": "z-ai/glm-5v-turbo",
+      "model": "~anthropic/claude-fable-latest",
       "model_info": {
-        "model": "z-ai/glm-5v-turbo",
-        "name": "Z.ai: GLM 5V Turbo",
-        "description": "GLM-5V-Turbo is Z.ai’s first native multimodal agent foundation model, built for vision-based coding and agent-driven tasks. It natively handles image, video, and text inputs, excels at long-horizon planning, complex coding,...",
-        "context_length": 202752,
-        "max_tokens": 131072,
+        "model": "~anthropic/claude-fable-latest",
+        "name": "Anthropic: Claude Fable Latest",
+        "description": "This model always redirects to the latest model in the Claude Fable family.",
+        "context_length": 1000000,
+        "max_tokens": 128000,
         "input_modalities": [
-          "image",
           "text",
-          "video"
+          "image",
+          "file"
         ],
         "output_modalities": [
           "text"
@@ -8835,8 +8786,8 @@
           "structured_outputs"
         ],
         "support_url": [
-          "https://openrouter.ai/models/z-ai/glm-5v-turbo",
-          "https://openrouter.ai/api/v1/models/z-ai/glm-5v-turbo-20260401/endpoints"
+          "https://openrouter.ai/models/~anthropic/claude-fable-latest",
+          "https://openrouter.ai/api/v1/models/~anthropic/claude-fable-latest/endpoints"
         ]
       }
     },
