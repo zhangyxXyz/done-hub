@@ -1200,7 +1200,7 @@
         "model": "deepseek/deepseek-chat-v3-0324",
         "name": "DeepSeek: DeepSeek V3 0324",
         "description": "DeepSeek V3, a 685B-parameter, mixture-of-experts model, is the latest iteration of the flagship chat model family from the DeepSeek team. It succeeds the [DeepSeek V3](/deepseek/deepseek-chat-v3) model and performs really well...",
-        "context_length": 131072,
+        "context_length": 163840,
         "max_tokens": 16384,
         "input_modalities": [
           "text"
@@ -1431,7 +1431,7 @@
         "name": "DeepSeek: DeepSeek V4 Flash",
         "description": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and...",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 0,
         "input_modalities": [
           "text"
         ],
@@ -3816,7 +3816,7 @@
         "name": "MoonshotAI: Kimi K2.5",
         "description": "Kimi K2.5 is Moonshot AI's native multimodal model, delivering state-of-the-art visual coding capability and a self-directed agent swarm paradigm. Built on Kimi K2 with continued pretraining over approximately 15T mixed...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 0,
         "input_modalities": [
           "text",
           "image"
@@ -3844,7 +3844,7 @@
         "name": "MoonshotAI: Kimi K2.6",
         "description": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and...",
         "context_length": 262144,
-        "max_tokens": 262142,
+        "max_tokens": 262144,
         "input_modalities": [
           "text",
           "image"
@@ -6607,7 +6607,7 @@
         "name": "Qwen: Qwen2.5 VL 72B Instruct",
         "description": "Qwen2.5-VL is proficient in recognizing common objects such as flowers, birds, fish, and insects. It is also highly capable of analyzing texts, charts, icons, graphics, and layouts within images.",
         "context_length": 131072,
-        "max_tokens": 0,
+        "max_tokens": 128000,
         "input_modalities": [
           "text",
           "image"
@@ -8895,7 +8895,7 @@
         "name": "MoonshotAI Kimi Latest",
         "description": "This model always redirects to the latest model in the MoonshotAI Kimi family.",
         "context_length": 262144,
-        "max_tokens": 262142,
+        "max_tokens": 262144,
         "input_modalities": [
           "text",
           "image"
