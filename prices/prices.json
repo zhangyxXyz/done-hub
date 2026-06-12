@@ -4042,7 +4042,7 @@
     "model": "meta-llama/llama-guard-3-8b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.484,
+    "input": 0.48,
     "output": 0.03
   },
   {
@@ -4497,15 +4497,22 @@
     "model": "moonshotai/kimi-k2.5",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.35,
-    "output": 1.89
+    "input": 0.4,
+    "output": 1.9
   },
   {
     "model": "moonshotai/kimi-k2.6",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.67,
-    "output": 3.39
+    "input": 0.68,
+    "output": 3.41
+  },
+  {
+    "model": "moonshotai/kimi-k2.7-code",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.95,
+    "output": 4
   },
   {
     "model": "moonshotai/kimi-k2:free",
@@ -5785,8 +5792,8 @@
     "model": "qwen/qwen3.6-27b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.289,
-    "output": 2.4
+    "input": 0.2885,
+    "output": 3.17
   },
   {
     "model": "qwen/qwen3.6-35b-a3b",
@@ -6401,8 +6408,8 @@
     "model": "~moonshotai/kimi-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.67,
-    "output": 3.39
+    "input": 0.68,
+    "output": 3.41
   },
   {
     "model": "~openai/gpt-latest",
