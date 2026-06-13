@@ -3793,7 +3793,7 @@
         "name": "MoonshotAI: Kimi K2.5",
         "description": "Kimi K2.5 is Moonshot AI's native multimodal model, delivering state-of-the-art visual coding capability and a self-directed agent swarm paradigm. Built on Kimi K2 with continued pretraining over approximately 15T mixed...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 0,
         "input_modalities": [
           "text",
           "image"
