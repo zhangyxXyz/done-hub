@@ -3849,11 +3849,10 @@
         "name": "MoonshotAI: Kimi K2.7 Code",
         "description": "MoonshotAI: Kimi K2.7 Code is a coding-focused model in Moonshot AI's Kimi K2 family, built to complete end-to-end programming tasks reliably over long contexts. It uses a native multimodal mixture-of-experts...",
         "context_length": 262144,
-        "max_tokens": 0,
+        "max_tokens": 262144,
         "input_modalities": [
           "text",
-          "image",
-          "video"
+          "image"
         ],
         "output_modalities": [
           "text"

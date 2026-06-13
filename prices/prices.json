@@ -4511,8 +4511,8 @@
     "model": "moonshotai/kimi-k2.7-code",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.95,
-    "output": 4
+    "input": 0.75,
+    "output": 3.5
   },
   {
     "model": "moonshotai/kimi-k2:free",
