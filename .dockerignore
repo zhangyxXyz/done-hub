@@ -1,0 +1,12 @@
+.git
+.codex-run
+**/node_modules
+**/.next/cache
+web/build
+build
+logs
+*.log
+*.db
+*.db-journal
+uploads
+data

@@ -1,13 +1,63 @@
-FROM alpine
+# syntax=docker/dockerfile:1.7
+
+FROM node:22.20 AS nextchat-builder
+
+ARG TARGETARCH=amd64
+ARG NEXTCHAT_VERSION=v2.16.1
+ENV NEXTCHAT_VERSION=$NEXTCHAT_VERSION
+ENV NEXTCHAT_WORKTREE=/cache/nextchat/${NEXTCHAT_VERSION}-${TARGETARCH}
+
+RUN --mount=type=cache,id=apt-cache-nextchat,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,id=apt-lists-nextchat,target=/var/lib/apt/lists,sharing=locked \
+    apt-get update && \
+    apt-get install -y --no-install-recommends git ca-certificates && \
+    update-ca-certificates
+
+WORKDIR /build
+COPY scripts/build-nextchat.mjs ./scripts/build-nextchat.mjs
+RUN --mount=type=cache,id=nextchat-worktree-${NEXTCHAT_VERSION}-${TARGETARCH},target=/cache/nextchat,sharing=locked \
+    --mount=type=cache,id=nextchat-root-cache-${NEXTCHAT_VERSION}-${TARGETARCH},target=/root/.cache,sharing=locked \
+    --mount=type=cache,id=nextchat-npm-${NEXTCHAT_VERSION}-${TARGETARCH},target=/root/.npm,sharing=locked \
+    NEXTCHAT_KEEP_WORKTREE=true node scripts/build-nextchat.mjs --mode standalone && \
+    cp -a "$NEXTCHAT_WORKTREE" /opt/nextchat
+
+FROM node:22.20 AS mjchat-builder
+
+ARG TARGETARCH=amd64
+ARG MJCHAT_VERSION=v2.26.5
+ENV MJCHAT_VERSION=$MJCHAT_VERSION
+ENV MJCHAT_WORKTREE=/cache/mjchat/${MJCHAT_VERSION}-${TARGETARCH}
+
+RUN --mount=type=cache,id=apt-cache-mjchat,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,id=apt-lists-mjchat,target=/var/lib/apt/lists,sharing=locked \
+    apt-get update && \
+    apt-get install -y --no-install-recommends git ca-certificates && \
+    update-ca-certificates
+
+WORKDIR /build
+COPY scripts/build-midjourney-proxy.mjs ./scripts/build-midjourney-proxy.mjs
+RUN --mount=type=cache,id=mjchat-worktree-${MJCHAT_VERSION}-${TARGETARCH},target=/cache/mjchat,sharing=locked \
+    --mount=type=cache,id=mjchat-root-cache-${MJCHAT_VERSION}-${TARGETARCH},target=/root/.cache,sharing=locked \
+    --mount=type=cache,id=mjchat-npm-${MJCHAT_VERSION}-${TARGETARCH},target=/root/.npm,sharing=locked \
+    MJCHAT_KEEP_WORKTREE=true node scripts/build-midjourney-proxy.mjs && \
+    cp -a "$MJCHAT_WORKTREE" /opt/mjchat
+
+FROM node:22.20-slim
 
 ARG TARGETARCH
 
-RUN apk update \
-    && apk upgrade \
-    && apk add --no-cache ca-certificates tzdata \
-    && update-ca-certificates 2>/dev/null || true
+RUN --mount=type=cache,id=apt-cache-final-${TARGETARCH},target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,id=apt-lists-final-${TARGETARCH},target=/var/lib/apt/lists,sharing=locked \
+    apt-get update && \
+    apt-get install -y --no-install-recommends ca-certificates tzdata wget && \
+    update-ca-certificates 2>/dev/null || true && \
+    corepack enable
 
 COPY done-hub-$TARGETARCH /done-hub
+COPY --from=nextchat-builder /opt/nextchat /opt/nextchat
+COPY --from=mjchat-builder /opt/mjchat /opt/mjchat
+COPY scripts/start-nextchat.mjs scripts/start-midjourney-proxy.mjs scripts/docker-entrypoint.sh /app/scripts/
+
 EXPOSE 3000
 WORKDIR /data
-ENTRYPOINT ["/done-hub"]
+ENTRYPOINT ["/bin/sh", "/app/scripts/docker-entrypoint.sh"]

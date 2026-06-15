@@ -2,8 +2,10 @@
 .vscode
 .cursor
 upload
+uploads
 *.exe
 *.db
+*.log
 build
 *.db-journal
 logs
