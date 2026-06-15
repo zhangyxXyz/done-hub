@@ -26,16 +26,16 @@ import (
 const (
 	// ClaudeCode OAuth 状态缓存前缀
 	ClaudeCodeOAuthStateCachePrefix = "claudecode_oauth_state:"
-	// ClaudeCode OAuth 状态缓存时长（10分钟）
-	ClaudeCodeOAuthStateCacheDuration = 10 * time.Minute
+	// ClaudeCode OAuth 状态缓存时长（30分钟）
+	ClaudeCodeOAuthStateCacheDuration = 30 * time.Minute
 )
 
 // ClaudeCode OAuth 配置常量
 const (
-	ClaudeCodeAuthorizeURL = "https://platform.claude.com/oauth/authorize"
+	ClaudeCodeAuthorizeURL = "https://claude.ai/oauth/authorize"
 	ClaudeCodeTokenURL     = claudecode.TokenEndpoint
 	ClaudeCodeClientID     = "9d1c250a-e61b-44d9-88ed-5944d1962f5e"
-	ClaudeCodeRedirectURI  = "https://platform.claude.com/oauth/code/callback"
+	ClaudeCodeRedirectURI  = "https://console.anthropic.com/oauth/code/callback"
 	ClaudeCodeScopes       = claudecode.DefaultScope
 )
 
@@ -81,18 +81,17 @@ func StartClaudeCodeOAuth(c *gin.Context) {
 		return
 	}
 
-	// 生成随机 state
-	stateBytes := make([]byte, 32)
-	if _, err := rand.Read(stateBytes); err != nil {
-		common.APIRespondWithError(c, http.StatusOK, fmt.Errorf("failed to generate state: %w", err))
-		return
-	}
-	state := base64.URLEncoding.EncodeToString(stateBytes)
-
 	// 生成 PKCE code verifier
 	codeVerifier, err := generateCodeVerifier()
 	if err != nil {
 		common.APIRespondWithError(c, http.StatusOK, fmt.Errorf("failed to generate code verifier: %w", err))
+		return
+	}
+
+	// ClaudeCode 返回的授权码形如 code#state，state 用于回查本次 PKCE verifier。
+	state, err := generateCodeVerifier()
+	if err != nil {
+		common.APIRespondWithError(c, http.StatusOK, fmt.Errorf("failed to generate state: %w", err))
 		return
 	}
 
@@ -228,30 +227,33 @@ func ClaudeCodeOAuthCallback(c *gin.Context) {
 		return
 	}
 
-	state := req.SessionID
-
-	// 从缓存中获取 state 数据
-	cacheKey := ClaudeCodeOAuthStateCachePrefix + state
-	stateData, err := cache.GetCache[ClaudeCodeOAuthStateData](cacheKey)
-	if err != nil {
-		common.APIRespondWithError(c, http.StatusOK, fmt.Errorf("invalid or expired OAuth session"))
-		return
-	}
-
-	// 删除已使用的 state
-	cache.DeleteCache(cacheKey)
-
 	// 解析授权码（可能是完整的 URL 或直接的 code）
 	inputValue := req.CallbackURL
 	if inputValue == "" {
 		inputValue = req.AuthorizationCode
 	}
 
-	code, err := parseCallbackURL(inputValue)
+	code, callbackState, err := parseClaudeCodeCallbackInput(inputValue)
 	if err != nil {
 		common.APIRespondWithError(c, http.StatusOK, fmt.Errorf("failed to parse authorization code: %w", err))
 		return
 	}
+
+	state := strings.TrimSpace(req.SessionID)
+	if callbackState != "" {
+		state = callbackState
+	}
+
+	// 从缓存中获取 state 数据
+	cacheKey := ClaudeCodeOAuthStateCachePrefix + state
+	stateData, err := cache.GetCache[ClaudeCodeOAuthStateData](cacheKey)
+	if err != nil {
+		common.APIRespondWithError(c, http.StatusOK, fmt.Errorf("invalid or expired OAuth session; please restart ClaudeCode OAuth authorization"))
+		return
+	}
+
+	// 删除已使用的 state
+	cache.DeleteCache(cacheKey)
 
 	// 使用 code 交换 token（使用会话中保存的代理配置）
 	tokenResp, err := exchangeClaudeCodeForToken(code, stateData.CodeVerifier, state, stateData.Proxy)
@@ -295,8 +297,13 @@ func ClaudeCodeOAuthCallback(c *gin.Context) {
 
 // parseCallbackURL 解析回调 URL 或授权码
 func parseCallbackURL(input string) (string, error) {
+	code, _, err := parseClaudeCodeCallbackInput(input)
+	return code, err
+}
+
+func parseClaudeCodeCallbackInput(input string) (string, string, error) {
 	if input == "" {
-		return "", fmt.Errorf("empty input")
+		return "", "", fmt.Errorf("empty input")
 	}
 
 	trimmedInput := strings.TrimSpace(input)
@@ -305,26 +312,54 @@ func parseCallbackURL(input string) (string, error) {
 	if strings.HasPrefix(trimmedInput, "http://") || strings.HasPrefix(trimmedInput, "https://") {
 		parsedURL, err := url.Parse(trimmedInput)
 		if err != nil {
-			return "", fmt.Errorf("invalid URL format: %w", err)
+			return "", "", fmt.Errorf("invalid URL format: %w", err)
 		}
 
 		code := parsedURL.Query().Get("code")
 		if code == "" {
-			return "", fmt.Errorf("code parameter not found in callback URL")
+			return "", "", fmt.Errorf("code parameter not found in callback URL")
 		}
 
-		return code, nil
+		state := parsedURL.Query().Get("state")
+		if state == "" && parsedURL.Fragment != "" {
+			fragmentValues, err := url.ParseQuery(parsedURL.Fragment)
+			if err == nil {
+				state = fragmentValues.Get("state")
+			}
+			if state == "" {
+				state = strings.TrimSpace(parsedURL.Fragment)
+			}
+		}
+
+		return code, state, nil
 	}
 
-	// 情况2: 直接的授权码（可能包含URL fragments）
-	cleanedCode := strings.Split(strings.Split(trimmedInput, "#")[0], "&")[0]
+	// 情况2: 直接的授权码（可能携带 #state 或 &state=xxx）
+	codePart := trimmedInput
+	state := ""
+	if before, after, found := strings.Cut(codePart, "#"); found {
+		codePart = before
+		state = strings.TrimSpace(after)
+		if values, err := url.ParseQuery(state); err == nil && values.Get("state") != "" {
+			state = values.Get("state")
+		}
+	}
+	if before, after, found := strings.Cut(codePart, "&"); found {
+		codePart = before
+		if state == "" {
+			if values, err := url.ParseQuery(after); err == nil {
+				state = values.Get("state")
+			}
+		}
+	}
+	cleanedCode := strings.TrimSpace(codePart)
 
 	// 验证授权码格式
 	if len(cleanedCode) < 10 {
-		return "", fmt.Errorf("authorization code too short")
+		return "", "", fmt.Errorf("authorization code too short")
 	}
 
-	return cleanedCode, nil
+	return cleanedCode, state, nil
 }
 
 // exchangeClaudeCodeForToken 使用授权码交换访问令牌（支持代理）
@@ -350,7 +385,8 @@ func exchangeClaudeCodeForToken(code, codeVerifier, state, proxyURL string) (*cl
 	}
 
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("User-Agent", claudecode.GetClaudeCodeUserAgentWithProxy(proxyURL))
+	req.Header.Set("User-Agent", claudecode.TokenUserAgent)
+	req.Header.Set("anthropic-beta", "oauth-2025-04-20")
 	req.Header.Set("Accept", "application/json, text/plain, */*")
 	req.Header.Set("Accept-Language", "en-US,en;q=0.9")
 	req.Header.Set("Referer", "https://claude.ai/")

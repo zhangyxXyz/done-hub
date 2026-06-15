@@ -1571,8 +1571,8 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, isTag, model
                               <ol style={{ margin: '8px 0', paddingLeft: '20px' }}>
                                 <li>点击下方"打开授权页面"按钮（或手动复制链接到浏览器）</li>
                                 <li>在新打开的页面中登录 Claude 账户并同意授权</li>
-                                <li>授权成功后，复制浏览器地址栏中的<strong>完整 URL</strong></li>
-                                <li>将完整 URL 粘贴到下方输入框中，点击"提交授权码"</li>
+                                <li>授权成功后，复制页面给出的 code；如果浏览器停在回调页，也可以复制地址栏完整 URL</li>
+                                <li>将 code 或完整 URL 粘贴到下方输入框中，点击"提交授权码"</li>
                               </ol>
                             </Typography>
                           </Alert>
@@ -1607,7 +1607,7 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, isTag, model
                           <TextField
                             fullWidth
                             label="授权回调 URL 或授权码"
-                            placeholder="粘贴完整的回调 URL，例如：https://console.anthropic.com/oauth/code/callback?code=xxx&state=xxx"
+                            placeholder="粘贴页面给出的 code，或完整回调 URL"
                             value={claudeCodeAuthCode}
                             onChange={(e) => setClaudeCodeAuthCode(e.target.value)}
                             multiline
