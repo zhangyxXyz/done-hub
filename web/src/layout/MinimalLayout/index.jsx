@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import { AppBar, Box, CssBaseline, Toolbar, Container, useMediaQuery } from '@mui/material';
@@ -8,11 +9,58 @@ import Footer from 'ui-component/Footer';
 
 const MinimalLayout = () => {
   const theme = useTheme();
+  const [customContent, setCustomContent] = useState(false);
   const matchDownSm = useMediaQuery(theme.breakpoints.down('sm'));
-  const matchDownMd = useMediaQuery(theme.breakpoints.down('md'));
+  const headerHeight = matchDownSm ? '56px' : '64px';
+  const footerHeight = '64px';
+
+  useEffect(() => {
+    const root = document.getElementById('root');
+    const previous = {
+      htmlHeight: document.documentElement.style.height,
+      htmlOverflow: document.documentElement.style.overflow,
+      bodyHeight: document.body.style.height,
+      bodyOverflow: document.body.style.overflow,
+      rootHeight: root?.style.height || '',
+      rootOverflow: root?.style.overflow || ''
+    };
+
+    if (customContent) {
+      document.documentElement.style.height = '100vh';
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.height = '100vh';
+      document.body.style.overflow = 'hidden';
+      if (root) {
+        root.style.height = '100vh';
+        root.style.overflow = 'hidden';
+      }
+    }
+
+    return () => {
+      document.documentElement.style.height = previous.htmlHeight;
+      document.documentElement.style.overflow = previous.htmlOverflow;
+      document.body.style.height = previous.bodyHeight;
+      document.body.style.overflow = previous.bodyOverflow;
+      if (root) {
+        root.style.height = previous.rootHeight;
+        root.style.overflow = previous.rootOverflow;
+      }
+    };
+  }, [customContent]);
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <Box
+      data-layout="minimal"
+      data-custom-content={customContent ? 'true' : undefined}
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100vh',
+        minHeight: '100vh',
+        overflow: 'hidden',
+        backgroundColor: customContent ? 'transparent' : theme.palette.background.default
+      }}
+    >
       <CssBaseline />
       <AppBar
         enableColorOnDark
@@ -20,15 +68,18 @@ const MinimalLayout = () => {
         color="inherit"
         elevation={0}
         sx={{
-          bgcolor: theme.palette.background.default,
+          bgcolor: customContent ? 'transparent' : theme.palette.background.default,
           boxShadow: 'none',
           borderBottom: 'none',
           zIndex: theme.zIndex.drawer + 1,
           width: '100%',
-          borderRadius:0
+          borderRadius: 0,
+          transition: theme.transitions.create('background-color', {
+            duration: theme.transitions.duration.shortest
+          })
         }}
       >
-        <Container maxWidth="xl">
+        <Container maxWidth="xl" sx={{ bgcolor: 'transparent' }}>
           <Toolbar sx={{ px: { xs: 1.5, sm: 2, md: 3 }, minHeight: '64px', height: '64px' }}>
             <Header />
           </Toolbar>
@@ -36,13 +87,19 @@ const MinimalLayout = () => {
       </AppBar>
       <Box
         sx={{
-          flex: '1 1 auto',
+          flex: 'none',
           overflow: 'auto',
-          marginTop: { xs: '56px', sm: '64px' },
-          backgroundColor: theme.palette.background.default,
+          marginTop: 0,
+          backgroundColor: customContent ? 'transparent' : theme.palette.background.default,
           // padding: { xs: '16px', sm: '20px', md: '24px' },
-          position: 'relative',
-          minHeight: `calc(100vh - ${matchDownSm ? '56px' : '64px'} - ${matchDownMd ? '80px' : '60px'})`,
+          position: 'fixed',
+          top: customContent ? 0 : headerHeight,
+          right: 0,
+          bottom: customContent ? 0 : footerHeight,
+          left: 0,
+          height: 'auto',
+          minHeight: 0,
+          boxSizing: 'border-box',
           scrollbarWidth: 'thin',
           '&::-webkit-scrollbar': {
             width: '8px',
@@ -57,9 +114,24 @@ const MinimalLayout = () => {
           }
         }}
       >
-        <Outlet />
+        <Outlet context={{ customContent, setCustomContent, headerHeight, footerHeight }} />
       </Box>
-      <Box sx={{ flex: 'none', position: 'relative', zIndex: 1 }}>
+      <Box
+        sx={{
+          flex: 'none',
+          position: 'fixed',
+          zIndex: 1,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          height: footerHeight,
+          background: 'var(--aihub-header)',
+          borderTop: '1px solid var(--aihub-border)',
+          backdropFilter: 'blur(18px) saturate(135%)',
+          WebkitBackdropFilter: 'blur(18px) saturate(135%)',
+          pointerEvents: 'auto'
+        }}
+      >
         <Footer />
       </Box>
     </Box>

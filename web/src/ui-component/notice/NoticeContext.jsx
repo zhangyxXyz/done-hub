@@ -1,11 +1,14 @@
 import PropTypes from 'prop-types';
 import { useMemo, useState, useEffect, useContext, useCallback, createContext } from 'react';
+import { useSelector } from 'react-redux';
 
 import { API } from 'utils/api';
 
 export const NoticeContext = createContext(undefined);
 
 export function NoticeProvider({ children }) {
+  const siteInfo = useSelector((state) => state.siteInfo);
+  const noticeAutoPopup = siteInfo.notice_auto_popup;
   const [notice, setNotice] = useState(null);
   const [isOpen, setOpen] = useState(false);
 
@@ -13,15 +16,20 @@ export function NoticeProvider({ children }) {
   const closeNotice = () => setOpen(false);
 
   const checkNotice = useCallback(async () => {
+    if (siteInfo.isLoading) {
+      return;
+    }
+
     if (typeof window !== 'undefined') {
       // 确保代码只在客户端执行
       try {
         const noticeMsg = await getNotice();
         const oldNotice = localStorage.getItem('notice');
+        const shouldAutoPopup = noticeAutoPopup !== false && noticeAutoPopup !== 'false';
 
         const processAndSetNotice = async (content) => {
           setNotice(content);
-          if (content !== oldNotice) {
+          if (shouldAutoPopup && content !== oldNotice) {
             setOpen(true);
             localStorage.setItem('notice', content || '');
           }
@@ -36,7 +44,7 @@ export function NoticeProvider({ children }) {
         console.error('Failed to fetch notice:', error);
       }
     }
-  }, []);
+  }, [noticeAutoPopup, siteInfo.isLoading]);
 
   useEffect(() => {
     checkNotice();

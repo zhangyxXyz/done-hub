@@ -44,6 +44,14 @@ export default defineConfig({
       '/api': {
         target: 'http://127.0.0.1:3000', // 设置代理的目标服务器
         changeOrigin: true
+      },
+      '/nextchat': {
+        target: 'http://127.0.0.1:3000',
+        changeOrigin: true
+      },
+      '/mjchat': {
+        target: 'http://127.0.0.1:3000',
+        changeOrigin: true
       }
     }
   },

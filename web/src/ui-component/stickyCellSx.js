@@ -12,7 +12,9 @@ const baseSticky = {
 
 export const stickyCellSx = {
   ...baseSticky,
-  backgroundColor: 'background.paper',
+  background: 'var(--aihub-panel-strong)',
+  backdropFilter: 'blur(18px) saturate(135%)',
+  WebkitBackdropFilter: 'blur(18px) saturate(135%)',
   zIndex: 1,
   // 行 hover 时叠一层与 MuiTableRow:hover 同色的 overlay（compStyleOverride.js 同样从
   // theme.tableRowHoverBackgroundColor 读取，源头唯一），否则 sticky cell 的 paper
@@ -27,6 +29,8 @@ export const stickyCellSx = {
 
 export const stickyHeadCellSx = {
   ...baseSticky,
-  backgroundColor: (theme) => theme.headBackgroundColor,
+  background: 'var(--aihub-table-head)',
+  backdropFilter: 'blur(18px) saturate(135%)',
+  WebkitBackdropFilter: 'blur(18px) saturate(135%)',
   zIndex: 2
 };

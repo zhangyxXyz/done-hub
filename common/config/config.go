@@ -15,6 +15,11 @@ func InitConf() {
 	Language = viper.GetString("language")
 	IsMasterNode = viper.GetString("node_type") != "slave"
 	RequestInterval = time.Duration(viper.GetInt("polling_interval")) * time.Second
+	AutoPriceUpdates = viper.GetBool("auto_price_updates")
+	AutoPriceUpdatesMode = viper.GetString("auto_price_updates_mode")
+	AutoPriceUpdatesInterval = viper.GetInt("auto_price_updates_interval")
+	AutoPriceUpdatesCron = viper.GetString("auto_price_updates_cron")
+	UpdatePriceService = viper.GetString("update_price_service")
 	SessionSecret = utils.GetOrDefault("session_secret", SessionSecret)
 	UserInvoiceMonth = viper.GetBool("user_invoice_month")
 	GitHubProxy = viper.GetString("github_proxy")
@@ -49,7 +54,8 @@ func defaultConfig() {
 	viper.SetDefault("auto_price_updates", false)
 	viper.SetDefault("auto_price_updates_mode", "system")
 	viper.SetDefault("auto_price_updates_interval", 1440)
-	viper.SetDefault("update_price_service", "https://raw.githubusercontent.com/MartialBE/one-api/prices/prices.json")
+	viper.SetDefault("auto_price_updates_cron", "")
+	viper.SetDefault("update_price_service", "https://raw.githubusercontent.com/zhangyxXyz/done-hub/refs/heads/llm-model-info/prices/prices.json")
 	viper.SetDefault("language", "zh_CN")
 	viper.SetDefault("favicon", "")
 	viper.SetDefault("user_invoice_month", false)

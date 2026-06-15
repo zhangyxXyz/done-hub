@@ -3,86 +3,75 @@
  * @param {JsonObject} theme Theme customization object
  */
 
-import { varAlpha } from './utils';
+import { createGradient } from './utils';
 
 export default function themePalette(theme) {
   return {
     mode: theme.mode,
     common: {
-      black: '#000000',
-      white: '#FFFFFF'
+      black: theme.colors?.darkPaper
     },
     primary: {
-      lighter: theme.colors?.primary200 || '#C8FAD6',
+      lighter: theme.mode === 'dark' ? '#60B8FF' : '#F0F7FF',
       light: theme.colors?.primaryLight,
       main: theme.colors?.primaryMain,
       dark: theme.colors?.primaryDark,
-      darker: theme.colors?.primary800,
       200: theme.colors?.primary200,
       800: theme.colors?.primary800,
-      contrastText: '#FFFFFF'
+      contrastText: '#fff',
+      gradient: createGradient(theme.colors?.primaryMain, theme.colors?.primaryDark)
     },
     secondary: {
-      lighter: theme.colors?.secondary200 || '#EFD6FF',
+      lighter: theme.mode === 'dark' ? '#B4A1FF' : '#F6F0FF',
       light: theme.colors?.secondaryLight,
       main: theme.colors?.secondaryMain,
       dark: theme.colors?.secondaryDark,
-      darker: theme.colors?.secondary800,
       200: theme.colors?.secondary200,
       800: theme.colors?.secondary800,
-      contrastText: '#FFFFFF'
-    },
-    info: {
-      lighter: '#CAFDF5',
-      light: theme.colors?.infoLight || '#61F3F3',
-      main: theme.colors?.infoMain || '#00B8D9',
-      dark: theme.colors?.infoDark || '#006C9C',
-      darker: '#003768',
-      contrastText: '#FFFFFF'
+      contrastText: '#fff',
+      gradient: createGradient(theme.colors?.secondaryMain, theme.colors?.secondaryDark)
     },
     error: {
-      lighter: '#FFE9D5',
+      lighter: '#FFEBEE',
       light: theme.colors?.errorLight,
       main: theme.colors?.errorMain,
       dark: theme.colors?.errorDark,
-      darker: '#7A0916',
-      contrastText: '#FFFFFF'
+      contrastText: '#fff',
+      gradient: createGradient(theme.colors?.errorMain, theme.colors?.errorDark)
     },
     orange: {
-      lighter: '#FFE9D5',
+      lighter: '#FFF3E0',
       light: theme.colors?.orangeLight,
       main: theme.colors?.orangeMain,
       dark: theme.colors?.orangeDark,
       contrastText: theme.mode === 'dark' ? '#fff' : '#000'
     },
     warning: {
-      lighter: '#FFF5CC',
+      lighter: '#FFF8E1',
       light: theme.colors?.warningLight,
       main: theme.colors?.warningMain,
       dark: theme.colors?.warningDark,
-      darker: '#7A4100',
-      contrastText: '#1C252E'
+      contrastText: theme.mode === 'dark' ? '#000' : '#000',
+      gradient: createGradient(theme.colors?.warningMain, theme.colors?.warningDark)
     },
     success: {
-      lighter: '#D3FCD2',
+      lighter: '#E6F8F1',
       light: theme.colors?.successLight,
       200: theme.colors?.success200,
       main: theme.colors?.successMain,
       dark: theme.colors?.successDark,
-      darker: '#065E49',
-      contrastText: '#ffffff'
+      contrastText: '#fff',
+      gradient: createGradient(theme.colors?.successMain, theme.colors?.successDark)
     },
     grey: {
       50: theme.colors?.grey50,
       100: theme.colors?.grey100,
       200: theme.colors?.grey200,
       300: theme.colors?.grey300,
-      400: theme.colors?.grey400 || '#C4CDD5',
-      500: theme.colors?.grey500,
-      600: theme.colors?.grey600,
-      700: theme.colors?.grey700,
-      800: theme.colors?.grey800 || '#1C252E',
-      900: theme.colors?.grey900 || '#141A21'
+      500: theme.darkTextSecondary,
+      600: theme.heading,
+      700: theme.darkTextPrimary,
+      900: theme.textDark
     },
     dark: {
       light: theme.colors?.darkTextPrimary,
@@ -96,21 +85,19 @@ export default function themePalette(theme) {
       secondary: theme.darkTextSecondary,
       dark: theme.textDark,
       hint: theme.colors?.grey100,
-      disabled: theme.mode === 'dark' ? theme.colors?.grey600 : theme.colors?.grey500
+      disabled: theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(0, 0, 0, 0.38)'
     },
-    divider: theme.divider || (theme.mode === 'dark' ? varAlpha(theme.colors?.grey500, 0.2) : varAlpha(theme.colors?.grey500, 0.2)),
+    divider: theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.12)' : 'rgba(0, 0, 0, 0.09)',
     background: {
       paper: theme.paper,
-      default: theme.backgroundDefault,
-      neutral: theme.mode === 'dark' ? '#28323D' : theme.colors?.grey200
+      default: theme.backgroundDefault
     },
     action: {
-      hover: varAlpha(theme.colors?.grey500, 0.08),
-      selected: varAlpha(theme.colors?.grey500, 0.16),
-      disabled: varAlpha(theme.colors?.grey500, 0.8),
-      disabledBackground: varAlpha(theme.colors?.grey500, 0.24),
-      focus: varAlpha(theme.colors?.grey500, 0.24),
-      active: theme.mode === 'dark' ? theme.colors?.grey500 : theme.colors?.grey600
+      hover: theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.03)',
+      selected: theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.16)' : 'rgba(0, 0, 0, 0.06)',
+      disabled: theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.26)',
+      disabledBackground: theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.12)' : 'rgba(0, 0, 0, 0.08)',
+      focus: theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.12)' : 'rgba(0, 0, 0, 0.05)'
     }
   };
 }

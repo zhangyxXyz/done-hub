@@ -135,3 +135,693 @@
     transform: rotate(360deg);
   }
 }
+
+// ==============================|| AI HUB GLASS THEME ||============================== //
+
+:root {
+  --aihub-bg: radial-gradient(circle at 22% 18%, rgba(59, 130, 246, 0.18), transparent 28%),
+    radial-gradient(circle at 78% 22%, rgba(20, 184, 166, 0.16), transparent 26%),
+    linear-gradient(135deg, #f8fbff 0%, #eef6ff 46%, #eaf7f4 100%);
+  --aihub-text: #172033;
+  --aihub-muted: rgba(23, 32, 51, 0.68);
+  --aihub-panel: rgba(255, 255, 255, 0.36);
+  --aihub-panel-strong: rgba(255, 255, 255, 0.46);
+  --aihub-drawer: linear-gradient(135deg, rgba(255, 255, 255, 0.78), rgba(219, 237, 255, 0.62), rgba(214, 243, 238, 0.52));
+  --aihub-field: linear-gradient(135deg, rgba(255, 255, 255, 0.42), rgba(216, 236, 255, 0.24), rgba(212, 242, 237, 0.2));
+  --aihub-field-hover: linear-gradient(135deg, rgba(255, 255, 255, 0.54), rgba(208, 233, 255, 0.28), rgba(205, 240, 235, 0.24));
+  --aihub-border: rgba(30, 64, 175, 0.14);
+  --aihub-soft: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(203, 232, 255, 0.18), rgba(203, 244, 238, 0.16));
+  --aihub-link: #0877c8;
+  --aihub-link-hover: #005a9e;
+  --aihub-selected: linear-gradient(135deg, rgba(219, 238, 255, 0.92), rgba(187, 225, 255, 0.78));
+  --aihub-selected-hover: linear-gradient(135deg, rgba(204, 231, 255, 0.96), rgba(166, 214, 255, 0.84));
+  --aihub-shadow: 0 24px 70px rgba(15, 23, 42, 0.13);
+  --aihub-header: rgba(255, 255, 255, 0.24);
+  --aihub-scroll-thumb: rgba(14, 116, 144, 0.26);
+  --aihub-scroll-thumb-hover: rgba(8, 119, 200, 0.46);
+  --aihub-table-head: linear-gradient(90deg, rgba(214, 232, 255, 0.56), rgba(224, 243, 255, 0.48), rgba(211, 242, 237, 0.46));
+  --aihub-table-footer: linear-gradient(90deg, rgba(204, 226, 252, 0.48), rgba(215, 238, 250, 0.42), rgba(204, 238, 233, 0.4));
+  --aihub-switch-track: rgba(100, 116, 139, 0.28);
+  --aihub-switch-thumb-checked: #14a58c;
+  --aihub-switch-track-checked: rgba(20, 165, 140, 0.42);
+}
+
+html[data-theme='dark'] {
+  --aihub-bg: radial-gradient(circle at 22% 18%, rgba(96, 165, 250, 0.22), transparent 28%),
+    radial-gradient(circle at 78% 22%, rgba(45, 212, 191, 0.16), transparent 26%),
+    linear-gradient(135deg, #0b1220 0%, #102238 48%, #0f2f35 100%);
+  --aihub-text: #f8fbff;
+  --aihub-muted: rgba(248, 251, 255, 0.72);
+  --aihub-panel: rgba(255, 255, 255, 0.1);
+  --aihub-panel-strong: rgba(15, 23, 42, 0.34);
+  --aihub-drawer: linear-gradient(145deg, rgba(10, 18, 32, 0.76), rgba(15, 35, 58, 0.6), rgba(13, 52, 62, 0.46));
+  --aihub-field: rgba(255, 255, 255, 0.08);
+  --aihub-field-hover: rgba(255, 255, 255, 0.12);
+  --aihub-border: rgba(255, 255, 255, 0.16);
+  --aihub-soft: rgba(255, 255, 255, 0.08);
+  --aihub-link: #4db4ff;
+  --aihub-link-hover: #8bd0ff;
+  --aihub-selected: linear-gradient(135deg, rgba(77, 180, 255, 0.32), rgba(38, 139, 230, 0.42));
+  --aihub-selected-hover: linear-gradient(135deg, rgba(90, 188, 255, 0.42), rgba(50, 152, 240, 0.52));
+  --aihub-shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
+  --aihub-header: rgba(15, 23, 42, 0.22);
+  --aihub-scroll-thumb: rgba(77, 180, 255, 0.42);
+  --aihub-scroll-thumb-hover: rgba(139, 208, 255, 0.68);
+  --aihub-table-head: linear-gradient(90deg, rgba(44, 70, 105, 0.56), rgba(27, 75, 91, 0.46), rgba(20, 88, 89, 0.4));
+  --aihub-table-footer: linear-gradient(90deg, rgba(34, 60, 92, 0.5), rgba(24, 70, 86, 0.42), rgba(17, 76, 80, 0.38));
+  --aihub-switch-track: rgba(248, 251, 255, 0.24);
+  --aihub-switch-thumb-checked: #4db4ff;
+  --aihub-switch-track-checked: rgba(77, 180, 255, 0.48);
+}
+
+body,
+#root,
+#root > [data-layout='main'],
+#root > [data-layout='minimal'] {
+  background: var(--aihub-bg) !important;
+  color: var(--aihub-text);
+}
+
+#root > [data-layout='main'] > header,
+#root > [data-layout='minimal'] > header {
+  background: var(--aihub-header) !important;
+  border-bottom: 1px solid var(--aihub-border) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(135%);
+  backdrop-filter: blur(18px) saturate(135%);
+}
+
+#root > [data-layout='main'] main,
+#root > [data-layout='minimal'] > .MuiBox-root {
+  background: transparent !important;
+}
+
+#root > [data-layout='main'] .MuiDrawer-paper,
+#root > [data-layout='main'] .aihub-sidebar-drawer {
+  background: var(--aihub-drawer) !important;
+  border-right: 1px solid var(--aihub-border) !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: blur(22px) saturate(135%);
+  backdrop-filter: blur(22px) saturate(135%);
+  background-clip: padding-box;
+}
+
+#root > [data-layout='main'] .MuiCard-root,
+#root > [data-layout='minimal'] .MuiCard-root {
+  background: var(--aihub-panel-strong) !important;
+  border: 1px solid var(--aihub-border) !important;
+  box-shadow: var(--aihub-shadow) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(135%);
+  backdrop-filter: blur(22px) saturate(135%);
+  background-clip: padding-box;
+}
+
+#root > [data-layout='main'] .MuiPaper-root.MuiPaper-elevation:not(.MuiDrawer-paper):not(.MuiDialog-paper):not(.MuiMenu-paper):not(.MuiPopover-paper):not(.MuiAppBar-root),
+#root > [data-layout='minimal'] .MuiPaper-root.MuiPaper-elevation:not(.MuiDrawer-paper):not(.MuiDialog-paper):not(.MuiMenu-paper):not(.MuiPopover-paper):not(.MuiAppBar-root) {
+  background: var(--aihub-panel-strong) !important;
+  border: 1px solid var(--aihub-border);
+  box-shadow: var(--aihub-shadow) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(135%);
+  backdrop-filter: blur(22px) saturate(135%);
+  background-clip: padding-box;
+}
+
+#root > [data-layout='main'] .MuiPaper-root.MuiPaper-outlined,
+#root > [data-layout='minimal'] .MuiPaper-root.MuiPaper-outlined {
+  background: var(--aihub-panel-strong) !important;
+  border-color: var(--aihub-border) !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: blur(22px) saturate(135%);
+  backdrop-filter: blur(22px) saturate(135%);
+  background-clip: padding-box;
+}
+
+#root > [data-layout='main'] :is(.MuiCardContent-root, .MuiCardHeader-root, .MuiDataGrid-root, .MuiTableContainer-root),
+#root > [data-layout='minimal'] :is(.MuiCardContent-root, .MuiCardHeader-root, .MuiDataGrid-root, .MuiTableContainer-root) {
+  background: transparent !important;
+}
+
+#root > [data-layout='main'] .MuiChip-root,
+#root > [data-layout='minimal'] .MuiChip-root {
+  background: var(--aihub-soft) !important;
+  border-color: var(--aihub-border) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  backdrop-filter: blur(14px) saturate(130%);
+}
+
+#root > [data-layout='main'] .MuiOutlinedInput-root,
+#root > [data-layout='minimal'] .MuiOutlinedInput-root {
+  background: var(--aihub-field) !important;
+  border-radius: 12px;
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  backdrop-filter: blur(14px) saturate(130%);
+}
+
+#root > [data-layout='main'] :is(.MuiOutlinedInput-root:hover, .MuiFilledInput-root:hover, .MuiInputBase-root.Mui-focused),
+#root > [data-layout='minimal'] :is(.MuiOutlinedInput-root:hover, .MuiFilledInput-root:hover, .MuiInputBase-root.Mui-focused) {
+  background: var(--aihub-field-hover) !important;
+}
+
+#root > [data-layout='main'] :is(.MuiFilledInput-root, .MuiInput-root),
+#root > [data-layout='minimal'] :is(.MuiFilledInput-root, .MuiInput-root) {
+  background: var(--aihub-field) !important;
+  border-radius: 12px;
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  backdrop-filter: blur(14px) saturate(130%);
+}
+
+#root > [data-layout='main'] .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline,
+#root > [data-layout='minimal'] .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  border-color: var(--aihub-border) !important;
+}
+
+#root > [data-layout='main'] .MuiFilledInput-root::before,
+#root > [data-layout='main'] .MuiFilledInput-root::after,
+#root > [data-layout='minimal'] .MuiFilledInput-root::before,
+#root > [data-layout='minimal'] .MuiFilledInput-root::after {
+  border-color: var(--aihub-border) !important;
+}
+
+#root > [data-layout='main'] :is(.MuiInputBase-input, .MuiSelect-select, textarea),
+#root > [data-layout='minimal'] :is(.MuiInputBase-input, .MuiSelect-select, textarea) {
+  color: var(--aihub-text) !important;
+}
+
+#root > [data-layout='main'] :is(.MuiInputBase-input::placeholder, textarea::placeholder),
+#root > [data-layout='minimal'] :is(.MuiInputBase-input::placeholder, textarea::placeholder) {
+  color: var(--aihub-muted) !important;
+  opacity: 0.82;
+}
+
+#root > [data-layout='main'] :is(.MuiInputLabel-root, .MuiFormLabel-root, .MuiFormHelperText-root),
+#root > [data-layout='minimal'] :is(.MuiInputLabel-root, .MuiFormLabel-root, .MuiFormHelperText-root) {
+  color: var(--aihub-muted);
+}
+
+#root > [data-layout='main'] .MuiOutlinedInput-root .MuiInputAdornment-root,
+#root > [data-layout='minimal'] .MuiOutlinedInput-root .MuiInputAdornment-root {
+  color: var(--aihub-muted);
+}
+
+#root > [data-layout='main'] .MuiOutlinedInput-root .MuiInputAdornment-positionStart,
+#root > [data-layout='minimal'] .MuiOutlinedInput-root .MuiInputAdornment-positionStart {
+  margin-right: 8px;
+}
+
+#root > [data-layout='main'] .MuiOutlinedInput-root .MuiInputBase-inputAdornedStart,
+#root > [data-layout='minimal'] .MuiOutlinedInput-root .MuiInputBase-inputAdornedStart {
+  padding-left: 0;
+}
+
+#root > [data-layout='main'] .MuiOutlinedInput-root .MuiInputAdornment-root svg,
+#root > [data-layout='minimal'] .MuiOutlinedInput-root .MuiInputAdornment-root svg {
+  color: currentColor !important;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--aihub-scroll-thumb) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--aihub-scroll-thumb);
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background-clip: padding-box;
+  min-height: 44px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--aihub-scroll-thumb-hover);
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent !important;
+}
+
+#root > [data-layout='main'] :is(.MuiPopover-paper, .MuiMenu-paper),
+#root > [data-layout='minimal'] :is(.MuiPopover-paper, .MuiMenu-paper) {
+  background: var(--aihub-panel-strong) !important;
+  border: 1px solid var(--aihub-border) !important;
+  box-shadow: var(--aihub-shadow) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(135%);
+  backdrop-filter: blur(18px) saturate(135%);
+  background-clip: padding-box;
+}
+
+#root > [data-layout='main'] :is(.MuiMenu-list, .MuiList-root[role='listbox']),
+#root > [data-layout='minimal'] :is(.MuiMenu-list, .MuiList-root[role='listbox']) {
+  background: transparent !important;
+  color: var(--aihub-text);
+}
+
+#root > [data-layout='main'] :is(.MuiMenuItem-root, .MuiList-root[role='listbox'] .MuiMenuItem-root):hover,
+#root > [data-layout='minimal'] :is(.MuiMenuItem-root, .MuiList-root[role='listbox'] .MuiMenuItem-root):hover,
+#root > [data-layout='main'] :is(.MuiMenuItem-root, .MuiList-root[role='listbox'] .MuiMenuItem-root).Mui-selected,
+#root > [data-layout='minimal'] :is(.MuiMenuItem-root, .MuiList-root[role='listbox'] .MuiMenuItem-root).Mui-selected {
+  background: var(--aihub-soft) !important;
+}
+
+body :is(.MuiPopover-paper, .MuiMenu-paper) {
+  background: var(--aihub-panel-strong) !important;
+  border: 1px solid var(--aihub-border) !important;
+  box-shadow: var(--aihub-shadow) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(135%);
+  backdrop-filter: blur(18px) saturate(135%);
+  background-clip: padding-box;
+}
+
+body :is(.MuiMenu-list, .MuiList-root[role='listbox']) {
+  background: transparent !important;
+  color: var(--aihub-text);
+}
+
+body :is(.MuiMenuItem-root, .MuiList-root[role='listbox'] .MuiMenuItem-root):hover,
+body :is(.MuiMenuItem-root, .MuiList-root[role='listbox'] .MuiMenuItem-root).Mui-selected {
+  background: var(--aihub-soft) !important;
+}
+
+body :is(.MuiAutocomplete-popper .MuiPaper-root, .MuiPopper-root .MuiPaper-root:not(.MuiPickersPopper-paper), .MuiDataGrid-panel, .MuiDataGrid-menu) {
+  background: var(--aihub-panel-strong) !important;
+  border: 1px solid var(--aihub-border) !important;
+  box-shadow: var(--aihub-shadow) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(135%);
+  backdrop-filter: blur(18px) saturate(135%);
+  background-clip: padding-box;
+  color: var(--aihub-text) !important;
+}
+
+body :is(.MuiAutocomplete-listbox, .MuiDataGrid-menuList) {
+  background: transparent !important;
+  color: var(--aihub-text) !important;
+}
+
+body :is(.MuiAutocomplete-option:hover, .MuiAutocomplete-option[aria-selected='true']) {
+  background: var(--aihub-soft) !important;
+}
+
+body .MuiTooltip-tooltip {
+  background: var(--aihub-panel-strong) !important;
+  border: 1px solid var(--aihub-border);
+  box-shadow: var(--aihub-shadow);
+  -webkit-backdrop-filter: blur(14px) saturate(135%);
+  backdrop-filter: blur(14px) saturate(135%);
+  color: var(--aihub-text) !important;
+}
+
+body .MuiTooltip-arrow {
+  color: var(--aihub-panel-strong) !important;
+}
+
+body .MuiDrawer-paper {
+  background: var(--aihub-drawer) !important;
+  border-color: var(--aihub-border) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(135%);
+  backdrop-filter: blur(22px) saturate(135%);
+  background-clip: padding-box;
+}
+
+body .MuiDialog-paper {
+  background: var(--aihub-panel-strong) !important;
+  border: 1px solid var(--aihub-border) !important;
+  box-shadow: var(--aihub-shadow) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(135%);
+  backdrop-filter: blur(22px) saturate(135%);
+  background-clip: padding-box;
+}
+
+body .MuiDialog-paper :is(.MuiDialogTitle-root, .MuiDialogContent-root, .MuiDialogActions-root) {
+  background: transparent !important;
+  border-color: var(--aihub-border) !important;
+}
+
+body .MuiDialog-paper :is(.MuiOutlinedInput-root, .MuiFilledInput-root) {
+  background: var(--aihub-field) !important;
+  border-radius: 12px;
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  backdrop-filter: blur(14px) saturate(130%);
+}
+
+body .MuiDialog-paper :is(.MuiOutlinedInput-root:hover, .MuiFilledInput-root:hover, .MuiInputBase-root.Mui-focused) {
+  background: var(--aihub-field-hover) !important;
+}
+
+body .MuiDialog-paper :is(.MuiOutlinedInput-root.Mui-disabled, .MuiFilledInput-root.Mui-disabled, .MuiInputBase-root.Mui-disabled) {
+  background: var(--aihub-field) !important;
+  opacity: 1;
+}
+
+body .MuiDialog-paper :is(.MuiInputBase-input.Mui-disabled, .Mui-disabled .MuiInputBase-input, .Mui-disabled textarea) {
+  color: var(--aihub-muted) !important;
+  -webkit-text-fill-color: var(--aihub-muted) !important;
+}
+
+body .MuiDialog-paper .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  border-color: var(--aihub-border) !important;
+}
+
+body .MuiDialog-paper .aihub-code-editor {
+  background: var(--aihub-field) !important;
+  border-color: var(--aihub-border) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  backdrop-filter: blur(14px) saturate(130%);
+  background-clip: padding-box;
+}
+
+body .MuiDialog-paper .aihub-code-editor :is(
+  .monaco-editor,
+  .monaco-editor .overflow-guard,
+  .monaco-editor-background,
+  .monaco-editor .margin,
+  .monaco-editor .margin-view-overlays,
+  .monaco-editor .glyph-margin,
+  .monaco-editor .view-overlays,
+  .monaco-editor .view-lines,
+  .monaco-editor .view-line,
+  .monaco-editor .lines-content,
+  .monaco-editor .monaco-scrollable-element,
+  .monaco-editor .minimap,
+  .monaco-editor .minimap-decorations-layer,
+  .monaco-editor .decorationsOverviewRuler
+) {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+body .MuiDialog-paper .aihub-code-editor :is(
+  .monaco-editor .current-line,
+  .monaco-editor .current-line-margin,
+  .monaco-editor .view-overlays .current-line,
+  .monaco-editor .margin-view-overlays .current-line-margin,
+  .monaco-editor .focused .current-line,
+  .monaco-editor .line-numbers.active-line-number
+) {
+  background: var(--aihub-soft) !important;
+  border-color: transparent !important;
+}
+
+body .MuiDialog-paper .aihub-code-editor :is(
+  .monaco-editor .view-overlays .current-line,
+  .monaco-editor .margin-view-overlays .current-line-margin
+) {
+  box-shadow: inset 0 0 0 1px var(--aihub-border);
+}
+
+body .MuiDialog-paper .aihub-code-editor :is(.monaco-editor .line-numbers, .monaco-editor .mtk1, .monaco-editor .view-line span) {
+  color: var(--aihub-text) !important;
+}
+
+body .MuiDialog-paper .MuiFilledInput-root::before,
+body .MuiDialog-paper .MuiFilledInput-root::after {
+  border-color: var(--aihub-border) !important;
+}
+
+body :is(.MuiPickersPopper-paper, .MuiPickersLayout-root) {
+  background: var(--aihub-panel-strong) !important;
+  border: 1px solid var(--aihub-border) !important;
+  box-shadow: var(--aihub-shadow) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(135%);
+  backdrop-filter: blur(22px) saturate(135%);
+  background-clip: padding-box;
+  color: var(--aihub-text) !important;
+}
+
+body :is(.MuiPickersLayout-contentWrapper, .MuiPickersLayout-actionBar, .MuiDateCalendar-root, .MuiTimeClock-root, .MuiMultiSectionDigitalClock-root) {
+  background: transparent !important;
+  color: var(--aihub-text) !important;
+}
+
+body :is(.MuiPickersCalendarHeader-root, .MuiDayCalendar-weekDayLabel, .MuiPickersDay-root, .MuiMultiSectionDigitalClockSection-item) {
+  color: var(--aihub-text) !important;
+}
+
+body :is(.MuiPickersDay-root:hover, .MuiMultiSectionDigitalClockSection-item:hover) {
+  background: var(--aihub-soft) !important;
+}
+
+body :is(.MuiPickersDay-root.Mui-selected, .MuiMultiSectionDigitalClockSection-item.Mui-selected) {
+  background: var(--aihub-link) !important;
+  color: #fff !important;
+}
+
+body :is(.MuiPickersArrowSwitcher-button, .MuiPickersCalendarHeader-switchViewButton) {
+  color: var(--aihub-text) !important;
+}
+
+#root > [data-layout='main'] :is(.MuiDataGrid-columnHeaders, .MuiTableHead-root),
+#root > [data-layout='minimal'] :is(.MuiDataGrid-columnHeaders, .MuiTableHead-root) {
+  background: var(--aihub-table-head) !important;
+  color: var(--aihub-text) !important;
+}
+
+#root > [data-layout='main'] .MuiTableHead-root :is(.MuiTableRow-root, .MuiTableCell-root),
+#root > [data-layout='minimal'] .MuiTableHead-root :is(.MuiTableRow-root, .MuiTableCell-root) {
+  background: transparent !important;
+  color: var(--aihub-text) !important;
+}
+
+#root > [data-layout='main'] :is(.MuiTableBody-root .MuiTableRow-root, .MuiDataGrid-row),
+#root > [data-layout='minimal'] :is(.MuiTableBody-root .MuiTableRow-root, .MuiDataGrid-row) {
+  background: transparent !important;
+}
+
+#root > [data-layout='main'] :is(.MuiTableBody-root .MuiTableRow-root:hover, .MuiDataGrid-row:hover),
+#root > [data-layout='minimal'] :is(.MuiTableBody-root .MuiTableRow-root:hover, .MuiDataGrid-row:hover) {
+  background: var(--aihub-soft) !important;
+}
+
+#root > [data-layout='main'] :is(.MuiDataGrid-root, .MuiDataGrid-main, .MuiDataGrid-virtualScroller, .MuiDataGrid-footerContainer, .MuiDataGrid-toolbarContainer),
+#root > [data-layout='minimal'] :is(.MuiDataGrid-root, .MuiDataGrid-main, .MuiDataGrid-virtualScroller, .MuiDataGrid-footerContainer, .MuiDataGrid-toolbarContainer) {
+  background: transparent !important;
+  border-color: var(--aihub-border) !important;
+}
+
+#root > [data-layout='main'] .MuiTablePagination-root,
+#root > [data-layout='main'] .MuiTablePagination-toolbar,
+#root > [data-layout='minimal'] .MuiTablePagination-root,
+#root > [data-layout='minimal'] .MuiTablePagination-toolbar {
+  background: var(--aihub-table-footer) !important;
+  color: var(--aihub-muted) !important;
+}
+
+#root > [data-layout='main'] .MuiTablePagination-root .MuiIconButton-root,
+#root > [data-layout='minimal'] .MuiTablePagination-root .MuiIconButton-root {
+  background: var(--aihub-soft);
+}
+
+#root > [data-layout='main'] :is(.MuiToggleButtonGroup-root, .MuiButtonGroup-root),
+#root > [data-layout='minimal'] :is(.MuiToggleButtonGroup-root, .MuiButtonGroup-root) {
+  background: var(--aihub-field) !important;
+  border-color: var(--aihub-border) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  backdrop-filter: blur(14px) saturate(130%);
+}
+
+#root > [data-layout='main'] .MuiToggleButton-root,
+#root > [data-layout='minimal'] .MuiToggleButton-root {
+  border-color: var(--aihub-border) !important;
+  color: var(--aihub-text) !important;
+}
+
+#root > [data-layout='main'] .MuiToggleButton-root.Mui-selected,
+#root > [data-layout='minimal'] .MuiToggleButton-root.Mui-selected {
+  background: var(--aihub-selected) !important;
+  color: var(--aihub-link) !important;
+  box-shadow: 0 0 0 1px rgba(8, 119, 200, 0.72), 0 10px 24px rgba(8, 119, 200, 0.14) !important;
+}
+
+#root > [data-layout='main'] .MuiToggleButton-root.Mui-selected:hover,
+#root > [data-layout='minimal'] .MuiToggleButton-root.Mui-selected:hover {
+  background: var(--aihub-selected-hover) !important;
+  color: var(--aihub-link-hover) !important;
+}
+
+#root > [data-layout='main'] .MuiToggleButton-root:not(.Mui-selected):hover,
+#root > [data-layout='minimal'] .MuiToggleButton-root:not(.Mui-selected):hover {
+  background: var(--aihub-field-hover) !important;
+}
+
+#root > [data-layout='main'] :is(.MuiIconButton-root, .MuiPaginationItem-root):not(.Mui-selected),
+#root > [data-layout='minimal'] :is(.MuiIconButton-root, .MuiPaginationItem-root):not(.Mui-selected) {
+  color: var(--aihub-muted);
+}
+
+#root > [data-layout='main'] :is(.MuiIconButton-root, .MuiPaginationItem-root):not(.Mui-selected):hover,
+#root > [data-layout='minimal'] :is(.MuiIconButton-root, .MuiPaginationItem-root):not(.Mui-selected):hover {
+  background: var(--aihub-soft) !important;
+}
+
+#root > [data-layout='main'] .aihub-support-models-toggle,
+#root > [data-layout='minimal'] .aihub-support-models-toggle,
+#root > [data-layout='main'] .aihub-sidebar-toggle,
+#root > [data-layout='minimal'] .aihub-sidebar-toggle {
+  background: rgba(8, 119, 200, 0.1) !important;
+  border-radius: 999px !important;
+  color: var(--aihub-link) !important;
+  box-shadow: inset 0 0 0 1px rgba(8, 119, 200, 0.16) !important;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+html[data-theme='dark'] #root > [data-layout='main'] .aihub-support-models-toggle,
+html[data-theme='dark'] #root > [data-layout='minimal'] .aihub-support-models-toggle,
+html[data-theme='dark'] #root > [data-layout='main'] .aihub-sidebar-toggle,
+html[data-theme='dark'] #root > [data-layout='minimal'] .aihub-sidebar-toggle {
+  background: rgba(77, 180, 255, 0.12) !important;
+  box-shadow: inset 0 0 0 1px rgba(77, 180, 255, 0.2) !important;
+}
+
+#root > [data-layout='main'] .aihub-support-models-toggle:hover,
+#root > [data-layout='minimal'] .aihub-support-models-toggle:hover,
+#root > [data-layout='main'] .aihub-sidebar-toggle:hover,
+#root > [data-layout='minimal'] .aihub-sidebar-toggle:hover {
+  background: rgba(8, 119, 200, 0.16) !important;
+  color: var(--aihub-link-hover) !important;
+}
+
+html[data-theme='dark'] #root > [data-layout='main'] .aihub-support-models-toggle:hover,
+html[data-theme='dark'] #root > [data-layout='minimal'] .aihub-support-models-toggle:hover,
+html[data-theme='dark'] #root > [data-layout='main'] .aihub-sidebar-toggle:hover,
+html[data-theme='dark'] #root > [data-layout='minimal'] .aihub-sidebar-toggle:hover {
+  background: rgba(77, 180, 255, 0.2) !important;
+}
+
+#root > [data-layout='main'] .aihub-support-models-toggle .MuiTouchRipple-root,
+#root > [data-layout='minimal'] .aihub-support-models-toggle .MuiTouchRipple-root,
+#root > [data-layout='main'] .aihub-sidebar-toggle .MuiTouchRipple-root,
+#root > [data-layout='minimal'] .aihub-sidebar-toggle .MuiTouchRipple-root,
+#root > [data-layout='main'] .aihub-support-models-toggle .MuiTouchRipple-ripple,
+#root > [data-layout='minimal'] .aihub-support-models-toggle .MuiTouchRipple-ripple,
+#root > [data-layout='main'] .aihub-sidebar-toggle .MuiTouchRipple-ripple,
+#root > [data-layout='minimal'] .aihub-sidebar-toggle .MuiTouchRipple-ripple,
+#root > [data-layout='main'] .aihub-support-models-toggle .MuiTouchRipple-child,
+#root > [data-layout='minimal'] .aihub-support-models-toggle .MuiTouchRipple-child,
+#root > [data-layout='main'] .aihub-sidebar-toggle .MuiTouchRipple-child,
+#root > [data-layout='minimal'] .aihub-sidebar-toggle .MuiTouchRipple-child {
+  border-radius: inherit !important;
+}
+
+#root > [data-layout='main'] :is(.MuiTabs-root, .MuiTabs-scroller),
+#root > [data-layout='minimal'] :is(.MuiTabs-root, .MuiTabs-scroller) {
+  background: transparent !important;
+  border-color: var(--aihub-border) !important;
+}
+
+#root > [data-layout='main'] .MuiTab-root,
+#root > [data-layout='minimal'] .MuiTab-root {
+  color: var(--aihub-muted) !important;
+}
+
+#root > [data-layout='main'] .MuiTab-root.Mui-selected,
+#root > [data-layout='minimal'] .MuiTab-root.Mui-selected {
+  color: var(--aihub-link) !important;
+}
+
+#root > [data-layout='main'] :is(.MuiListItemButton-root, .MuiListItem-root),
+#root > [data-layout='minimal'] :is(.MuiListItemButton-root, .MuiListItem-root) {
+  color: var(--aihub-text);
+}
+
+#root > [data-layout='main'] .MuiListItemButton-root:hover,
+#root > [data-layout='minimal'] .MuiListItemButton-root:hover,
+#root > [data-layout='main'] .MuiListItemButton-root.Mui-selected,
+#root > [data-layout='minimal'] .MuiListItemButton-root.Mui-selected {
+  background: var(--aihub-soft) !important;
+}
+
+#root > [data-layout='main'] :is(.MuiListItemIcon-root, .MuiListItemText-secondary),
+#root > [data-layout='minimal'] :is(.MuiListItemIcon-root, .MuiListItemText-secondary) {
+  color: var(--aihub-muted) !important;
+}
+
+#root > [data-layout='main'] :is(.MuiAccordion-root, .MuiAccordionSummary-root, .MuiAccordionDetails-root),
+#root > [data-layout='minimal'] :is(.MuiAccordion-root, .MuiAccordionSummary-root, .MuiAccordionDetails-root) {
+  background: transparent !important;
+  color: var(--aihub-text);
+  border-color: var(--aihub-border);
+}
+
+#root > [data-layout='main'] :is(.MuiAlert-root, .MuiSnackbarContent-root),
+#root > [data-layout='minimal'] :is(.MuiAlert-root, .MuiSnackbarContent-root) {
+  -webkit-backdrop-filter: blur(16px) saturate(135%);
+  backdrop-filter: blur(16px) saturate(135%);
+  border: 1px solid var(--aihub-border);
+  box-shadow: var(--aihub-shadow);
+}
+
+#root > [data-layout='main'] .MuiSwitch-track,
+#root > [data-layout='minimal'] .MuiSwitch-track {
+  background: var(--aihub-switch-track) !important;
+}
+
+#root > [data-layout='main'] .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track,
+#root > [data-layout='minimal'] .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track {
+  background: var(--aihub-switch-track-checked) !important;
+}
+
+#root > [data-layout='main'] .MuiSwitch-switchBase.Mui-checked .MuiSwitch-thumb,
+#root > [data-layout='minimal'] .MuiSwitch-switchBase.Mui-checked .MuiSwitch-thumb {
+  background: var(--aihub-switch-thumb-checked) !important;
+}
+
+#root > [data-layout='main'] .MuiSlider-rail,
+#root > [data-layout='minimal'] .MuiSlider-rail {
+  background: var(--aihub-muted) !important;
+}
+
+#root > [data-layout='main'] .MuiSlider-track,
+#root > [data-layout='minimal'] .MuiSlider-track {
+  background: var(--aihub-link) !important;
+}
+
+#root > [data-layout='main'] :is(.MuiDivider-root, .MuiDataGrid-withBorderColor, .MuiTableCell-root),
+#root > [data-layout='minimal'] :is(.MuiDivider-root, .MuiDataGrid-withBorderColor, .MuiTableCell-root) {
+  border-color: var(--aihub-border) !important;
+}
+
+#root > [data-layout='main'] :is(a:not(.MuiButton-root), .MuiLink-root:not(.MuiButton-root)),
+#root > [data-layout='minimal'] :is(a:not(.MuiButton-root), .MuiLink-root:not(.MuiButton-root)) {
+  color: var(--aihub-link);
+}
+
+#root > [data-layout='main'] :is(a:not(.MuiButton-root), .MuiLink-root:not(.MuiButton-root)):hover,
+#root > [data-layout='minimal'] :is(a:not(.MuiButton-root), .MuiLink-root:not(.MuiButton-root)):hover {
+  color: var(--aihub-link-hover);
+}
+
+#root > [data-layout='main'] ::-webkit-scrollbar-thumb,
+#root > [data-layout='minimal'] ::-webkit-scrollbar-thumb {
+  background: var(--aihub-scroll-thumb) !important;
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background-clip: padding-box;
+}
+
+#root > [data-layout='main'] ::-webkit-scrollbar-thumb:hover,
+#root > [data-layout='minimal'] ::-webkit-scrollbar-thumb:hover {
+  background: var(--aihub-scroll-thumb-hover) !important;
+  background-clip: padding-box;
+}
+
+#root > [data-layout='minimal'] .auth-wrapper {
+  background: transparent !important;
+}
+
+#root > [data-layout='minimal'] .auth-card.MuiCard-root,
+#root > [data-layout='minimal'] .auth-card.MuiPaper-root {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}

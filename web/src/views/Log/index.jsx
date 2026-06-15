@@ -36,6 +36,7 @@ import dayjs from 'dayjs'
 import { useTranslation } from 'react-i18next'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme } from '@mui/material/styles'
+import { alpha } from '@mui/material/styles'
 import { useSelector } from 'react-redux'
 import { useLogType } from './type/LogType'
 import useStickyShadow from 'hooks/useStickyShadow'
@@ -709,8 +710,14 @@ export default function Log() {
             minHeight: { xs: 'auto', sm: 56 },
             px: { xs: 2, sm: 3 },
             py: { xs: 1, sm: 0 },
-            bgcolor: theme.headBackgroundColor,
-            borderTop: `1px dashed ${theme.tableBorderBottom}`
+            bgcolor:
+              theme.palette.mode === 'dark'
+                ? alpha(theme.palette.background.paper, 0.58)
+                : alpha(theme.palette.background.paper, 0.64),
+            borderTop: `1px solid ${alpha(theme.palette.divider, 0.6)}`,
+            backdropFilter: 'blur(20px) saturate(150%)',
+            WebkitBackdropFilter: 'blur(20px) saturate(150%)',
+            boxShadow: `0 -14px 32px ${alpha(theme.palette.common.black, theme.palette.mode === 'dark' ? 0.16 : 0.06)}`
           })}
         >
           {showTotalCost && (

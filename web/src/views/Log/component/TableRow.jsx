@@ -12,7 +12,7 @@ import { useLogType } from '../type/LogType'
 import { useTranslation } from 'react-i18next'
 import QuotaWithDetailRow from './QuotaWithDetailRow'
 import QuotaWithDetailContent, { calculatePrice } from './QuotaWithDetailContent'
-import { styled } from '@mui/material/styles'
+import { alpha, styled } from '@mui/material/styles'
 import { stickyCellSx } from 'ui-component/stickyCellSx';
 
 function renderType(type, logTypes, t) {
@@ -94,7 +94,32 @@ export default function LogTableRow({ item, userIsAdmin, userGroup, columnVisibi
 
   return (
     <>
-      <TableRow tabIndex={item.id}>
+      <TableRow
+        tabIndex={item.id}
+        hover
+        sx={(theme) => ({
+          '--log-row-detail-bg':
+            theme.palette.mode === 'dark'
+              ? alpha(theme.palette.background.paper, 0.64)
+              : alpha(theme.palette.background.paper, 0.52),
+          '--log-row-bg': 'transparent',
+          transition: 'background-color .16s ease',
+          '&:hover': {
+            '--log-row-detail-bg':
+              theme.palette.mode === 'dark'
+                ? alpha(theme.palette.primary.main, 0.14)
+                : alpha(theme.palette.primary.main, 0.1),
+            '--log-row-bg':
+              theme.palette.mode === 'dark'
+                ? alpha(theme.palette.primary.main, 0.07)
+                : alpha(theme.palette.primary.main, 0.045),
+            backgroundColor: 'var(--log-row-bg)'
+          },
+          '& > .MuiTableCell-root': {
+            backgroundColor: 'var(--log-row-bg)'
+          }
+        })}
+      >
         {columnVisibility.created_at &&
           <TableCell sx={{
             p: '10px 8px',
@@ -191,9 +216,12 @@ export default function LogTableRow({ item, userIsAdmin, userGroup, columnVisibi
         {columnVisibility.source_ip &&
           <TableCell sx={{ p: '10px 8px', textAlign: 'center' }}>{item.source_ip || ''}</TableCell>}
         {columnVisibility.detail && (
-          <TableCell sx={{ p: '10px 8px', textAlign: 'center', ...stickyCellSx }}>
-            {viewLogContent(item, t, totalInputTokens, totalOutputTokens)}
-          </TableCell>
+          <TableCell sx={{
+            p: '10px 8px',
+            textAlign: 'center',
+            ...stickyCellSx,
+            backgroundColor: 'var(--log-row-detail-bg)',
+          }}>{viewLogContent(item, t, totalInputTokens, totalOutputTokens)}</TableCell>
         )}
       </TableRow>
       {/* 展开行 */}

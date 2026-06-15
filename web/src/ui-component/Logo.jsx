@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 // material-ui
-import logoLight from 'assets/images/logo.svg';
-import logoDark from 'assets/images/logo-white.svg';
+import logoDark from 'assets/images/ai-hub-dark.svg';
+import logoLight from 'assets/images/ai-hub-light.svg';
 import { useSelector } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
 

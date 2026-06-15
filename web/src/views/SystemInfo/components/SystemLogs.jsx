@@ -34,6 +34,7 @@ import Label from 'ui-component/Label'
 import { useTranslation } from 'react-i18next'
 import { Icon } from '@iconify/react'
 import { API } from 'utils/api'
+import { alpha } from '@mui/material/styles'
 
 // System Logs Component
 const SystemLogs = () => {
@@ -682,19 +683,30 @@ const SystemLogs = () => {
               <IconButton
                 onClick={scrollToBottom}
                 sx={{
-                  backgroundColor: theme.palette.mode === 'dark'
-                    ? 'rgba(66, 66, 66, 0.95)'
-                    : 'rgba(255, 255, 255, 0.95)',
-                  border: `1px solid ${theme.palette.divider}`,
-                  boxShadow: theme.shadows[4],
+                  color: theme.palette.mode === 'dark' ? theme.palette.primary.light : theme.palette.primary.dark,
+                  background:
+                    theme.palette.mode === 'dark'
+                      ? `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.2)}, ${alpha('#10213a', 0.64)})`
+                      : `linear-gradient(135deg, ${alpha('#ffffff', 0.58)}, ${alpha(theme.palette.primary.light, 0.28)})`,
+                  border: `1px solid ${alpha(theme.palette.primary.main, theme.palette.mode === 'dark' ? 0.38 : 0.26)}`,
+                  boxShadow:
+                    theme.palette.mode === 'dark'
+                      ? `inset 0 1px 0 ${alpha('#ffffff', 0.08)}, 0 12px 30px ${alpha('#020617', 0.28)}`
+                      : `inset 0 1px 0 ${alpha('#ffffff', 0.86)}, 0 12px 28px ${alpha('#0f172a', 0.1)}`,
                   width: 40,
                   height: 40,
-                  backdropFilter: 'blur(8px)',
+                  backdropFilter: 'blur(18px) saturate(160%)',
+                  WebkitBackdropFilter: 'blur(18px) saturate(160%)',
                   '&:hover': {
-                    backgroundColor: theme.palette.mode === 'dark'
-                      ? 'rgba(88, 88, 88, 1)'
-                      : 'rgba(248, 249, 250, 1)',
-                    boxShadow: theme.shadows[8]
+                    background:
+                      theme.palette.mode === 'dark'
+                        ? `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.28)}, ${alpha('#12304a', 0.72)})`
+                        : `linear-gradient(135deg, ${alpha('#ffffff', 0.7)}, ${alpha(theme.palette.primary.light, 0.38)})`,
+                    borderColor: alpha(theme.palette.primary.main, theme.palette.mode === 'dark' ? 0.52 : 0.34),
+                    boxShadow:
+                      theme.palette.mode === 'dark'
+                        ? `inset 0 1px 0 ${alpha('#ffffff', 0.1)}, 0 16px 34px ${alpha(theme.palette.primary.main, 0.16)}`
+                        : `inset 0 1px 0 ${alpha('#ffffff', 0.9)}, 0 16px 34px ${alpha(theme.palette.primary.main, 0.14)}`
                   },
                   transition: 'all 0.2s ease-in-out'
                 }}
@@ -702,8 +714,7 @@ const SystemLogs = () => {
                 <Icon
                   icon="solar:arrow-down-bold"
                   style={{
-                    fontSize: '20px',
-                    color: theme.palette.text.secondary
+                    fontSize: '20px'
                   }}
                 />
               </IconButton>

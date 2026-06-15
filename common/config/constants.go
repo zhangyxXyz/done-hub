@@ -18,6 +18,16 @@ var PaymentCallbackAddress = ""
 var Debug = false
 
 var OldTokenMaxId = 0
+var AutoPriceUpdates = false
+var AutoPriceUpdatesMode = "system"
+var AutoPriceUpdatesInterval = 1440
+var AutoPriceUpdatesCron = ""
+var UpdatePriceService = "https://raw.githubusercontent.com/zhangyxXyz/done-hub/refs/heads/llm-model-info/prices/prices.json"
+var AutoModelInfoUpdates = false
+var AutoModelInfoUpdatesMode = "add"
+var AutoModelInfoUpdatesInterval = 1440
+var AutoModelInfoUpdatesCron = ""
+var UpdateModelInfoService = "https://raw.githubusercontent.com/zhangyxXyz/done-hub/refs/heads/llm-model-info/model_info/model_info.json"
 
 var Language = ""
 var Footer = ""
@@ -26,6 +36,7 @@ var TopUpLink = ""
 var ChatLink = ""
 var ChatLinks = ""
 var AnalyticsCode = ""
+var NoticeAutoPopup = true
 var QuotaPerUnit = 500 * 1000.0 // $0.002 / 1K tokens
 var DisplayInCurrencyEnabled = true
 
@@ -389,6 +400,8 @@ const (
 	ChannelTypeCodex           = 59
 	ChannelTypeAntigravity     = 60
 	ChannelTypeVertexAIExpress = 61
+	ChannelTypeDoubao          = 62
+	ChannelTypeXiaomi          = 63
 )
 
 const (

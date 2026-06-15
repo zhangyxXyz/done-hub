@@ -76,8 +76,10 @@ const Header = () => {
                 color: theme.palette.text.primary,
                 borderRadius: '12px',
                 padding: '8px',
-                backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.04)',
                 '&:hover': {
+                  backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.08)'
+                },
+                '&.Mui-focusVisible': {
                   backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.08)'
                 }
               }}
@@ -226,17 +228,32 @@ const Header = () => {
                 sx={{
                   width: { xs: '30vw', sm: '320px' },
                   borderRadius: '8px',
+                  border: '1px solid var(--aihub-border)',
+                  background: 'var(--aihub-panel-strong)',
+                  backgroundClip: 'padding-box',
+                  backdropFilter: 'blur(18px) saturate(135%)',
+                  WebkitBackdropFilter: 'blur(18px) saturate(135%)',
                   overflow: 'hidden',
-                  boxShadow: theme.shadows[8],
+                  boxShadow: 'var(--aihub-shadow)',
                   textAlign: 'center'
                 }}
               >
-                <MainCard border={false} elevation={0} content={false} boxShadow>
+                <MainCard
+                  border={false}
+                  elevation={0}
+                  content={false}
+                  sx={{
+                    background: 'transparent',
+                    border: 0,
+                    boxShadow: 'none',
+                    borderRadius: 0
+                  }}
+                >
                   <List
                     component="nav"
                     sx={{
                       width: '100%',
-                      backgroundColor: theme.palette.background.paper,
+                      backgroundColor: 'transparent',
                       py: 1,
                       '& .MuiListItemButton-root': {
                         py: 0.75,

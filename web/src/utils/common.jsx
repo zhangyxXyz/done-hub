@@ -663,7 +663,7 @@ export function getChatLinks(filterShow = false) {
       // 循环找到name为ChatGPT Next的链接
       for (let i = 0; i < links.length; i++) {
         if (links[i].name === 'ChatGPT Next') {
-          links[i].url = siteInfo.chat_link + `/#/?settings={"key":"sk-{key}","url":"{server}"}`;
+          links[i].url = siteInfo.chat_link + `/#/?settings={"key":"sk-{key}","url":"{server}","customModels":"{models}"}`;
           links[i].show = true;
           break;
         }
@@ -672,6 +672,8 @@ export function getChatLinks(filterShow = false) {
   } else {
     links = chatLinks;
   }
+
+  links = links.map((link) => withNextChatModelPlaceholder(link));
 
   if (filterShow) {
     links = links.filter((link) => link.show);
@@ -685,13 +687,65 @@ export function getChatLinks(filterShow = false) {
   return links;
 }
 
-export function replaceChatPlaceholders(text, key, server) {
+function withNextChatModelPlaceholder(link) {
+  if (!link?.url || link.url.includes('customModels')) return link;
+
+  const isNextChatLink = link.name?.toLowerCase().includes('next') || link.url.includes('/nextchat');
+  if (!isNextChatLink) return link;
+
+  try {
+    const isRelativeUrl = link.url.startsWith('/');
+    const url = new URL(link.url, window.location.origin);
+    const hash = url.hash || '';
+    const queryIndex = hash.indexOf('?');
+    if (queryIndex === -1) return link;
+
+    const hashPath = hash.slice(0, queryIndex);
+    const hashSearch = new URLSearchParams(hash.slice(queryIndex + 1));
+    const settings = hashSearch.get('settings');
+    if (!settings) return link;
+
+    const parsedSettings = JSON.parse(settings);
+    parsedSettings.customModels = '{models}';
+    hashSearch.set('settings', JSON.stringify(parsedSettings));
+    url.hash = `${hashPath}?${hashSearch.toString()}`;
+
+    return {
+      ...link,
+      url: isRelativeUrl ? `${url.pathname}${url.search}${url.hash}` : url.toString()
+    };
+  } catch (error) {
+    return link;
+  }
+}
+
+export async function getAvailableModelNames() {
+  try {
+    const res = await API.get('/api/available_model');
+    const { success, data } = res.data;
+    if (!success || !data) return [];
+
+    return Object.keys(data).sort();
+  } catch (error) {
+    return [];
+  }
+}
+
+export function replaceChatPlaceholders(text, key, server, models = '') {
+  const applyReplacements = (value) =>
+    value
+      .replaceAll('{key}', key)
+      .replaceAll('%7Bkey%7D', key)
+      .replaceAll('{server}', server)
+      .replaceAll('%7Bserver%7D', server)
+      .replaceAll('{models}', models)
+      .replaceAll('%7Bmodels%7D', models);
+
   // 使用正则表达式匹配 base64<[...]> 模式
   const base64Pattern = /base64<\[([^\]]+)\]>/g;
-  return text
-    .replace(base64Pattern, (match, content) => {
+  const replacedText = text.replace(base64Pattern, (match, content) => {
       // 先对方括号内的内容进行占位符替换
-      const replacedContent = content.replace('{key}', key).replace('{server}', server);
+      const replacedContent = applyReplacements(content);
       // 然后进行base64编码
       try {
         return btoa(decodeURIComponent(replacedContent));
@@ -699,9 +753,9 @@ export function replaceChatPlaceholders(text, key, server) {
         // 如果编码失败，返回替换后的原始内容
         return replacedContent;
       }
-    })
-    .replace('{key}', key)
-    .replace('{server}', server);
+    });
+
+  return applyReplacements(replacedText);
 }
 
 export function ValueFormatter(value, onlyUsd = false, unitMillion = false) {

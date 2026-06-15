@@ -3,26 +3,28 @@ import { Link, Container, Box } from '@mui/material';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { PROJECT_REPOSITORY_URL } from 'constants/CommonConstants';
 
 // ==============================|| FOOTER - AUTHENTICATION 2 & 3 ||============================== //
 
 const Footer = () => {
   const siteInfo = useSelector((state) => state.siteInfo);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const language = i18n.language || localStorage.getItem('appLanguage') || siteInfo.language || 'zh_CN';
 
   return (
-    <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '64px', borderRadius: 0 }}>
+    <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '64px', height: '100%', borderRadius: 0 }}>
       <Box sx={{ textAlign: 'center' }}>
         {siteInfo.footer_html ? (
-          <div className="custom-footer" dangerouslySetInnerHTML={{ __html: siteInfo.footer_html }}></div>
+          <div className="custom-footer" data-language={language} dangerouslySetInnerHTML={{ __html: siteInfo.footer_html }}></div>
         ) : (
           <>
-            <Link href="https://github.com/deanxv/done-hub" target="_blank">
+            <Link href={PROJECT_REPOSITORY_URL} target="_blank">
               {siteInfo.system_name} {import.meta.env.VITE_APP_VERSION}{' '}
             </Link>
             {t('footer.developedBy')}{' '}
-            <Link href="https://github.com/deanxv" target="_blank">
-              deanxv
+            <Link href="https://github.com/zhangyxXyz" target="_blank">
+              zhangyxXyz
             </Link>
             ，{t('footer.basedOn')}{' '}
             <Link href="https://github.com/MartialBE" target="_blank">
