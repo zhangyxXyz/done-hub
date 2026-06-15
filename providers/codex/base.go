@@ -2,6 +2,7 @@ package codex
 
 import (
 	"context"
+	"crypto/sha256"
 	"done-hub/common/cache"
 	"done-hub/common/logger"
 	"done-hub/common/requester"
@@ -9,6 +10,7 @@ import (
 	"done-hub/providers/base"
 	"done-hub/providers/openai"
 	"done-hub/types"
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -269,7 +271,7 @@ func (p *CodexProvider) GetToken() (string, error) {
 	}
 
 	// 使用缓存
-	cacheKey := fmt.Sprintf("%s:%d", TokenCacheKey, p.Channel.Id)
+	cacheKey := p.getTokenCacheKey()
 	cachedToken, _ := cache.GetCache[string](cacheKey)
 	if cachedToken != "" {
 		return cachedToken, nil
@@ -291,6 +293,7 @@ func (p *CodexProvider) GetToken() (string, error) {
 		if err := p.saveCredentialsToDatabase(ctx); err != nil {
 			logger.LogError(ctx, fmt.Sprintf("Failed to save refreshed credentials to database: %s", err.Error()))
 		}
+		cacheKey = p.getTokenCacheKey()
 	}
 
 	// 缓存 token，默认 55 分钟
@@ -305,6 +308,24 @@ func (p *CodexProvider) GetToken() (string, error) {
 	cache.SetCache(cacheKey, p.Credentials.AccessToken, cacheDuration)
 
 	return p.Credentials.AccessToken, nil
+}
+
+func (p *CodexProvider) getTokenCacheKey() string {
+	channelID := 0
+	if p.Channel != nil {
+		channelID = p.Channel.Id
+	}
+
+	seed := ""
+	if p.Credentials != nil {
+		seed = p.Credentials.RefreshToken
+		if seed == "" {
+			seed = p.Credentials.AccessToken
+		}
+	}
+
+	sum := sha256.Sum256([]byte(seed))
+	return fmt.Sprintf("%s:%d:%s", TokenCacheKey, channelID, hex.EncodeToString(sum[:8]))
 }
 
 func (p *CodexProvider) saveCredentialsToDatabase(ctx context.Context) error {

@@ -3,6 +3,7 @@ package antigravity
 import (
 	"bytes"
 	"context"
+	"crypto/sha256"
 	"done-hub/common/cache"
 	"done-hub/common/logger"
 	"done-hub/common/requester"
@@ -11,6 +12,7 @@ import (
 	"done-hub/providers/gemini"
 	"done-hub/providers/openai"
 	"done-hub/types"
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -283,7 +285,7 @@ func (p *AntigravityProvider) GetToken() (string, error) {
 		ctx = context.Background()
 	}
 
-	cacheKey := fmt.Sprintf("%s:%s", TokenCacheKey, p.ProjectID)
+	cacheKey := p.getTokenCacheKey()
 
 	cachedToken, _ := cache.GetCache[string](cacheKey)
 	if cachedToken != "" {
@@ -310,6 +312,7 @@ func (p *AntigravityProvider) GetToken() (string, error) {
 		if err := p.saveCredentialsToDatabase(ctx); err != nil {
 			logger.LogError(ctx, fmt.Sprintf("Failed to save refreshed credentials to database: %s", err.Error()))
 		}
+		cacheKey = p.getTokenCacheKey()
 	}
 
 	duration := 30 * time.Minute
@@ -325,6 +328,19 @@ func (p *AntigravityProvider) GetToken() (string, error) {
 	cache.SetCache(cacheKey, p.Credentials.AccessToken, duration)
 
 	return p.Credentials.AccessToken, nil
+}
+
+func (p *AntigravityProvider) getTokenCacheKey() string {
+	seed := ""
+	if p.Credentials != nil {
+		seed = p.Credentials.RefreshToken
+		if seed == "" {
+			seed = p.Credentials.AccessToken
+		}
+	}
+
+	sum := sha256.Sum256([]byte(seed))
+	return fmt.Sprintf("%s:%s:%s", TokenCacheKey, p.ProjectID, hex.EncodeToString(sum[:8]))
 }
 
 func (p *AntigravityProvider) saveCredentialsToDatabase(ctx context.Context) error {

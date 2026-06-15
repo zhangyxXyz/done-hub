@@ -2,6 +2,7 @@ package claudecode
 
 import (
 	"context"
+	"crypto/sha256"
 	"done-hub/common/cache"
 	"done-hub/common/logger"
 	"done-hub/common/requester"
@@ -9,6 +10,7 @@ import (
 	"done-hub/providers/base"
 	"done-hub/providers/claude"
 	"done-hub/types"
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -201,7 +203,7 @@ func (p *ClaudeCodeProvider) GetToken() (string, error) {
 		return p.Credentials.AccessToken, nil
 	}
 
-	cacheKey := fmt.Sprintf("%s:%d", TokenCacheKey, p.Channel.Id)
+	cacheKey := p.getTokenCacheKey()
 	cachedToken, _ := cache.GetCache[string](cacheKey)
 	if cachedToken != "" {
 		return cachedToken, nil
@@ -223,6 +225,7 @@ func (p *ClaudeCodeProvider) GetToken() (string, error) {
 		if err := p.saveCredentialsToDatabase(ctx); err != nil {
 			logger.LogError(ctx, fmt.Sprintf("Failed to save refreshed credentials to database: %s", err.Error()))
 		}
+		cacheKey = p.getTokenCacheKey()
 	}
 
 	cacheDuration := 55 * time.Minute
@@ -236,6 +239,24 @@ func (p *ClaudeCodeProvider) GetToken() (string, error) {
 	cache.SetCache(cacheKey, p.Credentials.AccessToken, cacheDuration)
 
 	return p.Credentials.AccessToken, nil
+}
+
+func (p *ClaudeCodeProvider) getTokenCacheKey() string {
+	channelID := 0
+	if p.Channel != nil {
+		channelID = p.Channel.Id
+	}
+
+	seed := ""
+	if p.Credentials != nil {
+		seed = p.Credentials.RefreshToken
+		if seed == "" {
+			seed = p.Credentials.AccessToken
+		}
+	}
+
+	sum := sha256.Sum256([]byte(seed))
+	return fmt.Sprintf("%s:%d:%s", TokenCacheKey, channelID, hex.EncodeToString(sum[:8]))
 }
 
 func (p *ClaudeCodeProvider) saveCredentialsToDatabase(ctx context.Context) error {
