@@ -95,6 +95,7 @@ func (c *OAuth2Credentials) Refresh(ctx context.Context, proxyURL string, maxRet
 
 		req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 		req.Header.Set("User-Agent", TokenUserAgent)
+		req.Header.Set("anthropic-beta", TokenBetaHeader)
 		req.Header.Set("Accept", "application/json, text/plain, */*")
 
 		resp, err := client.Do(req)

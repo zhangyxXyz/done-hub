@@ -27,6 +27,7 @@ const (
 	TokenEndpoint   = "https://console.anthropic.com/v1/oauth/token"
 	DefaultScope    = "org:create_api_key user:profile user:inference"
 	TokenUserAgent  = "anthropic"
+	TokenBetaHeader = "oauth-2025-04-20"
 )
 
 type ClaudeCodeProviderFactory struct{}

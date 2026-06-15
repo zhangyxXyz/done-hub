@@ -386,7 +386,7 @@ func exchangeClaudeCodeForToken(code, codeVerifier, state, proxyURL string) (*cl
 
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("User-Agent", claudecode.TokenUserAgent)
-	req.Header.Set("anthropic-beta", "oauth-2025-04-20")
+	req.Header.Set("anthropic-beta", claudecode.TokenBetaHeader)
 	req.Header.Set("Accept", "application/json, text/plain, */*")
 	req.Header.Set("Accept-Language", "en-US,en;q=0.9")
 	req.Header.Set("Referer", "https://claude.ai/")
