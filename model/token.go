@@ -67,14 +67,23 @@ func (token *Token) AfterCreate(tx *gorm.DB) (err error) {
 }
 
 type TokenSetting struct {
-	Heartbeat  HeartbeatSetting `json:"heartbeat,omitempty"`
-	Limits     LimitsConfig     `json:"limits,omitempty"`
-	BillingTag *string          `json:"billing_tag,omitempty"` // 费用标签，用于按分组统计费用，仅可信内部员工和管理员可见
+	Heartbeat  HeartbeatSetting  `json:"heartbeat,omitempty"`
+	Limits     LimitsConfig      `json:"limits,omitempty"`
+	UsageAlert UsageAlertSetting `json:"usage_alert,omitempty"`
+	BillingTag *string           `json:"billing_tag,omitempty"` // 费用标签，用于按分组统计费用，仅可信内部员工和管理员可见
 }
 
 type HeartbeatSetting struct {
 	Enabled        bool `json:"enabled"`
 	TimeoutSeconds int  `json:"timeout_seconds"`
+}
+
+type UsageAlertSetting struct {
+	Enabled         bool `json:"enabled"`
+	WindowSeconds   int  `json:"window_seconds"`
+	ThresholdQuota  int  `json:"threshold_quota"`
+	CooldownSeconds int  `json:"cooldown_seconds"`
+	AutoDisable     bool `json:"auto_disable"`
 }
 
 type LimitsConfig struct {
@@ -209,7 +218,6 @@ func GetTokenModel(key string) (token *Token, err error) {
 
 	switch len(key) {
 	case 48:
-		validUser = true
 		if config.RedisEnabled {
 			exists, _ := redis.RedisSIsMember(OldUserTokensCacheKey, key)
 			if !exists {
@@ -218,12 +226,12 @@ func GetTokenModel(key string) (token *Token, err error) {
 		}
 	case 59:
 		tokenId, userId, err = common.ValidateToken(key)
-		if err != nil || userId == 0 || tokenId == 0 {
-			return nil, ErrTokenInvalid
+		if err == nil && userId != 0 && tokenId != 0 {
+			if userEnabled, err := CacheIsUserEnabled(userId); err != nil || !userEnabled {
+				return nil, ErrTokenInvalid
+			}
 		}
-		if userEnabled, err := CacheIsUserEnabled(userId); err != nil || !userEnabled {
-			return nil, ErrTokenInvalid
-		}
+		validUser = true
 	default:
 		return nil, ErrTokenInvalid
 	}
@@ -334,6 +342,25 @@ func (token *Token) Update() error {
 	// 防止Redis缓存不生效，直接删除
 	if err == nil && config.RedisEnabled {
 		redis.RedisDel(fmt.Sprintf(UserTokensKey, token.Key))
+	}
+
+	return err
+}
+
+func (token *Token) RefreshKey() error {
+	oldKey := token.Key
+	tokenKey, err := common.GenerateRandomToken()
+	if err != nil {
+		return err
+	}
+
+	err = DB.Model(token).Select("key").Update("key", tokenKey).Error
+	if err == nil {
+		token.Key = tokenKey
+	}
+	if err == nil && config.RedisEnabled {
+		redis.RedisDel(fmt.Sprintf(UserTokensKey, oldKey))
+		redis.RedisDel(fmt.Sprintf(UserTokensKey, tokenKey))
 	}
 
 	return err

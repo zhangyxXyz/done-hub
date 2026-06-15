@@ -70,9 +70,15 @@ const ProfileDrawer = ({ open, onClose }) => {
         sx: {
           width: { xs: '85%', sm: 350 },
           maxWidth: '350px',
-          backgroundColor: theme.palette.background.paper,
-          boxShadow: theme.shadows[8],
-          borderRadius: '0px 0px 0px 0px'
+          background:
+            theme.palette.mode === 'dark'
+              ? 'var(--aihub-panel-strong)'
+              : 'linear-gradient(145deg, rgba(236, 247, 255, 0.86), rgba(209, 233, 248, 0.72), rgba(202, 236, 231, 0.68))',
+          borderLeft: '1px solid var(--aihub-border)',
+          boxShadow: 'var(--aihub-shadow)',
+          borderRadius: '0px 0px 0px 0px',
+          backdropFilter: 'blur(22px) saturate(135%)',
+          backgroundClip: 'padding-box'
         }
       }}
       ModalProps={{
@@ -254,7 +260,18 @@ const ProfileDrawer = ({ open, onClose }) => {
         </Box>
 
         {/* 退出按钮 - 固定在底部 */}
-        <Box sx={{ mt: 'auto', p: 2, position: 'sticky', bottom: 0, bgcolor: theme.palette.background.paper }}>
+        <Box
+          sx={{
+            mt: 'auto',
+            p: 2,
+            position: 'sticky',
+            bottom: 0,
+            background:
+              theme.palette.mode === 'dark'
+                ? 'var(--aihub-panel-strong)'
+                : 'linear-gradient(90deg, rgba(231, 243, 255, 0.88), rgba(204, 232, 244, 0.76))'
+          }}
+        >
           <Button
             fullWidth
             variant="contained"

@@ -22,6 +22,7 @@ import {
   FormHelperText,
   Select,
   MenuItem,
+  InputAdornment,
   Typography,
   Grid,
   TextField,
@@ -36,7 +37,7 @@ import RatioBadge from 'ui-component/RatioBadge';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import { copy, showSuccess, showError, useIsReliable } from 'utils/common';
+import { copy, renderQuota, showSuccess, showError, useIsReliable } from 'utils/common';
 import { API } from 'utils/api';
 import UnknownType from 'assets/images/icons/unknown_type.svg';
 import QuotaInput from 'ui-component/QuotaInput';
@@ -63,6 +64,20 @@ const validationSchema = Yup.object().shape({
         enabled: Yup.boolean(),
         whitelist: Yup.array().of(Yup.string())
       })
+    }),
+    usage_alert: Yup.object().shape({
+      enabled: Yup.boolean(),
+      window_seconds: Yup.number().when('enabled', {
+        is: true,
+        then: () => Yup.number().min(60, '统计窗口不能小于60秒').required('统计窗口不能为空'),
+        otherwise: () => Yup.number()
+      }),
+      threshold_quota: Yup.number().when('enabled', {
+        is: true,
+        then: () => Yup.number().min(1, '提醒阈值必须大于0').required('提醒阈值不能为空'),
+        otherwise: () => Yup.number()
+      }),
+      cooldown_seconds: Yup.number().min(0, '冷却时间不能小于0')
     })
   })
 });
@@ -89,9 +104,18 @@ const originInputs = {
         enabled: false,
         whitelist: []
       }
+    },
+    usage_alert: {
+      enabled: false,
+      window_seconds: 3600,
+      threshold_quota: 0,
+      cooldown_seconds: 3600,
+      auto_disable: false
     }
   }
 };
+
+const renderQuotaWithPrompt = (quota) => renderQuota(parseInt(quota) || 0, 2);
 
 const EditModal = ({ open, tokenId, onCancel, onOk, userGroupOptions, adminMode = false }) => {
   const { t } = useTranslation();
@@ -206,6 +230,11 @@ const EditModal = ({ open, tokenId, onCancel, onOk, userGroupOptions, adminMode 
     setSubmitting(true);
     values.remain_quota = parseInt(values.remain_quota);
     values.setting.heartbeat.timeout_seconds = parseInt(values.setting.heartbeat.timeout_seconds);
+    if (values.setting?.usage_alert) {
+      values.setting.usage_alert.window_seconds = parseInt(values.setting.usage_alert.window_seconds) || 0;
+      values.setting.usage_alert.threshold_quota = parseInt(values.setting.usage_alert.threshold_quota) || 0;
+      values.setting.usage_alert.cooldown_seconds = parseInt(values.setting.usage_alert.cooldown_seconds) || 0;
+    }
 
     // 过滤掉空的 IP 行
     if (values.setting?.limits?.limits_ip_setting?.whitelist) {
@@ -281,7 +310,9 @@ const EditModal = ({ open, tokenId, onCancel, onOk, userGroupOptions, adminMode 
         }
         tokenData.is_edit = true;
         if (!tokenData.setting) tokenData.setting = originInputs.setting;
+        if (!tokenData.setting.heartbeat) tokenData.setting.heartbeat = originInputs.setting.heartbeat;
         if (!tokenData.setting.limits) tokenData.setting.limits = originInputs.setting.limits;
+        if (!tokenData.setting.usage_alert) tokenData.setting.usage_alert = originInputs.setting.usage_alert;
         if (!tokenData.setting.limits.limit_model_setting)
           tokenData.setting.limits.limit_model_setting = originInputs.setting.limits.limit_model_setting;
         if (!tokenData.setting.limits.limits_ip_setting) tokenData.setting.limits.limits_ip_setting = originInputs.setting.limits.limits_ip_setting;
@@ -413,6 +444,128 @@ const EditModal = ({ open, tokenId, onCancel, onOk, userGroupOptions, adminMode 
                     </FormHelperText>
                   )}
                 </FormControl>
+              <Divider sx={{ margin: '16px 0px' }} />
+              <Typography variant="h4">{t('token_index.usageAlert')}</Typography>
+              <Typography variant="caption">{t('token_index.usageAlertInfo')}</Typography>
+
+              <FormControl fullWidth>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={values?.setting?.usage_alert?.enabled === true}
+                      onClick={() => {
+                        const newEnabledState = !values.setting?.usage_alert?.enabled;
+                        setFieldValue('setting.usage_alert.enabled', newEnabledState);
+                        if (newEnabledState) {
+                          if (!values.setting?.usage_alert?.window_seconds) {
+                            setFieldValue('setting.usage_alert.window_seconds', 3600);
+                          }
+                          if (!values.setting?.usage_alert?.cooldown_seconds) {
+                            setFieldValue('setting.usage_alert.cooldown_seconds', 3600);
+                          }
+                        }
+                      }}
+                    />
+                  }
+                  label={t('token_index.usageAlertSwitch')}
+                />
+              </FormControl>
+
+              {values?.setting?.usage_alert?.enabled && (
+                <Grid container spacing={2} mt={1}>
+                  <Grid item xs={12} md={4}>
+                    <FormControl
+                      fullWidth
+                      error={Boolean(touched.setting?.usage_alert?.window_seconds && errors.setting?.usage_alert?.window_seconds)}
+                    >
+                      <InputLabel>{t('token_index.usageAlertWindow')}</InputLabel>
+                      <Select
+                        label={t('token_index.usageAlertWindow')}
+                        value={values?.setting?.usage_alert?.window_seconds || 3600}
+                        onChange={(e) => {
+                          const seconds = parseInt(e.target.value);
+                          setFieldValue('setting.usage_alert.window_seconds', seconds);
+                          if (!values.setting?.usage_alert?.cooldown_seconds) {
+                            setFieldValue('setting.usage_alert.cooldown_seconds', seconds);
+                          }
+                        }}
+                        variant={'outlined'}
+                      >
+                        <MenuItem value={300}>5 {t('token_index.minutes')}</MenuItem>
+                        <MenuItem value={900}>15 {t('token_index.minutes')}</MenuItem>
+                        <MenuItem value={3600}>1 {t('token_index.hours')}</MenuItem>
+                        <MenuItem value={21600}>6 {t('token_index.hours')}</MenuItem>
+                        <MenuItem value={86400}>24 {t('token_index.hours')}</MenuItem>
+                      </Select>
+                      {touched.setting?.usage_alert?.window_seconds && errors.setting?.usage_alert?.window_seconds && (
+                        <FormHelperText error>{errors.setting?.usage_alert?.window_seconds}</FormHelperText>
+                      )}
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12} md={4}>
+                    <FormControl
+                      fullWidth
+                      error={Boolean(touched.setting?.usage_alert?.threshold_quota && errors.setting?.usage_alert?.threshold_quota)}
+                    >
+                      <InputLabel>{t('token_index.usageAlertThreshold')}</InputLabel>
+                      <OutlinedInput
+                        label={t('token_index.usageAlertThreshold')}
+                        type="number"
+                        value={values?.setting?.usage_alert?.threshold_quota}
+                        onChange={(e) => {
+                          setFieldValue('setting.usage_alert.threshold_quota', e.target.value);
+                        }}
+                      />
+                      {touched.setting?.usage_alert?.threshold_quota && errors.setting?.usage_alert?.threshold_quota ? (
+                        <FormHelperText error>{errors.setting?.usage_alert?.threshold_quota}</FormHelperText>
+                      ) : (
+                        <FormHelperText>
+                          {t('token_index.usageAlertThresholdHelper')} {renderQuotaWithPrompt(values?.setting?.usage_alert?.threshold_quota || 0)}
+                        </FormHelperText>
+                      )}
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12} md={4}>
+                    <FormControl
+                      fullWidth
+                      error={Boolean(touched.setting?.usage_alert?.cooldown_seconds && errors.setting?.usage_alert?.cooldown_seconds)}
+                    >
+                      <InputLabel>{t('token_index.usageAlertCooldown')}</InputLabel>
+                      <OutlinedInput
+                        label={t('token_index.usageAlertCooldown')}
+                        type="number"
+                        value={values?.setting?.usage_alert?.cooldown_seconds}
+                        endAdornment={<InputAdornment position="end">{t('token_index.seconds')}</InputAdornment>}
+                        onChange={(e) => {
+                          setFieldValue('setting.usage_alert.cooldown_seconds', e.target.value);
+                        }}
+                      />
+                      {touched.setting?.usage_alert?.cooldown_seconds && errors.setting?.usage_alert?.cooldown_seconds ? (
+                        <FormHelperText error>{errors.setting?.usage_alert?.cooldown_seconds}</FormHelperText>
+                      ) : (
+                        <FormHelperText>{t('token_index.usageAlertCooldownHelper')}</FormHelperText>
+                      )}
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <FormControl fullWidth>
+                      <FormControlLabel
+                        control={
+                          <Switch
+                            checked={values?.setting?.usage_alert?.auto_disable === true}
+                            onClick={() => {
+                              setFieldValue('setting.usage_alert.auto_disable', !values.setting?.usage_alert?.auto_disable);
+                            }}
+                          />
+                        }
+                        label={t('token_index.usageAlertAutoDisable')}
+                      />
+                      <FormHelperText>{t('token_index.usageAlertAutoDisableHelper')}</FormHelperText>
+                    </FormControl>
+                  </Grid>
+                </Grid>
+              )}
+
                 <FormControlLabel
                   control={
                     <Switch

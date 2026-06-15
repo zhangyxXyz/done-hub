@@ -2,13 +2,13 @@ import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
-import { Box, Button, IconButton, Stack, TableCell, TableRow, Tooltip } from '@mui/material'
+import { Box, Button, IconButton, MenuItem, Popover, Stack, TableCell, TableRow, Tooltip } from '@mui/material'
 
 import RatioBadge from 'ui-component/RatioBadge'
 
 import TableSwitch from 'ui-component/Switch'
 import ConfirmDialog from 'ui-component/confirm-dialog'
-import { copy, renderQuota, timestamp2string } from 'utils/common'
+import { copy, getAvailableModelNames, getChatLinks, renderQuota, replaceChatPlaceholders, timestamp2string } from 'utils/common'
 import Label from 'ui-component/Label'
 
 import { Icon } from '@iconify/react'
@@ -39,14 +39,20 @@ function maskTokenKey(fullKey) {
 export default function TokensTableRow({ item, manageToken, handleOpenModal, setModalTokenId, userGroup, userIsReliable, isAdminSearch }) {
   const { t } = useTranslation()
   const [openDelete, setOpenDelete] = useState(false)
+  const [openRefreshKey, setOpenRefreshKey] = useState(false)
   const [deleting, setDeleting] = useState(false)
+  const [refreshingKey, setRefreshingKey] = useState(false)
   const [statusSwitch, setStatusSwitch] = useState(item.status)
   const [keyVisible, setKeyVisible] = useState(false)
+  const [modelNames, setModelNames] = useState([])
+  const [menuAnchor, setMenuAnchor] = useState(null)
+  const [menuItems, setMenuItems] = useState([])
 
-  // 非 admin 搜索时，列表里所有 token 都属于当前登录用户，「跟随用户」的实际倍率 = 用户当前分组的倍率
   const user = useSelector((state) => state.account.user)
+  const siteInfo = useSelector((state) => state.siteInfo)
   const followingRatio = !isAdminSearch && user?.group ? userGroup?.[user.group]?.ratio : undefined
   const fullKey = `sk-${item.key}`
+  const chatLinks = getChatLinks()
 
   const renderGroupCell = (symbol, fallback, fallbackRatio) => {
     let label
@@ -73,12 +79,31 @@ export default function TokensTableRow({ item, manageToken, handleOpenModal, set
     )
   }
 
+  const handleOpenChatMenu = (event) => {
+    setMenuItems(chatItems)
+    setMenuAnchor(event.currentTarget)
+  }
+
+  const handleCloseMenu = () => {
+    setMenuAnchor(null)
+  }
+
   const handleDeleteOpen = () => {
+    handleCloseMenu()
     setOpenDelete(true)
   }
 
   const handleDeleteClose = () => {
     setOpenDelete(false)
+  }
+
+  const handleRefreshKeyOpen = () => {
+    handleCloseMenu()
+    setOpenRefreshKey(true)
+  }
+
+  const handleRefreshKeyClose = () => {
+    setOpenRefreshKey(false)
   }
 
   const handleStatus = async() => {
@@ -100,6 +125,43 @@ export default function TokensTableRow({ item, manageToken, handleOpenModal, set
       setOpenDelete(false)
     }
   }
+
+  const handleRefreshKey = async() => {
+    if (refreshingKey) return
+
+    setRefreshingKey(true)
+    try {
+      await manageToken(item.id, 'refresh_key', '')
+    } finally {
+      setRefreshingKey(false)
+      setOpenRefreshKey(false)
+    }
+  }
+
+  const loadModelNames = async() => {
+    if (modelNames.length > 0) return modelNames
+
+    const names = await getAvailableModelNames()
+    setModelNames(names)
+    return names
+  }
+
+  const handleChatLink = async(option, type) => {
+    const models = await loadModelNames()
+    const server = encodeURIComponent(siteInfo?.server_address || window.location.host)
+    const text = replaceChatPlaceholders(option.url, fullKey, server, encodeURIComponent(models.join(',')))
+    if (type === 'link') {
+      window.open(text)
+    } else {
+      copy(text, t('common.link'))
+    }
+    handleCloseMenu()
+  }
+
+  const chatItems = chatLinks.map((option) => ({
+    text: option.name,
+    onClick: () => handleChatLink(option, 'link')
+  }))
 
   useEffect(() => {
     setStatusSwitch(item.status)
@@ -139,14 +201,17 @@ export default function TokensTableRow({ item, manageToken, handleOpenModal, set
               </IconButton>
             </Tooltip>
             <Tooltip title={t('token_index.copy')} placement="top" arrow>
-              <IconButton
-                size="small"
-                sx={{ p: 0.25, color: 'primary.main' }}
-                onClick={() => copy(fullKey, t('token_index.token'))}
-              >
+              <IconButton size="small" sx={{ p: 0.25, color: 'primary.main' }} onClick={() => copy(fullKey, t('token_index.token'))}>
                 <Icon icon="solar:copy-bold-duotone" width={16}/>
               </IconButton>
             </Tooltip>
+            {!isAdminSearch && chatLinks.length > 0 && (
+              <Tooltip title={t('token_index.chat')} placement="top" arrow>
+                <IconButton size="small" sx={{ p: 0.25 }} onClick={handleOpenChatMenu}>
+                  <Icon icon="solar:chat-round-dots-bold-duotone" width={16}/>
+                </IconButton>
+              </Tooltip>
+            )}
           </Stack>
         </TableCell>
         <TableCell>
@@ -166,17 +231,11 @@ export default function TokensTableRow({ item, manageToken, handleOpenModal, set
         )}
 
         <TableCell>
-          <Tooltip
-            title={(() => {
-              return statusInfo(t, statusSwitch)
-            })()}
-            placement="top"
-          >
+          <Tooltip title={statusInfo(t, statusSwitch)} placement="top">
             <TableSwitch
               id={`switch-${item.id}`}
               checked={statusSwitch === 1}
               onChange={handleStatus}
-              // disabled={statusSwitch !== 1 && statusSwitch !== 2}
             />
           </Tooltip>
         </TableCell>
@@ -215,9 +274,7 @@ export default function TokensTableRow({ item, manageToken, handleOpenModal, set
           </TableCell>
         )}
 
-        <TableCell
-          sx={stickyCellSx}
-        >
+        <TableCell sx={stickyCellSx}>
           <Stack direction="row" justifyContent="center" alignItems="center" spacing={0.5}>
             <Tooltip title={t('common.edit')} placement="top" arrow>
               <IconButton
@@ -230,18 +287,35 @@ export default function TokensTableRow({ item, manageToken, handleOpenModal, set
                 <Icon icon="solar:pen-bold-duotone" width={20}/>
               </IconButton>
             </Tooltip>
+            <Tooltip title={t('token_index.refreshKey')} placement="top" arrow>
+              <IconButton size="small" onClick={handleRefreshKeyOpen}>
+                <Icon icon="solar:key-minimalistic-square-2-bold-duotone" width={20}/>
+              </IconButton>
+            </Tooltip>
             <Tooltip title={t('common.delete')} placement="top" arrow>
-              <IconButton
-                size="small"
-                sx={{ color: 'error.main' }}
-                onClick={handleDeleteOpen}
-              >
+              <IconButton size="small" sx={{ color: 'error.main' }} onClick={handleDeleteOpen}>
                 <Icon icon="solar:trash-bin-trash-bold-duotone" width={20}/>
               </IconButton>
             </Tooltip>
           </Stack>
         </TableCell>
       </TableRow>
+
+      <Popover
+        open={!!menuAnchor}
+        anchorEl={menuAnchor}
+        onClose={handleCloseMenu}
+        anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+        PaperProps={{ sx: { minWidth: 140 } }}
+      >
+        {menuItems.map((menuItem, index) => (
+          <MenuItem key={index} onClick={menuItem.onClick} sx={{ color: menuItem.color }}>
+            {menuItem.icon && <Icon icon={menuItem.icon} style={{ marginRight: '16px' }}/>}
+            {menuItem.text}
+          </MenuItem>
+        ))}
+      </Popover>
 
       <ConfirmDialog
         open={openDelete}
@@ -256,6 +330,23 @@ export default function TokensTableRow({ item, manageToken, handleOpenModal, set
             disabled={deleting}
           >
             {deleting ? '删除中...' : t('token_index.delete')}
+          </Button>
+        }
+      />
+
+      <ConfirmDialog
+        open={openRefreshKey}
+        onClose={handleRefreshKeyClose}
+        title={t('token_index.refreshKey')}
+        content={t('token_index.refreshKeyConfirm', { title: item.name })}
+        action={
+          <Button
+            variant="contained"
+            color="warning"
+            onClick={handleRefreshKey}
+            disabled={refreshingKey}
+          >
+            {refreshingKey ? t('token_index.refreshingKey') : t('token_index.refreshKey')}
           </Button>
         }
       />

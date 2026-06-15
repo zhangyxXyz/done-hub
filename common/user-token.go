@@ -3,6 +3,7 @@ package common
 import (
 	"bytes"
 	"crypto/hmac"
+	cryptoRand "crypto/rand"
 	"crypto/sha256"
 	"encoding/base64"
 	"errors"
@@ -13,6 +14,8 @@ import (
 	"github.com/spf13/viper"
 	"github.com/sqids/sqids-go"
 )
+
+const tokenPayloadChars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 var (
 	hashidsMinLength = 15
@@ -51,12 +54,7 @@ func InitUserToken() error {
 	return err
 }
 
-func GenerateToken(tokenID, userID int) (string, error) {
-	payload, err := hashids.Encode([]uint64{uint64(tokenID), uint64(userID)})
-	if err != nil {
-		return "", err
-	}
-
+func signTokenPayload(payload string) string {
 	h := hmacPool.Get().(hash.Hash)
 	defer func() {
 		h.Reset()
@@ -64,9 +62,34 @@ func GenerateToken(tokenID, userID int) (string, error) {
 	}()
 
 	h.Write([]byte(payload))
-	signature := base64.RawURLEncoding.EncodeToString(h.Sum(nil))
+	return base64.RawURLEncoding.EncodeToString(h.Sum(nil))
+}
+
+func GenerateToken(tokenID, userID int) (string, error) {
+	payload, err := hashids.Encode([]uint64{uint64(tokenID), uint64(userID)})
+	if err != nil {
+		return "", err
+	}
+
+	signature := signTokenPayload(payload)
 
 	return payload + "_" + signature, nil
+}
+
+func GenerateRandomToken() (string, error) {
+	payload := make([]byte, hashidsMinLength)
+	randomBytes := make([]byte, hashidsMinLength)
+	if _, err := cryptoRand.Read(randomBytes); err != nil {
+		return "", err
+	}
+	for i, randomByte := range randomBytes {
+		payload[i] = tokenPayloadChars[int(randomByte)%len(tokenPayloadChars)]
+	}
+
+	payloadString := string(payload)
+	signature := signTokenPayload(payloadString)
+
+	return payloadString + "_" + signature, nil
 }
 
 func ValidateToken(token string) (tokenID, userID int, err error) {

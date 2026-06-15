@@ -232,6 +232,32 @@ func DeleteToken(c *gin.Context) {
 	})
 }
 
+func RefreshTokenKey(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("id"))
+	userId := c.GetInt("id")
+	if err != nil {
+		common.APIRespondWithError(c, http.StatusOK, err)
+		return
+	}
+
+	token, err := model.GetTokenByIds(id, userId)
+	if err != nil {
+		common.APIRespondWithError(c, http.StatusOK, err)
+		return
+	}
+
+	if err := token.RefreshKey(); err != nil {
+		common.APIRespondWithError(c, http.StatusOK, err)
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"success": true,
+		"message": "",
+		"data":    token,
+	})
+}
+
 func UpdateToken(c *gin.Context) {
 	userId := c.GetInt("id")
 	userRole := c.GetInt("role")
@@ -520,6 +546,20 @@ func validateTokenSetting(setting *model.TokenSetting) error {
 	if setting.Heartbeat.Enabled {
 		if setting.Heartbeat.TimeoutSeconds < 30 || setting.Heartbeat.TimeoutSeconds > 90 {
 			return errors.New("heartbeat timeout seconds must be between 30 and 90")
+		}
+	}
+	if setting.UsageAlert.Enabled {
+		if setting.UsageAlert.WindowSeconds < 60 {
+			return errors.New("usage alert window seconds must be at least 60")
+		}
+		if setting.UsageAlert.WindowSeconds > 30*24*3600 {
+			return errors.New("usage alert window seconds must be less than 30 days")
+		}
+		if setting.UsageAlert.ThresholdQuota <= 0 {
+			return errors.New("usage alert threshold quota must be greater than 0")
+		}
+		if setting.UsageAlert.CooldownSeconds < 0 {
+			return errors.New("usage alert cooldown seconds must be greater than or equal to 0")
 		}
 	}
 
