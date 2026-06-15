@@ -59,9 +59,24 @@ export default function ModelDetailModal({ open, onClose, model, provider, model
       maxWidth="md"
       fullWidth
       sx={{
+        '& .MuiBackdrop-root': {
+          backgroundColor:
+            theme.palette.mode === 'dark'
+              ? alpha('#020617', 0.62)
+              : alpha('#dbeafe', 0.34),
+          backdropFilter: 'blur(10px) saturate(125%)',
+          WebkitBackdropFilter: 'blur(10px) saturate(125%)'
+        },
         '& .MuiDialog-paper': {
           borderRadius: '16px',
-          backgroundColor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.95) : theme.palette.background.paper
+          background:
+            theme.palette.mode === 'dark'
+              ? `linear-gradient(135deg, ${alpha('#0b1628', 0.78)} 0%, ${alpha('#071424', 0.68)} 100%)`
+              : `linear-gradient(135deg, ${alpha('#ffffff', 0.62)} 0%, ${alpha('#eff8ff', 0.46)} 52%, ${alpha('#e9fbf6', 0.38)} 100%)`,
+          backdropFilter: 'blur(30px) saturate(170%)',
+          WebkitBackdropFilter: 'blur(30px) saturate(170%)',
+          border: `1px solid ${alpha(theme.palette.divider, theme.palette.mode === 'dark' ? 0.28 : 0.5)}`,
+          boxShadow: `0 28px 80px ${alpha(theme.palette.common.black, theme.palette.mode === 'dark' ? 0.45 : 0.18)}`
         }
       }}
     >
@@ -249,14 +264,78 @@ export default function ModelDetailModal({ open, onClose, model, provider, model
           {/* 价格表格 */}
           <TableContainer
             sx={{
-              border: `1px solid ${theme.palette.mode === 'dark' ? alpha('#fff', 0.08) : alpha('#000', 0.08)}`,
+              position: 'relative',
+              border: `1px solid ${alpha(theme.palette.primary.main, theme.palette.mode === 'dark' ? 0.2 : 0.18)}`,
               borderRadius: '8px',
-              overflow: 'hidden'
+              overflow: 'hidden',
+              background:
+                theme.palette.mode === 'dark'
+                  ? `linear-gradient(135deg, ${alpha('#10213a', 0.48)} 0%, ${alpha('#071424', 0.54)} 100%)`
+                  : `linear-gradient(135deg, ${alpha('#ffffff', 0.16)} 0%, ${alpha('#e0f2fe', 0.1)} 46%, ${alpha('#ccfbf1', 0.08)} 100%)`,
+              backdropFilter: 'blur(42px) saturate(210%)',
+              WebkitBackdropFilter: 'blur(42px) saturate(210%)',
+              boxShadow:
+                theme.palette.mode === 'dark'
+                  ? `inset 0 1px 0 ${alpha('#ffffff', 0.06)}`
+                  : `inset 0 1px 0 ${alpha('#ffffff', 0.92)}, inset 0 -1px 0 ${alpha(theme.palette.primary.main, 0.05)}, 0 14px 34px ${alpha('#0f172a', 0.035)}`,
+              '&:before': {
+                content: '""',
+                position: 'absolute',
+                inset: 0,
+                pointerEvents: 'none',
+                background:
+                  theme.palette.mode === 'dark'
+                    ? `linear-gradient(180deg, ${alpha('#ffffff', 0.04)}, transparent 55%)`
+                    : `linear-gradient(180deg, ${alpha('#ffffff', 0.34)}, ${alpha('#ffffff', 0.05)} 48%, transparent)`,
+                zIndex: 0
+              },
+              '&:after': {
+                content: '""',
+                position: 'absolute',
+                inset: 0,
+                pointerEvents: 'none',
+                background:
+                  theme.palette.mode === 'dark'
+                    ? 'transparent'
+                    : `radial-gradient(circle at 18% 0%, ${alpha(theme.palette.primary.light, 0.12)}, transparent 38%), radial-gradient(circle at 85% 100%, ${alpha(theme.palette.success.light, 0.1)}, transparent 34%)`,
+                zIndex: 0
+              },
+              '& .MuiTable-root': {
+                position: 'relative',
+                zIndex: 1,
+                backgroundColor: 'transparent'
+              },
+              '& .MuiTableCell-root': {
+                borderColor: alpha(theme.palette.divider, theme.palette.mode === 'dark' ? 0.2 : 0.34),
+                backgroundColor: 'transparent'
+              },
+              '& .MuiTableHead-root .MuiTableCell-root': {
+                backgroundColor:
+                  theme.palette.mode === 'dark'
+                    ? alpha(theme.palette.primary.main, 0.13)
+                    : alpha('#ffffff', 0.12),
+                color: 'text.primary',
+                backdropFilter: 'blur(28px) saturate(190%)',
+                WebkitBackdropFilter: 'blur(28px) saturate(190%)'
+              },
+              '& .MuiTableBody-root .MuiTableRow-root': {
+                backgroundColor:
+                  theme.palette.mode === 'dark'
+                    ? alpha(theme.palette.background.paper, 0.18)
+                    : alpha('#ffffff', 0.07),
+                transition: 'background-color .16s ease'
+              },
+              '& .MuiTableBody-root .MuiTableRow-root:hover': {
+                backgroundColor:
+                  theme.palette.mode === 'dark'
+                    ? alpha(theme.palette.primary.main, 0.12)
+                    : alpha(theme.palette.primary.main, 0.045)
+              }
             }}
           >
             <Table size="small">
               <TableHead>
-                <TableRow sx={{ backgroundColor: theme.palette.mode === 'dark' ? alpha('#fff', 0.05) : alpha('#000', 0.02) }}>
+                <TableRow>
                   <TableCell sx={{ fontWeight: 600 }}>{t('modelpricePage.group')}</TableCell>
                   <TableCell sx={{ fontWeight: 600 }}>{t('modelpricePage.input')}</TableCell>
                   <TableCell sx={{ fontWeight: 600 }}>{t('modelpricePage.output')}</TableCell>

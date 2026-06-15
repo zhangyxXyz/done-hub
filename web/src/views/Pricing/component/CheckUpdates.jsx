@@ -39,7 +39,7 @@ export const CheckUpdates = ({ open, onCancel, onOk, row }) => {
   // 从localStorage获取保存的URL
   useEffect(() => {
     const savedUrl = localStorage.getItem('oneapi_price_update_url');
-    if (savedUrl) {
+    if (savedUrl && savedUrl !== 'https://raw.githubusercontent.com/MartialBE/one-api/prices/prices.json') {
       setUrl(savedUrl);
     } else {
       fetchDefaultUrl();
@@ -56,7 +56,7 @@ export const CheckUpdates = ({ open, onCancel, onOk, row }) => {
       }
     } catch (err) {
       console.error(err);
-      const defaultUrl = 'https://raw.githubusercontent.com/MartialBE/one-api/prices/prices.json';
+      const defaultUrl = 'https://raw.githubusercontent.com/zhangyxXyz/done-hub/refs/heads/llm-model-info/prices/prices.json';
       setUrl(defaultUrl);
       localStorage.setItem('oneapi_price_update_url', defaultUrl);
     }
@@ -420,7 +420,7 @@ export const CheckUpdates = ({ open, onCancel, onOk, row }) => {
               variant="contained"
               size="small"
               color="primary"
-              onClick={() => syncPricing('overwrite')}
+              onClick={() => syncPricing('replace')}
               loading={updateLoading}
               sx={{ borderRadius: '18px' }}
             >

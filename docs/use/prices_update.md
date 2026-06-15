@@ -9,7 +9,7 @@ lastUpdated: true
 
 目前定价管理是通过管理员账户下的`运营 --> 模型价格 --> 更新价格`进行配置的。
 
-项目官方提供一张价格表：<https://raw.githubusercontent.com/MartialBE/one-api/prices/prices.json>
+项目官方提供一张价格表：<https://raw.githubusercontent.com/zhangyxXyz/done-hub/refs/heads/llm-model-info/prices/prices.json>
 
 另外社区维护的价格表项目如下：
 
@@ -37,6 +37,5 @@ lastUpdated: true
 ::: tip 说明
 可以使用环境变量`UPDATE_PRICE_SERVICE`设置默认价格更新服务器地址，详见[环境变量](../deployment/env)
 :::
-
 
 

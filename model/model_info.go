@@ -1,7 +1,18 @@
 package model
 
 import (
+	"done-hub/common/config"
+	"done-hub/common/logger"
 	"done-hub/common/utils"
+	"encoding/json"
+	"errors"
+	"fmt"
+	"io"
+	"net/http"
+	"strings"
+	"time"
+
+	"gorm.io/gorm"
 )
 
 type ModelInfo struct {
@@ -31,6 +42,24 @@ type ModelInfoResponse struct {
 	SupportUrl       []string `json:"support_url"`
 	CreatedAt        int64    `json:"created_at"`
 	UpdatedAt        int64    `json:"updated_at"`
+}
+
+type ModelInfoImportResult struct {
+	Created int `json:"created"`
+	Updated int `json:"updated"`
+	Skipped int `json:"skipped"`
+	Failed  int `json:"failed"`
+	Deleted int `json:"deleted"`
+	Total   int `json:"total"`
+}
+
+type remoteModelInfoItem struct {
+	Model     string         `json:"model"`
+	ModelInfo map[string]any `json:"model_info"`
+}
+
+type remoteModelInfoResponse struct {
+	Data []*remoteModelInfoItem `json:"data"`
 }
 
 func (m *ModelInfo) ToResponse() *ModelInfoResponse {
@@ -114,4 +143,211 @@ func DeleteModelInfo(id int) error {
 		return err
 	}
 	return nil
+}
+
+func ImportModelInfo(items []*ModelInfo, strategy string) (*ModelInfoImportResult, error) {
+	result := &ModelInfoImportResult{Total: len(items)}
+	if len(items) == 0 {
+		return result, nil
+	}
+
+	modelMap := make(map[string]*ModelInfo)
+	modelNames := make([]string, 0, len(items))
+	for _, item := range items {
+		if item == nil || item.Model == "" {
+			result.Failed++
+			continue
+		}
+		if _, ok := modelMap[item.Model]; !ok {
+			modelNames = append(modelNames, item.Model)
+		}
+		modelMap[item.Model] = item
+	}
+	if len(modelNames) == 0 {
+		return result, nil
+	}
+
+	var existingItems []*ModelInfo
+	if err := DB.Where("model IN ?", modelNames).Find(&existingItems).Error; err != nil {
+		return nil, err
+	}
+
+	existingMap := make(map[string]*ModelInfo)
+	for _, item := range existingItems {
+		existingMap[item.Model] = item
+	}
+
+	err := DB.Transaction(func(tx *gorm.DB) error {
+		toCreate := make([]*ModelInfo, 0)
+		for _, modelName := range modelNames {
+			item := modelMap[modelName]
+			existing := existingMap[modelName]
+			if existing == nil {
+				toCreate = append(toCreate, item)
+				result.Created++
+				continue
+			}
+
+			if strategy != "overwrite" && strategy != "replace" {
+				result.Skipped++
+				continue
+			}
+
+			if err := tx.Model(&ModelInfo{}).
+				Where("model = ?", modelName).
+				Select("*").
+				Omit("id", "created_at").
+				Updates(item).Error; err != nil {
+				return err
+			}
+			result.Updated++
+		}
+
+		if strategy == "replace" && len(modelNames) > 0 {
+			deleteResult := tx.Where("model NOT IN ?", modelNames).Delete(&ModelInfo{})
+			if deleteResult.Error != nil {
+				return deleteResult.Error
+			}
+			result.Deleted = int(deleteResult.RowsAffected)
+		}
+
+		if len(toCreate) > 0 {
+			if err := tx.CreateInBatches(toCreate, 100).Error; err != nil {
+				return err
+			}
+		}
+
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	return result, nil
+}
+
+func UpdateModelInfoByService() (*ModelInfoImportResult, error) {
+	mode := config.AutoModelInfoUpdatesMode
+	if mode != "add" && mode != "overwrite" && mode != "replace" {
+		return nil, errors.New("model info update mode must be add, overwrite, or replace")
+	}
+
+	items, err := GetModelInfoByService()
+	if err != nil {
+		return nil, err
+	}
+	return ImportModelInfo(items, mode)
+}
+
+func GetModelInfoByService() ([]*ModelInfo, error) {
+	api := config.UpdateModelInfoService
+	if api == "" {
+		return nil, errors.New("update_model_info_service is not configured")
+	}
+
+	logger.SysLog("Start Update Model Info, Service URL: " + api)
+	client := &http.Client{
+		Timeout: 30 * time.Second,
+	}
+	req, err := http.NewRequest("GET", api, nil)
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("User-Agent", "done-hub-model-info-sync/1.0")
+	req.Header.Set("Accept", "application/json")
+
+	resp, err := client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if resp.StatusCode < http.StatusOK || resp.StatusCode >= http.StatusBadRequest {
+		return nil, errors.New("bad response status code: " + resp.Status)
+	}
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	var wrapped remoteModelInfoResponse
+	if err := json.Unmarshal(body, &wrapped); err == nil && len(wrapped.Data) > 0 {
+		items := make([]*ModelInfo, 0, len(wrapped.Data))
+		for _, item := range wrapped.Data {
+			if item == nil || item.ModelInfo == nil {
+				continue
+			}
+			modelInfo := modelInfoFromRemote(item.ModelInfo)
+			if modelInfo.Model == "" {
+				modelInfo.Model = item.Model
+			}
+			items = append(items, modelInfo)
+		}
+		return items, nil
+	}
+
+	var direct []map[string]any
+	if err := json.Unmarshal(body, &direct); err != nil {
+		return nil, err
+	}
+	items := make([]*ModelInfo, 0, len(direct))
+	for _, item := range direct {
+		items = append(items, modelInfoFromRemote(item))
+	}
+	return items, nil
+}
+
+func modelInfoFromRemote(raw map[string]any) *ModelInfo {
+	return &ModelInfo{
+		Model:            remoteString(raw["model"]),
+		Name:             remoteString(raw["name"]),
+		Description:      remoteString(raw["description"]),
+		ContextLength:    remoteInt(raw["context_length"]),
+		MaxTokens:        remoteInt(raw["max_tokens"]),
+		InputModalities:  remoteJSONString(raw["input_modalities"]),
+		OutputModalities: remoteJSONString(raw["output_modalities"]),
+		Tags:             remoteJSONString(raw["tags"]),
+		SupportUrl:       remoteJSONString(raw["support_url"]),
+	}
+}
+
+func remoteString(value any) string {
+	if value == nil {
+		return ""
+	}
+	if text, ok := value.(string); ok {
+		return text
+	}
+	return fmt.Sprint(value)
+}
+
+func remoteInt(value any) int {
+	switch v := value.(type) {
+	case int:
+		return v
+	case float64:
+		return int(v)
+	case json.Number:
+		result, _ := v.Int64()
+		return int(result)
+	default:
+		return 0
+	}
+}
+
+func remoteJSONString(value any) string {
+	if value == nil {
+		return "[]"
+	}
+	if text, ok := value.(string); ok {
+		if strings.TrimSpace(text) == "" {
+			return "[]"
+		}
+		return text
+	}
+	bytes, err := json.Marshal(value)
+	if err != nil {
+		return "[]"
+	}
+	return string(bytes)
 }

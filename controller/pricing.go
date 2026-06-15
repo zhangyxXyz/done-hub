@@ -2,12 +2,14 @@ package controller
 
 import (
 	"done-hub/common"
+	"done-hub/common/config"
+	"done-hub/cron"
 	"done-hub/model"
 	"errors"
 	"net/http"
 	"net/url"
-
-	"github.com/spf13/viper"
+	"strconv"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 )
@@ -198,10 +200,100 @@ func SyncPricing(c *gin.Context) {
 }
 
 func GetUpdatePriceService(c *gin.Context) {
-	updatePriceService := viper.GetString("update_price_service")
 	c.JSON(http.StatusOK, gin.H{
 		"success": true,
-		"data":    updatePriceService,
+		"data":    config.UpdatePriceService,
 		"message": "",
 	})
+}
+
+type PriceScheduleRequest struct {
+	Enabled  bool   `json:"enabled"`
+	Mode     string `json:"mode"`
+	Interval int    `json:"interval"`
+	Cron     string `json:"cron"`
+	Service  string `json:"service"`
+}
+
+func GetPriceSchedule(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{
+		"success": true,
+		"message": "",
+		"data": PriceScheduleRequest{
+			Enabled:  config.AutoPriceUpdates,
+			Mode:     config.AutoPriceUpdatesMode,
+			Interval: config.AutoPriceUpdatesInterval,
+			Cron:     config.AutoPriceUpdatesCron,
+			Service:  config.UpdatePriceService,
+		},
+	})
+}
+
+func UpdatePriceSchedule(c *gin.Context) {
+	var req PriceScheduleRequest
+	if err := c.ShouldBindJSON(&req); err != nil {
+		common.APIRespondWithError(c, http.StatusOK, err)
+		return
+	}
+	req.Cron = strings.TrimSpace(req.Cron)
+	req.Service = strings.TrimSpace(req.Service)
+
+	switch req.Mode {
+	case string(model.PriceUpdateModeSystem), string(model.PriceUpdateModeAdd), string(model.PriceUpdateModeUpdate), string(model.PriceUpdateModeOverwrite), string(model.PriceUpdateModeReplace):
+	default:
+		common.APIRespondWithError(c, http.StatusOK, errors.New("update mode must be system, add, update, overwrite, or replace"))
+		return
+	}
+
+	if req.Enabled && req.Cron == "" && req.Interval <= 0 {
+		common.APIRespondWithError(c, http.StatusOK, errors.New("interval must be greater than 0 when cron is empty"))
+		return
+	}
+	if req.Service == "" {
+		common.APIRespondWithError(c, http.StatusOK, errors.New("price service URL is required"))
+		return
+	}
+
+	origin := PriceScheduleRequest{
+		Enabled:  config.AutoPriceUpdates,
+		Mode:     config.AutoPriceUpdatesMode,
+		Interval: config.AutoPriceUpdatesInterval,
+		Cron:     config.AutoPriceUpdatesCron,
+		Service:  config.UpdatePriceService,
+	}
+
+	updates := []model.Option{
+		{Key: "AutoPriceUpdates", Value: strconv.FormatBool(req.Enabled)},
+		{Key: "AutoPriceUpdatesMode", Value: req.Mode},
+		{Key: "AutoPriceUpdatesInterval", Value: strconv.Itoa(req.Interval)},
+		{Key: "AutoPriceUpdatesCron", Value: req.Cron},
+		{Key: "UpdatePriceService", Value: req.Service},
+	}
+	for _, option := range updates {
+		if err := model.UpdateOption(option.Key, option.Value); err != nil {
+			rollbackPriceSchedule(origin)
+			common.APIRespondWithError(c, http.StatusOK, err)
+			return
+		}
+	}
+
+	if err := cron.ConfigurePriceUpdateJob(); err != nil {
+		rollbackPriceSchedule(origin)
+		common.APIRespondWithError(c, http.StatusOK, err)
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"success": true,
+		"message": "",
+	})
+}
+
+func rollbackPriceSchedule(origin PriceScheduleRequest) {
+	_ = model.UpdateOption("AutoPriceUpdates", strconv.FormatBool(origin.Enabled))
+	_ = model.UpdateOption("AutoPriceUpdatesMode", origin.Mode)
+	_ = model.UpdateOption("AutoPriceUpdatesInterval", strconv.Itoa(origin.Interval))
+	_ = model.UpdateOption("AutoPriceUpdatesCron", origin.Cron)
+	_ = model.UpdateOption("UpdatePriceService", origin.Service)
+	_ = cron.ConfigurePriceUpdateJob()
 }

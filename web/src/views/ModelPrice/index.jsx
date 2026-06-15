@@ -6,7 +6,6 @@ import {
   Stack,
   Typography,
   Box,
-  InputBase,
   Paper,
   IconButton,
   Fade,
@@ -38,8 +37,39 @@ import ModelCard from './component/ModelCard';
 import ModelDetailModal from './component/ModelDetailModal';
 import { MODALITY_OPTIONS } from 'constants/Modality';
 import Label from 'ui-component/Label';
+import { getModelPriceAliases } from 'utils/modelPriceAliases';
 
 // ----------------------------------------------------------------------
+const normalizeModelInfoKey = (modelName) => String(modelName || '').trim().toLowerCase().replace(/^[+~]+/, '');
+
+const createModelInfoLookup = (modelInfoMap) => {
+  const lookup = {};
+  Object.values(modelInfoMap).forEach((info) => {
+    const normalized = normalizeModelInfoKey(info?.model);
+    if (!normalized) {
+      return;
+    }
+    lookup[normalized] = info;
+
+    const slashIndex = normalized.lastIndexOf('/');
+    if (slashIndex >= 0 && slashIndex < normalized.length - 1) {
+      lookup[normalized.slice(slashIndex + 1)] = info;
+    }
+  });
+  return lookup;
+};
+
+const findModelInfo = (lookup, modelName) => {
+  const aliases = getModelPriceAliases(modelName);
+  for (const alias of aliases) {
+    const modelInfo = lookup[normalizeModelInfoKey(alias)];
+    if (modelInfo) {
+      return modelInfo;
+    }
+  }
+  return null;
+};
+
 export default function ModelPrice() {
   const { t } = useTranslation();
   const theme = useTheme();
@@ -152,6 +182,7 @@ export default function ModelPrice() {
       })
     )
   ];
+  const modelInfoLookup = useMemo(() => createModelInfoLookup(modelInfoMap), [modelInfoMap]);
 
   // 格式化价格
   const formatPrice = (value, type) => {
@@ -182,7 +213,7 @@ export default function ModelPrice() {
         // 搜索
         if (searchQuery) {
           const query = searchQuery.toLowerCase();
-          const modelInfo = modelInfoMap[modelName];
+          const modelInfo = findModelInfo(modelInfoLookup, modelName);
           const matchModel = modelName.toLowerCase().includes(query);
           const matchDescription = modelInfo?.description?.toLowerCase().includes(query);
           if (!matchModel && !matchDescription) return false;
@@ -190,7 +221,7 @@ export default function ModelPrice() {
 
         // 模态筛选
         if (selectedModality !== 'all') {
-          const modelInfo = modelInfoMap[modelName];
+          const modelInfo = findModelInfo(modelInfoLookup, modelName);
           if (modelInfo) {
             try {
               const inputModalities = JSON.parse(modelInfo.input_modalities || '[]');
@@ -208,7 +239,7 @@ export default function ModelPrice() {
 
         // 标签筛选
         if (selectedTag !== 'all') {
-          const modelInfo = modelInfoMap[modelName];
+          const modelInfo = findModelInfo(modelInfoLookup, modelName);
           if (modelInfo) {
             try {
               const tags = JSON.parse(modelInfo.tags || '[]');
@@ -228,9 +259,9 @@ export default function ModelPrice() {
         const hasAccess = model.groups.includes(selectedGroup);
         const price = hasAccess
           ? {
-            input: group.ratio * model.price.input,
-            output: group.ratio * model.price.output
-          }
+              input: group.ratio * model.price.input,
+              output: group.ratio * model.price.output
+            }
           : { input: t('modelpricePage.noneGroup'), output: t('modelpricePage.noneGroup') };
 
         // 计算所有用户组的价格 - 只包含模型实际存在的分组
@@ -244,17 +275,16 @@ export default function ModelPrice() {
               output: grp.ratio * model.price.output,
               type: model.price.type,
               ratio: grp.ratio,
-              extraRatios:
-                model.price.extra_ratios
-                  ? Object.fromEntries(Object.entries(model.price.extra_ratios).map(([k, v]) => [k, (grp.ratio * v).toFixed(6)]))
-                  : null
+              extraRatios: model.price.extra_ratios
+                ? Object.fromEntries(Object.entries(model.price.extra_ratios).map(([k, v]) => [k, (grp.ratio * v).toFixed(6)]))
+                : null
             };
           });
 
         return {
           model: modelName,
           provider: model.owned_by,
-          modelInfo: modelInfoMap[modelName],
+          modelInfo: findModelInfo(modelInfoLookup, modelName),
           price,
           group: hasAccess ? group : null,
           type: model.price.type,
@@ -269,7 +299,7 @@ export default function ModelPrice() {
         const ownerB = ownedby?.find((item) => item.name === b.provider);
         return (ownerA?.id || 0) - (ownerB?.id || 0);
       });
-  }, [availableModels, selectedOwnedBy, onlyShowAvailable, selectedGroup, searchQuery, modelInfoMap, selectedModality, selectedTag, userGroupMap, sortedUserGroupEntries, ownedby, t, unit]);
+  }, [availableModels, selectedOwnedBy, onlyShowAvailable, selectedGroup, searchQuery, modelInfoLookup, selectedModality, selectedTag, userGroupMap, sortedUserGroupEntries, ownedby, t, unit]);
 
   // 分页处理
   const paginatedModels = useMemo(() => {
@@ -441,16 +471,41 @@ export default function ModelPrice() {
               alignItems: 'center',
               width: isMobile ? '100%' : 300,
               borderRadius: '8px',
-              border: 'none',
               boxShadow: theme.palette.mode === 'dark' ? '0 2px 8px rgba(0,0,0,0.2)' : '0 2px 8px rgba(0,0,0,0.05)',
-              backgroundColor:
-                theme.palette.mode === 'dark' ? alpha(theme.palette.background.default, 0.6) : theme.palette.background.default
+              background: 'var(--aihub-field)',
+              border: '1px solid var(--aihub-border)',
+              backdropFilter: 'blur(14px) saturate(130%)',
+              WebkitBackdropFilter: 'blur(14px) saturate(130%)',
+              '&:focus-within': {
+                background: 'var(--aihub-field-hover)',
+                borderColor: 'var(--aihub-link)'
+              }
             }}
           >
             <IconButton sx={{ p: '8px' }} aria-label="search">
               <Icon icon="eva:search-fill" width={18} height={18} />
             </IconButton>
-            <InputBase sx={{ ml: 1, flex: 1 }} placeholder={t('modelpricePage.search')} value={searchQuery} onChange={handleSearchChange} />
+            <Box
+              component="input"
+              sx={{
+                ml: 1,
+                flex: 1,
+                width: 0,
+                minWidth: 0,
+                border: 0,
+                outline: 0,
+                background: 'transparent',
+                color: 'text.primary',
+                font: 'inherit',
+                '&::placeholder': {
+                  color: 'text.secondary',
+                  opacity: 0.75
+                }
+              }}
+              placeholder={t('modelpricePage.search')}
+              value={searchQuery}
+              onChange={handleSearchChange}
+            />
             {searchQuery && (
               <IconButton sx={{ p: '8px' }} aria-label="clear" onClick={clearSearch}>
                 <Icon icon="eva:close-fill" width={16} height={16} />
@@ -469,13 +524,21 @@ export default function ModelPrice() {
               aria-label="unit toggle"
               size="small"
               sx={{
+                background: 'var(--aihub-field)',
+                borderColor: 'var(--aihub-border)',
                 '& .MuiToggleButtonGroup-grouped': {
-                  borderRadius: '6px !important',
+                  borderRadius: '6px',
                   mx: 0.5,
                   border: 0,
                   boxShadow: theme.palette.mode === 'dark' ? '0 1px 4px rgba(0,0,0,0.2)' : '0 1px 4px rgba(0,0,0,0.05)',
                   '&.Mui-selected': {
-                    boxShadow: `0 0 0 1px ${theme.palette.primary.main}`
+                    background: 'var(--aihub-selected)',
+                    color: 'var(--aihub-link)',
+                    boxShadow: '0 0 0 1px rgba(8, 119, 200, 0.72), 0 8px 18px rgba(8, 119, 200, 0.14)'
+                  },
+                  '&.Mui-selected:hover': {
+                    background: 'var(--aihub-selected-hover)',
+                    color: 'var(--aihub-link-hover)'
                   }
                 }
               }}
@@ -1172,11 +1235,7 @@ export default function ModelPrice() {
                                 <Typography variant="caption" color="text.secondary" sx={{ minWidth: 40 }}>
                                   {groupPrice.groupName}:
                                 </Typography>
-                                <Typography
-                                  variant="body2"
-                                  color='success.main'
-                                  fontWeight="bold"
-                                >
+                                <Typography variant="body2" color="success.main" fontWeight="bold">
                                   {groupPrice.input > 0
                                     ? formatPrice(groupPrice.input, model.type === 'tokens' ? 'tokens' : 'times')
                                     : t('modelpricePage.free')}
@@ -1197,11 +1256,7 @@ export default function ModelPrice() {
                                 <Typography variant="caption" color="text.secondary" sx={{ minWidth: 40 }}>
                                   {groupPrice.groupName}:
                                 </Typography>
-                                <Typography
-                                  variant="body2"
-                                  color= 'success.main'
-                                  fontWeight="bold"
-                                >
+                                <Typography variant="body2" color="success.main" fontWeight="bold">
                                   {groupPrice.output > 0
                                     ? formatPrice(groupPrice.output, model.type === 'tokens' ? 'tokens' : 'times')
                                     : t('modelpricePage.free')}

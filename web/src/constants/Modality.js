@@ -9,6 +9,11 @@ export const MODALITY_OPTIONS = {
     text: 'Image',
     color: 'info'
   },
+  file: {
+    value: 'file',
+    text: 'File',
+    color: 'primary'
+  },
   music: {
     value: 'music',
     text: 'Music',

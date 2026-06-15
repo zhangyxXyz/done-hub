@@ -108,11 +108,21 @@ const PriceCard = ({ price, onEdit, onDelete, ownedby, unit = 'K' }) => {
   return (
     <TableRow
       sx={{
-        borderBottom: `1px solid ${alpha(theme.palette.divider, 0.08)}`,
+        borderBottom: '1px solid var(--aihub-border)',
         position: 'relative',
-        bgcolor: hasHighlight ? alpha(theme.palette.primary.main, 0.03) : 'transparent',
+        background:
+          theme.palette.mode === 'dark'
+            ? hasHighlight
+              ? alpha(theme.palette.primary.main, 0.03)
+              : 'transparent'
+            : hasHighlight
+              ? 'linear-gradient(90deg, rgba(255, 255, 255, 0.24), rgba(214, 235, 255, 0.14), rgba(211, 242, 237, 0.12))'
+              : 'rgba(255, 255, 255, 0.18)',
         '&:hover': {
-          bgcolor: alpha(theme.palette.primary.main, 0.05)
+          background:
+            theme.palette.mode === 'dark'
+              ? alpha(theme.palette.primary.main, 0.05)
+              : 'linear-gradient(90deg, rgba(255, 255, 255, 0.32), rgba(208, 234, 255, 0.2), rgba(202, 240, 235, 0.18))'
         },
         '&:hover .action-buttons': {
           opacity: 1
@@ -280,7 +290,7 @@ const PriceCard = ({ price, onEdit, onDelete, ownedby, unit = 'K' }) => {
                   borderRadius: '2px',
                   transition: 'background-color 0.2s',
                   '&:hover': {
-                    bgcolor: alpha(theme.palette.background.default, 0.6)
+                    background: 'var(--aihub-soft)'
                   }
                 }}
               >

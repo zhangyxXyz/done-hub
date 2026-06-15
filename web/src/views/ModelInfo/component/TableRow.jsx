@@ -63,11 +63,14 @@ export default function ModelInfoTableRow({ item, manageModelInfo, handleOpenMod
           {(() => {
             try {
               const inputModalities = JSON.parse(item.input_modalities || '[]');
-              return inputModalities.map((modality, index) => (
-                <Label key={index} variant="soft" color={MODALITY_OPTIONS[modality]?.color || 'primary'} sx={{ mr: 0.5 }}>
-                  {MODALITY_OPTIONS[modality]?.text}
-                </Label>
-              ));
+              return inputModalities.map((modality, index) => {
+                const option = MODALITY_OPTIONS[modality];
+                return (
+                  <Label key={index} variant="soft" color={option?.color || 'default'} sx={{ mr: 0.5 }}>
+                    {option?.text || modality}
+                  </Label>
+                );
+              });
             } catch (e) {
               return '';
             }
@@ -77,11 +80,14 @@ export default function ModelInfoTableRow({ item, manageModelInfo, handleOpenMod
           {(() => {
             try {
               const outputModalities = JSON.parse(item.output_modalities || '[]');
-              return outputModalities.map((modality, index) => (
-                <Label key={index} variant="soft" color={MODALITY_OPTIONS[modality]?.color || 'secondary'} sx={{ mr: 0.5 }}>
-                  {MODALITY_OPTIONS[modality]?.text}
-                </Label>
-              ));
+              return outputModalities.map((modality, index) => {
+                const option = MODALITY_OPTIONS[modality];
+                return (
+                  <Label key={index} variant="soft" color={option?.color || 'default'} sx={{ mr: 0.5 }}>
+                    {option?.text || modality}
+                  </Label>
+                );
+              });
             } catch (e) {
               return '';
             }

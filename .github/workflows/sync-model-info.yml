@@ -1,0 +1,35 @@
+name: Sync model info and prices
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Beijing time 01:00 and 13:00.
+    - cron: "0 5,17 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          ref: llm-model-info
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Sync model info and prices
+        run: python scripts/sync_model_data.py
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: "chore: sync model info and prices"
+          branch: llm-model-info
+          file_pattern: prices/prices.json prices/metadata.json model_info/model_info.json model_info/metadata.json

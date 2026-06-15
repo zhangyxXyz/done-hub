@@ -31,7 +31,7 @@ import { Icon } from '@iconify/react';
 const ImportModal = ({ open, onCancel, onOk, existingModels = [] }) => {
   const [jsonUrl, setJsonUrl] = useState('');
   const [previewData, setPreviewData] = useState([]);
-  const [conflictStrategy, setConflictStrategy] = useState('skip'); // 'skip' or 'overwrite'
+  const [conflictStrategy, setConflictStrategy] = useState('skip'); // 'skip', 'overwrite', or 'replace'
   const [loading, setLoading] = useState(false);
   const [importing, setImporting] = useState(false);
   const [importProgress, setImportProgress] = useState({ current: 0, total: 0 });
@@ -73,6 +73,7 @@ const ImportModal = ({ open, onCancel, onOk, existingModels = [] }) => {
             input_modalities: JSON.stringify(modelInfo.input_modalities || []),
             output_modalities: JSON.stringify(modelInfo.output_modalities || []),
             tags: JSON.stringify(modelInfo.tags || []),
+            support_url: JSON.stringify(modelInfo.support_url || []),
             isConflict: existingModels.includes(modelInfo.model || item.model)
           };
         });
@@ -94,66 +95,46 @@ const ImportModal = ({ open, onCancel, onOk, existingModels = [] }) => {
 
   const handleImport = async () => {
     if (previewData.length === 0) {
-      showError('没有可导入的数据');
+      showError('No data to import');
       return;
     }
 
     setImporting(true);
-    setImportProgress({ current: 0, total: previewData.length });
+    setImportProgress({ current: previewData.length, total: previewData.length });
 
-    let successCount = 0;
-    let skipCount = 0;
-    let errorCount = 0;
-
-    for (let i = 0; i < previewData.length; i++) {
-      const item = previewData[i];
-      setImportProgress({ current: i + 1, total: previewData.length });
-
-      // 处理冲突
-      if (item.isConflict && conflictStrategy === 'skip') {
-        skipCount++;
-        continue;
-      }
-
-      try {
-        // 准备提交的数据（移除 isConflict 标记）
+    try {
+      const items = previewData.map((item) => {
         const submitData = { ...item };
         delete submitData.isConflict;
-
-        if (item.isConflict && conflictStrategy === 'overwrite') {
-          // 查找现有记录的 ID（需要从 existingModels 获取完整信息）
-          // 注意：这里需要传入完整的模型信息，而不仅仅是模型名称
-          // 暂时使用 POST 创建，如果需要更新，需要调整数据结构
-          await API.post('/api/model_info/', submitData);
-        } else {
-          await API.post('/api/model_info/', submitData);
-        }
-        successCount++;
-      } catch (error) {
-        console.error(`Failed to import model ${item.model}:`, error);
-        errorCount++;
+        return submitData;
+      });
+      const res = await API.post('/api/model_info/batch_import', {
+        strategy: conflictStrategy,
+        items
+      });
+      const { success, message, data } = res?.data || {};
+      if (!success) {
+        throw new Error(message || 'Import failed');
       }
+
+      const messages = [];
+      if (data?.created > 0) messages.push(`created ${data.created}`);
+      if (data?.updated > 0) messages.push(`updated ${data.updated}`);
+      if (data?.deleted > 0) messages.push(`deleted ${data.deleted}`);
+      if (data?.skipped > 0) messages.push(`skipped ${data.skipped}`);
+      if (data?.failed > 0) messages.push(`failed ${data.failed}`);
+      showSuccess(`Import complete: ${messages.join(', ') || 'no changes'}`);
+
+      setJsonUrl('');
+      setPreviewData([]);
+      setImportProgress({ current: 0, total: 0 });
+      onOk(true);
+    } catch (error) {
+      console.error('Failed to import model info:', error);
+      showError('Import failed: ' + (error?.response?.data?.message || error?.message || 'unknown error'));
+    } finally {
+      setImporting(false);
     }
-
-    setImporting(false);
-
-    // 显示导入结果
-    const messages = [];
-    if (successCount > 0) messages.push(`成功导入 ${successCount} 条`);
-    if (skipCount > 0) messages.push(`跳过 ${skipCount} 条`);
-    if (errorCount > 0) messages.push(`失败 ${errorCount} 条`);
-
-    if (errorCount > 0) {
-      showError(`导入完成：${messages.join('，')}`);
-    } else {
-      showSuccess(`导入完成：${messages.join('，')}`);
-    }
-
-    // 重置状态
-    setJsonUrl('');
-    setPreviewData([]);
-    setImportProgress({ current: 0, total: 0 });
-    onOk(true);
   };
 
   const handleClose = () => {
@@ -212,8 +193,8 @@ const ImportModal = ({ open, onCancel, onOk, existingModels = [] }) => {
           </Box>
         </Box>
 
-        {/* 冲突处理选项 */}
-        {previewData.length > 0 && conflictCount > 0 && (
+        {/* 导入处理选项 */}
+        {previewData.length > 0 && (
           <Box sx={{ mb: 3 }}>
             {/* 警告提示 */}
             <Alert
@@ -229,7 +210,13 @@ const ImportModal = ({ open, onCancel, onOk, existingModels = [] }) => {
                 }
               }}
             >
-              检测到 <strong>{conflictCount}</strong> 个模型标识冲突，请选择处理策略
+              {conflictCount > 0 ? (
+                <>
+                  检测到 <strong>{conflictCount}</strong> 个模型标识冲突，请选择处理策略
+                </>
+              ) : (
+                <>未检测到模型标识冲突，也可以选择全量替换以删除远端数据源中不存在的本地模型详情</>
+              )}
             </Alert>
 
             {/* 策略选择卡片 */}
@@ -248,12 +235,12 @@ const ImportModal = ({ open, onCancel, onOk, existingModels = [] }) => {
                 <Icon icon="solar:settings-minimalistic-bold-duotone" width={20} />
                 冲突处理策略
               </Typography>
-              <Box sx={{ display: 'flex', gap: 2 }}>
+              <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
                 {/* 跳过策略卡片 */}
                 <Box
                   onClick={() => setConflictStrategy('skip')}
                   sx={{
-                    flex: 1,
+                    flex: '1 1 240px',
                     p: 2.5,
                     borderRadius: 2,
                     cursor: 'pointer',
@@ -337,7 +324,7 @@ const ImportModal = ({ open, onCancel, onOk, existingModels = [] }) => {
                 <Box
                   onClick={() => setConflictStrategy('overwrite')}
                   sx={{
-                    flex: 1,
+                    flex: '1 1 240px',
                     p: 2.5,
                     borderRadius: 2,
                     cursor: 'pointer',
@@ -412,7 +399,91 @@ const ImportModal = ({ open, onCancel, onOk, existingModels = [] }) => {
                         </Typography>
                       </Box>
                       <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.875rem' }}>
-                        使用新数据替换现有模型
+                        使用新数据更新同名模型，不删除冗余数据
+                      </Typography>
+                    </Box>
+                  </Box>
+                </Box>
+
+                {/* 全量替换策略卡片 */}
+                <Box
+                  onClick={() => setConflictStrategy('replace')}
+                  sx={{
+                    flex: '1 1 240px',
+                    p: 2.5,
+                    borderRadius: 2,
+                    cursor: 'pointer',
+                    border: '2px solid',
+                    borderColor: conflictStrategy === 'replace' ? 'error.main' : 'divider',
+                    backgroundColor: conflictStrategy === 'replace' ? 'rgba(244, 67, 54, 0.08)' : 'background.paper',
+                    transition: 'all 0.2s ease-in-out',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    '&:hover': {
+                      borderColor: conflictStrategy === 'replace' ? 'error.main' : 'error.light',
+                      transform: 'translateY(-2px)',
+                      boxShadow: conflictStrategy === 'replace' ? 3 : 2
+                    },
+                    '&::before': {
+                      content: '""',
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      height: '4px',
+                      background: conflictStrategy === 'replace' ? 'linear-gradient(90deg, #F44336 0%, #D32F2F 100%)' : 'transparent',
+                      transition: 'all 0.2s'
+                    }
+                  }}
+                >
+                  <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1.5 }}>
+                    <Box
+                      sx={{
+                        mt: 0.5,
+                        width: 20,
+                        height: 20,
+                        borderRadius: '50%',
+                        border: '2px solid',
+                        borderColor: conflictStrategy === 'replace' ? 'error.main' : 'divider',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        backgroundColor: conflictStrategy === 'replace' ? 'error.main' : 'transparent',
+                        transition: 'all 0.2s'
+                      }}
+                    >
+                      {conflictStrategy === 'replace' && (
+                        <Box
+                          sx={{
+                            width: 8,
+                            height: 8,
+                            borderRadius: '50%',
+                            backgroundColor: 'white'
+                          }}
+                        />
+                      )}
+                    </Box>
+                    <Box sx={{ flex: 1 }}>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
+                        <Icon
+                          icon="solar:trash-bin-trash-bold-duotone"
+                          width={22}
+                          style={{
+                            color: conflictStrategy === 'replace' ? 'var(--mui-palette-error-main)' : 'var(--mui-palette-text-secondary)'
+                          }}
+                        />
+                        <Typography
+                          variant="subtitle1"
+                          sx={{
+                            fontWeight: 600,
+                            color: conflictStrategy === 'replace' ? 'error.main' : 'text.primary'
+                          }}
+                        >
+                          全量替换
+                        </Typography>
+                      </Box>
+                      <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.875rem' }}>
+                        更新同名模型，并删除远端数据源中不存在的本地模型
                       </Typography>
                     </Box>
                   </Box>

@@ -13,8 +13,6 @@ import (
 	"strings"
 	"sync"
 	"time"
-
-	"github.com/spf13/viper"
 )
 
 // PricingInstance is the Pricing instance
@@ -27,6 +25,7 @@ const (
 	PriceUpdateModeAdd       PriceUpdateMode = "add"
 	PriceUpdateModeOverwrite PriceUpdateMode = "overwrite"
 	PriceUpdateModeUpdate    PriceUpdateMode = "update"
+	PriceUpdateModeReplace   PriceUpdateMode = "replace"
 )
 
 // Pricing is a struct that contains the pricing data
@@ -44,7 +43,7 @@ type BatchPrices struct {
 // NewPricing creates a new Pricing instance
 func NewPricing() {
 	logger.SysLog("Initializing Pricing")
-	logger.SysLog("Update Price Mode:" + viper.GetString("auto_price_updates_mode"))
+	logger.SysLog("Update Price Mode:" + config.AutoPriceUpdatesMode)
 	PricingInstance = &Pricing{
 		Prices: make(map[string]*Price),
 		Match:  make([]string, 0),
@@ -58,7 +57,7 @@ func NewPricing() {
 	}
 
 	// 初始化时，需要检测是否有更新
-	if viper.GetString("auto_price_updates_mode") == "system" && (viper.GetBool("auto_price_updates") || len(PricingInstance.Prices) == 0) {
+	if config.AutoPriceUpdatesMode == "system" && (config.AutoPriceUpdates || len(PricingInstance.Prices) == 0) {
 		logger.SysLog("Checking for pricing updates")
 		prices := GetDefaultPrice()
 		PricingInstance.SyncPricing(prices, "system")
@@ -97,7 +96,9 @@ func (p *Pricing) Init() error {
 	newMatch := make(map[string]bool)
 
 	for _, price := range prices {
-		newPrices[price.Model] = price
+		if existing, ok := newPrices[price.Model]; !ok || shouldReplaceDuplicatePrice(existing, price) {
+			newPrices[price.Model] = price
+		}
 		if strings.HasSuffix(price.Model, "*") {
 			if _, ok := newMatch[price.Model]; !ok {
 				newMatch[price.Model] = true
@@ -125,7 +126,7 @@ func (p *Pricing) GetPrice(modelName string) *Price {
 	defer p.RUnlock()
 
 	if price, ok := p.Prices[modelName]; ok {
-		return price
+		return priceForModel(modelName, price)
 	}
 
 	// 如果启用了大小写不敏感匹配，先尝试大小写不敏感的精确匹配
@@ -133,7 +134,22 @@ func (p *Pricing) GetPrice(modelName string) *Price {
 		modelNameLower := strings.ToLower(modelName)
 		for existingModel, price := range p.Prices {
 			if strings.ToLower(existingModel) == modelNameLower {
-				return price
+				return priceForModel(modelName, price)
+			}
+		}
+	}
+
+	for _, alias := range GetModelPriceAliases(modelName) {
+		if price, ok := p.Prices[alias]; ok {
+			return priceForModel(modelName, price)
+		}
+
+		if config.ModelNameCaseInsensitiveEnabled {
+			aliasLower := strings.ToLower(alias)
+			for existingModel, price := range p.Prices {
+				if strings.ToLower(existingModel) == aliasLower {
+					return priceForModel(modelName, price)
+				}
 			}
 		}
 	}
@@ -150,15 +166,37 @@ func (p *Pricing) GetPrice(modelName string) *Price {
 	}
 
 	if price, ok := p.Prices[matchModel]; ok {
-		return price
+		return priceForModel(modelName, price)
 	}
 
+	channelType := InferModelChannelType(modelName)
 	return &Price{
 		Type:        TokensPriceType,
-		ChannelType: config.ChannelTypeUnknown,
+		ChannelType: channelType,
 		Input:       DefaultPrice,
 		Output:      DefaultPrice,
 	}
+}
+
+func shouldReplaceDuplicatePrice(existing, candidate *Price) bool {
+	inferredChannelType := InferModelChannelType(candidate.Model)
+	if inferredChannelType == config.ChannelTypeUnknown {
+		return false
+	}
+	return existing.ChannelType != inferredChannelType && candidate.ChannelType == inferredChannelType
+}
+
+func priceForModel(modelName string, price *Price) *Price {
+	if price == nil {
+		return nil
+	}
+
+	res := *price
+	res.Model = modelName
+	if inferredChannelType := InferModelChannelType(modelName); inferredChannelType != config.ChannelTypeUnknown {
+		res.ChannelType = inferredChannelType
+	}
+	return &res
 }
 
 func (p *Pricing) GetAllPrices() map[string]*Price {
@@ -252,7 +290,7 @@ func (p *Pricing) SyncPricing(pricing []*Price, mode string) error {
 	case string(PriceUpdateModeUpdate):
 		err = p.SyncPriceOnlyUpdate(pricing)
 		return err
-	case string(PriceUpdateModeOverwrite):
+	case string(PriceUpdateModeOverwrite), string(PriceUpdateModeReplace):
 		err = p.SyncPriceWithOverwrite(pricing)
 		return err
 	case string(PriceUpdateModeAdd):
@@ -265,7 +303,7 @@ func (p *Pricing) SyncPricing(pricing []*Price, mode string) error {
 }
 
 func UpdatePriceByPriceService() error {
-	updatePriceMode := viper.GetString("auto_price_updates_mode")
+	updatePriceMode := config.AutoPriceUpdatesMode
 	if updatePriceMode == string(PriceUpdateModeSystem) {
 		// 使用程序内置更新
 		return nil
@@ -291,7 +329,7 @@ func UpdatePriceByPriceService() error {
 		}
 		return nil
 	}
-	if updatePriceMode == string(PriceUpdateModeOverwrite) {
+	if updatePriceMode == string(PriceUpdateModeOverwrite) || updatePriceMode == string(PriceUpdateModeReplace) {
 		// 覆盖所有
 		p := &Pricing{
 			Prices: make(map[string]*Price),
@@ -330,7 +368,7 @@ func UpdatePriceByPriceService() error {
 
 // GetPriceByPriceService 只插入系统没有的数据
 func GetPriceByPriceService() ([]*Price, error) {
-	api := viper.GetString("update_price_service")
+	api := config.UpdatePriceService
 	if api == "" {
 		return nil, errors.New("update_price_service is not configured")
 	}

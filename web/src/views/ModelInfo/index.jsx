@@ -14,7 +14,9 @@ import KeywordTableHead from 'ui-component/TableHead';
 import { API } from 'utils/api';
 import EditModal from './component/EditModal';
 import ImportModal from './component/ImportModal';
+import { ScheduleModal } from './component/ScheduleModal';
 import { Icon } from '@iconify/react';
+import { useSelector } from 'react-redux';
 import useStickyShadow from 'hooks/useStickyShadow';
 
 // ----------------------------------------------------------------------
@@ -26,8 +28,11 @@ export default function ModelInfo() {
   const [openModal, setOpenModal] = useState(false);
   const [editId, setEditId] = useState(0);
   const [openImportModal, setOpenImportModal] = useState(false);
+  const [openScheduleModal, setOpenScheduleModal] = useState(false);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const user = useSelector((state) => state.account?.user);
+  const isRootUser = (user?.role || 0) >= 100;
 
   const fetchData = async () => {
     try {
@@ -134,6 +139,16 @@ export default function ModelInfo() {
         </Stack>
 
         <Stack direction="row" spacing={2}>
+          {isRootUser && (
+            <Button
+              variant="outlined"
+              color="primary"
+              startIcon={<Icon icon="solar:database-bold-duotone" />}
+              onClick={() => setOpenScheduleModal(true)}
+            >
+              同步设置
+            </Button>
+          )}
           <Button
             variant="outlined"
             color="primary"
@@ -227,6 +242,14 @@ export default function ModelInfo() {
           }
         }}
         existingModels={modelInfos.map((info) => info.model)}
+      />
+      <ScheduleModal
+        open={openScheduleModal}
+        onCancel={() => setOpenScheduleModal(false)}
+        onSynced={() => {
+          setOpenScheduleModal(false);
+          handleRefresh();
+        }}
       />
     </>
   );

@@ -9,8 +9,10 @@ import AdminContainer from 'ui-component/AdminContainer';
 import { API } from 'utils/api';
 import { showError } from 'utils/common';
 import { CheckUpdates } from './component/CheckUpdates';
+import { ScheduleModal } from './component/ScheduleModal';
 import EditeModal from './component/EditModal';
 import { useTranslation } from 'react-i18next';
+import { createPriceModelMatcher } from 'utils/modelPriceAliases';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -40,6 +42,7 @@ const Pricing = () => {
   const [ownedby, setOwnedby] = useState([]);
   const [modelList, setModelList] = useState([]);
   const [openModal, setOpenModal] = useState(false);
+  const [openScheduleModal, setOpenScheduleModal] = useState(false);
   const [openaddModal, setOpenaddModal] = useState(false);
   const [errPrices, setErrPrices] = useState('');
   const [prices, setPrices] = useState([]);
@@ -99,7 +102,8 @@ const Pricing = () => {
   };
 
   useEffect(() => {
-    const missingModels = modelList.filter((model) => !prices.some((price) => price.model === model));
+    const hasConfiguredPrice = createPriceModelMatcher(prices);
+    const missingModels = modelList.filter((model) => !hasConfiguredPrice(model));
     setNoPriceModel(missingModels);
   }, [modelList, prices]);
 
@@ -200,6 +204,9 @@ const Pricing = () => {
           <Button onClick={handleRefresh} startIcon={<Icon icon="solar:refresh-circle-bold-duotone" width={18} />}>
             {t('pricingPage.refreshButton')}
           </Button>
+          <Button onClick={() => setOpenScheduleModal(true)} startIcon={<Icon icon="solar:calendar-mark-bold-duotone" width={18} />}>
+            {t('pricingPage.scheduleSettings')}
+          </Button>
           <Button
             onClick={() => {
               setOpenModal(true);
@@ -288,6 +295,12 @@ const Pricing = () => {
         }}
         row={prices}
         onOk={handleOkModal}
+      />
+      <ScheduleModal
+        open={openScheduleModal}
+        onCancel={() => {
+          setOpenScheduleModal(false);
+        }}
       />
     </Stack>
   );

@@ -195,7 +195,12 @@ const Single = ({ ownedby, prices, reloadData }) => {
         sx={{
           p: 2,
           mb: 2,
-          borderRadius: 1
+          borderRadius: 1,
+          background: 'var(--aihub-panel)',
+          borderColor: 'var(--aihub-border)',
+          boxShadow: 'none',
+          backdropFilter: 'blur(18px) saturate(130%)',
+          backgroundClip: 'padding-box'
         }}
       >
         <Box
@@ -292,7 +297,12 @@ const Single = ({ ownedby, prices, reloadData }) => {
           sx={{
             overflow: 'hidden',
             borderRadius: 1,
-            mb: 2
+            mb: 2,
+            background: 'var(--aihub-panel)',
+            borderColor: 'var(--aihub-border)',
+            boxShadow: 'none',
+            backdropFilter: 'blur(18px) saturate(130%)',
+            backgroundClip: 'padding-box'
           }}
         >
           {/* 添加滚动容器 */}
@@ -315,8 +325,8 @@ const Single = ({ ownedby, prices, reloadData }) => {
                 display: 'flex',
                 px: 2,
                 py: 1.5,
-                bgcolor: alpha(theme.palette.primary.main, 0.08),
-                borderBottom: `1px solid ${alpha(theme.palette.divider, 0.5)}`,
+                background: 'var(--aihub-table-head)',
+                borderBottom: '1px solid var(--aihub-border)',
                 minWidth: { xs: '800px', sm: '100%' } // 设置最小宽度确保在小屏幕上内容不会挤压
               }}
             >
@@ -348,6 +358,7 @@ const Single = ({ ownedby, prices, reloadData }) => {
               sx={{
                 width: '100%',
                 borderCollapse: 'collapse',
+                background: theme.palette.mode === 'dark' ? 'rgba(8, 18, 32, 0.2)' : 'rgba(255, 255, 255, 0.16)',
                 minWidth: { xs: '800px', sm: '100%' } // 设置最小宽度确保在小屏幕上内容不会挤压
               }}
             >
@@ -375,7 +386,8 @@ const Single = ({ ownedby, prices, reloadData }) => {
                 justifyContent: 'space-between',
                 px: 2,
                 py: 1.5,
-                borderTop: `1px solid ${alpha(theme.palette.divider, 0.5)}`
+                background: 'var(--aihub-table-footer)',
+                borderTop: '1px solid var(--aihub-border)'
               }}
             >
               <Typography variant="caption" color="text.secondary">
@@ -402,7 +414,12 @@ const Single = ({ ownedby, prices, reloadData }) => {
           sx={{
             p: 4,
             textAlign: 'center',
-            borderRadius: 1
+            borderRadius: 1,
+            background: 'var(--aihub-panel)',
+            borderColor: 'var(--aihub-border)',
+            boxShadow: 'none',
+            backdropFilter: 'blur(18px) saturate(130%)',
+            backgroundClip: 'padding-box'
           }}
         >
           <Icon icon="mdi:file-search-outline" width={48} height={48} color={alpha(theme.palette.text.secondary, 0.4)} />
