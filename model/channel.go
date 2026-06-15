@@ -44,7 +44,9 @@ type Channel struct {
 	CompatibleResponse bool    `json:"compatible_response" gorm:"default:false"`
 	AllowExtraBody     bool    `json:"allow_extra_body" form:"allow_extra_body" gorm:"default:false"`
 
-	DisabledStream *datatypes.JSONSlice[string] `json:"disabled_stream,omitempty" gorm:"type:json"`
+	DisabledStream           *datatypes.JSONSlice[string] `json:"disabled_stream,omitempty" gorm:"type:json"`
+	ResponsesModels          *datatypes.JSONSlice[string] `json:"responses_models,omitempty" gorm:"type:json"`
+	CompatibleResponseModels *datatypes.JSONSlice[string] `json:"compatible_response_models,omitempty" gorm:"type:json"`
 
 	Plugin    *datatypes.JSONType[PluginType] `json:"plugin" form:"plugin" gorm:"type:json"`
 	DeletedAt gorm.DeletedAt                  `json:"-" gorm:"index"`

@@ -88,10 +88,12 @@ func SetApiRouter(router *gin.Engine) {
 				selfRoute.GET("/dashboard/rate", controller.GetRateRealtime)
 				selfRoute.GET("/dashboard/uptimekuma/status-page", controller.UptimeKumaStatusPage)
 				selfRoute.GET("/dashboard/uptimekuma/status-page/heartbeat", controller.UptimeKumaStatusPageHeartbeat)
+				selfRoute.GET("/playground/status", controller.GetPlaygroundStatus)
 				selfRoute.GET("/invoice", controller.GetUserInvoice)
 				selfRoute.GET("/invoice/detail", controller.GetUserInvoiceDetail)
 				selfRoute.GET("/self", controller.GetSelf)
 				selfRoute.PUT("/self", controller.UpdateSelf)
+				selfRoute.PUT("/avatar", controller.UpdateSelfAvatar)
 				selfRoute.POST("/unbind", controller.Unbind)
 				// selfRoute.DELETE("/self", controller.DeleteSelf)
 				selfRoute.GET("/token", controller.GenerateAccessToken)
@@ -155,10 +157,14 @@ func SetApiRouter(router *gin.Engine) {
 
 		modelInfoRoute := apiRouter.Group("/model_info")
 		modelInfoRoute.GET("/", controller.GetAllModelInfo)
+		modelInfoRoute.GET("/schedule", middleware.RootAuth(), controller.GetModelInfoSchedule)
+		modelInfoRoute.PUT("/schedule", middleware.RootAuth(), controller.UpdateModelInfoSchedule)
+		modelInfoRoute.POST("/sync_service", middleware.RootAuth(), controller.SyncModelInfoFromService)
 		modelInfoRoute.Use(middleware.AdminAuth())
 		{
 			modelInfoRoute.GET("/:id", controller.GetModelInfo)
 			modelInfoRoute.POST("/", controller.CreateModelInfo)
+			modelInfoRoute.POST("/batch_import", controller.BatchImportModelInfo)
 			modelInfoRoute.PUT("/", controller.UpdateModelInfo)
 			modelInfoRoute.DELETE("/:id", controller.DeleteModelInfo)
 		}
@@ -180,6 +186,8 @@ func SetApiRouter(router *gin.Engine) {
 			channelRoute.GET("/", controller.GetChannelsList)
 			channelRoute.GET("/models", relay.ListModelsForAdmin)
 			channelRoute.POST("/provider_models_list", controller.GetModelList)
+			channelRoute.GET("/usage", controller.GetChannelsUsage)
+			channelRoute.GET("/:id/usage", controller.GetChannelUsage)
 			channelRoute.GET("/:id", controller.GetChannel)
 			channelRoute.GET("/test", controller.TestAllChannels)
 			channelRoute.GET("/test/:id", controller.TestChannel)
@@ -211,6 +219,26 @@ func SetApiRouter(router *gin.Engine) {
 		{
 			claudeCodeRoute.POST("/oauth/start", controller.StartClaudeCodeOAuth)
 			claudeCodeRoute.POST("/oauth/exchange-code", controller.ClaudeCodeOAuthCallback)
+		}
+
+		// ClaudeCode usage proxy routes
+		claudeCodeUsageRoute := apiRouter.Group("/claudecode")
+		{
+			claudeCodeUsageRoute.GET("/usage", middleware.OpenaiAuth(), middleware.ContextUserId(), middleware.Distribute(), controller.GetClaudeCodeUsage)
+			claudeCodeUsageRoute.POST("/usage", middleware.OpenaiAuth(), middleware.ContextUserId(), middleware.Distribute(), controller.GetClaudeCodeUsage)
+		}
+
+		// Codex usage proxy routes
+		codexUsageRoute := apiRouter.Group("/codex")
+		{
+			codexUsageRoute.GET("/usage", middleware.OpenaiAuth(), middleware.ContextUserId(), middleware.Distribute(), controller.GetCodexUsage)
+			codexUsageRoute.POST("/usage", middleware.OpenaiAuth(), middleware.ContextUserId(), middleware.Distribute(), controller.GetCodexUsage)
+		}
+
+		usageRoute := apiRouter.Group("/usage")
+		{
+			usageRoute.GET("/channels", middleware.OpenaiAuth(), middleware.ContextUserId(), controller.GetChannelsUsageByToken)
+			usageRoute.POST("/channels", middleware.OpenaiAuth(), middleware.ContextUserId(), controller.GetChannelsUsageByToken)
 		}
 
 		// Codex OAuth routes
@@ -251,6 +279,7 @@ func SetApiRouter(router *gin.Engine) {
 			tokenRoute.GET("/:id", controller.GetToken)
 			tokenRoute.POST("/", controller.AddToken)
 			tokenRoute.PUT("/", controller.UpdateToken)
+			tokenRoute.PUT("/:id/key", controller.RefreshTokenKey)
 			tokenRoute.DELETE("/:id", controller.DeleteToken)
 		}
 		tokenAdminRoute := apiRouter.Group("/token")
@@ -280,6 +309,14 @@ func SetApiRouter(router *gin.Engine) {
 			logRoute.GET("/self/export", middleware.UserAuth(), controller.ExportUserLogsList)
 			// logRoute.GET("/self/search", middleware.UserAuth(), controller.SearchUserLogs)
 		}
+		debugRoute := apiRouter.Group("/debug")
+		debugRoute.Use(middleware.AdminAuth())
+		{
+			debugRoute.GET("/relay-io", relay.GetRelayDebugIO)
+			debugRoute.GET("/relay-io/:id", relay.GetRelayDebugIODetail)
+			debugRoute.PUT("/relay-io", relay.UpdateRelayDebugIO)
+			debugRoute.DELETE("/relay-io", relay.ClearRelayDebugIO)
+		}
 		groupRoute := apiRouter.Group("/group")
 		groupRoute.Use(middleware.AdminAuth())
 		{
@@ -306,6 +343,8 @@ func SetApiRouter(router *gin.Engine) {
 			pricesRoute.PUT("/multiple/delete", controller.BatchDeletePrices)
 			pricesRoute.POST("/sync", controller.SyncPricing)
 			pricesRoute.GET("/updateService", controller.GetUpdatePriceService)
+			pricesRoute.GET("/schedule", controller.GetPriceSchedule)
+			pricesRoute.PUT("/schedule", controller.UpdatePriceSchedule)
 
 		}
 

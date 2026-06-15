@@ -13,6 +13,26 @@ const SupportModels = () => {
   const [expanded, setExpanded] = useState(false);
   const { t } = useTranslation();
   const ownedby = useSelector((state) => state.siteInfo?.ownedby);
+  const modelLabelSx = {
+    cursor: 'pointer',
+    color: (theme) => (theme.palette.mode === 'dark' ? '#45b7dc' : theme.palette.primary.dark),
+    border: (theme) => (theme.palette.mode === 'dark' ? `1px solid ${alpha('#45b7dc', 0.2)}` : 'none'),
+    '&:hover': {
+      bgcolor: (theme) => alpha(theme.palette.primary.main, theme.palette.mode === 'dark' ? 0.2 : 0.16),
+      color: (theme) => (theme.palette.mode === 'dark' ? '#68c8e8' : theme.palette.primary.dark)
+    }
+  };
+  const expandButtonSx = {
+    width: 32,
+    height: 32,
+    borderRadius: 1.5,
+    color: (theme) => (theme.palette.mode === 'dark' ? '#45b7dc' : theme.palette.primary.main),
+    bgcolor: (theme) => alpha(theme.palette.primary.main, theme.palette.mode === 'dark' ? 0.1 : 0.08),
+    '&:hover': {
+      color: (theme) => (theme.palette.mode === 'dark' ? '#68c8e8' : theme.palette.primary.dark),
+      bgcolor: (theme) => alpha(theme.palette.primary.main, theme.palette.mode === 'dark' ? 0.18 : 0.14)
+    }
+  };
 
   const fetchModels = async () => {
     try {
@@ -67,6 +87,7 @@ const SupportModels = () => {
             spacing={2}
             sx={{
               mb: expanded ? 2 : 0,
+              minWidth: 0,
               pr: 5
             }}
           >
@@ -78,6 +99,7 @@ const SupportModels = () => {
               <Box
                 sx={{
                   flex: 1,
+                  minWidth: 0,
                   overflow: 'auto',
                   display: 'flex',
                   gap: 1,
@@ -115,11 +137,8 @@ const SupportModels = () => {
                           color="primary"
                           onClick={() => copy(model, t('dashboard_index.model_name'))}
                           sx={{
-                            cursor: 'pointer',
                             whiteSpace: 'nowrap',
-                            '&:hover': {
-                              bgcolor: (theme) => alpha(theme.palette.primary.main, 0.16)
-                            }
+                            ...modelLabelSx
                           }}
                         >
                           {model}
@@ -135,24 +154,21 @@ const SupportModels = () => {
             sx={{
               position: 'absolute',
               right: 0,
-              top: -2,
-              bgcolor: (theme) => theme.palette.background.paper,
-              background: (theme) => `linear-gradient(to right, transparent, ${theme.palette.background.paper} 20%)`,
-              pl: 1
+              top: 0,
+              display: 'flex',
+              alignItems: 'center',
+              pl: 1,
+              background: 'transparent'
             }}
           >
-            <Tooltip>
+            <Tooltip title={expanded ? t('common.collapse') : t('common.expand')}>
               <IconButton
+                className="aihub-support-models-toggle"
                 size="small"
                 onClick={() => setExpanded(!expanded)}
-                sx={{
-                  color: 'text.secondary',
-                  '&:hover': {
-                    color: 'text.primary'
-                  }
-                }}
+                sx={expandButtonSx}
               >
-                {expanded ? <ExpandLess sx={{ width: 20 }} /> : <ExpandMore sx={{ width: 20 }} />}
+                {expanded ? <ExpandLess fontSize="small" /> : <ExpandMore fontSize="small" />}
               </IconButton>
             </Tooltip>
           </Box>
@@ -190,12 +206,7 @@ const SupportModels = () => {
                       variant="soft"
                       color="primary"
                       onClick={() => copy(model, t('dashboard_index.model_name'))}
-                      sx={{
-                        cursor: 'pointer',
-                        '&:hover': {
-                          bgcolor: (theme) => alpha(theme.palette.primary.main, 0.16)
-                        }
-                      }}
+                      sx={modelLabelSx}
                     >
                       {model}
                     </Label>

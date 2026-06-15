@@ -1,6 +1,7 @@
 package claudecode
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
@@ -54,10 +55,16 @@ func (c *OAuth2Credentials) Refresh(ctx context.Context, proxyURL string, maxRet
 		clientID = DefaultClientID
 	}
 
-	data := url.Values{}
-	data.Set("grant_type", "refresh_token")
-	data.Set("client_id", clientID)
-	data.Set("refresh_token", c.RefreshToken)
+	requestBody := map[string]string{
+		"grant_type":    "refresh_token",
+		"client_id":     clientID,
+		"refresh_token": c.RefreshToken,
+		"scope":         DefaultScope,
+	}
+	jsonData, err := json.Marshal(requestBody)
+	if err != nil {
+		return fmt.Errorf("failed to marshal refresh request: %w", err)
+	}
 
 	var lastErr error
 	for attempt := 0; attempt <= maxRetries; attempt++ {
@@ -87,14 +94,14 @@ func (c *OAuth2Credentials) Refresh(ctx context.Context, proxyURL string, maxRet
 			}
 		}
 
-		req, err := http.NewRequest("POST", TokenEndpoint, strings.NewReader(data.Encode()))
+		req, err := http.NewRequest("POST", TokenEndpoint, bytes.NewReader(jsonData))
 		if err != nil {
 			lastErr = fmt.Errorf("failed to create refresh request: %w", err)
 			continue
 		}
 
-		req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-		req.Header.Set("User-Agent", "claude-cli/1.0.56 (external, cli)")
+		req.Header.Set("Content-Type", "application/json")
+		req.Header.Set("User-Agent", GetClaudeCodeUserAgentWithProxy(proxyURL))
 		req.Header.Set("Accept", "application/json, text/plain, */*")
 
 		resp, err := client.Do(req)

@@ -6,10 +6,13 @@ import (
 	"crypto/sha256"
 	"done-hub/common"
 	"done-hub/common/cache"
+	"done-hub/common/config"
 	"done-hub/common/logger"
+	"done-hub/model"
 	"done-hub/providers/claudecode"
 	"encoding/base64"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -29,12 +32,11 @@ const (
 
 // ClaudeCode OAuth 配置常量
 const (
-	ClaudeCodeAuthorizeURL = "https://claude.ai/oauth/authorize"
-	ClaudeCodeTokenURL     = "https://console.anthropic.com/v1/oauth/token"
+	ClaudeCodeAuthorizeURL = "https://platform.claude.com/oauth/authorize"
+	ClaudeCodeTokenURL     = claudecode.TokenEndpoint
 	ClaudeCodeClientID     = "9d1c250a-e61b-44d9-88ed-5944d1962f5e"
-	ClaudeCodeRedirectURI  = "https://console.anthropic.com/oauth/code/callback"
-	// 使用与 provider 一致的 scopes，确保权限足够
-	ClaudeCodeScopes = "user:inference user:profile"
+	ClaudeCodeRedirectURI  = "https://platform.claude.com/oauth/code/callback"
+	ClaudeCodeScopes       = claudecode.DefaultScope
 )
 
 // ClaudeCodeOAuthStateData OAuth 状态数据
@@ -47,8 +49,12 @@ type ClaudeCodeOAuthStateData struct {
 
 // StartClaudeCodeOAuthRequest 开始 OAuth 认证请求
 type StartClaudeCodeOAuthRequest struct {
-	ChannelID int    `json:"channel_id"` // 可选，新建时为 0
-	Proxy     string `json:"proxy"`      // 可选，代理配置（JSON 字符串）
+	ChannelID jsonInt `json:"channel_id"` // 可选，新建时为 0
+	Proxy     string  `json:"proxy"`      // 可选，代理配置（JSON 字符串）
+}
+
+type ClaudeCodeUsageRequest struct {
+	ChannelID int `json:"channel_id" form:"channel_id"`
 }
 
 // generateCodeVerifier 生成随机的 code verifier（PKCE）
@@ -95,7 +101,7 @@ func StartClaudeCodeOAuth(c *gin.Context) {
 
 	// 保存 state 到缓存（包含代理配置）
 	stateData := ClaudeCodeOAuthStateData{
-		ChannelID:    req.ChannelID,
+		ChannelID:    req.ChannelID.Int(),
 		CodeVerifier: codeVerifier,
 		Proxy:        req.Proxy, // 保存代理配置，用于后续 token 交换
 		CreatedAt:    time.Now().Unix(),
@@ -130,6 +136,74 @@ func StartClaudeCodeOAuth(c *gin.Context) {
 				"4. 将完整的回调 URL 粘贴到下方输入框中",
 			},
 		},
+	})
+}
+
+// GetClaudeCodeUsage 通过 done-hub 渠道代理查询 ClaudeCode 官方额度。
+// GET /api/claudecode/usage?channel_id=1
+// Authorization: Bearer sk-...
+func GetClaudeCodeUsage(c *gin.Context) {
+	var req ClaudeCodeUsageRequest
+	if c.Request.Method == http.MethodGet {
+		if err := c.ShouldBindQuery(&req); err != nil {
+			common.APIRespondWithError(c, http.StatusOK, err)
+			return
+		}
+	} else if err := c.ShouldBindJSON(&req); err != nil {
+		common.APIRespondWithError(c, http.StatusOK, err)
+		return
+	}
+
+	if req.ChannelID == 0 {
+		req.ChannelID = c.GetInt("specific_channel_id")
+	}
+	if req.ChannelID <= 0 {
+		common.APIRespondWithError(c, http.StatusOK, errors.New("channel_id 不能为空"))
+		return
+	}
+
+	channel, err := model.GetChannelById(req.ChannelID)
+	if err != nil {
+		common.APIRespondWithError(c, http.StatusOK, err)
+		return
+	}
+	if channel.Type != config.ChannelTypeClaudeCode {
+		common.APIRespondWithError(c, http.StatusOK, errors.New("指定渠道不是 ClaudeCode 类型"))
+		return
+	}
+
+	userID := c.GetInt("id")
+	isAdmin := model.IsAdmin(userID)
+	if !isAdmin {
+		if channel.Status != config.ChannelStatusEnabled {
+			common.APIRespondWithError(c, http.StatusOK, errors.New("指定渠道未启用"))
+			return
+		}
+		if !codexUsageChannelAllowed(c, channel) {
+			common.APIRespondWithError(c, http.StatusOK, errors.New("当前令牌无权查询该渠道"))
+			return
+		}
+	}
+
+	provider := claudecode.ClaudeCodeProviderFactory{}.Create(channel)
+	claudeCodeProvider, ok := provider.(*claudecode.ClaudeCodeProvider)
+	if !ok {
+		common.APIRespondWithError(c, http.StatusOK, errors.New("创建 ClaudeCode provider 失败"))
+		return
+	}
+	claudeCodeProvider.SetContext(c)
+
+	cacheConfig := claudeCodeProvider.GetUsageCacheConfig()
+	usageResult, err := claudeCodeProvider.RequestUsageWithCache()
+	if err != nil {
+		common.APIRespondWithError(c, http.StatusOK, err)
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"success": true,
+		"message": "",
+		"data":    claudeUsageData(channel, usageResult, cacheConfig),
 	})
 }
 
@@ -255,7 +329,6 @@ func parseCallbackURL(input string) (string, error) {
 
 // exchangeClaudeCodeForToken 使用授权码交换访问令牌（支持代理）
 func exchangeClaudeCodeForToken(code, codeVerifier, state, proxyURL string) (*claudecode.TokenRefreshResponse, error) {
-	// 准备请求数据（使用 JSON 格式）
 	requestBody := map[string]string{
 		"grant_type":    "authorization_code",
 		"client_id":     ClaudeCodeClientID,
@@ -271,13 +344,13 @@ func exchangeClaudeCodeForToken(code, codeVerifier, state, proxyURL string) (*cl
 	}
 
 	// 创建请求
-	req, err := http.NewRequest("POST", ClaudeCodeTokenURL, bytes.NewBuffer(jsonData))
+	req, err := http.NewRequest("POST", ClaudeCodeTokenURL, bytes.NewReader(jsonData))
 	if err != nil {
 		return nil, fmt.Errorf("failed to create request: %w", err)
 	}
 
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("User-Agent", "claude-cli/1.0.56 (external, cli)")
+	req.Header.Set("User-Agent", claudecode.GetClaudeCodeUserAgentWithProxy(proxyURL))
 	req.Header.Set("Accept", "application/json, text/plain, */*")
 	req.Header.Set("Accept-Language", "en-US,en;q=0.9")
 	req.Header.Set("Referer", "https://claude.ai/")

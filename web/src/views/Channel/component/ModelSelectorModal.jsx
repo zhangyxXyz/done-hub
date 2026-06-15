@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState, useEffect } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { API } from 'utils/api';
 import { showError, showSuccess } from 'utils/common';
 import {
@@ -36,6 +36,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { useTranslation } from 'react-i18next';
 import { Icon } from '@iconify/react';
 import { useSelector } from 'react-redux';
+import { createPriceModelFinder, inferModelProviderName } from 'utils/modelPriceAliases';
 
 const ModelSelectorModal = ({ open, onClose, onConfirm, channelValues, prices }) => {
   const { t } = useTranslation();
@@ -60,15 +61,57 @@ const ModelSelectorModal = ({ open, onClose, onConfirm, channelValues, prices })
   const [overwriteModels, setOverwriteModels] = useState(false);
   const [mappingPreview, setMappingPreview] = useState({});
   const [modelsListCollapsed, setModelsListCollapsed] = useState(false);
+  const otherModelsGroup = t('channel_edit.otherModels');
+  const findPriceModel = useMemo(() => createPriceModelFinder(prices), [prices]);
+  const isClaudeCodeChannel = Number(channelValues?.type) === 58;
+  const showOpenAIModeSwitch = !isClaudeCodeChannel;
 
   const getOwnedbyName = (id) => {
-    const owner = ownedby.find((item) => item.id === id);
+    const owner = ownedby?.find((item) => item.id === id);
     return owner?.name;
   };
 
+  const normalizeGroupName = (group) => {
+    const owner = ownedby?.find((item) => item.name?.toLowerCase() === group?.toLowerCase());
+    return owner?.name || group;
+  };
+
+  const getInferredGroupByModel = (model) => {
+    const provider = inferModelProviderName(model);
+    return provider ? normalizeGroupName(provider) : null;
+  };
+
   const getChannelTypeByModel = (model) => {
-    const price = prices.find((item) => item.model === model);
+    const price = findPriceModel(model);
     return price?.channel_type;
+  };
+
+  const getGroupOrder = (group) => {
+    if (group === otherModelsGroup) {
+      return Number.MAX_SAFE_INTEGER;
+    }
+    const owner = ownedby?.find((item) => item.name === group);
+    return owner?.id ?? Number.MAX_SAFE_INTEGER - 1;
+  };
+
+  const sortModelsByGroup = (modelList) =>
+    [...modelList].sort((a, b) => {
+      const groupOrder = getGroupOrder(a.group) - getGroupOrder(b.group);
+      if (groupOrder !== 0) {
+        return groupOrder;
+      }
+      return a.id.localeCompare(b.id);
+    });
+
+  const groupModels = (modelList) => {
+    const grouped = {};
+    sortModelsByGroup(modelList).forEach((model) => {
+      if (!grouped[model.group]) {
+        grouped[model.group] = [];
+      }
+      grouped[model.group].push(model);
+    });
+    return grouped;
   };
 
   useEffect(() => {
@@ -91,6 +134,9 @@ const ModelSelectorModal = ({ open, onClose, onConfirm, channelValues, prices })
       if (channelValues?.base_url) {
         setCustomBaseUrl(channelValues.base_url);
       }
+      if (isClaudeCodeChannel) {
+        setIsOpenAIMode(false);
+      }
 
       setAddToMapping(false);
       setRemovePrefixOrSuffix(true);
@@ -102,7 +148,7 @@ const ModelSelectorModal = ({ open, onClose, onConfirm, channelValues, prices })
       setOverwriteModels(false);
       setMappingPreview({});
     }
-  }, [open, channelValues, t]);
+  }, [open, channelValues, t, isClaudeCodeChannel]);
 
   useEffect(() => {
     if (!addToMapping || selectedModels.length === 0) {
@@ -168,7 +214,7 @@ const ModelSelectorModal = ({ open, onClose, onConfirm, channelValues, prices })
         model_headers: ''
       };
 
-      if (isOpenAIMode) {
+      if (showOpenAIModeSwitch && isOpenAIMode) {
         requestData.type = 1;
         if (customBaseUrl) {
           requestData.base_url = customBaseUrl;
@@ -179,33 +225,29 @@ const ModelSelectorModal = ({ open, onClose, onConfirm, channelValues, prices })
       const { success, message, data } = res.data;
 
       if (success && data) {
-        const groupedModels = {};
         const uniqueModels = Array.from(new Set(data)).map((model) => {
-          let group = t('channel_edit.otherModels');
+          let group = otherModelsGroup;
+          const inferredGroup = getInferredGroupByModel(model);
 
-          const channelType = getChannelTypeByModel(model);
-
-          if (channelType) {
+          if (inferredGroup) {
+            group = inferredGroup;
+          } else {
+            const channelType = getChannelTypeByModel(model);
             const modelGroup = getOwnedbyName(channelType);
             if (modelGroup) {
               group = modelGroup;
+            } else if (model.includes('/')) {
+              group = model.split('/')[0];
             }
-          } else if (model.includes('/')) {
-            const modelGroup = model.split('/')[0];
-            group = modelGroup;
           }
 
           return { id: model, group };
         });
 
-        uniqueModels.forEach((model) => {
-          if (!groupedModels[model.group]) {
-            groupedModels[model.group] = [];
-          }
-          groupedModels[model.group].push(model);
-        });
+        const sortedModels = sortModelsByGroup(uniqueModels);
+        const groupedModels = groupModels(sortedModels);
 
-        setModels(uniqueModels);
+        setModels(sortedModels);
         setModelGroups(groupedModels);
 
         const defaultExpanded = {};
@@ -287,18 +329,9 @@ const ModelSelectorModal = ({ open, onClose, onConfirm, channelValues, prices })
   const filteredModels = models.filter((model) => model.id.toLowerCase().includes(searchTerm.toLowerCase()));
 
   const getFilteredModelsByGroup = () => {
-    const result = {};
+    if (filteredModels.length === 0) return {};
 
-    if (filteredModels.length === 0) return result;
-
-    filteredModels.forEach((model) => {
-      if (!result[model.group]) {
-        result[model.group] = [];
-      }
-      result[model.group].push(model);
-    });
-
-    return result;
+    return groupModels(filteredModels);
   };
 
   const filteredModelsByGroup = getFilteredModelsByGroup();
@@ -456,16 +489,18 @@ const ModelSelectorModal = ({ open, onClose, onConfirm, channelValues, prices })
             }}
           >
             <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, flexWrap: 'wrap', gap: 1, alignItems: 'center' }}>
-              <FormControlLabel
-                control={<Switch checked={isOpenAIMode} onChange={handleOpenAIModeChange} color="primary" />}
-                label={
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <Icon icon="simple-icons:openai" style={{ marginRight: 8 }} />
-                    {t('channel_edit.openaiMode')}
-                  </Box>
-                }
-                sx={{ m: 0 }}
-              />
+              {showOpenAIModeSwitch && (
+                <FormControlLabel
+                  control={<Switch checked={isOpenAIMode} onChange={handleOpenAIModeChange} color="primary" />}
+                  label={
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                      <Icon icon="simple-icons:openai" style={{ marginRight: 8 }} />
+                      {t('channel_edit.openaiMode')}
+                    </Box>
+                  }
+                  sx={{ m: 0 }}
+                />
+              )}
 
               <Box
                 sx={{
@@ -479,7 +514,7 @@ const ModelSelectorModal = ({ open, onClose, onConfirm, channelValues, prices })
                   flexDirection: { xs: 'column', sm: 'row' }
                 }}
               >
-                {isOpenAIMode && (
+                {showOpenAIModeSwitch && isOpenAIMode && (
                   <FormControl
                     fullWidth
                     sx={{

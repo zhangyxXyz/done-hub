@@ -144,7 +144,7 @@ func (p *CodexProvider) applyDefaultHeaders(headers map[string]string) {
 			}
 		}
 		// 使用默认 UA
-		headers["User-Agent"] = "codex_cli_rs/0.38.0 (Ubuntu 22.4.0; x86_64) WindowsTerminal"
+		headers["User-Agent"] = p.getCodexCLIUserAgent()
 	}
 
 	// 设置 Accept（如果没有设置）
@@ -155,9 +155,10 @@ func (p *CodexProvider) applyDefaultHeaders(headers map[string]string) {
 
 // CodexStreamHandler Codex 流式响应处理器
 type CodexStreamHandler struct {
-	Usage   *types.Usage
-	Request *types.ChatCompletionRequest
-	Context *gin.Context
+	Usage     *types.Usage
+	Request   *types.ChatCompletionRequest
+	Context   *gin.Context
+	textDelta bool
 }
 
 // HandlerStream 处理流式响应（将 Responses 格式转换为 Chat 格式）
@@ -197,6 +198,20 @@ func (h *CodexStreamHandler) HandlerStream(rawLine *[]byte, dataChan chan string
 			h.Usage.CompletionTokens = responsesStream.Response.Usage.OutputTokens
 			h.Usage.TotalTokens = responsesStream.Response.Usage.TotalTokens
 		}
+		if !h.textDelta {
+			content := responsesStream.Response.GetContent()
+			if content != "" {
+				chatResponse := h.convertResponsesStreamToChatStream(&responsesStream, content)
+				if chatResponse != nil {
+					responseBody, err := json.Marshal(chatResponse)
+					if err != nil {
+						logger.SysError("Failed to marshal Chat stream response: " + err.Error())
+						return
+					}
+					dataChan <- string(responseBody)
+				}
+			}
+		}
 		return
 	}
 
@@ -206,7 +221,9 @@ func (h *CodexStreamHandler) HandlerStream(rawLine *[]byte, dataChan chan string
 		if !ok {
 			return
 		}
-
+		if delta != "" {
+			h.textDelta = true
+		}
 		// 转换为 Chat 格式的流式响应
 		chatResponse := h.convertResponsesStreamToChatStream(&responsesStream, delta)
 		if chatResponse != nil {
@@ -351,14 +368,7 @@ func (h *CodexStreamHandler) convertResponsesStreamToChatStream(responsesStream 
 // convertResponsesToChatCompletion 将 Responses 格式转换为 Chat 格式
 func (p *CodexProvider) convertResponsesToChatCompletion(responsesResp *types.OpenAIResponsesResponses, model string) *types.ChatCompletionResponse {
 	// 提取文本内容
-	content := ""
-	if len(responsesResp.Output) > 0 {
-		for _, output := range responsesResp.Output {
-			if output.Type == types.ContentTypeOutputText {
-				content += output.StringContent()
-			}
-		}
-	}
+	content := responsesResp.GetContent()
 
 	// 构建 Chat 格式响应
 	chatResponse := &types.ChatCompletionResponse{

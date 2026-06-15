@@ -54,6 +54,8 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 import { ChannelCheck } from './ChannelCheck'
 import { getPageSize, PAGE_SIZE_OPTIONS, savePageSize } from 'constants'
 import { stickyCellSx } from 'ui-component/stickyCellSx'
+import ChannelQuotaUsage from './ChannelQuotaUsage'
+import { supportsUsageWindows } from 'utils/channelUsage'
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -473,19 +475,25 @@ export default function ChannelTableRow({
         <TableCell>
           {!item.tag && (
             <Stack spacing={0.5} alignItems="center">
-              <Typography variant="body1">{renderQuota(item.used_quota)}</Typography>
-              <Typography
-                variant="caption"
-                sx={{
-                  color: 'success.main',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  '&:hover': { textDecoration: 'underline' }
-                }}
-                onClick={updateChannelBalance}
-              >
-                {renderBalance(item.type, itemBalance)}
-              </Typography>
+              {supportsUsageWindows(item.type) ? (
+                <ChannelQuotaUsage channel={item}/>
+              ) : (
+                <>
+                  <Typography variant="body1">{renderQuota(item.used_quota)}</Typography>
+                  <Typography
+                    variant="caption"
+                    sx={{
+                      color: 'success.main',
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      '&:hover': { textDecoration: 'underline' }
+                    }}
+                    onClick={updateChannelBalance}
+                  >
+                    {renderBalance(item.type, itemBalance)}
+                  </Typography>
+                </>
+              )}
             </Stack>
           )}
         </TableCell>

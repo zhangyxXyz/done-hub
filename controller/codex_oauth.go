@@ -5,10 +5,13 @@ import (
 	"crypto/sha256"
 	"done-hub/common"
 	"done-hub/common/cache"
+	"done-hub/common/config"
 	"done-hub/common/logger"
+	"done-hub/model"
 	"done-hub/providers/codex"
 	"encoding/base64"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -47,8 +50,12 @@ type CodexOAuthStateData struct {
 
 // StartCodexOAuthRequest 开始 OAuth 认证请求
 type StartCodexOAuthRequest struct {
-	ChannelID int    `json:"channel_id"` // 可选，新建时为 0
-	Proxy     string `json:"proxy"`      // 可选，代理配置（JSON 字符串）
+	ChannelID jsonInt `json:"channel_id"` // 可选，新建时为 0
+	Proxy     string  `json:"proxy"`      // 可选，代理配置（JSON 字符串）
+}
+
+type CodexUsageRequest struct {
+	ChannelID int `json:"channel_id" form:"channel_id"`
 }
 
 // generateCodexCodeVerifier 生成随机的 code verifier（PKCE）
@@ -95,7 +102,7 @@ func StartCodexOAuth(c *gin.Context) {
 
 	// 保存 state 到缓存（包含代理配置）
 	stateData := CodexOAuthStateData{
-		ChannelID:    req.ChannelID,
+		ChannelID:    req.ChannelID.Int(),
 		CodeVerifier: codeVerifier,
 		State:        state,
 		Proxy:        req.Proxy, // 保存代理配置，用于后续 token 交换
@@ -133,6 +140,99 @@ func StartCodexOAuth(c *gin.Context) {
 			},
 		},
 	})
+}
+
+// GetCodexUsage 通过 done-hub 渠道代理查询 Codex 官方额度。
+// GET /api/codex/usage?channel_id=1
+// Authorization: Bearer sk-...
+func GetCodexUsage(c *gin.Context) {
+	var req CodexUsageRequest
+	if c.Request.Method == http.MethodGet {
+		if err := c.ShouldBindQuery(&req); err != nil {
+			common.APIRespondWithError(c, http.StatusOK, err)
+			return
+		}
+	} else if err := c.ShouldBindJSON(&req); err != nil {
+		common.APIRespondWithError(c, http.StatusOK, err)
+		return
+	}
+
+	if req.ChannelID == 0 {
+		req.ChannelID = c.GetInt("specific_channel_id")
+	}
+	if req.ChannelID <= 0 {
+		common.APIRespondWithError(c, http.StatusOK, errors.New("channel_id 不能为空"))
+		return
+	}
+
+	channel, err := model.GetChannelById(req.ChannelID)
+	if err != nil {
+		common.APIRespondWithError(c, http.StatusOK, err)
+		return
+	}
+	if channel.Type != config.ChannelTypeCodex {
+		common.APIRespondWithError(c, http.StatusOK, errors.New("指定渠道不是 Codex 类型"))
+		return
+	}
+
+	userID := c.GetInt("id")
+	isAdmin := model.IsAdmin(userID)
+	if !isAdmin {
+		if channel.Status != config.ChannelStatusEnabled {
+			common.APIRespondWithError(c, http.StatusOK, errors.New("指定渠道未启用"))
+			return
+		}
+		if !codexUsageChannelAllowed(c, channel) {
+			common.APIRespondWithError(c, http.StatusOK, errors.New("当前令牌无权查询该渠道"))
+			return
+		}
+	}
+
+	provider := codex.CodexProviderFactory{}.Create(channel)
+	codexProvider, ok := provider.(*codex.CodexProvider)
+	if !ok {
+		common.APIRespondWithError(c, http.StatusOK, errors.New("创建 Codex provider 失败"))
+		return
+	}
+	codexProvider.SetContext(c)
+
+	cacheConfig := codexProvider.GetUsageCacheConfig()
+	usageResult, err := codexProvider.RequestUsageWithCache()
+	if err != nil {
+		common.APIRespondWithError(c, http.StatusOK, err)
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"success": true,
+		"message": "",
+		"data":    codexUsageData(channel, usageResult, cacheConfig),
+	})
+}
+
+func codexUsageChannelAllowed(c *gin.Context, channel *model.Channel) bool {
+	allowedGroups := map[string]struct{}{}
+	for _, group := range []string{
+		c.GetString("group"),
+		c.GetString("token_group"),
+		c.GetString("token_backup_group"),
+	} {
+		group = strings.TrimSpace(group)
+		if group != "" {
+			allowedGroups[group] = struct{}{}
+		}
+	}
+	if len(allowedGroups) == 0 {
+		return false
+	}
+
+	for _, group := range strings.Split(channel.Group, ",") {
+		group = strings.TrimSpace(group)
+		if _, ok := allowedGroups[group]; ok {
+			return true
+		}
+	}
+	return false
 }
 
 // ExchangeCodexCodeRequest 交换授权码请求
@@ -306,7 +406,7 @@ func exchangeCodexCodeForToken(code, codeVerifier, state, proxyURL string) (*cod
 	}
 
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-	req.Header.Set("User-Agent", "codex_cli_rs/0.38.0 (Ubuntu 22.4.0; x86_64) WindowsTerminal")
+	req.Header.Set("User-Agent", codex.GetCodexCLIUserAgentWithProxy(proxyURL))
 	req.Header.Set("Accept", "application/json")
 
 	// 创建 HTTP 客户端

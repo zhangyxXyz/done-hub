@@ -15,6 +15,7 @@ import QuickStartCard from './component/QuickStartCard'
 import RPM from './component/RPM'
 import StatusPanel from './component/StatusPanel'
 import { useSelector } from 'react-redux'
+import ChannelQuotaPanel from './component/ChannelQuotaPanel'
 
 // TabPanel component for tab content
 function TabPanel(props) {
@@ -147,6 +148,9 @@ const Dashboard = () => {
                 <QuickStartCard/>
               </Box>
             )}
+            <Box mt={2}>
+              <ChannelQuotaPanel/>
+            </Box>
             {/* 邀请 */}
             <Box mt={2}>
               <InviteCard/>

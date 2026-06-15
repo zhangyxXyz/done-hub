@@ -124,9 +124,11 @@ func (p *ClaudeCodeProvider) applyDefaultHeaders(headers map[string]string) {
 		headers["anthropic-beta"] = "claude-code-20250219,oauth-2025-04-20,interleaved-thinking-2025-05-14,fine-grained-tool-streaming-2025-05-14"
 	}
 
-	// 如果没有 user-agent，设置默认值
+	// 如果没有 user-agent，按 npm latest 的 Claude Code 版本构造默认值
 	if _, exists := headers["user-agent"]; !exists {
-		headers["user-agent"] = "claude-cli/1.0.81 (external, cli)"
+		if _, exists := headers["User-Agent"]; !exists {
+			headers["user-agent"] = p.getClaudeCodeUserAgent()
+		}
 	}
 
 	// 添加 ClaudeCode 必需的 x-stainless-* 头部

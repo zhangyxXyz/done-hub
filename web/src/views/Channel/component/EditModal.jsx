@@ -54,6 +54,18 @@ const icon = <CheckBoxOutlineBlankIcon fontSize="small"/>
 const checkedIcon = <CheckBoxIcon fontSize="small"/>
 
 const filter = createFilterOptions()
+const hasOAuthCredentials = (key) => {
+  if (!key || typeof key !== 'string') {
+    return false
+  }
+  try {
+    const credentials = JSON.parse(key)
+    return Boolean(credentials.access_token || credentials.refresh_token)
+  } catch {
+    return false
+  }
+}
+
 const getValidationSchema = (t) =>
   Yup.object().shape({
     is_edit: Yup.boolean(),
@@ -73,6 +85,8 @@ const getValidationSchema = (t) =>
     }),
     model_mapping: Yup.array(),
     model_headers: Yup.array(),
+    responses_models: Yup.array(),
+    compatible_response_models: Yup.array(),
     custom_parameter: Yup.string().nullable()
   })
 
@@ -120,6 +134,10 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, isTag, model
   const [codexSessionId, setCodexSessionId] = useState('')
   const [codexAuthCode, setCodexAuthCode] = useState('')
   const [codexSubmitting, setCodexSubmitting] = useState(false)
+  const oauthChannelId = Number.isFinite(Number(channelId)) ? Number(channelId) : 0
+  const oauthSuccessMessage = channelId
+    ? 'OAuth 授权成功！新凭证已自动填充，请保存渠道设置后覆盖现有凭证'
+    : 'OAuth 授权成功！凭证已自动填充'
 
   // 清理 OAuth 相关资源
   const cleanupOAuth = () => {
@@ -334,7 +352,7 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, isTag, model
         // 处理结果
         if (res.data.result && res.data.credentials) {
           setFieldValue('key', res.data.credentials)
-          showSuccess('OAuth 授权成功！凭证已自动填充')
+          showSuccess(oauthSuccessMessage)
         } else {
           showError(res.data.message || 'OAuth 授权失败')
         }
@@ -383,7 +401,7 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, isTag, model
 
       // 调用后端 API 生成授权 URL（传递代理配置）
       const res = await API.post(`/api/${apiEndpoint}/oauth/start`, {
-        channel_id: channelId || 0,
+        channel_id: oauthChannelId,
         project_id: trimmedProjectId,
         proxy: trimmedProxy
       })
@@ -434,7 +452,7 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, isTag, model
           // 处理结果
           if (event.data.success && event.data.credentials) {
             setFieldValue('key', event.data.credentials)
-            showSuccess('OAuth 授权成功！凭证已自动填充')
+            showSuccess(oauthSuccessMessage)
           } else {
             showError('OAuth 授权失败')
           }
@@ -514,7 +532,7 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, isTag, model
 
       // 调用后端 API 生成授权 URL（传递代理配置）
       const res = await API.post('/api/claudecode/oauth/start', {
-        channel_id: channelId || 0,
+        channel_id: oauthChannelId,
         proxy: trimmedProxy
       })
 
@@ -566,7 +584,7 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, isTag, model
       // 获取凭证并填充
       const credentials = res.data.data.credentials
       setFieldValue('key', credentials)
-      showSuccess('OAuth 授权成功！凭证已自动填充')
+      showSuccess(oauthSuccessMessage)
 
       // 关闭对话框并重置状态
       setClaudeCodeOAuthVisible(false)
@@ -599,7 +617,7 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, isTag, model
 
       // 调用后端 API 生成授权 URL（传递代理配置）
       const res = await API.post('/api/codex/oauth/start', {
-        channel_id: channelId || 0,
+        channel_id: oauthChannelId,
         proxy: trimmedProxy
       })
 
@@ -651,7 +669,7 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, isTag, model
       // 获取凭证并填充
       const credentials = res.data.data.credentials
       setFieldValue('key', credentials)
-      showSuccess('OAuth 授权成功！凭证已自动填充')
+      showSuccess(oauthSuccessMessage)
 
       // 关闭对话框并重置状态
       setCodexOAuthVisible(false)
@@ -819,6 +837,13 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, isTag, model
     if (values.disabled_stream) {
       values.disabled_stream = removeDuplicates(values.disabled_stream)
     }
+    if (values.responses_models) {
+      values.responses_models = removeDuplicates(values.responses_models)
+    }
+    if (values.compatible_response_models) {
+      values.compatible_response_models = removeDuplicates(values.compatible_response_models)
+    }
+    values.compatible_response = false
 
     // 获取现有的模型 ID
     const existingModelIds = values.models.map((model) => model.id)
@@ -959,6 +984,8 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, isTag, model
         }
 
         data.base_url = data.base_url ?? ''
+        data.responses_models = data.responses_models ?? []
+        data.compatible_response_models = data.compatible_response_models ?? (data.compatible_response ? ['*'] : [])
         data.is_edit = true
         if (data.plugin === null) {
           data.plugin = {}
@@ -1008,6 +1035,9 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, isTag, model
         <Formik initialValues={initialInput} enableReinitialize validationSchema={getValidationSchema(t)}
                 onSubmit={submit}>
           {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values, setFieldValue }) => {
+            const channelType = Number(values.type)
+            const isBatchKeyInput = !channelId && batchAdd
+            const hasExistingOAuthCredentials = hasOAuthCredentials(values.key)
             // 保存当前Formik状态，以便在模型选择器中使用
             const openModelSelector = () => {
               setTempFormikValues({ ...values })
@@ -1411,7 +1441,7 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, isTag, model
                 </Container>
                 <FormControl fullWidth error={Boolean(touched.key && errors.key)}
                              sx={{ ...theme.typography.otherInput }}>
-                  {!batchAdd ? (
+                  {!isBatchKeyInput ? (
                     <>
                       <InputLabel htmlFor="channel-key-label">{customizeT(inputLabel.key)}</InputLabel>
                       <OutlinedInput
@@ -1466,18 +1496,18 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, isTag, model
                 </FormControl>
 
                 {/* GeminiCli/Antigravity OAuth 授权按钮 */}
-                {(values.type === 57 || values.type === 60) && !batchAdd && (
+                {([57, 60].includes(channelType)) && !isBatchKeyInput && (
                   <Box sx={{ mt: 2, mb: 2 }}>
                     <Box sx={{ display: 'flex', gap: 1 }}>
                       <Button
                         variant="outlined"
-                        color="primary"
+                        color={hasExistingOAuthCredentials ? 'warning' : 'primary'}
                         fullWidth
                         disabled={oauthLoading}
-                        onClick={() => handleGeminiCliOAuth(values.other, values.proxy, setFieldValue, values.type)}
+                        onClick={() => handleGeminiCliOAuth(values.other, values.proxy, setFieldValue, channelType)}
                         startIcon={oauthLoading ? null : <Icon icon="mdi:google"/>}
                       >
-                        {oauthLoading ? '授权中，请完成授权...' : 'OAuth 授权'}
+                        {oauthLoading ? '授权中，请完成授权...' : (hasExistingOAuthCredentials ? '重新 OAuth 授权' : 'OAuth 授权')}
                       </Button>
                       <Button
                         variant="outlined"
@@ -1490,14 +1520,16 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, isTag, model
                         复制链接
                       </Button>
                     </Box>
-                    <Alert severity="info" sx={{ mt: 1 }}>
-                      {values.other ? (
-                        <>授权后会跳转到 localhost:8080，请在浏览器地址栏中将 localhost:8080 改为当前服务的域名后刷新访问完成授权</>
+                    <Alert severity={hasExistingOAuthCredentials ? 'warning' : 'info'} sx={{ mt: 1 }}>
+                      {hasExistingOAuthCredentials ? (
+                        <>当前渠道已有 OAuth 凭证。重新授权会获取新的 credentials 并填入密钥框，保存渠道设置后会覆盖现有凭证。</>
+                      ) : values.other ? (
+                        <>授权后会跳转到 localhost:8080，请在浏览器地址栏中将 localhost:8080 改为当前服务的域名后刷新访问完成授权。</>
                       ) : (
                         <>
                           <strong>Project ID 未填写，将自动检测可用项目。</strong>
                           <br />
-                          授权后会跳转到 localhost:8080，请在浏览器地址栏中将 localhost:8080 改为当前服务的域名后刷新访问完成授权
+                          授权后会跳转到 localhost:8080，请在浏览器地址栏中将 localhost:8080 改为当前服务的域名后刷新访问完成授权。
                         </>
                       )}
                     </Alert>
@@ -1505,20 +1537,22 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, isTag, model
                 )}
 
                 {/* ClaudeCode OAuth 授权按钮 */}
-                {values.type === 58 && !batchAdd && (
+                {channelType === 58 && !isBatchKeyInput && (
                   <Box sx={{ mt: 2, mb: 2 }}>
                     <Button
                       variant="outlined"
-                      color="primary"
+                      color={hasExistingOAuthCredentials ? 'warning' : 'primary'}
                       fullWidth
                       disabled={claudeCodeSubmitting}
                       onClick={() => handleClaudeCodeOAuth(values.proxy)}
                       startIcon={claudeCodeSubmitting ? null : <Icon icon="simple-icons:anthropic"/>}
                     >
-                      {claudeCodeSubmitting ? '获取授权链接中...' : 'OAuth 授权'}
+                      {claudeCodeSubmitting ? '获取授权链接中...' : (hasExistingOAuthCredentials ? '重新 OAuth 授权' : 'OAuth 授权')}
                     </Button>
-                    <Alert severity="info" sx={{ mt: 1 }}>
-                      点击按钮后，将打开 Claude 授权页面。授权成功后，请复制浏览器地址栏中的完整 URL 并粘贴到弹出的输入框中。
+                    <Alert severity={hasExistingOAuthCredentials ? 'warning' : 'info'} sx={{ mt: 1 }}>
+                      {hasExistingOAuthCredentials
+                        ? '当前渠道已有 OAuth 凭证。重新授权会获取新的 credentials 并填入密钥框，保存渠道设置后会覆盖现有凭证。'
+                        : '点击按钮后，将打开 Claude 授权页面。授权成功后，请复制浏览器地址栏中的完整 URL 并粘贴到弹出的输入框中。'}
                     </Alert>
 
                     {/* ClaudeCode OAuth 对话框 */}
@@ -1600,20 +1634,22 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, isTag, model
                 )}
 
                 {/* Codex OAuth 授权按钮 */}
-                {values.type === 59 && !batchAdd && (
+                {channelType === 59 && !isBatchKeyInput && (
                   <Box sx={{ mt: 2, mb: 2 }}>
-                    <Button
-                      variant="outlined"
-                      color="primary"
-                      fullWidth
-                      disabled={codexSubmitting}
-                      onClick={() => handleCodexOAuth(values.proxy)}
-                      startIcon={codexSubmitting ? null : <Icon icon="simple-icons:openai"/>}
-                    >
-                      {codexSubmitting ? '获取授权链接中...' : 'OAuth 授权'}
+                      <Button
+                        variant="outlined"
+                        color={hasExistingOAuthCredentials ? 'warning' : 'primary'}
+                        fullWidth
+                        disabled={codexSubmitting}
+                        onClick={() => handleCodexOAuth(values.proxy)}
+                        startIcon={codexSubmitting ? null : <Icon icon="simple-icons:openai"/>}
+                      >
+                      {codexSubmitting ? '获取授权链接中...' : (hasExistingOAuthCredentials ? '重新 OAuth 授权' : 'OAuth 授权')}
                     </Button>
-                    <Alert severity="info" sx={{ mt: 1 }}>
-                      点击按钮后，将打开 OpenAI 授权页面。授权成功后，请复制浏览器地址栏中的完整 URL 并粘贴到弹出的输入框中。
+                    <Alert severity={hasExistingOAuthCredentials ? 'warning' : 'info'} sx={{ mt: 1 }}>
+                      {hasExistingOAuthCredentials
+                        ? '当前渠道已有 OAuth 凭证。重新授权会获取新的 credentials 并填入密钥框，保存渠道设置后会覆盖现有凭证。'
+                        : '点击按钮后，将打开 OpenAI 授权页面。授权成功后，请复制浏览器地址栏中的完整 URL 并粘贴到弹出的输入框中。'}
                     </Alert>
 
                     {/* Codex OAuth 对话框 */}
@@ -1764,6 +1800,7 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, isTag, model
                       {customizeT(inputLabel.custom_parameter)}
                     </InputLabel>
                     <Box
+                      className="aihub-code-editor"
                       sx={{
                         border: '1px solid',
                         borderColor: touched.custom_parameter && errors.custom_parameter ? 'error.main' : 'divider',
@@ -1829,6 +1866,46 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, isTag, model
                       label={{
                         name: customizeT(inputLabel.disabled_stream),
                         itemName: customizeT(inputPrompt.disabled_stream)
+                      }}
+                    />
+                  </FormControl>
+                )}
+                {inputPrompt.responses_models && (
+                  <FormControl
+                    fullWidth
+                    error={Boolean(touched.responses_models && errors.responses_models)}
+                    sx={{ ...theme.typography.otherInput }}
+                  >
+                    <ListInput
+                      listValue={values.responses_models}
+                      onChange={(newValue) => {
+                        setFieldValue('responses_models', newValue)
+                      }}
+                      disabled={hasTag}
+                      error={Boolean(touched.responses_models && errors.responses_models)}
+                      label={{
+                        name: customizeT(inputLabel.responses_models),
+                        itemName: customizeT(inputPrompt.responses_models)
+                      }}
+                    />
+                  </FormControl>
+                )}
+                {inputPrompt.compatible_response_models && (
+                  <FormControl
+                    fullWidth
+                    error={Boolean(touched.compatible_response_models && errors.compatible_response_models)}
+                    sx={{ ...theme.typography.otherInput }}
+                  >
+                    <ListInput
+                      listValue={values.compatible_response_models}
+                      onChange={(newValue) => {
+                        setFieldValue('compatible_response_models', newValue)
+                      }}
+                      disabled={hasTag}
+                      error={Boolean(touched.compatible_response_models && errors.compatible_response_models)}
+                      label={{
+                        name: customizeT(inputLabel.compatible_response_models),
+                        itemName: customizeT(inputPrompt.compatible_response_models)
                       }}
                     />
                   </FormControl>
@@ -1939,24 +2016,6 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, isTag, model
                       <FormHelperText
                         id="helper-tex-channel-pre_cost-label"> {customizeT(inputPrompt.pre_cost)} </FormHelperText>
                     )}
-                  </FormControl>
-                )}
-                {inputPrompt.compatible_response && (
-                  <FormControl fullWidth>
-                    <FormControlLabel
-                      control={
-                        <Switch
-                          disabled={hasTag}
-                          checked={Boolean(values.compatible_response)}
-                          onChange={(event) => {
-                            setFieldValue('compatible_response', event.target.checked)
-                          }}
-                        />
-                      }
-                      label={customizeT(inputLabel.compatible_response)}
-                    />
-                    <FormHelperText
-                      id="helper-tex-compatible_response-label">{customizeT(inputPrompt.compatible_response)}</FormHelperText>
                   </FormControl>
                 )}
                 {inputPrompt.allow_extra_body && (

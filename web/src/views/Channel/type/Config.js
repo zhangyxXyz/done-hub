@@ -17,6 +17,8 @@ const defaultConfig = {
     only_chat: false,
     pre_cost: 1,
     disabled_stream: [],
+    responses_models: [],
+    compatible_response_models: [],
     compatible_response: false,
     allow_extra_body: false
   },
@@ -38,6 +40,8 @@ const defaultConfig = {
     provider_models_list: '',
     pre_cost: '预计费选项',
     disabled_stream: '禁用流式的模型',
+    responses_models: 'Responses 转换模型',
+    compatible_response_models: 'Response 兼容模型',
     compatible_response: '兼容Response API',
     allow_extra_body: '允许额外字段透传'
   },
@@ -63,6 +67,8 @@ const defaultConfig = {
     pre_cost:
       '这里选择预计费选项，用于预估费用，如果你觉得计算图片占用太多资源，可以选择关闭图片计费。但是请注意：有些渠道在stream下是不会返回tokens的，这会导致输入tokens计算错误。',
     disabled_stream: '这里填写禁用流式的模型，注意：如果填写了禁用流式的模型，那么这些模型在流式请求时会跳过该渠道',
+    responses_models: '填写需要将 Chat Completions 请求转换为 Responses API 的模型。支持精确模型名、末尾 * 通配，或用 * 表示全部模型。',
+    compatible_response_models: '填写需要将 Responses API 请求转换为 Chat Completions 的模型。支持精确模型名、末尾 * 通配，或用 * 表示全部模型。',
     compatible_response: '兼容Response API',
     allow_extra_body: '开启后，将会透传用户请求中的额外字段（如OpenAI SDK的extra_body参数），适用于需要传递自定义参数到上游API的场景'
   },
@@ -562,20 +568,25 @@ const typeConfig = {
   },
   58: {
     inputLabel: {
-      other: ''
+      other: 'ClaudeCode 配置 JSON',
+      provider_models_list: '从ClaudeCode获取模型列表'
     },
     prompt: {
       key: '请输入 access_token（sk-ant-sid01-xxx）或完整的 OAuth2 凭证 JSON，也可点击下方"OAuth 授权"按钮自动获取',
-      other: ''
+      other:
+        '可选 JSON，例如 {"usage_cache_ttl_seconds":300,"usage_cache_stale_seconds":86400,"usage_cache_use_stale_on_error":true}。默认 user_agent 会按 @anthropic-ai/claude-code 的 npm latest 自动构造为 claude-cli/{version}，拉取失败回落到固定版本；如需覆盖可加 {"user_agent":"claude-cli/2.1.177"}。usage_cache_ttl_seconds 为正常缓存时间，0 表示关闭额度缓存；usage_cache_stale_seconds 为失败回退旧缓存保留时间。',
+      provider_models_list: '必须填写 ClaudeCode OAuth 凭证后才能获取模型列表'
     }
   },
   59: {
     inputLabel: {
-      other: ''
+      other: 'Codex 配置 JSON',
+      provider_models_list: '从Codex获取模型列表'
     },
     prompt: {
       key: '请输入完整的 OAuth2 凭证 JSON，或点击下方"OAuth 授权"按钮自动获取',
-      other: ''
+      other:
+        '可选 JSON，例如 {"user_agent":"Codex Desktop/26.601.2237.0 (Windows NT 10.0; x64)","usage_cache_ttl_seconds":300,"usage_cache_stale_seconds":86400,"usage_cache_use_stale_on_error":true}。Codex CLI 请求默认会按 @openai/codex 的 npm latest 自动构造 UA，拉取失败回落到固定版本；这里的 user_agent 用于覆盖额度查询请求。usage_cache_ttl_seconds 为正常缓存时间，0 表示关闭额度缓存；usage_cache_stale_seconds 为失败回退旧缓存时间。'
     }
   },
   60: {

@@ -108,7 +108,7 @@ func getConfig() base.ProviderConfig {
 		BaseURL:         "https://chatgpt.com",
 		ChatCompletions: "/backend-api/codex/responses",
 		Responses:       "/backend-api/codex/responses",
-		ModelList:       "/backend-api/models",
+		ModelList:       "/backend-api/codex/models",
 	}
 }
 

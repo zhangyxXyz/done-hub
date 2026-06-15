@@ -2,6 +2,7 @@ import { Icon } from '@iconify/react';
 
 const icons = {
   IconArticle: () => <Icon width={20} icon="solar:document-text-bold-duotone" />,
+  IconDebug: () => <Icon width={20} icon="solar:bug-bold-duotone" />,
   IconBrush: () => <Icon width={20} icon="tabler:photo-ai" />,
   IconList: () => <Icon width={20} icon="solar:checklist-minimalistic-bold-duotone" />,
   IconInvoice: () => <Icon width={20} icon="solar:dollar-minimalistic-bold-duotone" />
@@ -19,6 +20,15 @@ const usage = {
       url: '/panel/log',
       icon: icons.IconArticle,
       breadcrumbs: false
+    },
+    {
+      id: 'relayDebug',
+      title: '会话',
+      type: 'item',
+      url: '/panel/relay_debug',
+      icon: icons.IconDebug,
+      breadcrumbs: false,
+      isAdmin: true
     },
     {
       id: 'invoice',
