@@ -22,7 +22,7 @@ type ChannelTag struct {
 
 func GetChannelsTagList(tag string) ([]*Channel, error) {
 	var channels []*Channel
-	err := DB.Model(&Channel{}).Where("tag = ?", tag).Find(&channels).Error
+	err := DB.Model(&Channel{}).Where("tag = ?", tag).Order("id ASC").Find(&channels).Error
 	return channels, err
 }
 
@@ -46,7 +46,7 @@ func GetChannelsTag(tag string) (*ChannelTagCollection, error) {
 	var channelTag ChannelTagCollection
 
 	var channels []Channel
-	err := DB.Where("tag = ?", tag).Find(&channels).Error
+	err := DB.Where("tag = ?", tag).Order("id ASC").Find(&channels).Error
 	if err != nil {
 		return nil, err
 	}
