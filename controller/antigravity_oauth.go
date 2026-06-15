@@ -52,9 +52,9 @@ type AntigravityOAuthResultData struct {
 
 // StartAntigravityOAuthRequest 开始 OAuth 认证请求
 type StartAntigravityOAuthRequest struct {
-	ChannelID int    `json:"channel_id"`
-	ProjectID string `json:"project_id"`
-	Proxy     string `json:"proxy"`
+	ChannelID jsonInt `json:"channel_id"`
+	ProjectID string  `json:"project_id"`
+	Proxy     string  `json:"proxy"`
 }
 
 // StartAntigravityOAuth 开始 Antigravity OAuth 认证流程
@@ -76,7 +76,7 @@ func StartAntigravityOAuth(c *gin.Context) {
 
 	// 保存 state 到缓存
 	stateData := AntigravityOAuthStateData{
-		ChannelID: req.ChannelID,
+		ChannelID: req.ChannelID.Int(),
 		ProjectID: req.ProjectID,
 		Proxy:     req.Proxy,
 		CreatedAt: time.Now().Unix(),

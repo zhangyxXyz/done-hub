@@ -27,6 +27,8 @@ const (
 	DefaultClientSecret = "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"
 	TokenEndpoint       = "https://oauth2.googleapis.com/token"
 	DefaultScope        = "https://www.googleapis.com/auth/cloud-platform"
+	OAuthUserAgent      = "done-hub-geminicli/1.0"
+	CLIUserAgent        = "GeminiCLI/0.1.5 (Windows; AMD64)"
 )
 
 type GeminiCliProviderFactory struct{}

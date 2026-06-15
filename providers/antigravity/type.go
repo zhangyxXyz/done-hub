@@ -127,6 +127,7 @@ func (c *OAuth2Credentials) Refresh(ctx context.Context, proxyURL string, maxRet
 		}
 
 		req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+		req.Header.Set("User-Agent", AntigravityUserAgent)
 
 		resp, err := client.Do(req)
 		if err != nil {

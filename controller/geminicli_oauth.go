@@ -50,9 +50,9 @@ type OAuthResultData struct {
 
 // StartGeminiCliOAuthRequest 开始 OAuth 认证请求
 type StartGeminiCliOAuthRequest struct {
-	ChannelID int    `json:"channel_id"` // 可选，新建时为 0
-	ProjectID string `json:"project_id"` // 可选，为空时自动检测
-	Proxy     string `json:"proxy"`      // 可选，代理配置（JSON 字符串）
+	ChannelID jsonInt `json:"channel_id"` // 可选，新建时为 0
+	ProjectID string  `json:"project_id"` // 可选，为空时自动检测
+	Proxy     string  `json:"proxy"`      // 可选，代理配置（JSON 字符串）
 }
 
 // StartGeminiCliOAuth 开始 GeminiCli OAuth 认证流程
@@ -74,7 +74,7 @@ func StartGeminiCliOAuth(c *gin.Context) {
 
 	// 保存 state 到缓存（包含代理配置）
 	stateData := OAuthStateData{
-		ChannelID: req.ChannelID,
+		ChannelID: req.ChannelID.Int(),
 		ProjectID: req.ProjectID,
 		Proxy:     req.Proxy, // 保存代理配置，用于后续 token 交换
 		CreatedAt: time.Now().Unix(),
@@ -560,7 +560,7 @@ func enableRequiredAPIs(accessToken, projectID string) error {
 	headers := map[string]string{
 		"Authorization": "Bearer " + accessToken,
 		"Content-Type":  "application/json",
-		"User-Agent":    "done-hub-geminicli/1.0",
+		"User-Agent":    geminicli.OAuthUserAgent,
 	}
 
 	for _, service := range requiredServices {
@@ -635,6 +635,7 @@ func exchangeCodeForToken(code, redirectURI, proxyURL string) (*geminicli.TokenR
 	}
 
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	req.Header.Set("User-Agent", geminicli.OAuthUserAgent)
 
 	// 创建 HTTP 客户端
 	client := &http.Client{Timeout: 30 * time.Second}
@@ -746,7 +747,7 @@ func getUserProjects(accessToken, proxyURL string) ([]GoogleCloudProject, error)
 	}
 
 	req.Header.Set("Authorization", "Bearer "+accessToken)
-	req.Header.Set("User-Agent", "geminicli-oauth/1.0")
+	req.Header.Set("User-Agent", geminicli.OAuthUserAgent)
 
 	// 创建 HTTP 客户端
 	client := &http.Client{Timeout: 30 * time.Second}
@@ -883,7 +884,7 @@ func callLoadCodeAssistAPI(accessToken, proxyURL string) (*LoadCodeAssistRespons
 
 	req.Header.Set("Authorization", "Bearer "+accessToken)
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("User-Agent", "GeminiCLI/0.1.5 (Windows; AMD64)")
+	req.Header.Set("User-Agent", geminicli.CLIUserAgent)
 
 	client := createHTTPClient(proxyURL, 30*time.Second)
 
@@ -978,7 +979,7 @@ func onboardUser(ctx context.Context, accessToken, proxyURL string) (string, err
 
 		req.Header.Set("Authorization", "Bearer "+accessToken)
 		req.Header.Set("Content-Type", "application/json")
-		req.Header.Set("User-Agent", "GeminiCLI/0.1.5 (Windows; AMD64)")
+		req.Header.Set("User-Agent", geminicli.CLIUserAgent)
 
 		resp, err := client.Do(req)
 		if err != nil {
