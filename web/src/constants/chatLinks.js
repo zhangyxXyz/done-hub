@@ -1,13 +1,13 @@
 export const CHAT_LINKS = [
   {
     name: 'ChatGPT Next',
-    url: 'https://app.nextchat.dev/#/?settings={"key":"{key}","url":"{server}"}',
+    url: '/nextchat/#/?settings={"key":"{key}","url":"{server}","customModels":"{models}"}',
     show: true,
-    sort: 1
+    sort: 10
   },
   {
     name: 'chatgpt-web-midjourney-proxy',
-    url: 'https://vercel.ddaiai.com/#/?settings={"key":"{key}","url":"{server}"}',
+    url: '/mjchat/#/?settings={"key":"{key}","url":"{server}"}',
     show: true,
     sort: 2
   },

@@ -90,10 +90,41 @@ var need2Response = map[string]bool{
 	"codex-mini-latest":                true,
 }
 
+func matchModelPattern(modelName string, patterns []string) bool {
+	for _, pattern := range patterns {
+		pattern = strings.TrimSpace(pattern)
+		if pattern == "" {
+			continue
+		}
+		if pattern == modelName {
+			return true
+		}
+		if pattern == "*" {
+			return true
+		}
+		if strings.HasSuffix(pattern, "*") && strings.HasPrefix(modelName, strings.TrimSuffix(pattern, "*")) {
+			return true
+		}
+	}
+
+	return false
+}
+
+func shouldUseResponses(modelName string, channelResponsesModels []string) bool {
+	if need2Response[modelName] {
+		return true
+	}
+
+	if matchModelPattern(modelName, channelResponsesModels) {
+		return true
+	}
+
+	return false
+}
+
 func (r *relayChat) send() (err *types.OpenAIErrorWithStatusCode, done bool) {
-	// 图像生成模型走 chat 入口是非标用法，按 chat 协议处理会把上游 base64 当文本反算成百万级 token、
-	// 计费爆炸；对齐 new-api 渠道降级行为，在 chat 入口分流到 image generations 协议。
-	// 同时查映射后名与原始名，避免渠道做了模型重命名时漏判。
+	// Image generation models through the chat endpoint are non-standard. Route
+	// them to image generations to avoid treating upstream base64 as text tokens.
 	if types.IsImageGenerationModel(r.modelName) || types.IsImageGenerationModel(r.getOriginalModel()) {
 		if imgProvider, ok := r.provider.(providersBase.ImageGenerationsInterface); ok {
 			return r.compatibleSendImage(imgProvider)
@@ -105,7 +136,14 @@ func (r *relayChat) send() (err *types.OpenAIErrorWithStatusCode, done bool) {
 		return
 	}
 
-	if need2Response[r.modelName] {
+	channel := r.provider.GetChannel()
+	var channelResponsesModels []string
+	if channel != nil && channel.ResponsesModels != nil {
+		channelResponsesModels = *channel.ResponsesModels
+	}
+
+	if shouldUseResponses(r.modelName, channelResponsesModels) {
+
 		resProvider, ok := r.provider.(providersBase.ResponsesInterface)
 		if ok {
 			return r.compatibleSend(resProvider)
@@ -357,6 +395,7 @@ func writeChatStreamFrame(c *gin.Context, chunk types.ChatCompletionStreamRespon
 }
 
 func (r *relayChat) compatibleSend(resProvider providersBase.ResponsesInterface) (err *types.OpenAIErrorWithStatusCode, done bool) {
+	r.chatRequest.Model = r.modelName
 	resRequest := r.chatRequest.ToResponsesRequest()
 	resRequest.ConvertChat = true
 

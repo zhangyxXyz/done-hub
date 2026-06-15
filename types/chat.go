@@ -1,6 +1,9 @@
 package types
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"strings"
+)
 
 const (
 	ContentTypeText     = "text"
@@ -138,6 +141,35 @@ func (m *ChatCompletionMessage) ToolToFuncCalls() {
 
 func (m *ChatCompletionMessage) IsSystemRole() bool {
 	return m.Role == ChatMessageRoleSystem || m.Role == ChatMessageRoleDeveloper
+}
+
+func (m ChatCompletionMessage) InstructionContent() string {
+	parts := make([]string, 0)
+	for _, part := range m.ParseContent() {
+		if part.Type != ContentTypeText {
+			continue
+		}
+		text := strings.TrimSpace(part.Text)
+		if text != "" {
+			parts = append(parts, text)
+		}
+	}
+	return strings.Join(parts, "\n")
+}
+
+func stringifyInstruction(value any) string {
+	switch v := value.(type) {
+	case nil:
+		return ""
+	case string:
+		return strings.TrimSpace(v)
+	default:
+		body, err := json.Marshal(v)
+		if err != nil {
+			return ""
+		}
+		return strings.TrimSpace(string(body))
+	}
 }
 
 type ChatMessageImageURL struct {
@@ -504,13 +536,11 @@ type MultimediaData struct {
 func (c *ChatCompletionRequest) ToResponsesRequest() *OpenAIResponsesRequest {
 
 	res := &OpenAIResponsesRequest{
-		Model:             c.Model,
-		MaxOutputTokens:   c.MaxTokens,
-		ParallelToolCalls: c.ParallelToolCalls,
-		Stream:            c.Stream,
-		Temperature:       c.Temperature,
-		ToolChoice:        c.ToolChoice,
-		TopP:              c.TopP,
+		Model:           c.Model,
+		MaxOutputTokens: c.MaxTokens,
+		Stream:          c.Stream,
+		Temperature:     c.Temperature,
+		TopP:            c.TopP,
 	}
 
 	if c.ResponseFormat != nil {
@@ -560,6 +590,8 @@ func (c *ChatCompletionRequest) ToResponsesRequest() *OpenAIResponsesRequest {
 	}
 
 	if len(c.Tools) > 0 {
+		res.ParallelToolCalls = c.ParallelToolCalls
+		res.ToolChoice = c.ToolChoice
 		resTools := make([]ResponsesTools, 0)
 		for _, tool := range c.Tools {
 			if tool.Type == "function" && tool.Function.Name != "" {
@@ -582,8 +614,42 @@ func (c *ChatCompletionRequest) ToResponsesRequest() *OpenAIResponsesRequest {
 		}
 	}
 
+	if c.WebSearchOptions != nil {
+		hasWebSearch := false
+		for _, tool := range res.Tools {
+			if tool.Type == APITollTypeWebSearchPreview || tool.Type == "web_search" {
+				hasWebSearch = true
+				break
+			}
+		}
+		if !hasWebSearch {
+			res.Tools = append(res.Tools, ResponsesTools{
+				Type:              APITollTypeWebSearchPreview,
+				SearchContextSize: c.WebSearchOptions.SearchContextSize,
+				UserLocation:      c.WebSearchOptions.UserLocation,
+			})
+		}
+	}
+
+	instructions := make([]string, 0)
+	if c.Instructions != nil {
+		if instruction := strings.TrimSpace(*c.Instructions); instruction != "" {
+			instructions = append(instructions, instruction)
+		}
+	}
+	if instruction := stringifyInstruction(c.System); instruction != "" {
+		instructions = append(instructions, instruction)
+	}
+
 	inputs := make([]InputResponses, 0)
 	for _, msg := range c.Messages {
+		if msg.IsSystemRole() {
+			if instruction := strings.TrimSpace(msg.InstructionContent()); instruction != "" {
+				instructions = append(instructions, instruction)
+			}
+			continue
+		}
+
 		// 处理ToolCalls
 		if len(msg.ToolCalls) > 0 {
 			for _, tool := range msg.ToolCalls {
@@ -649,6 +715,9 @@ func (c *ChatCompletionRequest) ToResponsesRequest() *OpenAIResponsesRequest {
 
 	if len(inputs) > 0 {
 		res.Input = inputs
+	}
+	if len(instructions) > 0 {
+		res.Instructions = strings.Join(instructions, "\n\n")
 	}
 
 	return res

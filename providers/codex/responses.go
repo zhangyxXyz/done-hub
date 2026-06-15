@@ -3,6 +3,7 @@ package codex
 import (
 	"done-hub/common"
 	"done-hub/common/requester"
+	"done-hub/common/utils"
 	"done-hub/types"
 	"encoding/json"
 	"net/http"
@@ -70,6 +71,10 @@ func (p *CodexProvider) CreateResponses(request *types.OpenAIResponsesRequest) (
 
 // CreateResponsesStream 创建 Responses 完成（流式）
 func (p *CodexProvider) CreateResponsesStream(request *types.OpenAIResponsesRequest) (requester.StreamReaderInterface[string], *types.OpenAIErrorWithStatusCode) {
+	chatRequest := &types.ChatCompletionRequest{
+		Model:  request.Model,
+		Stream: request.Stream,
+	}
 	// Codex API 特定参数设置
 	p.prepareCodexRequest(request)
 
@@ -95,6 +100,14 @@ func (p *CodexProvider) CreateResponsesStream(request *types.OpenAIResponsesRequ
 	}
 
 	// 使用 RequestNoTrimStream 保持原始格式（包括 event: 行）
+	if request.ConvertChat {
+		chatHandler := &CodexStreamHandler{
+			Usage:   p.Usage,
+			Request: chatRequest,
+			Context: p.Context,
+		}
+		return requester.RequestStream(p.Requester, resp, chatHandler.HandlerStream)
+	}
 	return requester.RequestNoTrimStream(p.Requester, resp, handler.HandlerResponsesStream)
 }
 
@@ -150,6 +163,7 @@ func (p *CodexProvider) adaptCodexCLI(request *types.OpenAIResponsesRequest) {
 // collectResponsesStreamResponse 收集流式响应并转换为非流式格式
 func (p *CodexProvider) collectResponsesStreamResponse(stream requester.StreamReaderInterface[string]) (*types.OpenAIResponsesResponses, *types.OpenAIErrorWithStatusCode) {
 	var response *types.OpenAIResponsesResponses
+	var outputText strings.Builder
 
 	dataChan, errChan := stream.Recv()
 
@@ -174,6 +188,12 @@ func (p *CodexProvider) collectResponsesStreamResponse(stream requester.StreamRe
 			var streamResp types.OpenAIResponsesStreamResponses
 			if err := json.Unmarshal([]byte(jsonData), &streamResp); err != nil {
 				continue
+			}
+
+			if streamResp.Type == "response.output_text.delta" {
+				if delta, ok := streamResp.Delta.(string); ok {
+					outputText.WriteString(delta)
+				}
 			}
 
 			// 提取完整响应（response.completed 事件）
@@ -203,6 +223,21 @@ func (p *CodexProvider) collectResponsesStreamResponse(stream requester.StreamRe
 buildResponse:
 	if response == nil {
 		return nil, common.StringErrorWrapperLocal("no response received", "no_response", http.StatusInternalServerError)
+	}
+
+	if outputText.Len() > 0 && response.GetContent() == "" {
+		response.Output = append(response.Output, types.ResponsesOutput{
+			Type:   types.InputTypeMessage,
+			ID:     "msg_" + utils.GetRandomString(48),
+			Status: types.ResponseStatusCompleted,
+			Role:   types.ChatMessageRoleAssistant,
+			Content: []types.ContentResponses{
+				{
+					Type: types.ContentTypeOutputText,
+					Text: outputText.String(),
+				},
+			},
+		})
 	}
 
 	return response, nil

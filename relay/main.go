@@ -20,6 +20,9 @@ import (
 )
 
 func Relay(c *gin.Context) {
+	finishRelayIODebug := beginRelayIODebug(c)
+	defer finishRelayIODebug()
+
 	// 在请求完成后清理缓存的请求体，防止内存泄漏
 	defer func() {
 		c.Set(config.GinRequestBodyKey, nil)

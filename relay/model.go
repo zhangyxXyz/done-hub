@@ -2,6 +2,7 @@ package relay
 
 import (
 	"done-hub/common"
+	"done-hub/common/config"
 	"done-hub/common/utils"
 	"done-hub/model"
 	"done-hub/providers/claude"
@@ -196,7 +197,7 @@ func ListModelsForAdmin(c *gin.Context) {
 			Id:      modelId,
 			Object:  "model",
 			Created: 1677649963,
-			OwnedBy: getModelOwnedBy(price.ChannelType),
+			OwnedBy: getModelOwnedByForModel(modelId, price.ChannelType),
 		})
 	}
 	// 根据 OwnedBy 排序
@@ -243,6 +244,13 @@ func getModelOwnedBy(channelType int) (ownedBy *string) {
 	return &model.UnknownOwnedBy
 }
 
+func getModelOwnedByForModel(modelName string, channelType int) (ownedBy *string) {
+	if inferredChannelType := model.InferModelChannelType(modelName); inferredChannelType != config.ChannelTypeUnknown {
+		channelType = inferredChannelType
+	}
+	return getModelOwnedBy(channelType)
+}
+
 func getOpenAIModelWithName(modelName string) *OpenAIModels {
 	price := model.PricingInstance.GetPrice(modelName)
 
@@ -250,7 +258,7 @@ func getOpenAIModelWithName(modelName string) *OpenAIModels {
 		Id:      modelName,
 		Object:  "model",
 		Created: 1677649963,
-		OwnedBy: getModelOwnedBy(price.ChannelType),
+		OwnedBy: getModelOwnedByForModel(modelName, price.ChannelType),
 	}
 }
 
@@ -313,7 +321,7 @@ func getAvailableModels(groupName string) map[string]*AvailableModelResponse {
 			price := model.PricingInstance.GetPrice(modelName)
 			availableModels[modelName] = &AvailableModelResponse{
 				Groups:  groups,
-				OwnedBy: *getModelOwnedBy(price.ChannelType),
+				OwnedBy: *getModelOwnedByForModel(modelName, price.ChannelType),
 				Price:   price,
 			}
 		}

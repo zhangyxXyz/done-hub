@@ -33,6 +33,7 @@ type Quota struct {
 	channelId        int
 	tokenId          int
 	unlimitedQuota   bool
+	tokenSetting     *model.TokenSetting
 	HandelStatus     bool
 
 	startTime         time.Time
@@ -50,6 +51,7 @@ func NewQuota(c *gin.Context, modelName string, promptTokens int) *Quota {
 		channelId:      c.GetInt("channel_id"),
 		tokenId:        c.GetInt("token_id"),
 		unlimitedQuota: c.GetBool("token_unlimited_quota"),
+		tokenSetting:   getTokenSetting(c),
 		HandelStatus:   false,
 		isBackupGroup:  isBackupGroup, // 记录是否使用备用分组
 	}
@@ -73,6 +75,18 @@ func NewQuota(c *gin.Context, modelName string, promptTokens int) *Quota {
 
 	return quota
 
+}
+
+func getTokenSetting(c *gin.Context) *model.TokenSetting {
+	value, exists := c.Get("token_setting")
+	if !exists {
+		return nil
+	}
+	setting, ok := value.(*model.TokenSetting)
+	if !ok {
+		return nil
+	}
+	return setting
 }
 
 func (q *Quota) PreQuotaConsumption() *types.OpenAIErrorWithStatusCode {
@@ -187,6 +201,9 @@ func (q *Quota) completedQuotaConsumption(usage *types.Usage, tokenName string, 
 		sourceIp,
 	)
 	model.UpdateUserUsedQuotaAndRequestCount(q.userId, quota)
+	if q.tokenSetting != nil {
+		model.CheckTokenUsageAlert(ctx, q.tokenId, q.userId, tokenName, quota, q.tokenSetting.UsageAlert)
+	}
 
 	return quotaErr
 }

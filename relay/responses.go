@@ -71,7 +71,12 @@ func (r *relayResponses) send() (err *types.OpenAIErrorWithStatusCode, done bool
 
 	channel := r.provider.GetChannel()
 	responsesProvider, ok := r.provider.(providersBase.ResponsesInterface)
-	if !ok || channel.CompatibleResponse || !r.provider.GetSupportedResponse() {
+	var compatibleResponseModels []string
+	if channel != nil && channel.CompatibleResponseModels != nil {
+		compatibleResponseModels = *channel.CompatibleResponseModels
+	}
+	legacyCompatibleResponse := channel != nil && channel.CompatibleResponse
+	if !ok || legacyCompatibleResponse || matchModelPattern(r.modelName, compatibleResponseModels) || !r.provider.GetSupportedResponse() {
 		// 做一层Chat的兼容
 		chatProvider, ok := r.provider.(providersBase.ChatInterface)
 		if !ok {

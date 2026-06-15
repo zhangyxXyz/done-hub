@@ -24,6 +24,7 @@ type OpenAIResponsesStreamHandler struct {
 
 	searchType string
 	toolIndex  int
+	textDelta  bool
 
 	// SSE 事件缓冲
 	eventBuffer strings.Builder
@@ -380,6 +381,9 @@ func (h *OpenAIResponsesStreamHandler) HandlerChatStream(rawLine *[]byte, dataCh
 	case "response.output_text.delta": // 处理文本输出的增量
 		delta, ok := openaiResponse.Delta.(string)
 		if ok {
+			if delta != "" {
+				h.textDelta = true
+			}
 			h.Usage.TextBuilder.WriteString(delta)
 		}
 		chatRes.Choices = append(chatRes.Choices, types.ChatCompletionStreamChoice{
@@ -389,6 +393,17 @@ func (h *OpenAIResponsesStreamHandler) HandlerChatStream(rawLine *[]byte, dataCh
 			},
 		})
 		needOutput = true
+	case "response.output_text.done":
+		if !h.textDelta && openaiResponse.Text != nil && *openaiResponse.Text != "" {
+			h.Usage.TextBuilder.WriteString(*openaiResponse.Text)
+			chatRes.Choices = append(chatRes.Choices, types.ChatCompletionStreamChoice{
+				Index: 0,
+				Delta: types.ChatCompletionStreamChoiceDelta{
+					Content: *openaiResponse.Text,
+				},
+			})
+			needOutput = true
+		}
 	case "response.reasoning_summary_text.delta": // 处理文本输出的增量
 		delta, ok := openaiResponse.Delta.(string)
 		if ok {
