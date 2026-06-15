@@ -45,7 +45,7 @@ func (s *StmpConfig) Send(to, subject, body string) error {
 	message.Subject(subject)
 	message.SetGenHeader("References", s.getReferences())
 	message.SetBodyString(mail.TypeTextHTML, body)
-	message.SetUserAgent(fmt.Sprintf("Done Hub %s // https://github.com/deanxv/done-hub", config.Version))
+	message.SetUserAgent(fmt.Sprintf("Done Hub %s // https://github.com/zhangyxXyz/done-hub", config.Version))
 
 	client, err := mail.NewClient(
 		s.Host,
@@ -175,6 +175,45 @@ func SendQuotaWarningCodeEmail(userName, email string, quota int, noMoreQuota bo
 	content := fmt.Sprintf(contentTemp, userName, subject, quota, topUpLink, topUpLink)
 
 	return stmp.Render(email, subject, content)
+}
+
+func SendTokenUsageAlertEmail(userName, email, tokenName string, windowSeconds int, thresholdQuota int, usedQuota int) error {
+	stmp, err := GetSystemStmp()
+
+	if err != nil {
+		return err
+	}
+
+	windowText := formatDurationText(windowSeconds)
+	contentTemp := `<p style="font-size: 30px">Hi <strong>%s,</strong></p>
+		<p>
+			您的令牌 <strong>%s</strong> 在最近 %s 内的消费额度已超过提醒阈值。
+		</p>
+		<p>
+			当前窗口消费：<strong>%s</strong><br>
+			提醒阈值：<strong>%s</strong>
+		</p>
+		<p style="color: #858585; padding-top: 15px;">
+			如果这是预期内的高频调用，可以在令牌编辑页面调整提醒阈值或关闭提醒。
+		</p>`
+
+	subject := fmt.Sprintf("%s 令牌用量提醒", config.SystemName)
+	content := fmt.Sprintf(contentTemp, userName, tokenName, windowText, common.LogQuota(usedQuota), common.LogQuota(thresholdQuota))
+
+	return stmp.Render(email, subject, content)
+}
+
+func formatDurationText(seconds int) string {
+	if seconds%86400 == 0 {
+		return fmt.Sprintf("%d 天", seconds/86400)
+	}
+	if seconds%3600 == 0 {
+		return fmt.Sprintf("%d 小时", seconds/3600)
+	}
+	if seconds%60 == 0 {
+		return fmt.Sprintf("%d 分钟", seconds/60)
+	}
+	return fmt.Sprintf("%d 秒", seconds)
 }
 
 func DialAndSend(c *mail.Client, messages ...*mail.Msg) error {
