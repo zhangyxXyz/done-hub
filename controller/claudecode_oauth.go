@@ -35,7 +35,7 @@ const (
 	ClaudeCodeAuthorizeURL = "https://claude.ai/oauth/authorize"
 	ClaudeCodeTokenURL     = claudecode.TokenEndpoint
 	ClaudeCodeClientID     = "9d1c250a-e61b-44d9-88ed-5944d1962f5e"
-	ClaudeCodeRedirectURI  = "https://console.anthropic.com/oauth/code/callback"
+	ClaudeCodeRedirectURI  = claudecode.RedirectURI
 	ClaudeCodeScopes       = claudecode.DefaultScope
 )
 
@@ -239,7 +239,8 @@ func ClaudeCodeOAuthCallback(c *gin.Context) {
 		return
 	}
 
-	state := strings.TrimSpace(req.SessionID)
+	sessionState := strings.TrimSpace(req.SessionID)
+	state := sessionState
 	if callbackState != "" {
 		state = callbackState
 	}
@@ -256,7 +257,7 @@ func ClaudeCodeOAuthCallback(c *gin.Context) {
 	cache.DeleteCache(cacheKey)
 
 	// 使用 code 交换 token（使用会话中保存的代理配置）
-	tokenResp, err := exchangeClaudeCodeForToken(code, stateData.CodeVerifier, state, stateData.Proxy)
+	tokenResp, err := exchangeClaudeCodeForToken(code, stateData.CodeVerifier, callbackState, stateData.Proxy)
 	if err != nil {
 		logger.SysError(fmt.Sprintf("Failed to exchange code for token: %s", err.Error()))
 		common.APIRespondWithError(c, http.StatusOK, fmt.Errorf("failed to exchange code for token: %w", err))
@@ -283,6 +284,14 @@ func ClaudeCodeOAuthCallback(c *gin.Context) {
 		logger.SysError(fmt.Sprintf("Failed to serialize credentials: %s", err.Error()))
 		common.APIRespondWithError(c, http.StatusOK, fmt.Errorf("failed to serialize credentials: %w", err))
 		return
+	}
+
+	if stateData.ChannelID > 0 {
+		if err := model.UpdateChannelKey(stateData.ChannelID, credentialsJSON); err != nil {
+			logger.SysError(fmt.Sprintf("Failed to update ClaudeCode credentials for channel %d: %s", stateData.ChannelID, err.Error()))
+			common.APIRespondWithError(c, http.StatusOK, fmt.Errorf("failed to update channel credentials: %w", err))
+			return
+		}
 	}
 
 	// 返回成功响应
@@ -370,7 +379,9 @@ func exchangeClaudeCodeForToken(code, codeVerifier, state, proxyURL string) (*cl
 		"code":          code,
 		"redirect_uri":  ClaudeCodeRedirectURI,
 		"code_verifier": codeVerifier,
-		"state":         state,
+	}
+	if state != "" {
+		requestBody["state"] = state
 	}
 
 	jsonData, err := json.Marshal(requestBody)
@@ -379,14 +390,13 @@ func exchangeClaudeCodeForToken(code, codeVerifier, state, proxyURL string) (*cl
 	}
 
 	// 创建请求
-	req, err := http.NewRequest("POST", ClaudeCodeTokenURL, bytes.NewReader(jsonData))
+	req, err := http.NewRequest("POST", ClaudeCodeTokenURL, bytes.NewBuffer(jsonData))
 	if err != nil {
 		return nil, fmt.Errorf("failed to create request: %w", err)
 	}
 
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("User-Agent", claudecode.TokenUserAgent)
-	req.Header.Set("anthropic-beta", claudecode.TokenBetaHeader)
+	req.Header.Set("User-Agent", claudecode.OAuthUserAgent)
 	req.Header.Set("Accept", "application/json, text/plain, */*")
 	req.Header.Set("Accept-Language", "en-US,en;q=0.9")
 	req.Header.Set("Referer", "https://claude.ai/")

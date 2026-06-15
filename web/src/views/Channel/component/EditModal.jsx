@@ -134,7 +134,8 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, isTag, model
   const [codexSessionId, setCodexSessionId] = useState('')
   const [codexAuthCode, setCodexAuthCode] = useState('')
   const [codexSubmitting, setCodexSubmitting] = useState(false)
-  const oauthChannelId = Number.isFinite(Number(channelId)) ? Number(channelId) : 0
+  const getOAuthChannelId = (value) => Number.isFinite(Number(value)) ? Number(value) : 0
+  const oauthChannelId = getOAuthChannelId(channelId)
   const oauthSuccessMessage = channelId
     ? 'OAuth 授权成功！新凭证已自动填充，请保存渠道设置后覆盖现有凭证'
     : 'OAuth 授权成功！凭证已自动填充'
@@ -524,7 +525,7 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, isTag, model
   }
 
   // ClaudeCode OAuth 授权处理 - 步骤1: 获取授权链接
-  const handleClaudeCodeOAuth = async(proxy) => {
+  const handleClaudeCodeOAuth = async(proxy, targetChannelId = oauthChannelId) => {
     const trimmedProxy = proxy ? proxy.trim() : ''
 
     try {
@@ -532,7 +533,7 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, isTag, model
 
       // 调用后端 API 生成授权 URL（传递代理配置）
       const res = await API.post('/api/claudecode/oauth/start', {
-        channel_id: oauthChannelId,
+        channel_id: getOAuthChannelId(targetChannelId),
         proxy: trimmedProxy
       })
 
@@ -609,7 +610,7 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, isTag, model
   }
 
   // Codex OAuth 授权处理 - 步骤1: 获取授权链接
-  const handleCodexOAuth = async(proxy) => {
+  const handleCodexOAuth = async(proxy, targetChannelId = oauthChannelId) => {
     const trimmedProxy = proxy ? proxy.trim() : ''
 
     try {
@@ -617,7 +618,7 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, isTag, model
 
       // 调用后端 API 生成授权 URL（传递代理配置）
       const res = await API.post('/api/codex/oauth/start', {
-        channel_id: oauthChannelId,
+        channel_id: getOAuthChannelId(targetChannelId),
         proxy: trimmedProxy
       })
 
@@ -1544,7 +1545,7 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, isTag, model
                       color={hasExistingOAuthCredentials ? 'warning' : 'primary'}
                       fullWidth
                       disabled={claudeCodeSubmitting}
-                      onClick={() => handleClaudeCodeOAuth(values.proxy)}
+                      onClick={() => handleClaudeCodeOAuth(values.proxy, values.id)}
                       startIcon={claudeCodeSubmitting ? null : <Icon icon="simple-icons:anthropic"/>}
                     >
                       {claudeCodeSubmitting ? '获取授权链接中...' : (hasExistingOAuthCredentials ? '重新 OAuth 授权' : 'OAuth 授权')}
@@ -1641,7 +1642,7 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, isTag, model
                         color={hasExistingOAuthCredentials ? 'warning' : 'primary'}
                         fullWidth
                         disabled={codexSubmitting}
-                        onClick={() => handleCodexOAuth(values.proxy)}
+                        onClick={() => handleCodexOAuth(values.proxy, values.id)}
                         startIcon={codexSubmitting ? null : <Icon icon="simple-icons:openai"/>}
                       >
                       {codexSubmitting ? '获取授权链接中...' : (hasExistingOAuthCredentials ? '重新 OAuth 授权' : 'OAuth 授权')}

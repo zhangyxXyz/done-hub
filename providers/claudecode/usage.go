@@ -35,6 +35,11 @@ type usageCacheEntry struct {
 	FetchedAt int64       `json:"fetched_at"`
 }
 
+type usageErrorCacheEntry struct {
+	Message   string `json:"message"`
+	FetchedAt int64  `json:"fetched_at"`
+}
+
 type usageWindowUnavailableError struct {
 	message string
 }
@@ -54,13 +59,20 @@ const (
 )
 
 func (p *ClaudeCodeProvider) RequestUsage() (UsageStatus, int, error) {
-	headers := p.GetRequestHeaders()
-	if _, hasAuth := headers["Authorization"]; !hasAuth {
-		token, err := p.GetToken()
-		if err != nil {
-			return nil, 0, fmt.Errorf("failed to get token: %w", err)
+	token, err := p.GetTokenWithRefreshRetries(0)
+	if err != nil {
+		return nil, 0, fmt.Errorf("failed to get token: %w", err)
+	}
+
+	headers := map[string]string{
+		"Authorization":     "Bearer " + token,
+		"anthropic-version": "2023-06-01",
+	}
+	if p.Context != nil {
+		anthropicVersion := p.Context.Request.Header.Get("anthropic-version")
+		if anthropicVersion != "" {
+			headers["anthropic-version"] = anthropicVersion
 		}
-		headers["Authorization"] = "Bearer " + token
 	}
 	if userAgent := p.GetUsageCacheConfig().UserAgent; userAgent != "" {
 		headers["user-agent"] = userAgent
@@ -125,6 +137,7 @@ func (p *ClaudeCodeProvider) RequestUsageWithCache() (*UsageResult, error) {
 
 	cacheKey := fmt.Sprintf("claudecode_usage:%d", p.Channel.Id)
 	staleCacheKey := fmt.Sprintf("claudecode_usage_stale:%d", p.Channel.Id)
+	errorCacheKey := fmt.Sprintf("claudecode_usage_error:%d", p.Channel.Id)
 
 	if entry, err := cache.GetCache[usageCacheEntry](cacheKey); err == nil && entry.Usage != nil {
 		return &UsageResult{
@@ -134,6 +147,10 @@ func (p *ClaudeCodeProvider) RequestUsageWithCache() (*UsageResult, error) {
 			Stale:      false,
 			FetchedAt:  entry.FetchedAt,
 		}, nil
+	}
+
+	if entry, err := cache.GetCache[usageErrorCacheEntry](errorCacheKey); err == nil && entry.Message != "" {
+		return nil, fmt.Errorf("%s", entry.Message)
 	}
 
 	usage, statusCode, err := p.RequestUsage()
@@ -161,6 +178,10 @@ func (p *ClaudeCodeProvider) RequestUsageWithCache() (*UsageResult, error) {
 				Warning:    err.Error(),
 			}, nil
 		}
+		cache.SetCache(errorCacheKey, usageErrorCacheEntry{
+			Message:   err.Error(),
+			FetchedAt: time.Now().Unix(),
+		}, usageErrorCacheDuration(cacheConfig.TTLSeconds))
 		return nil, err
 	}
 
@@ -181,6 +202,19 @@ func (p *ClaudeCodeProvider) RequestUsageWithCache() (*UsageResult, error) {
 		Stale:      false,
 		FetchedAt:  entry.FetchedAt,
 	}, nil
+}
+
+func usageErrorCacheDuration(ttlSeconds int) time.Duration {
+	if ttlSeconds <= 0 {
+		return 30 * time.Second
+	}
+	if ttlSeconds < 30 {
+		return time.Duration(ttlSeconds) * time.Second
+	}
+	if ttlSeconds > 120 {
+		return 120 * time.Second
+	}
+	return time.Duration(ttlSeconds) * time.Second
 }
 
 func (p *ClaudeCodeProvider) GetUsageCacheConfig() UsageCacheConfig {

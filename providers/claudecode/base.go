@@ -24,9 +24,11 @@ const TokenCacheKey = "api_token:claudecode"
 // OAuth2 配置常量
 const (
 	DefaultClientID = "9d1c250a-e61b-44d9-88ed-5944d1962f5e"
-	TokenEndpoint   = "https://console.anthropic.com/v1/oauth/token"
-	DefaultScope    = "org:create_api_key user:profile user:inference"
+	TokenEndpoint   = "https://platform.claude.com/v1/oauth/token"
+	RedirectURI     = "https://platform.claude.com/oauth/code/callback"
+	DefaultScope    = "org:create_api_key user:profile user:inference user:sessions:claude_code user:mcp_servers user:file_upload"
 	TokenUserAgent  = "anthropic"
+	OAuthUserAgent  = "axios/1.13.6"
 	TokenBetaHeader = "oauth-2025-04-20"
 )
 
@@ -186,6 +188,17 @@ func (p *ClaudeCodeProvider) handleTokenError(err error) *types.OpenAIErrorWithS
 }
 
 func (p *ClaudeCodeProvider) GetToken() (string, error) {
+	return p.getToken(3)
+}
+
+func (p *ClaudeCodeProvider) GetTokenWithRefreshRetries(maxRetries int) (string, error) {
+	if maxRetries < 0 {
+		maxRetries = 0
+	}
+	return p.getToken(maxRetries)
+}
+
+func (p *ClaudeCodeProvider) getToken(maxRetries int) (string, error) {
 	var ctx context.Context
 	if p.Context != nil {
 		ctx = p.Context.Request.Context()
@@ -215,7 +228,7 @@ func (p *ClaudeCodeProvider) GetToken() (string, error) {
 	if p.Credentials.IsExpired() {
 		proxyURL := p.Channel.GetProxy()
 
-		if err := p.Credentials.Refresh(ctx, proxyURL, 3); err != nil {
+		if err := p.Credentials.Refresh(ctx, proxyURL, maxRetries); err != nil {
 			logger.LogError(ctx, fmt.Sprintf("Failed to refresh claudecode token: %s", err.Error()))
 			return "", fmt.Errorf("failed to refresh token: %w", err)
 		}
