@@ -5995,8 +5995,8 @@
     "model": "tencent/hy3-preview",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.063,
-    "output": 0.21
+    "input": 0.066,
+    "output": 0.26
   },
   {
     "model": "tencent/hy3-preview:free",
@@ -6282,7 +6282,7 @@
     "model": "z-ai/glm-4.5-air",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.125,
+    "input": 0.13,
     "output": 0.85
   },
   {
@@ -6354,6 +6354,13 @@
     "channel_type": 20,
     "input": 0.98,
     "output": 3.08
+  },
+  {
+    "model": "z-ai/glm-5.2",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 1.4,
+    "output": 4.4
   },
   {
     "model": "z-ai/glm-5v-turbo",
