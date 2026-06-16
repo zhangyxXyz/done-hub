@@ -7397,7 +7397,7 @@
         "name": "Qwen: Qwen3.5-35B-A3B",
         "description": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 81920,
         "input_modalities": [
           "text",
           "image",
@@ -7425,8 +7425,8 @@
         "model": "qwen/qwen3.5-397b-a17b",
         "name": "Qwen: Qwen3.5 397B A17B",
         "description": "The Qwen3.5 series 397B-A17B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. It delivers...",
-        "context_length": 262144,
-        "max_tokens": 65536,
+        "context_length": 256000,
+        "max_tokens": 0,
         "input_modalities": [
           "text",
           "image",
