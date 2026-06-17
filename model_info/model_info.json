@@ -6388,7 +6388,7 @@
       "model_info": {
         "model": "poolside/laguna-xs.2:free",
         "name": "Poolside: Laguna XS.2 (free)",
-        "description": "Laguna XS.2 is the second-generation model in the XS size class from [Poolside](https://poolside.ai), their efficient coding agent series. It combines tool calling and reasoning capabilities with a compact footprint, offering...",
+        "description": "Laguna XS.2 is the second-generation model in the XS size class from [Poolside](https://poolside.ai/), their efficient coding agent series. It combines tool calling and reasoning capabilities with a compact footprint, offering...",
         "context_length": 262144,
         "max_tokens": 32768,
         "input_modalities": [
@@ -8342,32 +8342,6 @@
       }
     },
     {
-      "model": "xiaomi/mimo-v2-flash",
-      "model_info": {
-        "model": "xiaomi/mimo-v2-flash",
-        "name": "Xiaomi: MiMo-V2-Flash",
-        "description": "MiMo-V2-Flash is an open-source foundation language model developed by Xiaomi. It is a Mixture-of-Experts model with 309B total parameters and 15B active parameters, adopting hybrid attention architecture. MiMo-V2-Flash supports a...",
-        "context_length": 262144,
-        "max_tokens": 65536,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/xiaomi/mimo-v2-flash",
-          "https://openrouter.ai/api/v1/models/xiaomi/mimo-v2-flash-20251210/endpoints"
-        ]
-      }
-    },
-    {
       "model": "xiaomi/mimo-v2.5",
       "model_info": {
         "model": "xiaomi/mimo-v2.5",
@@ -8693,7 +8667,7 @@
       "model_info": {
         "model": "z-ai/glm-5.2",
         "name": "Z.ai: GLM 5.2",
-        "description": "GLM-5.2 is Z.ai’s flagship model for the era of long-horizon tasks. With a truly usable 1M-token context window, it can handle project-level engineering context, execute long-running tasks more reliably, follow...",
+        "description": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...",
         "context_length": 1048576,
         "max_tokens": 262144,
         "input_modalities": [
