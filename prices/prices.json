@@ -3419,8 +3419,8 @@
     "model": "deepseek/deepseek-v4-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.098,
-    "output": 0.196
+    "input": 0.09,
+    "output": 0.18
   },
   {
     "model": "deepseek/deepseek-v4-pro",
@@ -4511,7 +4511,7 @@
     "model": "moonshotai/kimi-k2.7-code",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.75,
+    "input": 0.74,
     "output": 3.5
   },
   {
@@ -4687,7 +4687,7 @@
     "type": "tokens",
     "channel_type": 20,
     "input": 0.5,
-    "output": 2.5
+    "output": 2.2
   },
   {
     "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
