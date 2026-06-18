@@ -5383,11 +5383,25 @@
     "output": 8
   },
   {
+    "model": "poolside/laguna-m.1",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.2,
+    "output": 0.4
+  },
+  {
     "model": "poolside/laguna-m.1:free",
     "type": "tokens",
     "channel_type": 20,
     "input": 0,
     "output": 0
+  },
+  {
+    "model": "poolside/laguna-xs.2",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.1,
+    "output": 0.2
   },
   {
     "model": "poolside/laguna-xs.2:free",
@@ -5806,7 +5820,7 @@
     "model": "qwen/qwen3.6-35b-a3b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.15,
+    "input": 0.14,
     "output": 1
   },
   {
@@ -8711,15 +8725,15 @@
     "model": "moonshot.kimi-k2-thinking",
     "type": "tokens",
     "channel_type": 32,
-    "input": 6,
-    "output": 25
+    "input": 0.6,
+    "output": 2.5
   },
   {
     "model": "moonshotai.kimi-k2.5",
     "type": "tokens",
     "channel_type": 32,
-    "input": 6,
-    "output": 30
+    "input": 0.6,
+    "output": 3
   },
   {
     "model": "openai.gpt-oss-120b-1:0",

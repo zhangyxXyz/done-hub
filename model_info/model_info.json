@@ -1014,7 +1014,8 @@
         ],
         "tags": [
           "openrouter",
-          "vision"
+          "vision",
+          "structured_outputs"
         ],
         "support_url": [
           "https://openrouter.ai/models/bytedance/ui-tars-1.5-7b",
@@ -2363,7 +2364,8 @@
           "text"
         ],
         "tags": [
-          "openrouter"
+          "openrouter",
+          "structured_outputs"
         ],
         "support_url": [
           "https://openrouter.ai/models/ibm-granite/granite-4.0-h-micro",
@@ -2706,7 +2708,8 @@
           "text"
         ],
         "tags": [
-          "openrouter"
+          "openrouter",
+          "structured_outputs"
         ],
         "support_url": [
           "https://openrouter.ai/models/meta-llama/llama-3-8b-instruct",
@@ -3970,7 +3973,8 @@
           "text"
         ],
         "tags": [
-          "openrouter"
+          "openrouter",
+          "structured_outputs"
         ],
         "support_url": [
           "https://openrouter.ai/models/morph/morph-v3-large",
@@ -6446,11 +6450,11 @@
       }
     },
     {
-      "model": "poolside/laguna-m.1:free",
+      "model": "poolside/laguna-m.1",
       "model_info": {
-        "model": "poolside/laguna-m.1:free",
-        "name": "Poolside: Laguna M.1 (free)",
-        "description": "Laguna M.1 is the flagship coding agent model from [Poolside](https://poolside.ai), optimized for complex software engineering tasks. Designed for agentic coding workflows, it supports tool calling and reasoning, with a 128K...",
+        "model": "poolside/laguna-m.1",
+        "name": "Poolside: Laguna M.1",
+        "description": "Laguna M.1 is the flagship coding agent model from [Poolside](https://poolside.ai/), optimized for complex software engineering tasks. Designed for agentic coding workflows, it supports tool calling and reasoning, with a 256K...",
         "context_length": 262144,
         "max_tokens": 32768,
         "input_modalities": [
@@ -6466,8 +6470,59 @@
           "structured_outputs"
         ],
         "support_url": [
+          "https://openrouter.ai/models/poolside/laguna-m.1",
+          "https://openrouter.ai/api/v1/models/poolside/laguna-m.1-20260312/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "poolside/laguna-m.1:free",
+      "model_info": {
+        "model": "poolside/laguna-m.1:free",
+        "name": "Poolside: Laguna M.1 (free)",
+        "description": "Laguna M.1 is the flagship coding agent model from [Poolside](https://poolside.ai/), optimized for complex software engineering tasks. Designed for agentic coding workflows, it supports tool calling and reasoning, with a 256K...",
+        "context_length": 262144,
+        "max_tokens": 32768,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning"
+        ],
+        "support_url": [
           "https://openrouter.ai/models/poolside/laguna-m.1:free",
           "https://openrouter.ai/api/v1/models/poolside/laguna-m.1-20260312/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "poolside/laguna-xs.2",
+      "model_info": {
+        "model": "poolside/laguna-xs.2",
+        "name": "Poolside: Laguna XS.2",
+        "description": "Laguna XS.2 is the second-generation model in the XS size class from [Poolside](https://poolside.ai/), their efficient coding agent series. It combines tool calling and reasoning capabilities with a compact footprint, offering...",
+        "context_length": 262144,
+        "max_tokens": 32768,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/poolside/laguna-xs.2",
+          "https://openrouter.ai/api/v1/models/poolside/laguna-xs.2-20260421/endpoints"
         ]
       }
     },
@@ -6488,8 +6543,7 @@
         "tags": [
           "openrouter",
           "tools",
-          "reasoning",
-          "structured_outputs"
+          "reasoning"
         ],
         "support_url": [
           "https://openrouter.ai/models/poolside/laguna-xs.2:free",
@@ -7463,7 +7517,7 @@
         "name": "Qwen: Qwen3.5-35B-A3B",
         "description": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall...",
         "context_length": 262144,
-        "max_tokens": 81920,
+        "max_tokens": 262144,
         "input_modalities": [
           "text",
           "image",
@@ -7917,7 +7971,8 @@
         ],
         "tags": [
           "openrouter",
-          "tools"
+          "tools",
+          "structured_outputs"
         ],
         "support_url": [
           "https://openrouter.ai/models/relace/relace-search",
@@ -7964,7 +8019,8 @@
           "text"
         ],
         "tags": [
-          "openrouter"
+          "openrouter",
+          "structured_outputs"
         ],
         "support_url": [
           "https://openrouter.ai/models/sao10k/l3.1-70b-hanami-x1",
@@ -8092,7 +8148,8 @@
         ],
         "tags": [
           "openrouter",
-          "reasoning"
+          "reasoning",
+          "structured_outputs"
         ],
         "support_url": [
           "https://openrouter.ai/models/switchpoint/router",
@@ -8214,7 +8271,8 @@
           "text"
         ],
         "tags": [
-          "openrouter"
+          "openrouter",
+          "structured_outputs"
         ],
         "support_url": [
           "https://openrouter.ai/models/thedrummer/skyfall-36b-v2",
@@ -8761,7 +8819,7 @@
         "name": "Z.ai: GLM 5.2",
         "description": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...",
         "context_length": 1048576,
-        "max_tokens": 262144,
+        "max_tokens": 524288,
         "input_modalities": [
           "text"
         ],
