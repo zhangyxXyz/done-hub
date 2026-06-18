@@ -1145,6 +1145,31 @@
       }
     },
     {
+      "model": "cohere/north-mini-code:free",
+      "model_info": {
+        "model": "cohere/north-mini-code:free",
+        "name": "Cohere: North Mini Code (free)",
+        "description": "North Mini Code is Cohere's first agentic coding model and the debut of its North family. A sparse mixture-of-experts model with 30B total parameters and 3B active, it is optimized...",
+        "context_length": 256000,
+        "max_tokens": 64000,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/cohere/north-mini-code:free",
+          "https://openrouter.ai/api/v1/models/cohere/north-mini-code-20260617/endpoints"
+        ]
+      }
+    },
+    {
       "model": "deepcogito/cogito-v2.1-671b",
       "model_info": {
         "model": "deepcogito/cogito-v2.1-671b",
@@ -1515,7 +1540,7 @@
         "name": "Google: Nano Banana (Gemini 2.5 Flash Image)",
         "description": "Gemini 2.5 Flash Image, a.k.a. \"Nano Banana,\" is now generally available. It is a state of the art image generation model with contextual understanding. It is capable of image generation,...",
         "context_length": 32768,
-        "max_tokens": 32768,
+        "max_tokens": 8192,
         "input_modalities": [
           "image",
           "text"
@@ -1701,7 +1726,7 @@
         "name": "Google: Gemini 3 Flash Preview",
         "description": "Gemini 3 Flash Preview is a high speed, high value thinking model designed for agentic workflows, multi turn chat, and coding assistance. It delivers near Pro level reasoning and tool...",
         "context_length": 1048576,
-        "max_tokens": 65536,
+        "max_tokens": 65535,
         "input_modalities": [
           "text",
           "image",
@@ -1723,6 +1748,35 @@
         "support_url": [
           "https://openrouter.ai/models/google/gemini-3-flash-preview",
           "https://openrouter.ai/api/v1/models/google/gemini-3-flash-preview-20251217/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "google/gemini-3-pro-image",
+      "model_info": {
+        "model": "google/gemini-3-pro-image",
+        "name": "Google: Nano Banana Pro (Gemini 3 Pro Image)",
+        "description": "Nano Banana Pro is Google’s most advanced image-generation and editing model, built on Gemini 3 Pro. It extends the original Nano Banana with significantly improved multimodal reasoning, real-world grounding, and...",
+        "context_length": 65536,
+        "max_tokens": 32768,
+        "input_modalities": [
+          "image",
+          "text"
+        ],
+        "output_modalities": [
+          "image",
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/google/gemini-3-pro-image",
+          "https://openrouter.ai/api/v1/models/google/gemini-3-pro-image-20260528/endpoints"
         ]
       }
     },
@@ -1751,6 +1805,34 @@
         "support_url": [
           "https://openrouter.ai/models/google/gemini-3-pro-image-preview",
           "https://openrouter.ai/api/v1/models/google/gemini-3-pro-image-preview-20251120/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "google/gemini-3.1-flash-image",
+      "model_info": {
+        "model": "google/gemini-3.1-flash-image",
+        "name": "Google: Nano Banana 2 (Gemini 3.1 Flash Image)",
+        "description": "Gemini 3.1 Flash Image, a.k.a. \"Nano Banana 2,\" is Google’s latest state of the art image generation and editing model, delivering Pro-level visual quality at Flash speed. It combines advanced...",
+        "context_length": 131072,
+        "max_tokens": 65536,
+        "input_modalities": [
+          "image",
+          "text"
+        ],
+        "output_modalities": [
+          "image",
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/google/gemini-3.1-flash-image",
+          "https://openrouter.ai/api/v1/models/google/gemini-3.1-flash-image-20260528/endpoints"
         ]
       }
     },
@@ -2061,7 +2143,8 @@
           "text"
         ],
         "tags": [
-          "openrouter"
+          "openrouter",
+          "structured_outputs"
         ],
         "support_url": [
           "https://openrouter.ai/models/google/gemma-3n-e4b-it",
@@ -2163,7 +2246,7 @@
         "name": "Google: Gemma 4 31B (free)",
         "description": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function...",
         "context_length": 262144,
-        "max_tokens": 32768,
+        "max_tokens": 8192,
         "input_modalities": [
           "image",
           "text",
@@ -2501,7 +2584,8 @@
           "text"
         ],
         "tags": [
-          "openrouter"
+          "openrouter",
+          "structured_outputs"
         ],
         "support_url": [
           "https://openrouter.ai/models/liquid/lfm-2-24b-a2b",
@@ -2524,7 +2608,8 @@
           "text"
         ],
         "tags": [
-          "openrouter"
+          "openrouter",
+          "structured_outputs"
         ],
         "support_url": [
           "https://openrouter.ai/models/liquid/lfm-2.5-1.2b-instruct:free",
@@ -2548,7 +2633,9 @@
         ],
         "tags": [
           "openrouter",
-          "reasoning"
+          "tools",
+          "reasoning",
+          "structured_outputs"
         ],
         "support_url": [
           "https://openrouter.ai/models/liquid/lfm-2.5-1.2b-thinking:free",
@@ -5718,7 +5805,7 @@
         "name": "OpenAI: gpt-oss-20b (free)",
         "description": "gpt-oss-20b is an open-weight 21B parameter model released by OpenAI under the Apache 2.0 license. It uses a Mixture-of-Experts (MoE) architecture with 3.6B active parameters per forward pass, optimized for...",
         "context_length": 131072,
-        "max_tokens": 8192,
+        "max_tokens": 32768,
         "input_modalities": [
           "text"
         ],
@@ -6375,7 +6462,8 @@
         "tags": [
           "openrouter",
           "tools",
-          "reasoning"
+          "reasoning",
+          "structured_outputs"
         ],
         "support_url": [
           "https://openrouter.ai/models/poolside/laguna-m.1:free",
@@ -6400,7 +6488,8 @@
         "tags": [
           "openrouter",
           "tools",
-          "reasoning"
+          "reasoning",
+          "structured_outputs"
         ],
         "support_url": [
           "https://openrouter.ai/models/poolside/laguna-xs.2:free",
@@ -6474,7 +6563,9 @@
           "text"
         ],
         "tags": [
-          "openrouter"
+          "openrouter",
+          "tools",
+          "structured_outputs"
         ],
         "support_url": [
           "https://openrouter.ai/models/qwen/qwen-2.5-7b-instruct",
@@ -8074,7 +8165,8 @@
           "text"
         ],
         "tags": [
-          "openrouter"
+          "openrouter",
+          "structured_outputs"
         ],
         "support_url": [
           "https://openrouter.ai/models/thedrummer/cydonia-24b-v4.1",

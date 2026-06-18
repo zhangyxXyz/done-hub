@@ -3269,6 +3269,13 @@
     "output": 0.15
   },
   {
+    "model": "cohere/north-mini-code:free",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0,
+    "output": 0
+  },
+  {
     "model": "deepcogito/cogito-v2-preview-deepseek-671b",
     "type": "tokens",
     "channel_type": 20,
