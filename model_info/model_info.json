@@ -3886,7 +3886,7 @@
         "name": "MoonshotAI: Kimi K2.6",
         "description": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and...",
         "context_length": 262144,
-        "max_tokens": 262142,
+        "max_tokens": 262144,
         "input_modalities": [
           "text",
           "image"
@@ -8819,7 +8819,7 @@
         "name": "Z.ai: GLM 5.2",
         "description": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...",
         "context_length": 1048576,
-        "max_tokens": 524288,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -9025,7 +9025,7 @@
         "name": "MoonshotAI Kimi Latest",
         "description": "This model always redirects to the latest model in the MoonshotAI Kimi family.",
         "context_length": 262144,
-        "max_tokens": 262142,
+        "max_tokens": 262144,
         "input_modalities": [
           "text",
           "image"

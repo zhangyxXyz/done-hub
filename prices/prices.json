@@ -4511,8 +4511,8 @@
     "model": "moonshotai/kimi-k2.6",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.68,
-    "output": 3.41
+    "input": 0.67,
+    "output": 3.5
   },
   {
     "model": "moonshotai/kimi-k2.7-code",
@@ -6380,8 +6380,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 1.4,
-    "output": 4.4
+    "input": 1.2,
+    "output": 4.1
   },
   {
     "model": "z-ai/glm-5v-turbo",
@@ -6436,8 +6436,8 @@
     "model": "~moonshotai/kimi-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.68,
-    "output": 3.41
+    "input": 0.67,
+    "output": 3.5
   },
   {
     "model": "~openai/gpt-latest",
