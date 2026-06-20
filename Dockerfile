@@ -43,7 +43,7 @@ RUN mv /tmp/done-hub-mjchat-${MJCHAT_VERSION:-v2.26.5} /opt/mjchat
 FROM golang:1.25.0 AS builder2
 
 ENV GO111MODULE=on \
-    CGO_ENABLED=1 \
+    CGO_ENABLED=0 \
     GOOS=linux \
     GOPROXY=https://proxy.golang.org,direct
 
@@ -52,7 +52,7 @@ ADD go.mod go.sum ./
 RUN go mod download
 COPY . .
 COPY --from=builder /build/build ./web/build
-RUN go build -ldflags "-s -w -X 'done-hub/common.Version=$(cat VERSION)' -extldflags '-static'" -o done-hub
+RUN go build -ldflags "-s -w -X 'done-hub/common.Version=$(cat VERSION)'" -o done-hub
 
 FROM node:22.20-slim
 

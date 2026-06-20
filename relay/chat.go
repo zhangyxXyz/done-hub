@@ -236,8 +236,8 @@ func (r *relayChat) getUsageResponse() string {
 
 // compatibleSendImage 把 chat completions 请求降级到 image generations 协议调上游，
 // 并把上游返回的 image response 包装回 chat completions 响应（或 SSE）发给客户端。
-// 对齐 new-api 在渠道层降级后由 image_handler 路径处理的形态——upstream usage 是真实的
-// input/output image tokens，prompt 也按 image 协议口径算，不再走 chat 文本 tokenize。
+// 降级后 upstream usage 是真实的 input/output image tokens，prompt 也按 image 协议口径算，
+// 不再走 chat 文本 tokenize。
 func (r *relayChat) compatibleSendImage(provider providersBase.ImageGenerationsInterface) (err *types.OpenAIErrorWithStatusCode, done bool) {
 	imgReq := r.chatRequest.ToImageRequest()
 	imgReq.Model = r.modelName

@@ -20,7 +20,8 @@ const defaultConfig = {
     responses_models: [],
     compatible_response_models: [],
     compatible_response: false,
-    allow_extra_body: false
+    allow_extra_body: false,
+    cost_ratio: 0
   },
   inputLabel: {
     name: '渠道名称',
@@ -43,7 +44,8 @@ const defaultConfig = {
     responses_models: 'Responses 转换模型',
     compatible_response_models: 'Response 兼容模型',
     compatible_response: '兼容Response API',
-    allow_extra_body: '允许额外字段透传'
+    allow_extra_body: '允许额外字段透传',
+    cost_ratio: '成本倍率'
   },
   prompt: {
     type: '请选择渠道类型',
@@ -70,7 +72,8 @@ const defaultConfig = {
     responses_models: '填写需要将 Chat Completions 请求转换为 Responses API 的模型。支持精确模型名、末尾 * 通配，或用 * 表示全部模型。',
     compatible_response_models: '填写需要将 Responses API 请求转换为 Chat Completions 的模型。支持精确模型名、末尾 * 通配，或用 * 表示全部模型。',
     compatible_response: '兼容Response API',
-    allow_extra_body: '开启后，将会透传用户请求中的额外字段（如OpenAI SDK的extra_body参数），适用于需要传递自定义参数到上游API的场景'
+    allow_extra_body: '开启后，将会透传用户请求中的额外字段（如OpenAI SDK的extra_body参数），适用于需要传递自定义参数到上游API的场景',
+    cost_ratio: '上游成本倍率，相对模型基础价的折扣，例如 0.5 表示成本为基础价的 5 折。仅用于成本与利润统计，不影响用户扣费。未配置或为 0 时不计成本。'
   },
   modelGroup: 'OpenAI'
 }

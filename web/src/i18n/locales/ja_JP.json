@@ -1,4 +1,17 @@
 {
+  "theme": {
+    "auto": "システムに従う",
+    "light": "ライトモード",
+    "dark": "ダークモード",
+    "color": "テーマカラー",
+    "colors": {
+      "default": "デフォルト",
+      "blue": "ブルー",
+      "cyan": "シアン",
+      "purple": "パープル",
+      "red": "レッド"
+    }
+  },
   "System Logs": "システムログ",
   "view_more_logs_on_server": "より多くのシステムログを表示するには、サーバーにアクセスしてください",
   "systemInfo": "システム情報",
@@ -68,6 +81,8 @@
     "averageLatency": "平均遅延",
     "channelCount": "チャネル数",
     "consumptionStatistics": "消費統計",
+    "costStatistics": "コスト統計",
+    "profitStatistics": "利益統計",
     "directRegistration": "直接登録",
     "disabled": "無効",
     "endTime": "終了時間",
@@ -80,6 +95,9 @@
     "testDisabled": "テスト無効",
     "tokensStatistics": "トークン統計",
     "totalUserBalance": "ユーザーの総残高",
+    "totalUsedQuota": "総消費",
+    "totalRequestCount": "リクエスト数",
+    "totalTokens": "総トークン数",
     "totalUserSpending": "ユーザーの総消費額",
     "totalUsers": "ユーザーの総数",
     "unused": "未使用",
@@ -89,6 +107,8 @@
     "order": "注文",
     "realTimeTraffic": "リアルタイム流量",
     "tpmDescription": "TPM (Token/分)",
+    "cpmDescription": "CPM",
+    "ppmDescription": "PPM",
     "last60SecondsStats": "最近60秒の統計"
   },
   "auth": {
@@ -200,7 +220,59 @@
     "updateEnabledBalance": "有効残高を更新",
     "usedBalance": "使用済み/残高",
     "weight": "ウェイト",
-    "onlyTags": "タグのみ表示"
+    "costRatio": "コスト倍率",
+    "onlyTags": "タグのみ表示",
+    "batchAddUserGroup": "ユーザーグループを一括追加",
+    "batchAddUserGroupTip": "チャネルを選択してユーザーグループを追加します。すでに該当グループを持つチャネルはスキップされます。",
+    "searchChannelPlaceholder": "チャネル名で検索（空欄ですべてのチャネルを取得）",
+    "searchChannelLabel": "チャネル検索",
+    "noMatchingChannels": "一致するチャネルが見つかりません",
+    "clickSearchToGetChannels": "検索ボタンをクリックしてチャネル一覧を取得",
+    "selectedChannelsCount": "{{total}} 件中 {{selected}} 件を選択",
+    "channelAlreadyHasGroup": "（このグループは既に存在）",
+    "currentGroup": "現在のグループ",
+    "noGroup": "なし",
+    "selectUserGroupToAdd": "追加するユーザーグループを選択",
+    "pleaseSelectUserGroup": "ユーザーグループを選択してください",
+    "pleaseSelectChannelsForUserGroup": "少なくとも 1 つのチャネルを選択してください",
+    "addingUserGroup": "追加中...",
+    "addUserGroupToChannels": "{{count}} 件のチャネルにユーザーグループを追加",
+    "batchAddUserGroupSuccess": "{{count}} 件のチャネルにユーザーグループ \"{{group}}\" を追加しました",
+    "batchAddModel": "モデルを一括追加",
+    "batchAddModelTip": "チャネルを選択してモデルを追加します。複数モデルの入力に対応。既存のモデルはスキップされます。",
+    "selectModelToAdd": "追加するモデルを選択または入力",
+    "pleaseSelectModel": "モデルを選択または入力してください",
+    "pleaseSelectChannelsForModel": "少なくとも 1 つのチャネルを選択してください",
+    "channelAlreadyHasAllModels": "（選択したモデルがすべて存在）",
+    "currentModels": "現在のモデル",
+    "noModels": "なし",
+    "addingModel": "追加中...",
+    "addModelToChannels": "{{count}} 件のチャネルにモデルを追加",
+    "batchAddModelSuccess": "{{count}} 件のチャネルにモデル \"{{model}}\" を追加しました",
+    "modelInputTip": "複数モデルはカンマ区切りで入力できます",
+    "loadingChannels": "チャネル一覧を読み込み中...",
+    "previousPage": "前のページ",
+    "nextPage": "次のページ",
+    "pageInfo": "ページ {{page}} / {{total}}",
+    "selectionStatus": "選択中 {{selected}} 件（現ページ {{onPage}}）/ 現ページ {{count}} 件 / 一致 {{total}} 件",
+    "selectionStatusFiltered": "選択中 {{selected}} 件（現ページ {{onPage}}）/ 現ページ厳密一致 {{count}} 件 / サーバー粗一致 {{total}} 件",
+    "selectCurrentPage": "現ページを全選択",
+    "unselectCurrentPage": "現ページの選択を解除",
+    "clearSelection": "選択をクリア",
+    "clearKeyword": "キーワードをクリア",
+    "channelOnlyHasThisModel": "（このモデルのみ — 削除不可）",
+    "channelAlreadyHasPartialModels": "（一部のモデルが既に存在）",
+    "batchDeleteTipV2": "検索は曖昧一致ですが、一覧は完全モデル名で厳密にフィルタリングされます。残り 1 モデルのチャネルは空化防止のため削除不可です。",
+    "batchAzureAPITip": "Azure タイプのチャネルを選択して API バージョンを置換します。まず現在のバージョンで検索（空欄なら全 Azure チャネル）、その後新バージョンを入力して置換を実行します。",
+    "currentAzureAPIVersion": "現在のバージョン",
+    "newAzureAPIVersion": "新しいバージョン",
+    "replaceAzureAPIVersion": "{{count}} 件のチャネルの API バージョンを置換",
+    "replacing": "置換中...",
+    "confirmDeleteModel": "{{count}} 件のチャネルからモデル \"{{model}}\" を削除",
+    "deleting": "削除中...",
+    "modelToDelete": "削除するモデル名（完全一致）",
+    "delModelEmptyHint": "上の入力欄に削除対象のモデル名を入力し Enter で該当チャネルを検索",
+    "azureApiSearchPlaceholder": "検索する API バージョン（空欄で全 Azure チャネル）"
   },
   "channel_row": {
     "auto": "自動",
@@ -258,6 +330,8 @@
     "tagChannelsSuccess": "タグチャネル{{action}}が成功しました",
     "weightUpdateError": "重みの更新に失敗しました：{{message}}",
     "weightUpdateSuccess": "重みが更新されました",
+    "costRatioUpdateSuccess": "コスト倍率が更新されました",
+    "costRatioUpdateError": "コスト倍率の更新に失敗しました：{{message}}",
     "key": "鍵",
     "keyRequired": "キーを入力してください。"
   },
@@ -367,7 +441,66 @@
     "sourceCode": "ソースコードは"
   },
   "home": {
-    "loadingErr": "ホームページのコンテンツを読み込めませんでした..."
+    "loadingErr": "ホームページのコンテンツを読み込めませんでした...",
+    "hero": {
+      "title": "すべてのモデルを、ひとつの API で",
+      "subtitle": "OpenAI、Claude、Gemini、DeepSeek など数十のプロバイダーを OpenAI 互換 API に統一。base URL を差し替えるだけで接続でき、キー・課金・ログを一元管理。",
+      "getStarted": "今すぐ始める",
+      "console": "コンソールへ",
+      "viewPricing": "料金を見る"
+    },
+    "stats": {
+      "channels": "チャネル種別",
+      "protocols": "ネイティブプロトコル",
+      "openSource": "オープンソース"
+    },
+    "code": {
+      "title": "3 つのプロトコル、ひとつのアドレス",
+      "subtitle": "OpenAI・Claude・Gemini のリクエストをそのままプロキシ。",
+      "reply": "こんにちは。{{model}} です。Done Hub 経由で接続しています。"
+    },
+    "providers": {
+      "title": "数十のプロバイダーを、ひとつの API で",
+      "subtitle": "国内外の主要モデルを接続済み、OpenAI 互換に統一。新しいプロバイダーも順次追加。"
+    },
+    "features": {
+      "title": "つなぐだけでは終わらない",
+      "subtitle": "チャネル振り分け、課金、ログ、クライアント接続。運用に必要な機能をひとつの管理画面に。",
+      "items": {
+        "routing": {
+          "title": "チャネル振り分け",
+          "desc": "優先度と重みで振り分け、落ちた上流はクールダウン後に再試行。"
+        },
+        "billing": {
+          "title": "課金とグループ",
+          "desc": "トークン、グループ、価格、上限、請求。コストを追跡できます。"
+        },
+        "observability": {
+          "title": "ログと使用量",
+          "desc": "RPM／TPM、消費、リクエストログ。ユーザー別 CSV 出力も。"
+        },
+        "clients": {
+          "title": "クライアント接続",
+          "desc": "Claude Code、Gemini CLI、Codex などをそのまま接続。各クライアントのネイティブプロトコルで転送。"
+        }
+      }
+    },
+    "howItWorks": {
+      "title": "4 ステップで稼働",
+      "subtitle": "デプロイから接続まで、各ステップが実際のリクエストパスに沿います。",
+      "s1Title": "デプロイ",
+      "s1Desc": "Docker で Done Hub を起動し、基本設定。",
+      "s2Title": "チャネル追加",
+      "s2Desc": "OpenAI、Claude、Gemini を有効化し、上流キーを登録。",
+      "s3Title": "クライアント接続",
+      "s3Desc": "OpenAI は /v1、Claude は /claude/v1、Gemini は /gemini。",
+      "s4Title": "運用",
+      "s4Desc": "ダッシュボードとログを見て、課金とチャネルを管理。"
+    },
+    "cta": {
+      "title": "完全オープンソース。Star・コントリビュート歓迎。",
+      "github": "GitHub を見る"
+    }
   },
   "inviteCard": {
     "copyButton": {
@@ -528,6 +661,8 @@
       "finalCalculation": "最終計算",
       "originalBilling": "元の請求",
       "actualBilling": "実際の請求",
+      "cost": "コスト",
+      "profit": "利益",
       "calculationNote": "PS：このシステムはポイントに基づいて計算され、すべての金額はポイント換算であり、1ポイント＝$0.000002です。最低消費額は1ポイントであり、この計算手順は参考用として提供されます。実際の料金が優先されます。",
       "times": "倍"
     },
@@ -1481,11 +1616,14 @@
     "billingTagLabel": "課金タグ",
     "billingTagHelper": "このトークンのコストをグループ別に追跡するための課金タグとしてグループを選択してください",
     "adminSearch": "管理者検索",
-    "adminSearchDesc": "ユーザーIDまたはトークンIDですべてのユーザーのトークンを検索",
+    "adminSearchDesc": "ユーザーIDまたはトークンKeyですべてのユーザーのトークンを検索",
     "userId": "ユーザーID",
     "userIdPlaceholder": "ユーザーIDを入力",
     "tokenId": "トークンID",
     "tokenIdPlaceholder": "トークンIDを入力",
+    "tokenKeySearch": "トークンKey",
+    "tokenKeySearchPlaceholder": "トークンKeyを入力（前方一致、sk- 可）",
+    "search": "検索",
     "clearSearch": "クリア",
     "owner": "所有者",
     "adminEditWarning": "管理者としてこのトークンを編集しています。トークンの所有者を変更できます",

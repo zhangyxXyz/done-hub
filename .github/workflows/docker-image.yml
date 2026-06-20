@@ -86,7 +86,7 @@ jobs:
         if: matrix.arch == 'amd64'
         run: |
           go mod download
-          go build -ldflags "-s -w -X 'done-hub/common/config.Version=$(cat VERSION)' -extldflags '-static'" -o done-hub-amd64
+          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "-s -w -X 'done-hub/common/config.Version=$(cat VERSION)'" -o done-hub-amd64
 
       - name: Build Backend (arm64)
         if: matrix.arch == 'arm64'
@@ -104,7 +104,6 @@ jobs:
           sudo rm -rf /var/lib/apt/lists/* /var/cache/apt/*
           docker system prune -af || true
           df -h
-
       - name: Set up QEMU
         if: matrix.arch == 'arm64'
         uses: docker/setup-qemu-action@v4
