@@ -786,7 +786,7 @@
         "name": "Arcee AI: Trinity Large Thinking",
         "description": "Trinity Large Thinking is a powerful open source reasoning model from the team at Arcee AI. It shows strong performance in PinchBench, agentic workloads, and reasoning tasks. Launch video: https://youtu.be/Gc82AXLa0Rg?si=4RLn6WBz33qT--B7...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 80000,
         "input_modalities": [
           "text"
         ],
@@ -3862,7 +3862,7 @@
         "name": "MoonshotAI: Kimi K2.6",
         "description": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 262142,
         "input_modalities": [
           "text",
           "image"
@@ -8164,7 +8164,7 @@
         "name": "Tencent: Hy3 preview",
         "description": "Hy3 preview is a high-efficiency Mixture-of-Experts model from Tencent designed for agentic workflows and production use. It supports configurable reasoning levels across disabled, low, and high modes, allowing it to...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 0,
         "input_modalities": [
           "text"
         ],
@@ -8768,7 +8768,7 @@
         "name": "Z.ai: GLM 5.1",
         "description": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on...",
         "context_length": 202752,
-        "max_tokens": 0,
+        "max_tokens": 65535,
         "input_modalities": [
           "text"
         ],
@@ -9000,7 +9000,7 @@
         "name": "MoonshotAI Kimi Latest",
         "description": "This model always redirects to the latest model in the MoonshotAI Kimi family.",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 262142,
         "input_modalities": [
           "text",
           "image"
