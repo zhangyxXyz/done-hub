@@ -1844,7 +1844,7 @@
         "name": "Google: Nano Banana 2 (Gemini 3.1 Flash Image Preview)",
         "description": "Gemini 3.1 Flash Image Preview, a.k.a. \"Nano Banana 2,\" is Google’s latest state of the art image generation and editing model, delivering Pro-level visual quality at Flash speed. It combines...",
         "context_length": 131072,
-        "max_tokens": 65536,
+        "max_tokens": 32768,
         "input_modalities": [
           "image",
           "text"
