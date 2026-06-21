@@ -80,7 +80,7 @@ function Item({ item, isSelected, onClick, sx, ...other }) {
         display: 'flex',
         alignItems: 'center',
         borderBottom: `dashed 1px`,
-        backgroundColor: isSelected ? 'rgba(173, 216, 230, 0.3)' : 'transparent',
+        background: isSelected ? 'var(--aihub-selected)' : 'transparent',
         cursor: 'pointer',
         ...sx
       }}

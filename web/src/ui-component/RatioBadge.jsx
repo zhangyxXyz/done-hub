@@ -15,7 +15,7 @@ const RatioBadge = ({ ratio }) => {
     ? theme.palette.success.main
     : isPremium
       ? theme.palette.warning.main
-      : theme.palette.info.main;
+      : theme.palette.primary.main;
 
   // 尺寸与 ui-component/Label 对齐（height 24 / radius 6 / 12px），方便与 Label 横排时视觉等高
   return (

@@ -501,8 +501,51 @@ export default function ModelPrice() {
     setSelectedModelDetail(null);
   };
 
+  const isDarkMode = theme.palette.mode === 'dark';
+  const gridColor = alpha(theme.palette.primary.main, isDarkMode ? 0.1 : 0.08);
+  const glowColor = alpha(theme.palette.primary.main, isDarkMode ? 0.28 : 0.16);
+  const glowSoftColor = alpha(theme.palette.primary.main, isDarkMode ? 0.16 : 0.1);
+
   return (
-    <Stack spacing={3} sx={{ padding: theme.spacing(3) }}>
+    <Box
+      sx={{
+        position: 'relative',
+        minHeight: '100%',
+        overflow: 'hidden',
+        background: 'transparent'
+      }}
+    >
+      <Box
+        aria-hidden
+        sx={{
+          position: 'fixed',
+          inset: 0,
+          pointerEvents: 'none',
+          background: 'var(--aihub-bg, transparent)',
+          backgroundImage: `linear-gradient(${gridColor} 1px, transparent 1px), linear-gradient(90deg, ${gridColor} 1px, transparent 1px)`,
+          backgroundSize: { xs: '42px 42px', md: '64px 64px' },
+          maskImage: 'radial-gradient(ellipse 78% 62% at 30% 0%, #000 12%, transparent 78%)',
+          WebkitMaskImage: 'radial-gradient(ellipse 78% 62% at 30% 0%, #000 12%, transparent 78%)',
+          zIndex: 0
+        }}
+      />
+      <Box
+        aria-hidden
+        sx={{
+          position: 'fixed',
+          top: { xs: '-18%', md: '-24%' },
+          left: { xs: '-32%', md: '-10%' },
+          width: { xs: '110vw', md: '64vw' },
+          height: { xs: '110vw', md: '64vw' },
+          maxWidth: 980,
+          maxHeight: 980,
+          pointerEvents: 'none',
+          background: `radial-gradient(circle, ${glowColor} 0%, ${glowSoftColor} 36%, transparent 70%)`,
+          filter: 'blur(2px)',
+          zIndex: 0
+        }}
+      />
+      <Stack spacing={3} sx={{ position: 'relative', zIndex: 1, padding: theme.spacing(3) }}>
       <Box sx={{ position: 'relative', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
         <Box>
           <Fade in timeout={800}>
@@ -647,7 +690,7 @@ export default function ModelPrice() {
                   '&.Mui-selected': {
                     background: 'var(--aihub-selected)',
                     color: 'var(--aihub-link)',
-                    boxShadow: '0 0 0 1px rgba(8, 119, 200, 0.72), 0 8px 18px rgba(8, 119, 200, 0.14)'
+                    boxShadow: '0 0 0 1px var(--aihub-accent-ring), 0 8px 18px var(--aihub-accent-shadow)'
                   },
                   '&.Mui-selected:hover': {
                     background: 'var(--aihub-selected-hover)',
@@ -1014,21 +1057,21 @@ export default function ModelPrice() {
                         px: 1.5,
                         borderRadius: '6px',
                         backgroundColor: isSelected
-                          ? alpha(theme.palette.info.main, theme.palette.mode === 'dark' ? 0.25 : 0.1)
+                          ? alpha(theme.palette.primary.main, theme.palette.mode === 'dark' ? 0.25 : 0.1)
                           : theme.palette.mode === 'dark'
                             ? alpha(theme.palette.background.default, 0.5)
                             : theme.palette.background.default,
                         border: `1px solid ${
-                          isSelected ? theme.palette.info.main : theme.palette.mode === 'dark' ? alpha('#fff', 0.08) : alpha('#000', 0.05)
+                          isSelected ? theme.palette.primary.main : theme.palette.mode === 'dark' ? alpha('#fff', 0.08) : alpha('#000', 0.05)
                         }`,
-                        boxShadow: isSelected ? `0 2px 8px ${alpha(theme.palette.info.main, 0.2)}` : 'none'
+                        boxShadow: isSelected ? `0 2px 8px ${alpha(theme.palette.primary.main, 0.2)}` : 'none'
                       }}
                     >
                       <Typography
                         variant="body2"
                         sx={{
                           fontWeight: isSelected ? 600 : 500,
-                          color: isSelected ? theme.palette.info.main : theme.palette.text.primary,
+                          color: isSelected ? theme.palette.primary.main : theme.palette.text.primary,
                           fontSize: '0.8125rem'
                         }}
                       >
@@ -1039,7 +1082,7 @@ export default function ModelPrice() {
                         variant="caption"
                         sx={{
                           ml: 0.5,
-                          color: isSelected ? theme.palette.info.main : theme.palette.text.secondary,
+                          color: isSelected ? theme.palette.primary.main : theme.palette.text.secondary,
                           fontSize: '0.6875rem',
                           opacity: 0.8
                         }}
@@ -1317,8 +1360,8 @@ export default function ModelPrice() {
                             backgroundColor:
                               group.ratio > 1
                                 ? alpha(theme.palette.warning.main, theme.palette.mode === 'dark' ? 0.3 : 0.2)
-                                : alpha(theme.palette.info.main, theme.palette.mode === 'dark' ? 0.3 : 0.2),
-                            color: group.ratio > 1 ? theme.palette.warning.main : theme.palette.info.main,
+                                : alpha(theme.palette.primary.main, theme.palette.mode === 'dark' ? 0.3 : 0.2),
+                            color: group.ratio > 1 ? theme.palette.warning.main : theme.palette.primary.main,
                             fontSize: '0.6875rem',
                             fontWeight: 600,
                             px: 0.5
@@ -1594,6 +1637,7 @@ export default function ModelPrice() {
         formatPrice={formatPrice}
         unit={unit}
       />
-    </Stack>
+      </Stack>
+    </Box>
   );
 }

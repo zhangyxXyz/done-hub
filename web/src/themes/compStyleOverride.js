@@ -59,7 +59,7 @@ export default function componentStyleOverrides(theme) {
           borderColor: theme.colors?.primaryMain,
           color: theme.colors?.primaryMain,
           '&:hover': {
-            backgroundColor: 'rgba(8, 132, 221, 0.04)'
+            backgroundColor: 'var(--aihub-accent-soft)'
           }
         },
         text: {
@@ -688,7 +688,7 @@ export default function componentStyleOverrides(theme) {
           }
         },
         standardInfo: {
-          backgroundColor: theme.mode === 'dark' ? 'rgba(8, 132, 221, 0.16)' : 'rgba(8, 132, 221, 0.08)',
+          background: 'var(--aihub-accent-soft)',
           color: theme.mode === 'dark' ? '#E0F1FF' : theme.colors?.primaryDark,
           '& .MuiAlert-icon': {
             color: theme.mode === 'dark' ? '#60B8FF' : theme.colors?.primaryMain
@@ -824,9 +824,9 @@ export default function componentStyleOverrides(theme) {
           padding: '10px 16px',
           minHeight: '42px',
           '&.Mui-selected': {
-            backgroundColor: theme.mode === 'dark' ? 'rgba(8, 132, 221, 0.15)' : 'rgba(8, 132, 221, 0.08)',
+            background: 'var(--aihub-selected)',
             '&.Mui-focusVisible': {
-              backgroundColor: theme.mode === 'dark' ? 'rgba(8, 132, 221, 0.25)' : 'rgba(8, 132, 221, 0.12)'
+              background: 'var(--aihub-selected-hover)'
             }
           }
         }
@@ -959,9 +959,9 @@ export default function componentStyleOverrides(theme) {
             backgroundColor: theme.tableRowHoverBackgroundColor
           },
           '&.Mui-selected': {
-            backgroundColor: theme.mode === 'dark' ? 'rgba(8, 132, 221, 0.15)' : 'rgba(8, 132, 221, 0.08)',
+            background: 'var(--aihub-selected)',
             '&:hover': {
-              backgroundColor: theme.mode === 'dark' ? 'rgba(8, 132, 221, 0.25)' : 'rgba(8, 132, 221, 0.12)'
+              background: 'var(--aihub-selected-hover)'
             }
           }
         },

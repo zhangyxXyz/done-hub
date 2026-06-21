@@ -15,21 +15,22 @@ const SupportModels = () => {
   const ownedby = useSelector((state) => state.siteInfo?.ownedby);
   const modelLabelSx = {
     cursor: 'pointer',
-    color: (theme) => (theme.palette.mode === 'dark' ? '#45b7dc' : theme.palette.primary.dark),
-    border: (theme) => (theme.palette.mode === 'dark' ? `1px solid ${alpha('#45b7dc', 0.2)}` : 'none'),
+    color: 'var(--aihub-link)',
+    bgcolor: 'var(--aihub-accent-soft)',
+    border: '1px solid var(--aihub-accent-ring)',
     '&:hover': {
-      bgcolor: (theme) => alpha(theme.palette.primary.main, theme.palette.mode === 'dark' ? 0.2 : 0.16),
-      color: (theme) => (theme.palette.mode === 'dark' ? '#68c8e8' : theme.palette.primary.dark)
+      bgcolor: 'var(--aihub-accent-hover)',
+      color: 'var(--aihub-link-hover)'
     }
   };
   const expandButtonSx = {
     width: 32,
     height: 32,
     borderRadius: 1.5,
-    color: (theme) => (theme.palette.mode === 'dark' ? '#45b7dc' : theme.palette.primary.main),
+    color: 'var(--aihub-link)',
     bgcolor: (theme) => alpha(theme.palette.primary.main, theme.palette.mode === 'dark' ? 0.1 : 0.08),
     '&:hover': {
-      color: (theme) => (theme.palette.mode === 'dark' ? '#68c8e8' : theme.palette.primary.dark),
+      color: 'var(--aihub-link-hover)',
       bgcolor: (theme) => alpha(theme.palette.primary.main, theme.palette.mode === 'dark' ? 0.18 : 0.14)
     }
   };

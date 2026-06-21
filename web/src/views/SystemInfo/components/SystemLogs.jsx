@@ -478,7 +478,7 @@ const SystemLogs = () => {
       case 'warning':
         return 'warning'
       case 'info':
-        return 'info'
+        return 'primary'
       case 'debug':
         return 'secondary'
       default:
@@ -874,32 +874,22 @@ const SystemLogs = () => {
                         <TableRow
                           key={index}
                           sx={{
-                            backgroundColor: isTargetLog
-                              ? theme.palette.mode === 'dark'
-                                ? 'rgba(255, 193, 7, 0.12)'
-                                : 'rgba(0, 122, 255, 0.04)'
-                              : 'transparent',
+                            background: isTargetLog ? 'var(--aihub-accent-soft)' : 'transparent',
                             border: isTargetLog
-                              ? theme.palette.mode === 'dark'
-                                ? '1px solid rgba(255, 193, 7, 0.3)'
-                                : '1px solid rgba(0, 122, 255, 0.12)'
+                              ? '1px solid var(--aihub-accent-ring)'
                               : theme.palette.mode === 'dark'
                                 ? '1px solid rgba(255, 255, 255, 0.12)'
                                 : '1px solid rgba(0, 0, 0, 0.06)',
                             minHeight: '50px',
                             boxShadow: isTargetLog
-                              ? theme.palette.mode === 'dark'
-                                ? '0 1px 6px rgba(255, 193, 7, 0.2)'
-                                : '0 1px 6px rgba(0, 122, 255, 0.08)'
+                              ? '0 1px 6px var(--aihub-accent-shadow)'
                               : 'none',
                             borderRadius: isTargetLog ? '6px' : '0',
                             transform: 'none',
                             transition: 'all 0.15s ease-out',
                             position: 'relative',
                             borderLeft: isTargetLog
-                              ? theme.palette.mode === 'dark'
-                                ? '3px solid rgba(255, 193, 7, 0.8)'
-                                : '3px solid rgba(0, 122, 255, 0.4)'
+                              ? '3px solid var(--aihub-link)'
                               : 'none'
                           }}
                         >
@@ -911,9 +901,7 @@ const SystemLogs = () => {
                             verticalAlign: 'top',
                             lineHeight: 1.2,
                             color: isTargetLog
-                              ? theme.palette.mode === 'dark'
-                                ? 'rgba(255, 193, 7, 1)'
-                                : 'rgba(0, 122, 255, 0.7)'
+                              ? 'var(--aihub-link)'
                               : 'inherit',
                             fontWeight: isTargetLog ? '450' : 'normal'
                           }}>

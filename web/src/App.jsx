@@ -30,6 +30,7 @@ const App = () => {
   const dispatch = useDispatch();
   const customization = useSelector((state) => state.customization);
   const siteInfo = useSelector((state) => state.siteInfo);
+  const account = useSelector((state) => state.account);
 
   useEffect(() => {
     const getRuntimeState = () => {
@@ -47,7 +48,9 @@ const App = () => {
         theme: resolvedTheme,
         themeMode: storedTheme || 'auto',
         language,
-        defaultLanguage
+        defaultLanguage,
+        primaryColor: customization.primaryColor,
+        isLoggedIn: Boolean(account.user)
       };
     };
 
@@ -57,6 +60,7 @@ const App = () => {
       document.documentElement.dataset.theme = state.theme;
       document.documentElement.dataset.themeMode = state.themeMode;
       document.documentElement.dataset.language = state.language;
+      document.documentElement.dataset.primaryColor = customization.primaryColor;
       document.documentElement.lang = state.language.replace('_', '-');
       document.documentElement.style.colorScheme = state.theme;
       localStorage.setItem('resolved_theme', state.theme);
@@ -82,7 +86,7 @@ const App = () => {
       mediaQuery.removeEventListener('change', syncCustomRuntime);
       i18n.off('languageChanged', syncCustomRuntime);
     };
-  }, [customization.theme, siteInfo.language]);
+  }, [account.user, customization.theme, customization.primaryColor, siteInfo.language]);
 
   useEffect(() => {
     const styleId = 'custom-css';

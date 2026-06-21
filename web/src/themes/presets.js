@@ -1,6 +1,6 @@
 // 可选主题主色预设，颜色取自 Minimals 调色板，与项目既有语义色同源
 const themePresets = [
-  { id: 'default', primaryLight: '#5BE49B', primaryMain: '#00A76F', primaryDark: '#007867', primary200: '#C8FAD6', primary800: '#004B50' },
+  { id: 'default', primaryLight: '#60A5FA', primaryMain: '#0B8DFF', primaryDark: '#0759B8', primary200: '#D8ECFF', primary800: '#082B64' },
   { id: 'blue', primaryLight: '#76B0F1', primaryMain: '#2065D1', primaryDark: '#103996', primary200: '#D1E9FC', primary800: '#061B64' },
   { id: 'cyan', primaryLight: '#68CDF9', primaryMain: '#078DEE', primaryDark: '#0351AB', primary200: '#CCF4FE', primary800: '#012972' },
   { id: 'purple', primaryLight: '#B985F4', primaryMain: '#7635DC', primaryDark: '#431A9E', primary200: '#EBD6FD', primary800: '#200A69' },

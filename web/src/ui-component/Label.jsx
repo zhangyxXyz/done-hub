@@ -101,16 +101,14 @@ const StyledLabel = styled(Box)(({ theme, ownerState }) => {
       }),
       // OUTLINED
       ...(outlinedVariant && {
-        color: theme.palette.grey[500],
-        border: `2px solid ${theme.palette.grey[500]}`
+        color: 'var(--aihub-link, currentColor)',
+        border: '1px solid var(--aihub-accent-ring, currentColor)'
       }),
       // SOFT
       ...(softVariant && {
-        color: theme.palette.mode === 'light' ? 'rgba(51, 82, 115, 0.82)' : theme.palette.text.secondary,
-        background: theme.palette.mode === 'light'
-          ? 'linear-gradient(135deg, rgba(222, 237, 255, 0.72), rgba(218, 244, 239, 0.52))'
-          : alpha(theme.palette.grey[500], 0.16),
-        border: theme.palette.mode === 'light' ? '1px solid rgba(30, 64, 175, 0.08)' : '1px solid transparent'
+        color: 'var(--aihub-link, currentColor)',
+        background: 'var(--aihub-accent-soft, rgba(255, 255, 255, 0.08))',
+        border: '1px solid var(--aihub-accent-ring, transparent)'
       })
     })
   };
@@ -119,23 +117,52 @@ const StyledLabel = styled(Box)(({ theme, ownerState }) => {
     ...(ownerState.color !== 'default' && {
       // FILLED
       ...(filledVariant && {
-        color: theme.palette.background.paper,
-        backgroundColor: theme.palette[ownerState.color].main
+        color:
+          ownerState.color === 'info'
+            ? 'var(--aihub-link, currentColor)'
+            : theme.palette.background.paper,
+        background:
+          ownerState.color === 'info'
+            ? 'var(--aihub-accent-soft, rgba(255, 255, 255, 0.08))'
+            : theme.palette[ownerState.color].main,
+        border:
+          ownerState.color === 'info'
+            ? '1px solid var(--aihub-accent-ring, transparent)'
+            : undefined
       }),
       // OUTLINED
       ...(outlinedVariant && {
         backgroundColor: 'transparent',
-        color: theme.palette[ownerState.color].main,
-        border: `2px solid ${theme.palette[ownerState.color].main}`
+        color:
+          ownerState.color === 'primary' || ownerState.color === 'info'
+            ? 'var(--aihub-link, currentColor)'
+            : theme.palette[ownerState.color].main,
+        border:
+          ownerState.color === 'primary' || ownerState.color === 'info'
+            ? '1px solid var(--aihub-accent-ring, currentColor)'
+            : `2px solid ${theme.palette[ownerState.color].main}`
       }),
       // SOFT
       ...(softVariant && {
-        color: theme.palette[ownerState.color]['dark'],
-        backgroundColor: alpha(theme.palette[ownerState.color].main, 0.16)
+        color:
+          ownerState.color === 'primary' || ownerState.color === 'info'
+            ? 'var(--aihub-link, currentColor)'
+            : theme.palette[ownerState.color]['dark'],
+        background:
+          ownerState.color === 'primary' || ownerState.color === 'info'
+            ? 'var(--aihub-accent-soft, rgba(255, 255, 255, 0.08))'
+            : alpha(theme.palette[ownerState.color].main, 0.16),
+        border:
+          ownerState.color === 'primary' || ownerState.color === 'info'
+            ? '1px solid var(--aihub-accent-ring, transparent)'
+            : undefined
       }),
       // GHOST
       ...(ghostVariant && {
-        color: theme.palette[ownerState.color].main
+        color:
+          ownerState.color === 'primary' || ownerState.color === 'info'
+            ? 'var(--aihub-link, currentColor)'
+            : theme.palette[ownerState.color].main
       })
     })
   };

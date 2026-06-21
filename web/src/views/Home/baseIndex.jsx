@@ -1,5 +1,4 @@
 import { Box } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
 import AmbientBackground from './components/AmbientBackground';
 import Hero from './components/Hero';
 import Stats from './components/Stats';
@@ -13,10 +12,8 @@ import CTA from './components/CTA';
 // follows the active preset color and light/dark mode. The site Footer is
 // rendered by MinimalLayout — not here.
 const BaseIndex = () => {
-  const theme = useTheme();
-
   return (
-    <Box sx={{ position: 'relative', overflowX: 'clip', backgroundColor: theme.palette.background.default }}>
+    <Box sx={{ position: 'relative', overflowX: 'clip', background: 'var(--aihub-bg)' }}>
       <AmbientBackground />
       <Box sx={{ position: 'relative', zIndex: 1 }}>
         <Hero />

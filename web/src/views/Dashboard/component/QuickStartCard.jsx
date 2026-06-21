@@ -1,5 +1,5 @@
 import { Stack, Typography, Box, Button, Divider } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+import { alpha, useTheme } from '@mui/material/styles';
 import SubCard from 'ui-component/cards/SubCard';
 import { IconMessageChatbot } from '@tabler/icons-react';
 import { useSelector } from 'react-redux';
@@ -81,10 +81,10 @@ const QuickStartCard = () => {
                       color: 'white',
                       '&:hover': {
                         backgroundColor: theme.palette.primary.dark,
-                        boxShadow: '0 0 3px 0 rgba(11, 108, 235, 0.5)'
+                        boxShadow: `0 0 3px 0 ${alpha(theme.palette.primary.main, 0.5)}`
                       },
                       textTransform: 'none',
-                      boxShadow: '0 0 3px 0 rgba(11, 108, 235, 0.5)'
+                      boxShadow: `0 0 3px 0 ${alpha(theme.palette.primary.main, 0.5)}`
                     }}
                   >
                     {option.name}
@@ -103,14 +103,14 @@ const QuickStartCard = () => {
                     startIcon={<IconAppWindow />}
                     onClick={() => handleClick(option.url)}
                     sx={{
-                      backgroundColor: '#00B8D4',
+                      backgroundColor: theme.palette.primary.main,
                       color: 'white',
                       '&:hover': {
-                        backgroundColor: '#00838F',
-                        boxShadow: '0 0 3px 0 #00838F'
+                        backgroundColor: theme.palette.primary.dark,
+                        boxShadow: `0 0 3px 0 ${alpha(theme.palette.primary.main, 0.5)}`
                       },
                       textTransform: 'none',
-                      boxShadow: '0 0 3px 0 #00838F'
+                      boxShadow: `0 0 3px 0 ${alpha(theme.palette.primary.main, 0.5)}`
                     }}
                   >
                     {option.name}

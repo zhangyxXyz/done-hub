@@ -15,8 +15,8 @@ const AmbientBackground = () => {
   const yB = useTransform(scrollYProgress, [0, 1], ['8%', '-12%']);
 
   const isDark = theme.palette.mode === 'dark';
-  const blobA = `radial-gradient(closest-side, ${alpha(theme.palette.primary.main, isDark ? 0.22 : 0.16)}, transparent)`;
-  const blobB = `radial-gradient(closest-side, ${alpha(theme.palette.secondary.main, isDark ? 0.18 : 0.12)}, transparent)`;
+  const blobA = `radial-gradient(closest-side, ${alpha(theme.palette.primary.main, isDark ? 0.3 : 0.18)}, transparent)`;
+  const blobB = `radial-gradient(closest-side, ${alpha(theme.palette.secondary.main, isDark ? 0.2 : 0.13)}, transparent)`;
   const grid = alpha(theme.palette.text.primary, isDark ? 0.05 : 0.04);
 
   return (
@@ -37,9 +37,9 @@ const AmbientBackground = () => {
       <motion.div
         style={{
           position: 'absolute',
-          top: '-12%',
-          left: '-8%',
-          width: '60vw',
+          top: '-10%',
+          left: '-5%',
+          width: '64vw',
           height: '60vw',
           maxWidth: 820,
           maxHeight: 820,

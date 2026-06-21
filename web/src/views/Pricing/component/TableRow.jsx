@@ -18,7 +18,7 @@ const PricesTableRow = ({ item, onEdit, onDelete, ownedby, unit = 'K' }) => {
       theme.palette.primary.main,
       theme.palette.secondary.main,
       theme.palette.success.main,
-      theme.palette.info.main,
+      theme.palette.primary.main,
       theme.palette.warning.main
     ];
     // 根据channel_type确定颜色
@@ -222,8 +222,8 @@ const PricesTableRow = ({ item, onEdit, onDelete, ownedby, unit = 'K' }) => {
                 fontSize: '0.68rem',
                 fontWeight: 600,
                 borderRadius: '3px',
-                bgcolor: alpha(theme.palette.info.main, 0.1),
-                color: theme.palette.info.main,
+                bgcolor: alpha(theme.palette.primary.main, 0.1),
+                color: theme.palette.primary.main,
                 '& .MuiChip-label': {
                   px: 0.5
                 }

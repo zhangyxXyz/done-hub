@@ -125,7 +125,7 @@ const MinimalLayout = () => {
           right: 0,
           bottom: 0,
           height: footerHeight,
-          background: 'var(--aihub-header)',
+          background: 'var(--aihub-chrome, var(--aihub-header))',
           borderTop: '1px solid var(--aihub-border)',
           backdropFilter: 'blur(18px) saturate(135%)',
           WebkitBackdropFilter: 'blur(18px) saturate(135%)',

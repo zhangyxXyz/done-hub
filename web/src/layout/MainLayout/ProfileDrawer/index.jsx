@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 // material-ui
-import { useTheme } from '@mui/material/styles';
+import { alpha, useTheme } from '@mui/material/styles';
 import {
   Avatar,
   Box,
@@ -266,26 +266,36 @@ const ProfileDrawer = ({ open, onClose }) => {
             p: 2,
             position: 'sticky',
             bottom: 0,
-            background:
-              theme.palette.mode === 'dark'
-                ? 'var(--aihub-panel-strong)'
-                : 'linear-gradient(90deg, rgba(231, 243, 255, 0.88), rgba(204, 232, 244, 0.76))'
+            background: 'var(--aihub-panel-strong)'
           }}
         >
           <Button
             fullWidth
-            variant="contained"
+            variant="outlined"
             sx={{
-              borderRadius: '4px',
+              borderRadius: '8px',
               py: 1,
               textTransform: 'none',
-              fontWeight: 'normal',
-              color: '#ab1632',
+              fontWeight: 600,
+              color: theme.palette.error.dark,
               bgcolor: '#FFDDD5', // 自定义颜色
               transition: 'transform 0.2s ease-in-out, background-color 0.2s ease-in-out', // 添加过渡效果
               '&:hover': {
                 bgcolor: '#fdb5a5', // 悬停时的颜色
                 transform: 'scale(1.03)' // 悬停时放大
+              }
+              ,
+              ...{
+                bgcolor: alpha(theme.palette.error.main, theme.palette.mode === 'dark' ? 0.1 : 0.07),
+              borderColor: alpha(theme.palette.error.main, theme.palette.mode === 'dark' ? 0.26 : 0.2),
+              boxShadow: 'none',
+                transition: 'transform 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out'
+              },
+              '&&:hover': {
+                bgcolor: alpha(theme.palette.error.main, theme.palette.mode === 'dark' ? 0.16 : 0.12),
+                borderColor: alpha(theme.palette.error.main, theme.palette.mode === 'dark' ? 0.38 : 0.3),
+                boxShadow: `0 10px 24px ${alpha(theme.palette.error.main, 0.1)}`,
+                transform: 'scale(1.02)'
               }
             }}
             onClick={handleLogout}

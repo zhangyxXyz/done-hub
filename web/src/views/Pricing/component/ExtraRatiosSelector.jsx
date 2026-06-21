@@ -57,10 +57,10 @@ export const ExtraRatiosSelector = ({ value = {}, onChange }) => {
   const getIconColor = (isPrompt) => {
     return theme.palette.mode === 'dark'
       ? isPrompt
-        ? theme.palette.info.light
+        ? theme.palette.primary.light
         : theme.palette.success.light
       : isPrompt
-        ? theme.palette.info.main
+        ? theme.palette.primary.main
         : theme.palette.success.main;
   };
 

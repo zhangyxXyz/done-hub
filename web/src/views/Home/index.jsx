@@ -15,7 +15,6 @@ const Home = () => {
   const hasCustomContent = homePageContentLoaded && homePageContent !== '' && homePageContent !== t('home.loadingErr');
 
   const displayHomePageContent = async () => {
-    setHomePageContent(localStorage.getItem('home_page_content') || '');
     try {
       const res = await API.get('/api/home_page_content');
       const { success, message, data } = res.data;
@@ -57,14 +56,15 @@ const Home = () => {
             containerStyle={{
               top: hasCustomContent ? headerHeight : undefined,
               minHeight: hasCustomContent ? `calc(100dvh - ${headerHeight || '0px'} - ${footerHeight || '0px'})` : 'calc(100vh - 136px)',
-              bottom: hasCustomContent ? footerHeight : undefined
+              height: hasCustomContent ? `calc(100dvh - ${headerHeight || '0px'} - ${footerHeight || '0px'})` : undefined
             }}
             contentStyle={{
-              fontSize: 'larger',
+              fontSize: 'inherit',
               minHeight: hasCustomContent ? `calc(100dvh - ${headerHeight || '0px'} - ${footerHeight || '0px'})` : undefined
             }}
             disablePadding={hasCustomContent}
-            autoResizeEmbeddedFrames={!hasCustomContent}
+            autoResizeEmbeddedFrames
+            enableScripts={hasCustomContent}
           />
         </Box>
       )}

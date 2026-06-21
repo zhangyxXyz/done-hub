@@ -77,6 +77,7 @@ const About = () => {
               height: hasCustomContent ? `calc(100dvh - ${headerHeight || '0px'} - ${footerHeight || '0px'})` : undefined
             }}
             disablePadding={hasCustomContent}
+            enableScripts={hasCustomContent}
           />
         </Box>
       )}
