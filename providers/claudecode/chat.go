@@ -233,8 +233,30 @@ func (p *ClaudeCodeProvider) extractMetadataFromOriginalRequest(claudeRequest *c
 // 确保 system 字段中包含必需的 Claude Code 指令，并添加 metadata.user_id
 func (p *ClaudeCodeProvider) applyClaudeCodeCompatibility(claudeRequest *claude.ClaudeRequest) {
 	p.extractMetadataFromOriginalRequest(claudeRequest)
+	p.stripDeprecatedSamplingParams(claudeRequest)
 	p.ensureClaudeCodeSystemInstruction(claudeRequest)
 	p.ensureMetadataUserId(claudeRequest)
+}
+
+func (p *ClaudeCodeProvider) stripDeprecatedSamplingParams(claudeRequest *claude.ClaudeRequest) {
+	if claudeRequest == nil || !claudeCodeModelDisallowsTemperature(claudeRequest.Model) {
+		return
+	}
+	claudeRequest.Temperature = nil
+}
+
+func claudeCodeModelDisallowsTemperature(modelName string) bool {
+	family, version := splitClaudeCodeModelVersion(strings.ToLower(strings.TrimSpace(modelName)))
+	if len(version) == 0 || compareClaudeCodeVersion(version, []int{4}) < 0 {
+		return false
+	}
+
+	switch family {
+	case "claude-opus", "claude-sonnet", "claude-haiku":
+		return true
+	default:
+		return false
+	}
 }
 
 // ensureClaudeCodeSystemInstruction 确保 system 字段包含 Claude Code 指令
