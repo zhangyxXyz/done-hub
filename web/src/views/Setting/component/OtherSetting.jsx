@@ -27,6 +27,8 @@ import { PROJECT_REPOSITORY_API_URL, PROJECT_REPOSITORY_URL } from 'constants/Co
 
 const OtherSetting = () => {
   const { t } = useTranslation();
+  const homeProviderMarqueeTag = '<aihub-model-marquee></aihub-model-marquee>';
+  const homeApiTerminalTag = '<aihub-api-terminal></aihub-api-terminal>';
   let [inputs, setInputs] = useState({
     Footer: '',
     Notice: '',
@@ -150,6 +152,25 @@ const OtherSetting = () => {
   const submitOption = async (key) => {
     await updateOption(key, inputs[key]);
   };
+
+  const insertHomeContentTag = (tag) => {
+    const textarea = document.getElementById('HomePageContent');
+    const content = inputs.HomePageContent || '';
+    const insert = `\n${tag}\n`;
+    const start = textarea?.selectionStart ?? content.length;
+    const end = textarea?.selectionEnd ?? start;
+    const value = `${content.slice(0, start)}${insert}${content.slice(end)}`;
+
+    setInputs((prev) => ({ ...prev, HomePageContent: value }));
+
+    requestAnimationFrame(() => {
+      textarea?.focus();
+      textarea?.setSelectionRange(start + insert.length, start + insert.length);
+    });
+  };
+
+  const insertHomeProviderMarquee = () => insertHomeContentTag(homeProviderMarqueeTag);
+  const insertHomeApiTerminal = () => insertHomeContentTag(homeApiTerminalTag);
 
   const openGitHubRelease = () => {
     window.location = `${PROJECT_REPOSITORY_URL}/releases/latest`;
@@ -300,6 +321,22 @@ const OtherSetting = () => {
                   placeholder={t('setting_index.otherSettings.customSettings.homePageContentPlaceholder')}
                 />
               </FormControl>
+            </Grid>
+            <Grid xs={12}>
+              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} alignItems={{ xs: 'stretch', sm: 'center' }} flexWrap="wrap">
+                <Button variant="outlined" onClick={insertHomeProviderMarquee}>
+                  {t('setting_index.otherSettings.customSettings.insertHomeProviderMarquee')}
+                </Button>
+                <Button variant="outlined" onClick={insertHomeApiTerminal}>
+                  {t('setting_index.otherSettings.customSettings.insertHomeApiTerminal')}
+                </Button>
+                <Typography variant="body2" color="textSecondary">
+                  {t('setting_index.otherSettings.customSettings.homeNativeWidgetHelper', {
+                    marqueeTag: homeProviderMarqueeTag,
+                    terminalTag: homeApiTerminalTag
+                  })}
+                </Typography>
+              </Stack>
             </Grid>
             <Grid xs={12}>
               <Button variant="contained" onClick={() => submitOption('HomePageContent')}>

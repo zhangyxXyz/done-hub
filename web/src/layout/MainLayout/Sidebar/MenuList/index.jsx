@@ -9,19 +9,21 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 // ==============================|| SIDEBAR MENU LIST ||============================== //
+const translateMenuItem = (item, t) => ({
+  ...item,
+  title: t(item.id),
+  children: item.children?.map((child) => translateMenuItem(child, t))
+});
+
 const MenuList = ({ isMini = false }) => {
   const userIsAdmin = useIsAdmin();
   const { t } = useTranslation();
   const siteInfo = useSelector((state) => state.siteInfo);
-  menuItem.items.forEach((group) => {
-    group.children.forEach((item) => {
-      item.title = t(item.id);
-    });
-  });
+  const translatedItems = menuItem.items.map((item) => translateMenuItem(item, t));
 
   return (
     <>
-      {menuItem.items.map((item) => {
+      {translatedItems.map((item) => {
         if (item.type !== 'group') {
           return (
             <Typography key={item.id} variant="h6" color="error" align="center">

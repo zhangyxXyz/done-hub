@@ -9,7 +9,13 @@
       "blue": "ブルー",
       "cyan": "シアン",
       "purple": "パープル",
-      "red": "レッド"
+      "red": "レッド",
+      "celadon": "青磁",
+      "daiqing": "黛青",
+      "rouge": "臙脂",
+      "cinnabar": "朱砂",
+      "gamboge": "藤黄",
+      "malachite": "石緑"
     }
   },
   "System Logs": "システムログ",
@@ -430,6 +436,8 @@
     }
   },
   "dashboard": "ダッシュボード",
+  "billing": "請求",
+  "usage": "使用量",
   "dashboard_index": {
     "balance": "残高",
     "calls": "コール回数",
@@ -494,8 +502,10 @@
     },
     "code": {
       "title": "3 つのプロトコル、ひとつのアドレス",
+      "titleDynamic": "{{count}} つのプロトコル、ひとつのアドレス",
       "subtitle": "OpenAI・Claude・Gemini のリクエストをそのままプロキシ。",
-      "reply": "こんにちは。{{model}} です。Done Hub 経由で接続しています。"
+      "protocolSubtitle": "{{protocols}} プロトコルをネイティブ転送し、書き換えません。",
+      "reply": "こんにちは。{{model}} です。{{systemName}} 経由で接続しています。"
     },
     "providers": {
       "title": "数十のプロバイダーを、ひとつの API で",
@@ -593,6 +603,36 @@
     "tokenFilterId": "SK {{id}}"
   },
   "invoice": "月次請求書",
+  "multi_user_stats": "複数ユーザーのトークン統計",
+  "multi_user_stats_page": {
+    "title": "複数ユーザーのトークン統計",
+    "subtitle": "複数ユーザーのトークン統計",
+    "description": "複数ユーザーの全トークン使用状況を集計します。",
+    "usernameLabel": "ユーザー名（複数の場合はカンマ区切り）",
+    "usernamePlaceholder": "例: user1, user2, user3",
+    "usernameHelper": "1つ以上のユーザー名をカンマ区切りで入力してください。",
+    "usernameRequired": "ユーザー名を入力してください",
+    "startDate": "開始日",
+    "endDate": "終了日",
+    "searchButton": "統計を検索",
+    "exportButton": "CSV をエクスポート",
+    "searchNoData": "検索は完了しましたが、データは見つかりませんでした。",
+    "searchSuccess": "検索が完了しました。{{count}} 人のユーザーデータが見つかりました。",
+    "searchFailed": "検索に失敗しました: {{message}}",
+    "exportSuccess": "CSV のエクスポートに成功しました",
+    "exportFailed": "エクスポートに失敗しました: {{message}}",
+    "totalRequests": "総リクエスト数",
+    "quotaUsed": "使用額",
+    "promptTokens": "入力 Tokens",
+    "completionTokens": "出力 Tokens",
+    "requestDuration": "リクエスト時間",
+    "quotaComparison": "ユーザー別使用額比較",
+    "modelUsageDistribution": "ユーザー別モデル呼び出し分布",
+    "totalCalls": "総呼び出し回数",
+    "times": "{{count}} 回",
+    "noData": "データなし",
+    "emptyHint": "検索条件を入力して「統計を検索」ボタンをクリックしてください"
+  },
   "midjourney": "Midjourney",
   "invoice_index": {
     "invoice": "月次請求書",
@@ -764,6 +804,8 @@
     "user": "ユーザー"
   },
   "model_price": "モデル価格",
+  "model_ownedby": "モデル所有元",
+  "model_info": "モデル詳細",
   "modelpricePage": {
     "availableModels": "利用可能なモデル",
     "channelType": "サプライヤー",
@@ -1353,6 +1395,10 @@
         "footerPlaceholder": "ここに新しいフッターを入力してください。空白のままにするとデフォルトのフッターが使用されます。HTMLコードがサポートされています。",
         "homePageContentLabel": "ホームページの内容",
         "homePageContentPlaceholder": "ここにホームページの内容を入力してください。MarkdownおよびHTMLコードがサポートされています。設定すると、ホームページのステータス情報は表示されなくなります。リンクを入力した場合、そのリンクはiframeのsrc属性として使用され、任意のウェブページをホームページとして設定できます。",
+        "homeProviderMarqueeHelper": "{tag} を挿入すると、上書きホームページで実際のモデル情報からテーマ対応のプロバイダーバッジを表示します。",
+        "homeNativeWidgetHelper": "{marqueeTag} または {terminalTag} を挿入すると、実際のモデル情報からネイティブのテーマ対応ウィジェットを表示します。",
+        "insertHomeApiTerminal": "API ターミナルデモを挿入",
+        "insertHomeProviderMarquee": "モデルプロバイダーバッジを挿入",
         "logoLabel": "ロゴ画像のURL",
         "logoPlaceholder": "ここにロゴ画像のURLを入力してください",
         "saveAbout": "概要を保存する",

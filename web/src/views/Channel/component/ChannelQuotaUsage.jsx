@@ -58,6 +58,7 @@ export default function ChannelQuotaUsage({ channel }) {
 
   const windows = parseUsageWindows(channel.type, state.data?.usage)
   const empty = state.data?.empty || windows.length === 0
+  const usageColor = empty ? 'warning.main' : 'primary.main'
   const title = (
     <Box>
       <Typography variant="subtitle2" sx={{ fontWeight: 800, mb: 0.5 }}>
@@ -85,7 +86,7 @@ export default function ChannelQuotaUsage({ channel }) {
     <Tooltip title={title} arrow placement="top">
       <Stack direction="row" spacing={0.5} alignItems="center" justifyContent="center" sx={{ cursor: 'help' }}>
         <Icon icon={empty ? 'mdi:clock-alert-outline' : 'mdi:gauge'} width={16}/>
-        <Typography variant="caption" sx={{ color: empty ? 'warning.main' : 'success.main', fontWeight: 800 }}>
+        <Typography variant="caption" sx={{ color: usageColor, fontWeight: 800 }}>
           {empty ? '暂无窗口' : getUsageSummaryLabel(windows)}
         </Typography>
       </Stack>

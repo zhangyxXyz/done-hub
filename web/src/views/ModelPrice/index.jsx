@@ -553,10 +553,7 @@ export default function ModelPrice() {
               variant="h2"
               sx={{
                 fontWeight: 700,
-                background:
-                  theme.palette.mode === 'dark'
-                    ? 'linear-gradient(45deg, #6b9fff 30%, #a29bfe 90%)'
-                    : 'linear-gradient(45deg, #2196F3 30%, #3f51b5 90%)',
+                background: `linear-gradient(45deg, ${theme.palette.primary.light} 30%, ${theme.palette.primary.main} 90%)`,
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent'
               }}

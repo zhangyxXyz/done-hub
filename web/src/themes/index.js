@@ -17,7 +17,12 @@ import { getPrimaryColors } from './presets';
 
 export const theme = (customization) => {
   // 用用户选择的主题色覆盖默认主色
-  const color = { ...colors, ...getPrimaryColors(customization.primaryColor) };
+  const presetColor = getPrimaryColors(customization.primaryColor);
+  const color = {
+    ...colors,
+    ...presetColor,
+    ...(customization.theme === 'dark' && { primaryMain: presetColor.primaryForeground })
+  };
   // 创建自定义渐变背景色
   const customGradients = {
     primary: createGradient(color.primaryMain, color.primaryDark),
@@ -74,13 +79,45 @@ export const theme = (customization) => {
 
 export default theme;
 
+function hexToRgb(hex) {
+  const normalized = hex.replace('#', '');
+  const fullHex =
+    normalized.length === 3
+      ? normalized
+          .split('')
+          .map((value) => value + value)
+          .join('')
+      : normalized;
+
+  return {
+    r: parseInt(fullHex.slice(0, 2), 16),
+    g: parseInt(fullHex.slice(2, 4), 16),
+    b: parseInt(fullHex.slice(4, 6), 16)
+  };
+}
+
+function mixHex(baseHex, tintHex, tintWeight = 0.5) {
+  const base = hexToRgb(baseHex);
+  const tint = hexToRgb(tintHex);
+  const weight = Math.min(Math.max(tintWeight, 0), 1);
+  const mixChannel = (baseChannel, tintChannel) => Math.round(baseChannel * (1 - weight) + tintChannel * weight);
+  const toHex = (value) => value.toString(16).padStart(2, '0');
+
+  return `#${toHex(mixChannel(base.r, tint.r))}${toHex(mixChannel(base.g, tint.g))}${toHex(mixChannel(base.b, tint.b))}`;
+}
+
 function GetDarkOption(color) {
+  const backgroundDefault = mixHex('#05080C', color.primary800, 0.34);
+  const paper = mixHex('#101318', color.primary800, 0.3);
+  const background = mixHex('#151922', color.primaryDark, 0.24);
+  const chrome = mixHex('#202733', color.primaryDark, 0.2);
+
   return {
     mode: 'dark',
     heading: color.darkTextTitle,
-    paper: '#1A1D23',
-    backgroundDefault: '#13151A',
-    background: '#1E2128',
+    paper,
+    backgroundDefault,
+    background,
     darkTextPrimary: '#E0E4EC',
     darkTextSecondary: '#A9B2C3',
     textDark: '#F8F9FC',
@@ -88,11 +125,11 @@ function GetDarkOption(color) {
     menuSelectedBack: varAlpha(color.primaryMain, 0.12),
     divider: 'rgba(255, 255, 255, 0.1)',
     borderColor: 'rgba(255, 255, 255, 0.12)',
-    menuButton: '#292D36',
+    menuButton: chrome,
     menuButtonColor: color.primaryMain,
-    menuChip: '#28323D',
-    headBackgroundColor: '#28323D',
-    headBackgroundColorHover: varAlpha('#28323D', 0.08),
+    menuChip: chrome,
+    headBackgroundColor: chrome,
+    headBackgroundColorHover: varAlpha(chrome, 0.08),
     tableRowHoverBackgroundColor: 'rgba(0, 0, 0, 0.3)',
     tableBorderBottom: varAlpha(color.grey500, 0.2)
   };

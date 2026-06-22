@@ -1,11 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { marked } from 'marked';
+import { createPortal } from 'react-dom';
 import { Box, Paper, Typography, CircularProgress } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import CustomHomeProviderMarquee from './CustomHomeProviderMarquee';
+import ApiTerminalDemo from '../views/Home/components/ApiTerminalDemo';
 import 'assets/css/content-viewer.css';
+
+const NATIVE_WIDGET_PATTERN = /(^|\n)\s*<aihub-(model-marquee|api-terminal)\b([^>]*)(?:\/>|>\s*<\/aihub-\2>)\s*/gi;
+const DEFAULT_IFRAME_SANDBOX = 'allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads allow-modals';
 
 const customRuntimeScript = `<script data-aihub-runtime>
 (function(){
@@ -169,6 +175,118 @@ const appendToHead = (html, insertion) => {
 
 const htmlLang = (language) => (language || 'zh_CN').replace('_', '-');
 
+const nativeSlotClassName = (type) => (type === 'api-terminal' ? 'aihub-terminal-wrap' : '');
+
+const readAttribute = (attrs, name) => {
+  const match = String(attrs || '').match(new RegExp(`${name}\\s*=\\s*["']([^"']*)["']`, 'i'));
+  return match?.[1] || '';
+};
+
+const appendTrustedHtmlToHead = (doc, selector, html) => {
+  if (!doc.head.querySelector(selector)) {
+    doc.head.insertAdjacentHTML('beforeend', html);
+  }
+};
+
+const appendCustomCssToHead = (doc, customCss) => {
+  if (!customCss || doc.head.querySelector('[data-aihub-custom-css]')) {
+    return;
+  }
+
+  const style = doc.createElement('style');
+  style.setAttribute('data-aihub-custom-css', '');
+  style.textContent = customCss;
+  doc.head.appendChild(style);
+};
+
+const setDefaultIframeSandbox = (iframe) => {
+  if (!iframe.hasAttribute('sandbox')) {
+    iframe.setAttribute('sandbox', DEFAULT_IFRAME_SANDBOX);
+  }
+};
+
+const escapeAttribute = (value) =>
+  String(value || '')
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+
+const transformNativeContent = (html) => {
+  let index = 0;
+  NATIVE_WIDGET_PATTERN.lastIndex = 0;
+
+  return html.replace(NATIVE_WIDGET_PATTERN, (match, prefix, type, attrs) => {
+    const id = `aihub-native-${index}`;
+    index += 1;
+    const className = nativeSlotClassName(type);
+    const classAttr = className ? ` class="${className}"` : '';
+    const protocols = readAttribute(attrs, 'protocols');
+    const protocolsAttr = protocols ? ` data-aihub-protocols="${escapeAttribute(protocols)}"` : '';
+    return `${prefix || ''}<div${classAttr} data-aihub-native-slot="${type}" data-aihub-native-id="${id}"${protocolsAttr}></div>`;
+  });
+};
+
+const customHomeNativeSx = (theme) => ({
+  width: '100%',
+  maxWidth: 1120,
+  mx: 'auto',
+  px: { xs: 2.5, sm: 4 },
+  py: { xs: 7, md: 10 },
+  color: theme.palette.text.primary,
+  '& main': {
+    display: 'grid',
+    gap: { xs: 7, md: 10 }
+  },
+  '& section': {
+    maxWidth: 760
+  },
+  '& section:has([data-aihub-native="model-marquee"])': {
+    maxWidth: 'none',
+    width: '100%'
+  },
+  '& h1, & h2': {
+    borderBottom: '0 !important',
+    p: '0 !important',
+    mt: '0 !important',
+    mb: '18px !important',
+    color: theme.palette.text.primary,
+    letterSpacing: '0 !important',
+    lineHeight: 1.08,
+    fontWeight: 700
+  },
+  '& h1': {
+    fontSize: { xs: '2.6rem', md: '4.8rem' }
+  },
+  '& h2': {
+    fontSize: { xs: '2rem', md: '3rem' }
+  },
+  '& p': {
+    maxWidth: 720,
+    mt: '0 !important',
+    mb: '18px !important',
+    color: theme.palette.text.secondary,
+    fontSize: { xs: '1rem', md: '1.08rem' },
+    lineHeight: 1.7
+  },
+  '& section > p:first-of-type': {
+    color: theme.palette.primary.main,
+    fontSize: '0.76rem',
+    fontWeight: 700,
+    letterSpacing: '0.18em',
+    textTransform: 'uppercase',
+    mb: '20px !important'
+  },
+  '& a': {
+    color: theme.palette.primary.main,
+    fontWeight: 700
+  },
+  '& [data-aihub-native="model-marquee"]': {
+    mt: { xs: 3, md: 5 },
+    mb: 0
+  }
+});
+
 const setHtmlRuntimeAttributes = (html, resolvedTheme, language, primaryColor) => {
   if (!resolvedTheme && !language && !primaryColor) {
     return html;
@@ -202,12 +320,38 @@ const setHtmlRuntimeAttributes = (html, resolvedTheme, language, primaryColor) =
   });
 };
 
+const injectFrameSrcdoc = (html, customCss, resolvedTheme, language, primaryColor, autoResizeEmbeddedFrames) => {
+  const themedHtml = setHtmlRuntimeAttributes(html, resolvedTheme, language, primaryColor);
+
+  try {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(themedHtml, 'text/html');
+    doc.documentElement.setAttribute('data-theme', resolvedTheme);
+    doc.documentElement.setAttribute('data-primary-color', primaryColor);
+    doc.documentElement.setAttribute('data-language', language);
+    doc.documentElement.setAttribute('lang', htmlLang(language));
+    appendTrustedHtmlToHead(doc, '[data-aihub-runtime]', customRuntimeScript);
+    appendCustomCssToHead(doc, customCss);
+    appendTrustedHtmlToHead(doc, '[data-aihub-iframe-scroll]', iframeScrollStyle);
+
+    doc.querySelectorAll('iframe').forEach((iframe) => {
+      setDefaultIframeSandbox(iframe);
+      iframe.setAttribute('data-aihub-auto-height', autoResizeEmbeddedFrames ? 'true' : 'false');
+    });
+
+    return doc.documentElement.outerHTML;
+  } catch (error) {
+    // DOMParser should handle arbitrary strings, but keep a conservative
+    // fallback for malformed custom admin content.
+    return appendToHead(appendToHead(themedHtml, customRuntimeScript), iframeScrollStyle);
+  }
+};
+
 const injectCustomCss = (html, customCss, resolvedTheme, language, primaryColor, autoResizeEmbeddedFrames = true) => {
   if (typeof window === 'undefined' || !html.trim().startsWith('<')) {
     return html;
   }
 
-  const styleTag = customCss ? `<style data-aihub-custom-css>${customCss}</style>` : '';
   const themedHtml = setHtmlRuntimeAttributes(html, resolvedTheme, language, primaryColor);
 
   try {
@@ -218,25 +362,26 @@ const injectCustomCss = (html, customCss, resolvedTheme, language, primaryColor,
     doc.documentElement.setAttribute('data-language', language);
     doc.documentElement.setAttribute('lang', htmlLang(language));
 
-    if (!doc.head.querySelector('[data-aihub-runtime]')) {
-      doc.head.insertAdjacentHTML('beforeend', customRuntimeScript);
-    }
-    if (styleTag && !doc.head.querySelector('[data-aihub-custom-css]')) {
-      doc.head.insertAdjacentHTML('beforeend', styleTag);
-    }
-    if (!doc.head.querySelector('[data-aihub-iframe-scroll]')) {
-      doc.head.insertAdjacentHTML('beforeend', iframeScrollStyle);
-    }
+    appendTrustedHtmlToHead(doc, '[data-aihub-runtime]', customRuntimeScript);
+    appendCustomCssToHead(doc, customCss);
+    appendTrustedHtmlToHead(doc, '[data-aihub-iframe-scroll]', iframeScrollStyle);
 
-    doc.querySelectorAll('iframe[srcdoc]').forEach((iframe) => {
-      const srcdoc = setHtmlRuntimeAttributes(iframe.getAttribute('srcdoc') || '', resolvedTheme, language, primaryColor);
+    doc.querySelectorAll('iframe').forEach((iframe) => {
+      setDefaultIframeSandbox(iframe);
       iframe.setAttribute('data-aihub-auto-height', autoResizeEmbeddedFrames ? 'true' : 'false');
-      iframe.setAttribute('srcdoc', appendToHead(appendToHead(appendToHead(srcdoc, customRuntimeScript), styleTag), iframeScrollStyle));
+      if (iframe.hasAttribute('srcdoc')) {
+        iframe.setAttribute(
+          'srcdoc',
+          injectFrameSrcdoc(iframe.getAttribute('srcdoc') || '', customCss, resolvedTheme, language, primaryColor, autoResizeEmbeddedFrames)
+        );
+      }
     });
 
     return doc.body.innerHTML;
   } catch (error) {
-    return appendToHead(appendToHead(appendToHead(themedHtml, customRuntimeScript), styleTag), iframeScrollStyle);
+    // Keep rendering malformed trusted custom content, but avoid injecting
+    // administrator CSS through an HTML string in the fallback path.
+    return appendToHead(appendToHead(themedHtml, customRuntimeScript), iframeScrollStyle);
   }
 };
 
@@ -272,7 +417,10 @@ const ContentViewer = ({
   const language = i18n.language || localStorage.getItem('appLanguage') || siteInfo.language || 'zh_CN';
   const [parsedContent, setParsedContent] = useState('');
   const [isUrl, setIsUrl] = useState(false);
+  const [nativeSlots, setNativeSlots] = useState([]);
   const contentRef = useRef(null);
+  const hasNativeWidget = !isUrl && parsedContent.includes('data-aihub-native-slot=');
+  const useNativeLayout = hasNativeWidget && !parsedContent.includes('aihub-landing');
 
   useEffect(() => {
     if (!content) {
@@ -291,13 +439,13 @@ const ContentViewer = ({
     // Check if content is already HTML
     if (content.trim().startsWith('<') && content.includes('</')) {
       setIsUrl(false);
-      setParsedContent(injectCustomCss(content, customCss, resolvedTheme, language, primaryColor, autoResizeEmbeddedFrames));
+      setParsedContent(injectCustomCss(transformNativeContent(content), customCss, resolvedTheme, language, primaryColor, autoResizeEmbeddedFrames));
       return;
     }
 
     // Parse as Markdown
     try {
-      const parsed = marked.parse(content);
+      const parsed = transformNativeContent(marked.parse(content));
       setParsedContent(parsed);
       setIsUrl(false);
     } catch (error) {
@@ -339,8 +487,8 @@ const ContentViewer = ({
         }
 
         try {
-          // Admin custom pages are trusted site configuration. Execute inline
-          // scripts explicitly because scripts inserted through innerHTML are inert.
+          // Only enable this for trusted root/admin-authored site configuration.
+          // ContentViewer intentionally does not sanitize arbitrary user HTML.
           Function(scriptText)();
         } catch (error) {
           console.error('Error executing custom content script:', error);
@@ -405,6 +553,22 @@ const ContentViewer = ({
 
     return () => controller.abort();
   }, [isUrl, parsedContent, enableScripts]);
+
+  useEffect(() => {
+    if (!hasNativeWidget || !contentRef.current) {
+      setNativeSlots([]);
+      return;
+    }
+
+    const slots = Array.from(contentRef.current.querySelectorAll('[data-aihub-native-slot]')).map((node) => ({
+      id: node.getAttribute('data-aihub-native-id'),
+      type: node.getAttribute('data-aihub-native-slot'),
+      protocols: node.getAttribute('data-aihub-protocols') || '',
+      node
+    }));
+
+    setNativeSlots(slots);
+  }, [hasNativeWidget, parsedContent]);
 
   if (loading) {
     return (
@@ -479,6 +643,7 @@ const ContentViewer = ({
         <iframe
           title="content-frame"
           src={parsedContent}
+          sandbox={DEFAULT_IFRAME_SANDBOX}
           data-theme={resolvedTheme}
           data-language={language}
           style={{
@@ -497,10 +662,10 @@ const ContentViewer = ({
           sx={{
             fontSize: 'inherit',
             lineHeight: 1.6,
-            p: disablePadding ? '0 !important' : undefined,
+            p: useNativeLayout ? '0 !important' : disablePadding ? '0 !important' : undefined,
             m: disablePadding ? '0 !important' : undefined,
-            width: disablePadding ? '100%' : undefined,
-            maxWidth: disablePadding ? '100vw' : undefined,
+            width: useNativeLayout || disablePadding ? '100%' : undefined,
+            maxWidth: useNativeLayout ? '100%' : disablePadding ? '100vw' : undefined,
             minHeight: disablePadding ? '100%' : undefined,
             boxSizing: 'border-box',
             overflowX: disablePadding ? 'hidden !important' : undefined,
@@ -527,11 +692,35 @@ const ContentViewer = ({
                   }
                 }
               : {}),
+            ...(useNativeLayout ? customHomeNativeSx(theme) : {}),
             ...contentStyle
           }}
           dangerouslySetInnerHTML={{ __html: parsedContent }}
         />
       )}
+      {nativeSlots.map((slot) => {
+        if (slot.type === 'model-marquee') {
+          return createPortal(
+            <Box data-aihub-native="model-marquee" sx={{ width: '100%', my: 0.75 }}>
+              <CustomHomeProviderMarquee />
+            </Box>,
+            slot.node,
+            slot.id
+          );
+        }
+
+        if (slot.type === 'api-terminal') {
+          return createPortal(
+            <Box data-aihub-native="api-terminal" sx={{ width: '100%' }}>
+              <ApiTerminalDemo protocols={slot.protocols} />
+            </Box>,
+            slot.node,
+            slot.id
+          );
+        }
+
+        return null;
+      })}
     </Paper>
   );
 };

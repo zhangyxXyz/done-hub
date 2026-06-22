@@ -421,6 +421,8 @@
     }
   },
   "dashboard": "儀表板",
+  "billing": "賬單",
+  "usage": "用量",
   "dashboard_index": {
     "balance": "餘額",
     "calls": "調用次數",
@@ -485,8 +487,10 @@
     },
     "code": {
       "title": "三種協議，同一入口",
+      "titleDynamic": "{{count}} 種協議，同一入口",
       "subtitle": "OpenAI、Claude、Gemini 協議原生轉發，不作改寫。",
-      "reply": "你好,我是 {{model}},經 Done Hub 接入。"
+      "protocolSubtitle": "{{protocols}} 協議原生轉發，不作改寫。",
+      "reply": "你好, 我是 {{model}}, 經 {{systemName}} 接入。"
     },
     "providers": {
       "title": "覆蓋數十家模型供應商",
@@ -544,6 +548,35 @@
   "jump": "正在跳轉中...",
   "invoice": "月度賬單",
   "multi_user_stats": "多用戶令牌統計",
+  "multi_user_stats_page": {
+    "title": "多用戶令牌統計",
+    "subtitle": "多用戶令牌統計",
+    "description": "查詢多個用戶的所有令牌使用情況統計數據",
+    "usernameLabel": "用戶名（多個用戶名用逗號分隔）",
+    "usernamePlaceholder": "例如：user1, user2, user3",
+    "usernameHelper": "輸入一個或多個用戶名，用逗號分隔",
+    "usernameRequired": "請輸入用戶名",
+    "startDate": "開始日期",
+    "endDate": "結束日期",
+    "searchButton": "查詢統計",
+    "exportButton": "導出 CSV",
+    "searchNoData": "查詢成功，但沒有找到數據",
+    "searchSuccess": "查詢成功，找到 {{count}} 個用戶的數據",
+    "searchFailed": "查詢失敗：{{message}}",
+    "exportSuccess": "CSV 導出成功",
+    "exportFailed": "導出失敗：{{message}}",
+    "totalRequests": "總請求數",
+    "quotaUsed": "額度消耗",
+    "promptTokens": "輸入 Tokens",
+    "completionTokens": "輸出 Tokens",
+    "requestDuration": "請求時長",
+    "quotaComparison": "用戶額度消耗對比",
+    "modelUsageDistribution": "不同用戶模型調用分佈",
+    "totalCalls": "總調用次數",
+    "times": "{{count}} 次",
+    "noData": "暫無數據",
+    "emptyHint": "請輸入查詢條件並點擊「查詢統計」按鈕"
+  },
   "midjourney": "Midjourney",
   "invoice_index": {
     "invoice": "月度賬單",
@@ -755,6 +788,8 @@
     "user": "用戶"
   },
   "model_price": "可用模型",
+  "model_ownedby": "模型歸屬",
+  "model_info": "模型詳情",
   "modelpricePage": {
     "availableModels": "可用模型",
     "channelType": "供應商",
@@ -1143,7 +1178,13 @@
       "blue": "藍色",
       "cyan": "青色",
       "purple": "紫色",
-      "red": "紅色"
+      "red": "紅色",
+      "celadon": "青瓷",
+      "daiqing": "黛青",
+      "rouge": "胭脂",
+      "cinnabar": "朱砂",
+      "gamboge": "藤黃",
+      "malachite": "石綠"
     }
   },
   "setting_index": {
@@ -1358,6 +1399,10 @@
         "footerPlaceholder": "在此輸入新的頁腳，留空則使用默認頁腳，支持 HTML 代碼",
         "homePageContentLabel": "首頁內容",
         "homePageContentPlaceholder": "在此輸入首頁內容，支持 Markdown & HTML 代碼，設置後首頁的狀態信息將不再顯示。如果輸入的是一個鏈接，則會使用該鏈接作為 iframe 的 src 屬性，這允許你設置任意網頁作為首頁。",
+        "homeProviderMarqueeHelper": "插入 {tag} 後，覆蓋首頁會用真實模型信息渲染主題化廠商徽章。",
+        "homeNativeWidgetHelper": "插入 {marqueeTag} 或 {terminalTag} 後，覆蓋首頁會使用真實模型信息和原生主題組件渲染。",
+        "insertHomeApiTerminal": "插入 API 終端演示",
+        "insertHomeProviderMarquee": "插入模型廠商徽章",
         "logoLabel": "Logo 圖片地址",
         "logoPlaceholder": "在此輸入 Logo 圖片地址",
         "saveAbout": "保存關於",

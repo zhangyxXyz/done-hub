@@ -28,6 +28,7 @@ const RPM = () => {
   const [rateData, setRateData] = useState({ rpm: 0, maxRPM: 0, tpm: 0, maxTPM: 0, usageRpmRate: 0, usageTpmRate: 0 });
   const [localLoading, setLocalLoading] = useState(false);
   const [initialLoading, setInitialLoading] = useState(true);
+  const usageColor = rateData.usageRpmRate > 80 ? 'error' : rateData.usageRpmRate > 50 ? 'warning' : 'primary';
   const fetchRPMData = async () => {
     setLocalLoading(true);
     try {
@@ -131,7 +132,7 @@ const RPM = () => {
                   variant="buffer"
                   value={rateData.usageRpmRate > 100 ? 100 : rateData.usageRpmRate}
                   valueBuffer={100}
-                  color={rateData.usageRpmRate > 80 ? 'error' : rateData.usageRpmRate > 50 ? 'warning' : 'success'}
+                  color={usageColor}
                   sx={{
                     mt: 1.5,
                     mb: 1.5
@@ -149,7 +150,7 @@ const RPM = () => {
                     sx={{
                       display: 'flex',
                       alignItems: 'center',
-                      color: rateData.usageRpmRate > 80 ? 'error.main' : rateData.usageRpmRate > 50 ? 'warning.main' : 'success.main',
+                      color: `${usageColor}.main`,
                       fontSize: '14px'
                     }}
                   >

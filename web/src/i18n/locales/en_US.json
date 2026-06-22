@@ -17,6 +17,35 @@
   "Search logs...": "Search logs...",
   "invite_count": "Invite Count",
   "invite_reward": "Invite Reward",
+  "multi_user_stats_page": {
+    "title": "Multi-User Token Statistics",
+    "subtitle": "Multi-User Token Statistics",
+    "description": "Query token usage statistics across multiple users.",
+    "usernameLabel": "Usernames (separate multiple usernames with commas)",
+    "usernamePlaceholder": "Example: user1, user2, user3",
+    "usernameHelper": "Enter one or more usernames, separated by commas.",
+    "usernameRequired": "Please enter a username",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "searchButton": "Search Statistics",
+    "exportButton": "Export CSV",
+    "searchNoData": "Search completed, but no data was found.",
+    "searchSuccess": "Search completed. Found data for {{count}} users.",
+    "searchFailed": "Search failed: {{message}}",
+    "exportSuccess": "CSV exported successfully",
+    "exportFailed": "Export failed: {{message}}",
+    "totalRequests": "Total Requests",
+    "quotaUsed": "Quota Used",
+    "promptTokens": "Input Tokens",
+    "completionTokens": "Output Tokens",
+    "requestDuration": "Request Duration",
+    "quotaComparison": "User Quota Usage Comparison",
+    "modelUsageDistribution": "Model Call Distribution by User",
+    "totalCalls": "Total Calls",
+    "times": "{{count}} times",
+    "noData": "No data",
+    "emptyHint": "Enter search criteria and click “Search Statistics”."
+  },
   "AZURE_OPENAI_ENDPOINT": "AZURE_OPENAI_ENDPOINT",
   "CheckUpdatesTable": {
     "addNewOnly": "Add New Only",
@@ -447,6 +476,8 @@
     }
   },
   "dashboard": "Dashboard",
+  "billing": "Billing",
+  "usage": "Usage",
   "dashboard_index": {
     "balance": "Balance",
     "calls": "Calls",
@@ -512,8 +543,10 @@
     },
     "code": {
       "title": "Three protocols, one address",
+      "titleDynamic": "{{count}} protocols, one address",
       "subtitle": "OpenAI, Claude, and Gemini requests are proxied as-is.",
-      "reply": "Hi! I'm {{model}}, reached through Done Hub."
+      "protocolSubtitle": "{{protocols}} requests are proxied as-is.",
+      "reply": "Hi! I'm {{model}}, reached through {{systemName}}."
     },
     "providers": {
       "title": "Dozens of providers, one API",
@@ -611,6 +644,7 @@
     "tokenFilterId": "SK {{id}}"
   },
   "invoice": "Monthly Bill",
+  "multi_user_stats": "Multi-User Token Statistics",
   "midjourney": "Midjourney",
   "invoice_index": {
     "invoice": "Monthly Bill",
@@ -772,6 +806,8 @@
     "user": "User"
   },
   "model_price": "Model Price",
+  "model_ownedby": "Model Ownership",
+  "model_info": "Model Details",
   "modelpricePage": {
     "availableModels": "Available Models",
     "channelType": "Supplier",
@@ -1164,7 +1200,13 @@
       "blue": "Blue",
       "cyan": "Cyan",
       "purple": "Purple",
-      "red": "Red"
+      "red": "Red",
+      "celadon": "Celadon",
+      "daiqing": "Daiqing Blue",
+      "rouge": "Rouge",
+      "cinnabar": "Cinnabar",
+      "gamboge": "Gamboge",
+      "malachite": "Malachite"
     }
   },
   "setting_index": {
@@ -1379,6 +1421,10 @@
         "footerPlaceholder": "Enter new footer here, leave blank to use the default footer, supports HTML code",
         "homePageContentLabel": "Home Page Content",
         "homePageContentPlaceholder": "Enter home page content here, supports Markdown & HTML code. Once set, the home page status information will no longer be displayed. If a link is entered, it will be used as the src attribute of the iframe, allowing you to set any web page as the home page.",
+        "homeProviderMarqueeHelper": "Insert {tag} to render themed provider badges from live model info on the overridden homepage.",
+        "homeNativeWidgetHelper": "Insert {marqueeTag} or {terminalTag} to render native themed widgets from live model info on the overridden homepage.",
+        "insertHomeApiTerminal": "Insert API Terminal Demo",
+        "insertHomeProviderMarquee": "Insert Model Provider Badges",
         "logoLabel": "Logo Image URL",
         "logoPlaceholder": "Enter Logo Image URL here",
         "saveAbout": "Save About",

@@ -72,6 +72,7 @@ export default function ChannelQuotaPanel() {
         const windows = parseUsageWindows(item.channel.type, item.data?.usage)
         const remaining = minRemaining(windows)
         const empty = item.data?.empty || (!item.error && windows.length === 0)
+        const usageColor = item.error ? 'error.main' : empty ? 'warning.main' : 'primary.main'
         const tooltip = item.error ? (
           item.error
         ) : (
@@ -105,7 +106,7 @@ export default function ChannelQuotaPanel() {
                   <Typography
                     variant="body2"
                     sx={{
-                      color: item.error ? 'error.main' : empty ? 'warning.main' : 'success.main',
+                      color: usageColor,
                       fontWeight: 800,
                       whiteSpace: 'nowrap'
                     }}
@@ -124,7 +125,7 @@ export default function ChannelQuotaPanel() {
                       bgcolor: 'action.hover',
                       '& .MuiLinearProgress-bar': {
                         borderRadius: 1,
-                        bgcolor: remaining < 20 ? 'error.main' : remaining < 50 ? 'warning.main' : 'success.main'
+                        bgcolor: remaining < 20 ? 'error.main' : remaining < 50 ? 'warning.main' : 'primary.main'
                       }
                     }}
                   />
