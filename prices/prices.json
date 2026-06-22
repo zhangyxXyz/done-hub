@@ -4512,7 +4512,7 @@
     "type": "tokens",
     "channel_type": 20,
     "input": 0.66,
-    "output": 3.5
+    "output": 3.41
   },
   {
     "model": "moonshotai/kimi-k2.7-code",
@@ -4569,6 +4569,13 @@
     "channel_type": 20,
     "input": 0.135,
     "output": 0.5
+  },
+  {
+    "model": "nex-agi/nex-n2-pro",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.5,
+    "output": 2.5
   },
   {
     "model": "nex-agi/nex-n2-pro:free",
@@ -6380,8 +6387,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 1.2,
-    "output": 4.1
+    "input": 1,
+    "output": 4
   },
   {
     "model": "z-ai/glm-5v-turbo",
@@ -6437,7 +6444,7 @@
     "type": "tokens",
     "channel_type": 20,
     "input": 0.66,
-    "output": 3.5
+    "output": 3.41
   },
   {
     "model": "~openai/gpt-latest",
@@ -9735,6 +9742,13 @@
     "channel_type": 42,
     "input": 0.2,
     "output": 0
+  },
+  {
+    "model": "gemma-4-26b-a4b-it-maas",
+    "type": "tokens",
+    "channel_type": 42,
+    "input": 0.15,
+    "output": 0.6
   },
   {
     "model": "glm-4.7-maas",

@@ -327,32 +327,6 @@
       }
     },
     {
-      "model": "anthropic/claude-3.5-haiku",
-      "model_info": {
-        "model": "anthropic/claude-3.5-haiku",
-        "name": "Anthropic: Claude 3.5 Haiku",
-        "description": "Claude 3.5 Haiku features offers enhanced capabilities in speed, coding accuracy, and tool use. Engineered to excel in real-time applications, it delivers quick response times that are essential for dynamic...",
-        "context_length": 200000,
-        "max_tokens": 8192,
-        "input_modalities": [
-          "text",
-          "image"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/anthropic/claude-3.5-haiku",
-          "https://openrouter.ai/api/v1/models/anthropic/claude-3-5-haiku/endpoints"
-        ]
-      }
-    },
-    {
       "model": "anthropic/claude-fable-5",
       "model_info": {
         "model": "anthropic/claude-fable-5",
@@ -3862,7 +3836,7 @@
         "name": "MoonshotAI: Kimi K2.6",
         "description": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and...",
         "context_length": 262144,
-        "max_tokens": 65535,
+        "max_tokens": 262144,
         "input_modalities": [
           "text",
           "image"
@@ -3959,13 +3933,39 @@
       }
     },
     {
+      "model": "nex-agi/nex-n2-pro",
+      "model_info": {
+        "model": "nex-agi/nex-n2-pro",
+        "name": "Nex AGI: Nex-N2-Pro",
+        "description": "Nex-N2-Pro is an agentic mixture-of-experts model from Nex AGI, with 17B active parameters out of 397B total. Built on the Qwen3.5 architecture, it accepts text and image input and produces...",
+        "context_length": 262144,
+        "max_tokens": 262144,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "reasoning"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/nex-agi/nex-n2-pro",
+          "https://openrouter.ai/api/v1/models/nex-agi/nex-n2-pro/endpoints"
+        ]
+      }
+    },
+    {
       "model": "nex-agi/nex-n2-pro:free",
       "model_info": {
         "model": "nex-agi/nex-n2-pro:free",
         "name": "Nex AGI: Nex-N2-Pro (free)",
         "description": "Nex-N2-Pro is an agentic mixture-of-experts model from Nex AGI, with 17B active parameters out of 397B total. Built on the Qwen3.5 architecture, it accepts text and image input and produces...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 256000,
         "input_modalities": [
           "text",
           "image"
@@ -8794,7 +8794,7 @@
         "name": "Z.ai: GLM 5.2",
         "description": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 32768,
         "input_modalities": [
           "text"
         ],
@@ -9000,7 +9000,7 @@
         "name": "MoonshotAI Kimi Latest",
         "description": "This model always redirects to the latest model in the MoonshotAI Kimi family.",
         "context_length": 262144,
-        "max_tokens": 65535,
+        "max_tokens": 262144,
         "input_modalities": [
           "text",
           "image"
