@@ -4578,13 +4578,6 @@
     "output": 2.5
   },
   {
-    "model": "nex-agi/nex-n2-pro:free",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 0,
-    "output": 0
-  },
-  {
     "model": "nousresearch/deephermes-3-mistral-24b-preview",
     "type": "tokens",
     "channel_type": 20,
@@ -6387,8 +6380,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 1,
-    "output": 4
+    "input": 0.98,
+    "output": 3.08
   },
   {
     "model": "z-ai/glm-5v-turbo",
