@@ -182,10 +182,9 @@ html[data-theme='dark'] {
   --aihub-panel-strong: rgba(15, 23, 42, 0.34);
   --aihub-card-bg: linear-gradient(
       145deg,
-      color-mix(in srgb, var(--aihub-link) 24%, transparent),
-      color-mix(in srgb, var(--aihub-link) 14%, transparent)
-    ),
-    linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.035));
+      color-mix(in srgb, var(--aihub-link) 10%, rgba(8, 18, 34, 0.56)),
+      color-mix(in srgb, var(--aihub-link) 6%, rgba(8, 18, 34, 0.42))
+    );
   --aihub-drawer: linear-gradient(145deg, rgba(8, 18, 36, 0.78), rgba(10, 35, 64, 0.62), rgba(7, 45, 68, 0.5));
   --aihub-field: rgba(255, 255, 255, 0.08);
   --aihub-field-hover: rgba(255, 255, 255, 0.12);
@@ -668,7 +667,7 @@ body,
 
 #root > [data-layout='main'] .MuiPaper-root.MuiPaper-outlined,
 #root > [data-layout='minimal'] .MuiPaper-root.MuiPaper-outlined {
-  background: var(--aihub-panel-strong) !important;
+  background: var(--aihub-card-bg, var(--aihub-panel-strong)) !important;
   border-color: var(--aihub-accent-ring) !important;
   box-shadow: none !important;
   -webkit-backdrop-filter: blur(22px) saturate(135%);

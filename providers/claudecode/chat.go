@@ -239,13 +239,14 @@ func (p *ClaudeCodeProvider) applyClaudeCodeCompatibility(claudeRequest *claude.
 }
 
 func (p *ClaudeCodeProvider) stripDeprecatedSamplingParams(claudeRequest *claude.ClaudeRequest) {
-	if claudeRequest == nil || !claudeCodeModelDisallowsTemperature(claudeRequest.Model) {
+	if claudeRequest == nil || !claudeCodeModelDisallowsSamplingParams(claudeRequest.Model) {
 		return
 	}
 	claudeRequest.Temperature = nil
+	claudeRequest.TopP = nil
 }
 
-func claudeCodeModelDisallowsTemperature(modelName string) bool {
+func claudeCodeModelDisallowsSamplingParams(modelName string) bool {
 	family, version := splitClaudeCodeModelVersion(strings.ToLower(strings.TrimSpace(modelName)))
 	if len(version) == 0 || compareClaudeCodeVersion(version, []int{4}) < 0 {
 		return false

@@ -69,10 +69,13 @@ const About = () => {
             containerStyle={{
               top: hasCustomContent ? headerHeight : undefined,
               minHeight: hasCustomContent ? `calc(100dvh - ${headerHeight || '0px'} - ${footerHeight || '0px'})` : 'calc(100vh - 136px)',
-              overflowX: 'hidden'
+              overflowX: 'hidden',
+              overflowY: hasCustomContent ? 'visible' : undefined
             }}
             contentStyle={{
-              fontSize: 'larger'
+              fontSize: 'larger',
+              minHeight: hasCustomContent ? 'auto' : undefined,
+              overflowY: hasCustomContent ? 'visible' : undefined
             }}
             disablePadding={hasCustomContent}
             scrollContainer={!hasCustomContent}

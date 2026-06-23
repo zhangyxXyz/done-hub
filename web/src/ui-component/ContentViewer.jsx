@@ -692,7 +692,7 @@ const ContentViewer = ({
               m: disablePadding ? '0 !important' : undefined,
               width: useNativeLayout || disablePadding ? '100%' : undefined,
               maxWidth: useNativeLayout ? '100%' : disablePadding ? '100vw' : undefined,
-              minHeight: disablePadding ? '100%' : undefined,
+              minHeight: disablePadding && scrollContainer ? '100%' : undefined,
               boxSizing: 'border-box',
               overflowX: disablePadding ? 'hidden !important' : undefined,
               overflowY: disablePadding ? 'visible' : undefined,

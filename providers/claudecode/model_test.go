@@ -51,7 +51,7 @@ func TestParseClaudeCodeModelListKeepsFutureAliases(t *testing.T) {
 	}
 }
 
-func TestClaudeCodeModelDisallowsTemperature(t *testing.T) {
+func TestClaudeCodeModelDisallowsSamplingParams(t *testing.T) {
 	tests := []struct {
 		model string
 		want  bool
@@ -67,14 +67,14 @@ func TestClaudeCodeModelDisallowsTemperature(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.model, func(t *testing.T) {
-			if got := claudeCodeModelDisallowsTemperature(tt.model); got != tt.want {
-				t.Fatalf("claudeCodeModelDisallowsTemperature(%q) = %v, want %v", tt.model, got, tt.want)
+			if got := claudeCodeModelDisallowsSamplingParams(tt.model); got != tt.want {
+				t.Fatalf("claudeCodeModelDisallowsSamplingParams(%q) = %v, want %v", tt.model, got, tt.want)
 			}
 		})
 	}
 }
 
-func TestApplyClaudeCodeCompatibilityDropsTemperatureForClaude4(t *testing.T) {
+func TestApplyClaudeCodeCompatibilityDropsSamplingParamsForClaude4(t *testing.T) {
 	temperature := 0.7
 	topP := 0.9
 	request := &claude.ClaudeRequest{
@@ -89,8 +89,8 @@ func TestApplyClaudeCodeCompatibilityDropsTemperatureForClaude4(t *testing.T) {
 	if request.Temperature != nil {
 		t.Fatalf("Temperature = %v, want nil", *request.Temperature)
 	}
-	if request.TopP == nil || *request.TopP != topP {
-		t.Fatalf("TopP = %v, want %v", request.TopP, topP)
+	if request.TopP != nil {
+		t.Fatalf("TopP = %v, want nil", *request.TopP)
 	}
 }
 
