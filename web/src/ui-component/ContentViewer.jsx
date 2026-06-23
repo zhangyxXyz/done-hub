@@ -406,6 +406,7 @@ const ContentViewer = ({
   disablePadding = false,
   iframeHeight = '100vh',
   autoResizeEmbeddedFrames = true,
+  scrollContainer = true,
   enableScripts = false
 }) => {
   const theme = useTheme();
@@ -608,120 +609,124 @@ const ContentViewer = ({
     return null;
   }
 
+  const nativePortals = nativeSlots.map((slot) => {
+    if (slot.type === 'model-marquee') {
+      return createPortal(
+        <Box data-aihub-native="model-marquee" sx={{ width: '100%', my: 0.75 }}>
+          <CustomHomeProviderMarquee />
+        </Box>,
+        slot.node,
+        slot.id
+      );
+    }
+
+    if (slot.type === 'api-terminal') {
+      return createPortal(
+        <Box data-aihub-native="api-terminal" sx={{ width: '100%' }}>
+          <ApiTerminalDemo protocols={slot.protocols} />
+        </Box>,
+        slot.node,
+        slot.id
+      );
+    }
+
+    return null;
+  });
+
   return (
-    <Paper
-      elevation={0}
-      style={
-        disablePadding
-          ? {
-              overflowX: 'hidden',
-              overflowY: 'auto'
-            }
-          : undefined
-      }
-      sx={{
-        overflowX: 'hidden',
-        overflowY: disablePadding ? 'auto' : 'visible',
-        backgroundColor: 'transparent',
-        borderRadius: disablePadding ? 0 : undefined,
-        m: disablePadding ? 0 : undefined,
-        p: disablePadding ? 0 : undefined,
-        position: disablePadding ? 'fixed' : undefined,
-        inset: disablePadding ? 0 : undefined,
-        zIndex: disablePadding ? 0 : undefined,
-        width: disablePadding ? '100%' : undefined,
-        maxWidth: disablePadding ? '100vw' : undefined,
-        boxSizing: 'border-box',
-        '&::-webkit-scrollbar:horizontal': {
-          height: '0 !important',
-          display: 'none'
-        },
-        ...containerStyle
-      }}
-    >
-      {isUrl ? (
-        <iframe
-          title="content-frame"
-          src={parsedContent}
-          sandbox={DEFAULT_IFRAME_SANDBOX}
-          data-theme={resolvedTheme}
-          data-language={language}
-          style={{
-            width: '100%',
-            height: iframeHeight,
-            border: 'none',
-            ...contentStyle
-          }}
-        />
-      ) : (
-        <Box
-          ref={contentRef}
-          className="content-viewer"
-          data-theme={resolvedTheme}
-          data-language={language}
-          sx={{
-            fontSize: 'inherit',
-            lineHeight: 1.6,
-            p: useNativeLayout ? '0 !important' : disablePadding ? '0 !important' : undefined,
-            m: disablePadding ? '0 !important' : undefined,
-            width: useNativeLayout || disablePadding ? '100%' : undefined,
-            maxWidth: useNativeLayout ? '100%' : disablePadding ? '100vw' : undefined,
-            minHeight: disablePadding ? '100%' : undefined,
-            boxSizing: 'border-box',
-            overflowX: disablePadding ? 'hidden !important' : undefined,
-            overflowY: disablePadding ? 'visible' : undefined,
-            WebkitOverflowScrolling: disablePadding ? 'touch' : undefined,
-            '&::-webkit-scrollbar:horizontal': {
-              height: '0 !important',
-              display: 'none'
-            },
-            '& img': {
-              maxWidth: '100%',
-              height: 'auto'
-            },
-            ...(disablePadding
-              ? {
-                  '& > iframe:only-child': {
-                    display: 'block',
-                    width: '100% !important',
-                    maxWidth: '100% !important',
-                    minHeight: autoResizeEmbeddedFrames ? '100% !important' : undefined,
-                    height: autoResizeEmbeddedFrames ? undefined : '100% !important',
-                    maxHeight: autoResizeEmbeddedFrames ? undefined : '100% !important',
-                    border: '0 !important'
+    <>
+      <Paper
+        elevation={0}
+        style={
+          disablePadding
+            ? {
+                overflowX: 'hidden',
+                overflowY: scrollContainer ? 'auto' : 'visible'
+              }
+            : undefined
+        }
+        sx={{
+          overflowX: 'hidden',
+          overflowY: disablePadding && scrollContainer ? 'auto' : 'visible',
+          backgroundColor: 'transparent',
+          borderRadius: disablePadding ? 0 : undefined,
+          m: disablePadding ? 0 : undefined,
+          p: disablePadding ? 0 : undefined,
+          position: disablePadding && scrollContainer ? 'fixed' : undefined,
+          inset: disablePadding && scrollContainer ? 0 : undefined,
+          zIndex: disablePadding ? 0 : undefined,
+          width: disablePadding ? '100%' : undefined,
+          maxWidth: disablePadding ? '100vw' : undefined,
+          boxSizing: 'border-box',
+          '&::-webkit-scrollbar:horizontal': {
+            height: '0 !important',
+            display: 'none'
+          },
+          ...containerStyle
+        }}
+      >
+        {isUrl ? (
+          <iframe
+            title="content-frame"
+            src={parsedContent}
+            sandbox={DEFAULT_IFRAME_SANDBOX}
+            data-theme={resolvedTheme}
+            data-language={language}
+            style={{
+              width: '100%',
+              height: iframeHeight,
+              border: 'none',
+              ...contentStyle
+            }}
+          />
+        ) : (
+          <Box
+            ref={contentRef}
+            className="content-viewer"
+            data-theme={resolvedTheme}
+            data-language={language}
+            sx={{
+              fontSize: 'inherit',
+              lineHeight: 1.6,
+              p: useNativeLayout ? '0 !important' : disablePadding ? '0 !important' : undefined,
+              m: disablePadding ? '0 !important' : undefined,
+              width: useNativeLayout || disablePadding ? '100%' : undefined,
+              maxWidth: useNativeLayout ? '100%' : disablePadding ? '100vw' : undefined,
+              minHeight: disablePadding ? '100%' : undefined,
+              boxSizing: 'border-box',
+              overflowX: disablePadding ? 'hidden !important' : undefined,
+              overflowY: disablePadding ? 'visible' : undefined,
+              WebkitOverflowScrolling: disablePadding ? 'touch' : undefined,
+              '&::-webkit-scrollbar:horizontal': {
+                height: '0 !important',
+                display: 'none'
+              },
+              '& img': {
+                maxWidth: '100%',
+                height: 'auto'
+              },
+              ...(disablePadding
+                ? {
+                    '& > iframe:only-child': {
+                      display: 'block',
+                      width: '100% !important',
+                      maxWidth: '100% !important',
+                      minHeight: autoResizeEmbeddedFrames ? '100% !important' : undefined,
+                      height: autoResizeEmbeddedFrames ? undefined : '100% !important',
+                      maxHeight: autoResizeEmbeddedFrames ? undefined : '100% !important',
+                      border: '0 !important'
+                    }
                   }
-                }
-              : {}),
-            ...(useNativeLayout ? customHomeNativeSx(theme) : {}),
-            ...contentStyle
-          }}
-          dangerouslySetInnerHTML={{ __html: parsedContent }}
-        />
-      )}
-      {nativeSlots.map((slot) => {
-        if (slot.type === 'model-marquee') {
-          return createPortal(
-            <Box data-aihub-native="model-marquee" sx={{ width: '100%', my: 0.75 }}>
-              <CustomHomeProviderMarquee />
-            </Box>,
-            slot.node,
-            slot.id
-          );
-        }
-
-        if (slot.type === 'api-terminal') {
-          return createPortal(
-            <Box data-aihub-native="api-terminal" sx={{ width: '100%' }}>
-              <ApiTerminalDemo protocols={slot.protocols} />
-            </Box>,
-            slot.node,
-            slot.id
-          );
-        }
-
-        return null;
-      })}
-    </Paper>
+                : {}),
+              ...(useNativeLayout ? customHomeNativeSx(theme) : {}),
+              ...contentStyle
+            }}
+            dangerouslySetInnerHTML={{ __html: parsedContent }}
+          />
+        )}
+      </Paper>
+      {nativePortals}
+    </>
   );
 };
 
@@ -734,6 +739,7 @@ ContentViewer.propTypes = {
   disablePadding: PropTypes.bool,
   iframeHeight: PropTypes.string,
   autoResizeEmbeddedFrames: PropTypes.bool,
+  scrollContainer: PropTypes.bool,
   enableScripts: PropTypes.bool
 };
 
