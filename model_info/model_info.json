@@ -1451,31 +1451,6 @@
       }
     },
     {
-      "model": "essentialai/rnj-1-instruct",
-      "model_info": {
-        "model": "essentialai/rnj-1-instruct",
-        "name": "EssentialAI: Rnj 1 Instruct",
-        "description": "Rnj-1 is an 8B-parameter, dense, open-weight model family developed by Essential AI and trained from scratch with a focus on programming, math, and scientific reasoning. The model demonstrates strong performance...",
-        "context_length": 32768,
-        "max_tokens": 0,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/essentialai/rnj-1-instruct",
-          "https://openrouter.ai/api/v1/models/essentialai/rnj-1-instruct/endpoints"
-        ]
-      }
-    },
-    {
       "model": "google/gemini-2.5-flash",
       "model_info": {
         "model": "google/gemini-2.5-flash",
@@ -3170,7 +3145,7 @@
         "name": "MiniMax: MiniMax M2.7",
         "description": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent...",
         "context_length": 204800,
-        "max_tokens": 131072,
+        "max_tokens": 196608,
         "input_modalities": [
           "text"
         ],
@@ -6497,32 +6472,6 @@
       }
     },
     {
-      "model": "prime-intellect/intellect-3",
-      "model_info": {
-        "model": "prime-intellect/intellect-3",
-        "name": "Prime Intellect: INTELLECT-3",
-        "description": "INTELLECT-3 is a 106B-parameter Mixture-of-Experts model (12B active) post-trained from GLM-4.5-Air-Base using supervised fine-tuning (SFT) followed by large-scale reinforcement learning (RL). It offers state-of-the-art performance for its size across math,...",
-        "context_length": 131072,
-        "max_tokens": 131072,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/prime-intellect/intellect-3",
-          "https://openrouter.ai/api/v1/models/prime-intellect/intellect-3-20251126/endpoints"
-        ]
-      }
-    },
-    {
       "model": "qwen/qwen-2.5-72b-instruct",
       "model_info": {
         "model": "qwen/qwen-2.5-72b-instruct",
@@ -8184,7 +8133,7 @@
         "name": "TheDrummer: Rocinante 12B",
         "description": "Rocinante 12B is designed for engaging storytelling and rich prose. Early testers have reported: - Expanded vocabulary with unique and expressive word choices - Enhanced creativity for vivid narratives -...",
         "context_length": 32768,
-        "max_tokens": 32768,
+        "max_tokens": 0,
         "input_modalities": [
           "text"
         ],
@@ -8192,9 +8141,7 @@
           "text"
         ],
         "tags": [
-          "openrouter",
-          "tools",
-          "structured_outputs"
+          "openrouter"
         ],
         "support_url": [
           "https://openrouter.ai/models/thedrummer/rocinante-12b",
