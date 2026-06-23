@@ -770,8 +770,7 @@
         "tags": [
           "openrouter",
           "tools",
-          "reasoning",
-          "structured_outputs"
+          "reasoning"
         ],
         "support_url": [
           "https://openrouter.ai/models/arcee-ai/trinity-large-thinking",

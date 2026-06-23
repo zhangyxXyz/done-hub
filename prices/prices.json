@@ -4074,6 +4074,13 @@
     "output": 1.2
   },
   {
+    "model": "microsoft/mai-image-2.5",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 5,
+    "output": 47
+  },
+  {
     "model": "microsoft/phi-3-medium-128k-instruct",
     "type": "tokens",
     "channel_type": 20,
@@ -4518,8 +4525,8 @@
     "model": "moonshotai/kimi-k2.7-code",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.612,
-    "output": 3.069
+    "input": 0.68,
+    "output": 3.41
   },
   {
     "model": "moonshotai/kimi-k2:free",
