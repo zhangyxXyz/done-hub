@@ -1489,7 +1489,7 @@
         "name": "Google: Nano Banana (Gemini 2.5 Flash Image)",
         "description": "Gemini 2.5 Flash Image, a.k.a. \"Nano Banana,\" is now generally available. It is a state of the art image generation model with contextual understanding. It is capable of image generation,...",
         "context_length": 32768,
-        "max_tokens": 8192,
+        "max_tokens": 32768,
         "input_modalities": [
           "image",
           "text"
@@ -1764,7 +1764,7 @@
         "name": "Google: Nano Banana 2 (Gemini 3.1 Flash Image)",
         "description": "Gemini 3.1 Flash Image, a.k.a. \"Nano Banana 2,\" is Google’s latest state of the art image generation and editing model, delivering Pro-level visual quality at Flash speed. It combines advanced...",
         "context_length": 131072,
-        "max_tokens": 65536,
+        "max_tokens": 32768,
         "input_modalities": [
           "image",
           "text"
@@ -3838,7 +3838,7 @@
         "name": "MoonshotAI: Kimi K2.7 Code",
         "description": "MoonshotAI: Kimi K2.7 Code is a coding-focused model in Moonshot AI's Kimi K2 family, built to complete end-to-end programming tasks reliably over long contexts. It uses a native multimodal mixture-of-experts...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 16384,
         "input_modalities": [
           "text",
           "image"
@@ -7411,7 +7411,7 @@
         "name": "Qwen: Qwen3.5-35B-A3B",
         "description": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 81920,
         "input_modalities": [
           "text",
           "image",
@@ -7872,6 +7872,34 @@
         "support_url": [
           "https://openrouter.ai/models/relace/relace-search",
           "https://openrouter.ai/api/v1/models/relace/relace-search-20251208/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "sakana/fugu-ultra",
+      "model_info": {
+        "model": "sakana/fugu-ultra",
+        "name": "Sakana: Fugu Ultra",
+        "description": "Fugu Ultra is the higher-performance model in Sakana AI's Fugu family. Rather than a single monolithic model, Fugu is a learned multi-agent orchestration system: a language model trained to route...",
+        "context_length": 1000000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/sakana/fugu-ultra",
+          "https://openrouter.ai/api/v1/models/sakana/fugu-ultra-20260615/endpoints"
         ]
       }
     },
@@ -8391,7 +8419,7 @@
         "name": "Xiaomi: MiMo-V2.5",
         "description": "MiMo-V2.5 is a native omnimodal model by Xiaomi. It delivers Pro-level agentic performance at roughly half the inference cost, while surpassing MiMo-V2-Omni in multimodal perception across image and video understanding...",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 0,
         "input_modalities": [
           "text",
           "audio",
@@ -8686,7 +8714,7 @@
         "name": "Z.ai: GLM 5.1",
         "description": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on...",
         "context_length": 202752,
-        "max_tokens": 65535,
+        "max_tokens": 0,
         "input_modalities": [
           "text"
         ],
@@ -8712,7 +8740,7 @@
         "name": "Z.ai: GLM 5.2",
         "description": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...",
         "context_length": 1048576,
-        "max_tokens": 0,
+        "max_tokens": 32768,
         "input_modalities": [
           "text"
         ],

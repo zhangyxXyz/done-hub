@@ -4525,8 +4525,8 @@
     "model": "moonshotai/kimi-k2.7-code",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.68,
-    "output": 3.41
+    "input": 0.74,
+    "output": 3.5
   },
   {
     "model": "moonshotai/kimi-k2:free",
@@ -5908,6 +5908,13 @@
     "output": 3
   },
   {
+    "model": "sakana/fugu-ultra",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 5,
+    "output": 30
+  },
+  {
     "model": "sao10k/l3-euryale-70b",
     "type": "tokens",
     "channel_type": 20,
@@ -6282,7 +6289,7 @@
     "model": "xiaomi/mimo-v2.5",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.14,
+    "input": 0.105,
     "output": 0.28
   },
   {
@@ -6387,8 +6394,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.98,
-    "output": 3.08
+    "input": 0.95,
+    "output": 3
   },
   {
     "model": "z-ai/glm-5v-turbo",
