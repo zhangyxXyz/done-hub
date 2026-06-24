@@ -1489,7 +1489,7 @@
         "name": "Google: Nano Banana (Gemini 2.5 Flash Image)",
         "description": "Gemini 2.5 Flash Image, a.k.a. \"Nano Banana,\" is now generally available. It is a state of the art image generation model with contextual understanding. It is capable of image generation,...",
         "context_length": 32768,
-        "max_tokens": 32768,
+        "max_tokens": 8192,
         "input_modalities": [
           "image",
           "text"
@@ -1764,7 +1764,7 @@
         "name": "Google: Nano Banana 2 (Gemini 3.1 Flash Image)",
         "description": "Gemini 3.1 Flash Image, a.k.a. \"Nano Banana 2,\" is Google’s latest state of the art image generation and editing model, delivering Pro-level visual quality at Flash speed. It combines advanced...",
         "context_length": 131072,
-        "max_tokens": 32768,
+        "max_tokens": 65536,
         "input_modalities": [
           "image",
           "text"
@@ -7411,7 +7411,7 @@
         "name": "Qwen: Qwen3.5-35B-A3B",
         "description": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall...",
         "context_length": 262144,
-        "max_tokens": 81920,
+        "max_tokens": 262144,
         "input_modalities": [
           "text",
           "image",
@@ -8714,7 +8714,7 @@
         "name": "Z.ai: GLM 5.1",
         "description": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on...",
         "context_length": 202752,
-        "max_tokens": 0,
+        "max_tokens": 65535,
         "input_modalities": [
           "text"
         ],
