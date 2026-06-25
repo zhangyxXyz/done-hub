@@ -3426,8 +3426,8 @@
     "model": "deepseek/deepseek-v4-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.09,
-    "output": 0.18
+    "input": 0.089,
+    "output": 0.224
   },
   {
     "model": "deepseek/deepseek-v4-pro",
