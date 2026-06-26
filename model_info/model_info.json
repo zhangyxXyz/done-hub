@@ -4167,7 +4167,7 @@
         "name": "NVIDIA: Nemotron 3 Super",
         "description": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer...",
         "context_length": 1000000,
-        "max_tokens": 0,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -8366,7 +8366,8 @@
         "max_tokens": 0,
         "input_modalities": [
           "text",
-          "image"
+          "image",
+          "file"
         ],
         "output_modalities": [
           "text"
