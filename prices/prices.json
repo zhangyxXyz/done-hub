@@ -5995,7 +5995,7 @@
     "model": "stepfun/step-3.5-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.09,
+    "input": 0.1,
     "output": 0.3
   },
   {
@@ -6394,7 +6394,7 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.95,
+    "input": 0.94,
     "output": 3
   },
   {
