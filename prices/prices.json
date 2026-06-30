@@ -6387,8 +6387,8 @@
     "model": "z-ai/glm-5.1",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.98,
-    "output": 3.08
+    "input": 0.975,
+    "output": 4.3
   },
   {
     "model": "z-ai/glm-5.2",
