@@ -1817,6 +1817,34 @@
       }
     },
     {
+      "model": "google/gemini-3.1-flash-lite-image",
+      "model_info": {
+        "model": "google/gemini-3.1-flash-lite-image",
+        "name": "Google: Nano Banana 2 Lite (Gemini 3.1 Flash Lite Image)",
+        "description": "Nano Banana 2 Lite (Gemini 3.1 Flash Lite Image) is Google's fastest, most cost-efficient Gemini image model, built for high-velocity developer pipelines and rapid-fire visual exploration. It delivers text-to-image generation...",
+        "context_length": 65536,
+        "max_tokens": 66000,
+        "input_modalities": [
+          "image",
+          "text"
+        ],
+        "output_modalities": [
+          "image",
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/google/gemini-3.1-flash-lite-image",
+          "https://openrouter.ai/api/v1/models/google/gemini-3.1-flash-lite-image-20260630/endpoints"
+        ]
+      }
+    },
+    {
       "model": "google/gemini-3.1-flash-lite-preview",
       "model_info": {
         "model": "google/gemini-3.1-flash-lite-preview",
@@ -6136,31 +6164,6 @@
         "support_url": [
           "https://openrouter.ai/models/openrouter/fusion",
           "https://openrouter.ai/api/v1/models/openrouter/fusion/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openrouter/owl-alpha",
-      "model_info": {
-        "model": "openrouter/owl-alpha",
-        "name": "Owl Alpha",
-        "description": "Owl Alpha is a high-performance foundation model designed for agentic workloads. Natively supports tool use, and long-context tasks, with strong performance in code generation, automated workflows, and complex instruction execution....",
-        "context_length": 1048756,
-        "max_tokens": 262144,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openrouter/owl-alpha",
-          "https://openrouter.ai/api/v1/models/openrouter/owl-alpha/endpoints"
         ]
       }
     },

@@ -3584,6 +3584,13 @@
     "output": 1.5
   },
   {
+    "model": "google/gemini-3.1-flash-lite-image",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.25,
+    "output": 1.5
+  },
+  {
     "model": "google/gemini-3.1-flash-lite-preview",
     "type": "tokens",
     "channel_type": 20,
@@ -5820,8 +5827,8 @@
     "model": "qwen/qwen3.6-27b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.2596,
-    "output": 2.385
+    "input": 0.285,
+    "output": 2.4
   },
   {
     "model": "qwen/qwen3.6-35b-a3b",
