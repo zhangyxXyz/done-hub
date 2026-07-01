@@ -3440,8 +3440,8 @@
     "model": "deepseek/deepseek-v4-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.098,
-    "output": 0.196
+    "input": 0.09,
+    "output": 0.18
   },
   {
     "model": "deepseek/deepseek-v4-pro",
@@ -4176,7 +4176,7 @@
     "type": "tokens",
     "channel_type": 20,
     "input": 0.255,
-    "output": 1
+    "output": 1.02
   },
   {
     "model": "minimax/minimax-m2-her",
@@ -4189,8 +4189,8 @@
     "model": "minimax/minimax-m2.1",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.29,
-    "output": 0.95
+    "input": 0.3,
+    "output": 1.2
   },
   {
     "model": "minimax/minimax-m2.5",
@@ -5603,8 +5603,8 @@
     "model": "qwen/qwen3-30b-a3b-thinking-2507",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.08,
-    "output": 0.4
+    "input": 0.13,
+    "output": 1.56
   },
   {
     "model": "qwen/qwen3-32b",
@@ -5631,8 +5631,8 @@
     "model": "qwen/qwen3-8b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.05,
-    "output": 0.4
+    "input": 0.117,
+    "output": 0.455
   },
   {
     "model": "qwen/qwen3-coder",
@@ -6424,13 +6424,6 @@
     "channel_type": 20,
     "input": 1.2,
     "output": 4
-  },
-  {
-    "model": "~anthropic/claude-fable-latest",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 10,
-    "output": 50
   },
   {
     "model": "~anthropic/claude-haiku-latest",

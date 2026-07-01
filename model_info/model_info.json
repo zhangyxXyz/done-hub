@@ -327,35 +327,6 @@
       }
     },
     {
-      "model": "anthropic/claude-fable-5",
-      "model_info": {
-        "model": "anthropic/claude-fable-5",
-        "name": "Anthropic: Claude Fable 5",
-        "description": "Claude Fable 5 is a Mythos-class model from Anthropic, built for autonomous knowledge work and coding. It supports text, image, and file inputs with text output, with reasoning support and...",
-        "context_length": 1000000,
-        "max_tokens": 128000,
-        "input_modalities": [
-          "text",
-          "image",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/anthropic/claude-fable-5",
-          "https://openrouter.ai/api/v1/models/anthropic/claude-5-fable-20260609/endpoints"
-        ]
-      }
-    },
-    {
       "model": "anthropic/claude-haiku-4.5",
       "model_info": {
         "model": "anthropic/claude-haiku-4.5",
@@ -1405,7 +1376,7 @@
         "name": "DeepSeek: DeepSeek V4 Flash",
         "description": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and...",
         "context_length": 1048576,
-        "max_tokens": 0,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -3048,7 +3019,7 @@
         "name": "MiniMax: MiniMax M2",
         "description": "MiniMax-M2 is a compact, high-efficiency large language model optimized for end-to-end coding and agentic workflows. With 10 billion activated parameters (230 billion total), it delivers near-frontier intelligence across general reasoning,...",
         "context_length": 204800,
-        "max_tokens": 196608,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -3097,7 +3068,7 @@
         "name": "MiniMax: MiniMax M2.1",
         "description": "MiniMax-M2.1 is a lightweight, state-of-the-art large language model optimized for coding, agentic workflows, and modern application development. With only 10 billion activated parameters, it delivers a major jump in real-world...",
         "context_length": 204800,
-        "max_tokens": 196608,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -3760,7 +3731,7 @@
         "name": "MoonshotAI: Kimi K2 Thinking",
         "description": "Kimi K2 Thinking is Moonshot AI’s most advanced open reasoning model to date, extending the K2 series into agentic, long-horizon reasoning. Built on the trillion-parameter Mixture-of-Experts (MoE) architecture introduced in...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 100352,
         "input_modalities": [
           "text"
         ],
@@ -6786,7 +6757,7 @@
         "name": "Qwen: Qwen3 30B A3B Thinking 2507",
         "description": "Qwen3-30B-A3B-Thinking-2507 is a 30B parameter Mixture-of-Experts reasoning model optimized for complex tasks requiring extended multi-step thinking. The model is designed specifically for “thinking mode,” where internal reasoning traces are separated...",
         "context_length": 131072,
-        "max_tokens": 131072,
+        "max_tokens": 32768,
         "input_modalities": [
           "text"
         ],
@@ -8774,7 +8745,7 @@
         "name": "Anthropic: Claude Fable Latest",
         "description": "This model always redirects to the latest model in the Claude Fable family.",
         "context_length": 1000000,
-        "max_tokens": 128000,
+        "max_tokens": 0,
         "input_modalities": [
           "text",
           "image",
@@ -8785,10 +8756,7 @@
         ],
         "tags": [
           "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
+          "vision"
         ],
         "support_url": [
           "https://openrouter.ai/models/~anthropic/claude-fable-latest",
