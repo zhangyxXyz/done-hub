@@ -702,6 +702,35 @@
       }
     },
     {
+      "model": "anthropic/claude-sonnet-5",
+      "model_info": {
+        "model": "anthropic/claude-sonnet-5",
+        "name": "Anthropic: Claude Sonnet 5",
+        "description": "Sonnet 5 is Anthropic's most capable Sonnet-class model, with frontier performance across coding, agents, and professional work. It supports adaptive thinking with selectable reasoning effort levels (low, medium, high, max,...",
+        "context_length": 1000000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "text",
+          "image",
+          "file"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/anthropic/claude-sonnet-5",
+          "https://openrouter.ai/api/v1/models/anthropic/claude-sonnet-5-20260630/endpoints"
+        ]
+      }
+    },
+    {
       "model": "arcee-ai/coder-large",
       "model_info": {
         "model": "arcee-ai/coder-large",
@@ -1376,7 +1405,7 @@
         "name": "DeepSeek: DeepSeek V4 Flash",
         "description": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and...",
         "context_length": 1048576,
-        "max_tokens": 65536,
+        "max_tokens": 0,
         "input_modalities": [
           "text"
         ],
@@ -2935,30 +2964,6 @@
         "support_url": [
           "https://openrouter.ai/models/microsoft/phi-4",
           "https://openrouter.ai/api/v1/models/microsoft/phi-4/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "microsoft/phi-4-mini-instruct",
-      "model_info": {
-        "model": "microsoft/phi-4-mini-instruct",
-        "name": "Microsoft: Phi 4 Mini Instruct",
-        "description": "Phi-4-mini-instruct is a lightweight open model built upon synthetic data and filtered publicly available websites - with a focus on high-quality, reasoning dense data. The model belongs to the Phi-4...",
-        "context_length": 131072,
-        "max_tokens": 128000,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/microsoft/phi-4-mini-instruct",
-          "https://openrouter.ai/api/v1/models/microsoft/phi-4-mini-instruct/endpoints"
         ]
       }
     },
@@ -6704,7 +6709,7 @@
         "name": "Qwen: Qwen3 235B A22B Thinking 2507",
         "description": "Qwen3-235B-A22B-Thinking-2507 is a high-performance, open-weight Mixture-of-Experts (MoE) language model optimized for complex reasoning tasks. It activates 22B of its 235B parameters per forward pass and natively supports up to 262,144...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 0,
         "input_modalities": [
           "text"
         ],
@@ -8714,7 +8719,7 @@
         "name": "Z.ai: GLM 5.2",
         "description": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...",
         "context_length": 1048576,
-        "max_tokens": 0,
+        "max_tokens": 32768,
         "input_modalities": [
           "text"
         ],
