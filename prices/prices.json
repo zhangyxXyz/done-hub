@@ -3335,8 +3335,8 @@
     "model": "deepseek/deepseek-chat-v3-0324",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.2,
-    "output": 0.77
+    "input": 0.24,
+    "output": 0.9
   },
   {
     "model": "deepseek/deepseek-chat-v3.1",
@@ -6426,6 +6426,13 @@
     "output": 4
   },
   {
+    "model": "~anthropic/claude-fable-latest",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 10,
+    "output": 50
+  },
+  {
     "model": "~anthropic/claude-haiku-latest",
     "type": "tokens",
     "channel_type": 20,
@@ -7070,6 +7077,20 @@
     "output": 1.5
   },
   {
+    "model": "gemini-3.1-flash-lite-image-gt-128k",
+    "type": "tokens",
+    "channel_type": 25,
+    "input": 0.25,
+    "output": 1.5
+  },
+  {
+    "model": "gemini-3.1-flash-lite-image-lte-128k",
+    "type": "tokens",
+    "channel_type": 25,
+    "input": 0.25,
+    "output": 1.5
+  },
+  {
     "model": "gemini-3.1-flash-lite-lte-128k",
     "type": "tokens",
     "channel_type": 25,
@@ -7222,6 +7243,20 @@
     "channel_type": 25,
     "input": 0.25,
     "output": 1.5
+  },
+  {
+    "model": "gemini-omni-flash-preview-gt-128k",
+    "type": "tokens",
+    "channel_type": 25,
+    "input": 1.5,
+    "output": 9
+  },
+  {
+    "model": "gemini-omni-flash-preview-lte-128k",
+    "type": "tokens",
+    "channel_type": 25,
+    "input": 1.5,
+    "output": 9
   },
   {
     "model": "gemini-pro",
@@ -9779,6 +9814,13 @@
     "output": 1.5
   },
   {
+    "model": "gemini-3.1-flash-lite-image",
+    "type": "tokens",
+    "channel_type": 42,
+    "input": 0.25,
+    "output": 1.5
+  },
+  {
     "model": "gemini-3.1-flash-lite-preview",
     "type": "tokens",
     "channel_type": 42,
@@ -9833,6 +9875,13 @@
     "channel_type": 42,
     "input": 0.2,
     "output": 0
+  },
+  {
+    "model": "gemini-omni-flash-preview",
+    "type": "tokens",
+    "channel_type": 42,
+    "input": 1.5,
+    "output": 9
   },
   {
     "model": "gemma-4-26b-a4b-it-maas",

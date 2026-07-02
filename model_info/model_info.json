@@ -327,6 +327,35 @@
       }
     },
     {
+      "model": "anthropic/claude-fable-5",
+      "model_info": {
+        "model": "anthropic/claude-fable-5",
+        "name": "Anthropic: Claude Fable 5",
+        "description": "Claude Fable 5 is a Mythos-class model from Anthropic, built for autonomous knowledge work and coding. It supports text, image, and file inputs with text output, with reasoning support and...",
+        "context_length": 1000000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "text",
+          "image",
+          "file"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/anthropic/claude-fable-5",
+          "https://openrouter.ai/api/v1/models/anthropic/claude-5-fable-20260609/endpoints"
+        ]
+      }
+    },
+    {
       "model": "anthropic/claude-haiku-4.5",
       "model_info": {
         "model": "anthropic/claude-haiku-4.5",
@@ -8745,7 +8774,7 @@
         "name": "Anthropic: Claude Fable Latest",
         "description": "This model always redirects to the latest model in the Claude Fable family.",
         "context_length": 1000000,
-        "max_tokens": 0,
+        "max_tokens": 128000,
         "input_modalities": [
           "text",
           "image",
@@ -8756,7 +8785,10 @@
         ],
         "tags": [
           "openrouter",
-          "vision"
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
         ],
         "support_url": [
           "https://openrouter.ai/models/~anthropic/claude-fable-latest",
