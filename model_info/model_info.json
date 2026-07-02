@@ -1405,7 +1405,7 @@
         "name": "DeepSeek: DeepSeek V4 Flash",
         "description": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and...",
         "context_length": 1048576,
-        "max_tokens": 16384,
+        "max_tokens": 0,
         "input_modalities": [
           "text"
         ],
@@ -6397,6 +6397,56 @@
         "support_url": [
           "https://openrouter.ai/models/poolside/laguna-m.1:free",
           "https://openrouter.ai/api/v1/models/poolside/laguna-m.1-20260312/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "poolside/laguna-xs-2.1",
+      "model_info": {
+        "model": "poolside/laguna-xs-2.1",
+        "name": "Poolside: Laguna XS 2.1",
+        "description": "Laguna XS 2.1 is the latest coding agent model in the 33B-A3B category from [Poolside](https://poolside.ai/) and a step forward from their Laguna XS.2 model (released in April 2026). It combines...",
+        "context_length": 262144,
+        "max_tokens": 32768,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/poolside/laguna-xs-2.1",
+          "https://openrouter.ai/api/v1/models/poolside/laguna-xs-2.1-20260625/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "poolside/laguna-xs-2.1:free",
+      "model_info": {
+        "model": "poolside/laguna-xs-2.1:free",
+        "name": "Poolside: Laguna XS 2.1 (free)",
+        "description": "Laguna XS 2.1 is the latest coding agent model in the 33B-A3B category from [Poolside](https://poolside.ai/) and a step forward from their Laguna XS.2 model (released in April 2026). It combines...",
+        "context_length": 262144,
+        "max_tokens": 32768,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/poolside/laguna-xs-2.1:free",
+          "https://openrouter.ai/api/v1/models/poolside/laguna-xs-2.1-20260625/endpoints"
         ]
       }
     },
