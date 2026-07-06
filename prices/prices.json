@@ -6062,6 +6062,13 @@
     "output": 0.57
   },
   {
+    "model": "tencent/hy3",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.14,
+    "output": 0.58
+  },
+  {
     "model": "tencent/hy3-preview",
     "type": "tokens",
     "channel_type": 20,
@@ -6070,6 +6077,13 @@
   },
   {
     "model": "tencent/hy3-preview:free",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0,
+    "output": 0
+  },
+  {
+    "model": "tencent/hy3:free",
     "type": "tokens",
     "channel_type": 20,
     "input": 0,
@@ -6429,8 +6443,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.896,
-    "output": 2.816
+    "input": 0.9086,
+    "output": 2.8556
   },
   {
     "model": "z-ai/glm-5v-turbo",
