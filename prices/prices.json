@@ -1743,6 +1743,13 @@
     "output": 4.4
   },
   {
+    "model": "glm-5.2",
+    "type": "tokens",
+    "channel_type": 16,
+    "input": 1.4,
+    "output": 4.4
+  },
+  {
     "model": "MiniMax-M2.1",
     "type": "tokens",
     "channel_type": 17,
@@ -4014,8 +4021,8 @@
     "model": "meta-llama/llama-3.2-3b-instruct",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.0509,
-    "output": 0.335
+    "input": 0.05,
+    "output": 0.33
   },
   {
     "model": "meta-llama/llama-3.2-3b-instruct:free",
@@ -4597,6 +4604,13 @@
     "channel_type": 20,
     "input": 0.135,
     "output": 0.5
+  },
+  {
+    "model": "nex-agi/nex-n2-mini",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.025,
+    "output": 0.1
   },
   {
     "model": "nex-agi/nex-n2-pro",
@@ -6065,8 +6079,8 @@
     "model": "tencent/hy3",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.14,
-    "output": 0.58
+    "input": 0.2,
+    "output": 0.8
   },
   {
     "model": "tencent/hy3-preview",

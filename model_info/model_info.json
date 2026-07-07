@@ -2775,7 +2775,7 @@
         "name": "Meta: Llama 3.2 3B Instruct",
         "description": "Llama 3.2 3B is a 3-billion-parameter multilingual large language model, optimized for advanced natural language processing tasks like dialogue generation, reasoning, and summarization. Designed with the latest transformer architecture, it...",
         "context_length": 131072,
-        "max_tokens": 80000,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -2783,7 +2783,8 @@
           "text"
         ],
         "tags": [
-          "openrouter"
+          "openrouter",
+          "structured_outputs"
         ],
         "support_url": [
           "https://openrouter.ai/models/meta-llama/llama-3.2-3b-instruct",
@@ -3907,6 +3908,34 @@
         "support_url": [
           "https://openrouter.ai/models/morph/morph-v3-large",
           "https://openrouter.ai/api/v1/models/morph/morph-v3-large/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "nex-agi/nex-n2-mini",
+      "model_info": {
+        "model": "nex-agi/nex-n2-mini",
+        "name": "Nex AGI: Nex-N2-Mini",
+        "description": "Nex-N2-Mini is an open-source agentic mixture-of-experts model from Nex AGI, the smaller sibling in the Nex-N2 series. It accepts text and image input and is built for coding, tool use,...",
+        "context_length": 262144,
+        "max_tokens": 262144,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/nex-agi/nex-n2-mini",
+          "https://openrouter.ai/api/v1/models/nex-agi/nex-n2-mini/endpoints"
         ]
       }
     },
