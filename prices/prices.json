@@ -6457,8 +6457,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.9086,
-    "output": 2.8556
+    "input": 0.93,
+    "output": 3
   },
   {
     "model": "z-ai/glm-5v-turbo",
@@ -8033,7 +8033,7 @@
     "type": "tokens",
     "channel_type": 32,
     "input": 0.8,
-    "output": 0.2
+    "output": 3.2
   },
   {
     "model": "amazon.rerank-v1:0",
@@ -8676,15 +8676,15 @@
     "model": "meta.llama3-1-405b-instruct-v1:0",
     "type": "tokens",
     "channel_type": 32,
-    "input": 5.32,
-    "output": 16
+    "input": 2.4,
+    "output": 2.4
   },
   {
     "model": "meta.llama3-1-70b-instruct-v1:0",
     "type": "tokens",
     "channel_type": 32,
-    "input": 0.99,
-    "output": 0.99
+    "input": 0.72,
+    "output": 0.72
   },
   {
     "model": "meta.llama3-1-8b-instruct-v1:0",
@@ -8697,8 +8697,8 @@
     "model": "meta.llama3-2-11b-instruct-v1:0",
     "type": "tokens",
     "channel_type": 32,
-    "input": 0.35,
-    "output": 0.35
+    "input": 0.16,
+    "output": 0.16
   },
   {
     "model": "meta.llama3-2-1b-instruct-v1:0",
@@ -8718,8 +8718,8 @@
     "model": "meta.llama3-2-90b-instruct-v1:0",
     "type": "tokens",
     "channel_type": 32,
-    "input": 2,
-    "output": 2
+    "input": 0.72,
+    "output": 0.72
   },
   {
     "model": "meta.llama3-3-70b-instruct-v1:0",

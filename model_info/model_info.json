@@ -26,54 +26,6 @@
       }
     },
     {
-      "model": "aion-labs/aion-1.0",
-      "model_info": {
-        "model": "aion-labs/aion-1.0",
-        "name": "AionLabs: Aion-1.0",
-        "description": "Aion-1.0 is a multi-model system designed for high performance across various tasks, including reasoning and coding. It is built on DeepSeek-R1, augmented with additional models and techniques such as Tree...",
-        "context_length": 131072,
-        "max_tokens": 32768,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/aion-labs/aion-1.0",
-          "https://openrouter.ai/api/v1/models/aion-labs/aion-1.0/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "aion-labs/aion-1.0-mini",
-      "model_info": {
-        "model": "aion-labs/aion-1.0-mini",
-        "name": "AionLabs: Aion-1.0-Mini",
-        "description": "Aion-1.0-Mini 32B parameter model is a distilled version of the DeepSeek-R1 model, designed for strong performance in reasoning domains such as mathematics, coding, and logic. It is a modified variant...",
-        "context_length": 131072,
-        "max_tokens": 32768,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/aion-labs/aion-1.0-mini",
-          "https://openrouter.ai/api/v1/models/aion-labs/aion-1.0-mini/endpoints"
-        ]
-      }
-    },
-    {
       "model": "aion-labs/aion-2.0",
       "model_info": {
         "model": "aion-labs/aion-2.0",
@@ -89,7 +41,9 @@
         ],
         "tags": [
           "openrouter",
-          "reasoning"
+          "tools",
+          "reasoning",
+          "structured_outputs"
         ],
         "support_url": [
           "https://openrouter.ai/models/aion-labs/aion-2.0",
@@ -3957,6 +3911,7 @@
         "tags": [
           "openrouter",
           "vision",
+          "tools",
           "reasoning"
         ],
         "support_url": [
@@ -8850,7 +8805,7 @@
         "name": "Z.ai: GLM 5.2",
         "description": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 32768,
         "input_modalities": [
           "text"
         ],
