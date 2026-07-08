@@ -2772,6 +2772,20 @@
     "output": 1.6
   },
   {
+    "model": "aion-labs/aion-3.0",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 3,
+    "output": 6
+  },
+  {
+    "model": "aion-labs/aion-3.0-mini",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.7,
+    "output": 1.4
+  },
+  {
     "model": "aion-labs/aion-rp-llama-3.1-8b",
     "type": "tokens",
     "channel_type": 20,

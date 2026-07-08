@@ -52,6 +52,58 @@
       }
     },
     {
+      "model": "aion-labs/aion-3.0",
+      "model_info": {
+        "model": "aion-labs/aion-3.0",
+        "name": "AionLabs: Aion-3.0",
+        "description": "Aion-3.0 is a multi-model roleplaying and storytelling system from AionLabs, built on the GLM family of models. It uses a collaborative generation process in which multiple specialized models each contribute...",
+        "context_length": 131072,
+        "max_tokens": 32768,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/aion-labs/aion-3.0",
+          "https://openrouter.ai/api/v1/models/aion-labs/aion-3.0-20260707/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "aion-labs/aion-3.0-mini",
+      "model_info": {
+        "model": "aion-labs/aion-3.0-mini",
+        "name": "AionLabs: Aion-3.0-Mini",
+        "description": "Aion-3.0 Mini is a multi-model roleplaying and storytelling system from AionLabs, built on the DeepSeek family of models. It uses a collaborative generation process in which multiple specialized models each...",
+        "context_length": 131072,
+        "max_tokens": 32768,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/aion-labs/aion-3.0-mini",
+          "https://openrouter.ai/api/v1/models/aion-labs/aion-3.0-mini-20260707/endpoints"
+        ]
+      }
+    },
+    {
       "model": "aion-labs/aion-rp-llama-3.1-8b",
       "model_info": {
         "model": "aion-labs/aion-rp-llama-3.1-8b",
@@ -1359,7 +1411,7 @@
         "name": "DeepSeek: DeepSeek V4 Flash",
         "description": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and...",
         "context_length": 1048576,
-        "max_tokens": 16384,
+        "max_tokens": 65536,
         "input_modalities": [
           "text"
         ],
@@ -8224,8 +8276,8 @@
         "model": "thedrummer/rocinante-12b",
         "name": "TheDrummer: Rocinante 12B",
         "description": "Rocinante 12B is designed for engaging storytelling and rich prose. Early testers have reported: - Expanded vocabulary with unique and expressive word choices - Enhanced creativity for vivid narratives -...",
-        "context_length": 32768,
-        "max_tokens": 0,
+        "context_length": 65536,
+        "max_tokens": 65536,
         "input_modalities": [
           "text"
         ],
@@ -8233,7 +8285,8 @@
           "text"
         ],
         "tags": [
-          "openrouter"
+          "openrouter",
+          "structured_outputs"
         ],
         "support_url": [
           "https://openrouter.ai/models/thedrummer/rocinante-12b",
@@ -8459,7 +8512,8 @@
         "max_tokens": 0,
         "input_modalities": [
           "text",
-          "image"
+          "image",
+          "file"
         ],
         "output_modalities": [
           "text"
