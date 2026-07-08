@@ -4560,7 +4560,7 @@
     "model": "moonshotai/kimi-k2.6",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.66,
+    "input": 0.65,
     "output": 3.41
   },
   {
@@ -6328,6 +6328,13 @@
     "output": 2.5
   },
   {
+    "model": "x-ai/grok-4.5",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 2,
+    "output": 6
+  },
+  {
     "model": "x-ai/grok-build-0.1",
     "type": "tokens",
     "channel_type": 20,
@@ -6471,8 +6478,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.93,
-    "output": 3
+    "input": 0.42,
+    "output": 1.32
   },
   {
     "model": "z-ai/glm-5v-turbo",
@@ -6527,7 +6534,7 @@
     "model": "~moonshotai/kimi-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.66,
+    "input": 0.65,
     "output": 3.41
   },
   {
@@ -6543,6 +6550,13 @@
     "channel_type": 20,
     "input": 0.75,
     "output": 4.5
+  },
+  {
+    "model": "~x-ai/grok-latest",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 2,
+    "output": 6
   },
   {
     "model": "deep-research-pro-preview-12-2025-gt-128k",

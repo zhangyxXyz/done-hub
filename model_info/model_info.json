@@ -8503,6 +8503,35 @@
       }
     },
     {
+      "model": "x-ai/grok-4.5",
+      "model_info": {
+        "model": "x-ai/grok-4.5",
+        "name": "xAI: Grok 4.5",
+        "description": "Grok 4.5 is SpaceXAI's smartest model with frontier performance on coding, knowledge work, and STEM.",
+        "context_length": 500000,
+        "max_tokens": 0,
+        "input_modalities": [
+          "text",
+          "image",
+          "file"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/x-ai/grok-4.5",
+          "https://openrouter.ai/api/v1/models/x-ai/grok-4.5-20260708/endpoints"
+        ]
+      }
+    },
+    {
       "model": "x-ai/grok-build-0.1",
       "model_info": {
         "model": "x-ai/grok-build-0.1",
@@ -8859,7 +8888,7 @@
         "name": "Z.ai: GLM 5.2",
         "description": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...",
         "context_length": 1048576,
-        "max_tokens": 32768,
+        "max_tokens": 128000,
         "input_modalities": [
           "text"
         ],
@@ -9170,6 +9199,35 @@
         "support_url": [
           "https://openrouter.ai/models/~openai/gpt-mini-latest",
           "https://openrouter.ai/api/v1/models/~openai/gpt-mini-latest/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "~x-ai/grok-latest",
+      "model_info": {
+        "model": "~x-ai/grok-latest",
+        "name": "xAI: Grok Latest",
+        "description": "This model always redirects to the latest Grok model from xAI.",
+        "context_length": 500000,
+        "max_tokens": 0,
+        "input_modalities": [
+          "text",
+          "image",
+          "file"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/~x-ai/grok-latest",
+          "https://openrouter.ai/api/v1/models/~x-ai/grok-latest/endpoints"
         ]
       }
     }
