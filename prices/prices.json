@@ -6093,8 +6093,8 @@
     "model": "tencent/hy3",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.2,
-    "output": 0.8
+    "input": 0.14,
+    "output": 0.58
   },
   {
     "model": "tencent/hy3-preview",
@@ -6478,8 +6478,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.42,
-    "output": 1.32
+    "input": 0.9,
+    "output": 3.08
   },
   {
     "model": "z-ai/glm-5v-turbo",
