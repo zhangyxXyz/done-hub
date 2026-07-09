@@ -4217,8 +4217,8 @@
     "model": "minimax/minimax-m2.5",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.12,
-    "output": 0.48
+    "input": 0.15,
+    "output": 0.9
   },
   {
     "model": "minimax/minimax-m2.5:free",
@@ -4231,8 +4231,8 @@
     "model": "minimax/minimax-m2.7",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.18,
-    "output": 0.72
+    "input": 0.24,
+    "output": 0.96
   },
   {
     "model": "minimax/minimax-m3",
@@ -4567,8 +4567,8 @@
     "model": "moonshotai/kimi-k2.7-code",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.74,
-    "output": 3.5
+    "input": 0.72,
+    "output": 3.49
   },
   {
     "model": "moonshotai/kimi-k2:free",
@@ -5152,6 +5152,48 @@
     "output": 180
   },
   {
+    "model": "openai/gpt-5.6-luna",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 1,
+    "output": 6
+  },
+  {
+    "model": "openai/gpt-5.6-luna-pro",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 1,
+    "output": 6
+  },
+  {
+    "model": "openai/gpt-5.6-sol",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 5,
+    "output": 30
+  },
+  {
+    "model": "openai/gpt-5.6-sol-pro",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 5,
+    "output": 30
+  },
+  {
+    "model": "openai/gpt-5.6-terra",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 2.5,
+    "output": 15
+  },
+  {
+    "model": "openai/gpt-5.6-terra-pro",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 2.5,
+    "output": 15
+  },
+  {
     "model": "openai/gpt-audio",
     "type": "tokens",
     "channel_type": 20,
@@ -5176,8 +5218,8 @@
     "model": "openai/gpt-oss-120b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.03,
-    "output": 0.15
+    "input": 0.036,
+    "output": 0.18
   },
   {
     "model": "openai/gpt-oss-120b:exacto",
@@ -5465,13 +5507,6 @@
     "channel_type": 20,
     "input": 0,
     "output": 0
-  },
-  {
-    "model": "poolside/laguna-xs.2",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 0.1,
-    "output": 0.2
   },
   {
     "model": "poolside/laguna-xs.2:free",
@@ -6478,8 +6513,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.9,
-    "output": 3.08
+    "input": 0.54,
+    "output": 1.76
   },
   {
     "model": "z-ai/glm-5v-turbo",
