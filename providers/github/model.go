@@ -8,6 +8,8 @@ import (
 func (p *GithubProvider) GetModelList() ([]string, error) {
 	fullRequestURL := p.GetFullRequestURL(p.Config.ModelList, "")
 	headers := p.GetRequestHeaders()
+	headers["Accept"] = "application/vnd.github+json"
+	headers["X-GitHub-Api-Version"] = "2022-11-28"
 
 	req, err := p.Requester.NewRequest(http.MethodGet, fullRequestURL, p.Requester.WithHeader(headers))
 	if err != nil {
@@ -22,7 +24,7 @@ func (p *GithubProvider) GetModelList() ([]string, error) {
 
 	var modelList []string
 	for _, model := range response {
-		modelList = append(modelList, model.Name)
+		modelList = append(modelList, model.ID)
 	}
 
 	return modelList, nil

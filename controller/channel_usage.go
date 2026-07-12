@@ -6,6 +6,7 @@ import (
 	"done-hub/model"
 	"done-hub/providers/claudecode"
 	"done-hub/providers/codex"
+	"done-hub/providers/githubcopilot"
 	"errors"
 	"fmt"
 	"net/http"
@@ -18,7 +19,7 @@ import (
 const maxChannelUsageListLimit = 50
 
 func channelSupportsUsageWindows(channelType int) bool {
-	return channelType == config.ChannelTypeClaudeCode || channelType == config.ChannelTypeCodex
+	return channelType == config.ChannelTypeClaudeCode || channelType == config.ChannelTypeCodex || channelType == config.ChannelTypeGithubCopilot
 }
 
 func channelMatchesUsageProvider(channelType int, provider string) bool {
@@ -29,6 +30,8 @@ func channelMatchesUsageProvider(channelType int, provider string) bool {
 		return channelType == config.ChannelTypeClaudeCode
 	case "codex", "openai":
 		return channelType == config.ChannelTypeCodex
+	case "copilot", "githubcopilot", "github-copilot", "github":
+		return channelType == config.ChannelTypeGithubCopilot
 	default:
 		if parsedType, err := strconv.Atoi(provider); err == nil {
 			return channelType == parsedType
@@ -38,6 +41,9 @@ func channelMatchesUsageProvider(channelType int, provider string) bool {
 }
 
 func usageChannelAllowedForRequest(c *gin.Context, channel *model.Channel, enforceTokenAccess bool) bool {
+	if !channel.EnableUsageQuery {
+		return false
+	}
 	if !enforceTokenAccess || model.IsAdmin(c.GetInt("id")) {
 		return true
 	}
@@ -45,6 +51,16 @@ func usageChannelAllowedForRequest(c *gin.Context, channel *model.Channel, enfor
 		return false
 	}
 	return codexUsageChannelAllowed(c, channel)
+}
+
+func usageQueryEnabled(channel *model.Channel) error {
+	if !channelSupportsUsageWindows(channel.Type) {
+		return errors.New("当前渠道类型不支持额度窗口查询")
+	}
+	if !channel.EnableUsageQuery {
+		return errors.New("该渠道已关闭额度查询")
+	}
+	return nil
 }
 
 func usageCacheMeta(fetchedAt int64, ttlSeconds int) gin.H {
@@ -95,6 +111,79 @@ func codexUsageData(channel *model.Channel, usageResult *codex.UsageResult, cach
 	return data
 }
 
+func githubCopilotUsageData(channel *model.Channel, usageResult *githubcopilot.UsageResult, cacheConfig githubcopilot.UsageCacheConfig) gin.H {
+	data := gin.H{
+		"channel_id": channel.Id, "type": channel.Type, "name": channel.Name,
+		"status": usageResult.StatusCode, "usage": usageResult.Usage,
+		"cached": usageResult.Cached, "stale": usageResult.Stale, "empty": usageResult.Empty,
+		"fetched_at": usageResult.FetchedAt, "warning": usageResult.Warning,
+	}
+	for key, value := range usageCacheMeta(usageResult.FetchedAt, cacheConfig.TTLSeconds) {
+		data[key] = value
+	}
+	return data
+}
+
+type GitHubCopilotUsageRequest struct {
+	ChannelID int `form:"channel_id" json:"channel_id"`
+}
+
+// GetGitHubCopilotUsage proxies the selected channel's live Copilot entitlement data.
+// GET /api/github-copilot/usage?channel_id=1
+// Authorization: Bearer sk-...
+func GetGitHubCopilotUsage(c *gin.Context) {
+	var req GitHubCopilotUsageRequest
+	if c.Request.Method == http.MethodGet {
+		if err := c.ShouldBindQuery(&req); err != nil {
+			common.APIRespondWithError(c, http.StatusOK, err)
+			return
+		}
+	} else if err := c.ShouldBindJSON(&req); err != nil {
+		common.APIRespondWithError(c, http.StatusOK, err)
+		return
+	}
+	if req.ChannelID == 0 {
+		req.ChannelID = c.GetInt("specific_channel_id")
+	}
+	if req.ChannelID <= 0 {
+		common.APIRespondWithError(c, http.StatusOK, errors.New("channel_id 不能为空"))
+		return
+	}
+
+	channel, err := model.GetChannelById(req.ChannelID)
+	if err != nil {
+		common.APIRespondWithError(c, http.StatusOK, err)
+		return
+	}
+	if channel.Type != config.ChannelTypeGithubCopilot {
+		common.APIRespondWithError(c, http.StatusOK, errors.New("指定渠道不是 GitHub Copilot 类型"))
+		return
+	}
+	if !model.IsAdmin(c.GetInt("id")) {
+		if channel.Status != config.ChannelStatusEnabled {
+			common.APIRespondWithError(c, http.StatusOK, errors.New("指定渠道未启用"))
+			return
+		}
+		if !codexUsageChannelAllowed(c, channel) {
+			common.APIRespondWithError(c, http.StatusOK, errors.New("当前令牌无权查询该渠道"))
+			return
+		}
+	}
+	if err := usageQueryEnabled(channel); err != nil {
+		common.APIRespondWithError(c, http.StatusOK, err)
+		return
+	}
+
+	copilotProvider := githubcopilot.New(channel)
+	cacheConfig := copilotProvider.GetUsageCacheConfig()
+	usageResult, err := copilotProvider.RequestUsageWithCache()
+	if err != nil {
+		common.APIRespondWithError(c, http.StatusOK, err)
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"success": true, "message": "", "data": githubCopilotUsageData(channel, usageResult, cacheConfig)})
+}
+
 // GetChannelUsage queries admin-visible usage windows for OAuth-backed channels.
 func GetChannelUsage(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
@@ -105,6 +194,10 @@ func GetChannelUsage(c *gin.Context) {
 
 	channel, err := model.GetChannelById(id)
 	if err != nil {
+		common.APIRespondWithError(c, http.StatusOK, err)
+		return
+	}
+	if err := usageQueryEnabled(channel); err != nil {
 		common.APIRespondWithError(c, http.StatusOK, err)
 		return
 	}
@@ -148,6 +241,15 @@ func GetChannelUsage(c *gin.Context) {
 			"message": "",
 			"data":    codexUsageData(channel, usageResult, cacheConfig),
 		})
+	case config.ChannelTypeGithubCopilot:
+		copilotProvider := githubcopilot.New(channel)
+		cacheConfig := copilotProvider.GetUsageCacheConfig()
+		usageResult, err := copilotProvider.RequestUsageWithCache()
+		if err != nil {
+			common.APIRespondWithError(c, http.StatusOK, err)
+			return
+		}
+		c.JSON(http.StatusOK, gin.H{"success": true, "message": "", "data": githubCopilotUsageData(channel, usageResult, cacheConfig)})
 	default:
 		common.APIRespondWithError(c, http.StatusOK, errors.New("当前渠道类型不支持额度窗口查询"))
 	}
@@ -174,19 +276,39 @@ func getChannelsUsage(c *gin.Context, enforceTokenAccess bool) {
 	if limit > maxChannelUsageListLimit {
 		limit = maxChannelUsageListLimit
 	}
-	providerFilter := c.Query("provider")
-	if providerFilter == "" {
-		providerFilter = c.Query("type")
+	providerFilters, err := parseUsageList(c.Query("provider"), 20)
+	if err != nil {
+		common.APIRespondWithError(c, http.StatusBadRequest, fmt.Errorf("provider 参数无效: %w", err))
+		return
 	}
-	channelID := 0
-	if rawChannelID := c.Query("channel_id"); rawChannelID != "" {
-		if parsedChannelID, err := strconv.Atoi(rawChannelID); err == nil && parsedChannelID > 0 {
-			channelID = parsedChannelID
+	if len(providerFilters) == 0 {
+		providerFilters, err = parseUsageList(c.Query("type"), 20)
+		if err != nil {
+			common.APIRespondWithError(c, http.StatusBadRequest, fmt.Errorf("type 参数无效: %w", err))
+			return
 		}
 	}
-	if channelID == 0 {
-		channelID = c.GetInt("specific_channel_id")
+	rawChannelIDs := c.Query("channel-id")
+	if rawChannelIDs == "" {
+		rawChannelIDs = c.Query("channel_id")
 	}
+	channelIDs, err := parseUsageChannelIDs(rawChannelIDs, maxChannelUsageListLimit)
+	if err != nil {
+		common.APIRespondWithError(c, http.StatusBadRequest, err)
+		return
+	}
+	specificChannelID := c.GetInt("specific_channel_id")
+	if specificChannelID > 0 {
+		// A token pinned to a channel can never broaden its scope with query parameters.
+		if len(channelIDs) > 0 {
+			if _, ok := channelIDs[specificChannelID]; !ok {
+				c.JSON(http.StatusOK, gin.H{"success": true, "message": "", "data": gin.H{"items": []gin.H{}, "cache_ttl_seconds": 0}})
+				return
+			}
+		}
+		channelIDs = map[int]struct{}{specificChannelID: {}}
+	}
+	explicitChannelSelection := len(channelIDs) > 0
 
 	channels, err := model.GetAllChannels()
 	if err != nil {
@@ -197,13 +319,18 @@ func getChannelsUsage(c *gin.Context, enforceTokenAccess bool) {
 	items := make([]gin.H, 0, limit)
 	minTTLSeconds := 0
 	for _, channel := range channels {
-		if channel == nil || !channelSupportsUsageWindows(channel.Type) || !channelMatchesUsageProvider(channel.Type, providerFilter) {
+		if channel == nil || !channelSupportsUsageWindows(channel.Type) || !matchesAnyUsageProvider(channel.Type, providerFilters) {
 			continue
 		}
-		if channelID > 0 && channel.Id != channelID {
+		if len(channelIDs) > 0 {
+			if _, ok := channelIDs[channel.Id]; !ok {
+				continue
+			}
+		}
+		if enforceTokenAccess && !usageChannelAllowedForRequest(c, channel, true) {
 			continue
 		}
-		if !usageChannelAllowedForRequest(c, channel, enforceTokenAccess) {
+		if !enforceTokenAccess && !channel.EnableUsageQuery && !explicitChannelSelection {
 			continue
 		}
 		if len(items) >= limit {
@@ -220,6 +347,15 @@ func getChannelsUsage(c *gin.Context, enforceTokenAccess bool) {
 				"status": channel.Status,
 			},
 		}
+		if !channel.EnableUsageQuery {
+			item["enabled"] = false
+			item["supported"] = true
+			item["error"] = gin.H{"code": "usage_query_disabled", "message": "该渠道已关闭额度查询"}
+			items = append(items, item)
+			continue
+		}
+		item["enabled"] = true
+		item["supported"] = true
 
 		switch channel.Type {
 		case config.ChannelTypeClaudeCode:
@@ -258,6 +394,18 @@ func getChannelsUsage(c *gin.Context, enforceTokenAccess bool) {
 			if cacheConfig.TTLSeconds > 0 && (minTTLSeconds == 0 || cacheConfig.TTLSeconds < minTTLSeconds) {
 				minTTLSeconds = cacheConfig.TTLSeconds
 			}
+		case config.ChannelTypeGithubCopilot:
+			copilotProvider := githubcopilot.New(channel)
+			cacheConfig := copilotProvider.GetUsageCacheConfig()
+			usageResult, err := copilotProvider.RequestUsageWithCache()
+			if err != nil {
+				item["error"] = err.Error()
+				break
+			}
+			item["data"] = githubCopilotUsageData(channel, usageResult, cacheConfig)
+			if cacheConfig.TTLSeconds > 0 && (minTTLSeconds == 0 || cacheConfig.TTLSeconds < minTTLSeconds) {
+				minTTLSeconds = cacheConfig.TTLSeconds
+			}
 		default:
 			item["error"] = fmt.Sprintf("不支持的渠道类型: %d", channel.Type)
 		}
@@ -273,4 +421,55 @@ func getChannelsUsage(c *gin.Context, enforceTokenAccess bool) {
 			"cache_ttl_seconds": minTTLSeconds,
 		},
 	})
+}
+
+func parseUsageList(raw string, max int) ([]string, error) {
+	if strings.TrimSpace(raw) == "" {
+		return nil, nil
+	}
+	seen := make(map[string]struct{})
+	values := make([]string, 0)
+	for _, part := range strings.Split(raw, ",") {
+		value := strings.ToLower(strings.TrimSpace(part))
+		if value == "" {
+			return nil, errors.New("包含空值")
+		}
+		if _, ok := seen[value]; ok {
+			continue
+		}
+		seen[value] = struct{}{}
+		values = append(values, value)
+		if len(values) > max {
+			return nil, fmt.Errorf("最多允许 %d 项", max)
+		}
+	}
+	return values, nil
+}
+
+func parseUsageChannelIDs(raw string, max int) (map[int]struct{}, error) {
+	values, err := parseUsageList(raw, max)
+	if err != nil {
+		return nil, fmt.Errorf("channel-id 参数无效: %w", err)
+	}
+	ids := make(map[int]struct{}, len(values))
+	for _, value := range values {
+		id, err := strconv.Atoi(value)
+		if err != nil || id <= 0 {
+			return nil, fmt.Errorf("channel-id 参数无效: %q", value)
+		}
+		ids[id] = struct{}{}
+	}
+	return ids, nil
+}
+
+func matchesAnyUsageProvider(channelType int, providers []string) bool {
+	if len(providers) == 0 {
+		return true
+	}
+	for _, provider := range providers {
+		if channelMatchesUsageProvider(channelType, provider) {
+			return true
+		}
+	}
+	return false
 }

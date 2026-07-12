@@ -16,6 +16,7 @@ const defaultConfig = {
     plugin: {},
     tag: '',
     only_chat: false,
+    enable_usage_query: false,
     pre_cost: 1,
     disabled_stream: [],
     responses_models: [],
@@ -40,6 +41,7 @@ const defaultConfig = {
     custom_parameter: '额外参数',
     groups: '用户组',
     only_chat: '仅支持聊天',
+    enable_usage_query: '允许查询上游额度',
     tag: '标签',
     provider_models_list: '',
     pre_cost: '预计费选项',
@@ -70,21 +72,24 @@ const defaultConfig = {
       '支持通过 JSON 注入额外参数（可嵌套）。可用控制项：overwrite：设为 true 覆盖同名字段，未设置或 false 时仅补充缺失字段；per_model：设为 true 后按模型名进行参数覆盖，如 {"per_model":true,"gpt-3.5-turbo":{"temperature": 0.7},"gpt-4":{"temperature": 0.5}}；pre_add：设为 true 时在请求入口即完成参数覆盖，否则会在发送请求前再进行参数覆盖，适用于所有渠道（含 Claude、Gemini），如 {"pre_add":true,"overwrite":true,"stream":false}。',
     groups: '请选择该渠道所支持的用户组',
     only_chat: '如果选择了仅支持聊天，那么遇到有函数调用的请求会跳过该渠道',
+    enable_usage_query: '开启后，允许通过管理端或有权限的 API Token 查询该渠道的上游额度。凭据只在服务端使用，不会返回给查询方。',
     provider_models_list: '必须填写所有数据后才能获取模型列表',
     tag: '你可以为你的渠道打一个标签，打完标签后，可以通过标签进行批量管理渠道，注意：设置标签后某些设置只能通过渠道标签修改，无法在渠道列表中修改。',
     pre_cost:
       '这里选择预计费选项，用于预估费用，如果你觉得计算图片占用太多资源，可以选择关闭图片计费。但是请注意：有些渠道在stream下是不会返回tokens的，这会导致输入tokens计算错误。',
     disabled_stream: '这里填写禁用流式的模型，注意：如果填写了禁用流式的模型，那么这些模型在流式请求时会跳过该渠道',
     responses_models: '填写需要将 Chat Completions 请求转换为 Responses API 的模型。支持精确模型名、末尾 * 通配，或用 * 表示全部模型。',
-    compatible_response_models: '填写需要将 Responses API 请求转换为 Chat Completions 的模型。支持精确模型名、末尾 * 通配，或用 * 表示全部模型。',
+    compatible_response_models:
+      '填写需要将 Responses API 请求转换为 Chat Completions 的模型。支持精确模型名、末尾 * 通配，或用 * 表示全部模型。',
     compatible_response: '兼容Response API',
     allow_extra_body: '开启后，将会透传用户请求中的额外字段（如OpenAI SDK的extra_body参数），适用于需要传递自定义参数到上游API的场景',
     pass_through_body:
       '开启后，将客户端请求体原样转发至上游，仅改写映射后的模型名，保留未知字段与原始字节；适用于同协议透明代理场景。注意：仅对 OpenAI 协议渠道生效（Claude、Gemini 等自建请求体的渠道不读取该项）；开启后将跳过额外字段合并（仅渠道额外参数仍以字节方式生效）。',
-    cost_ratio: '上游成本倍率，相对模型基础价的折扣，例如 0.5 表示成本为基础价的 5 折。仅用于成本与利润统计，不影响用户扣费。未配置或为 0 时不计成本。'
+    cost_ratio:
+      '上游成本倍率，相对模型基础价的折扣，例如 0.5 表示成本为基础价的 5 折。仅用于成本与利润统计，不影响用户扣费。未配置或为 0 时不计成本。'
   },
   modelGroup: 'OpenAI'
-}
+};
 
 const typeConfig = {
   1: {
@@ -508,11 +513,11 @@ const typeConfig = {
       test_model: 'gpt-4o-mini'
     },
     inputLabel: {
-      provider_models_list: '从Github获取模型列表'
+      provider_models_list: '从 GitHub Models 获取模型列表'
     },
     prompt: {
-      key: '密钥信息请参考https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens',
-      base_url: 'https://models.inference.ai.azure.com'
+      key: '请输入具有 models: read 权限的 GitHub fine-grained PAT（此渠道不是 GitHub Copilot）',
+      base_url: 'GitHub Models API 地址；默认使用官方地址'
     },
     modelGroup: 'Github'
   },
@@ -622,7 +627,24 @@ const typeConfig = {
       other: '格式：us-central1|your-project-id'
     },
     modelGroup: 'VertexAI Express'
+  },
+  64: {
+    input: {
+      models: ['gpt-4.1', 'gpt-4o', 'claude-sonnet-4', 'gemini-2.5-pro'],
+      test_model: 'gpt-4.1'
+    },
+    inputLabel: {
+      other: 'GitHub OAuth Client ID',
+      provider_models_list: '从 GitHub Copilot 获取可用模型列表'
+    },
+    prompt: {
+      key: '请输入 GitHub OAuth user token，或点击下方“GitHub Device 授权”自动获取；无需填写短期 Copilot token',
+      other: '通常留空，系统默认使用 GitHub Copilot Chat 的 Device Flow Client ID；仅在 GitHub Enterprise 或自定义兼容 OAuth App 时覆盖',
+      base_url: '通常留空，系统会根据 Copilot 订阅自动选择 API 地址',
+      provider_models_list: '需先完成 GitHub Device 授权或填写有效的 GitHub OAuth user token'
+    },
+    modelGroup: 'GitHub Copilot'
   }
-}
+};
 
-export { defaultConfig, typeConfig }
+export { defaultConfig, typeConfig };

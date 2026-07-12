@@ -1,5 +1,6 @@
 export const CHANNEL_TYPE_CLAUDE_CODE = 58
 export const CHANNEL_TYPE_CODEX = 59
+export const CHANNEL_TYPE_GITHUB_COPILOT = 64
 export const DEFAULT_USAGE_CACHE_TTL_MS = 5 * 60 * 1000
 
 const usageMemoryCache = new Map()
@@ -61,7 +62,7 @@ export async function getCachedUsage(key, fetcher) {
 }
 
 export function supportsUsageWindows(type) {
-  return [CHANNEL_TYPE_CLAUDE_CODE, CHANNEL_TYPE_CODEX].includes(Number(type))
+  return [CHANNEL_TYPE_CLAUDE_CODE, CHANNEL_TYPE_CODEX, CHANNEL_TYPE_GITHUB_COPILOT].includes(Number(type))
 }
 
 export function clampPercent(value) {
@@ -127,6 +128,40 @@ export function parseUsageWindows(type, usage) {
       primary && buildWindow('primary', getWindowLabel(primary.limit_window_seconds), primary.used_percent, primary.reset_at, 'seconds'),
       secondary && buildWindow('secondary', getWindowLabel(secondary.limit_window_seconds), secondary.used_percent, secondary.reset_at, 'seconds')
     ].filter(Boolean)
+  }
+
+  if (channelType === CHANNEL_TYPE_GITHUB_COPILOT) {
+    const snapshots = usage.quota_snapshots || {}
+    const resetAt = usage.quota_reset_date_utc || usage.quota_reset_date || usage.limited_user_reset_date
+    const snapshotWindows = [
+      ['premium_interactions', 'Premium'],
+      ['chat', 'Chat'],
+      ['completions', 'Completions']
+    ].map(([key, label]) => {
+      const snapshot = snapshots[key]
+      if (!snapshot) return null
+      if (snapshot.unlimited === true || Number(snapshot.entitlement) < 0) {
+        return buildWindow(key, `${label} ∞`, 0, snapshot.quota_reset_at || resetAt, snapshot.quota_reset_at ? 'seconds' : 'ms')
+      }
+      const remainingPercent = Number.isFinite(Number(snapshot.percent_remaining))
+        ? Number(snapshot.percent_remaining)
+        : Number(snapshot.entitlement) > 0
+          ? Number(snapshot.remaining ?? snapshot.quota_remaining ?? 0) / Number(snapshot.entitlement) * 100
+          : null
+      if (!Number.isFinite(remainingPercent)) return null
+      return buildWindow(key, label, 100 - remainingPercent, snapshot.quota_reset_at || resetAt, snapshot.quota_reset_at ? 'seconds' : 'ms')
+    }).filter(Boolean)
+    if (snapshotWindows.length) return snapshotWindows
+
+    const remaining = usage.limited_user_quotas || {}
+    const monthly = usage.monthly_quotas || {}
+    return ['chat', 'completions'].map((key) => {
+      const entitlement = Number(monthly[key])
+      const quotaRemaining = Number(remaining[key])
+      if (!Number.isFinite(entitlement) || entitlement <= 0 || !Number.isFinite(quotaRemaining)) return null
+      const resetUnit = typeof resetAt === 'number' && resetAt < 1e12 ? 'seconds' : 'ms'
+      return buildWindow(`limited_${key}`, key === 'chat' ? 'Chat' : 'Completions', 100 - quotaRemaining / entitlement * 100, resetAt, resetUnit)
+    }).filter(Boolean)
   }
 
   return []

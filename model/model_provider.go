@@ -11,6 +11,7 @@ type modelProviderRule struct {
 }
 
 var modelProviderRules = []modelProviderRule{
+	{prefix: "gemini", channelType: config.ChannelTypeGemini},
 	{prefix: "anthropic", channelType: config.ChannelTypeAnthropic},
 	{prefix: "claude", channelType: config.ChannelTypeAnthropic},
 	{prefix: "moonshot", channelType: config.ChannelTypeMoonshot},

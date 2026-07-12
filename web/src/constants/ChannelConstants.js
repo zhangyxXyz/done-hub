@@ -231,7 +231,7 @@ export const CHANNEL_OPTIONS = {
   },
   49: {
     key: 49,
-    text: 'Github',
+    text: 'GitHub Models',
     value: 49,
     color: 'default',
     url: 'https://github.com/marketplace/models'
@@ -305,6 +305,13 @@ export const CHANNEL_OPTIONS = {
     value: 61,
     color: 'orange',
     url: 'https://console.cloud.google.com/'
+  },
+  64: {
+    key: 64,
+    text: 'GitHub Copilot',
+    value: 64,
+    color: 'info',
+    url: 'https://github.com/features/copilot'
   },
   8: {
     key: 8,

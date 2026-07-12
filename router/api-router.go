@@ -257,6 +257,19 @@ func SetApiRouter(router *gin.Engine) {
 			antigravityRoute.GET("/oauth/status/:state", middleware.AdminAuth(), controller.GetAntigravityOAuthStatus)
 		}
 
+		githubCopilotRoute := apiRouter.Group("/github-copilot")
+		githubCopilotRoute.Use(middleware.AdminAuth())
+		{
+			githubCopilotRoute.POST("/oauth/start", controller.StartGitHubCopilotOAuth)
+			githubCopilotRoute.GET("/oauth/status/:state", controller.GetGitHubCopilotOAuthStatus)
+		}
+
+		githubCopilotUsageRoute := apiRouter.Group("/github-copilot")
+		{
+			githubCopilotUsageRoute.GET("/usage", middleware.OpenaiAuth(), middleware.ContextUserId(), middleware.Distribute(), controller.GetGitHubCopilotUsage)
+			githubCopilotUsageRoute.POST("/usage", middleware.OpenaiAuth(), middleware.ContextUserId(), middleware.Distribute(), controller.GetGitHubCopilotUsage)
+		}
+
 		channelTagRoute := apiRouter.Group("/channel_tag")
 		channelTagRoute.Use(middleware.AdminAuth())
 		{

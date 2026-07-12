@@ -170,7 +170,6 @@ func GetClaudeCodeUsage(c *gin.Context) {
 		common.APIRespondWithError(c, http.StatusOK, errors.New("指定渠道不是 ClaudeCode 类型"))
 		return
 	}
-
 	userID := c.GetInt("id")
 	isAdmin := model.IsAdmin(userID)
 	if !isAdmin {
@@ -182,6 +181,10 @@ func GetClaudeCodeUsage(c *gin.Context) {
 			common.APIRespondWithError(c, http.StatusOK, errors.New("当前令牌无权查询该渠道"))
 			return
 		}
+	}
+	if err := usageQueryEnabled(channel); err != nil {
+		common.APIRespondWithError(c, http.StatusOK, err)
+		return
 	}
 
 	provider := claudecode.ClaudeCodeProviderFactory{}.Create(channel)

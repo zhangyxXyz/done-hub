@@ -23,6 +23,7 @@ import (
 	"done-hub/providers/gemini"
 	"done-hub/providers/geminicli"
 	"done-hub/providers/github"
+	"done-hub/providers/githubcopilot"
 	"done-hub/providers/groq"
 	"done-hub/providers/hunyuan"
 	"done-hub/providers/jina"
@@ -92,6 +93,7 @@ func init() {
 		config.ChannelTypeSiliconflow:     siliconflow.SiliconflowProviderFactory{},
 		config.ChannelTypeJina:            jina.JinaProviderFactory{},
 		config.ChannelTypeGithub:          github.GithubProviderFactory{},
+		config.ChannelTypeGithubCopilot:   githubcopilot.Factory{},
 		config.ChannelTypeRecraft:         recraftAI.RecraftProviderFactory{},
 		config.ChannelTypeReplicate:       replicate.ReplicateProviderFactory{},
 		config.ChannelTypeOpenRouter:      openrouter.OpenRouterProviderFactory{},

@@ -45,6 +45,7 @@ type Channel struct {
 	CompatibleResponse bool     `json:"compatible_response" gorm:"default:false"`
 	AllowExtraBody     bool     `json:"allow_extra_body" form:"allow_extra_body" gorm:"default:false"`
 	PassThroughBody    bool     `json:"pass_through_body" form:"pass_through_body" gorm:"default:false"`
+	EnableUsageQuery   bool     `json:"enable_usage_query" form:"enable_usage_query" gorm:"default:false"`
 	CostRatio          *float64 `json:"cost_ratio" form:"cost_ratio" gorm:"type:decimal(10,4);default:0"`
 
 	DisabledStream           *datatypes.JSONSlice[string] `json:"disabled_stream,omitempty" gorm:"type:json"`

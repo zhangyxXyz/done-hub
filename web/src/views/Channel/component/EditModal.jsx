@@ -26,6 +26,7 @@ import {
   ListItemText,
   MenuItem,
   OutlinedInput,
+  Paper,
   Select,
   Stack,
   Switch,
@@ -54,6 +55,7 @@ import GroupRatioLabel from 'ui-component/GroupRatioLabel';
 import pluginList from '../type/Plugin.json';
 import { Icon } from '@iconify/react';
 import Editor from '@monaco-editor/react';
+import { supportsUsageWindows } from 'utils/channelUsage';
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -132,6 +134,15 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, groupMap, is
   const [codexAuthCode, setCodexAuthCode] = useState('');
   const [codexSubmitting, setCodexSubmitting] = useState(false);
 
+  // GitHub Copilot Device OAuth 相关状态
+  const [copilotOAuthVisible, setCopilotOAuthVisible] = useState(false);
+  const [copilotSubmitting, setCopilotSubmitting] = useState(false);
+  const [copilotSessionId, setCopilotSessionId] = useState('');
+  const [copilotUserCode, setCopilotUserCode] = useState('');
+  const [copilotVerificationURL, setCopilotVerificationURL] = useState('https://github.com/login/device');
+  const [copilotStatusText, setCopilotStatusText] = useState('等待 GitHub 授权…');
+  const copilotPollingRef = useRef(null);
+
   // 清理 OAuth 相关资源
   const cleanupOAuth = () => {
     if (pollingIntervalRef.current) {
@@ -145,6 +156,12 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, groupMap, is
     setOauthLoading(false);
     setOauthState(null);
     oauthHandledRef.current = false;
+    if (copilotPollingRef.current) {
+      clearTimeout(copilotPollingRef.current);
+      copilotPollingRef.current = null;
+    }
+    setCopilotSubmitting(false);
+    setCopilotOAuthVisible(false);
   };
 
   // 包装 onCancel，添加清理逻辑
@@ -682,6 +699,98 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, groupMap, is
     setCodexSubmitting(false);
   };
 
+  const resetCopilotOAuth = () => {
+    if (copilotPollingRef.current) {
+      clearTimeout(copilotPollingRef.current);
+      copilotPollingRef.current = null;
+    }
+    setCopilotOAuthVisible(false);
+    setCopilotSubmitting(false);
+    setCopilotSessionId('');
+    setCopilotUserCode('');
+    setCopilotStatusText('等待 GitHub 授权…');
+  };
+
+  const pollCopilotOAuth = (sessionId, setFieldValue, intervalSeconds = 5, onCredentials) => {
+    const poll = async () => {
+      try {
+        const res = await API.get(`/api/github-copilot/oauth/status/${encodeURIComponent(sessionId)}`);
+        const payload = res.data?.data || res.data || {};
+        const status = payload.status || (res.data?.success && payload.credentials ? 'success' : 'pending');
+
+        if (status === 'success' || status === 'completed' || payload.credentials || payload.access_token) {
+          const credentials = payload.credentials || payload.access_token;
+          const credentialValue = typeof credentials === 'string' ? credentials : JSON.stringify(credentials);
+          setFieldValue('key', credentialValue);
+          onCredentials?.(credentialValue);
+          showSuccess('GitHub Copilot 授权成功，凭据已自动填充');
+          resetCopilotOAuth();
+          return;
+        }
+        if (status === 'expired' || status === 'failed' || status === 'denied' || res.data?.success === false) {
+          setCopilotSubmitting(false);
+          setCopilotStatusText(res.data?.message || payload.message || '授权失败或已过期，请重新发起授权');
+          return;
+        }
+
+        setCopilotStatusText(payload.message || '等待你在 GitHub 完成授权…');
+        copilotPollingRef.current = setTimeout(poll, Math.max(2, intervalSeconds) * 1000);
+      } catch (error) {
+        setCopilotStatusText('暂时无法查询授权状态，正在重试…');
+        copilotPollingRef.current = setTimeout(poll, Math.max(5, intervalSeconds) * 1000);
+      }
+    };
+    copilotPollingRef.current = setTimeout(poll, Math.max(2, intervalSeconds) * 1000);
+  };
+
+  const handleCopilotOAuth = async (clientId, proxy, setFieldValue, onCredentials) => {
+    try {
+      resetCopilotOAuth();
+      setCopilotSubmitting(true);
+      const numericChannelId = Number(channelId);
+      const res = await API.post('/api/github-copilot/oauth/start', {
+        channel_id: Number.isInteger(numericChannelId) && numericChannelId > 0 ? numericChannelId : 0,
+        client_id: clientId?.trim() || '',
+        proxy: proxy?.trim() || ''
+      });
+      if (!res.data?.success) {
+        showError(res.data?.message || 'GitHub Device 授权发起失败');
+        setCopilotSubmitting(false);
+        return;
+      }
+      const payload = res.data.data || res.data || {};
+      const sessionId = payload.session_id || payload.state;
+      if (!sessionId || !payload.user_code) {
+        showError('授权服务返回的数据不完整');
+        setCopilotSubmitting(false);
+        return;
+      }
+      const verificationURL = payload.verification_uri_complete || payload.verification_uri || 'https://github.com/login/device';
+      setCopilotSessionId(sessionId);
+      setCopilotUserCode(payload.user_code);
+      setCopilotVerificationURL(verificationURL);
+      setCopilotStatusText('等待你在 GitHub 完成授权…');
+      setCopilotOAuthVisible(true);
+      window.open(verificationURL, '_blank', 'noopener,noreferrer');
+      pollCopilotOAuth(sessionId, setFieldValue, Number(payload.interval) || 5, onCredentials);
+    } catch (error) {
+      showError('GitHub Device 授权发起失败: ' + (error.message || error));
+      setCopilotSubmitting(false);
+    }
+  };
+
+  const handleCopilotCancelOAuth = async () => {
+    const sessionId = copilotSessionId;
+    resetCopilotOAuth();
+    if (sessionId) {
+      try {
+        await API.post(`/api/github-copilot/oauth/cancel/${encodeURIComponent(sessionId)}`);
+      } catch (_) {
+        // 后端清理接口是可选能力，本地停止轮询即可安全取消。
+      }
+    }
+  };
+
   const handleTypeChange = (setFieldValue, typeValue, values) => {
     // 处理插件事务
     if (pluginList[typeValue]) {
@@ -700,6 +809,8 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, groupMap, is
     }
 
     const newInput = initChannel(typeValue);
+    // 额度查询是显式授权项：切换渠道类型后必须由管理员重新开启。
+    setFieldValue('enable_usage_query', false);
 
     if (newInput) {
       Object.keys(newInput).forEach((key) => {
@@ -1003,6 +1114,8 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, groupMap, is
 
         data.base_url = data.base_url ?? '';
         data.cost_ratio = data.cost_ratio ?? 0;
+        // 兼容尚未返回新字段的旧后端：缺失时按关闭处理。
+        data.enable_usage_query = data.enable_usage_query ?? false;
         data.is_edit = true;
         if (data.plugin === null) {
           data.plugin = {};
@@ -1054,6 +1167,80 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, groupMap, is
               setTempSetFieldValue(() => setFieldValue); // 保存函数引用
               setModelSelectorOpen(true);
             };
+
+            const copilotOAuthSection = Number(values.type) === 64 ? (
+              <Box sx={{ mt: 2, mb: 2 }}>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  fullWidth
+                  disabled={copilotSubmitting}
+                  onClick={() => handleCopilotOAuth(values.other, values.proxy, setFieldValue)}
+                  startIcon={copilotSubmitting ? null : <Icon icon="mdi:github" />}
+                >
+                  {copilotSubmitting ? '等待 GitHub 授权…' : values.key ? '重新授权 GitHub Copilot' : 'GitHub Device 授权'}
+                </Button>
+                <Alert severity="info" sx={{ mt: 1 }}>
+                  使用当前 GitHub 账号的 Copilot 订阅授权。Client ID 通常留空；授权成功后会自动更新渠道凭据。
+                </Alert>
+                {copilotOAuthVisible && (
+                  <Paper variant="outlined" sx={{ mt: 2, p: 2, borderRadius: 2 }}>
+                    <Typography variant="h5" sx={{ mb: 2 }}>
+                      GitHub Copilot Device 授权
+                    </Typography>
+                    <Alert severity="info" sx={{ mb: 2 }}>
+                      在 GitHub 页面输入下方设备码并确认授权。授权完成后本页面会自动填充凭据。
+                    </Alert>
+                    <Typography variant="body2" color="text.secondary" gutterBottom>
+                      设备码
+                    </Typography>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        gap: 2,
+                        p: 2,
+                        mb: 2,
+                        borderRadius: 1,
+                        bgcolor: 'background.neutral'
+                      }}
+                    >
+                      <Typography variant="h4" sx={{ fontFamily: 'monospace', letterSpacing: 3 }}>
+                        {copilotUserCode}
+                      </Typography>
+                      <IconButton aria-label="复制设备码" onClick={() => copy(copilotUserCode).then(() => showSuccess('设备码已复制'))}>
+                        <Icon icon="mdi:content-copy" />
+                      </IconButton>
+                    </Box>
+                    <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}>
+                      <Button
+                        variant="contained"
+                        fullWidth
+                        onClick={() => window.open(copilotVerificationURL, '_blank', 'noopener,noreferrer')}
+                        startIcon={<Icon icon="mdi:open-in-new" />}
+                      >
+                        打开 GitHub 授权页面
+                      </Button>
+                      <Button
+                        variant="outlined"
+                        onClick={() => copy(copilotVerificationURL).then(() => showSuccess('授权链接已复制'))}
+                        startIcon={<Icon icon="mdi:content-copy" />}
+                        sx={{ minWidth: '120px' }}
+                      >
+                        复制链接
+                      </Button>
+                    </Stack>
+                    <Typography variant="body2" sx={{ mt: 2 }} color="text.secondary">
+                      {copilotStatusText}
+                    </Typography>
+                    <Button onClick={handleCopilotCancelOAuth} sx={{ mt: 1 }}>
+                      取消授权
+                    </Button>
+                  </Paper>
+                )}
+              </Box>
+            ) : null;
 
             return (
               <form noValidate onSubmit={handleSubmit}>
@@ -1208,6 +1395,8 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, groupMap, is
                       )}
                     </FormControl>
                   )}
+
+                  {copilotOAuthSection}
 
                   <FormControl fullWidth sx={{ ...theme.typography.otherInput }}>
                     <Autocomplete
@@ -1770,6 +1959,7 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, groupMap, is
                       </Dialog>
                     </Box>
                   )}
+
                 </CollapsibleSection>
 
                 <CollapsibleSection title={t('channel_edit.sectionAdvanced')}>
@@ -1984,6 +2174,23 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, groupMap, is
                 </CollapsibleSection>
 
                 <CollapsibleSection title={t('channel_edit.sectionBilling')}>
+                  <FormControl fullWidth sx={{ ...theme.typography.otherInput }}>
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={Boolean(values.enable_usage_query)}
+                          disabled={!supportsUsageWindows(values.type)}
+                          onChange={(event) => setFieldValue('enable_usage_query', event.target.checked)}
+                        />
+                      }
+                      label={customizeT(inputLabel.enable_usage_query)}
+                    />
+                    <FormHelperText id="helper-text-enable-usage-query">
+                      {supportsUsageWindows(values.type)
+                        ? customizeT(inputPrompt.enable_usage_query)
+                        : '当前渠道类型不支持查询上游额度'}
+                    </FormHelperText>
+                  </FormControl>
                   {inputPrompt.only_chat && (
                     <FormControl fullWidth sx={{ ...theme.typography.otherInput }}>
                       <FormControlLabel

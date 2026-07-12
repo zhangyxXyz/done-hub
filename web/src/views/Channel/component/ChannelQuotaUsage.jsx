@@ -18,7 +18,7 @@ export default function ChannelQuotaUsage({ channel }) {
   useEffect(() => {
     let ignore = false
     const loadUsage = async() => {
-      if (!supportsUsageWindows(channel?.type) || !channel?.id) return
+      if (!supportsUsageWindows(channel?.type) || !channel?.enable_usage_query || !channel?.id) return
       setState((prev) => ({ ...prev, loading: true, error: '' }))
       try {
         const res = await getCachedUsage(`channel:${channel.id}`, () => API.get(`/api/channel/${channel.id}/usage`))
@@ -38,9 +38,9 @@ export default function ChannelQuotaUsage({ channel }) {
     return () => {
       ignore = true
     }
-  }, [channel?.id, channel?.type])
+  }, [channel?.id, channel?.type, channel?.enable_usage_query])
 
-  if (!supportsUsageWindows(channel?.type)) return null
+  if (!supportsUsageWindows(channel?.type) || !channel?.enable_usage_query) return null
 
   if (state.loading) {
     return <CircularProgress size={16}/>

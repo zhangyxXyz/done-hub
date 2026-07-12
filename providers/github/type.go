@@ -6,7 +6,8 @@ type ModelInfo struct {
 	ID            string   `json:"id"`
 	Name          string   `json:"name"`
 	FriendlyName  string   `json:"friendly_name"`
-	ModelVersion  int      `json:"model_version"`
+	ModelVersion  any      `json:"model_version"`
+	Version       string   `json:"version"`
 	Publisher     string   `json:"publisher"`
 	ModelFamily   string   `json:"model_family"`
 	ModelRegistry string   `json:"model_registry"`

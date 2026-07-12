@@ -415,6 +415,7 @@ const (
 	ChannelTypeVertexAIExpress = 61
 	ChannelTypeDoubao          = 62
 	ChannelTypeXiaomi          = 63
+	ChannelTypeGithubCopilot   = 64
 )
 
 const (

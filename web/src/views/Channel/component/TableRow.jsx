@@ -756,7 +756,7 @@ export default function ChannelTableRow({
         <TableCell>
           {!item.tag && (
             <Stack spacing={0.5} alignItems="center">
-              {supportsUsageWindows(item.type) ? (
+              {supportsUsageWindows(item.type) && item.enable_usage_query ? (
                 <ChannelQuotaUsage channel={item} />
               ) : (
                 <>

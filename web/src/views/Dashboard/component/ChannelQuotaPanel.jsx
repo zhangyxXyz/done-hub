@@ -6,7 +6,6 @@ import {
   formatResetAt,
   formatUsagePercent,
   getCachedUsage,
-  getUsageSummaryLabel,
   parseUsageWindows
 } from 'utils/channelUsage'
 
@@ -16,14 +15,11 @@ function providerName(type) {
       return 'ClaudeCode'
     case 59:
       return 'Codex'
+    case 64:
+      return 'GitHub Copilot'
     default:
       return 'OAuth'
   }
-}
-
-function minRemaining(windows) {
-  if (!windows.length) return null
-  return Math.min(...windows.map((window) => window.remainingPercent))
 }
 
 export default function ChannelQuotaPanel() {
@@ -36,8 +32,10 @@ export default function ChannelQuotaPanel() {
     const load = async() => {
       setLoading(true)
       try {
-        const res = await getCachedUsage('dashboard:channels:12', () => API.get('/api/channel/usage', { params: { limit: 12 } }))
-        const usageItems = res.data.success ? (res.data.data?.items || []) : []
+        const res = await getCachedUsage('dashboard:channels:12:copilot-v1', () => API.get('/api/channel/usage', { params: { limit: 12 } }))
+        const usageItems = res.data.success
+          ? (res.data.data?.items || []).filter((item) => item.enabled !== false && item.channel?.enable_usage_query !== false)
+          : []
         if (!ignore) setItems(usageItems)
       } finally {
         if (!ignore) setLoading(false)
@@ -65,12 +63,11 @@ export default function ChannelQuotaPanel() {
       )}
 
       {!loading && visibleItems.length === 0 && (
-        <Typography variant="body2" color="text.secondary">暂无 ClaudeCode / Codex 渠道额度数据</Typography>
+        <Typography variant="body2" color="text.secondary">暂无 ClaudeCode / Codex / GitHub Copilot 渠道额度数据</Typography>
       )}
 
       {!loading && visibleItems.map((item, index) => {
         const windows = parseUsageWindows(item.channel.type, item.data?.usage)
-        const remaining = minRemaining(windows)
         const empty = item.data?.empty || (!item.error && windows.length === 0)
         const usageColor = item.error ? 'error.main' : empty ? 'warning.main' : 'primary.main'
         const tooltip = item.error ? (
@@ -94,7 +91,7 @@ export default function ChannelQuotaPanel() {
             {index > 0 && <Divider sx={{ my: 1.25 }}/>}
             <Tooltip title={tooltip} arrow placement="top">
               <Box sx={{ cursor: 'help' }}>
-                <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={1}>
+                <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={1} sx={{ mb: !item.error && !empty ? 1.25 : 0 }}>
                   <Box sx={{ minWidth: 0 }}>
                     <Typography variant="subtitle2" sx={{ fontWeight: 800 }} noWrap>
                       {item.channel.name}
@@ -111,24 +108,38 @@ export default function ChannelQuotaPanel() {
                       whiteSpace: 'nowrap'
                     }}
                   >
-                    {item.error ? '失败' : empty ? '暂无窗口' : getUsageSummaryLabel(windows)}
+                    {item.error ? '失败' : empty ? '暂无窗口' : `${windows.length} 个额度窗口`}
                   </Typography>
                 </Stack>
-                {!item.error && !empty && remaining !== null && (
-                  <LinearProgress
-                    variant="determinate"
-                    value={remaining}
-                    sx={{
-                      mt: 1,
-                      height: 6,
-                      borderRadius: 1,
-                      bgcolor: 'action.hover',
-                      '& .MuiLinearProgress-bar': {
-                        borderRadius: 1,
-                        bgcolor: remaining < 20 ? 'error.main' : remaining < 50 ? 'warning.main' : 'primary.main'
-                      }
-                    }}
-                  />
+                {!item.error && !empty && (
+                  <Stack spacing={1.1}>
+                    {windows.map((window) => {
+                      const unlimited = window.label.endsWith(' ∞')
+                      const label = unlimited ? window.label.slice(0, -2) : window.label
+                      const remaining = window.remainingPercent
+                      const barColor = remaining < 20 ? 'error.main' : remaining < 50 ? 'warning.main' : 'primary.main'
+                      return (
+                        <Box key={window.key}>
+                          <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={1} sx={{ mb: 0.5 }}>
+                            <Typography variant="caption" sx={{ fontWeight: 800 }}>{label}</Typography>
+                            <Typography variant="caption" sx={{ color: barColor, fontWeight: 800 }}>
+                              {unlimited ? '无限制' : `剩余 ${formatUsagePercent(remaining)}`}
+                            </Typography>
+                          </Stack>
+                          <LinearProgress
+                            variant="determinate"
+                            value={remaining}
+                            sx={{
+                              height: 6,
+                              borderRadius: 1,
+                              bgcolor: 'action.hover',
+                              '& .MuiLinearProgress-bar': { borderRadius: 1, bgcolor: barColor }
+                            }}
+                          />
+                        </Box>
+                      )
+                    })}
+                  </Stack>
                 )}
               </Box>
             </Tooltip>

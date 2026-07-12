@@ -562,6 +562,7 @@ const ModelSelectorModal = ({ open, onClose, onConfirm, channelValues, prices })
                 >
                   {t('channel_edit.fetchModels')}
                 </LoadingButton>
+
               </Box>
             </Box>
           </Paper>

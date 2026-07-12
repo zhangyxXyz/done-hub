@@ -26,6 +26,11 @@ func TestInferModelChannelTypeChineseModels(t *testing.T) {
 		{modelName: "ERNIE-4.5-300B-A47B", channelType: config.ChannelTypeBaidu},
 		{modelName: "qianfan-ocr-fast", channelType: config.ChannelTypeBaidu},
 		{modelName: "ui-tars-1.5-7b", channelType: config.ChannelTypeDoubao},
+		{modelName: "gemini-2.5-pro", channelType: config.ChannelTypeGemini},
+		{modelName: "gemini-3-flash-preview", channelType: config.ChannelTypeGemini},
+		{modelName: "gemini-3.1-pro-preview", channelType: config.ChannelTypeGemini},
+		{modelName: "gemini-3.5-flash", channelType: config.ChannelTypeGemini},
+		{modelName: "google/gemini-3.5-flash", channelType: config.ChannelTypeGemini},
 	}
 
 	for _, tt := range tests {
