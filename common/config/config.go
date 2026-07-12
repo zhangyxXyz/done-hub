@@ -14,6 +14,7 @@ func InitConf() {
 	setEnv()
 	Language = viper.GetString("language")
 	IsMasterNode = viper.GetString("node_type") != "slave"
+	RelayOnly = viper.GetBool("relay_only")
 	RequestInterval = time.Duration(viper.GetInt("polling_interval")) * time.Second
 	AutoPriceUpdates = viper.GetBool("auto_price_updates")
 	AutoPriceUpdatesMode = viper.GetString("auto_price_updates_mode")

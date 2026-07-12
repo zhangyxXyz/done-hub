@@ -167,6 +167,9 @@ var MemoryCacheEnabled = false
 
 var LogConsumeEnabled = true
 
+var LogAutoDeleteEnabled = false // 是否启用消费日志自动清理
+var LogAutoDeleteDays = 30       // 保留天数，默认30天
+
 var SMTPServer = ""
 var SMTPPort = 587
 var SMTPAccount = ""
@@ -246,6 +249,11 @@ func GetChannelFailErrorMessage() string {
 // 统一请求响应模型（响应中显示用户请求的原始模型名称）
 var UnifiedRequestResponseModelEnabled = false
 
+// FingerprintPassThroughEnabled 让原生 Claude 格式渠道（Bedrock / Claude 官方）尽量保留
+// 上游的响应指纹：非流式原始字节透传、Bedrock 额外透传 x-amzn-* 响应头、流式跳过 model 改写。
+// 默认开启；关闭后回退到与其它渠道一致的结构体序列化行为。
+var FingerprintPassThroughEnabled = true
+
 // 模型名称大小写不敏感匹配
 var ModelNameCaseInsensitiveEnabled = false
 
@@ -286,6 +294,10 @@ var CFWorkerImageKey = ""
 var RootUserEmail = ""
 
 var IsMasterNode = true
+
+// RelayOnly 纯 relay 网关模式：仅暴露转发接口(/v1、/claude、/gemini、/mj 等)与 /health，
+// 前端页面、/api 管理接口、dashboard 一律返回 404，避免从节点泄露主域名等信息。
+var RelayOnly = false
 
 var RequestInterval time.Duration
 

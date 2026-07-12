@@ -6,12 +6,15 @@ import (
 	"done-hub/common/config"
 	"done-hub/common/model_utils"
 	"done-hub/common/requester"
+	"done-hub/providers/base"
 	"done-hub/types"
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
 	"strings"
 
+	"github.com/gin-gonic/gin"
 	"github.com/tidwall/gjson"
 	"github.com/tidwall/sjson"
 )
@@ -21,8 +24,100 @@ type ClaudeRelayStreamHandler struct {
 	ModelName  string
 	Prefix     string
 	StartUsage *Usage
+	Context    *gin.Context
 
 	AddEvent bool
+
+	// SkipModelUnify 为 true 时跳过 message_start 中 message.model 的统一改写，
+	// 用于 Bedrock 指纹保真：保留上游 AWS 返回的原始 model 名。
+	SkipModelUnify bool
+}
+
+// claudeUpstreamHeaderExcluded 传输层头，绝不透传（key 全小写）。
+var claudeUpstreamHeaderExcluded = map[string]struct{}{
+	"content-length":    {},
+	"content-type":      {},
+	"content-encoding":  {},
+	"transfer-encoding": {},
+	"connection":        {},
+	"keep-alive":        {},
+}
+
+// claudeUpstreamHeaderPrefixes 前缀白名单（全小写）：限流 / 优先级 / fast mode 指纹头。
+var claudeUpstreamHeaderPrefixes = []string{
+	"anthropic-ratelimit-",
+	"anthropic-priority-",
+	"anthropic-fast-",
+}
+
+// claudeUpstreamHeaderExact 精确白名单（全小写）：退避指令。
+// 注意：retry-after / x-should-retry 是上游 429/529 错误响应才带的头，而错误路径由
+// SendRequest 的 HandleErrorResp 提前接管，不会走到本过滤器——故当前仅在成功响应可达。
+// 保留在白名单是零成本的前瞻：若将来打通错误响应头透传，此处即自动生效。
+var claudeUpstreamHeaderExact = map[string]struct{}{
+	"retry-after":    {},
+	"x-should-retry": {},
+}
+
+// filterClaudeUpstreamHeaders 从上游 Claude 响应头中挑出可透传给客户端的指纹头，
+// 目的是让 done-hub 中转的响应尽量贴近直连 Anthropic（携带 anthropic-ratelimit-* /
+// retry-after 等）。request-id / x-request-id 不直透（避免覆盖本地追踪 ID），单独提取
+// 为字符串返回，由 relay 层以 X-Upstream-Request-Id 回写。大小写不敏感；多值 header 全部
+// 保留；无命中时返回的 http.Header 为 nil。
+func filterClaudeUpstreamHeaders(src http.Header) (http.Header, string) {
+	if len(src) == 0 {
+		return nil, ""
+	}
+	out := http.Header{}
+	var requestID string
+	for name, values := range src {
+		lower := strings.ToLower(name)
+		if _, excluded := claudeUpstreamHeaderExcluded[lower]; excluded {
+			continue
+		}
+		if lower == "request-id" || lower == "x-request-id" {
+			if requestID == "" && len(values) > 0 {
+				requestID = values[0]
+			}
+			continue
+		}
+		matched := false
+		if _, ok := claudeUpstreamHeaderExact[lower]; ok {
+			matched = true
+		} else {
+			for _, prefix := range claudeUpstreamHeaderPrefixes {
+				if strings.HasPrefix(lower, prefix) {
+					matched = true
+					break
+				}
+			}
+		}
+		if !matched {
+			continue
+		}
+		for _, v := range values {
+			out.Add(name, v)
+		}
+	}
+	if len(out) == 0 {
+		out = nil
+	}
+	return out, requestID
+}
+
+// storeClaudeUpstreamHeaders 过滤上游响应头并暂存到 gin.Context，供 relay 层透传写出。
+// 流式与非流式共用。
+func (p *ClaudeProvider) storeClaudeUpstreamHeaders(header http.Header) {
+	if p.Context == nil {
+		return
+	}
+	headers, requestID := filterClaudeUpstreamHeaders(header)
+	if headers != nil {
+		p.Context.Set(config.GinPassThroughHeaders, headers)
+	}
+	if requestID != "" {
+		p.Context.Set(config.GinUpstreamRequestIdKey, requestID)
+	}
 }
 
 func (p *ClaudeProvider) CreateClaudeChat(request *ClaudeRequest) (*ClaudeResponse, *types.OpenAIErrorWithStatusCode) {
@@ -33,8 +128,12 @@ func (p *ClaudeProvider) CreateClaudeChat(request *ClaudeRequest) (*ClaudeRespon
 	defer req.Body.Close()
 
 	claudeResponse := &ClaudeResponse{}
-	// 发送请求
-	_, errWithCode = p.Requester.SendRequest(req, claudeResponse, false)
+	// 指纹保真：用 outputResp=true 让 TeeReader 回填 resp.Body，既能 unmarshal 一份供计费，
+	// 又能拿到上游原始字节。只有在「无模型映射需要改 model」时才真正字节透传，
+	// 否则回退结构体路径由 unifyResponseModel 改写 model（字节透传无法改 model）。
+	// 与 Bedrock 共用 FingerprintPassThroughEnabled 开关；关闭即回退结构体序列化（无额外字节缓存）。
+	passThrough := config.FingerprintPassThroughEnabled && p.Context != nil
+	resp, errWithCode := p.Requester.SendRequest(req, claudeResponse, passThrough)
 	if errWithCode != nil {
 		return nil, errWithCode
 	}
@@ -45,6 +144,20 @@ func (p *ClaudeProvider) CreateClaudeChat(request *ClaudeRequest) (*ClaudeRespon
 	if !isOk {
 		usage.CompletionTokens = ClaudeOutputUsage(claudeResponse)
 		usage.TotalTokens = usage.PromptTokens + usage.CompletionTokens
+	}
+
+	// 上游回显的 model 名 == 用户请求名时字节透传，保留字段顺序 / 未知字段 / model 原名；
+	// 不相等（配了别名映射、需改回请求名）时不暂存字节，交给结构体路径 unifyResponseModel 改写。
+	// 判据是本次响应实际回显的 claudeResponse.Model，而非渠道是否配了映射表。
+	if passThrough && resp != nil {
+		// 透传上游响应头（限流 / 退避等）：无论走字节透传还是结构体改写分支都需要。
+		p.storeClaudeUpstreamHeaders(resp.Header)
+		if !base.HasResponseModelMapping(p.Context, claudeResponse.Model) {
+			if rawBytes, readErr := io.ReadAll(resp.Body); readErr == nil && len(rawBytes) > 0 {
+				p.Context.Set(config.GinRawResponseBodyKey, rawBytes)
+			}
+		}
+		resp.Body.Close()
 	}
 
 	return claudeResponse, nil
@@ -61,12 +174,19 @@ func (p *ClaudeProvider) CreateClaudeChatStream(request *ClaudeRequest) (request
 		Usage:     p.Usage,
 		ModelName: request.Model,
 		Prefix:    `data: {`,
+		Context:   p.Context,
 	}
 
 	// 发送请求
 	resp, errWithCode := p.Requester.SendRequestRaw(req)
 	if errWithCode != nil {
 		return nil, errWithCode
+	}
+
+	// 指纹保真：此刻 resp.Header 已就绪、resp.Body 尚未被消费，先透传上游响应头。
+	// 守卫条件与非流式 CreateClaudeChat 的 passThrough 对齐。
+	if config.FingerprintPassThroughEnabled && p.Context != nil {
+		p.storeClaudeUpstreamHeaders(resp.Header)
 	}
 
 	stream, errWithCode := requester.RequestNoTrimStream(p.Requester, resp, chatHandler.HandlerStream)
@@ -121,6 +241,15 @@ func (h *ClaudeRelayStreamHandler) HandlerStream(rawLine *[]byte, dataChan chan 
 	case "message_start":
 		ClaudeUsageToOpenaiUsage(&claudeResponse.Message.Usage, h.Usage)
 		h.StartUsage = &claudeResponse.Message.Usage
+		// 统一请求响应模型：model 仅出现在 message_start 的 message.model。
+		// 在剥离前缀的纯 JSON 上字节级改写（gjson 读 + sjson 改，仅动 model 一个字段，
+		// 其余字段顺序/内容不变），再把改写后的 JSON 回填到 rawStr，保留其原有的 data: 前缀与尾部。
+		// SkipModelUnify 时跳过（Bedrock 指纹保真：保留 AWS 原始 model 名）。
+		if !h.SkipModelUnify {
+			if patched, changed := base.UnifyModelInJSONBytes(h.Context, noSpaceLine, "message.model"); changed {
+				rawStr = strings.Replace(rawStr, string(noSpaceLine), string(patched), 1)
+			}
+		}
 	case "message_delta":
 		ClaudeUsageMerge(&claudeResponse.Usage, h.StartUsage)
 		ClaudeUsageToOpenaiUsage(&claudeResponse.Usage, h.Usage)

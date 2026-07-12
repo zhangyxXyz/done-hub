@@ -241,6 +241,7 @@
     "cpmDescription": "CPM",
     "ppmDescription": "PPM",
     "last60SecondsStats": "最近60秒统计",
+    "autoRefresh": "自动",
     "timeFilter": {
       "all": "全部",
       "year": "本年",
@@ -608,6 +609,7 @@
     "cachedWriteTokens": "缓存写入Tokens (* {{ ratio }})",
     "cachedWrite1hTokens": "缓存写入Tokens(1h) (* {{ ratio }})",
     "cachedReadTokens": "缓存读取Tokens (* {{ ratio }})",
+    "openaiCacheWriteTokens": "缓存写入Tokens(OpenAI) (* {{ ratio }})",
     "reasoningTokens": "推理Tokens (* {{ ratio }})",
     "inputImageTokens": "输入图像Tokens (* {{ ratio }})",
     "outputImageTokens": "输出图像Tokens (* {{ ratio }})",
@@ -643,6 +645,7 @@
       "outputPrice": "原输出价格",
       "groupRatio": "分组倍率",
       "groupRatioValue": "分组倍率",
+      "longContextRatio": "长上下文倍率",
       "actualPrice": "实际价格",
       "input": "实际输入价格",
       "output": "实际输出价格",
@@ -964,6 +967,7 @@
     "cached_write_tokens": "缓存写入倍率",
     "cached_write_1h_tokens": "缓存写入(1h)倍率",
     "cached_read_tokens": "缓存读取倍率",
+    "openai_cache_write_tokens": "OpenAI缓存写入倍率",
     "reasoning_tokens": "推理倍率",
     "input_text_tokens": "输入文本倍率",
     "output_text_tokens": "输出文本倍率",
@@ -985,6 +989,10 @@
     "priceDetails": "价格明细",
     "priceNote": "不同分组,对应的价格也随之不同,渠道组需要在令牌管理中切换。",
     "otherInfo": "其他信息",
+    "longContext": "长上下文计费",
+    "shortContext": "短上下文",
+    "longContextLabel": "长上下文",
+    "longContextDesc": "输入超过 {{threshold}} tokens 时，整次请求按长上下文价格计费。",
     "totalModels": "共 {{count}} 个模型",
     "noModelsFound": "未找到匹配的模型",
     "noModelsFoundTip": "请尝试调整筛选条件或搜索关键词",
@@ -1111,6 +1119,12 @@
         "unifiedRequestResponseModelTooltip": "当存在模型映射时，响应中的model值为请求的model值，而非实际调用的模型名称",
         "modelNameCaseInsensitive": "模型名称大小写不敏感",
         "modelNameCaseInsensitiveTooltip": "开启后，模型匹配时将忽略大小写，例如 GPT-4、gpt-4、Gpt-4 都会匹配到同一个模型",
+        "subGroups": {
+          "linkAndBilling": "链接与计费",
+          "retry": "重试策略",
+          "upstreamError": "上游错误处理",
+          "displayOptions": "显示与计费选项"
+        },
         "saveButton": "保存通用设置"
       },
       "invoice": {
@@ -1143,7 +1157,9 @@
           "label": "日志清理时间",
           "placeholder": "日志清理时间"
         },
-        "clearLogs": "清理历史日志"
+        "clearLogs": "清理历史日志",
+        "autoDelete": "启用消费日志自动清理",
+        "autoDeleteDays": "自动清理保留天数"
       },
       "monitoringSettings": {
         "title": "监控设置",
@@ -1734,6 +1750,11 @@
     "promptRatio": "提示倍率",
     "completionRatio": "完成倍率",
     "noAvailableRatios": "没有可用的扩展倍率",
+    "longContext": "长上下文分档",
+    "longContextThreshold": "阈值(tokens)",
+    "longContextInputRatio": "输入倍率",
+    "longContextOutputRatio": "输出倍率",
+    "longContextHelp": "输入 token 超过阈值时，整次请求按上述倍率计费；阈值留空或为 0 表示不启用。",
     "delMultipleInfoTip": "确定删除所选的 {{count}} 个价格吗？"
   },
   "redemption_edit": {

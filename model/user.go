@@ -40,14 +40,14 @@ type User struct {
 	InviteCode        string         `json:"invite_code" gorm:"-:all"`                                          // this field is only for registration, don't save it to database!
 	UsedInviteCode    string         `json:"used_invite_code" gorm:"type:varchar(32);index;default:''"`         // the invite code used during registration, for statistics
 	AccessToken       string         `json:"access_token" gorm:"type:char(32);column:access_token;uniqueIndex"` // this token is for system management
-	Quota             int            `json:"quota" gorm:"type:int;default:0"`
-	UsedQuota         int            `json:"used_quota" gorm:"type:int;default:0;column:used_quota"` // used quota
-	RequestCount      int            `json:"request_count" gorm:"type:int;default:0;"`               // request number
+	Quota             int            `json:"quota" gorm:"type:bigint;default:0"`
+	UsedQuota         int            `json:"used_quota" gorm:"type:bigint;default:0;column:used_quota"` // used quota
+	RequestCount      int            `json:"request_count" gorm:"type:int;default:0;"`                  // request number
 	Group             string         `json:"group" gorm:"type:varchar(32);default:'default'"`
 	AffCode           string         `json:"aff_code" gorm:"type:varchar(32);column:aff_code;uniqueIndex"`
 	AffCount          int            `json:"aff_count" gorm:"type:int;default:0;column:aff_count"`
-	AffQuota          int            `json:"aff_quota" gorm:"type:int;default:0;column:aff_quota"`
-	AffHistoryQuota   int            `json:"aff_history_quota" gorm:"type:int;default:0;column:aff_history"`
+	AffQuota          int            `json:"aff_quota" gorm:"type:bigint;default:0;column:aff_quota"`
+	AffHistoryQuota   int            `json:"aff_history_quota" gorm:"type:bigint;default:0;column:aff_history"`
 	InviterId         int            `json:"inviter_id" gorm:"type:int;column:inviter_id;index"`
 	LastLoginTime     int64          `json:"last_login_time" gorm:"bigint;default:0"`
 	LastLoginIp       string         `json:"last_login_ip" gorm:"type:varchar(128);default:''"`
@@ -258,15 +258,18 @@ func UpdateUser(id int, fields map[string]interface{}) error {
 		return err
 	}
 
-	// 如果更新了分组字段，清理缓存
-	if _, hasGroup := fields["group"]; hasGroup {
+	// 如果更新了分组、角色或状态字段，清理鉴权相关缓存
+	_, hasGroup := fields["group"]
+	_, hasRole := fields["role"]
+	_, hasStatus := fields["status"]
+	if hasGroup || hasRole || hasStatus {
 		ClearUserGroupAndTokensCache(id)
 	}
 
 	return nil
 }
 
-// ClearUserGroupAndTokensCache 清理用户分组和所有Token的缓存
+// ClearUserGroupAndTokensCache 清理用户鉴权相关缓存（分组 / 角色状态 / 启用状态 / 所有Token）
 func ClearUserGroupAndTokensCache(userId int) {
 	if !config.RedisEnabled {
 		return
@@ -279,6 +282,24 @@ func ClearUserGroupAndTokensCache(userId int) {
 	}
 	if err := cache.DeleteCache(userGroupKey); err != nil {
 		logger.SysError(fmt.Sprintf("清理用户分组缓存失败 userId=%d: %v", userId, err))
+	}
+
+	// 清理用户角色/状态缓存，保证降级、封禁等变更下一次鉴权即生效
+	userRoleStatusKey := fmt.Sprintf(UserRoleStatusCacheKey, userId)
+	if err := redis.RedisDel(userRoleStatusKey); err != nil {
+		logger.SysError(fmt.Sprintf("清理用户role/status Redis缓存失败 userId=%d: %v", userId, err))
+	}
+	if err := cache.DeleteCache(userRoleStatusKey); err != nil {
+		logger.SysError(fmt.Sprintf("清理用户role/status缓存失败 userId=%d: %v", userId, err))
+	}
+
+	// 清理用户启用状态缓存，保证封禁/删除后 relay(令牌)路径下一次请求即被拦截
+	userEnabledKey := fmt.Sprintf(UserEnabledCacheKey, userId)
+	if err := redis.RedisDel(userEnabledKey); err != nil {
+		logger.SysError(fmt.Sprintf("清理用户enabled Redis缓存失败 userId=%d: %v", userId, err))
+	}
+	if err := cache.DeleteCache(userEnabledKey); err != nil {
+		logger.SysError(fmt.Sprintf("清理用户enabled缓存失败 userId=%d: %v", userId, err))
 	}
 
 	// 获取用户所有Token的Key
@@ -316,7 +337,14 @@ func (user *User) Delete() error {
 	}
 
 	err = DB.Delete(user).Error
-	return err
+	if err != nil {
+		return err
+	}
+
+	// 软删除提交后再清一次缓存：防止并发请求在 Update 清理与 DB.Delete 之间用旧数据回填，
+	// 留下永不过期的脏缓存导致已删除用户仍能通过鉴权。
+	ClearUserGroupAndTokensCache(user.Id)
+	return nil
 }
 
 // ValidateAndFill check password & user status
@@ -520,6 +548,20 @@ func IsAdmin(userId int) bool {
 		return false
 	}
 	return user.Role >= config.RoleAdminUser
+}
+
+// GetUserRoleAndStatus 实时读取用户当前的角色与状态（仅查询 role、status 两列）。
+// 用户不存在（含已删除）时返回 error，供鉴权侧拒绝。
+func GetUserRoleAndStatus(userId int) (role int, status int, err error) {
+	if userId == 0 {
+		return 0, 0, errors.New("id 为空！")
+	}
+	var user User
+	err = DB.Where("id = ?", userId).Select("role", "status").First(&user).Error
+	if err != nil {
+		return 0, 0, err
+	}
+	return user.Role, user.Status, nil
 }
 
 func IsReliable(userId int) bool {
@@ -798,7 +840,7 @@ func ProcessInviterReward(userId int, rechargeQuota int, ip string) error {
 
 	if config.InviterRewardType == "percentage" {
 		// 百分比奖励
-		rewardQuota = int(float64(rechargeQuota) * float64(config.InviterRewardValue) / 100.0)
+		rewardQuota = common.QuotaFromFloat(float64(rechargeQuota) * float64(config.InviterRewardValue) / 100.0)
 		logMessage = fmt.Sprintf("邀请用户充值返利 %s \n\n (充值额度: %s, 返利比例: %d%%)",
 			common.LogQuota(rewardQuota),
 			common.LogQuota(rechargeQuota),

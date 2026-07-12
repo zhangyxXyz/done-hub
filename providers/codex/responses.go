@@ -4,15 +4,19 @@ import (
 	"done-hub/common"
 	"done-hub/common/requester"
 	"done-hub/common/utils"
+	"done-hub/providers/base"
 	"done-hub/types"
 	"encoding/json"
 	"net/http"
 	"strings"
+
+	"github.com/gin-gonic/gin"
 )
 
 // CodexResponsesStreamHandler Codex Responses 流式响应处理器
 type CodexResponsesStreamHandler struct {
 	Usage       *types.Usage
+	Context     *gin.Context
 	eventBuffer strings.Builder
 	eventType   string
 }
@@ -51,7 +55,8 @@ func (p *CodexProvider) CreateResponses(request *types.OpenAIResponsesRequest) (
 
 	// 创建流式处理器
 	handler := &CodexResponsesStreamHandler{
-		Usage: p.Usage,
+		Usage:   p.Usage,
+		Context: p.Context,
 	}
 
 	// 获取流式响应
@@ -65,6 +70,21 @@ func (p *CodexProvider) CreateResponses(request *types.OpenAIResponsesRequest) (
 	if errWithCode != nil {
 		return nil, errWithCode
 	}
+
+	// 与 openai 非流式同款兜底：上游漏返 usage、或有响应内容却把 output_tokens 算成 0（解析异常）时，
+	// 用本地预扣的 PromptTokens + 对响应文本估算 token 补齐，避免计费归零；
+	// output_tokens=0 且无内容的合法空响应不在此列，保留上游真实 usage。
+	if response.Usage == nil || (response.Usage.OutputTokens == 0 && response.GetContent() != "") {
+		response.Usage = &types.ResponsesUsage{
+			InputTokens:  p.Usage.PromptTokens,
+			OutputTokens: 0,
+			TotalTokens:  0,
+		}
+		response.Usage.OutputTokens = common.CountTokenText(response.GetContent(), request.Model)
+		response.Usage.TotalTokens = response.Usage.InputTokens + response.Usage.OutputTokens
+	}
+
+	*p.Usage = *response.Usage.ToOpenAIUsage()
 
 	return response, nil
 }
@@ -96,7 +116,8 @@ func (p *CodexProvider) CreateResponsesStream(request *types.OpenAIResponsesRequ
 
 	// 创建流式处理器
 	handler := &CodexResponsesStreamHandler{
-		Usage: p.Usage,
+		Usage:   p.Usage,
+		Context: p.Context,
 	}
 
 	// 使用 RequestNoTrimStream 保持原始格式（包括 event: 行）
@@ -173,14 +194,10 @@ func (p *CodexProvider) collectResponsesStreamResponse(stream requester.StreamRe
 				}
 			}
 
-			// 提取完整响应（response.completed 事件）
-			if streamResp.Type == "response.completed" && streamResp.Response != nil {
+			// 提取完整响应（终止事件：completed/done/incomplete/failed）
+			if base.IsResponsesTerminalEvent(streamResp.Type) && streamResp.Response != nil {
 				response = streamResp.Response
-				if response.Usage != nil {
-					p.Usage.PromptTokens = response.Usage.InputTokens
-					p.Usage.CompletionTokens = response.Usage.OutputTokens
-					p.Usage.TotalTokens = response.Usage.TotalTokens
-				}
+				base.ExtractResponsesStreamUsage(&streamResp, p.Usage)
 			}
 
 		case err, ok := <-errChan:
@@ -309,17 +326,24 @@ func (h *CodexResponsesStreamHandler) HandlerResponsesStream(rawLine *[]byte, da
 		return
 	}
 
+	// 统一请求响应模型：model 仅出现在 response.created / response.completed 等信封事件的
+	// response.model（文本增量事件不含该字段，helper 自动 no-op）。在剥离前缀的纯 JSON 上
+	// 字节级改写后回填 rawStr，保留 data: 前缀与字段顺序；下游缓冲/直发两个出口都复用。
+	if patched, changed := base.UnifyModelInJSONBytes(h.Context, []byte(dataLine), "response.model"); changed {
+		rawStr = strings.Replace(rawStr, dataLine, string(patched), 1)
+	}
+
 	// 解析 JSON 以提取 usage 信息（但不修改响应）
 	var responsesEvent types.OpenAIResponsesStreamResponses
 	if err := json.Unmarshal([]byte(dataLine), &responsesEvent); err == nil {
-		// 提取 usage 信息
-		if responsesEvent.Type == "response.completed" && responsesEvent.Response != nil {
-			if responsesEvent.Response.Usage != nil {
-				h.Usage.PromptTokens = responsesEvent.Response.Usage.InputTokens
-				h.Usage.CompletionTokens = responsesEvent.Response.Usage.OutputTokens
-				h.Usage.TotalTokens = responsesEvent.Response.Usage.TotalTokens
+		// 累积输出文本：终止事件未带 usage 时，relay 层据此估算 completion，避免计费归零。
+		if responsesEvent.Type == "response.output_text.delta" {
+			if delta, ok := responsesEvent.Delta.(string); ok {
+				h.Usage.TextBuilder.WriteString(delta)
 			}
 		}
+		// 终止事件 usage 提取统一走 base helper（覆盖 completed/done/incomplete/failed）。
+		base.ExtractResponsesStreamUsage(&responsesEvent, h.Usage)
 	}
 
 	// 完全透传：将原始数据添加到缓冲区或直接发送

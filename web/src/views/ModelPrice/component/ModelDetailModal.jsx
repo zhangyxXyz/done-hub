@@ -52,6 +52,10 @@ export default function ModelDetailModal({ open, onClose, model, provider, model
   const outputModalities = modelInfo ? getModalities(modelInfo.output_modalities) : [];
   const tags = modelInfo ? getTags(modelInfo.tags) : [];
 
+  // 长上下文分档：仅 token 计费且配置了阈值时，价格表展示短/长上下文两档对照
+  const longContext = priceData?.price?.long_context;
+  const hasLongContext = priceData?.price?.type === 'tokens' && longContext?.threshold > 0;
+
   return (
     <Dialog
       open={open}
@@ -267,7 +271,8 @@ export default function ModelDetailModal({ open, onClose, model, provider, model
               position: 'relative',
               border: `1px solid ${alpha(theme.palette.primary.main, theme.palette.mode === 'dark' ? 0.2 : 0.18)}`,
               borderRadius: '8px',
-              overflow: 'hidden',
+              overflowX: 'auto',
+              overflowY: 'hidden',
               background:
                 theme.palette.mode === 'dark'
                   ? `linear-gradient(135deg, ${alpha('#10213a', 0.48)} 0%, ${alpha('#071424', 0.54)} 100%)`
@@ -335,10 +340,23 @@ export default function ModelDetailModal({ open, onClose, model, provider, model
           >
             <Table size="small">
               <TableHead>
-                <TableRow>
+                {hasLongContext && (
+                  <TableRow sx={{ backgroundColor: theme.palette.mode === 'dark' ? alpha('#fff', 0.05) : alpha('#000', 0.02) }}>
+                    <TableCell />
+                    <TableCell colSpan={2} align="center" sx={{ fontWeight: 600 }}>
+                      {t('modelpricePage.shortContext')}
+                    </TableCell>
+                    <TableCell colSpan={2} align="center" sx={{ fontWeight: 600 }}>
+                      {t('modelpricePage.longContextLabel')}
+                    </TableCell>
+                  </TableRow>
+                )}
+                <TableRow sx={{ backgroundColor: theme.palette.mode === 'dark' ? alpha('#fff', 0.05) : alpha('#000', 0.02) }}>
                   <TableCell sx={{ fontWeight: 600 }}>{t('modelpricePage.group')}</TableCell>
                   <TableCell sx={{ fontWeight: 600 }}>{t('modelpricePage.input')}</TableCell>
                   <TableCell sx={{ fontWeight: 600 }}>{t('modelpricePage.output')}</TableCell>
+                  {hasLongContext && <TableCell sx={{ fontWeight: 600 }}>{t('modelpricePage.input')}</TableCell>}
+                  {hasLongContext && <TableCell sx={{ fontWeight: 600 }}>{t('modelpricePage.output')}</TableCell>}
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -360,12 +378,32 @@ export default function ModelDetailModal({ open, onClose, model, provider, model
                           {formatPrice(groupPrice.output, groupPrice?.type)}
                         </Label>
                       </TableCell>
+                      {hasLongContext && (
+                        <TableCell>
+                          <Label color="success" variant="outlined">
+                            {formatPrice(groupPrice.input * longContext.input_ratio, groupPrice?.type)}
+                          </Label>
+                        </TableCell>
+                      )}
+                      {hasLongContext && (
+                        <TableCell>
+                          <Label color="warning" variant="outlined">
+                            {formatPrice(groupPrice.output * longContext.output_ratio, groupPrice?.type)}
+                          </Label>
+                        </TableCell>
+                      )}
                     </TableRow>
                   );
                 })}
               </TableBody>
             </Table>
           </TableContainer>
+
+          {hasLongContext && (
+            <Typography variant="caption" color="text.secondary" sx={{ mt: 1.5, display: 'block' }}>
+              {t('modelpricePage.longContextDesc', { threshold: longContext.threshold.toLocaleString() })}
+            </Typography>
+          )}
         </Box>
 
         {/* 其他信息 */}

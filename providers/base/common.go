@@ -4,6 +4,7 @@ import (
 	"context"
 	"done-hub/common"
 	"done-hub/common/config"
+	"done-hub/common/logger"
 	"done-hub/common/requester"
 	"done-hub/common/utils"
 	"done-hub/model"
@@ -299,26 +300,115 @@ func (p *BaseProvider) GetResponseModelName(requestModel string) string {
 	return GetResponseModelNameFromContext(p.Context, requestModel)
 }
 
+// resolveUnifiedModel 返回应当替换成的原始请求模型名。
+// ok=false 表示无需替换（开关关闭 / 无 original_model / 与上游名一致）。
+// 仅在确实发生替换时记录一条日志，并用 context 标志位保证每个请求只记一次
+// （流式场景下替换函数会被每个 chunk 调用）。
+func resolveUnifiedModel(ctx *gin.Context, upstreamModel string) (originalModel string, ok bool) {
+	if ctx == nil || !config.UnifiedRequestResponseModelEnabled {
+		return "", false
+	}
+
+	val, exists := ctx.Get("original_model")
+	if !exists {
+		return "", false
+	}
+	originalModelStr, isStr := val.(string)
+	if !isStr || originalModelStr == "" || originalModelStr == upstreamModel {
+		return "", false
+	}
+
+	if !ctx.GetBool("unified_model_logged") {
+		ctx.Set("unified_model_logged", true)
+		logger.LogInfo(ctx.Request.Context(), fmt.Sprintf(
+			"unified_response_model: 响应模型名由上游的 %s 替换为请求的 %s", upstreamModel, originalModelStr))
+	}
+	return originalModelStr, true
+}
+
+// HasResponseModelMapping 判断本次响应是否需要把上游返回的 upstreamModel 改写成用户请求名。
+//
+// 关键：判据是「上游这次实际回显的 model 名（upstreamModel）是否 != 用户请求名」，
+// 而【不是】「渠道配置里有没有配模型映射表」。含义：
+//   - 上游回显名 == 请求名（Claude 官方常见情形，无别名映射时透传给上游、上游原样回显）
+//     → 返回 false → 改不改结果都一样 → 可安全字节透传保指纹。
+//   - 上游回显名 != 请求名（渠道配了别名映射，或上游本就返回带前后缀的规范名，
+//     如 Bedrock 的 anthropic.claude-xxx-v1:0）→ 返回 true → 必须走结构体路径
+//     由 unifyResponseModel 把 model 改回请求名（字节透传无法改字段）。
+//
+// 注意 Bedrock 渠道不用本函数取舍：它无条件保 AWS 原名（表现成真 AWS），
+// 见 providers/bedrock/relay_claude.go 的无条件字节透传 + SkipModelUnify。
+//
+// 实现依赖有副作用的 resolveUnifiedModel（首次判定为 true 时会输出一条 INFO 日志并置
+// unified_model_logged 标志）。这里是安全的：ok=true 时后段 unifyResponseModel 仍会
+// 走同一路径，靠该标志去重不会二次日志；ok=false 时 resolveUnifiedModel 根本不记日志。
+func HasResponseModelMapping(ctx *gin.Context, upstreamModel string) bool {
+	_, ok := resolveUnifiedModel(ctx, upstreamModel)
+	return ok
+}
+
 // GetResponseModelNameFromContext 从 Context 获取响应模型名称的静态函数
 // 用于流式响应等无法访问 BaseProvider 的场景
 func GetResponseModelNameFromContext(ctx *gin.Context, fallbackModel string) string {
-	if ctx == nil {
-		return fallbackModel
+	if originalModel, ok := resolveUnifiedModel(ctx, fallbackModel); ok {
+		return originalModel
 	}
-
-	// 检查是否启用了统一请求响应模型功能
-	if !config.UnifiedRequestResponseModelEnabled {
-		return fallbackModel
-	}
-
-	// 优先使用存储的原始模型名称
-	if originalModel, exists := ctx.Get("original_model"); exists {
-		if originalModelStr, ok := originalModel.(string); ok && originalModelStr != "" {
-			return originalModelStr
-		}
-	}
-
 	return fallbackModel
+}
+
+// UnifyModelInJSONBytes 在原始 JSON 字节上，仅把 modelPath 指向的字段替换为用户原始请求模型名。
+// 用于 claude/gemini/responses 等原生格式的流式响应：上游 SSE chunk 需尽量字节级透传，
+// 不能反序列化整个对象再 Marshal（会改变字段顺序、丢弃未知字段）。这里用 gjson 读 + sjson 改，
+// 只动 model 一个字段，其余字节（含字段顺序）原样保留。
+// modelPath 为 gjson/sjson 路径，如 claude 流式的 "message.model"、responses 的 "response.model"、
+// gemini 的 "modelVersion"。字段不存在或无需替换时返回原始字节、changed=false。
+func UnifyModelInJSONBytes(ctx *gin.Context, raw []byte, modelPath string) (out []byte, changed bool) {
+	if ctx == nil || !config.UnifiedRequestResponseModelEnabled {
+		return raw, false
+	}
+
+	cur := gjson.GetBytes(raw, modelPath)
+	if !cur.Exists() {
+		return raw, false
+	}
+
+	originalModel, ok := resolveUnifiedModel(ctx, cur.String())
+	if !ok {
+		return raw, false
+	}
+
+	patched, err := sjson.SetBytes(raw, modelPath, originalModel)
+	if err != nil {
+		return raw, false
+	}
+	return patched, true
+}
+
+// IsResponsesTerminalEvent 判断是否为 responses 流的终止事件（携带最终 usage）。
+// 不同上游可能以 response.completed / response.done / response.incomplete / response.failed 任一作为终止帧，
+// openai 与 codex 两条解析链路统一以此为准，避免各自漏认某种类型导致 usage 丢失。
+func IsResponsesTerminalEvent(eventType string) bool {
+	switch eventType {
+	case "response.completed", "response.done", "response.incomplete", "response.failed":
+		return true
+	default:
+		return false
+	}
+}
+
+// ExtractResponsesStreamUsage 从 responses 终止事件的嵌套 response.usage 提取 usage 写入 dst，
+// 返回 true 表示成功提取到上游 usage。仅覆盖 token 数；extra billing（web_search 等）由各 handler 自行补充。
+// 仅在确实拿到 usage 时才覆盖 dst：usage 缺失时返回 false 且不动 dst，保住已累积的 TextBuilder，
+// 让 relay 层基于输出文本的兜底估算仍能生效。
+func ExtractResponsesStreamUsage(event *types.OpenAIResponsesStreamResponses, dst *types.Usage) bool {
+	if event == nil || !IsResponsesTerminalEvent(event.Type) {
+		return false
+	}
+	if event.Response == nil || event.Response.Usage == nil {
+		return false
+	}
+	*dst = *event.Response.Usage.ToOpenAIUsage()
+	return true
 }
 
 func (p *BaseProvider) GetChannel() *model.Channel {

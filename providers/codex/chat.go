@@ -4,6 +4,7 @@ import (
 	"done-hub/common"
 	"done-hub/common/logger"
 	"done-hub/common/requester"
+	"done-hub/providers/base"
 	"done-hub/types"
 	"encoding/json"
 	"net/http"
@@ -124,6 +125,16 @@ func (p *CodexProvider) applyDefaultHeaders(headers map[string]string) {
 		headers["User-Agent"] = p.getCodexCLIUserAgent()
 	}
 
+	// 设置 version（上游据此对新模型做灰度门控，缺失时 gpt-5.6 等可能 404）
+	if _, exists := headers["version"]; !exists {
+		headers["version"] = DefaultCodexVersion
+	}
+
+	// 设置 originator（官方 Codex CLI 标识，缺失时可能被拒或降级）
+	if _, exists := headers["originator"]; !exists {
+		headers["originator"] = DefaultCodexOriginator
+	}
+
 	// 设置 Accept（如果没有设置）
 	if _, exists := headers["Accept"]; !exists {
 		headers["Accept"] = "application/json"
@@ -168,14 +179,10 @@ func (h *CodexStreamHandler) HandlerStream(rawLine *[]byte, dataChan chan string
 		return
 	}
 
-	// 处理 response.completed 事件（包含 usage 信息）
-	if responsesStream.Type == "response.completed" && responsesStream.Response != nil {
-		if responsesStream.Response.Usage != nil {
-			h.Usage.PromptTokens = responsesStream.Response.Usage.InputTokens
-			h.Usage.CompletionTokens = responsesStream.Response.Usage.OutputTokens
-			h.Usage.TotalTokens = responsesStream.Response.Usage.TotalTokens
-		}
-		if !h.textDelta {
+	// 处理终止事件（completed/done/incomplete/failed，包含 usage 信息）
+	if base.IsResponsesTerminalEvent(responsesStream.Type) {
+		base.ExtractResponsesStreamUsage(&responsesStream, h.Usage)
+		if responsesStream.Response != nil && !h.textDelta {
 			content := responsesStream.Response.GetContent()
 			if content != "" {
 				chatResponse := h.convertResponsesStreamToChatStream(&responsesStream, content)
@@ -201,6 +208,9 @@ func (h *CodexStreamHandler) HandlerStream(rawLine *[]byte, dataChan chan string
 		if delta != "" {
 			h.textDelta = true
 		}
+
+		// 累积输出文本：终止事件未带 usage 时，relay 层据此估算 completion，避免计费归零。
+		h.Usage.TextBuilder.WriteString(delta)
 		// 转换为 Chat 格式的流式响应
 		chatResponse := h.convertResponsesStreamToChatStream(&responsesStream, delta)
 		if chatResponse != nil {

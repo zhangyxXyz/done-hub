@@ -83,6 +83,56 @@ func changeTokenKeyColumnType() *gormigrate.Migration {
 	}
 }
 
+// changeQuotaColumnsToBigint 将历史上为 int32 的额度列加宽为 bigint,
+// 防止大额计费溢出回绕成负数。仅 MySQL/PostgreSQL 需要;SQLite 的 INTEGER
+// 本就是动态最长 8 字节,无需处理。
+func changeQuotaColumnsToBigint() *gormigrate.Migration {
+	return &gormigrate.Migration{
+		ID: "202607070001",
+		Migrate: func(tx *gorm.DB) error {
+			dialect := tx.Dialector.Name()
+			if dialect == "sqlite" {
+				return nil
+			}
+
+			// 表名 -> 需要加宽的列
+			targets := map[string][]string{
+				"users":  {"quota", "used_quota", "aff_quota", "aff_history"},
+				"orders": {"quota"},
+			}
+
+			for table, cols := range targets {
+				if !tx.Migrator().HasTable(table) {
+					continue
+				}
+				for _, col := range cols {
+					if !tx.Migrator().HasColumn(table, col) {
+						continue
+					}
+					var stmt string
+					switch dialect {
+					case "mysql":
+						stmt = "ALTER TABLE `" + table + "` MODIFY COLUMN `" + col + "` bigint NOT NULL DEFAULT 0"
+					case "postgres":
+						stmt = "ALTER TABLE " + table + " ALTER COLUMN " + col + " TYPE bigint"
+					default:
+						continue
+					}
+					if err := tx.Exec(stmt).Error; err != nil {
+						logger.SysLog("加宽 " + table + "." + col + " 为 bigint 失败: " + err.Error())
+						return err
+					}
+				}
+			}
+			return nil
+		},
+		// 不做缩窄回滚:bigint -> int 可能丢数据,故留空。
+		Rollback: func(tx *gorm.DB) error {
+			return nil
+		},
+	}
+}
+
 func migrationBefore(db *gorm.DB) error {
 	// 从库不执行
 	if !config.IsMasterNode {
@@ -98,6 +148,7 @@ func migrationBefore(db *gorm.DB) error {
 	m := gormigrate.New(db, gormigrate.DefaultOptions, []*gormigrate.Migration{
 		removeKeyIndexMigration(),
 		changeTokenKeyColumnType(),
+		changeQuotaColumnsToBigint(),
 	})
 	return m.Migrate()
 }
@@ -311,50 +362,6 @@ func addExtraRatios() *gormigrate.Migration {
 	}
 }
 
-// addCachedWrite1hRatio 为已存在 ExtraRatios 的模型补全 1h 缓存写入倍率。
-// 仅作 UI 显示对齐：计费侧 defaultExtraPrice[cached_write_1h_tokens]=2.0 已能兜底，
-// 此处把数字落到 ExtraRatios 里是为了让前端表格显示明确数字而不是空白/默认。
-// 按 key 触发而非 channel_type，确保 Bedrock / Vertex 上跑的 Claude 渠道也覆盖到；
-// 仅在已配置 cached_write_tokens 且未配置 cached_write_1h_tokens 时按官方倍率 2.0 写入，
-// 不覆盖用户自定义值。
-// 副作用：非 Claude 模型若手配 cached_write_tokens 也会被塞入 1h，但其请求路径不上报
-// cached_write_1h_tokens，不会被计费，无害。
-func addCachedWrite1hRatio() *gormigrate.Migration {
-	return &gormigrate.Migration{
-		ID: "202606100001",
-		Migrate: func(tx *gorm.DB) error {
-			var prices []*Price
-			if err := tx.Find(&prices).Error; err != nil {
-				return err
-			}
-
-			for _, price := range prices {
-				if price.ExtraRatios == nil {
-					continue
-				}
-				ratios := price.ExtraRatios.Data()
-				if _, ok := ratios[config.UsageExtraCachedWrite]; !ok {
-					continue
-				}
-				if _, ok := ratios[config.UsageExtraCachedWrite1h]; ok {
-					continue
-				}
-				ratios[config.UsageExtraCachedWrite1h] = 2
-				jsonData := datatypes.NewJSONType(ratios)
-				if err := tx.Model(&Price{}).Where("model = ?", price.Model).Updates(map[string]interface{}{
-					"extra_ratios": jsonData,
-				}).Error; err != nil {
-					return err
-				}
-			}
-			return nil
-		},
-		Rollback: func(tx *gorm.DB) error {
-			return tx.Rollback().Error
-		},
-	}
-}
-
 func migrateTokenLimitsStructure() *gormigrate.Migration {
 	return &gormigrate.Migration{
 		ID: "202510160002",
@@ -500,7 +507,6 @@ func migrationAfter(db *gorm.DB) error {
 		addOldTokenMaxId(),
 		addExtraRatios(),
 		migrateTokenLimitsStructure(),
-		addCachedWrite1hRatio(),
 	})
 	return m.Migrate()
 }
