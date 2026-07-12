@@ -34,7 +34,7 @@ type Provider struct{ base.BaseProvider }
 func New(channel *model.Channel) *Provider {
 	return &Provider{BaseProvider: base.BaseProvider{
 		Config:  base.ProviderConfig{BaseURL: "https://api.githubcopilot.com", ChatCompletions: "/chat/completions", ModelList: "/models"},
-		Channel: channel, Requester: requester.NewHTTPRequester(channel.GetProxy(), openai.RequestErrorHandle), SupportResponse: false,
+		Channel: channel, Requester: requester.NewHTTPRequester(channel.GetProxy(), openai.RequestErrorHandle), SupportResponse: true,
 	}}
 }
 

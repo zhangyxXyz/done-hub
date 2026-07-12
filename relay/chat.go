@@ -110,12 +110,16 @@ func matchModelPattern(modelName string, patterns []string) bool {
 	return false
 }
 
-func shouldUseResponses(modelName string, channelResponsesModels []string) bool {
+func shouldUseResponses(modelName, originalModelName string, chatToResponses bool, channelResponsesModels []string) bool {
+	if chatToResponses {
+		return true
+	}
+
 	if need2Response[modelName] {
 		return true
 	}
 
-	if matchModelPattern(modelName, channelResponsesModels) {
+	if matchModelPattern(modelName, channelResponsesModels) || matchModelPattern(originalModelName, channelResponsesModels) {
 		return true
 	}
 
@@ -142,7 +146,18 @@ func (r *relayChat) send() (err *types.OpenAIErrorWithStatusCode, done bool) {
 		channelResponsesModels = *channel.ResponsesModels
 	}
 
-	if shouldUseResponses(r.modelName, channelResponsesModels) {
+	chatToResponses := channel != nil && channel.ChatToResponses
+	supportsResponses := r.provider.GetSupportedResponse()
+	supportsChat := true
+	if resolver, ok := r.provider.(providersBase.ModelEndpointCapabilityResolver); ok {
+		capabilities := resolver.ResolveModelEndpointCapabilities(r.modelName)
+		if capabilities.Known {
+			supportsResponses = capabilities.Responses
+			supportsChat = capabilities.ChatCompletions
+		}
+	}
+	useResponses := shouldUseResponses(r.modelName, r.getOriginalModel(), chatToResponses, channelResponsesModels) || (supportsResponses && !supportsChat)
+	if useResponses && supportsResponses {
 
 		resProvider, ok := r.provider.(providersBase.ResponsesInterface)
 		if ok {

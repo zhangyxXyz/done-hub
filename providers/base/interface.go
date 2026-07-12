@@ -145,6 +145,25 @@ type ResponsesInterface interface {
 	CreateResponsesStream(request *types.OpenAIResponsesRequest) (requester.StreamReaderInterface[string], *types.OpenAIErrorWithStatusCode)
 }
 
+// ModelEndpointCapabilities 描述某个 Provider 中单个模型原生支持的上游协议。
+// Known=false 表示 Provider 无法可靠判断，relay 必须回退到 Provider 的静态能力和渠道配置，
+// 不能把探测失败误判为模型不支持任何协议。
+type ModelEndpointCapabilities struct {
+	ChatCompletions bool
+	Responses       bool
+	Messages        bool
+	GenerateContent bool
+	Known           bool
+	Source          string
+}
+
+// ModelEndpointCapabilityResolver 由具体 Provider 解析模型协议能力。
+// 能力可以来自上游模型元数据、Provider 静态声明或其它渠道特有来源；
+// relay 只消费解析结果，不感知渠道类型和能力来源。
+type ModelEndpointCapabilityResolver interface {
+	ResolveModelEndpointCapabilities(model string) ModelEndpointCapabilities
+}
+
 // ResponsesCompactInterface /v1/responses/compact 端点的能力。
 // compact 永远是非流式响应，因此不需要 stream 版本。
 type ResponsesCompactInterface interface {

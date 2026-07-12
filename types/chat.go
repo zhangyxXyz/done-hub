@@ -650,8 +650,20 @@ func (c *ChatCompletionRequest) ToResponsesRequest() *OpenAIResponsesRequest {
 			continue
 		}
 
-		// 处理ToolCalls
+		// Preserve assistant text/reasoning even when the same message also carries
+		// tool calls. Responses represents them as separate output items.
 		if len(msg.ToolCalls) > 0 {
+			if content := msg.ParseContent(); len(content) > 0 {
+				inputContent := make([]ContentResponses, 0, len(content))
+				for _, part := range content {
+					if part.Type == ContentTypeText && part.Text != "" {
+						inputContent = append(inputContent, ContentResponses{Type: ContentTypeOutputText, Text: part.Text})
+					}
+				}
+				if len(inputContent) > 0 {
+					inputs = append(inputs, InputResponses{Type: InputTypeMessage, Role: msg.Role, Content: inputContent})
+				}
+			}
 			for _, tool := range msg.ToolCalls {
 				if tool == nil || tool.Function == nil {
 					continue
@@ -694,6 +706,7 @@ func (c *ChatCompletionRequest) ToResponsesRequest() *OpenAIResponsesRequest {
 				inputContent = append(inputContent, ContentResponses{
 					Type:     ContentTypeInputImage,
 					ImageUrl: part.ImageURL.URL,
+					Detail:   part.ImageURL.Detail,
 				})
 			case ContentTypeText:
 				roleType := ContentTypeInputText

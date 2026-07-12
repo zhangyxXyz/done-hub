@@ -22,6 +22,7 @@ type OpenAIProviderFactory struct{}
 type UsageHandler func(usage *types.Usage) (ForcedFormatting bool)
 type RequestHandleBefore func(request *types.ChatCompletionRequest) (errWithCode *types.OpenAIErrorWithStatusCode)
 type ResponsesBodyPatch func(model string, body []byte) []byte
+type ResponsesStreamEventPatch func(body []byte) []byte
 
 type OpenAIProvider struct {
 	base.BaseProvider
@@ -31,9 +32,11 @@ type OpenAIProvider struct {
 	StreamEscapeJSON     bool
 	ReasoningHandler     bool
 
-	UsageHandler        UsageHandler
-	RequestHandleBefore RequestHandleBefore
-	ResponsesBodyPatch  ResponsesBodyPatch
+	UsageHandler              UsageHandler
+	RequestHandleBefore       RequestHandleBefore
+	ResponsesBodyPatch        ResponsesBodyPatch
+	ResponsesStreamEventPatch ResponsesStreamEventPatch
+	RequestHeaders            func() map[string]string
 }
 
 // 创建 OpenAIProvider
@@ -191,6 +194,9 @@ func (p *OpenAIProvider) GetFullRequestURL(requestURL string, modelName string) 
 
 // 获取请求头
 func (p *OpenAIProvider) GetRequestHeaders() (headers map[string]string) {
+	if p.RequestHeaders != nil {
+		return p.RequestHeaders()
+	}
 	headers = make(map[string]string)
 	p.CommonRequestHeaders(headers)
 	if p.IsAzure {

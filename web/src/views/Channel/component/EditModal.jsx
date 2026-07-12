@@ -61,6 +61,9 @@ const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const filter = createFilterOptions();
+const supportsNativeResponses = (channelType) =>
+  typeConfig[Number(channelType)]?.supportsNativeResponses ?? defaultConfig.supportsNativeResponses;
+const usesAutomaticResponsesRouting = (channelType) => typeConfig[Number(channelType)]?.responsesRouting === 'automatic';
 const getValidationSchema = (t) =>
   Yup.object().shape({
     is_edit: Yup.boolean(),
@@ -2207,21 +2210,107 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, groupMap, is
                       <FormHelperText id="helper-tex-only_chat_model-label"> {customizeT(inputPrompt.only_chat)} </FormHelperText>
                     </FormControl>
                   )}
+                  {inputPrompt.chat_to_responses && (
+                    <FormControl fullWidth sx={{ ...theme.typography.otherInput }}>
+                      <FormControlLabel
+                        control={
+                          <Switch
+                            checked={Boolean(values.chat_to_responses)}
+                            disabled={!supportsNativeResponses(values.type) || usesAutomaticResponsesRouting(values.type)}
+                            onChange={(event) => {
+                              setFieldValue('chat_to_responses', event.target.checked);
+                            }}
+                          />
+                        }
+                        label={t('channel_edit.chatToResponsesLabel')}
+                      />
+                      <FormHelperText id="helper-text-chat-to-responses">
+                        {usesAutomaticResponsesRouting(values.type)
+                          ? t('channel_edit.responsesEndpointAutoRouting')
+                          : !supportsNativeResponses(values.type)
+                          ? t('channel_edit.nativeResponsesUnsupported')
+                          : t('channel_edit.chatToResponsesHelp')}
+                      </FormHelperText>
+                    </FormControl>
+                  )}
+                  {inputPrompt.responses_models && (
+                    <FormControl fullWidth sx={{ ...theme.typography.otherInput }}>
+                      <ListInput
+                        listValue={values.responses_models}
+                        onChange={(newValue) => {
+                          setFieldValue('responses_models', newValue);
+                        }}
+                        disabled={
+                          !supportsNativeResponses(values.type) ||
+                          usesAutomaticResponsesRouting(values.type) ||
+                          Boolean(values.chat_to_responses)
+                        }
+                        error={Boolean(touched.responses_models && errors.responses_models)}
+                        label={{
+                          name: t('channel_edit.chatToResponsesModelsLabel'),
+                          itemName: t('channel_edit.chatToResponsesModelsLabel')
+                        }}
+                      />
+                      <FormHelperText id="helper-text-responses-models">
+                        {usesAutomaticResponsesRouting(values.type)
+                          ? t('channel_edit.responsesEndpointAutoRouting')
+                          : !supportsNativeResponses(values.type)
+                          ? t('channel_edit.nativeResponsesUnsupported')
+                          : values.chat_to_responses
+                            ? t('channel_edit.chatToResponsesAllEnabled')
+                            : t('channel_edit.chatToResponsesModelsHelp')}
+                      </FormHelperText>
+                    </FormControl>
+                  )}
                   {inputPrompt.compatible_response && (
                     <FormControl fullWidth sx={{ ...theme.typography.otherInput }}>
                       <FormControlLabel
                         control={
                           <Switch
                             checked={Boolean(values.compatible_response)}
+                            disabled={!supportsNativeResponses(values.type)}
                             onChange={(event) => {
                               setFieldValue('compatible_response', event.target.checked);
                             }}
                           />
                         }
-                        label={customizeT(inputLabel.compatible_response)}
+                        label={t('channel_edit.responsesToChatLabel')}
                       />
                       <FormHelperText id="helper-tex-compatible_response-label">
-                        {customizeT(inputPrompt.compatible_response)}
+                        {usesAutomaticResponsesRouting(values.type)
+                          ? t('channel_edit.responsesEndpointAutoRoutingOverride')
+                          : !supportsNativeResponses(values.type)
+                          ? t('channel_edit.responsesAutoToChat')
+                          : t('channel_edit.responsesToChatHelp')}
+                      </FormHelperText>
+                    </FormControl>
+                  )}
+                  {inputPrompt.compatible_response_models && (
+                    <FormControl fullWidth sx={{ ...theme.typography.otherInput }}>
+                      <ListInput
+                        listValue={values.compatible_response_models}
+                        onChange={(newValue) => {
+                          setFieldValue('compatible_response_models', newValue);
+                        }}
+                        disabled={
+                          !supportsNativeResponses(values.type) || Boolean(values.compatible_response)
+                        }
+                        error={Boolean(touched.compatible_response_models && errors.compatible_response_models)}
+                        label={{
+                          name: t('channel_edit.responsesToChatModelsLabel'),
+                          itemName: t('channel_edit.responsesToChatModelsLabel')
+                        }}
+                      />
+                      <FormHelperText id="helper-text-compatible-response-models">
+                        {usesAutomaticResponsesRouting(values.type)
+                          ? values.compatible_response
+                            ? t('channel_edit.responsesToChatAllEnabled')
+                            : t('channel_edit.responsesEndpointAutoRoutingOverride')
+                          : !supportsNativeResponses(values.type)
+                          ? t('channel_edit.responsesModelsAutoToChat')
+                          : values.compatible_response
+                            ? t('channel_edit.responsesToChatAllEnabled')
+                            : t('channel_edit.responsesToChatModelsHelp')}
                       </FormHelperText>
                     </FormControl>
                   )}

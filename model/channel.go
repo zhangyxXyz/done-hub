@@ -42,6 +42,7 @@ type Channel struct {
 	TestModel          string   `json:"test_model" form:"test_model" gorm:"type:varchar(50);default:''"`
 	OnlyChat           bool     `json:"only_chat" form:"only_chat" gorm:"default:false"`
 	PreCost            int      `json:"pre_cost" form:"pre_cost" gorm:"default:1"`
+	ChatToResponses    bool     `json:"chat_to_responses" gorm:"default:false"`
 	CompatibleResponse bool     `json:"compatible_response" gorm:"default:false"`
 	AllowExtraBody     bool     `json:"allow_extra_body" form:"allow_extra_body" gorm:"default:false"`
 	PassThroughBody    bool     `json:"pass_through_body" form:"pass_through_body" gorm:"default:false"`

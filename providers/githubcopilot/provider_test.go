@@ -49,7 +49,11 @@ func TestModelListUsesExchangeCacheAndPickerFilter(t *testing.T) {
 		if r.Header.Get("Authorization") != "Bearer copilot-token" {
 			t.Errorf("unexpected authorization: %s", r.Header.Get("Authorization"))
 		}
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": []map[string]any{{"id": "enabled", "model_picker_enabled": true}, {"id": "disabled", "model_picker_enabled": false}, {"id": "legacy"}}})
+		_ = json.NewEncoder(w).Encode(map[string]any{"data": []map[string]any{
+			{"id": "enabled", "model_picker_enabled": true, "supported_endpoints": []string{"/responses"}},
+			{"id": "disabled", "model_picker_enabled": false},
+			{"id": "legacy", "supported_endpoints": []string{"/chat/completions"}},
+		}})
 	}))
 	defer inference.Close()
 	github := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -79,6 +83,18 @@ func TestModelListUsesExchangeCacheAndPickerFilter(t *testing.T) {
 	}
 	if exchanges.Load() != 1 {
 		t.Fatalf("expected one cached exchange, got %d", exchanges.Load())
+	}
+	enabledCapabilities := p.ResolveModelEndpointCapabilities("enabled")
+	if !enabledCapabilities.Known || !enabledCapabilities.Responses || enabledCapabilities.ChatCompletions {
+		t.Fatal("responses-only model capabilities were not cached")
+	}
+	legacyCapabilities := p.ResolveModelEndpointCapabilities("legacy")
+	if !legacyCapabilities.Known || !legacyCapabilities.ChatCompletions || legacyCapabilities.Responses {
+		t.Fatal("chat-only model capabilities were not cached")
+	}
+	unknownCapabilities := p.ResolveModelEndpointCapabilities("missing")
+	if unknownCapabilities.Known {
+		t.Fatal("missing model capability must remain unknown")
 	}
 }
 
@@ -135,4 +151,7 @@ func resetTokenStore() {
 	tokenStore.flights = map[string]*inflight{}
 	tokenStore.failures = map[string]tokenFailure{}
 	tokenStore.Unlock()
+	modelCapabilitiesStore.Lock()
+	modelCapabilitiesStore.entries = map[string]modelCapabilitiesEntry{}
+	modelCapabilitiesStore.Unlock()
 }

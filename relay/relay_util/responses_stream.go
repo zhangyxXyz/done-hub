@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -30,7 +31,14 @@ type OpenAIResponsesStreamConverter struct {
 	nowStatus         string
 	lastToolCallIndex int
 	usage             *types.Usage
-	functionArgsBuf   strings.Builder
+	toolCalls         map[int]*responsesToolCallState
+	toolCallOrder     []int
+}
+
+type responsesToolCallState struct {
+	outputIndex int
+	item        *types.ResponsesOutput
+	arguments   strings.Builder
 }
 
 func NewOpenAIResponsesStreamConverter(c *gin.Context, request *types.OpenAIResponsesRequest, usage *types.Usage) *OpenAIResponsesStreamConverter {
@@ -44,6 +52,7 @@ func NewOpenAIResponsesStreamConverter(c *gin.Context, request *types.OpenAIResp
 		c:                 c,
 		lastToolCallIndex: 0,
 		usage:             usage,
+		toolCalls:         make(map[int]*responsesToolCallState),
 	}
 
 	converter.initializeResponse(request)
@@ -53,7 +62,9 @@ func NewOpenAIResponsesStreamConverter(c *gin.Context, request *types.OpenAIResp
 
 func (converter *OpenAIResponsesStreamConverter) initializeResponse(request *types.OpenAIResponsesRequest) {
 	converter.responses = &types.OpenAIResponsesResponses{
-		Object: "response",
+		ID:        fmt.Sprintf("resp_%s", utils.GetRandomString(48)),
+		Object:    "response",
+		CreatedAt: time.Now().Unix(),
 		Text: types.TextResponses{
 			Format: struct {
 				Type string `json:"type"`
@@ -87,8 +98,12 @@ func (converter *OpenAIResponsesStreamConverter) ProcessStreamData(jsonStr strin
 
 	// 第一次响应创建response.created
 	if converter.isFirstResponse {
-		converter.responses.ID = response.ID
-		converter.responses.CreatedAt = response.Created
+		if response.ID != "" {
+			converter.responses.ID = response.ID
+		}
+		if createdAt, ok := positiveCreatedAt(response.Created); ok {
+			converter.responses.CreatedAt = createdAt
+		}
 		converter.responses.Model = response.Model
 		converter.sendStreamResponse("response.created", converter.populateResponseData)
 		converter.sendStreamResponse("response.in_progress", converter.populateResponseData)
@@ -97,6 +112,24 @@ func (converter *OpenAIResponsesStreamConverter) ProcessStreamData(jsonStr strin
 
 	converter.processChoices(response.Choices)
 
+}
+
+func positiveCreatedAt(value any) (any, bool) {
+	switch createdAt := value.(type) {
+	case float64:
+		return createdAt, createdAt > 0
+	case float32:
+		return createdAt, createdAt > 0
+	case int:
+		return createdAt, createdAt > 0
+	case int64:
+		return createdAt, createdAt > 0
+	case json.Number:
+		parsed, err := createdAt.Int64()
+		return createdAt, err == nil && parsed > 0
+	default:
+		return nil, false
+	}
 }
 
 func (converter *OpenAIResponsesStreamConverter) ProcessError(jsonStr string) {
@@ -111,19 +144,38 @@ func (converter *OpenAIResponsesStreamConverter) processChoices(choices []types.
 			converter.nowStatus = types.ConvertChatStatusToResponses(nowStatus)
 		}
 
+		if nowStatus == types.FinishReasonToolCalls && len(choice.Delta.ToolCalls) == 0 && len(converter.toolCalls) > 0 {
+			converter.finalizeToolCalls()
+			converter.lastChoiceIndex = choice.Index
+			converter.lastResponseType = types.InputTypeFunctionCall
+			continue
+		}
+
+		if len(choice.Delta.ToolCalls) > 0 {
+			if choice.Delta.ReasoningContent != "" {
+				converter.createNewItem(choice, types.InputTypeReasoning)
+				converter.processReasoning(choice)
+				converter.done()
+			}
+			if choice.Delta.Content != "" {
+				converter.createNewItem(choice, types.InputTypeMessage)
+				converter.processMessage(choice)
+				converter.done()
+			}
+			if converter.item != nil {
+				converter.done()
+			}
+			converter.processFunctionCalls(choice)
+			converter.lastChoiceIndex = choice.Index
+			converter.lastResponseType = types.InputTypeFunctionCall
+			continue
+		}
+
 		currentType := converter.GetResponseType(&choice)
 		// 检查是否需要创建新的output_item
 		needNewOutputItem := false
 		if converter.lastResponseType != currentType {
 			needNewOutputItem = true
-		}
-
-		if currentType == types.InputTypeFunctionCall {
-
-			if len(choice.Delta.ToolCalls) > 0 && converter.lastToolCallIndex != choice.Delta.ToolCalls[0].Index {
-				needNewOutputItem = true
-				converter.lastToolCallIndex = choice.Delta.ToolCalls[0].Index
-			}
 		}
 
 		if needNewOutputItem {
@@ -134,8 +186,6 @@ func (converter *OpenAIResponsesStreamConverter) processChoices(choices []types.
 		switch currentType {
 		case types.InputTypeReasoning:
 			converter.processReasoning(choice)
-		case types.InputTypeFunctionCall:
-			converter.processFunctionCall(choice)
 		default:
 			converter.processMessage(choice)
 		}
@@ -154,8 +204,11 @@ func (converter *OpenAIResponsesStreamConverter) createNewItem(choice types.Chat
 
 	// 生成新的itemID
 	converter.generateResponseItemID(currentType)
+	converter.contentIndex = 0
+	converter.summaryIndex = 0
 
 	response := converter.buildStreamResponse("response.output_item.added")
+	response.OutputIndex = &converter.outputIndex
 
 	converter.item = &types.ResponsesOutput{
 		ID:     converter.itemID,
@@ -164,13 +217,6 @@ func (converter *OpenAIResponsesStreamConverter) createNewItem(choice types.Chat
 	}
 
 	switch currentType {
-	case types.InputTypeFunctionCall:
-		converter.functionArgsBuf.Reset()
-		if len(choice.Delta.ToolCalls) > 0 && choice.Delta.ToolCalls[0].Function != nil {
-			converter.item.Arguments = types.ArgumentsFromString(choice.Delta.ToolCalls[0].Function.Arguments)
-			converter.item.CallID = choice.Delta.ToolCalls[0].Id
-			converter.item.Name = choice.Delta.ToolCalls[0].Function.Name
-		}
 	case types.InputTypeReasoning:
 		converter.item.Role = choice.Delta.Role
 		converter.item.Summary = []types.SummaryResponses{}
@@ -196,8 +242,6 @@ func (converter *OpenAIResponsesStreamConverter) done() {
 		if converter.part != nil {
 			converter.doneReasoningPart()
 		}
-	case types.InputTypeFunctionCall:
-		converter.doneFunctionCall()
 	}
 
 	response := converter.buildStreamResponse("response.output_item.done")
@@ -247,10 +291,12 @@ func (converter *OpenAIResponsesStreamConverter) processMessage(choice types.Cha
 	}
 
 	// 处理文本内容
-	response := converter.buildStreamResponseWithItemID("response.output_text.delta")
-	response.ContentIndex = &converter.contentIndex
-	response.Delta = choice.Delta.Content
-	converter.sendStreamEvent(response, "response.output_text.delta")
+	if choice.Delta.Content != "" {
+		response := converter.buildStreamResponseWithItemID("response.output_text.delta")
+		response.ContentIndex = &converter.contentIndex
+		response.Delta = choice.Delta.Content
+		converter.sendStreamEvent(response, "response.output_text.delta")
+	}
 
 	// 处理文本增量
 	converter.part.Text += choice.Delta.Content
@@ -339,28 +385,80 @@ func (converter *OpenAIResponsesStreamConverter) doneReasoningPart() {
 	converter.part = nil
 }
 
-// 处理function call类型的内容
-func (converter *OpenAIResponsesStreamConverter) processFunctionCall(choice types.ChatCompletionStreamChoice) {
-	response := converter.buildStreamResponseWithItemID("response.function_call_arguments.delta")
-
-	if len(choice.Delta.ToolCalls) > 0 && choice.Delta.ToolCalls[0].Function != nil {
-		tool := choice.Delta.ToolCalls[0]
-		response.Delta = tool.Function.Arguments
-
-		converter.functionArgsBuf.WriteString(tool.Function.Arguments)
+func (converter *OpenAIResponsesStreamConverter) processFunctionCalls(choice types.ChatCompletionStreamChoice) {
+	for _, tool := range choice.Delta.ToolCalls {
+		if tool == nil {
+			continue
+		}
+		state := converter.toolCalls[tool.Index]
+		if state == nil {
+			itemID := fmt.Sprintf("fc_%s", utils.GetRandomString(48))
+			callID := tool.Id
+			name := ""
+			if tool.Function != nil {
+				name = tool.Function.Name
+			}
+			state = &responsesToolCallState{
+				outputIndex: converter.outputIndex,
+				item: &types.ResponsesOutput{
+					ID:        itemID,
+					Type:      types.InputTypeFunctionCall,
+					Status:    "in_progress",
+					CallID:    callID,
+					Name:      name,
+					Arguments: types.ArgumentsFromString(""),
+				},
+			}
+			converter.outputIndex++
+			converter.toolCalls[tool.Index] = state
+			converter.toolCallOrder = append(converter.toolCallOrder, tool.Index)
+			added := converter.buildStreamResponse("response.output_item.added")
+			added.OutputIndex = &state.outputIndex
+			added.Item = state.item
+			converter.sendStreamEvent(added, "response.output_item.added")
+		}
+		if tool.Id != "" {
+			state.item.CallID = tool.Id
+		}
+		if tool.Function != nil {
+			if tool.Function.Name != "" {
+				state.item.Name = tool.Function.Name
+			}
+			if tool.Function.Arguments != "" {
+				state.arguments.WriteString(tool.Function.Arguments)
+				delta := converter.buildStreamResponse("response.function_call_arguments.delta")
+				delta.OutputIndex = &state.outputIndex
+				delta.ItemID = state.item.ID
+				delta.Delta = tool.Function.Arguments
+				converter.sendStreamEvent(delta, "response.function_call_arguments.delta")
+			}
+		}
 	}
-
-	converter.sendStreamEvent(response, "response.function_call_arguments.delta")
 }
 
-// 结束function call
-func (converter *OpenAIResponsesStreamConverter) doneFunctionCall() {
-	converter.item.Arguments = types.ArgumentsFromString(converter.functionArgsBuf.String())
+func (converter *OpenAIResponsesStreamConverter) finalizeToolCalls() {
+	for _, toolIndex := range converter.toolCallOrder {
+		state := converter.toolCalls[toolIndex]
+		if state == nil {
+			continue
+		}
+		state.item.Arguments = types.ArgumentsFromString(state.arguments.String())
+		state.item.Status = types.ResponseStatusCompleted
+		doneArgs := converter.buildStreamResponse("response.function_call_arguments.done")
+		doneArgs.OutputIndex = &state.outputIndex
+		doneArgs.ItemID = state.item.ID
+		doneArgs.Name = state.item.Name
+		doneArgs.Arguments = state.item.Arguments
+		converter.sendStreamEvent(doneArgs, "response.function_call_arguments.done")
 
-	response := converter.buildStreamResponseWithItemID("response.function_call_arguments.done")
-	response.Arguments = converter.item.Arguments
-
-	converter.sendStreamEvent(response, "response.function_call_arguments.done")
+		doneItem := converter.buildStreamResponse("response.output_item.done")
+		doneItem.OutputIndex = &state.outputIndex
+		doneItem.Item = state.item
+		converter.responses.Output = append(converter.responses.Output, *state.item)
+		converter.sendStreamEvent(doneItem, "response.output_item.done")
+	}
+	converter.toolCalls = make(map[int]*responsesToolCallState)
+	converter.toolCallOrder = nil
 }
 
 func (converter *OpenAIResponsesStreamConverter) addContent() {
@@ -379,6 +477,12 @@ func (converter *OpenAIResponsesStreamConverter) addContent() {
 func (converter *OpenAIResponsesStreamConverter) finalizeStream() {
 	if converter.item != nil {
 		converter.done()
+	}
+	if len(converter.toolCalls) > 0 {
+		converter.finalizeToolCalls()
+	}
+	if converter.nowStatus == "" {
+		converter.nowStatus = types.ResponseStatusCompleted
 	}
 
 	respType := "response.completed"

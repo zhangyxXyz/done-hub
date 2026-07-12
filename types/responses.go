@@ -369,6 +369,31 @@ type ContentResponses struct {
 	Refusal *RefusalResponses `json:"refusal,omitempty"`
 }
 
+// MarshalJSON keeps output_text parts compatible with the Responses streaming
+// schema. In particular, an empty text part must still contain text and
+// annotations so strict clients can register it before receiving deltas.
+func (c ContentResponses) MarshalJSON() ([]byte, error) {
+	type alias ContentResponses
+	if c.Type != ContentTypeOutputText {
+		return json.Marshal(alias(c))
+	}
+	annotations := c.Annotations
+	if annotations == nil {
+		annotations = make([]Annotations, 0)
+	}
+	return json.Marshal(struct {
+		Type        string        `json:"type"`
+		Text        string        `json:"text"`
+		Annotations []Annotations `json:"annotations"`
+		Logprobs    any           `json:"logprobs,omitempty"`
+	}{
+		Type:        c.Type,
+		Text:        c.Text,
+		Annotations: annotations,
+		Logprobs:    c.Logprobs,
+	})
+}
+
 func (c *ContentResponses) ToChatContent() (*ChatMessagePart, error) {
 	switch c.Type {
 	case ContentTypeInputText, ContentTypeOutputText:
@@ -693,7 +718,8 @@ type OpenAIResponsesStreamResponses struct {
 	Refusal *string `json:"refusal,omitempty"` // 仅在response.refusal.done存在
 
 	// response.function_call_arguments.delta response.function_call_arguments.done
-	Arguments any `json:"arguments,omitempty"` // 仅在response.function_call_arguments.done存在
+	Arguments any    `json:"arguments,omitempty"` // 仅在response.function_call_arguments.done存在
+	Name      string `json:"name,omitempty"`
 
 	// response.reasoning_summary_part.added response.reasoning_summary_part.done 在reasoning_summary_text的前后，done 会输出完整的reasoning_summary_text
 	SummaryIndex *int `json:"summary_index,omitempty"` // 当前摘要的索引，从0开始
@@ -799,12 +825,16 @@ func ConvertChatStatusToResponses(status string) string {
 }
 
 func (cc *ChatCompletionResponse) ToResponses(request *OpenAIResponsesRequest) *OpenAIResponsesResponses {
+	var usage *ResponsesUsage
+	if cc.Usage != nil {
+		usage = cc.Usage.ToResponsesUsage()
+	}
 	res := &OpenAIResponsesResponses{
 		CreatedAt: cc.Created,
 		ID:        cc.ID,
 		Model:     cc.Model,
 		Object:    "response",
-		Usage:     cc.Usage.ToResponsesUsage(),
+		Usage:     usage,
 
 		Text: TextResponses{
 			Format: struct {
@@ -903,12 +933,16 @@ func (cc *ChatCompletionResponse) ToResponses(request *OpenAIResponsesRequest) *
 }
 
 func (r *OpenAIResponsesResponses) ToChat() *ChatCompletionResponse {
+	var usage *Usage
+	if r.Usage != nil {
+		usage = r.Usage.ToOpenAIUsage()
+	}
 	resp := &ChatCompletionResponse{
 		Created: r.CreatedAt,
 		ID:      r.ID,
 		Model:   r.Model,
 		Object:  "chat.completion",
-		Usage:   r.Usage.ToOpenAIUsage(),
+		Usage:   usage,
 		Choices: make([]ChatCompletionChoice, 0),
 	}
 
@@ -922,9 +956,14 @@ func (r *OpenAIResponsesResponses) ToChat() *ChatCompletionResponse {
 	for _, output := range r.Output {
 		switch output.Type {
 		case InputTypeMessage:
-			choice.Message.Content = output.StringContent()
+			content := output.StringContent()
+			if existing, ok := choice.Message.Content.(string); ok {
+				choice.Message.Content = existing + content
+			} else {
+				choice.Message.Content = content
+			}
 		case InputTypeReasoning:
-			choice.Message.ReasoningContent = output.GetSummaryString()
+			choice.Message.ReasoningContent += output.GetSummaryString()
 		case InputTypeFunctionCall:
 			if choice.Message.ToolCalls == nil {
 				choice.Message.ToolCalls = make([]*ChatCompletionToolCalls, 0)

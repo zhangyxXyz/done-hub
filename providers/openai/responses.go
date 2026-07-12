@@ -19,11 +19,12 @@ import (
 )
 
 type OpenAIResponsesStreamHandler struct {
-	Usage     *types.Usage
-	Prefix    string
-	Model     string
-	MessageID string
-	Context   *gin.Context
+	Usage      *types.Usage
+	Prefix     string
+	Model      string
+	MessageID  string
+	Context    *gin.Context
+	EventPatch ResponsesStreamEventPatch
 
 	searchType string
 	toolIndex  int
@@ -85,8 +86,9 @@ func (p *OpenAIProvider) CreateResponsesStream(request *types.OpenAIResponsesReq
 		Prefix: `data: `,
 		// chat→responses 兼容路径（HandlerChatStream）合成的 chat chunk 用 h.Model 当响应模型名，
 		// 这里直接解析成用户原始请求模型名；原生 responses 路径不读 h.Model，走 response.model 字节改写。
-		Model:   p.GetResponseModelName(request.Model),
-		Context: p.Context,
+		Model:      p.GetResponseModelName(request.Model),
+		Context:    p.Context,
+		EventPatch: p.ResponsesStreamEventPatch,
 	}
 
 	if request.ConvertChat {
@@ -266,6 +268,17 @@ func (h *OpenAIResponsesStreamHandler) HandlerResponsesStream(rawLine *[]byte, d
 	if strings.HasPrefix(string(noSpaceLine), "data: ") {
 		// 去除前缀
 		noSpaceLine = noSpaceLine[6:]
+	}
+
+	// 少数 OpenAI-compatible 上游会对同一 output item 的 id 重复编码，导致 added、
+	// delta、done 事件中的 item_id 不一致。具体 Provider 可通过该钩子在解析和转发前
+	// 归一化事件；未配置时保持上游字节不变。
+	if h.EventPatch != nil {
+		patched := h.EventPatch(noSpaceLine)
+		if len(patched) > 0 && !bytes.Equal(patched, noSpaceLine) {
+			rawStr = strings.Replace(rawStr, string(noSpaceLine), string(patched), 1)
+			noSpaceLine = patched
+		}
 	}
 
 	var openaiResponse types.OpenAIResponsesStreamResponses

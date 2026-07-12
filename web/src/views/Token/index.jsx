@@ -191,7 +191,7 @@ export default function Token() {
           }
           break;
         case 'refresh_key':
-          res = await API.put(url + `${id}/key`);
+          res = await API.put(`/api/token/${id}/key`);
           break;
       }
       const { success, message, data: responseData } = res.data;
