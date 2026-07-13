@@ -46,4 +46,7 @@ func TestMatchesAnyUsageProvider(t *testing.T) {
 	if matchesAnyUsageProvider(config.ChannelTypeClaudeCode, []string{"codex", "github"}) {
 		t.Fatal("Claude Code unexpectedly matched unrelated providers")
 	}
+	if !matchesAnyUsageProvider(config.ChannelTypeOpenCode, []string{"opencode-go"}) {
+		t.Fatal("OpenCode provider alias did not match")
+	}
 }

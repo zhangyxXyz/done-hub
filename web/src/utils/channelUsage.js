@@ -1,6 +1,9 @@
+import i18n from 'i18n/i18n'
+
 export const CHANNEL_TYPE_CLAUDE_CODE = 58
 export const CHANNEL_TYPE_CODEX = 59
 export const CHANNEL_TYPE_GITHUB_COPILOT = 64
+export const CHANNEL_TYPE_OPEN_CODE = 65
 export const DEFAULT_USAGE_CACHE_TTL_MS = 5 * 60 * 1000
 
 const usageMemoryCache = new Map()
@@ -61,8 +64,19 @@ export async function getCachedUsage(key, fetcher) {
   return value
 }
 
+export function clearUsageCache() {
+  usageMemoryCache.clear()
+  try {
+    Object.keys(sessionStorage)
+      .filter((key) => key.startsWith('channel_usage:'))
+      .forEach((key) => sessionStorage.removeItem(key))
+  } catch (error) {
+    // Ignore storage access failures; the in-memory cache has already been cleared.
+  }
+}
+
 export function supportsUsageWindows(type) {
-  return [CHANNEL_TYPE_CLAUDE_CODE, CHANNEL_TYPE_CODEX, CHANNEL_TYPE_GITHUB_COPILOT].includes(Number(type))
+  return [CHANNEL_TYPE_CLAUDE_CODE, CHANNEL_TYPE_CODEX, CHANNEL_TYPE_GITHUB_COPILOT, CHANNEL_TYPE_OPEN_CODE].includes(Number(type))
 }
 
 export function clampPercent(value) {
@@ -77,10 +91,12 @@ export function formatUsagePercent(value) {
 }
 
 export function formatResetAt(value, unit = 'ms') {
-  if (!value) return '未知'
+  if (!value) return i18n.t('channel_usage.unknown')
   const date = new Date(unit === 'seconds' ? Number(value) * 1000 : value)
-  if (Number.isNaN(date.getTime())) return '未知'
-  return date.toLocaleString('zh-CN', {
+  if (Number.isNaN(date.getTime())) return i18n.t('channel_usage.unknown')
+  const localeMap = { zh_CN: 'zh-CN', zh_HK: 'zh-HK', en_US: 'en-US', ja_JP: 'ja-JP' }
+  const language = i18n.resolvedLanguage || i18n.language
+  return date.toLocaleString(localeMap[language] || language || undefined, {
     month: '2-digit',
     day: '2-digit',
     hour: '2-digit',
@@ -95,7 +111,7 @@ export function getWindowLabel(seconds) {
   if (Math.abs(minutes - 1440) <= 72) return '1d'
   if (minutes >= 60) return `${Math.round(minutes / 60)}h`
   if (minutes > 0) return `${Math.round(minutes)}m`
-  return '额度'
+  return i18n.t('channel_usage.windowQuota')
 }
 
 function buildWindow(key, label, used, resetsAt, resetUnit = 'ms') {
@@ -134,9 +150,9 @@ export function parseUsageWindows(type, usage) {
     const snapshots = usage.quota_snapshots || {}
     const resetAt = usage.quota_reset_date_utc || usage.quota_reset_date || usage.limited_user_reset_date
     const snapshotWindows = [
-      ['premium_interactions', 'Premium'],
-      ['chat', 'Chat'],
-      ['completions', 'Completions']
+      ['premium_interactions', i18n.t('channel_usage.windowPremium')],
+      ['chat', i18n.t('channel_usage.windowChat')],
+      ['completions', i18n.t('channel_usage.windowCompletions')]
     ].map(([key, label]) => {
       const snapshot = snapshots[key]
       if (!snapshot) return null
@@ -160,14 +176,24 @@ export function parseUsageWindows(type, usage) {
       const quotaRemaining = Number(remaining[key])
       if (!Number.isFinite(entitlement) || entitlement <= 0 || !Number.isFinite(quotaRemaining)) return null
       const resetUnit = typeof resetAt === 'number' && resetAt < 1e12 ? 'seconds' : 'ms'
-      return buildWindow(`limited_${key}`, key === 'chat' ? 'Chat' : 'Completions', 100 - quotaRemaining / entitlement * 100, resetAt, resetUnit)
+      return buildWindow(`limited_${key}`, key === 'chat' ? i18n.t('channel_usage.windowChat') : i18n.t('channel_usage.windowCompletions'), 100 - quotaRemaining / entitlement * 100, resetAt, resetUnit)
     }).filter(Boolean)
+  }
+
+  if (channelType === CHANNEL_TYPE_OPEN_CODE) {
+    return (usage.windows || []).map((window, index) => buildWindow(
+      window.key || `window_${index}`,
+      window.label === 'Monthly' ? i18n.t('channel_usage.windowMonthly') : window.label || i18n.t('channel_usage.windowQuota'),
+      window.used_percent,
+      window.reset_at,
+      'seconds'
+    ))
   }
 
   return []
 }
 
 export function getUsageSummaryLabel(windows) {
-  if (!windows?.length) return '暂无窗口'
+  if (!windows?.length) return i18n.t('channel_usage.noWindow')
   return windows.map((window) => `${window.label} ${formatUsagePercent(window.remainingPercent)}`).join(' / ')
 }

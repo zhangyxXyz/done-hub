@@ -643,16 +643,33 @@ const typeConfig = {
       test_model: 'gpt-4.1'
     },
     inputLabel: {
-      other: 'GitHub OAuth Client ID',
+      other: 'channel_edit.githubCopilotConfigLabel',
       provider_models_list: '从 GitHub Copilot 获取可用模型列表'
     },
     prompt: {
       key: '请输入 GitHub OAuth user token，或点击下方“GitHub Device 授权”自动获取；无需填写短期 Copilot token',
-      other: '通常留空，系统默认使用 GitHub Copilot Chat 的 Device Flow Client ID；仅在 GitHub Enterprise 或自定义兼容 OAuth App 时覆盖',
+      other: 'channel_edit.githubCopilotConfigHelp',
       base_url: '通常留空，系统会根据 Copilot 订阅自动选择 API 地址',
       provider_models_list: '需先完成 GitHub Device 授权或填写有效的 GitHub OAuth user token'
     },
     modelGroup: 'GitHub Copilot'
+  },
+  65: {
+    supportsNativeResponses: false,
+    input: {
+      models: [],
+      test_model: ''
+    },
+    inputLabel: {
+      other: 'channel_edit.openCodeUsageConfigLabel',
+      provider_models_list: 'channel_edit.openCodeFetchModelsLabel'
+    },
+    prompt: {
+      other: 'channel_edit.openCodeUsageConfigHelp',
+      base_url: 'channel_edit.openCodeBaseUrlHelp',
+      provider_models_list: 'channel_edit.openCodeFetchModelsHelp'
+    },
+    modelGroup: 'OpenCode Go'
   }
 };
 

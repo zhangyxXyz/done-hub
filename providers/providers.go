@@ -34,6 +34,7 @@ import (
 	"done-hub/providers/moonshot"
 	"done-hub/providers/ollama"
 	"done-hub/providers/openai"
+	"done-hub/providers/opencode"
 	"done-hub/providers/openrouter"
 	"done-hub/providers/palm"
 	"done-hub/providers/recraftAI"
@@ -94,6 +95,7 @@ func init() {
 		config.ChannelTypeJina:            jina.JinaProviderFactory{},
 		config.ChannelTypeGithub:          github.GithubProviderFactory{},
 		config.ChannelTypeGithubCopilot:   githubcopilot.Factory{},
+		config.ChannelTypeOpenCode:        opencode.ProviderFactory{},
 		config.ChannelTypeRecraft:         recraftAI.RecraftProviderFactory{},
 		config.ChannelTypeReplicate:       replicate.ReplicateProviderFactory{},
 		config.ChannelTypeOpenRouter:      openrouter.OpenRouterProviderFactory{},

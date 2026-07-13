@@ -2,8 +2,10 @@ package controller
 
 import (
 	"done-hub/common"
+	"done-hub/common/config"
 	"done-hub/common/utils"
 	"done-hub/model"
+	"done-hub/providers/opencode"
 	"errors"
 	"net/http"
 	"strconv"
@@ -65,6 +67,12 @@ func AddChannel(c *gin.Context) {
 		})
 		return
 	}
+	if channel.Type == config.ChannelTypeOpenCode {
+		if _, err = opencode.ParseCredentials(channel.Key); err != nil {
+			common.APIRespondWithError(c, http.StatusOK, err)
+			return
+		}
+	}
 	if err = model.CheckTagTypeConsistency(channel.Tag, channel.Type, 0); err != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"success": false,
@@ -76,7 +84,7 @@ func AddChannel(c *gin.Context) {
 	if !channelSupportsUsageWindows(channel.Type) {
 		channel.EnableUsageQuery = false
 	}
-	keys := strings.Split(channel.Key, "\n")
+	keys := channelKeysForCreate(channel)
 
 	baseUrls := []string{}
 	if channel.BaseURL != nil && *channel.BaseURL != "" {
@@ -113,6 +121,13 @@ func AddChannel(c *gin.Context) {
 		"success": true,
 		"message": "",
 	})
+}
+
+func channelKeysForCreate(channel model.Channel) []string {
+	if channel.Type == config.ChannelTypeOpenCode {
+		return []string{channel.Key}
+	}
+	return strings.Split(channel.Key, "\n")
 }
 
 func DeleteChannel(c *gin.Context) {
@@ -173,6 +188,12 @@ func UpdateChannel(c *gin.Context) {
 			"message": err.Error(),
 		})
 		return
+	}
+	if channel.Type == config.ChannelTypeOpenCode {
+		if _, err = opencode.ParseCredentials(channel.Key); err != nil {
+			common.APIRespondWithError(c, http.StatusOK, err)
+			return
+		}
 	}
 	if !channelSupportsUsageWindows(channel.Type) {
 		channel.EnableUsageQuery = false

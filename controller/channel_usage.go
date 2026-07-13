@@ -7,6 +7,7 @@ import (
 	"done-hub/providers/claudecode"
 	"done-hub/providers/codex"
 	"done-hub/providers/githubcopilot"
+	"done-hub/providers/opencode"
 	"errors"
 	"fmt"
 	"net/http"
@@ -19,7 +20,7 @@ import (
 const maxChannelUsageListLimit = 50
 
 func channelSupportsUsageWindows(channelType int) bool {
-	return channelType == config.ChannelTypeClaudeCode || channelType == config.ChannelTypeCodex || channelType == config.ChannelTypeGithubCopilot
+	return channelType == config.ChannelTypeClaudeCode || channelType == config.ChannelTypeCodex || channelType == config.ChannelTypeGithubCopilot || channelType == config.ChannelTypeOpenCode
 }
 
 func channelMatchesUsageProvider(channelType int, provider string) bool {
@@ -32,6 +33,8 @@ func channelMatchesUsageProvider(channelType int, provider string) bool {
 		return channelType == config.ChannelTypeCodex
 	case "copilot", "githubcopilot", "github-copilot", "github":
 		return channelType == config.ChannelTypeGithubCopilot
+	case "opencode", "opencode-go", "opencodego":
+		return channelType == config.ChannelTypeOpenCode
 	default:
 		if parsedType, err := strconv.Atoi(provider); err == nil {
 			return channelType == parsedType
@@ -116,6 +119,19 @@ func githubCopilotUsageData(channel *model.Channel, usageResult *githubcopilot.U
 		"channel_id": channel.Id, "type": channel.Type, "name": channel.Name,
 		"status": usageResult.StatusCode, "usage": usageResult.Usage,
 		"cached": usageResult.Cached, "stale": usageResult.Stale, "empty": usageResult.Empty,
+		"fetched_at": usageResult.FetchedAt, "warning": usageResult.Warning,
+	}
+	for key, value := range usageCacheMeta(usageResult.FetchedAt, cacheConfig.TTLSeconds) {
+		data[key] = value
+	}
+	return data
+}
+
+func openCodeUsageData(channel *model.Channel, usageResult *opencode.UsageResult, cacheConfig opencode.UsageCacheConfig) gin.H {
+	data := gin.H{
+		"channel_id": channel.Id, "type": channel.Type, "name": channel.Name,
+		"status": usageResult.StatusCode, "usage": usageResult.Usage,
+		"cached": usageResult.Cached, "stale": usageResult.Stale,
 		"fetched_at": usageResult.FetchedAt, "warning": usageResult.Warning,
 	}
 	for key, value := range usageCacheMeta(usageResult.FetchedAt, cacheConfig.TTLSeconds) {
@@ -250,6 +266,20 @@ func GetChannelUsage(c *gin.Context) {
 			return
 		}
 		c.JSON(http.StatusOK, gin.H{"success": true, "message": "", "data": githubCopilotUsageData(channel, usageResult, cacheConfig)})
+	case config.ChannelTypeOpenCode:
+		provider := opencode.ProviderFactory{}.Create(channel)
+		openCodeProvider, ok := provider.(*opencode.Provider)
+		if !ok {
+			common.APIRespondWithError(c, http.StatusOK, errors.New("创建 OpenCode provider 失败"))
+			return
+		}
+		cacheConfig := openCodeProvider.GetUsageCacheConfig()
+		usageResult, err := openCodeProvider.RequestUsageWithCache()
+		if err != nil {
+			common.APIRespondWithError(c, http.StatusOK, err)
+			return
+		}
+		c.JSON(http.StatusOK, gin.H{"success": true, "message": "", "data": openCodeUsageData(channel, usageResult, cacheConfig)})
 	default:
 		common.APIRespondWithError(c, http.StatusOK, errors.New("当前渠道类型不支持额度窗口查询"))
 	}
@@ -403,6 +433,23 @@ func getChannelsUsage(c *gin.Context, enforceTokenAccess bool) {
 				break
 			}
 			item["data"] = githubCopilotUsageData(channel, usageResult, cacheConfig)
+			if cacheConfig.TTLSeconds > 0 && (minTTLSeconds == 0 || cacheConfig.TTLSeconds < minTTLSeconds) {
+				minTTLSeconds = cacheConfig.TTLSeconds
+			}
+		case config.ChannelTypeOpenCode:
+			provider := opencode.ProviderFactory{}.Create(channel)
+			openCodeProvider, ok := provider.(*opencode.Provider)
+			if !ok {
+				item["error"] = "创建 OpenCode provider 失败"
+				break
+			}
+			cacheConfig := openCodeProvider.GetUsageCacheConfig()
+			usageResult, err := openCodeProvider.RequestUsageWithCache()
+			if err != nil {
+				item["error"] = err.Error()
+				break
+			}
+			item["data"] = openCodeUsageData(channel, usageResult, cacheConfig)
 			if cacheConfig.TTLSeconds > 0 && (minTTLSeconds == 0 || cacheConfig.TTLSeconds < minTTLSeconds) {
 				minTTLSeconds = cacheConfig.TTLSeconds
 			}

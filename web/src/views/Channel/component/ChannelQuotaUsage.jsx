@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { Box, CircularProgress, Stack, Tooltip, Typography } from '@mui/material'
 import { Icon } from '@iconify/react'
 import { API } from 'utils/api'
+import { useTranslation } from 'react-i18next'
 import {
   formatResetAt,
   formatUsagePercent,
@@ -13,6 +14,7 @@ import {
 } from 'utils/channelUsage'
 
 export default function ChannelQuotaUsage({ channel }) {
+  const { t } = useTranslation()
   const [state, setState] = useState({ loading: false, data: null, error: '' })
 
   useEffect(() => {
@@ -27,10 +29,10 @@ export default function ChannelQuotaUsage({ channel }) {
         if (success) {
           setState({ loading: false, data, error: '' })
         } else {
-          setState({ loading: false, data: null, error: message || '查询失败' })
+          setState({ loading: false, data: null, error: message || t('channel_usage.queryFailed') })
         }
       } catch (error) {
-        if (!ignore) setState({ loading: false, data: null, error: error.message || '查询失败' })
+        if (!ignore) setState({ loading: false, data: null, error: error.message || t('channel_usage.queryFailed') })
       }
     }
 
@@ -38,7 +40,7 @@ export default function ChannelQuotaUsage({ channel }) {
     return () => {
       ignore = true
     }
-  }, [channel?.id, channel?.type, channel?.enable_usage_query])
+  }, [channel?.id, channel?.type, channel?.enable_usage_query, t])
 
   if (!supportsUsageWindows(channel?.type) || !channel?.enable_usage_query) return null
 
@@ -50,7 +52,7 @@ export default function ChannelQuotaUsage({ channel }) {
     return (
       <Tooltip title={state.error}>
         <Typography variant="caption" color="error.main" sx={{ cursor: 'help', fontWeight: 700 }}>
-          查询失败
+          {t('channel_usage.queryFailed')}
         </Typography>
       </Tooltip>
     )
@@ -62,20 +64,20 @@ export default function ChannelQuotaUsage({ channel }) {
   const title = (
     <Box>
       <Typography variant="subtitle2" sx={{ fontWeight: 800, mb: 0.5 }}>
-        {channel.name} 渠道额度
+        {t('channel_usage.channelQuotaTitle', { name: channel.name })}
       </Typography>
       {empty ? (
-        <Typography variant="body2">{state.data?.warning || '暂无活跃额度窗口，发起一次会话后再查询'}</Typography>
+        <Typography variant="body2">{state.data?.warning || t('channel_usage.noActiveWindowSessionHint')}</Typography>
       ) : (
         windows.map((window) => (
           <Typography key={window.key} variant="body2">
-            {window.label}: 已用 {formatUsagePercent(window.usedPercent)} / 剩余 {formatUsagePercent(window.remainingPercent)}，重置 {formatResetAt(window.resetsAt, window.resetUnit)}
+            {t('channel_usage.windowDetail', { label: window.label, used: formatUsagePercent(window.usedPercent), remaining: formatUsagePercent(window.remainingPercent), reset: formatResetAt(window.resetsAt, window.resetUnit) })}
           </Typography>
         ))
       )}
       {(state.data?.cached || state.data?.stale || state.data?.warning) && (
         <Typography variant="caption" sx={{ display: 'block', mt: 0.5, opacity: 0.75 }}>
-          {state.data?.stale ? '旧缓存' : state.data?.cached ? '缓存' : ''}
+          {state.data?.stale ? t('channel_usage.staleCache') : state.data?.cached ? t('channel_usage.cache') : ''}
           {state.data?.warning ? ` ${state.data.warning}` : ''}
         </Typography>
       )}
@@ -87,7 +89,7 @@ export default function ChannelQuotaUsage({ channel }) {
       <Stack direction="row" spacing={0.5} alignItems="center" justifyContent="center" sx={{ cursor: 'help' }}>
         <Icon icon={empty ? 'mdi:clock-alert-outline' : 'mdi:gauge'} width={16}/>
         <Typography variant="caption" sx={{ color: usageColor, fontWeight: 800 }}>
-          {empty ? '暂无窗口' : getUsageSummaryLabel(windows)}
+          {empty ? t('channel_usage.noWindow') : getUsageSummaryLabel(windows)}
         </Typography>
       </Stack>
     </Tooltip>

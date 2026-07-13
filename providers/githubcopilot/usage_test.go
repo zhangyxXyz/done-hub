@@ -26,7 +26,7 @@ func TestHasUsageQuota(t *testing.T) {
 }
 
 func TestUsageCacheConfigDefaultsAndBounds(t *testing.T) {
-	provider := New(&model.Channel{Other: `{"usage_cache_ttl_seconds":99999,"usage_cache_stale_seconds":9999999,"usage_cache_use_stale_on_error":false}`})
+	provider := New(&model.Channel{Other: `{"client_id":"custom-client","usage_cache_ttl_seconds":99999,"usage_cache_stale_seconds":9999999,"usage_cache_use_stale_on_error":false}`})
 	config := provider.GetUsageCacheConfig()
 	if config.TTLSeconds != 3600 || config.StaleSeconds != 604800 || config.AllowStaleOnError() {
 		t.Fatalf("unexpected cache config: %+v", config)

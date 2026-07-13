@@ -8,6 +8,7 @@ import {
   getCachedUsage,
   parseUsageWindows
 } from 'utils/channelUsage'
+import { useTranslation } from 'react-i18next'
 
 function providerName(type) {
   switch (Number(type)) {
@@ -17,12 +18,15 @@ function providerName(type) {
       return 'Codex'
     case 64:
       return 'GitHub Copilot'
+    case 65:
+      return 'OpenCode Go'
     default:
       return 'OAuth'
   }
 }
 
 export default function ChannelQuotaPanel() {
+  const { t } = useTranslation()
   const [loading, setLoading] = useState(false)
   const [items, setItems] = useState([])
 
@@ -52,18 +56,18 @@ export default function ChannelQuotaPanel() {
 
   return (
     <SubCard
-      title="渠道额度"
+      title={t('channel_usage.panelTitle')}
       contentSX={{ p: 2 }}
     >
       {loading && (
         <Stack direction="row" spacing={1} alignItems="center">
           <CircularProgress size={16}/>
-          <Typography variant="body2" color="text.secondary">正在查询渠道额度...</Typography>
+          <Typography variant="body2" color="text.secondary">{t('channel_usage.loading')}</Typography>
         </Stack>
       )}
 
       {!loading && visibleItems.length === 0 && (
-        <Typography variant="body2" color="text.secondary">暂无 ClaudeCode / Codex / GitHub Copilot 渠道额度数据</Typography>
+        <Typography variant="body2" color="text.secondary">{t('channel_usage.noProviderData')}</Typography>
       )}
 
       {!loading && visibleItems.map((item, index) => {
@@ -75,11 +79,11 @@ export default function ChannelQuotaPanel() {
         ) : (
           <Box>
             {empty ? (
-              <Typography variant="body2">{item.data?.warning || '暂无活跃额度窗口'}</Typography>
+              <Typography variant="body2">{item.data?.warning || t('channel_usage.noActiveWindow')}</Typography>
             ) : (
               windows.map((window) => (
                 <Typography key={window.key} variant="body2">
-                  {window.label}: 已用 {formatUsagePercent(window.usedPercent)} / 剩余 {formatUsagePercent(window.remainingPercent)}，重置 {formatResetAt(window.resetsAt, window.resetUnit)}
+                  {t('channel_usage.windowDetail', { label: window.label, used: formatUsagePercent(window.usedPercent), remaining: formatUsagePercent(window.remainingPercent), reset: formatResetAt(window.resetsAt, window.resetUnit) })}
                 </Typography>
               ))
             )}
@@ -108,7 +112,7 @@ export default function ChannelQuotaPanel() {
                       whiteSpace: 'nowrap'
                     }}
                   >
-                    {item.error ? '失败' : empty ? '暂无窗口' : `${windows.length} 个额度窗口`}
+                    {item.error ? t('channel_usage.failed') : empty ? t('channel_usage.noWindow') : t('channel_usage.windowCount', { count: windows.length })}
                   </Typography>
                 </Stack>
                 {!item.error && !empty && (
@@ -123,7 +127,7 @@ export default function ChannelQuotaPanel() {
                           <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={1} sx={{ mb: 0.5 }}>
                             <Typography variant="caption" sx={{ fontWeight: 800 }}>{label}</Typography>
                             <Typography variant="caption" sx={{ color: barColor, fontWeight: 800 }}>
-                              {unlimited ? '无限制' : `剩余 ${formatUsagePercent(remaining)}`}
+                              {unlimited ? t('channel_usage.unlimited') : t('channel_usage.remaining', { value: formatUsagePercent(remaining) })}
                             </Typography>
                           </Stack>
                           <LinearProgress

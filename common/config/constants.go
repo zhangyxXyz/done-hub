@@ -416,6 +416,7 @@ const (
 	ChannelTypeDoubao          = 62
 	ChannelTypeXiaomi          = 63
 	ChannelTypeGithubCopilot   = 64
+	ChannelTypeOpenCode        = 65
 )
 
 const (

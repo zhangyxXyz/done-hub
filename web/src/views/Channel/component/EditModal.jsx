@@ -4,6 +4,9 @@ import { CHANNEL_OPTIONS } from 'constants/ChannelConstants';
 import { useTheme } from '@mui/material/styles';
 import { API } from 'utils/api';
 import { copy, showError, showSuccess, trims } from 'utils/common';
+import { clearUsageCache } from 'utils/channelUsage';
+import { getGitHubCopilotClientId } from 'utils/githubCopilotConfig';
+import { buildOpenCodeCredentials, parseOpenCodeCredentials } from 'utils/openCodeCredentials';
 import {
   Alert,
   Autocomplete,
@@ -70,8 +73,22 @@ const getValidationSchema = (t) =>
     // is_tag: Yup.boolean(),
     name: Yup.string().required(t('channel_edit.requiredName')),
     type: Yup.number().required(t('channel_edit.requiredChannel')),
-    key: Yup.string().when('is_edit', { is: false, then: Yup.string().required(t('channel_edit.requiredKey')) }),
-    other: Yup.string(),
+    key: Yup.string()
+      .when('is_edit', { is: false, then: Yup.string().required(t('channel_edit.requiredKey')) })
+      .test('opencode-api-key', t('channel_edit.requiredKey'), function (value) {
+        if (Number(this.parent.type) !== 65) return true;
+        const credentials = parseOpenCodeCredentials(value);
+        return credentials.valid && Boolean(credentials.apiKey.trim());
+      }),
+    other: Yup.string().test('github-copilot-config', t('channel_edit.githubCopilotConfigInvalid'), function (value) {
+      if (Number(this.parent.type) !== 64 || !value) return true;
+      try {
+        getGitHubCopilotClientId(value);
+        return true;
+      } catch {
+        return false;
+      }
+    }),
     proxy: Yup.string(),
     test_model: Yup.string(),
     models: Yup.array().min(1, t('channel_edit.requiredModels')),
@@ -750,10 +767,18 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, groupMap, is
     try {
       resetCopilotOAuth();
       setCopilotSubmitting(true);
+      let resolvedClientId;
+      try {
+        resolvedClientId = getGitHubCopilotClientId(clientId);
+      } catch {
+        showError(t('channel_edit.githubCopilotConfigInvalid'));
+        setCopilotSubmitting(false);
+        return;
+      }
       const numericChannelId = Number(channelId);
       const res = await API.post('/api/github-copilot/oauth/start', {
         channel_id: Number.isInteger(numericChannelId) && numericChannelId > 0 ? numericChannelId : 0,
-        client_id: clientId?.trim() || '',
+        client_id: resolvedClientId,
         proxy: proxy?.trim() || ''
       });
       if (!res.data?.success) {
@@ -998,6 +1023,7 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, groupMap, is
       }
       const { success, message } = res.data;
       if (success) {
+        clearUsageCache();
         if (channelId) {
           showSuccess(t('channel_edit.editSuccess'));
         } else {
@@ -1170,6 +1196,8 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, groupMap, is
               setTempSetFieldValue(() => setFieldValue); // 保存函数引用
               setModelSelectorOpen(true);
             };
+
+            const openCodeCredentials = parseOpenCodeCredentials(values.key);
 
             const copilotOAuthSection = Number(values.type) === 64 ? (
               <Box sx={{ mt: 2, mb: 2 }}>
@@ -1394,7 +1422,12 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, groupMap, is
                           {errors.other}
                         </FormHelperText>
                       ) : (
-                        <FormHelperText id="helper-tex-channel-other-label"> {customizeT(inputPrompt.other)} </FormHelperText>
+                        <FormHelperText
+                          id="helper-tex-channel-other-label"
+                          sx={{ whiteSpace: 'pre-wrap', overflowWrap: 'anywhere', lineHeight: 1.6 }}
+                        >
+                          {customizeT(inputPrompt.other)}
+                        </FormHelperText>
                       )}
                     </FormControl>
                   )}
@@ -1683,6 +1716,48 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, groupMap, is
                         </Typography>
                       </Box>
                     </Box>
+                  ) : Number(values.type) === 65 ? (
+                    <Stack spacing={2} sx={{ ...theme.typography.otherInput }}>
+                      <FormControl fullWidth error={Boolean(touched.key && errors.key)}>
+                        <InputLabel htmlFor="opencode-api-key-label">{t('channel_edit.openCodeApiKeyLabel')}</InputLabel>
+                        <OutlinedInput
+                          id="opencode-api-key-label"
+                          label={t('channel_edit.openCodeApiKeyLabel')}
+                          type="text"
+                          value={openCodeCredentials.apiKey}
+                          name="key"
+                          onBlur={handleBlur}
+                          onChange={(event) => {
+                            setFieldValue('key', buildOpenCodeCredentials(event.target.value, openCodeCredentials.authCookie));
+                          }}
+                          aria-describedby="helper-text-opencode-api-key"
+                        />
+                        {touched.key && errors.key ? (
+                          <FormHelperText error id="helper-text-opencode-api-key">
+                            {errors.key}
+                          </FormHelperText>
+                        ) : (
+                          <FormHelperText id="helper-text-opencode-api-key">{t('channel_edit.openCodeApiKeyHelp')}</FormHelperText>
+                        )}
+                      </FormControl>
+
+                      <FormControl fullWidth>
+                        <InputLabel htmlFor="opencode-auth-cookie-label">{t('channel_edit.openCodeAuthCookieLabel')}</InputLabel>
+                        <OutlinedInput
+                          id="opencode-auth-cookie-label"
+                          label={t('channel_edit.openCodeAuthCookieLabel')}
+                          type="text"
+                          value={openCodeCredentials.authCookie}
+                          onChange={(event) => {
+                            setFieldValue('key', buildOpenCodeCredentials(openCodeCredentials.apiKey, event.target.value));
+                          }}
+                          aria-describedby="helper-text-opencode-auth-cookie"
+                        />
+                        <FormHelperText id="helper-text-opencode-auth-cookie">
+                          {t('channel_edit.openCodeAuthCookieHelp')}
+                        </FormHelperText>
+                      </FormControl>
+                    </Stack>
                   ) : (
                     <FormControl fullWidth error={Boolean(touched.key && errors.key)} sx={{ ...theme.typography.otherInput }}>
                       {!batchAdd ? (
@@ -1724,7 +1799,7 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, groupMap, is
                         <FormHelperText id="helper-tex-channel-key-label">
                           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <span>{customizeT(inputPrompt.key)}</span>
-                            {channelId === 0 && (
+                            {channelId === 0 && Number(values.type) !== 65 && (
                               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                                 <Switch size="small" checked={Boolean(batchAdd)} onChange={(e) => setBatchAdd(e.target.checked)} />
                                 <Typography variant="body2">{t('channel_edit.batchAdd')}</Typography>

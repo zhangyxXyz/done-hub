@@ -313,6 +313,13 @@ export const CHANNEL_OPTIONS = {
     color: 'info',
     url: 'https://github.com/features/copilot'
   },
+  65: {
+    key: 65,
+    text: 'OpenCode Go',
+    value: 65,
+    color: 'primary',
+    url: 'https://opencode.ai/'
+  },
   8: {
     key: 8,
     text: '自定义渠道',
