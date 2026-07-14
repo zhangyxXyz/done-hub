@@ -2166,7 +2166,7 @@
         "name": "Google: Gemma 4 31B",
         "description": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 8192,
         "input_modalities": [
           "image",
           "text",
@@ -2195,7 +2195,7 @@
         "name": "Google: Gemma 4 31B (free)",
         "description": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function...",
         "context_length": 262144,
-        "max_tokens": 8192,
+        "max_tokens": 32768,
         "input_modalities": [
           "image",
           "text",
@@ -2495,6 +2495,31 @@
       }
     },
     {
+      "model": "kwaipilot/kat-coder-air-v2.5",
+      "model_info": {
+        "model": "kwaipilot/kat-coder-air-v2.5",
+        "name": "Kwaipilot: KAT-Coder-Air V2.5",
+        "description": "",
+        "context_length": 256000,
+        "max_tokens": 80000,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/kwaipilot/kat-coder-air-v2.5",
+          "https://openrouter.ai/api/v1/models/kwaipilot/kat-coder-air-v2.5-20260710/endpoints"
+        ]
+      }
+    },
+    {
       "model": "kwaipilot/kat-coder-pro-v2",
       "model_info": {
         "model": "kwaipilot/kat-coder-pro-v2",
@@ -2516,6 +2541,31 @@
         "support_url": [
           "https://openrouter.ai/models/kwaipilot/kat-coder-pro-v2",
           "https://openrouter.ai/api/v1/models/kwaipilot/kat-coder-pro-v2-20260327/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "kwaipilot/kat-coder-pro-v2.5",
+      "model_info": {
+        "model": "kwaipilot/kat-coder-pro-v2.5",
+        "name": "Kwaipilot: KAT-Coder-Pro V2.5",
+        "description": "",
+        "context_length": 256000,
+        "max_tokens": 80000,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/kwaipilot/kat-coder-pro-v2.5",
+          "https://openrouter.ai/api/v1/models/kwaipilot/kat-coder-pro-v2.5-20260710/endpoints"
         ]
       }
     },
@@ -5736,7 +5786,7 @@
         "name": "OpenAI: gpt-oss-120b",
         "description": "gpt-oss-120b is an open-weight, 117B-parameter Mixture-of-Experts (MoE) language model from OpenAI designed for high-reasoning, agentic, and general-purpose production use cases. It activates 5.1B parameters per forward pass and is optimized...",
         "context_length": 131072,
-        "max_tokens": 0,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -5751,31 +5801,6 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/openai/gpt-oss-120b",
-          "https://openrouter.ai/api/v1/models/openai/gpt-oss-120b/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/gpt-oss-120b:free",
-      "model_info": {
-        "model": "openai/gpt-oss-120b:free",
-        "name": "OpenAI: gpt-oss-120b (free)",
-        "description": "gpt-oss-120b is an open-weight, 117B-parameter Mixture-of-Experts (MoE) language model from OpenAI designed for high-reasoning, agentic, and general-purpose production use cases. It activates 5.1B parameters per forward pass and is optimized...",
-        "context_length": 131072,
-        "max_tokens": 131072,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-oss-120b:free",
           "https://openrouter.ai/api/v1/models/openai/gpt-oss-120b/endpoints"
         ]
       }
@@ -7642,7 +7667,7 @@
         "name": "Qwen: Qwen3.6 27B",
         "description": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities — accepting text, image, and video inputs...",
         "context_length": 262144,
-        "max_tokens": 262140,
+        "max_tokens": 131072,
         "input_modalities": [
           "text",
           "image",
@@ -8855,7 +8880,7 @@
         "name": "Z.ai: GLM 5.2",
         "description": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...",
         "context_length": 1048576,
-        "max_tokens": 32768,
+        "max_tokens": 128000,
         "input_modalities": [
           "text"
         ],

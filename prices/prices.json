@@ -3790,7 +3790,7 @@
     "model": "google/gemma-4-31b-it",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.12,
+    "input": 0.06,
     "output": 0.35
   },
   {
@@ -3920,6 +3920,13 @@
     "output": 0
   },
   {
+    "model": "kwaipilot/kat-coder-air-v2.5",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.15,
+    "output": 0.6
+  },
+  {
     "model": "kwaipilot/kat-coder-pro",
     "type": "tokens",
     "channel_type": 20,
@@ -3932,6 +3939,13 @@
     "channel_type": 20,
     "input": 0.3,
     "output": 1.2
+  },
+  {
+    "model": "kwaipilot/kat-coder-pro-v2.5",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.74,
+    "output": 2.96
   },
   {
     "model": "kwaipilot/kat-coder-pro:free",
@@ -5246,8 +5260,8 @@
     "model": "openai/gpt-oss-120b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.036,
-    "output": 0.18
+    "input": 0.03,
+    "output": 0.15
   },
   {
     "model": "openai/gpt-oss-120b:exacto",
@@ -5946,7 +5960,7 @@
     "model": "qwen/qwen3.6-27b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.285,
+    "input": 0.289,
     "output": 2.4
   },
   {
@@ -6541,8 +6555,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.93,
-    "output": 3
+    "input": 0.9282,
+    "output": 2.9172
   },
   {
     "model": "z-ai/glm-5v-turbo",
