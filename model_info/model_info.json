@@ -2499,7 +2499,7 @@
       "model_info": {
         "model": "kwaipilot/kat-coder-air-v2.5",
         "name": "Kwaipilot: KAT-Coder-Air V2.5",
-        "description": "",
+        "description": "KAT-Coder-Air V2.5 is a flagship-level Agentic Coding model that can directly hand over an entire issue or an entire business workflow to it, allowing it to autonomously locate and make...",
         "context_length": 256000,
         "max_tokens": 80000,
         "input_modalities": [
@@ -2549,7 +2549,7 @@
       "model_info": {
         "model": "kwaipilot/kat-coder-pro-v2.5",
         "name": "Kwaipilot: KAT-Coder-Pro V2.5",
-        "description": "",
+        "description": "KAT-Coder-Pro V2.5 is a flagship-level Agentic Coding model that can directly hand over an entire issue or an entire business workflow to it, allowing it to autonomously locate and make...",
         "context_length": 256000,
         "max_tokens": 80000,
         "input_modalities": [
@@ -8010,30 +8010,6 @@
       }
     },
     {
-      "model": "sao10k/l3.1-70b-hanami-x1",
-      "model_info": {
-        "model": "sao10k/l3.1-70b-hanami-x1",
-        "name": "Sao10K: Llama 3.1 70B Hanami x1",
-        "description": "This is [Sao10K](/sao10k)'s experiment over [Euryale v2.2](/sao10k/l3.1-euryale-70b).",
-        "context_length": 16000,
-        "max_tokens": 0,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/sao10k/l3.1-70b-hanami-x1",
-          "https://openrouter.ai/api/v1/models/sao10k/l3.1-70b-hanami-x1/endpoints"
-        ]
-      }
-    },
-    {
       "model": "sao10k/l3.1-euryale-70b",
       "model_info": {
         "model": "sao10k/l3.1-euryale-70b",
@@ -8802,7 +8778,7 @@
         "name": "Z.ai: GLM 5",
         "description": "GLM-5 is Z.ai’s flagship open-source foundation model engineered for complex systems design and long-horizon agent workflows. Built for expert developers, it delivers production-grade performance on large-scale programming tasks, rivaling leading...",
         "context_length": 202752,
-        "max_tokens": 0,
+        "max_tokens": 128000,
         "input_modalities": [
           "text"
         ],
