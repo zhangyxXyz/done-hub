@@ -1801,7 +1801,7 @@
         "name": "Google: Nano Banana 2 Lite (Gemini 3.1 Flash Lite Image)",
         "description": "Nano Banana 2 Lite (Gemini 3.1 Flash Lite Image) is Google's fastest, most cost-efficient Gemini image model, built for high-velocity developer pipelines and rapid-fire visual exploration. It delivers text-to-image generation...",
         "context_length": 65536,
-        "max_tokens": 66000,
+        "max_tokens": 65536,
         "input_modalities": [
           "image",
           "text"
@@ -3716,7 +3716,7 @@
         "name": "MoonshotAI: Kimi K2.6",
         "description": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 0,
         "input_modalities": [
           "text",
           "image"
@@ -6712,7 +6712,7 @@
         "name": "Qwen: Qwen3 14B",
         "description": "Qwen3-14B is a dense 14.8B parameter causal language model from the Qwen3 series, designed for both complex reasoning and efficient dialogue. It supports seamless switching between a \"thinking\" mode for...",
         "context_length": 131702,
-        "max_tokens": 40960,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -8728,8 +8728,8 @@
         "model": "z-ai/glm-4.7-flash",
         "name": "Z.ai: GLM 4.7 Flash",
         "description": "As a 30B-class SOTA model, GLM-4.7-Flash offers a new option that balances performance and efficiency. It is further optimized for agentic coding use cases, strengthening coding capabilities, long-horizon task planning,...",
-        "context_length": 200000,
-        "max_tokens": 131072,
+        "context_length": 202752,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
