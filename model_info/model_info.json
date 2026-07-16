@@ -2846,6 +2846,38 @@
       }
     },
     {
+      "model": "meta/muse-spark-1.1",
+      "model_info": {
+        "model": "meta/muse-spark-1.1",
+        "name": "Meta: Muse Spark 1.1",
+        "description": "Muse Spark 1.1 is a multimodal reasoning model from Meta, built for agentic tasks. It accepts text, images, video, audio, and PDF documents and returns text, with a 1M-token context...",
+        "context_length": 1048576,
+        "max_tokens": 0,
+        "input_modalities": [
+          "text",
+          "image",
+          "video",
+          "file",
+          "audio"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "audio",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/meta/muse-spark-1.1",
+          "https://openrouter.ai/api/v1/models/meta/muse-spark-1.1-20260709/endpoints"
+        ]
+      }
+    },
+    {
       "model": "microsoft/phi-4",
       "model_info": {
         "model": "microsoft/phi-4",
@@ -3762,6 +3794,34 @@
         "support_url": [
           "https://openrouter.ai/models/moonshotai/kimi-k2.7-code",
           "https://openrouter.ai/api/v1/models/moonshotai/kimi-k2.7-code-20260612/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "moonshotai/kimi-k3",
+      "model_info": {
+        "model": "moonshotai/kimi-k3",
+        "name": "MoonshotAI: Kimi K3",
+        "description": "Kimi K3 is an ultra-large-scale, open-weight multimodal reasoning model from Moonshot AI. It is suited for complex coding, knowledge work, and long-horizon agentic workflows, and is particularly strong at navigating...",
+        "context_length": 1048576,
+        "max_tokens": 0,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/moonshotai/kimi-k3",
+          "https://openrouter.ai/api/v1/models/moonshotai/kimi-k3-20260715/endpoints"
         ]
       }
     },
@@ -8728,8 +8788,8 @@
         "model": "z-ai/glm-4.7-flash",
         "name": "Z.ai: GLM 4.7 Flash",
         "description": "As a 30B-class SOTA model, GLM-4.7-Flash offers a new option that balances performance and efficiency. It is further optimized for agentic coding use cases, strengthening coding capabilities, long-horizon task planning,...",
-        "context_length": 202752,
-        "max_tokens": 16384,
+        "context_length": 200000,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -9067,8 +9127,8 @@
         "model": "~moonshotai/kimi-latest",
         "name": "MoonshotAI Kimi Latest",
         "description": "This model always redirects to the latest model in the MoonshotAI Kimi family.",
-        "context_length": 262144,
-        "max_tokens": 262144,
+        "context_length": 1048576,
+        "max_tokens": 0,
         "input_modalities": [
           "text",
           "image"

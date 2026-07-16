@@ -35,6 +35,13 @@
     "output": 10
   },
   {
+    "model": "codex-auto-review",
+    "type": "tokens",
+    "channel_type": 1,
+    "input": 2.5,
+    "output": 15
+  },
+  {
     "model": "codex-mini-latest",
     "type": "tokens",
     "channel_type": 1,
@@ -4158,6 +4165,13 @@
     "output": 0
   },
   {
+    "model": "meta/muse-spark-1.1",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 1.25,
+    "output": 4.25
+  },
+  {
     "model": "microsoft/mai-ds-r1",
     "type": "tokens",
     "channel_type": 20,
@@ -4616,8 +4630,8 @@
     "model": "moonshotai/kimi-k2.7-code",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.719,
-    "output": 3.49
+    "input": 0.75,
+    "output": 3.5
   },
   {
     "model": "moonshotai/kimi-k2:free",
@@ -4625,6 +4639,13 @@
     "channel_type": 20,
     "input": 0,
     "output": 0
+  },
+  {
+    "model": "moonshotai/kimi-k3",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 3,
+    "output": 15
   },
   {
     "model": "moonshotai/kimi-linear-48b-a3b-instruct",
@@ -6541,7 +6562,7 @@
     "model": "z-ai/glm-4.7-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.06,
+    "input": 0.0605,
     "output": 0.4
   },
   {
@@ -6569,8 +6590,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.9688,
-    "output": 3.0448
+    "input": 0.9198,
+    "output": 2.8908
   },
   {
     "model": "z-ai/glm-5v-turbo",
@@ -6625,8 +6646,8 @@
     "model": "~moonshotai/kimi-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.66,
-    "output": 3.41
+    "input": 3,
+    "output": 15
   },
   {
     "model": "~openai/gpt-latest",
