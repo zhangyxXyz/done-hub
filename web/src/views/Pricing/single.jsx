@@ -24,7 +24,7 @@ import { Icon } from '@iconify/react';
 import { showError, showSuccess, trims } from 'utils/common';
 import { API } from 'utils/api';
 import { useTranslation } from 'react-i18next';
-import { getPageSize, savePageSize } from 'constants';
+import { getPageSize, savePageSize, PAGE_SIZE_OPTIONS } from 'constants';
 import PriceCard from './component/PriceCard';
 import { alpha } from '@mui/material/styles';
 import EditModal from './component/EditModal';
@@ -39,7 +39,8 @@ const Single = ({ ownedby, prices, reloadData }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterType, setFilterType] = useState('all');
   const [page, setPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(getPageSize('pricing', 24));
+  const savedPageSize = getPageSize('pricing', 10);
+  const [rowsPerPage, setRowsPerPage] = useState(PAGE_SIZE_OPTIONS.includes(savedPageSize) ? savedPageSize : 10);
   const [channelFilter, setChannelFilter] = useState('all');
   const [lockFilter, setLockFilter] = useState('all');
   const [unit, setUnit] = useState('M');
@@ -184,7 +185,7 @@ const Single = ({ ownedby, prices, reloadData }) => {
   // 当搜索词变化时重置到第一页
   useEffect(() => {
     setPage(1);
-  }, [searchTerm, filterType, lockFilter]);
+  }, [searchTerm, filterType, channelFilter, lockFilter]);
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -278,9 +279,11 @@ const Single = ({ ownedby, prices, reloadData }) => {
             <FormControl size="small" sx={{ minWidth: 90 }}>
               <InputLabel>{t('common.pageSize')}</InputLabel>
               <Select value={rowsPerPage} onChange={handleChangeRowsPerPage} label={t('common.pageSize')}>
-                <MenuItem value={20}>20</MenuItem>
-                <MenuItem value={50}>50</MenuItem>
-                <MenuItem value={100}>100</MenuItem>
+                {PAGE_SIZE_OPTIONS.map((size) => (
+                  <MenuItem key={size} value={size}>
+                    {size}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
 

@@ -39,6 +39,8 @@ func SetApiRouter(router *gin.Engine) {
 		apiRouter.GET("/available_model", middleware.CORS(), middleware.TrySetUserBySession(), relay.AvailableModel)
 		apiRouter.GET("/user_group_map", middleware.TrySetUserBySession(), controller.GetUserGroupRatio)
 		apiRouter.GET("/home_page_content", controller.GetHomePageContent)
+		apiRouter.GET("/user_agreement", controller.GetUserAgreement)
+		apiRouter.GET("/privacy_policy", controller.GetPrivacyPolicy)
 		apiRouter.GET("/verification", middleware.CriticalRateLimit(), middleware.TurnstileCheck(), controller.SendEmailVerification)
 		apiRouter.GET("/reset_password", middleware.CriticalRateLimit(), middleware.TurnstileCheck(), controller.SendPasswordResetEmail)
 		apiRouter.POST("/user/reset", middleware.CriticalRateLimit(), controller.ResetPassword)
@@ -95,6 +97,7 @@ func SetApiRouter(router *gin.Engine) {
 				selfRoute.PUT("/self", controller.UpdateSelf)
 				selfRoute.PUT("/avatar", controller.UpdateSelfAvatar)
 				selfRoute.POST("/unbind", controller.Unbind)
+				selfRoute.POST("/agree_terms", controller.AgreeToTerms)
 				// selfRoute.DELETE("/self", controller.DeleteSelf)
 				selfRoute.GET("/token", controller.GenerateAccessToken)
 				selfRoute.GET("/aff", controller.GetAffCode)
@@ -360,6 +363,7 @@ func SetApiRouter(router *gin.Engine) {
 			pricesRoute.GET("/updateService", controller.GetUpdatePriceService)
 			pricesRoute.GET("/schedule", controller.GetPriceSchedule)
 			pricesRoute.PUT("/schedule", controller.UpdatePriceSchedule)
+			pricesRoute.GET("/modelsdev", controller.GetPricesFromModelsDev)
 
 		}
 

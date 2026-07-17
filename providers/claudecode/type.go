@@ -7,11 +7,11 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"net/url"
 	"strings"
 	"time"
 
 	"done-hub/common/logger"
+	"done-hub/common/utils"
 )
 
 type OAuth2Credentials struct {
@@ -85,12 +85,12 @@ func (c *OAuth2Credentials) Refresh(ctx context.Context, proxyURL string, maxRet
 		}
 
 		if proxyURL != "" {
-			proxyURLParsed, err := url.Parse(proxyURL)
-			if err == nil {
-				client.Transport = &http.Transport{
-					Proxy: http.ProxyURL(proxyURLParsed),
-				}
+			proxyClient, err := utils.NewProxyHTTPClient(proxyURL)
+			if err != nil {
+				return fmt.Errorf("failed to create proxy http client: %w", err)
 			}
+			proxyClient.Timeout = 30 * time.Second
+			client = proxyClient
 		}
 
 		req, err := http.NewRequest("POST", TokenEndpoint, bytes.NewReader(jsonData))

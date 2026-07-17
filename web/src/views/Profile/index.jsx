@@ -14,6 +14,7 @@ import {
   DialogTitle,
   Divider,
   FormControl,
+  FormControlLabel,
   InputLabel,
   List,
   ListItem,
@@ -22,6 +23,7 @@ import {
   OutlinedInput,
   Slider,
   Stack,
+  Switch,
   Tab,
   Tabs,
   TextField,
@@ -32,6 +34,7 @@ import { keyframes } from '@emotion/react';
 import Grid from '@mui/material/Unstable_Grid2';
 import SubCard from 'ui-component/cards/SubCard';
 import MainCard from 'ui-component/cards/MainCard';
+import QuotaInput from 'ui-component/QuotaInput';
 import {
   IconBrandWechat,
   IconBrandGithub,
@@ -53,6 +56,7 @@ import {
   onLarkOAuthClicked,
   onLinuxDoOAuthClicked,
   onWebAuthnRegister,
+  renderQuota,
   showError,
   showSuccess,
   trims
@@ -370,6 +374,11 @@ export default function Profile() {
       let inputValue = inputs;
       // inputValue.username = trims(inputValue.username);
       inputValue.display_name = trims(inputValue.display_name);
+      // 空→null（清空回退系统默认，后端写 SQL NULL）；数字（含 0）→按字面阈值落库；负值夹到 0
+      const rt = inputValue.quota_remind_threshold;
+      inputValue.quota_remind_threshold = rt === '' || rt == null ? null : Math.max(0, Math.trunc(Number(rt)));
+      // 提醒开关归一为显式布尔（未设/null 视为开启），确保后端 *bool 能落库
+      inputValue.quota_remind_enabled = inputValue.quota_remind_enabled !== false;
       await validationSchema.validate(inputValue);
       const res = await API.put(`/api/user/self`, inputValue);
       const { success, message } = res.data;
@@ -637,6 +646,33 @@ export default function Profile() {
                         placeholder={t('profilePage.inputConfirmPasswordPlaceholder')}
                       />
                     </FormControl>
+                  </Grid>
+                  <Grid xs={12}>
+                    <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} alignItems="flex-start">
+                      <FormControlLabel
+                        sx={{ ml: 0, mt: { sm: 1 }, whiteSpace: 'nowrap' }}
+                        control={
+                          <Switch
+                            checked={inputs.quota_remind_enabled !== false}
+                            onChange={(e) => setInputs((prev) => ({ ...prev, quota_remind_enabled: e.target.checked }))}
+                            name="quota_remind_enabled"
+                          />
+                        }
+                        label={t('profilePage.quotaRemindEnabled')}
+                      />
+                      <Box sx={{ flexGrow: 1, width: '100%' }}>
+                        <QuotaInput
+                          id="quota_remind_threshold"
+                          name="quota_remind_threshold"
+                          label={t('profilePage.quotaRemindThreshold')}
+                          placeholder={t('profilePage.quotaRemindThresholdPlaceholder')}
+                          helperText={t('profilePage.quotaRemindThresholdDefault', { default: renderQuota(status?.quota_remind_threshold ?? 0) })}
+                          value={inputs.quota_remind_threshold ?? ''}
+                          onChange={handleInputChange}
+                          disabled={inputs.quota_remind_enabled === false}
+                        />
+                      </Box>
+                    </Stack>
                   </Grid>
                   <Grid xs={12} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                     <Button variant="contained" color="primary" onClick={submit}>
