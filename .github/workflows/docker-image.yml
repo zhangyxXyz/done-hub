@@ -4,6 +4,9 @@ env:
   IMAGE_NAME: ghcr.io/zhangyxxyz/done-hub
 
 on:
+  push:
+    tags:
+      - "v*"
   workflow_dispatch:
     inputs:
       nextchat_version:

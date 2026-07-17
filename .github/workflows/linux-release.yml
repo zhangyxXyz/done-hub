@@ -3,6 +3,10 @@ permissions:
   contents: write
 
 on:
+  push:
+    tags:
+      - "*"
+      - "!*-alpha*"
   workflow_dispatch:
     inputs:
       nextchat_version:
