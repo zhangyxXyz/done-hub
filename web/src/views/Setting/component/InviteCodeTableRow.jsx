@@ -84,14 +84,6 @@ export default function InviteCodeTableRow({ item, selected, onSelectRow, onRefr
     return timestamp2string(timestamp)
   }
 
-  const getStatusLabel = (status) => {
-    return status === STATUS.ENABLED ? (
-      <Label color="success">启用</Label>
-    ) : (
-      <Label color="error">禁用</Label>
-    )
-  }
-
   return (
     <>
       <TableRow tabIndex={item.id}>

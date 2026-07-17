@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { SET_THEME } from 'store/actions';
 import { useTheme } from '@mui/material/styles';
 import { Avatar, Box, ButtonBase, Tooltip } from '@mui/material';
@@ -8,8 +8,6 @@ import { useTranslation } from 'react-i18next';
 export default function ThemeButton() {
   const dispatch = useDispatch();
   const { t } = useTranslation();
-
-  const defaultTheme = useSelector((state) => state.customization.theme);
 
   const theme = useTheme();
 
@@ -49,31 +47,27 @@ export default function ThemeButton() {
 
   const handleThemeChange = () => {
     const currentMode = getThemeMode();
-    let nextMode;
     let nextTheme;
 
     // 循环切换：auto → light → dark → auto
     switch (currentMode) {
       case 'auto':
-        nextMode = 'light';
         nextTheme = 'light';
         localStorage.setItem('theme', 'light');
         break;
       case 'light':
-        nextMode = 'dark';
         nextTheme = 'dark';
         localStorage.setItem('theme', 'dark');
         break;
-      case 'dark':
-        nextMode = 'auto';
+      case 'dark': {
         // 跟随系统时，移除localStorage中的设置
         localStorage.removeItem('theme');
         // 检测当前系统主题
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         nextTheme = prefersDark ? 'dark' : 'light';
         break;
+      }
       default:
-        nextMode = 'light';
         nextTheme = 'light';
         localStorage.setItem('theme', 'light');
     }

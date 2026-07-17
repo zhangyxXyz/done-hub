@@ -122,8 +122,6 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, groupMap, is
   const [inputPrompt, setInputPrompt] = useState(defaultConfig.prompt);
   const [batchAdd, setBatchAdd] = useState(false);
   const [inputValue, setInputValue] = useState('');
-  const [parameterFocused, setParameterFocused] = useState(false);
-  const parameterInputRef = useRef(null);
   const removeDuplicates = (array) => [...new Set(array)];
   const [modelSelectorOpen, setModelSelectorOpen] = useState(false);
   const [tempFormikValues, setTempFormikValues] = useState(null);
@@ -135,7 +133,6 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, groupMap, is
   // GeminiCli OAuth 相关状态
   const [oauthLoading, setOauthLoading] = useState(false);
   const [oauthWindow, setOauthWindow] = useState(null);
-  const [oauthState, setOauthState] = useState(null);
   const [oauthURL, setOauthURL] = useState('');
   const oauthHandledRef = useRef(false); // 用于防止重复处理
   const pollingIntervalRef = useRef(null); // 使用 ref 存储 interval ID
@@ -174,7 +171,6 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, groupMap, is
     }
     setOauthWindow(null);
     setOauthLoading(false);
-    setOauthState(null);
     oauthHandledRef.current = false;
     if (copilotPollingRef.current) {
       clearTimeout(copilotPollingRef.current);
@@ -259,7 +255,7 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, groupMap, is
   };
 
   // 应用模型映射的核心逻辑
-  const applyModelMapping = (mapping, currentModels, currentMapping, setFieldValue) => {
+  const applyModelMapping = (mapping, currentModels, currentMapping) => {
     let updatedModels = [...currentModels];
     let newMapping = { ...currentMapping };
     let hasChanges = false;
@@ -326,7 +322,7 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, groupMap, is
       return;
     }
 
-    const { updatedModels, newMapping, hasChanges } = applyModelMapping(mapping, currentModels, modelOriginalMapping, setFieldValue);
+    const { updatedModels, newMapping, hasChanges } = applyModelMapping(mapping, currentModels, modelOriginalMapping);
 
     if (hasChanges) {
       updateModelsList(updatedModels, newMapping, setFieldValue);
@@ -372,7 +368,6 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, groupMap, is
 
         // 更新状态
         setOauthLoading(false);
-        setOauthState(null);
 
         // 处理结果
         if (res.data.result && res.data.credentials) {
@@ -421,8 +416,6 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, groupMap, is
 
     // 根据渠道类型选择 API 端点和名称
     const apiEndpoint = channelType === 60 ? 'antigravity' : 'geminicli';
-    const channelName = channelType === 60 ? 'Antigravity' : 'GeminiCli';
-
     try {
       setOauthLoading(true);
       oauthHandledRef.current = false; // 重置处理标志
@@ -443,7 +436,6 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, groupMap, is
       const authURL = res.data.auth_url;
       const state = res.data.state;
 
-      setOauthState(state);
       setOauthURL(authURL);
 
       // 打开新窗口进行授权（使用新标签页）
@@ -487,7 +479,6 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, groupMap, is
 
           // 更新状态
           setOauthLoading(false);
-          setOauthState(null);
           setOauthWindow(null);
 
           // 关闭弹窗
@@ -541,7 +532,6 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, groupMap, is
           }
           if (oauthLoading) {
             setOauthLoading(false);
-            setOauthState(null);
             showError('OAuth 授权超时，请重试');
           }
         },
@@ -1159,7 +1149,9 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, groupMap, is
       } else {
         showError(message);
       }
-    } catch (error) {}
+    } catch (error) {
+      // 加载失败时保持编辑弹窗当前状态，错误由接口层统一提示。
+    }
   };
 
   useEffect(() => {
@@ -1876,12 +1868,12 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, groupMap, is
                               <Typography variant="body2" component="div">
                                 <strong>授权步骤：</strong>
                                 <ol style={{ margin: '8px 0', paddingLeft: '20px' }}>
-                                  <li>点击下方"打开授权页面"按钮（或手动复制链接到浏览器）</li>
+                                  <li>点击下方&ldquo;打开授权页面&rdquo;按钮（或手动复制链接到浏览器）</li>
                                   <li>在新打开的页面中登录 Claude 账户并同意授权</li>
                                   <li>
                                     授权成功后，复制浏览器地址栏中的<strong>完整 URL</strong>
                                   </li>
-                                  <li>将完整 URL 粘贴到下方输入框中，点击"提交授权码"</li>
+                                  <li>将完整 URL 粘贴到下方输入框中，点击&ldquo;提交授权码&rdquo;</li>
                                 </ol>
                               </Typography>
                             </Alert>
@@ -1970,12 +1962,12 @@ const EditModal = ({ open, channelId, onCancel, onOk, groupOptions, groupMap, is
                               <Typography variant="body2" component="div">
                                 <strong>授权步骤：</strong>
                                 <ol style={{ margin: '8px 0', paddingLeft: '20px' }}>
-                                  <li>点击下方"打开授权页面"按钮（或手动复制链接到浏览器）</li>
+                                  <li>点击下方&ldquo;打开授权页面&rdquo;按钮（或手动复制链接到浏览器）</li>
                                   <li>在新打开的页面中登录 OpenAI 账户并同意授权</li>
                                   <li>
                                     授权成功后，复制浏览器地址栏中的<strong>完整 URL</strong>
                                   </li>
-                                  <li>将完整 URL 粘贴到下方输入框中，点击"提交授权码"</li>
+                                  <li>将完整 URL 粘贴到下方输入框中，点击&ldquo;提交授权码&rdquo;</li>
                                 </ol>
                               </Typography>
                             </Alert>

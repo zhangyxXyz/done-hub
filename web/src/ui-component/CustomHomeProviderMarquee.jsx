@@ -20,7 +20,7 @@ const MODEL_INFO_CACHE_TTL = 10 * 60 * 1000;
 const MONO = '"JetBrains Mono", "SFMono-Regular", Consolas, monospace';
 
 const MODEL_PROVIDERS = [
-  { name: 'OpenAI', test: /gpt|openai|codex|(^|[\/\s])o\d/i, Brand: OpenAI },
+  { name: 'OpenAI', test: /gpt|openai|codex|(^|[/\s])o\d/i, Brand: OpenAI },
   { name: 'Anthropic Claude', test: /claude|anthropic/i, Brand: Claude },
   { name: 'Google Gemini', test: /gemini|google/i, Brand: Gemini },
   { name: 'DeepSeek', test: /deepseek/i, Brand: DeepSeek },

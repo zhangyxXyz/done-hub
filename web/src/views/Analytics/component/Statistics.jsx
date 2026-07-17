@@ -6,13 +6,9 @@ import { renderQuota, renderNumber, showError } from 'utils/common';
 import { API } from 'utils/api';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import dayjs from 'dayjs';
-import 'dayjs/locale/zh-cn';
-import 'dayjs/locale/ja';
-import 'dayjs/locale/en';
 
 export default function Overview() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const siteInfo = useSelector((state) => state.siteInfo);
   const [userLoading, setUserLoading] = useState(true);
   const [channelLoading, setChannelLoading] = useState(true);
@@ -50,31 +46,6 @@ export default function Overview() {
     { value: 'year', label: t('analytics_index.timeFilter.year') },
     { value: 'all', label: t('analytics_index.timeFilter.all') }
   ];
-
-  // 获取dayjs locale
-  const getDayjsLocale = () => {
-    const currentLang = i18n.language || 'zh_CN';
-    if (currentLang === 'en_US') return 'en';
-    if (currentLang === 'ja_JP') return 'ja';
-    return 'zh-cn'; // 默认中文locale（周一开始）
-  };
-
-  // 获取时间范围 - 保留给其他功能使用
-  const getTimeRange = (filterType) => {
-    const now = dayjs().locale(getDayjsLocale());
-    switch (filterType) {
-      case 'year':
-        return { start: now.startOf('year').unix(), end: now.endOf('year').unix() };
-      case 'month':
-        return { start: now.startOf('month').unix(), end: now.endOf('month').unix() };
-      case 'week':
-        return { start: now.startOf('week').unix(), end: now.endOf('week').unix() };
-      case 'day':
-        return { start: now.startOf('day').unix(), end: now.endOf('day').unix() };
-      default:
-        return null;
-    }
-  };
 
   // 处理用户统计数据
   const processUserStatistics = (data) => {

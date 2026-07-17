@@ -299,7 +299,9 @@ export default function ChannelList() {
       } else {
         showError(message);
       }
-    } catch (error) {}
+    } catch (error) {
+      // 批量测试失败时保持列表状态，接口错误由全局请求处理统一反馈。
+    }
   };
 
   // 处理删除所有禁用渠道
@@ -313,7 +315,9 @@ export default function ChannelList() {
       } else {
         showError(message);
       }
-    } catch (error) {}
+    } catch (error) {
+      // 删除失败时保持列表不变，接口错误由全局请求处理统一反馈。
+    }
   };
 
   // 处理更新所有启用渠道余额

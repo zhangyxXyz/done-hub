@@ -160,7 +160,9 @@ const OperationSetting = () => {
       } else {
         showError(message);
       }
-    } catch (error) {}
+    } catch (error) {
+      // 保持页面可用，接口异常由后续手动保存操作反馈。
+    }
   };
 
   const getSafeTools = async () => {
@@ -504,7 +506,9 @@ const OperationSetting = () => {
         return;
       }
       showError('日志清理失败：' + message);
-    } catch (error) {}
+    } catch (error) {
+      // 清理失败时沿用接口返回前的静默处理行为。
+    }
   };
 
   const genInvoiceMonth = async () => {
@@ -517,7 +521,9 @@ const OperationSetting = () => {
         return;
       }
       showError('账单生成失败：' + message);
-    } catch (error) {}
+    } catch (error) {
+      // 生成失败时沿用接口返回前的静默处理行为。
+    }
   };
   const updateInvoiceMonth = async () => {
     try {
@@ -529,7 +535,9 @@ const OperationSetting = () => {
         return;
       }
       showError('账单更新失败：' + message);
-    } catch (error) {}
+    } catch (error) {
+      // 更新失败时沿用接口返回前的静默处理行为。
+    }
   };
 
   return (

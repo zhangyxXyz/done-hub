@@ -2,11 +2,9 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   Alert,
   Box,
-  Button,
   Chip,
   Divider,
   FormControl,
-  Grid,
   IconButton,
   InputLabel,
   LinearProgress,
@@ -41,16 +39,6 @@ const statusColor = (status) => {
   if (status >= 400) return 'warning';
   if (status >= 300) return 'info';
   return 'success';
-};
-
-const kindColor = (kind) => {
-  const normalized = `${kind || ''}`.toLowerCase();
-  if (normalized.includes('system')) return 'info';
-  if (normalized.includes('user')) return 'success';
-  if (normalized.includes('assistant')) return 'primary';
-  if (normalized.includes('tool')) return 'warning';
-  if (normalized.includes('reasoning')) return 'secondary';
-  return 'default';
 };
 
 const compactPath = (entry) => {
@@ -111,21 +99,6 @@ const glassPanel = (theme, opacity = 0.72) => ({
       ? `inset 0 1px 0 ${alpha('#ffffff', 0.08)}, 0 18px 42px ${alpha('#020617', 0.24)}`
       : `inset 0 1px 0 ${alpha('#ffffff', 0.82)}, 0 16px 36px ${alpha('#0f172a', 0.08)}`
 });
-
-const fieldAccent = (name = '') => {
-  const key = `${name}`.toLowerCase();
-  if (key.includes('request_id')) return { main: '#a78bfa', label: 'trace' };
-  if (key.includes('captured') || key.includes('time')) return { main: '#22d3ee', label: 'time' };
-  if (key.includes('method')) return { main: '#38bdf8', label: 'method' };
-  if (key.includes('path')) return { main: '#60a5fa', label: 'route' };
-  if (key.includes('status')) return { main: '#34d399', label: 'status' };
-  if (key.includes('duration')) return { main: '#f59e0b', label: 'latency' };
-  if (key.includes('token')) return { main: '#f472b6', label: 'token' };
-  if (key.includes('channel')) return { main: '#c084fc', label: 'channel' };
-  if (key.includes('model')) return { main: '#fb7185', label: 'model' };
-  if (key.includes('stream')) return { main: '#2dd4bf', label: 'stream' };
-  return { main: '#0ea5e9', label: 'field' };
-};
 
 const fieldCardSx = (theme) => ({
   ...glassPanel(theme, 0.62),

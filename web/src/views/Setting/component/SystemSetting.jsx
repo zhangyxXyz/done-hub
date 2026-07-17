@@ -100,7 +100,7 @@ const SystemSetting = () => {
         showError(message)
       }
     } catch (error) {
-
+      // 初次加载失败时保持现有设置页的静默降级行为。
     }
   }
 

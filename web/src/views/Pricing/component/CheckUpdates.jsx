@@ -472,13 +472,23 @@ export const CheckUpdates = ({ open, onCancel, onOk, row }) => {
         )}
       </DialogContent>
 
-      <DialogActions sx={{ px: 2, py: 1.5, justifyContent: 'space-between' }}>
+      <DialogActions
+        sx={{
+          px: 2,
+          py: 1.5,
+          justifyContent: 'space-between',
+          flexDirection: { xs: 'column-reverse', sm: 'row' },
+          alignItems: { xs: 'stretch', sm: 'center' },
+          gap: 1,
+          '& > :not(style) ~ :not(style)': { ml: 0 }
+        }}
+      >
         <Button onClick={onCancel} variant="outlined" size="small" color="inherit" sx={{ borderRadius: '18px' }}>
           {t('CheckUpdatesTable.cancel')}
         </Button>
 
         {newPricing.length > 0 && (
-          <Stack direction="row" spacing={1}>
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} sx={{ width: { xs: '100%', sm: 'auto' } }}>
             <LoadingButton
               variant="contained"
               size="small"

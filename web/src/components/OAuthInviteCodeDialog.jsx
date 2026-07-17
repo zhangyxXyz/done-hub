@@ -13,7 +13,6 @@ import {
   TextField,
   Typography
 } from '@mui/material'
-import { useTranslation } from 'react-i18next'
 import { API } from 'utils/api'
 
 const OAuthInviteCodeDialog = ({
@@ -22,7 +21,6 @@ const OAuthInviteCodeDialog = ({
   onConfirm,
   provider
 }) => {
-  const { t } = useTranslation()
   const [inviteCode, setInviteCode] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')

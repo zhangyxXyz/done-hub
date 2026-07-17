@@ -56,6 +56,27 @@ var firstPartyModelsDevProviders = map[string]bool{
 	"minimax": true, "alibaba": true, "stepfun": true, "perplexity": true,
 }
 
+// modelsDevProviderChannelTypes 将 models.dev 的第一方 provider 映射到 done-hub
+// 已有的渠道类型。模型名本身能够推断时仍优先使用 InferModelChannelType；这个映射主要
+// 覆盖 gpt/o 系列、grok、mistral 等无法仅凭当前前缀规则识别的模型。
+var modelsDevProviderChannelTypes = map[string]int{
+	"anthropic":     config.ChannelTypeAnthropic,
+	"openai":        config.ChannelTypeOpenAI,
+	"google":        config.ChannelTypeGemini,
+	"google-vertex": config.ChannelTypeVertexAI,
+	"xai":           config.ChannelTypeXAI,
+	"deepseek":      config.ChannelTypeDeepseek,
+	"mistral":       config.ChannelTypeMistral,
+	"cohere":        config.ChannelTypeCohere,
+	"meta":          config.ChannelTypeLLAMA,
+	"llama":         config.ChannelTypeLLAMA,
+	"moonshotai":    config.ChannelTypeMoonshot,
+	"zhipuai":       config.ChannelTypeZhipu,
+	"zai":           config.ChannelTypeZhipu,
+	"minimax":       config.ChannelTypeMiniMax,
+	"alibaba":       config.ChannelTypeAli,
+}
+
 // isFirstPartyModelsDevProvider 判断 provider 是否为模型发布方官方源。
 func isFirstPartyModelsDevProvider(provider string) bool {
 	return firstPartyModelsDevProviders[provider]
@@ -260,7 +281,7 @@ func candidateToPrice(name string, c modelsDevCandidate) *Price {
 	price := &Price{
 		Model:       name,
 		Type:        TokensPriceType,
-		ChannelType: 0, // models.dev 无渠道类型语义，且 ChannelType 不参与计费，填 0（Unknown）。
+		ChannelType: modelsDevChannelType(c.Provider, name),
 		Input:       roundRatioValue(c.Input / modelsDevCostPerMillionBase),
 	}
 	if c.Output != nil {
@@ -299,6 +320,18 @@ func candidateToPrice(name string, c modelsDevCandidate) *Price {
 	}
 
 	return price
+}
+
+// modelsDevChannelType 优先沿用项目已有的模型名推断规则，再使用 models.dev provider。
+// 对无法识别的托管商回退 Custom，避免把可用的价格数据落成无效的 Unknown 渠道类型。
+func modelsDevChannelType(provider, modelName string) int {
+	if inferred := InferModelChannelType(modelName); inferred != config.ChannelTypeUnknown {
+		return inferred
+	}
+	if channelType, ok := modelsDevProviderChannelTypes[provider]; ok {
+		return channelType
+	}
+	return config.ChannelTypeCustom
 }
 
 // firstContextTier 返回第一个 type=="context" 且带正阈值的档位。

@@ -47,16 +47,17 @@
 
 .content-viewer h6 {
   font-size: 0.85em;
-  color: #6a737d;
+  color: var(--aihub-muted, #6a737d);
 }
 
 /* Links */
 .content-viewer a {
-  color: #0366d6;
+  color: var(--aihub-link, #0366d6);
   text-decoration: none;
 }
 
 .content-viewer a:hover {
+  color: var(--aihub-link-hover, #005cc5);
   text-decoration: underline;
 }
 
@@ -116,8 +117,8 @@
 /* Blockquotes */
 .content-viewer blockquote {
   padding: 0 1em;
-  color: #6a737d;
-  border-left: 0.25em solid #dfe2e5;
+  color: var(--aihub-muted, #6a737d);
+  border-left: 0.25em solid var(--aihub-border, #dfe2e5);
   margin: 0 0 16px 0;
 }
 
@@ -176,49 +177,47 @@
   border: 0;
 }
 
-/* Dark mode adjustments */
-@media (prefers-color-scheme: dark) {
-  .content-viewer {
-    color: #c9d1d9;
-  }
+/* Dark mode follows the application's resolved theme instead of the OS setting. */
+.content-viewer[data-theme='dark'] {
+  color: #c9d1d9;
+}
 
-  .content-viewer h1,
-  .content-viewer h2 {
-    border-bottom-color: rgba(255, 255, 255, 0.1);
-  }
+.content-viewer[data-theme='dark'] h1,
+.content-viewer[data-theme='dark'] h2 {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
 
-  .content-viewer a {
-    color: #58a6ff;
-  }
+.content-viewer[data-theme='dark'] a {
+  color: var(--aihub-link, #58a6ff);
+}
 
-  .content-viewer code {
-    background-color: rgba(240, 246, 252, 0.15);
-  }
+.content-viewer[data-theme='dark'] code {
+  background-color: rgba(240, 246, 252, 0.15);
+}
 
-  .content-viewer pre {
-    background-color: #161b22;
-  }
+.content-viewer[data-theme='dark'] pre {
+  background-color: #161b22;
+}
 
-  .content-viewer blockquote {
-    color: #8b949e;
-    border-left-color: #3b434b;
-  }
+.content-viewer[data-theme='dark'] blockquote {
+  color: #8b949e;
+  border-left-color: #3b434b;
+}
 
-  .content-viewer table th,
-  .content-viewer table td {
-    border-color: #3b434b;
-  }
+.content-viewer[data-theme='dark'] table th,
+.content-viewer[data-theme='dark'] table td {
+  border-color: #3b434b;
+}
 
-  .content-viewer table tr {
-    background-color: #0d1117;
-    border-top-color: #3b434b;
-  }
+.content-viewer[data-theme='dark'] table tr {
+  background-color: #0d1117;
+  border-top-color: #3b434b;
+}
 
-  .content-viewer table tr:nth-child(2n) {
-    background-color: #161b22;
-  }
+.content-viewer[data-theme='dark'] table tr:nth-child(2n) {
+  background-color: #161b22;
+}
 
-  .content-viewer hr {
-    background-color: #30363d;
-  }
+.content-viewer[data-theme='dark'] hr {
+  background-color: #30363d;
 }

@@ -32,7 +32,6 @@ import PricesTableRow from './component/TableRow';
 import KeywordTableHead from 'ui-component/TableHead';
 import { API } from 'utils/api';
 import { useTranslation } from 'react-i18next';
-import { alpha } from '@mui/material/styles';
 import { getPageSize, savePageSize, PAGE_SIZE_OPTIONS } from 'constants';
 import EditModal from './component/EditModal';
 import ToggleButtonGroup from 'ui-component/ToggleButton';

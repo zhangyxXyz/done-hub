@@ -12,7 +12,6 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  Divider,
   FormControl,
   FormControlLabel,
   InputLabel,

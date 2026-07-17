@@ -293,7 +293,6 @@ const InviteCodeSetting = () => {
 
       // 如果要开启邀请码注册，先检查是否有有效的邀请码
       if (newValue) {
-        const now = Math.floor(Date.now() / 1000)
         const hasValidCodes = Array.isArray(inviteCodes) && inviteCodes.some(code =>
             code.status === INVITE_CODE_CONFIG.STATUS.ENABLED &&
             (code.max_uses === 0 || code.used_count < code.max_uses)

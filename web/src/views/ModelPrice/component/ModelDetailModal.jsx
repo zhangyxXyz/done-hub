@@ -27,7 +27,7 @@ import { useTranslation } from 'react-i18next';
 
 // ----------------------------------------------------------------------
 
-export default function ModelDetailModal({ open, onClose, model, provider, modelInfo, priceData, ownedbyIcon, formatPrice, unit }) {
+export default function ModelDetailModal({ open, onClose, model, provider, modelInfo, priceData, ownedbyIcon, formatPrice }) {
   const theme = useTheme();
   const { t } = useTranslation();
   if (!model) return null;
@@ -444,5 +444,4 @@ ModelDetailModal.propTypes = {
   ownedbyIcon: PropTypes.string,
   userGroupMap: PropTypes.object,
   formatPrice: PropTypes.func,
-  unit: PropTypes.string
 };

@@ -9,8 +9,6 @@ import GroupRatioLabel from 'ui-component/GroupRatioLabel'
 import TableSwitch from 'ui-component/Switch'
 import ConfirmDialog from 'ui-component/confirm-dialog'
 import { copy, getAvailableModelNames, getChatLinks, renderQuota, replaceChatPlaceholders, timestamp2string } from 'utils/common'
-import Label from 'ui-component/Label'
-
 import { Icon } from '@iconify/react'
 import { useTranslation } from 'react-i18next'
 import { stickyCellSx } from 'ui-component/stickyCellSx'

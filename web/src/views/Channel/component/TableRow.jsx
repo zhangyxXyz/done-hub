@@ -574,7 +574,9 @@ export default function ChannelTableRow({
       } else {
         showError(message);
       }
-    } catch (error) {}
+    } catch (error) {
+      // 更新失败时保留当前余额，接口错误由全局请求处理统一反馈。
+    }
   };
 
   useEffect(() => {
