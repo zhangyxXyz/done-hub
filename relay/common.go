@@ -13,6 +13,7 @@ import (
 	"done-hub/model"
 	"done-hub/providers"
 	providersBase "done-hub/providers/base"
+	"done-hub/providers/claude"
 	"done-hub/providers/gemini"
 	"done-hub/types"
 	"encoding/json"
@@ -378,7 +379,96 @@ func fetchChannelByModel(c *gin.Context, modelName string) (*model.Channel, erro
 	return channel, nil
 }
 
+// unifyResponseModel 在响应写出前统一把含 model 字段的响应对象改写为用户原始请求模型名。
+// 仅在 UnifiedRequestResponseModelEnabled 开启且 context 存在 original_model 时生效（由
+// GetResponseModelNameFromContext 内部判断）；未启用时返回原值，幂等无副作用。
+// 这是所有非流式 JSON 响应（chat/completions/embeddings/moderations/rerank/responses/claude/gemini）
+// 的统一出口拦截点，避免逐个 provider 手动改写导致的覆盖遗漏。
+func unifyResponseModel(c *gin.Context, data interface{}) {
+	switch v := data.(type) {
+	case *types.ChatCompletionResponse:
+		v.Model = providersBase.GetResponseModelNameFromContext(c, v.Model)
+	case *types.CompletionResponse:
+		v.Model = providersBase.GetResponseModelNameFromContext(c, v.Model)
+	case *types.EmbeddingResponse:
+		v.Model = providersBase.GetResponseModelNameFromContext(c, v.Model)
+	case *types.ModerationResponse:
+		v.Model = providersBase.GetResponseModelNameFromContext(c, v.Model)
+	case *types.RerankResponse:
+		v.Model = providersBase.GetResponseModelNameFromContext(c, v.Model)
+	case *types.OpenAIResponsesResponses:
+		v.Model = providersBase.GetResponseModelNameFromContext(c, v.Model)
+	case *claude.ClaudeResponse:
+		v.Model = providersBase.GetResponseModelNameFromContext(c, v.Model)
+	case *gemini.GeminiChatResponse:
+		// Gemini 原生响应回显的是 modelVersion；同时存在 model 字段，二者都按需改写。
+		// 仅当原值非空时改写，避免给本不含该字段的响应凭空注入。
+		if v.ModelVersion != "" {
+			v.ModelVersion = providersBase.GetResponseModelNameFromContext(c, v.ModelVersion)
+		}
+		if v.Model != "" {
+			v.Model = providersBase.GetResponseModelNameFromContext(c, v.Model)
+		}
+	}
+}
+
+// applyPassThroughHeaders 把 provider 暂存的上游响应头（Bedrock 的 x-amzn-* /
+// Claude 的 anthropic-ratelimit-* 等）写入下游响应，并把上游 request-id 以
+// X-Upstream-Request-Id 回写。必须在 WriteHeader 之前调用；未暂存对应 key 的渠道无影响。
+func applyPassThroughHeaders(c *gin.Context) {
+	if v, ok := c.Get(config.GinPassThroughHeaders); ok {
+		if headers, ok := v.(http.Header); ok {
+			for name, values := range headers {
+				for _, value := range values {
+					c.Writer.Header().Add(name, value)
+				}
+			}
+		}
+	}
+	if v, ok := c.Get(config.GinUpstreamRequestIdKey); ok {
+		if requestID, ok := v.(string); ok && requestID != "" {
+			c.Writer.Header().Set("X-Upstream-Request-Id", requestID)
+		}
+	}
+}
+
+// writeRawResponseBodyIfPresent 若 provider 暂存了上游原始响应字节，则直接透传，
+// 保留上游的字段顺序 / 未知字段 / model 原名，避免结构体 re-marshal 洗掉指纹。
+// 两个 key 都会同时透传上游响应头（Bedrock x-amzn-* / Claude anthropic-* 等）。
+// 命中并写出时返回 true，调用方应据此提前返回。
+func writeRawResponseBodyIfPresent(c *gin.Context) bool {
+	rawKeys := []string{
+		config.GinBedrockRawResponseBodyKey,
+		config.GinRawResponseBodyKey,
+	}
+	for _, key := range rawKeys {
+		raw, ok := c.Get(key)
+		if !ok {
+			continue
+		}
+		rawBytes, ok := raw.([]byte)
+		if !ok || len(rawBytes) == 0 {
+			continue
+		}
+		applyPassThroughHeaders(c)
+		c.Writer.Header().Set("Content-Type", "application/json")
+		c.Writer.WriteHeader(http.StatusOK)
+		if _, err := c.Writer.Write(rawBytes); err != nil {
+			logger.LogError(c.Request.Context(), "write_response_body_failed:"+err.Error())
+		}
+		return true
+	}
+	return false
+}
+
 func responseJsonClient(c *gin.Context, data interface{}) *types.OpenAIErrorWithStatusCode {
+	if writeRawResponseBodyIfPresent(c) {
+		return nil
+	}
+
+	// 统一改写响应里的 model 字段为用户原始请求模型名（开关开启且存在映射时）
+	unifyResponseModel(c, data)
+
 	// 将data转换为 JSON，禁用 HTML 转义以避免 & 被转为 \u0026
 	var buf bytes.Buffer
 	encoder := json.NewEncoder(&buf)
@@ -392,6 +482,8 @@ func responseJsonClient(c *gin.Context, data interface{}) *types.OpenAIErrorWith
 	// Encode 会在末尾添加换行符，需要去掉
 	responseBody := bytes.TrimSuffix(buf.Bytes(), []byte("\n"))
 
+	// 结构体改写分支（有模型映射，未走字节透传）同样透传上游响应头，必须在 WriteHeader 之前。
+	applyPassThroughHeaders(c)
 	c.Writer.Header().Set("Content-Type", "application/json")
 	c.Writer.WriteHeader(http.StatusOK)
 	_, err = c.Writer.Write(responseBody)
@@ -406,6 +498,8 @@ type StreamEndHandler func() string
 
 func responseStreamClient(c *gin.Context, stream requester.StreamReaderInterface[string], endHandler StreamEndHandler) (firstResponseTime time.Time, errWithOP *types.OpenAIErrorWithStatusCode) {
 	requester.SetEventStreamHeaders(c)
+	// 指纹保真：透传上游响应头（OpenAI x-ratelimit-* 等）。必须在首次写入前设置。
+	applyPassThroughHeaders(c)
 	dataChan, errChan := stream.Recv()
 
 	done := make(chan struct{})
@@ -473,6 +567,8 @@ func responseStreamClient(c *gin.Context, stream requester.StreamReaderInterface
 
 func responseGeneralStreamClient(c *gin.Context, stream requester.StreamReaderInterface[string], endHandler StreamEndHandler) (firstResponseTime time.Time) {
 	requester.SetEventStreamHeaders(c)
+	// 指纹保真：透传上游响应头（Bedrock x-amzn-* / Claude anthropic-* 等）。必须在首次写入前设置。
+	applyPassThroughHeaders(c)
 	dataChan, errChan := stream.Recv()
 
 	done := make(chan struct{})

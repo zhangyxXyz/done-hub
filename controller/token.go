@@ -312,8 +312,11 @@ func UpdateToken(c *gin.Context) {
 		// If you add more fields, please also update token.Update()
 		cleanToken.Name = token.Name
 		cleanToken.ExpiredTime = token.ExpiredTime
-		cleanToken.RemainQuota = token.RemainQuota
 		cleanToken.UnlimitedQuota = token.UnlimitedQuota
+		// 无限额度令牌没有上限概念，保留原 remain_quota，避免误填值覆盖掉用户真实额度（再切回有限额时仍可用）
+		if !token.UnlimitedQuota {
+			cleanToken.RemainQuota = token.RemainQuota
+		}
 		cleanToken.Group = token.Group
 		cleanToken.BackupGroup = token.BackupGroup
 
@@ -347,6 +350,23 @@ func UpdateToken(c *gin.Context) {
 		"success": true,
 		"message": "",
 		"data":    cleanToken,
+	})
+}
+
+// DeleteTokenByAdmin 管理员删除任意token
+func DeleteTokenByAdmin(c *gin.Context) {
+	id, _ := strconv.Atoi(c.Param("id"))
+	err := model.DeleteTokenByIdAdmin(id)
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"success": false,
+			"message": err.Error(),
+		})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"success": true,
+		"message": "",
 	})
 }
 
@@ -447,8 +467,11 @@ func UpdateTokenByAdmin(c *gin.Context) {
 	} else {
 		cleanToken.Name = token.Name
 		cleanToken.ExpiredTime = token.ExpiredTime
-		cleanToken.RemainQuota = token.RemainQuota
 		cleanToken.UnlimitedQuota = token.UnlimitedQuota
+		// 无限额度令牌没有上限概念，保留原 remain_quota，避免误填值覆盖掉用户真实额度（再切回有限额时仍可用）
+		if !token.UnlimitedQuota {
+			cleanToken.RemainQuota = token.RemainQuota
+		}
 		cleanToken.Group = token.Group
 		cleanToken.BackupGroup = token.BackupGroup
 		cleanToken.Setting.Set(newSetting)

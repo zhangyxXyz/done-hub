@@ -24,6 +24,7 @@
     "checkUpdates": "Check Updates",
     "dataFormatIncorrect": "Data format is incorrect",
     "fetchData": "Fetch Data",
+    "fetchFromModelsDev": "Fetch from models.dev",
     "inputMultiplierChanged": "Input multiplier changed from",
     "newModels": "New Models",
     "noNewModels": "No new models",
@@ -47,6 +48,12 @@
     "extraRatiosChanges": "Changes in magnification ratio",
     "extraRatiosChangesTip": "Changes in magnification: {{changes}}",
     "extraRatiosRemoved": "Remove magnification ratio",
+    "longContextAdded": "Add long context tier",
+    "longContextRemoved": "Remove long context tier",
+    "longContextChanged": "Long context tier changed",
+    "longContextThreshold": "Threshold",
+    "longContextInput": "Input ratio",
+    "longContextOutput": "Output ratio",
     "modified": "Edit",
     "removed": "Delete"
   },
@@ -73,6 +80,16 @@
     "loadingError": "Failed to load about content...",
     "projectRepo": "Project repository:"
   },
+  "userAgreement": {
+    "title": "User Agreement",
+    "emptyDescription": "The administrator has not configured the user agreement content yet.",
+    "loadingError": "Failed to load user agreement content..."
+  },
+  "privacyPolicy": {
+    "title": "Privacy Policy",
+    "emptyDescription": "The administrator has not configured the privacy policy content yet.",
+    "loadingError": "Failed to load privacy policy content..."
+  },
   "alloy 映射": "alloy mapping",
   "analytics": "Analytics",
   "analytics_index": {
@@ -80,6 +97,8 @@
     "averageLatency": "Average Latency",
     "channelCount": "Channel Count",
     "consumptionStatistics": "Consumption Statistics",
+    "costStatistics": "Cost Statistics",
+    "profitStatistics": "Profit Statistics",
     "directRegistration": "Direct Registration",
     "disabled": "Disabled",
     "endTime": "End Time",
@@ -92,6 +111,9 @@
     "testDisabled": "Test Disabled",
     "tokensStatistics": "Tokens Statistics",
     "totalUserBalance": "Total User Balance",
+    "totalUsedQuota": "Total Used",
+    "totalRequestCount": "Requests",
+    "totalTokens": "Total Tokens",
     "totalUserSpending": "Total User Spending",
     "totalUsers": "Total Users",
     "unused": "Unused",
@@ -101,7 +123,10 @@
     "order": "Order",
     "realTimeTraffic": "Real-time Traffic",
     "tpmDescription": "TPM (Token/min)",
+    "cpmDescription": "CPM",
+    "ppmDescription": "PPM",
     "last60SecondsStats": "Last 60 seconds statistics",
+    "autoRefresh": "Auto",
     "timeFilter": {
       "all": "All",
       "year": "This Year",
@@ -130,7 +155,19 @@
     "collapse": "Collapse",
     "customModelTip": "Customize: Click or press Enter to enter",
     "editSuccess": "update completed!",
+    "tagGroupOverwriteWarning": "This tag has {{count}} channels in total. Saving will overwrite all {{count}} channels with the same configuration (except each channel's own Key).",
+    "tagGroupSaveConfirmTitle": "Confirm overwriting group configuration",
+    "tagGroupSaveConfirmContent": "Saving will overwrite all {{count}} channels under tag \"{{tag}}\" with the current configuration (except each channel's own Key). Continue?",
+    "tagBulkFieldConfirmTitle": "Confirm bulk change",
+    "tagBulkFieldConfirmContent": "This will set \"{{field}}\" to {{value}} for all {{count}} channels under tag \"{{tag}}\". Continue?",
+    "tagMemberSectionTitle": "Group members (each Key is one channel)",
+    "tagMemberKeysLabel": "Member Key list",
+    "tagMemberKeysHelper": "One Key per line, each mapping to a channel in this group. Adding a line creates a channel; removing one deletes that channel. Each channel's Key is never overwritten by the shared config.",
+    "joinExistingTagWarning": "Tag \"{{tag}}\" already exists ({{count}} channels). After saving, this channel will join that group, and future group-wide edits will overwrite its configuration.",
     "expand": "Expand",
+    "sectionBasic": "Basic",
+    "sectionAdvanced": "Advanced",
+    "sectionBilling": "Billing & Behavior",
     "inputAllModel": "Fill in all models",
     "inputChannelModel": "Fill in the channel support model",
     "invalidJson": "Invalid JSON",
@@ -176,7 +213,9 @@
     "overwriteMappings": "Overwrite existing mappings",
     "overwriteMappingsTip": "When enabled, existing mappings will be cleared and only new mappings will be preserved",
     "clearModels": "Reset",
-    "clearModelsTip": "Reset all selected models"
+    "clearModelsTip": "Reset all selected models",
+    "tagMembersTitle": "{{count}} member channels in this group",
+    "tagMembersHint": "Each member's Key is independent and unaffected by the shared config. To add or remove members, expand this tag's row in the list."
   },
   "channel_index": {
     "AzureApiVersion": "Azure version number",
@@ -228,7 +267,10 @@
     "updateEnabledBalance": "Update Enabled Balance",
     "usedBalance": "Used Balance/Remaining Balance",
     "weight": "Weight",
+    "costRatio": "Cost Ratio",
     "onlyTags": "Display tags only",
+    "tagFilter": "Tag Filter",
+    "noTagOnly": "Untagged only",
     "batchAddUserGroup": "Batch Add User Group",
     "batchAddUserGroupTip": "Select channels and add user groups. If a channel already has the group, it will be skipped.",
     "searchChannelPlaceholder": "Enter channel name to search (leave empty to get all channels)",
@@ -250,14 +292,36 @@
     "selectModelToAdd": "Select or input models to add",
     "pleaseSelectModel": "Please select or input models",
     "pleaseSelectChannelsForModel": "Please select at least one channel",
-    "channelAlreadyHasModel": "(Already has some models)",
+    "channelAlreadyHasAllModels": "(Already has all selected models)",
     "currentModels": "Current models",
     "noModels": "None",
     "addingModel": "Adding...",
     "addModelToChannels": "Add models to {{count}} channels",
     "batchAddModelSuccess": "Successfully added models \"{{model}}\" to {{count}} channels",
     "modelInputTip": "Supports multiple models, separated by commas",
-    "loadingChannels": "Loading channels..."
+    "loadingChannels": "Loading channels...",
+    "previousPage": "Previous page",
+    "nextPage": "Next page",
+    "pageInfo": "Page {{page}} / {{total}}",
+    "selectionStatus": "Selected {{selected}} (on page {{onPage}}) / {{count}} on page / {{total}} matched",
+    "selectionStatusFiltered": "Selected {{selected}} (on page {{onPage}}) / {{count}} strict matches on page / {{total}} fuzzy-matched on server",
+    "selectCurrentPage": "Select current page",
+    "unselectCurrentPage": "Unselect current page",
+    "clearSelection": "Clear selection",
+    "clearKeyword": "Clear keyword",
+    "channelOnlyHasThisModel": "(Only model left — cannot delete)",
+    "channelAlreadyHasPartialModels": "(Some models already present)",
+    "batchDeleteTipV2": "Search uses fuzzy matching but the list is strictly filtered by exact model name. Channels with this as their only model are disabled to avoid emptying.",
+    "batchAzureAPITip": "Select Azure-type channels and replace their API version. First search by current version (leave blank to list all Azure channels), then enter the new version to replace.",
+    "currentAzureAPIVersion": "Current version",
+    "newAzureAPIVersion": "New version",
+    "replaceAzureAPIVersion": "Replace API version on {{count}} channels",
+    "replacing": "Replacing...",
+    "confirmDeleteModel": "Delete model \"{{model}}\" from {{count}} channels",
+    "deleting": "Deleting...",
+    "modelToDelete": "Model name to delete (exact match)",
+    "delModelEmptyHint": "Enter a model name above and press Enter to search matching channels",
+    "azureApiSearchPlaceholder": "API version to search (leave blank for all Azure channels)"
   },
   "channel_row": {
     "auto": "automatic",
@@ -316,7 +380,31 @@
     "tagChannelsError": "Channel {{action}} failed: {{message}}",
     "tagChannelsSuccess": "The tag channel {{action}} is successful.",
     "weightUpdateError": "Weight update failed: {{message}}",
-    "weightUpdateSuccess": "Weight update successful"
+    "weightUpdateSuccess": "Weight update successful",
+    "costRatioUpdateSuccess": "Cost ratio update successful",
+    "costRatioUpdateError": "Cost ratio update failed: {{message}}",
+    "rowsPerPage": "Rows per page:",
+    "paginationDisplayedRows": "{{from}}-{{to}} of {{count}}",
+    "groupPriority": "Priority (group)",
+    "groupPriorityTip": "Applies to all channels under this tag",
+    "groupWeight": "Group Weight",
+    "groupWeightTip": "Applies to all channels under this tag",
+    "groupCostRatio": "Group Ratio",
+    "groupCostRatioTip": "Applies to all channels under this tag",
+    "groupCount": "{{count}} total",
+    "groupEnabled": "{{count}} on",
+    "groupDisabled": "{{count}} off",
+    "expandGroup": "Expand channel list",
+    "collapseGroup": "Collapse channel list",
+    "avgLabel": "Avg",
+    "sumLabel": "Total",
+    "groupStatusSummary": "{{count}} channels · {{enabled}} enabled / {{disabled}} disabled",
+    "mixed": "Mixed",
+    "mixedTip": "Channels under this tag have inconsistent type/group; group editing will overwrite them all to one",
+    "wholeGroup": "Group",
+    "groupPriorityLabel": "Priority (all)",
+    "groupWeightLabel": "Weight (all)",
+    "groupCostRatioLabel": "Ratio (all)"
   },
   "common": {
     "again": "Retry ({{count}})",
@@ -363,6 +451,7 @@
     "action": "Action",
     "actions": "Operation",
     "noDataAvailable": "No data available",
+    "noSearchResults": "No matching results found",
     "pageSize": "Number of items per page",
     "search": "Search",
     "searchFilters": "Search Filters",
@@ -427,7 +516,66 @@
     "sourceCode": "Source code under"
   },
   "home": {
-    "loadingErr": "Failed to load homepage content..."
+    "loadingErr": "Failed to load homepage content...",
+    "hero": {
+      "title": "Every model, one API",
+      "subtitle": "Aggregate OpenAI, Claude, Gemini, DeepSeek and dozens of providers behind one OpenAI-compatible API. Swap the base URL to connect; manage keys, billing, and logs in one place.",
+      "getStarted": "Get started",
+      "console": "Open console",
+      "viewPricing": "View pricing"
+    },
+    "stats": {
+      "channels": "Channel types",
+      "protocols": "Native protocols",
+      "openSource": "Open source"
+    },
+    "code": {
+      "title": "Three protocols, one address",
+      "subtitle": "OpenAI, Claude, and Gemini requests are proxied as-is.",
+      "reply": "Hi! I'm {{model}}, reached through Done Hub."
+    },
+    "providers": {
+      "title": "Dozens of providers, one API",
+      "subtitle": "Major models worldwide are wired in and normalized to an OpenAI-compatible format, with new providers added over time."
+    },
+    "features": {
+      "title": "More than a gateway",
+      "subtitle": "Channel routing, billing, usage logs, and native clients, all in one backend.",
+      "items": {
+        "routing": {
+          "title": "Channel routing",
+          "desc": "Split traffic by priority and weight; failed upstreams cool down and retry."
+        },
+        "billing": {
+          "title": "Billing & groups",
+          "desc": "Tokens, groups, pricing, quotas, and invoices keep costs traceable."
+        },
+        "observability": {
+          "title": "Logs & usage",
+          "desc": "RPM/TPM, spend, and request logs, with per-user CSV export."
+        },
+        "clients": {
+          "title": "Native clients",
+          "desc": "Point Claude Code, Gemini CLI, and Codex straight at it; each proxied on its native protocol."
+        }
+      }
+    },
+    "howItWorks": {
+      "title": "Up and running in four steps",
+      "subtitle": "From deploy to client, each step follows the real request path.",
+      "s1Title": "Deploy",
+      "s1Desc": "Run Done Hub with Docker and set the basics.",
+      "s2Title": "Add channels",
+      "s2Desc": "Enable OpenAI, Claude, Gemini and add upstream keys.",
+      "s3Title": "Connect clients",
+      "s3Desc": "OpenAI uses /v1, Claude /claude/v1, Gemini /gemini.",
+      "s4Title": "Operate",
+      "s4Desc": "Watch dashboards and logs; manage billing and channels."
+    },
+    "cta": {
+      "title": "Fully open source. Stars and contributions welcome.",
+      "github": "View on GitHub"
+    }
   },
   "inviteCard": {
     "copyButton": {
@@ -543,18 +691,22 @@
       "outputPrice": "Output Price",
       "groupRatio": "Group Ratio",
       "groupRatioValue": "Group Ratio",
+      "longContextRatio": "Long Context Ratio",
       "actualPrice": "Actual Price",
       "input": "Input",
       "output": "Output",
       "finalCalculation": "Final Calculation",
       "originalBilling": "Original Billing",
       "actualBilling": "Actual Billing",
+      "cost": "Cost",
+      "profit": "Profit",
       "calculationNote": "PS: This system calculates based on points, and all amounts are converted from points. 1 point = $0.000002, with a minimum spending of 1 point. This calculation is for reference only; actual charges may vary.",
       "times": "times"
     },
     "cachedReadTokens": "Cache read Tokens (* {{ ratio }})",
     "cachedWriteTokens": "Write tokens to cache (* {{ ratio }})",
     "cachedWrite1hTokens": "Write tokens to cache 1h (* {{ ratio }})",
+    "openaiCacheWriteTokens": "Write tokens to cache (OpenAI) (* {{ ratio }})",
     "reasoningTokens": "Deduction Tokens (* {{ ratio }})"
   },
   "login": {
@@ -628,6 +780,7 @@
     "cached_write_tokens": "Cache Write Ratio",
     "cached_write_1h_tokens": "Cache Write 1h Ratio",
     "cached_read_tokens": "Cache Read Ratio",
+    "openai_cache_write_tokens": "OpenAI Cache Write Ratio",
     "reasoning_tokens": "Reasoning Ratio",
     "input_text_tokens": "Input Text Ratio",
     "output_text_tokens": "Output Text Ratio",
@@ -655,6 +808,10 @@
     "priceDetails": "Price Details",
     "priceNote": "Different groups have different prices. Switch groups in token management.",
     "otherInfo": "Other Information",
+    "longContext": "Long Context Pricing",
+    "shortContext": "Short context",
+    "longContextLabel": "Long context",
+    "longContextDesc": "When input exceeds {{threshold}} tokens, the whole request is billed at long context prices.",
     "totalModels": "Total {{count}} models",
     "noModelsFound": "No matching models found",
     "noModelsFoundTip": "Please try adjusting filters or search keywords",
@@ -764,10 +921,11 @@
     "currencyInfo5": "Example",
     "currencyInfo6": ": gpt-4 Input: $0.03 / 1K tokens Completion: $0.06 / 1K tokens",
     "currencyInfo7": "0.03 / 0.002 = 15, 0.06 / 0.002 = 30, input multiplier is 15, completion multiplier is 30",
-    "errPricesWarning": "There are models with incorrect supplier types, please configure them in time:",
+    "errPricesWarning": "There are models with incorrect supplier types, please configure them in time",
+    "modelCountLabel": "{{count}} in total",
     "multipleOperation": "Multiple Operation",
     "newButton": "New",
-    "noPriceModelWarning": "There are models without configured prices, please configure the prices in time:",
+    "noPriceModelWarning": "There are models without configured prices, please configure the prices in time",
     "refreshButton": "Refresh",
     "singleOperation": "Single Operation",
     "updatePricesButton": "Update Prices",
@@ -807,7 +965,12 @@
     "noAvailableRatios": "No available extension ratio",
     "noExtraRatios": "No additional magnification rate is available, please select to add from the drop-down menu.",
     "promptRatio": "Leverage ratio",
-    "selectExtraRatio": "Select magnification ratio"
+    "selectExtraRatio": "Select magnification ratio",
+    "longContext": "Long Context Tier",
+    "longContextThreshold": "Threshold (tokens)",
+    "longContextInputRatio": "Input Ratio",
+    "longContextOutputRatio": "Output Ratio",
+    "longContextHelp": "When input tokens exceed the threshold, the whole request is billed at the ratios above. Leave the threshold empty or 0 to disable."
   },
   "profile": "Profile",
   "profilePage": {
@@ -820,6 +983,10 @@
     "displayName": "Display Name",
     "generateToken": "Generate Access Token",
     "inputDisplayNamePlaceholder": "Enter display name",
+    "quotaRemindEnabled": "Receive Quota Reminder Emails",
+    "quotaRemindThreshold": "Quota Remind Threshold",
+    "quotaRemindThresholdPlaceholder": "Email reminder when remaining quota falls below this value; set 0 to notify only when quota is exhausted",
+    "quotaRemindThresholdDefault": "Leave empty to use the system default: {{default}}",
     "inputPasswordPlaceholder": "Enter password",
     "inputUsernamePlaceholder": "Enter username",
     "keepSafe": "Keep it safe. Reset immediately if leaked.",
@@ -913,7 +1080,17 @@
     "verificationCodeRequired": "Verification code is required",
     "verificationInfo": "Please try again in a few seconds, Turnstile is checking the user environment!",
     "registering": "Registering...",
-    "inviteCodeRequired": "Invite code is required"
+    "inviteCodeRequired": "Invite code is required",
+    "agreementRequired": "Please read and check to agree to the terms",
+    "agreementPrefix": "I have read and agree to ",
+    "userAgreement": "User Agreement",
+    "privacyPolicy": "Privacy Policy",
+    "agreementAnd": " and "
+  },
+  "legalConsentDialog": {
+    "title": "Terms Update",
+    "description": "The terms have been updated. Please read and agree to continue.",
+    "button": "Agree and continue"
   },
   "registerPage": {
     "alreadyHaveAccount": "Already have an account? Click to login"
@@ -928,7 +1105,15 @@
   "theme": {
     "auto": "Follow System",
     "light": "Light Mode",
-    "dark": "Dark Mode"
+    "dark": "Dark Mode",
+    "color": "Theme Color",
+    "colors": {
+      "default": "Default",
+      "blue": "Blue",
+      "cyan": "Cyan",
+      "purple": "Purple",
+      "red": "Red"
+    }
   },
   "setting_index": {
     "operationSettings": {
@@ -972,6 +1157,12 @@
           "placeholder": "Number of retries"
         },
         "saveButton": "Save General Settings",
+        "subGroups": {
+          "linkAndBilling": "Links & Billing",
+          "retry": "Retry Policy",
+          "upstreamError": "Upstream Error Handling",
+          "displayOptions": "Display & Billing Options"
+        },
         "title": "General Settings",
         "topUpLink": {
           "label": "Top-up Link",
@@ -995,6 +1186,8 @@
       },
       "logSettings": {
         "clearLogs": "Clear Historical Logs",
+        "autoDelete": "Enable Auto Deletion of Consumption Logs",
+        "autoDeleteDays": "Retention Days for Auto Deletion",
         "logCleanupTime": {
           "label": "Log Cleanup Time",
           "placeholder": "Log Cleanup Time"
@@ -1014,6 +1207,7 @@
           "label": "Quota Reminder Threshold",
           "placeholder": "When below this quota, an email will be sent to remind the user"
         },
+        "quotaRemindEnabled": "Enable Quota Reminder Emails",
         "saveMonitoringSettings": "Save Monitoring Settings",
         "title": "Monitoring Settings"
       },
@@ -1166,6 +1360,15 @@
         "close": "Close",
         "newVersion": "New Version",
         "viewGitHub": "View on GitHub"
+      },
+      "legalSettings": {
+        "title": "User Agreement / Privacy Policy",
+        "userAgreementLabel": "User Agreement Content",
+        "userAgreementPlaceholder": "Enter the user agreement content here, supports HTML & Markdown",
+        "saveUserAgreement": "Save User Agreement",
+        "privacyPolicyLabel": "Privacy Policy Content",
+        "privacyPolicyPlaceholder": "Enter the privacy policy content here, supports HTML & Markdown",
+        "savePrivacyPolicy": "Save Privacy Policy"
       }
     },
     "systemSettings": {
@@ -1219,7 +1422,9 @@
         "passwordSettings": "Password Login",
         "thirdPartyLogin": "Third-Party Login",
         "turnstileCheck": "Enable Turnstile User Verification",
-        "weChatAuth": "Allow Login & Register via WeChat"
+        "weChatAuth": "Allow Login & Register via WeChat",
+        "userAgreementEnabled": "Enable User Agreement",
+        "privacyPolicyEnabled": "Enable Privacy Policy"
       },
       "configureOIDCAuthorization": {
         "alert1": "Fill in the homepage link",
@@ -1424,11 +1629,14 @@
     "billingTagLabel": "Billing Tag",
     "billingTagHelper": "Select a group as billing tag for tracking token costs by group",
     "adminSearch": "Admin Search",
-    "adminSearchDesc": "Search all users' tokens by User ID or Token ID",
+    "adminSearchDesc": "Search all users' tokens by User ID or Token Key",
     "userId": "User ID",
     "userIdPlaceholder": "Enter user ID",
     "tokenId": "Token ID",
     "tokenIdPlaceholder": "Enter token ID",
+    "tokenKeySearch": "Token Key",
+    "tokenKeySearchPlaceholder": "Enter token key (prefix supported, sk- allowed)",
+    "search": "Search",
     "clearSearch": "Clear",
     "owner": "Owner",
     "adminEditWarning": "You are editing this token as an administrator, you can change the token owner",

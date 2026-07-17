@@ -10,6 +10,8 @@ import (
 	"done-hub/common/utils"
 	"errors"
 	"fmt"
+	"strings"
+	"time"
 
 	"gorm.io/gorm"
 )
@@ -130,8 +132,9 @@ func GetUserTokenGroupSymbols(userId int) ([]string, error) {
 // AdminSearchTokensParams 管理员搜索令牌的参数
 type AdminSearchTokensParams struct {
 	GenericParams
-	UserId  int `form:"user_id"`
-	TokenId int `form:"token_id"`
+	UserId  int    `form:"user_id"`
+	TokenId int    `form:"token_id"`
+	Key     string `form:"key"`
 }
 
 // TokenWithOwner 包含令牌信息和所属用户信息
@@ -151,6 +154,15 @@ func GetTokensListByAdmin(params *AdminSearchTokensParams) (*DataResult[TokenWit
 
 	if params.TokenId > 0 {
 		db = db.Where("id = ?", params.TokenId)
+	}
+
+	if params.Key != "" {
+		keyCol := "`key`"
+		if common.UsingPostgreSQL {
+			keyCol = `"key"`
+		}
+		key := strings.TrimPrefix(params.Key, "sk-")
+		db = db.Where(keyCol+" LIKE ?", key+"%")
 	}
 
 	if params.Keyword != "" {
@@ -386,6 +398,25 @@ func DeleteTokenById(id int, userId int) (err error) {
 
 }
 
+// DeleteTokenByIdAdmin 管理员删除任意token（不限制所属用户）
+func DeleteTokenByIdAdmin(id int) (err error) {
+	if id == 0 {
+		return errors.New("id 为空！")
+	}
+	token := Token{Id: id}
+	err = DB.Where("id = ?", id).First(&token).Error
+	if err != nil {
+		return err
+	}
+	err = token.Delete()
+
+	if err == nil && config.RedisEnabled {
+		redis.RedisDel(fmt.Sprintf(UserTokensKey, token.Key))
+	}
+
+	return err
+}
+
 func IncreaseTokenQuota(id int, quota int) (err error) {
 	if quota < 0 {
 		return errors.New("quota 不能为负数！")
@@ -456,6 +487,39 @@ func decreaseTokenQuota(id int, quota int) (err error) {
 	return err
 }
 
+// AddTokenUsedQuota 仅按带符号增量调整令牌的 used_quota（用量计量），不触碰 remain_quota（额度上限）。
+// 用于无限额度令牌：它没有额度上限的概念，但仍需统计真实用量。quota 为正表示消费、为负表示退还。
+func AddTokenUsedQuota(id int, quota int) (err error) {
+	if config.BatchUpdateEnabled {
+		addNewRecord(BatchUpdateTypeTokenUsedQuota, id, quota)
+		return nil
+	}
+	return addTokenUsedQuota(id, quota)
+}
+
+func addTokenUsedQuota(id int, quota int) (err error) {
+	err = DB.Model(&Token{}).Where("id = ?", id).Updates(
+		map[string]interface{}{
+			"used_quota":    gorm.Expr("used_quota + ?", quota),
+			"accessed_time": utils.GetTimestamp(),
+		},
+	).Error
+
+	// 清除缓存
+	if err == nil && config.RedisEnabled {
+		var key string
+		keyCol := "`key`"
+		if common.UsingPostgreSQL {
+			keyCol = `"key"`
+		}
+		if getErr := DB.Model(&Token{}).Where("id = ?", id).Select(keyCol).Scan(&key).Error; getErr == nil && key != "" {
+			redis.RedisDel(fmt.Sprintf(UserTokensKey, key))
+		}
+	}
+
+	return err
+}
+
 func PreConsumeTokenQuota(tokenId int, quota int) (err error) {
 	if quota < 0 {
 		return errors.New("quota 不能为负数！")
@@ -467,26 +531,61 @@ func PreConsumeTokenQuota(tokenId int, quota int) (err error) {
 	if !token.UnlimitedQuota && token.RemainQuota < quota {
 		return errors.New("令牌额度不足")
 	}
-	userQuota, err := GetUserQuota(token.UserId)
+	userQuota, remindThreshold, remindEnabled, err := GetUserQuotaWithRemindSetting(token.UserId)
 	if err != nil {
 		return err
 	}
 	if userQuota < quota {
 		return errors.New("用户额度不足")
 	}
-	quotaTooLow := userQuota >= config.QuotaRemindThreshold && userQuota-quota < config.QuotaRemindThreshold
-	noMoreQuota := userQuota-quota <= 0
-	if quotaTooLow || noMoreQuota {
-		go sendQuotaWarningEmail(token.UserId, userQuota, noMoreQuota)
-	}
-	if !token.UnlimitedQuota {
-		err = DecreaseTokenQuota(tokenId, quota)
-		if err != nil {
-			return err
+	// 额度提醒：全局总开关开启、且用户未单独关闭时才评估触发。
+	if config.QuotaRemindEnabled && remindEnabled {
+		threshold := config.QuotaRemindThreshold
+		if remindThreshold != nil {
+			threshold = *remindThreshold
 		}
+		quotaTooLow := userQuota >= threshold && userQuota-quota < threshold
+		noMoreQuota := userQuota-quota <= 0
+		if noMoreQuota {
+			if shouldSendQuotaWarningNotify(token.UserId, true) {
+				go sendQuotaWarningEmail(token.UserId, userQuota, true)
+			}
+		} else if quotaTooLow {
+			if shouldSendQuotaWarningNotify(token.UserId, false) {
+				go sendQuotaWarningEmail(token.UserId, userQuota, false)
+			}
+		}
+	}
+	if token.UnlimitedQuota {
+		// 无限额度令牌没有上限，只累计用量，不扣减 remain_quota
+		err = AddTokenUsedQuota(tokenId, quota)
+	} else {
+		err = DecreaseTokenQuota(tokenId, quota)
+	}
+	if err != nil {
+		return err
 	}
 	err = DecreaseUserQuota(token.UserId, quota)
 	return err
+}
+
+// quotaWarningNotifyDedupTTL 控制额度提醒在跨节点/并发之间的去重窗口：
+// 阈值边界附近的并发请求会各自命中触发条件，靠此窗口保证同类型告警只发一封。
+const quotaWarningNotifyDedupTTL = 10 * time.Minute
+
+// shouldSendQuotaWarningNotify 对额度提醒去重：同一用户、同一告警类型（即将用尽/已用尽）
+// 在窗口内只放行第一次。Redis 未启用时 fail-open（照旧发送）；SETNX 抖动失败时宁可多发也不静默丢。
+func shouldSendQuotaWarningNotify(userId int, noMoreQuota bool) bool {
+	if !config.RedisEnabled {
+		return true
+	}
+	key := fmt.Sprintf("notify_lock:quota_warning:%d:%t", userId, noMoreQuota)
+	ok, err := redis.RedisSetNX(key, "1", quotaWarningNotifyDedupTTL)
+	if err != nil {
+		logger.SysError(fmt.Sprintf("quota warning notify dedup SETNX failed (user=%d): %v", userId, err))
+		return true
+	}
+	return ok
 }
 
 func sendQuotaWarningEmail(userId int, userQuota int, noMoreQuota bool) {
@@ -527,15 +626,16 @@ func PostConsumeTokenQuotaWithInfo(tokenId int, userId int, unlimitedQuota bool,
 	if err != nil {
 		return err
 	}
-	if !unlimitedQuota {
-		if quota > 0 {
-			err = DecreaseTokenQuota(tokenId, quota)
-		} else {
-			err = IncreaseTokenQuota(tokenId, -quota)
-		}
-		if err != nil {
-			return err
-		}
+	if unlimitedQuota {
+		// 无限额度令牌没有上限，只按带符号增量调整用量，不触碰 remain_quota
+		err = AddTokenUsedQuota(tokenId, quota)
+	} else if quota > 0 {
+		err = DecreaseTokenQuota(tokenId, quota)
+	} else {
+		err = IncreaseTokenQuota(tokenId, -quota)
+	}
+	if err != nil {
+		return err
 	}
 	return nil
 }

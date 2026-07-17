@@ -28,6 +28,7 @@ var ChatLinks = ""
 var AnalyticsCode = ""
 var QuotaPerUnit = 500 * 1000.0 // $0.002 / 1K tokens
 var DisplayInCurrencyEnabled = true
+var DisplayTokenStatEnabled = true
 
 // 是否开启用户月账单功能
 var UserInvoiceMonth = false
@@ -48,6 +49,8 @@ var LarkAuthEnabled = false
 var TurnstileCheckEnabled = false
 var RegisterEnabled = true
 var InviteCodeRegisterEnabled = false
+var UserAgreementEnabled = false
+var PrivacyPolicyEnabled = false
 var OIDCAuthEnabled = false
 var LinuxDoOAuthEnabled = false
 var LinuxDoOAuthTrustLevelEnabled = false
@@ -155,6 +158,9 @@ var MemoryCacheEnabled = false
 
 var LogConsumeEnabled = true
 
+var LogAutoDeleteEnabled = false // 是否启用消费日志自动清理
+var LogAutoDeleteDays = 30       // 保留天数，默认30天
+
 var SMTPServer = ""
 var SMTPPort = 587
 var SMTPAccount = ""
@@ -197,7 +203,8 @@ var ChannelDisableThreshold = 5.0
 var AutomaticDisableChannelEnabled = false
 var AutomaticEnableChannelEnabled = false
 var AutomaticDisableChannelNotifyEnabled = true
-var QuotaRemindThreshold = 1000
+var QuotaRemindEnabled = true
+var QuotaRemindThreshold = 500000
 var PreConsumedQuota = 500
 var ApproximateTokenEnabled = false
 var EmptyResponseBillingEnabled = true
@@ -233,6 +240,12 @@ func GetChannelFailErrorMessage() string {
 
 // 统一请求响应模型（响应中显示用户请求的原始模型名称）
 var UnifiedRequestResponseModelEnabled = false
+
+// FingerprintPassThroughEnabled 让中转响应尽量保留上游的响应指纹：Claude / Bedrock 的
+// 非流式原始字节透传、流式跳过 model 改写，以及上游响应头透传（Bedrock x-amzn-* /
+// Claude anthropic-ratelimit-* / OpenAI x-ratelimit-* 等）。
+// 默认开启；关闭后回退到与其它渠道一致的结构体序列化行为。
+var FingerprintPassThroughEnabled = true
 
 // 模型名称大小写不敏感匹配
 var ModelNameCaseInsensitiveEnabled = false
@@ -274,6 +287,10 @@ var CFWorkerImageKey = ""
 var RootUserEmail = ""
 
 var IsMasterNode = true
+
+// RelayOnly 纯 relay 网关模式：仅暴露转发接口(/v1、/claude、/gemini、/mj 等)与 /health，
+// 前端页面、/api 管理接口、dashboard 一律返回 404，避免从节点泄露主域名等信息。
+var RelayOnly = false
 
 var RequestInterval time.Duration
 

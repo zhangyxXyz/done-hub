@@ -1,4 +1,17 @@
 {
+  "theme": {
+    "auto": "システムに従う",
+    "light": "ライトモード",
+    "dark": "ダークモード",
+    "color": "テーマカラー",
+    "colors": {
+      "default": "デフォルト",
+      "blue": "ブルー",
+      "cyan": "シアン",
+      "purple": "パープル",
+      "red": "レッド"
+    }
+  },
   "System Logs": "システムログ",
   "view_more_logs_on_server": "より多くのシステムログを表示するには、サーバーにアクセスしてください",
   "systemInfo": "システム情報",
@@ -24,6 +37,7 @@
     "checkUpdates": "更新を確認",
     "dataFormatIncorrect": "データ形式が正しくありません",
     "fetchData": "データを取得",
+    "fetchFromModelsDev": "models.dev から取得",
     "inputMultiplierChanged": "入力倍率が",
     "newModels": "新しいモデル",
     "noNewModels": "新しいモデルはありません",
@@ -47,6 +61,12 @@
     "extraRatiosChanges": "拡大率の変動",
     "extraRatiosChangesTip": "拡張率変更：{{changes}}",
     "extraRatiosRemoved": "拡張倍率を削除します",
+    "longContextAdded": "ロングコンテキスト階層の追加",
+    "longContextRemoved": "ロングコンテキスト階層を削除",
+    "longContextChanged": "ロングコンテキスト階層の変化",
+    "longContextThreshold": "しきい値",
+    "longContextInput": "入力倍率",
+    "longContextOutput": "出力倍率",
     "modified": "変更",
     "removed": "削除"
   },
@@ -61,6 +81,16 @@
     "loadingError": "「About」の内容の読み込みに失敗しました...",
     "projectRepo": "プロジェクトリポジトリ："
   },
+  "userAgreement": {
+    "title": "利用規約",
+    "emptyDescription": "管理者はまだ利用規約の内容を設定していません。",
+    "loadingError": "利用規約の内容の読み込みに失敗しました..."
+  },
+  "privacyPolicy": {
+    "title": "プライバシーポリシー",
+    "emptyDescription": "管理者はまだプライバシーポリシーの内容を設定していません。",
+    "loadingError": "プライバシーポリシーの内容の読み込みに失敗しました..."
+  },
   "alloy 映射": "合金マッピング",
   "analytics": "分析",
   "analytics_index": {
@@ -68,6 +98,8 @@
     "averageLatency": "平均遅延",
     "channelCount": "チャネル数",
     "consumptionStatistics": "消費統計",
+    "costStatistics": "コスト統計",
+    "profitStatistics": "利益統計",
     "directRegistration": "直接登録",
     "disabled": "無効",
     "endTime": "終了時間",
@@ -80,6 +112,9 @@
     "testDisabled": "テスト無効",
     "tokensStatistics": "トークン統計",
     "totalUserBalance": "ユーザーの総残高",
+    "totalUsedQuota": "総消費",
+    "totalRequestCount": "リクエスト数",
+    "totalTokens": "総トークン数",
     "totalUserSpending": "ユーザーの総消費額",
     "totalUsers": "ユーザーの総数",
     "unused": "未使用",
@@ -89,7 +124,10 @@
     "order": "注文",
     "realTimeTraffic": "リアルタイム流量",
     "tpmDescription": "TPM (Token/分)",
-    "last60SecondsStats": "最近60秒の統計"
+    "cpmDescription": "CPM",
+    "ppmDescription": "PPM",
+    "last60SecondsStats": "最近60秒の統計",
+    "autoRefresh": "自動"
   },
   "auth": {
     "invalidLink": "無効なリンク",
@@ -111,7 +149,19 @@
     "collapse": "折りたたむ",
     "customModelTip": "カスタマイズ: をクリックするか Enter キーを押して入力します。",
     "editSuccess": "アップデート完了！",
+    "tagGroupOverwriteWarning": "このタグには合計 {{count}} 個のチャネルがあります。保存すると、すべての {{count}} 個のチャネルが同じ設定で上書きされます（各自の Key を除く）。",
+    "tagGroupSaveConfirmTitle": "グループ設定の上書きを確認",
+    "tagGroupSaveConfirmContent": "保存すると、現在の設定でタグ「{{tag}}」配下のすべての {{count}} 個のチャネル（各自の Key を除く）が上書きされます。続行しますか？",
+    "tagBulkFieldConfirmTitle": "一括変更の確認",
+    "tagBulkFieldConfirmContent": "この操作はタグ「{{tag}}」配下のすべての {{count}} 個のチャネルの「{{field}}」を {{value}} に統一します。続行しますか？",
+    "tagMemberSectionTitle": "グループメンバー（各 Key が 1 つのチャネルに対応）",
+    "tagMemberKeysLabel": "メンバー Key 一覧",
+    "tagMemberKeysHelper": "1 行につき 1 つの Key で、グループ内の 1 チャネルに対応します。行を追加するとチャネルが作成され、削除すると該当チャネルが削除されます。各チャネルの Key は共有設定で上書きされません。",
+    "joinExistingTagWarning": "タグ「{{tag}}」は既に存在します（{{count}} 個のチャネル）。保存するとこのチャネルはそのグループに加わり、以降のグループ一括編集でその設定が上書きされます。",
     "expand": "展開する",
+    "sectionBasic": "基本設定",
+    "sectionAdvanced": "詳細設定",
+    "sectionBilling": "課金と動作",
     "inputAllModel": "すべてのモデルを入力してください",
     "inputChannelModel": "チャネルサポートモデルを入力します",
     "invalidJson": "無効なJSON",
@@ -149,7 +199,9 @@
     "removePrefix": "前缀を削除",
     "removeSuffix": "後缀を削除",
     "collapseList": "リストを折りたたむ",
-    "expandList": "リストを展開"
+    "expandList": "リストを展開",
+    "tagMembersTitle": "グループ内のメンバーチャンネル {{count}} 件",
+    "tagMembersHint": "各メンバーの Key は独立しており、共有設定の影響を受けません。メンバーの追加・削除は一覧でこのタグ行を展開して個別に行ってください。"
   },
   "channel_index": {
     "AzureApiVersion": "Azureのバージョン番号",
@@ -200,7 +252,61 @@
     "updateEnabledBalance": "有効残高を更新",
     "usedBalance": "使用済み/残高",
     "weight": "ウェイト",
-    "onlyTags": "タグのみ表示"
+    "costRatio": "コスト倍率",
+    "onlyTags": "タグのみ表示",
+    "tagFilter": "タグフィルター",
+    "noTagOnly": "未分類のみ",
+    "batchAddUserGroup": "ユーザーグループを一括追加",
+    "batchAddUserGroupTip": "チャネルを選択してユーザーグループを追加します。すでに該当グループを持つチャネルはスキップされます。",
+    "searchChannelPlaceholder": "チャネル名で検索（空欄ですべてのチャネルを取得）",
+    "searchChannelLabel": "チャネル検索",
+    "noMatchingChannels": "一致するチャネルが見つかりません",
+    "clickSearchToGetChannels": "検索ボタンをクリックしてチャネル一覧を取得",
+    "selectedChannelsCount": "{{total}} 件中 {{selected}} 件を選択",
+    "channelAlreadyHasGroup": "（このグループは既に存在）",
+    "currentGroup": "現在のグループ",
+    "noGroup": "なし",
+    "selectUserGroupToAdd": "追加するユーザーグループを選択",
+    "pleaseSelectUserGroup": "ユーザーグループを選択してください",
+    "pleaseSelectChannelsForUserGroup": "少なくとも 1 つのチャネルを選択してください",
+    "addingUserGroup": "追加中...",
+    "addUserGroupToChannels": "{{count}} 件のチャネルにユーザーグループを追加",
+    "batchAddUserGroupSuccess": "{{count}} 件のチャネルにユーザーグループ \"{{group}}\" を追加しました",
+    "batchAddModel": "モデルを一括追加",
+    "batchAddModelTip": "チャネルを選択してモデルを追加します。複数モデルの入力に対応。既存のモデルはスキップされます。",
+    "selectModelToAdd": "追加するモデルを選択または入力",
+    "pleaseSelectModel": "モデルを選択または入力してください",
+    "pleaseSelectChannelsForModel": "少なくとも 1 つのチャネルを選択してください",
+    "channelAlreadyHasAllModels": "（選択したモデルがすべて存在）",
+    "currentModels": "現在のモデル",
+    "noModels": "なし",
+    "addingModel": "追加中...",
+    "addModelToChannels": "{{count}} 件のチャネルにモデルを追加",
+    "batchAddModelSuccess": "{{count}} 件のチャネルにモデル \"{{model}}\" を追加しました",
+    "modelInputTip": "複数モデルはカンマ区切りで入力できます",
+    "loadingChannels": "チャネル一覧を読み込み中...",
+    "previousPage": "前のページ",
+    "nextPage": "次のページ",
+    "pageInfo": "ページ {{page}} / {{total}}",
+    "selectionStatus": "選択中 {{selected}} 件（現ページ {{onPage}}）/ 現ページ {{count}} 件 / 一致 {{total}} 件",
+    "selectionStatusFiltered": "選択中 {{selected}} 件（現ページ {{onPage}}）/ 現ページ厳密一致 {{count}} 件 / サーバー粗一致 {{total}} 件",
+    "selectCurrentPage": "現ページを全選択",
+    "unselectCurrentPage": "現ページの選択を解除",
+    "clearSelection": "選択をクリア",
+    "clearKeyword": "キーワードをクリア",
+    "channelOnlyHasThisModel": "（このモデルのみ — 削除不可）",
+    "channelAlreadyHasPartialModels": "（一部のモデルが既に存在）",
+    "batchDeleteTipV2": "検索は曖昧一致ですが、一覧は完全モデル名で厳密にフィルタリングされます。残り 1 モデルのチャネルは空化防止のため削除不可です。",
+    "batchAzureAPITip": "Azure タイプのチャネルを選択して API バージョンを置換します。まず現在のバージョンで検索（空欄なら全 Azure チャネル）、その後新バージョンを入力して置換を実行します。",
+    "currentAzureAPIVersion": "現在のバージョン",
+    "newAzureAPIVersion": "新しいバージョン",
+    "replaceAzureAPIVersion": "{{count}} 件のチャネルの API バージョンを置換",
+    "replacing": "置換中...",
+    "confirmDeleteModel": "{{count}} 件のチャネルからモデル \"{{model}}\" を削除",
+    "deleting": "削除中...",
+    "modelToDelete": "削除するモデル名（完全一致）",
+    "delModelEmptyHint": "上の入力欄に削除対象のモデル名を入力し Enter で該当チャネルを検索",
+    "azureApiSearchPlaceholder": "検索する API バージョン（空欄で全 Azure チャネル）"
   },
   "channel_row": {
     "auto": "自動",
@@ -258,8 +364,32 @@
     "tagChannelsSuccess": "タグチャネル{{action}}が成功しました",
     "weightUpdateError": "重みの更新に失敗しました：{{message}}",
     "weightUpdateSuccess": "重みが更新されました",
+    "costRatioUpdateSuccess": "コスト倍率が更新されました",
+    "costRatioUpdateError": "コスト倍率の更新に失敗しました：{{message}}",
+    "rowsPerPage": "1ページあたりの行数:",
+    "paginationDisplayedRows": "{{from}}-{{to}} / {{count}}",
+    "groupPriority": "優先度(グループ全体)",
+    "groupPriorityTip": "このタグ配下のすべてのチャネルに適用されます",
+    "groupWeight": "グループ重み",
+    "groupWeightTip": "このタグ配下のすべてのチャネルに適用されます",
+    "groupCostRatio": "グループ倍率",
+    "groupCostRatioTip": "このタグ配下のすべてのチャネルに適用されます",
+    "groupCount": "計 {{count}}",
+    "groupEnabled": "{{count}} 有効",
+    "groupDisabled": "{{count}} 無効",
+    "expandGroup": "チャネル一覧を展開",
+    "collapseGroup": "チャネル一覧を折りたたむ",
+    "avgLabel": "平均",
+    "sumLabel": "合計",
+    "groupStatusSummary": "{{count}} 個のチャネル · {{enabled}} 有効 / {{disabled}} 無効",
+    "mixed": "混在",
+    "mixedTip": "このタグ配下のチャネルはタイプ/グループが不一致です。グループ一括編集で同一に上書きされます",
     "key": "鍵",
-    "keyRequired": "キーを入力してください。"
+    "keyRequired": "キーを入力してください。",
+    "wholeGroup": "全体",
+    "groupPriorityLabel": "優先度·組",
+    "groupWeightLabel": "重み·組",
+    "groupCostRatioLabel": "倍率·組"
   },
   "common": {
     "again": "再試行 ({{count}})",
@@ -304,6 +434,7 @@
     "action": "操作",
     "actions": "操作 -> 操作",
     "noDataAvailable": "データがありません。",
+    "noSearchResults": "一致する検索結果がありません。",
     "pageSize": "ページごとのアイテム数",
     "search": "検索",
     "searchFilters": "検索条件",
@@ -367,7 +498,66 @@
     "sourceCode": "ソースコードは"
   },
   "home": {
-    "loadingErr": "ホームページのコンテンツを読み込めませんでした..."
+    "loadingErr": "ホームページのコンテンツを読み込めませんでした...",
+    "hero": {
+      "title": "すべてのモデルを、ひとつの API で",
+      "subtitle": "OpenAI、Claude、Gemini、DeepSeek など数十のプロバイダーを OpenAI 互換 API に統一。base URL を差し替えるだけで接続でき、キー・課金・ログを一元管理。",
+      "getStarted": "今すぐ始める",
+      "console": "コンソールへ",
+      "viewPricing": "料金を見る"
+    },
+    "stats": {
+      "channels": "チャネル種別",
+      "protocols": "ネイティブプロトコル",
+      "openSource": "オープンソース"
+    },
+    "code": {
+      "title": "3 つのプロトコル、ひとつのアドレス",
+      "subtitle": "OpenAI・Claude・Gemini のリクエストをそのままプロキシ。",
+      "reply": "こんにちは。{{model}} です。Done Hub 経由で接続しています。"
+    },
+    "providers": {
+      "title": "数十のプロバイダーを、ひとつの API で",
+      "subtitle": "国内外の主要モデルを接続済み、OpenAI 互換に統一。新しいプロバイダーも順次追加。"
+    },
+    "features": {
+      "title": "つなぐだけでは終わらない",
+      "subtitle": "チャネル振り分け、課金、ログ、クライアント接続。運用に必要な機能をひとつの管理画面に。",
+      "items": {
+        "routing": {
+          "title": "チャネル振り分け",
+          "desc": "優先度と重みで振り分け、落ちた上流はクールダウン後に再試行。"
+        },
+        "billing": {
+          "title": "課金とグループ",
+          "desc": "トークン、グループ、価格、上限、請求。コストを追跡できます。"
+        },
+        "observability": {
+          "title": "ログと使用量",
+          "desc": "RPM／TPM、消費、リクエストログ。ユーザー別 CSV 出力も。"
+        },
+        "clients": {
+          "title": "クライアント接続",
+          "desc": "Claude Code、Gemini CLI、Codex などをそのまま接続。各クライアントのネイティブプロトコルで転送。"
+        }
+      }
+    },
+    "howItWorks": {
+      "title": "4 ステップで稼働",
+      "subtitle": "デプロイから接続まで、各ステップが実際のリクエストパスに沿います。",
+      "s1Title": "デプロイ",
+      "s1Desc": "Docker で Done Hub を起動し、基本設定。",
+      "s2Title": "チャネル追加",
+      "s2Desc": "OpenAI、Claude、Gemini を有効化し、上流キーを登録。",
+      "s3Title": "クライアント接続",
+      "s3Desc": "OpenAI は /v1、Claude は /claude/v1、Gemini は /gemini。",
+      "s4Title": "運用",
+      "s4Desc": "ダッシュボードとログを見て、課金とチャネルを管理。"
+    },
+    "cta": {
+      "title": "完全オープンソース。Star・コントリビュート歓迎。",
+      "github": "GitHub を見る"
+    }
   },
   "inviteCard": {
     "copyButton": {
@@ -482,18 +672,22 @@
       "outputPrice": "出力価格",
       "groupRatio": "グループ倍率",
       "groupRatioValue": "グループ倍率",
+      "longContextRatio": "ロングコンテキスト倍率",
       "actualPrice": "実際の価格",
       "input": "入力",
       "output": "出力",
       "finalCalculation": "最終計算",
       "originalBilling": "元の請求",
       "actualBilling": "実際の請求",
+      "cost": "コスト",
+      "profit": "利益",
       "calculationNote": "PS：このシステムはポイントに基づいて計算され、すべての金額はポイント換算であり、1ポイント＝$0.000002です。最低消費額は1ポイントであり、この計算手順は参考用として提供されます。実際の料金が優先されます。",
       "times": "倍"
     },
     "cachedReadTokens": "キャッシュからトークンを読み取ります（* {{ ratio }} )",
     "cachedWriteTokens": "トークンのキャッシュ書き込み（* {{ ratio }} ）",
     "cachedWrite1hTokens": "トークンのキャッシュ書き込み 1h（* {{ ratio }} ）",
+    "openaiCacheWriteTokens": "トークンのキャッシュ書き込み（OpenAI）（* {{ ratio }} ）",
     "reasoningTokens": "推理トークン"
   },
   "login": {
@@ -578,6 +772,7 @@
     "cached_write_tokens": "キャッシュ書き込み倍率",
     "cached_write_1h_tokens": "キャッシュ書き込み(1h)倍率",
     "cached_read_tokens": "キャッシュ読み取り倍率",
+    "openai_cache_write_tokens": "OpenAIキャッシュ書き込み倍率",
     "reasoning_tokens": "推論倍率",
     "input_text_tokens": "入力テキスト倍率",
     "output_text_tokens": "出力テキスト倍率",
@@ -605,6 +800,10 @@
     "priceDetails": "価格詳細",
     "priceNote": "グループによって価格が異なります。トークン管理でグループを切り替えてください。",
     "otherInfo": "その他の情報",
+    "longContext": "ロングコンテキスト課金",
+    "shortContext": "ショートコンテキスト",
+    "longContextLabel": "ロングコンテキスト",
+    "longContextDesc": "入力が {{threshold}} tokens を超えると、リクエスト全体がロングコンテキスト価格で課金されます。",
     "totalModels": "合計 {{count}} モデル",
     "noModelsFound": "一致するモデルが見つかりません",
     "noModelsFoundTip": "フィルタまたは検索キーワードを調整してみてください",
@@ -714,10 +913,11 @@
     "currencyInfo5": "例",
     "currencyInfo6": "：gpt-4 入力： $0.03 / 1K tokens 完了：$0.06 / 1K tokens",
     "currencyInfo7": "0.03 / 0.002 = 15, 0.06 / 0.002 = 30、入力倍率は 15、完了倍率は 30",
-    "errPricesWarning": "サプライヤータイプが間違っているモデルがあります。設定してください：",
+    "errPricesWarning": "サプライヤータイプが間違っているモデルがあります。設定してください",
+    "modelCountLabel": "計 {{count}} 件",
     "multipleOperation": "複数操作",
     "newButton": "新規作成",
-    "noPriceModelWarning": "未設定の価格モデルがあります。価格を設定してください：",
+    "noPriceModelWarning": "未設定の価格モデルがあります。価格を設定してください",
     "refreshButton": "更新",
     "singleOperation": "シングル操作",
     "updatePricesButton": "価格を更新",
@@ -757,7 +957,12 @@
     "noAvailableRatios": "利用可能な拡張倍率はありません",
     "noExtraRatios": "追加の拡張倍率はありません。ドロップダウンメニューから選択してください。",
     "promptRatio": "倍率係数",
-    "selectExtraRatio": "拡大率を選択します"
+    "selectExtraRatio": "拡大率を選択します",
+    "longContext": "ロングコンテキスト階層",
+    "longContextThreshold": "しきい値(tokens)",
+    "longContextInputRatio": "入力倍率",
+    "longContextOutputRatio": "出力倍率",
+    "longContextHelp": "入力トークンがしきい値を超えると、リクエスト全体が上記の倍率で課金されます。しきい値を空または 0 にすると無効になります。"
   },
   "profile": "プロフィール",
   "profilePage": {
@@ -770,6 +975,10 @@
     "displayName": "表示名",
     "generateToken": "アクセストークンの生成",
     "inputDisplayNamePlaceholder": "表示名を入力してください",
+    "quotaRemindEnabled": "クォータ通知メールを受信する",
+    "quotaRemindThreshold": "クォータ通知しきい値",
+    "quotaRemindThresholdPlaceholder": "残りクォータがこの値を下回るとメールで通知します。0 でクォータ枯渇時のみ通知します",
+    "quotaRemindThresholdDefault": "空欄でシステム既定値を使用：{{default}}",
     "inputPasswordPlaceholder": "パスワードを入力してください",
     "inputUsernamePlaceholder": "ユーザー名を入力してください",
     "keepSafe": "安全に保管してください。漏洩した場合はすぐにリセットしてください。",
@@ -861,7 +1070,17 @@
     "usernameRequired": "ユーザー名は必須項目です",
     "validEmailRequired": "有効なメールアドレスである必要があります",
     "verificationCodeRequired": "確認コードは必須項目です",
-    "verificationInfo": "数秒後に再試行してください。Turnstile がユーザー環境をチェックしています！"
+    "verificationInfo": "数秒後に再試行してください。Turnstile がユーザー環境をチェックしています！",
+    "agreementRequired": "関連規約をお読みになり、同意にチェックを入れてください",
+    "agreementPrefix": "私は以下を読み、同意します：",
+    "userAgreement": "利用規約",
+    "privacyPolicy": "プライバシーポリシー",
+    "agreementAnd": "および"
+  },
+  "legalConsentDialog": {
+    "title": "規約の更新",
+    "description": "規約が更新されました。お読みになり、同意のうえご利用ください。",
+    "button": "同意して続行"
   },
   "registerPage": {
     "alreadyHaveAccount": "既にアカウントをお持ちですか？ログインをクリック"
@@ -953,6 +1172,7 @@
           "label": "クォータ通知しきい値",
           "placeholder": "このクォータを下回ると、ユーザーに通知メールが送信されます"
         },
+        "quotaRemindEnabled": "クォータ通知メールを有効化",
         "saveMonitoringSettings": "モニタリング設定を保存",
         "title": "モニタリング設定"
       },
@@ -1106,6 +1326,15 @@
         "close": "閉じる",
         "newVersion": "新しいバージョン",
         "viewGitHub": "GitHubで表示する"
+      },
+      "legalSettings": {
+        "title": "利用規約 / プライバシーポリシー",
+        "userAgreementLabel": "利用規約の内容",
+        "userAgreementPlaceholder": "ここに利用規約の内容を入力してください。HTML & Markdownをサポートしています",
+        "saveUserAgreement": "利用規約を保存",
+        "privacyPolicyLabel": "プライバシーポリシーの内容",
+        "privacyPolicyPlaceholder": "ここにプライバシーポリシーの内容を入力してください。HTML & Markdownをサポートしています",
+        "savePrivacyPolicy": "プライバシーポリシーを保存"
       }
     },
     "systemSettings": {
@@ -1159,7 +1388,9 @@
         "passwordSettings": "パスワードログイン",
         "thirdPartyLogin": "サードパーティログイン",
         "turnstileCheck": "Turnstileユーザー検証を有効にする",
-        "weChatAuth": "WeChatでのログイン＆登録を許可"
+        "weChatAuth": "WeChatでのログイン＆登録を許可",
+        "userAgreementEnabled": "利用規約を有効化",
+        "privacyPolicyEnabled": "プライバシーポリシーを有効化"
       },
       "configureOIDCAuthorization": {
         "alert1": "ホームページリンクを入力してください",
@@ -1364,11 +1595,14 @@
     "billingTagLabel": "課金タグ",
     "billingTagHelper": "このトークンのコストをグループ別に追跡するための課金タグとしてグループを選択してください",
     "adminSearch": "管理者検索",
-    "adminSearchDesc": "ユーザーIDまたはトークンIDですべてのユーザーのトークンを検索",
+    "adminSearchDesc": "ユーザーIDまたはトークンKeyですべてのユーザーのトークンを検索",
     "userId": "ユーザーID",
     "userIdPlaceholder": "ユーザーIDを入力",
     "tokenId": "トークンID",
     "tokenIdPlaceholder": "トークンIDを入力",
+    "tokenKeySearch": "トークンKey",
+    "tokenKeySearchPlaceholder": "トークンKeyを入力（前方一致、sk- 可）",
+    "search": "検索",
     "clearSearch": "クリア",
     "owner": "所有者",
     "adminEditWarning": "管理者としてこのトークンを編集しています。トークンの所有者を変更できます",

@@ -33,12 +33,14 @@ export function calculatePrice(ratio, groupDiscount, isTimes) {
 }
 
 // QuotaWithDetailContent is responsible for rendering the detailed content
-export default function QuotaWithDetailContent({ item, userGroup, totalInputTokens, totalOutputTokens }) {
-  console.log(item);
+export default function QuotaWithDetailContent({ item, userGroup, userIsAdmin, totalInputTokens, totalOutputTokens }) {
   const { t } = useTranslation();
   // Calculate the original quota based on the formula
   const originalQuota = calculateOriginalQuota(item);
   const quota = item.quota || 0;
+  // 成本/利润仅管理员可见，且仅在记录了上游成本时展示
+  const showCost = userIsAdmin && item.cost_quota > 0;
+  const costQuota = item.cost_quota || 0;
 
   const priceType = item.metadata?.price_type || 'tokens';
   const extraBilling = item?.metadata?.extra_billing || {};
@@ -53,11 +55,19 @@ export default function QuotaWithDetailContent({ item, userGroup, totalInputToke
 
   // Calculate actual prices based on ratios and group discount
   const groupRatio = item.metadata?.group_ratio || 1;
+  const longContextInputRatio = item.metadata?.long_context_input_ratio;
+  const longContextOutputRatio = item.metadata?.long_context_output_ratio;
+  // 命中长上下文分档时，输入/输出单价需按分档倍率放大，才能与实际扣费一致。
   const inputPrice =
-    item.metadata?.input_price || (item.metadata?.input_ratio ? `$${calculatePrice(item.metadata.input_ratio, groupRatio, false)} ` : '$0');
+    item.metadata?.input_price ||
+    (item.metadata?.input_ratio
+      ? `$${calculatePrice(item.metadata.input_ratio * (longContextInputRatio || 1), groupRatio, false)} `
+      : '$0');
   const outputPrice =
     item.metadata?.output_price ||
-    (item.metadata?.output_ratio ? `$${calculatePrice(item.metadata.output_ratio, groupRatio, false)}` : '$0');
+    (item.metadata?.output_ratio
+      ? `$${calculatePrice(item.metadata.output_ratio * (longContextOutputRatio || 1), groupRatio, false)}`
+      : '$0');
 
   const inputPriceUnit = inputPrice + ' /M';
   const outputPriceUnit = outputPrice + ' /M';
@@ -169,6 +179,11 @@ export default function QuotaWithDetailContent({ item, userGroup, totalInputToke
           <Typography sx={{ fontSize: 13, color: (theme) => theme.palette.text.secondary, textAlign: 'left' }}>
             {t('logPage.quotaDetail.groupRatioValue')}: {groupRatio}
           </Typography>
+          {Boolean(longContextInputRatio || longContextOutputRatio) && (
+            <Typography sx={{ fontSize: 13, color: (theme) => theme.palette.text.secondary, textAlign: 'left' }}>
+              {t('logPage.quotaDetail.longContextRatio')}: {longContextInputRatio || 1}× / {longContextOutputRatio || 1}×
+            </Typography>
+          )}
         </Box>
         {/* Actual Price */}
         <Box
@@ -231,6 +246,34 @@ export default function QuotaWithDetailContent({ item, userGroup, totalInputToke
           >
             {t('logPage.quotaDetail.actualBilling')}: {renderQuota(quota, 6)}
           </Typography>
+          {showCost && (
+            <>
+              <Typography
+                sx={{
+                  fontSize: 13,
+                  color: (theme) => theme.palette.warning.main,
+                  fontWeight: 500,
+                  mr: 2,
+                  mb: { xs: 0.5, sm: 0 },
+                  textAlign: 'left'
+                }}
+              >
+                {t('logPage.quotaDetail.cost')}: {renderQuota(costQuota, 6)}
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: 13,
+                  color: (theme) => theme.palette.primary.main,
+                  fontWeight: 500,
+                  mr: 2,
+                  mb: { xs: 0.5, sm: 0 },
+                  textAlign: 'left'
+                }}
+              >
+                {t('logPage.quotaDetail.profit')}: {renderQuota(quota - costQuota, 6)}
+              </Typography>
+            </>
+          )}
           {/* 注释掉节省百分比的显示 */}
           {/* {savePercent && (
             <Box
@@ -260,6 +303,7 @@ export default function QuotaWithDetailContent({ item, userGroup, totalInputToke
 QuotaWithDetailContent.propTypes = {
   item: PropTypes.shape({
     quota: PropTypes.number,
+    cost_quota: PropTypes.number,
     prompt_tokens: PropTypes.number,
     completion_tokens: PropTypes.number,
     metadata: PropTypes.shape({
@@ -276,10 +320,13 @@ QuotaWithDetailContent.propTypes = {
       original_quota: PropTypes.number,
       origin_quota: PropTypes.number,
       price_type: PropTypes.string,
-      extra_billing: PropTypes.object
+      extra_billing: PropTypes.object,
+      long_context_input_ratio: PropTypes.number,
+      long_context_output_ratio: PropTypes.number
     })
   }).isRequired,
   totalInputTokens: PropTypes.number.isRequired,
   totalOutputTokens: PropTypes.number.isRequired,
-  userGroup: PropTypes.object
+  userGroup: PropTypes.object,
+  userIsAdmin: PropTypes.bool
 };

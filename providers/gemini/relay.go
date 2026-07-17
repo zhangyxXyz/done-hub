@@ -4,10 +4,13 @@ import (
 	"bytes"
 	"done-hub/common"
 	"done-hub/common/requester"
+	"done-hub/providers/base"
 	"done-hub/types"
 	"encoding/json"
 	"net/http"
 	"strings"
+
+	"github.com/gin-gonic/gin"
 )
 
 // countImagesInResponse 统计响应中的图片数量
@@ -32,6 +35,7 @@ type GeminiRelayStreamHandler struct {
 	Usage     *types.Usage
 	Prefix    string
 	ModelName string
+	Context   *gin.Context
 
 	Key string
 }
@@ -91,6 +95,7 @@ func (p *GeminiProvider) CreateGeminiChatStream(request *GeminiChatRequest) (req
 		Usage:     p.Usage,
 		ModelName: request.Model,
 		Prefix:    `data: `,
+		Context:   p.Context,
 
 		Key: channel.Key,
 	}
@@ -133,6 +138,21 @@ func (h *GeminiRelayStreamHandler) HandlerStream(rawLine *[]byte, dataChan chan 
 		return
 	}
 
+	// 统一请求响应模型：在剥离前缀的纯 JSON 上字节级改写 modelVersion / model 两个字段
+	// （gjson 读 + sjson 改，仅动这两个字段，其余字段顺序/内容不变），再回填到 rawStr，
+	// 保留其 data: 前缀与尾部。下游两个发送出口都复用改写后的 rawStr。
+	{
+		patched := noSpaceLine
+		for _, path := range []string{"modelVersion", "model"} {
+			if out, changed := base.UnifyModelInJSONBytes(h.Context, patched, path); changed {
+				patched = out
+			}
+		}
+		if !bytes.Equal(patched, noSpaceLine) {
+			rawStr = strings.Replace(rawStr, string(noSpaceLine), string(patched), 1)
+		}
+	}
+
 	// 累积流式内容到 TextBuilder，用于 UsageMetadata 缺失或不准确时的 token 计算备用
 	for _, candidate := range geminiResponse.Candidates {
 		for _, part := range candidate.Content.Parts {
@@ -172,6 +192,11 @@ func (h *GeminiRelayStreamHandler) HandlerStream(rawLine *[]byte, dataChan chan 
 	// RelayHandler 在 send 前填的本地预估值，否则消费日志会落成 "0 in / N out"。
 	if geminiResponse.UsageMetadata.PromptTokenCount > 0 {
 		h.Usage.PromptTokens = geminiResponse.UsageMetadata.PromptTokenCount
+	}
+
+	// 缓存命中 token：与 PromptTokens 一致取最后一个非零值，计费时按缓存倍率折算。
+	if geminiResponse.UsageMetadata.CachedContentTokenCount > 0 {
+		h.Usage.PromptTokensDetails.CachedTokens = geminiResponse.UsageMetadata.CachedContentTokenCount
 	}
 
 	// 计算 completion tokens，确保不为负数

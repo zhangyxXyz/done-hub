@@ -45,7 +45,7 @@ func (u *Usage) GetExtraTokens() map[string]int {
 	// proxying Anthropic models). Only used as fallback when the standard
 	// prompt_tokens_details fields are not already populated.
 	// 顶层扁平字段不携带 5m/1h TTL 占比，全部计入 CachedWriteTokens 按 5m 倍率计费——
-	// 偏保守（少算 1h 部分的 0.75x），与 sub2api/new-api 兜底策略一致。
+	// 偏保守（少算 1h 部分的 0.75x）。
 	// 原生 Anthropic 路径在 providers/claude/common.go 按嵌套字段拆 1h 桶。
 	if u.CacheCreationInputTokens > 0 && u.PromptTokensDetails.CachedWriteTokens == 0 {
 		u.PromptTokensDetails.CachedWriteTokens = u.CacheCreationInputTokens
@@ -77,6 +77,11 @@ func (u *Usage) GetExtraTokens() map[string]int {
 	// 缓存读取
 	if u.PromptTokensDetails.CachedReadTokens > 0 && u.ExtraTokens[config.UsageExtraCachedRead] == 0 {
 		u.ExtraTokens[config.UsageExtraCachedRead] = u.PromptTokensDetails.CachedReadTokens
+	}
+
+	// OpenAI 缓存写入（GPT-5.6+，prompt_tokens_details.cache_write_tokens）
+	if u.PromptTokensDetails.OpenAICacheWriteTokens > 0 && u.ExtraTokens[config.UsageExtraOpenAICacheWrite] == 0 {
+		u.ExtraTokens[config.UsageExtraOpenAICacheWrite] = u.PromptTokensDetails.OpenAICacheWriteTokens
 	}
 
 	// 输入图像
@@ -125,6 +130,11 @@ type PromptTokensDetails struct {
 	CachedWriteTokens   int `json:"-"`
 	CachedWrite1hTokens int `json:"-"`
 	CachedReadTokens    int `json:"-"`
+
+	// OpenAICacheWriteTokens 对应 OpenAI GPT-5.6+ 的 prompt_tokens_details.cache_write_tokens
+	// （Responses API 为 input_token_details.cache_write_tokens）。与 Anthropic 的 CachedWriteTokens
+	// 语义解耦：OpenAI 缓存写入单一 TTL、按 1.25x 计费，走 UsageExtraOpenAICacheWrite。
+	OpenAICacheWriteTokens int `json:"cache_write_tokens,omitempty"`
 }
 
 type CompletionTokensDetails struct {

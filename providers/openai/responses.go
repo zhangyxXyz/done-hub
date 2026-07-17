@@ -6,12 +6,14 @@ import (
 	"done-hub/common/config"
 	"done-hub/common/requester"
 	"done-hub/common/utils"
+	"done-hub/providers/base"
 	"done-hub/types"
 	"encoding/json"
 	"io"
 	"net/http"
 	"strings"
 
+	"github.com/gin-gonic/gin"
 	"github.com/tidwall/gjson"
 	"github.com/tidwall/sjson"
 )
@@ -21,6 +23,7 @@ type OpenAIResponsesStreamHandler struct {
 	Prefix    string
 	Model     string
 	MessageID string
+	Context   *gin.Context
 
 	searchType string
 	toolIndex  int
@@ -38,19 +41,31 @@ func (p *OpenAIProvider) CreateResponses(request *types.OpenAIResponsesRequest) 
 	defer req.Body.Close()
 
 	response := &types.OpenAIResponsesResponses{}
+	// 开启渠道 PassThroughBody 且 relay 层已放行（入口协议 == responses、响应原样直返）时，
+	// 用 outputResp=true 让 SendRequest 回填 resp.Body：既 unmarshal 一份供计费，又能拿到上游
+	// 原始字节用于响应字节透传（保留未知字段 / 字段顺序）。chat 兼容路径（need2Response）不放行，
+	// 避免把 responses 字节当 chat 返回。
+	passThrough := p.Channel.PassThroughBody && p.Context != nil && p.Context.GetBool(config.GinRawPassThroughAllowedKey)
 	// 发送请求
-	_, errWithCode = p.Requester.SendRequest(req, response, false)
+	resp, errWithCode := p.Requester.SendRequest(req, response, passThrough)
 	if errWithCode != nil {
 		return nil, errWithCode
 	}
+	if passThrough {
+		defer resp.Body.Close()
+	}
 
-	if response.Usage == nil || response.Usage.OutputTokens == 0 {
+	// 透传上游响应头（限流指纹等）：与字节透传解耦，成功响应即捕获。
+	p.storeOpenAIUpstreamHeaders(resp.Header)
+
+	// 仅在 usage 完全缺失、或有响应内容却把 output_tokens 算成 0（解析异常）时才兜底估算，
+	// 避免误杀上游真实返回的空响应（output_tokens=0 且无内容是合法的）而覆盖其 input/details。
+	if response.Usage == nil || (response.Usage.OutputTokens == 0 && response.GetContent() != "") {
 		response.Usage = &types.ResponsesUsage{
 			InputTokens:  p.Usage.PromptTokens,
 			OutputTokens: 0,
 			TotalTokens:  0,
 		}
-		// // 那么需要计算
 		response.Usage.OutputTokens = common.CountTokenText(response.GetContent(), request.Model)
 		response.Usage.TotalTokens = response.Usage.InputTokens + response.Usage.OutputTokens
 	}
@@ -58,6 +73,18 @@ func (p *OpenAIProvider) CreateResponses(request *types.OpenAIResponsesRequest) 
 	*p.Usage = *response.Usage.ToOpenAIUsage()
 
 	getResponsesExtraBilling(response, p.Usage)
+
+	// 暂存上游原始字节，由 relay 层字节透传，保留未知字段 / 字段顺序。
+	// 有别名映射需改 model 时，在原始字节上就地 sjson 改写顶层 model（不改字段顺序 / 不丢未知字段）；
+	// 无映射时 UnifyModelInJSONBytes 恒 no-op。
+	if passThrough {
+		if rawBytes, readErr := io.ReadAll(resp.Body); readErr == nil && len(rawBytes) > 0 {
+			if patched, changed := base.UnifyModelInJSONBytes(p.Context, rawBytes, "model"); changed {
+				rawBytes = patched
+			}
+			p.Context.Set(config.GinRawResponseBodyKey, rawBytes)
+		}
+	}
 
 	return response, nil
 }
@@ -75,10 +102,16 @@ func (p *OpenAIProvider) CreateResponsesStream(request *types.OpenAIResponsesReq
 		return nil, errWithCode
 	}
 
+	// 透传上游响应头（限流指纹等）：与字节透传解耦，成功响应即捕获。
+	p.storeOpenAIUpstreamHeaders(resp.Header)
+
 	chatHandler := OpenAIResponsesStreamHandler{
 		Usage:  p.Usage,
 		Prefix: `data: `,
-		Model:  request.Model,
+		// chat→responses 兼容路径（HandlerChatStream）合成的 chat chunk 用 h.Model 当响应模型名，
+		// 这里直接解析成用户原始请求模型名；原生 responses 路径不读 h.Model，走 response.model 字节改写。
+		Model:   p.GetResponseModelName(request.Model),
+		Context: p.Context,
 	}
 
 	if request.ConvertChat {
@@ -150,6 +183,10 @@ func (p *OpenAIProvider) patchResponsesRequestBody(request *types.OpenAIResponse
 		out = patched
 	}
 
+	if p.ResponsesBodyPatch != nil {
+		out = p.ResponsesBodyPatch(request.Model, out)
+	}
+
 	return out, true
 }
 
@@ -168,14 +205,23 @@ func (p *OpenAIProvider) CreateResponsesCompaction(request *types.OpenAIResponse
 	defer req.Body.Close()
 
 	response := &types.OpenAIResponsesResponses{}
-	_, errWithCode = p.Requester.SendRequest(req, response, false)
+	// 开启渠道 PassThroughBody 且 relay 层已放行（入口协议 == responses、响应原样直返）时，
+	// 用 outputResp=true 让 SendRequest 回填 resp.Body：既 unmarshal 一份供计费，又能拿到上游
+	// 原始字节用于响应字节透传（保留未知字段 / 字段顺序）。chat 兼容路径（need2Response）不放行，
+	// 避免把 responses 字节当 chat 返回。
+	passThrough := p.Channel.PassThroughBody && p.Context != nil && p.Context.GetBool(config.GinRawPassThroughAllowedKey)
+	resp, errWithCode := p.Requester.SendRequest(req, response, passThrough)
 	if errWithCode != nil {
 		return nil, errWithCode
 	}
+	if passThrough {
+		defer resp.Body.Close()
+	}
 
-	// 与 CreateResponses 同款兜底：上游漏返 usage 或 output_tokens 时，
-	// 用本地预扣的 PromptTokens + 对响应文本做 token 估算补齐，避免计费归零。
-	if response.Usage == nil || response.Usage.OutputTokens == 0 {
+	// 与 CreateResponses 同款兜底：上游漏返 usage、或有响应内容却把 output_tokens 算成 0（解析异常）时，
+	// 用本地预扣的 PromptTokens + 对响应文本做 token 估算补齐，避免计费归零；
+	// output_tokens=0 且无内容的合法空响应不在此列，保留上游真实 usage。
+	if response.Usage == nil || (response.Usage.OutputTokens == 0 && response.GetContent() != "") {
 		response.Usage = &types.ResponsesUsage{
 			InputTokens:  p.Usage.PromptTokens,
 			OutputTokens: 0,
@@ -186,6 +232,18 @@ func (p *OpenAIProvider) CreateResponsesCompaction(request *types.OpenAIResponse
 	}
 
 	*p.Usage = *response.Usage.ToOpenAIUsage()
+
+	// 暂存上游原始字节，由 relay 层字节透传，保留未知字段 / 字段顺序。
+	// 有别名映射需改 model 时，在原始字节上就地 sjson 改写顶层 model（不改字段顺序 / 不丢未知字段）；
+	// 无映射时 UnifyModelInJSONBytes 恒 no-op。
+	if passThrough {
+		if rawBytes, readErr := io.ReadAll(resp.Body); readErr == nil && len(rawBytes) > 0 {
+			if patched, changed := base.UnifyModelInJSONBytes(p.Context, rawBytes, "model"); changed {
+				rawBytes = patched
+			}
+			p.Context.Set(config.GinRawResponseBodyKey, rawBytes)
+		}
+	}
 
 	return response, nil
 }
@@ -262,6 +320,35 @@ func (h *OpenAIResponsesStreamHandler) HandlerResponsesStream(rawLine *[]byte, d
 		return
 	}
 
+	// 统一请求响应模型：model 仅出现在 response.created / response.completed 等信封事件的
+	// response.model（文本增量事件不含该字段，helper 自动 no-op）。在剥离前缀的纯 JSON 上
+	// 字节级改写后回填 rawStr，保留 data: 前缀与字段顺序；下游写入 eventBuffer 的各出口都复用。
+	if patched, changed := base.UnifyModelInJSONBytes(h.Context, noSpaceLine, "response.model"); changed {
+		rawStr = strings.Replace(rawStr, string(noSpaceLine), string(patched), 1)
+	}
+
+	// 终止事件（completed/done/incomplete/failed）：先处理 usage，再结束流。
+	// 终止事件集合与 usage 提取统一走 base helper，与 codex 渠道共享同一份判定。
+	if base.IsResponsesTerminalEvent(openaiResponse.Type) {
+		if base.ExtractResponsesStreamUsage(&openaiResponse, h.Usage) {
+			getResponsesExtraBilling(openaiResponse.Response, h.Usage)
+		}
+
+		// 添加数据行到缓冲区
+		h.eventBuffer.WriteString(rawStr)
+		h.eventBuffer.WriteString("\n")
+
+		// 发送完整的 SSE 事件块
+		dataChan <- h.eventBuffer.String()
+
+		// 发送EOF信号结束流
+		errChan <- io.EOF
+
+		// 标记流已关闭
+		*rawLine = requester.StreamClosed
+		return
+	}
+
 	switch openaiResponse.Type {
 	case "response.created":
 		if len(openaiResponse.Response.Tools) > 0 {
@@ -293,27 +380,6 @@ func (h *OpenAIResponsesStreamHandler) HandlerResponsesStream(rawLine *[]byte, d
 				h.Usage.IncExtraBilling(types.APITollTypeFileSearch, "")
 			}
 		}
-	case "response.completed", "response.failed", "response.incomplete":
-		// 处理流结束事件 - 先处理usage，再结束流
-		if openaiResponse.Response != nil && openaiResponse.Response.Usage != nil {
-			usage := openaiResponse.Response.Usage
-			*h.Usage = *usage.ToOpenAIUsage()
-			getResponsesExtraBilling(openaiResponse.Response, h.Usage)
-		}
-
-		// 添加数据行到缓冲区
-		h.eventBuffer.WriteString(rawStr)
-		h.eventBuffer.WriteString("\n")
-
-		// 发送完整的 SSE 事件块
-		dataChan <- h.eventBuffer.String()
-
-		// 发送EOF信号结束流
-		errChan <- io.EOF
-
-		// 标记流已关闭
-		*rawLine = requester.StreamClosed
-		return
 	}
 
 	// 添加数据行到缓冲区
@@ -467,10 +533,8 @@ func (h *OpenAIResponsesStreamHandler) HandlerChatStream(rawLine *[]byte, dataCh
 			}
 		}
 	default:
-		if openaiResponse.Response != nil && openaiResponse.Response.Usage != nil {
-			usage := openaiResponse.Response.Usage
-			*h.Usage = *usage.ToOpenAIUsage()
-
+		// 终止事件携带最终 usage：判定与提取统一走 base helper（与原生 responses 路径共享）。
+		if base.ExtractResponsesStreamUsage(&openaiResponse, h.Usage) {
 			getResponsesExtraBilling(openaiResponse.Response, h.Usage)
 			chatRes.Choices = append(chatRes.Choices, types.ChatCompletionStreamChoice{
 				Index:        0,
@@ -478,7 +542,6 @@ func (h *OpenAIResponsesStreamHandler) HandlerChatStream(rawLine *[]byte, dataCh
 				FinishReason: types.ConvertResponsesStatusToChat(openaiResponse.Response.Status),
 			})
 			needOutput = true
-
 		}
 	}
 
