@@ -4007,8 +4007,8 @@
     "model": "mancer/weaver",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.75,
-    "output": 1
+    "input": 0.5,
+    "output": 0.75
   },
   {
     "model": "meituan/longcat-flash-chat",
@@ -4630,8 +4630,8 @@
     "model": "moonshotai/kimi-k2.7-code",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.75,
-    "output": 3.5
+    "input": 1,
+    "output": 4.4
   },
   {
     "model": "moonshotai/kimi-k2:free",
@@ -5743,8 +5743,8 @@
     "model": "qwen/qwen3-30b-a3b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.12,
-    "output": 0.5
+    "input": 0.13,
+    "output": 0.52
   },
   {
     "model": "qwen/qwen3-30b-a3b-instruct-2507",
@@ -5946,8 +5946,8 @@
     "model": "qwen/qwen3.5-27b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.195,
-    "output": 1.56
+    "input": 0.26,
+    "output": 2.6
   },
   {
     "model": "qwen/qwen3.5-35b-a3b",
@@ -6279,6 +6279,13 @@
     "output": 0
   },
   {
+    "model": "thinkingmachines/inkling",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 1,
+    "output": 4.05
+  },
+  {
     "model": "thudm/glm-4.1v-9b-thinking",
     "type": "tokens",
     "channel_type": 20,
@@ -6590,8 +6597,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.9268,
-    "output": 2.9128
+    "input": 0.343,
+    "output": 1.078
   },
   {
     "model": "z-ai/glm-5v-turbo",

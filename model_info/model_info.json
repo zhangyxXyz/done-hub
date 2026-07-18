@@ -3668,7 +3668,7 @@
         "name": "MoonshotAI: Kimi K2 Thinking",
         "description": "Kimi K2 Thinking is Moonshot AI’s most advanced open reasoning model to date, extending the K2 series into agentic, long-horizon reasoning. Built on the trillion-parameter Mixture-of-Experts (MoE) architecture introduced in...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 100352,
         "input_modalities": [
           "text"
         ],
@@ -6187,6 +6187,39 @@
       }
     },
     {
+      "model": "openrouter/auto-beta",
+      "model_info": {
+        "model": "openrouter/auto-beta",
+        "name": "Auto Router (Beta)",
+        "description": "Auto Router (Beta) is a task-aware router from OpenRouter. It classifies each request, then routes it the [most popular model](/rankings#task-spend) for that task based on aggregate spend, filtered by your...",
+        "context_length": 2000000,
+        "max_tokens": 0,
+        "input_modalities": [
+          "text",
+          "image",
+          "audio",
+          "file",
+          "video"
+        ],
+        "output_modalities": [
+          "text",
+          "image"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "audio",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/openrouter/auto-beta",
+          "https://openrouter.ai/api/v1/models/openrouter/auto-beta/endpoints"
+        ]
+      }
+    },
+    {
       "model": "openrouter/bodybuilder",
       "model_info": {
         "model": "openrouter/bodybuilder",
@@ -6823,7 +6856,7 @@
         "name": "Qwen: Qwen3 30B A3B",
         "description": "Qwen3, the latest generation in the Qwen large language model series, features both dense and mixture-of-experts (MoE) architectures to excel in reasoning, multilingual support, and advanced agent tasks. Its unique...",
         "context_length": 131072,
-        "max_tokens": 16384,
+        "max_tokens": 8192,
         "input_modalities": [
           "text"
         ],
@@ -7449,7 +7482,7 @@
         "name": "Qwen: Qwen3.5-27B",
         "description": "The Qwen3.5 27B native vision-language Dense model incorporates a linear attention mechanism, delivering fast response times while balancing inference speed and performance. Its overall capabilities are comparable to those of...",
         "context_length": 262144,
-        "max_tokens": 65536,
+        "max_tokens": 81920,
         "input_modalities": [
           "text",
           "image",
@@ -8293,6 +8326,35 @@
         "support_url": [
           "https://openrouter.ai/models/thedrummer/unslopnemo-12b",
           "https://openrouter.ai/api/v1/models/thedrummer/unslopnemo-12b/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "thinkingmachines/inkling",
+      "model_info": {
+        "model": "thinkingmachines/inkling",
+        "name": "Thinking Machines: Inkling",
+        "description": "Inkling is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 41B active parameters out of 975B total. It is designed for general-purpose reasoning, coding, agentic and tool-use systems,...",
+        "context_length": 1048576,
+        "max_tokens": 0,
+        "input_modalities": [
+          "text",
+          "image",
+          "audio"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "audio",
+          "tools",
+          "reasoning"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/thinkingmachines/inkling",
+          "https://openrouter.ai/api/v1/models/thinkingmachines/inkling-20260715/endpoints"
         ]
       }
     },
