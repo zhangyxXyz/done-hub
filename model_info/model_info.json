@@ -2143,7 +2143,7 @@
         "name": "Google: Gemma 4 31B",
         "description": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 16384,
         "input_modalities": [
           "image",
           "text",
@@ -6753,7 +6753,7 @@
         "name": "Qwen: Qwen3 14B",
         "description": "Qwen3-14B is a dense 14.8B parameter causal language model from the Qwen3 series, designed for both complex reasoning and efficient dialogue. It supports seamless switching between a \"thinking\" mode for...",
         "context_length": 131702,
-        "max_tokens": 16384,
+        "max_tokens": 8192,
         "input_modalities": [
           "text"
         ],

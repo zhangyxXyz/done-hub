@@ -3804,8 +3804,8 @@
     "model": "google/gemma-4-31b-it",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.22,
-    "output": 0.55
+    "input": 0.12,
+    "output": 0.37
   },
   {
     "model": "google/gemma-4-31b-it:free",
@@ -5708,8 +5708,8 @@
     "model": "qwen/qwen3-14b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.12,
-    "output": 0.24
+    "input": 0.2275,
+    "output": 0.91
   },
   {
     "model": "qwen/qwen3-235b-a22b",
@@ -6597,8 +6597,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.343,
-    "output": 1.078
+    "input": 0.2912,
+    "output": 0.9152
   },
   {
     "model": "z-ai/glm-5v-turbo",
