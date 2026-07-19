@@ -978,30 +978,6 @@
       }
     },
     {
-      "model": "cognitivecomputations/dolphin-mistral-24b-venice-edition:free",
-      "model_info": {
-        "model": "cognitivecomputations/dolphin-mistral-24b-venice-edition:free",
-        "name": "Venice: Uncensored (free)",
-        "description": "Venice Uncensored Dolphin Mistral 24B Venice Edition is a fine-tuned variant of Mistral-Small-24B-Instruct-2501, developed by dphn.ai in collaboration with Venice.ai. This model is designed as an “uncensored” instruct-tuned LLM, preserving...",
-        "context_length": 32768,
-        "max_tokens": 0,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/cognitivecomputations/dolphin-mistral-24b-venice-edition:free",
-          "https://openrouter.ai/api/v1/models/venice/uncensored/endpoints"
-        ]
-      }
-    },
-    {
       "model": "cohere/command-a",
       "model_info": {
         "model": "cohere/command-a",
@@ -2668,29 +2644,6 @@
       }
     },
     {
-      "model": "meta-llama/llama-3.2-3b-instruct:free",
-      "model_info": {
-        "model": "meta-llama/llama-3.2-3b-instruct:free",
-        "name": "Meta: Llama 3.2 3B Instruct (free)",
-        "description": "Llama 3.2 3B is a 3-billion-parameter multilingual large language model, optimized for advanced natural language processing tasks like dialogue generation, reasoning, and summarization. Designed with the latest transformer architecture, it...",
-        "context_length": 131072,
-        "max_tokens": 0,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/meta-llama/llama-3.2-3b-instruct:free",
-          "https://openrouter.ai/api/v1/models/meta-llama/llama-3.2-3b-instruct/endpoints"
-        ]
-      }
-    },
-    {
       "model": "meta-llama/llama-3.3-70b-instruct",
       "model_info": {
         "model": "meta-llama/llama-3.3-70b-instruct",
@@ -2711,30 +2664,6 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/meta-llama/llama-3.3-70b-instruct",
-          "https://openrouter.ai/api/v1/models/meta-llama/llama-3.3-70b-instruct/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "meta-llama/llama-3.3-70b-instruct:free",
-      "model_info": {
-        "model": "meta-llama/llama-3.3-70b-instruct:free",
-        "name": "Meta: Llama 3.3 70B Instruct (free)",
-        "description": "The Meta Llama 3.3 multilingual large language model (LLM) is a pretrained and instruction tuned generative model in 70B (text in/text out). The Llama 3.3 instruction tuned text only model...",
-        "context_length": 131072,
-        "max_tokens": 0,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/meta-llama/llama-3.3-70b-instruct:free",
           "https://openrouter.ai/api/v1/models/meta-llama/llama-3.3-70b-instruct/endpoints"
         ]
       }
@@ -3926,29 +3855,6 @@
       }
     },
     {
-      "model": "nousresearch/hermes-3-llama-3.1-405b:free",
-      "model_info": {
-        "model": "nousresearch/hermes-3-llama-3.1-405b:free",
-        "name": "Nous: Hermes 3 405B Instruct (free)",
-        "description": "Hermes 3 is a generalist language model with many improvements over Hermes 2, including advanced agentic capabilities, much better roleplaying, reasoning, multi-turn conversation, long context coherence, and improvements across the...",
-        "context_length": 131072,
-        "max_tokens": 0,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/nousresearch/hermes-3-llama-3.1-405b:free",
-          "https://openrouter.ai/api/v1/models/nousresearch/hermes-3-llama-3.1-405b/endpoints"
-        ]
-      }
-    },
-    {
       "model": "nousresearch/hermes-3-llama-3.1-70b",
       "model_info": {
         "model": "nousresearch/hermes-3-llama-3.1-70b",
@@ -4110,7 +4016,7 @@
         "name": "NVIDIA: Nemotron 3 Super",
         "description": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer...",
         "context_length": 1000000,
-        "max_tokens": 0,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -6753,7 +6659,7 @@
         "name": "Qwen: Qwen3 14B",
         "description": "Qwen3-14B is a dense 14.8B parameter causal language model from the Qwen3 series, designed for both complex reasoning and efficient dialogue. It supports seamless switching between a \"thinking\" mode for...",
         "context_length": 131702,
-        "max_tokens": 8192,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -7104,30 +7010,6 @@
       }
     },
     {
-      "model": "qwen/qwen3-coder:free",
-      "model_info": {
-        "model": "qwen/qwen3-coder:free",
-        "name": "Qwen: Qwen3 Coder 480B A35B (free)",
-        "description": "Qwen3-Coder-480B-A35B-Instruct is a Mixture-of-Experts (MoE) code generation model developed by the Qwen team. It is optimized for agentic coding tasks such as function calling, tool use, and long-context reasoning over...",
-        "context_length": 1048576,
-        "max_tokens": 262000,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/qwen/qwen3-coder:free",
-          "https://openrouter.ai/api/v1/models/qwen/qwen3-coder-480b-a35b-07-25/endpoints"
-        ]
-      }
-    },
-    {
       "model": "qwen/qwen3-max",
       "model_info": {
         "model": "qwen/qwen3-max",
@@ -7199,31 +7081,6 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/qwen/qwen3-next-80b-a3b-instruct",
-          "https://openrouter.ai/api/v1/models/qwen/qwen3-next-80b-a3b-instruct-2509/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "qwen/qwen3-next-80b-a3b-instruct:free",
-      "model_info": {
-        "model": "qwen/qwen3-next-80b-a3b-instruct:free",
-        "name": "Qwen: Qwen3 Next 80B A3B Instruct (free)",
-        "description": "Qwen3-Next-80B-A3B-Instruct is an instruction-tuned chat model in the Qwen3-Next series optimized for fast, stable responses without “thinking” traces. It targets complex tasks across reasoning, code generation, knowledge QA, and multilingual...",
-        "context_length": 262144,
-        "max_tokens": 0,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/qwen/qwen3-next-80b-a3b-instruct:free",
           "https://openrouter.ai/api/v1/models/qwen/qwen3-next-80b-a3b-instruct-2509/endpoints"
         ]
       }
