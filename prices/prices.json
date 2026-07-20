@@ -4025,6 +4025,13 @@
     "output": 0.75
   },
   {
+    "model": "meituan/longcat-2.0",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.3,
+    "output": 1.2
+  },
+  {
     "model": "meituan/longcat-flash-chat",
     "type": "tokens",
     "channel_type": 20,
@@ -4644,8 +4651,8 @@
     "model": "moonshotai/kimi-k2.7-code",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.85,
-    "output": 3.8
+    "input": 0.82,
+    "output": 3.75
   },
   {
     "model": "moonshotai/kimi-k2:free",
@@ -6611,8 +6618,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.9618,
-    "output": 3.0228
+    "input": 0.9478,
+    "output": 2.9788
   },
   {
     "model": "z-ai/glm-5v-turbo",
