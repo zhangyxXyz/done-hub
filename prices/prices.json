@@ -847,7 +847,21 @@
     "output": 30
   },
   {
+    "model": "gpt-5.5-2026-04-23",
+    "type": "tokens",
+    "channel_type": 1,
+    "input": 5,
+    "output": 30
+  },
+  {
     "model": "gpt-5.5-pro",
+    "type": "tokens",
+    "channel_type": 1,
+    "input": 30,
+    "output": 180
+  },
+  {
+    "model": "gpt-5.5-pro-2026-04-23",
     "type": "tokens",
     "channel_type": 1,
     "input": 30,
@@ -5729,8 +5743,8 @@
     "model": "qwen/qwen3-235b-a22b-thinking-2507",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.1495,
-    "output": 1.495
+    "input": 0.3,
+    "output": 3
   },
   {
     "model": "qwen/qwen3-235b-a22b:free",
@@ -6577,7 +6591,7 @@
     "type": "tokens",
     "channel_type": 20,
     "input": 0.95,
-    "output": 3.15
+    "output": 2.55
   },
   {
     "model": "z-ai/glm-5-turbo",
@@ -6597,8 +6611,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.2408,
-    "output": 0.7568
+    "input": 0.9618,
+    "output": 3.0228
   },
   {
     "model": "z-ai/glm-5v-turbo",

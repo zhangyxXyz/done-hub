@@ -6736,7 +6736,7 @@
         "name": "Qwen: Qwen3 235B A22B Thinking 2507",
         "description": "Qwen3-235B-A22B-Thinking-2507 is a high-performance, open-weight Mixture-of-Experts (MoE) language model optimized for complex reasoning tasks. It activates 22B of its 235B parameters per forward pass and natively supports up to 262,144...",
         "context_length": 262144,
-        "max_tokens": 0,
+        "max_tokens": 32768,
         "input_modalities": [
           "text"
         ],
@@ -8681,8 +8681,8 @@
         "model": "z-ai/glm-5",
         "name": "Z.ai: GLM 5",
         "description": "GLM-5 is Z.ai’s flagship open-source foundation model engineered for complex systems design and long-horizon agent workflows. Built for expert developers, it delivers production-grade performance on large-scale programming tasks, rivaling leading...",
-        "context_length": 202752,
-        "max_tokens": 202752,
+        "context_length": 204800,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
