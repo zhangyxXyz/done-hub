@@ -3703,6 +3703,20 @@
     "output": 9
   },
   {
+    "model": "google/gemini-3.5-flash-lite",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.3,
+    "output": 2.5
+  },
+  {
+    "model": "google/gemini-3.6-flash",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 1.5,
+    "output": 7.5
+  },
+  {
     "model": "google/gemini-embedding-001",
     "type": "tokens",
     "channel_type": 20,
@@ -5593,6 +5607,20 @@
     "output": 0
   },
   {
+    "model": "poolside/laguna-s-2.1",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.1,
+    "output": 0.2
+  },
+  {
+    "model": "poolside/laguna-s-2.1:free",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0,
+    "output": 0
+  },
+  {
     "model": "poolside/laguna-xs-2.1",
     "type": "tokens",
     "channel_type": 20,
@@ -6618,8 +6646,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.9464,
-    "output": 2.9744
+    "input": 0.7966,
+    "output": 2.5036
   },
   {
     "model": "z-ai/glm-5v-turbo",
@@ -6661,7 +6689,7 @@
     "type": "tokens",
     "channel_type": 20,
     "input": 1.5,
-    "output": 9
+    "output": 7.5
   },
   {
     "model": "~google/gemini-pro-latest",

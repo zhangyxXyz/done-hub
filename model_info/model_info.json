@@ -1718,7 +1718,7 @@
         "name": "Google: Nano Banana 2 (Gemini 3.1 Flash Image Preview)",
         "description": "Gemini 3.1 Flash Image Preview, a.k.a. \"Nano Banana 2,\" is Google’s latest state of the art image generation and editing model, delivering Pro-level visual quality at Flash speed. It combines...",
         "context_length": 131072,
-        "max_tokens": 32768,
+        "max_tokens": 65536,
         "input_modalities": [
           "image",
           "text"
@@ -1924,6 +1924,70 @@
         "support_url": [
           "https://openrouter.ai/models/google/gemini-3.5-flash",
           "https://openrouter.ai/api/v1/models/google/gemini-3.5-flash-20260519/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "google/gemini-3.5-flash-lite",
+      "model_info": {
+        "model": "google/gemini-3.5-flash-lite",
+        "name": "Google: Gemini 3.5 Flash-Lite",
+        "description": "Gemini 3.5 Flash-Lite is a high-efficiency model from Google with upgraded agentic capabilities. It is suited for subagents that execute focused tasks within complex, multi-agent workflows.",
+        "context_length": 1048576,
+        "max_tokens": 65536,
+        "input_modalities": [
+          "text",
+          "image",
+          "video",
+          "file",
+          "audio"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "audio",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/google/gemini-3.5-flash-lite",
+          "https://openrouter.ai/api/v1/models/google/gemini-3.5-flash-lite-20260721/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "google/gemini-3.6-flash",
+      "model_info": {
+        "model": "google/gemini-3.6-flash",
+        "name": "Google: Gemini 3.6 Flash",
+        "description": "Gemini 3.6 Flash is a high-efficiency model from Google for coding, agentic workflows, and web and app development. It is designed to produce polished outputs with fewer unnecessary edits and...",
+        "context_length": 1048576,
+        "max_tokens": 65536,
+        "input_modalities": [
+          "text",
+          "image",
+          "video",
+          "file",
+          "audio"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "audio",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/google/gemini-3.6-flash",
+          "https://openrouter.ai/api/v1/models/google/gemini-3.6-flash-20260721/endpoints"
         ]
       }
     },
@@ -6450,6 +6514,56 @@
         "support_url": [
           "https://openrouter.ai/models/poolside/laguna-m.1:free",
           "https://openrouter.ai/api/v1/models/poolside/laguna-m.1-20260312/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "poolside/laguna-s-2.1",
+      "model_info": {
+        "model": "poolside/laguna-s-2.1",
+        "name": "Poolside: Laguna S 2.1",
+        "description": "Laguna S 2.1 is the latest coding agent model from [Poolside](<https://poolside.ai/>). Laguna S 2.1 is a 118B total parameter model with 8B active parameters, scoring 70.2% on Terminal-Bench 2.1 and...",
+        "context_length": 1048576,
+        "max_tokens": 131072,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/poolside/laguna-s-2.1",
+          "https://openrouter.ai/api/v1/models/poolside/laguna-s-2.1-20260720/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "poolside/laguna-s-2.1:free",
+      "model_info": {
+        "model": "poolside/laguna-s-2.1:free",
+        "name": "Poolside: Laguna S 2.1 (free)",
+        "description": "Laguna S 2.1 is the latest coding agent model from [Poolside](<https://poolside.ai/>). Laguna S 2.1 is a 118B total parameter model with 8B active parameters, scoring 70.2% on Terminal-Bench 2.1 and...",
+        "context_length": 1048576,
+        "max_tokens": 32768,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/poolside/laguna-s-2.1:free",
+          "https://openrouter.ai/api/v1/models/poolside/laguna-s-2.1-20260720/endpoints"
         ]
       }
     },
