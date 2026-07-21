@@ -2120,7 +2120,7 @@
         "name": "Google: Gemma 4 31B",
         "description": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 16384,
         "input_modalities": [
           "image",
           "text",
@@ -4042,7 +4042,7 @@
         "name": "NVIDIA: Nemotron 3 Super",
         "description": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer...",
         "context_length": 1000000,
-        "max_tokens": 16384,
+        "max_tokens": 0,
         "input_modalities": [
           "text"
         ],
@@ -7093,7 +7093,7 @@
         "name": "Qwen: Qwen3 Next 80B A3B Instruct",
         "description": "Qwen3-Next-80B-A3B-Instruct is an instruction-tuned chat model in the Qwen3-Next series optimized for fast, stable responses without “thinking” traces. It targets complex tasks across reasoning, code generation, knowledge QA, and multilingual...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 32768,
         "input_modalities": [
           "text"
         ],
@@ -8045,7 +8045,7 @@
         "name": "Tencent: Hy3",
         "description": "Hy3 is a 295B-parameter Mixture-of-Experts model from Tencent (21B active, 192 experts with top-8 routing) built for reasoning, agentic workflows, and real-world production use. It supports a configurable reasoning effort:...",
         "context_length": 262144,
-        "max_tokens": 131072,
+        "max_tokens": 262144,
         "input_modalities": [
           "text"
         ],
@@ -8086,32 +8086,6 @@
         "support_url": [
           "https://openrouter.ai/models/tencent/hy3-preview",
           "https://openrouter.ai/api/v1/models/tencent/hy3-preview-20260421/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "tencent/hy3:free",
-      "model_info": {
-        "model": "tencent/hy3:free",
-        "name": "Tencent: Hy3 (free)",
-        "description": "Hy3 is a 295B-parameter Mixture-of-Experts model from Tencent (21B active, 192 experts with top-8 routing) built for reasoning, agentic workflows, and real-world production use. It supports a configurable reasoning effort:...",
-        "context_length": 262144,
-        "max_tokens": 262144,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/tencent/hy3:free",
-          "https://openrouter.ai/api/v1/models/tencent/hy3-20260706/endpoints"
         ]
       }
     },

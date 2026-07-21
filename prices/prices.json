@@ -3510,8 +3510,8 @@
     "model": "deepseek/deepseek-v4-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.098,
-    "output": 0.196
+    "input": 0.0938,
+    "output": 0.1876
   },
   {
     "model": "deepseek/deepseek-v4-pro",
@@ -3818,8 +3818,8 @@
     "model": "google/gemma-4-31b-it",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.22,
-    "output": 0.55
+    "input": 0.12,
+    "output": 0.37
   },
   {
     "model": "google/gemma-4-31b-it:free",
@@ -4826,8 +4826,8 @@
     "model": "nvidia/nemotron-3-super-120b-a12b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.085,
-    "output": 0.4
+    "input": 0.08,
+    "output": 0.45
   },
   {
     "model": "nvidia/nemotron-3-super-120b-a12b:free",
@@ -5890,8 +5890,8 @@
     "model": "qwen/qwen3-next-80b-a3b-instruct",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.1,
-    "output": 1.1
+    "input": 0.0975,
+    "output": 0.78
   },
   {
     "model": "qwen/qwen3-next-80b-a3b-instruct:free",
@@ -6226,8 +6226,8 @@
     "model": "tencent/hy3",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.2,
-    "output": 0.8
+    "input": 0.14,
+    "output": 0.58
   },
   {
     "model": "tencent/hy3-preview",
@@ -6618,8 +6618,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.9478,
-    "output": 2.9788
+    "input": 0.9464,
+    "output": 2.9744
   },
   {
     "model": "z-ai/glm-5v-turbo",
