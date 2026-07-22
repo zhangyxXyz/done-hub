@@ -3510,8 +3510,8 @@
     "model": "deepseek/deepseek-v4-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.0938,
-    "output": 0.1876
+    "input": 0.098,
+    "output": 0.196
   },
   {
     "model": "deepseek/deepseek-v4-pro",
@@ -5918,8 +5918,8 @@
     "model": "qwen/qwen3-next-80b-a3b-instruct",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.0975,
-    "output": 0.78
+    "input": 0.1,
+    "output": 1.1
   },
   {
     "model": "qwen/qwen3-next-80b-a3b-instruct:free",
@@ -6646,8 +6646,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.7966,
-    "output": 2.5036
+    "input": 0.805,
+    "output": 2.53
   },
   {
     "model": "z-ai/glm-5v-turbo",
