@@ -2049,7 +2049,7 @@
         "name": "Google: Gemma 3 27B",
         "description": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,...",
         "context_length": 262144,
-        "max_tokens": 0,
+        "max_tokens": 131072,
         "input_modalities": [
           "text",
           "image"
@@ -2437,6 +2437,31 @@
         "support_url": [
           "https://openrouter.ai/models/inclusionai/ling-2.6-flash",
           "https://openrouter.ai/api/v1/models/inclusionai/ling-2.6-flash-20260421/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "inclusionai/ling-3.0-flash",
+      "model_info": {
+        "model": "inclusionai/ling-3.0-flash",
+        "name": "Ling-3.0-flash",
+        "description": "*Ling-3.0-flash* is a *124B-parameter Mixture-of-Experts (MoE) model*, with approximately *5.1B parameters activated per token*. The model is designed with *token efficiency and production-scale agentic inference* as key priorities, enabling developers...",
+        "context_length": 262144,
+        "max_tokens": 32768,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/inclusionai/ling-3.0-flash",
+          "https://openrouter.ai/api/v1/models/inclusionai/ling-3.0-flash-20260723/endpoints"
         ]
       }
     },
@@ -7479,7 +7504,7 @@
         "name": "Qwen: Qwen3.5-27B",
         "description": "The Qwen3.5 27B native vision-language Dense model incorporates a linear attention mechanism, delivering fast response times while balancing inference speed and performance. Its overall capabilities are comparable to those of...",
         "context_length": 262144,
-        "max_tokens": 81920,
+        "max_tokens": 65536,
         "input_modalities": [
           "text",
           "image",
@@ -8306,7 +8331,7 @@
         "model": "thinkingmachines/inkling",
         "name": "Thinking Machines: Inkling",
         "description": "Inkling is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 41B active parameters out of 975B total. It is designed for general-purpose reasoning, coding, agentic and tool-use systems,...",
-        "context_length": 524288,
+        "context_length": 1048576,
         "max_tokens": 0,
         "input_modalities": [
           "text",
@@ -8796,7 +8821,7 @@
         "name": "Z.ai: GLM 5",
         "description": "GLM-5 is Z.ai’s flagship open-source foundation model engineered for complex systems design and long-horizon agent workflows. Built for expert developers, it delivers production-grade performance on large-scale programming tasks, rivaling leading...",
         "context_length": 204800,
-        "max_tokens": 202752,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],

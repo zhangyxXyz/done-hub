@@ -3776,8 +3776,8 @@
     "model": "google/gemma-3-27b-it",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.1,
-    "output": 0.3
+    "input": 0.08,
+    "output": 0.45
   },
   {
     "model": "google/gemma-3-27b-it:free",
@@ -3925,6 +3925,13 @@
     "channel_type": 20,
     "input": 0.01,
     "output": 0.03
+  },
+  {
+    "model": "inclusionai/ling-3.0-flash",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0,
+    "output": 0
   },
   {
     "model": "inclusionai/ring-2.6-1t",
@@ -6002,8 +6009,8 @@
     "model": "qwen/qwen3.5-27b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.26,
-    "output": 2.6
+    "input": 0.195,
+    "output": 1.56
   },
   {
     "model": "qwen/qwen3.5-35b-a3b",
@@ -6633,7 +6640,7 @@
     "type": "tokens",
     "channel_type": 20,
     "input": 0.95,
-    "output": 3.15
+    "output": 2.55
   },
   {
     "model": "z-ai/glm-5-turbo",
@@ -6653,8 +6660,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.812,
-    "output": 2.552
+    "input": 0.8204,
+    "output": 2.5784
   },
   {
     "model": "z-ai/glm-5v-turbo",
@@ -10197,6 +10204,13 @@
     "channel_type": 42,
     "input": 0.09,
     "output": 0.36
+  },
+  {
+    "model": "grok-4.3",
+    "type": "tokens",
+    "channel_type": 42,
+    "input": 1.25,
+    "output": 2.5
   },
   {
     "model": "jamba-large-1.6",
