@@ -3108,6 +3108,20 @@
     "output": 50
   },
   {
+    "model": "anthropic/claude-opus-5",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 5,
+    "output": 25
+  },
+  {
+    "model": "anthropic/claude-opus-5-fast",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 10,
+    "output": 50
+  },
+  {
     "model": "anthropic/claude-sonnet-4",
     "type": "tokens",
     "channel_type": 20,
@@ -3839,8 +3853,8 @@
     "model": "google/gemma-4-31b-it",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.1,
-    "output": 0.35
+    "input": 0.14,
+    "output": 0.4
   },
   {
     "model": "google/gemma-4-31b-it:free",
@@ -4343,8 +4357,8 @@
     "model": "minimax/minimax-m2.7",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.3,
-    "output": 1.2
+    "input": 0.25,
+    "output": 1
   },
   {
     "model": "minimax/minimax-m3",
@@ -4679,8 +4693,8 @@
     "model": "moonshotai/kimi-k2.7-code",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.71,
-    "output": 3.49
+    "input": 0.82,
+    "output": 3.75
   },
   {
     "model": "moonshotai/kimi-k2:free",
@@ -5855,8 +5869,8 @@
     "model": "qwen/qwen3-coder",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.38,
-    "output": 1.55
+    "input": 0.3,
+    "output": 1
   },
   {
     "model": "qwen/qwen3-coder-30b-a3b-instruct",
@@ -5932,8 +5946,8 @@
     "model": "qwen/qwen3-next-80b-a3b-instruct",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.15,
-    "output": 1.2
+    "input": 0.1,
+    "output": 1.1
   },
   {
     "model": "qwen/qwen3-next-80b-a3b-instruct:free",
@@ -6660,8 +6674,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.7644,
-    "output": 2.4024
+    "input": 0.7896,
+    "output": 2.4816
   },
   {
     "model": "z-ai/glm-5v-turbo",
