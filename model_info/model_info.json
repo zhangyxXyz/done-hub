@@ -2184,7 +2184,7 @@
         "name": "Google: Gemma 4 31B",
         "description": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 8192,
         "input_modalities": [
           "image",
           "text",
@@ -2441,10 +2441,10 @@
       }
     },
     {
-      "model": "inclusionai/ling-3.0-flash",
+      "model": "inclusionai/ling-3.0-flash:free",
       "model_info": {
-        "model": "inclusionai/ling-3.0-flash",
-        "name": "Ling-3.0-flash",
+        "model": "inclusionai/ling-3.0-flash:free",
+        "name": "Ling-3.0-flash (free)",
         "description": "*Ling-3.0-flash* is a *124B-parameter Mixture-of-Experts (MoE) model*, with approximately *5.1B parameters activated per token*. The model is designed with *token efficiency and production-scale agentic inference* as key priorities, enabling developers...",
         "context_length": 262144,
         "max_tokens": 32768,
@@ -2460,7 +2460,7 @@
           "reasoning"
         ],
         "support_url": [
-          "https://openrouter.ai/models/inclusionai/ling-3.0-flash",
+          "https://openrouter.ai/models/inclusionai/ling-3.0-flash:free",
           "https://openrouter.ai/api/v1/models/inclusionai/ling-3.0-flash-20260723/endpoints"
         ]
       }
@@ -5818,7 +5818,7 @@
         "name": "OpenAI: gpt-oss-20b",
         "description": "gpt-oss-20b is an open-weight 21B parameter model released by OpenAI under the Apache 2.0 license. It uses a Mixture-of-Experts (MoE) architecture with 3.6B active parameters per forward pass, optimized for...",
         "context_length": 131072,
-        "max_tokens": 131072,
+        "max_tokens": 0,
         "input_modalities": [
           "text"
         ],
@@ -7707,7 +7707,7 @@
         "name": "Qwen: Qwen3.6 27B",
         "description": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities — accepting text, image, and video inputs...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 0,
         "input_modalities": [
           "text",
           "image",
@@ -8184,7 +8184,7 @@
         "name": "Tencent: Hy3",
         "description": "Hy3 is a 295B-parameter Mixture-of-Experts model from Tencent (21B active, 192 experts with top-8 routing) built for reasoning, agentic workflows, and real-world production use. It supports a configurable reasoning effort:...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 128000,
         "input_modalities": [
           "text"
         ],

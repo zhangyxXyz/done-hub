@@ -3839,7 +3839,7 @@
     "model": "google/gemma-4-31b-it",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.12,
+    "input": 0.1,
     "output": 0.35
   },
   {
@@ -3927,7 +3927,7 @@
     "output": 0.03
   },
   {
-    "model": "inclusionai/ling-3.0-flash",
+    "model": "inclusionai/ling-3.0-flash:free",
     "type": "tokens",
     "channel_type": 20,
     "input": 0,
@@ -4308,8 +4308,8 @@
     "model": "minimax/minimax-m2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.3,
-    "output": 1.2
+    "input": 0.255,
+    "output": 1.02
   },
   {
     "model": "minimax/minimax-m2-her",
@@ -4343,8 +4343,8 @@
     "model": "minimax/minimax-m2.7",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.25,
-    "output": 1
+    "input": 0.3,
+    "output": 1.2
   },
   {
     "model": "minimax/minimax-m3",
@@ -4679,8 +4679,8 @@
     "model": "moonshotai/kimi-k2.7-code",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.82,
-    "output": 3.75
+    "input": 0.71,
+    "output": 3.49
   },
   {
     "model": "moonshotai/kimi-k2:free",
@@ -5358,8 +5358,8 @@
     "model": "openai/gpt-oss-20b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.03,
-    "output": 0.13
+    "input": 0.029,
+    "output": 0.14
   },
   {
     "model": "openai/gpt-oss-20b:free",
@@ -5855,8 +5855,8 @@
     "model": "qwen/qwen3-coder",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.3,
-    "output": 1
+    "input": 0.38,
+    "output": 1.55
   },
   {
     "model": "qwen/qwen3-coder-30b-a3b-instruct",
@@ -6058,8 +6058,8 @@
     "model": "qwen/qwen3.6-27b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.6,
-    "output": 3.6
+    "input": 0.288,
+    "output": 2.4
   },
   {
     "model": "qwen/qwen3.6-35b-a3b",
@@ -6268,8 +6268,8 @@
     "model": "tencent/hy3",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.14,
-    "output": 0.58
+    "input": 0.132,
+    "output": 0.528
   },
   {
     "model": "tencent/hy3-preview",
@@ -6660,8 +6660,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.8204,
-    "output": 2.5784
+    "input": 0.7644,
+    "output": 2.4024
   },
   {
     "model": "z-ai/glm-5v-turbo",
