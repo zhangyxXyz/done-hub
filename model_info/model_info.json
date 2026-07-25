@@ -801,7 +801,7 @@
         "name": "Arcee AI: Trinity Large Thinking",
         "description": "Trinity Large Thinking is a powerful open source reasoning model from the team at Arcee AI. It shows strong performance in PinchBench, agentic workloads, and reasoning tasks. Launch video: https://youtu.be/Gc82AXLa0Rg?si=4RLn6WBz33qT--B7...",
         "context_length": 262144,
-        "max_tokens": 80000,
+        "max_tokens": 262144,
         "input_modalities": [
           "text"
         ],
@@ -7011,7 +7011,7 @@
         "name": "Qwen: Qwen3 30B A3B Instruct 2507",
         "description": "Qwen3-30B-A3B-Instruct-2507 is a 30.5B-parameter mixture-of-experts language model from Qwen, with 3.3B active parameters per inference. It operates in non-thinking mode and is designed for high-quality instruction following, multilingual understanding, and...",
         "context_length": 262144,
-        "max_tokens": 0,
+        "max_tokens": 32000,
         "input_modalities": [
           "text"
         ],
