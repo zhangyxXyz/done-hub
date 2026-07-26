@@ -4700,7 +4700,7 @@
     "model": "moonshotai/kimi-k2.7-code",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.75,
+    "input": 0.73,
     "output": 3.5
   },
   {
@@ -6681,8 +6681,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.7056,
-    "output": 2.2176
+    "input": 0.6692,
+    "output": 2.1032
   },
   {
     "model": "z-ai/glm-5v-turbo",
