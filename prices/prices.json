@@ -3538,8 +3538,8 @@
     "model": "deepseek/deepseek-v4-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.0938,
-    "output": 0.1876
+    "input": 0.14,
+    "output": 0.28
   },
   {
     "model": "deepseek/deepseek-v4-pro",
@@ -4700,7 +4700,7 @@
     "model": "moonshotai/kimi-k2.7-code",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.78,
+    "input": 0.75,
     "output": 3.5
   },
   {
@@ -5380,7 +5380,7 @@
     "type": "tokens",
     "channel_type": 20,
     "input": 0.03,
-    "output": 0.13
+    "output": 0.14
   },
   {
     "model": "openai/gpt-oss-20b:free",
@@ -5827,8 +5827,8 @@
     "model": "qwen/qwen3-30b-a3b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.13,
-    "output": 0.52
+    "input": 0.12,
+    "output": 0.5
   },
   {
     "model": "qwen/qwen3-30b-a3b-instruct-2507",
@@ -6079,8 +6079,8 @@
     "model": "qwen/qwen3.6-27b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.289,
-    "output": 2.4
+    "input": 0.3,
+    "output": 2
   },
   {
     "model": "qwen/qwen3.6-35b-a3b",
@@ -6681,8 +6681,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.7616,
-    "output": 2.3936
+    "input": 0.7056,
+    "output": 2.2176
   },
   {
     "model": "z-ai/glm-5v-turbo",
