@@ -1775,7 +1775,7 @@
         "model": "google/gemini-3.1-flash-image-preview",
         "name": "Google: Nano Banana 2 (Gemini 3.1 Flash Image Preview)",
         "description": "Gemini 3.1 Flash Image Preview, a.k.a. \"Nano Banana 2,\" is Google’s latest state of the art image generation and editing model, delivering Pro-level visual quality at Flash speed. It combines...",
-        "context_length": 131072,
+        "context_length": 65536,
         "max_tokens": 65536,
         "input_modalities": [
           "image",
@@ -4195,7 +4195,7 @@
         "name": "NVIDIA: Nemotron 3 Ultra",
         "description": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it...",
         "context_length": 512288,
-        "max_tokens": 0,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -4748,30 +4748,6 @@
       }
     },
     {
-      "model": "openai/gpt-4o-mini-search-preview",
-      "model_info": {
-        "model": "openai/gpt-4o-mini-search-preview",
-        "name": "OpenAI: GPT-4o-mini Search Preview",
-        "description": "GPT-4o mini Search Preview is a specialized model for web search in Chat Completions. It is trained to understand and execute web search queries.",
-        "context_length": 128000,
-        "max_tokens": 16384,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-4o-mini-search-preview",
-          "https://openrouter.ai/api/v1/models/openai/gpt-4o-mini-search-preview-2025-03-11/endpoints"
-        ]
-      }
-    },
-    {
       "model": "openai/gpt-4o-search-preview",
       "model_info": {
         "model": "openai/gpt-4o-search-preview",
@@ -5144,7 +5120,7 @@
         "name": "OpenAI: GPT-5.1-Codex-Mini",
         "description": "GPT-5.1-Codex-Mini is a smaller and faster version of GPT-5.1-Codex",
         "context_length": 400000,
-        "max_tokens": 100000,
+        "max_tokens": 128000,
         "input_modalities": [
           "image",
           "text"

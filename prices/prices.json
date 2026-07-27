@@ -4889,8 +4889,8 @@
     "model": "nvidia/nemotron-3-ultra-550b-a55b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.6,
-    "output": 3.6
+    "input": 0.5,
+    "output": 2.2
   },
   {
     "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
@@ -6037,7 +6037,7 @@
     "model": "qwen/qwen3.5-35b-a3b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.14,
+    "input": 0.15,
     "output": 1
   },
   {
@@ -6681,8 +6681,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.6692,
-    "output": 2.1032
+    "input": 0.812,
+    "output": 2.552
   },
   {
     "model": "z-ai/glm-5v-turbo",
