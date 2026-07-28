@@ -3846,8 +3846,8 @@
     "model": "google/gemma-4-26b-a4b-it",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.14,
-    "output": 0.42
+    "input": 0.07,
+    "output": 0.34
   },
   {
     "model": "google/gemma-4-26b-a4b-it:free",
@@ -4889,8 +4889,8 @@
     "model": "nvidia/nemotron-3-ultra-550b-a55b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.5,
-    "output": 2.2
+    "input": 0.6,
+    "output": 3.6
   },
   {
     "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
@@ -6109,6 +6109,13 @@
     "channel_type": 20,
     "input": 0.325,
     "output": 1.95
+  },
+  {
+    "model": "qwen/qwen3.7-flash",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.03,
+    "output": 0.13
   },
   {
     "model": "qwen/qwen3.7-max",

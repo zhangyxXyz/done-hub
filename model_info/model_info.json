@@ -2184,7 +2184,7 @@
         "name": "Google: Gemma 4 26B A4B ",
         "description": "Gemma 4 26B A4B IT is an instruction-tuned Mixture-of-Experts (MoE) model from Google DeepMind. Despite 25.2B total parameters, only 3.8B activate per token during inference — delivering near-31B quality at...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 16384,
         "input_modalities": [
           "image",
           "text",
@@ -4195,7 +4195,7 @@
         "name": "NVIDIA: Nemotron 3 Ultra",
         "description": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it...",
         "context_length": 512288,
-        "max_tokens": 16384,
+        "max_tokens": 0,
         "input_modalities": [
           "text"
         ],
@@ -4773,33 +4773,6 @@
         "support_url": [
           "https://openrouter.ai/models/openai/gpt-5",
           "https://openrouter.ai/api/v1/models/openai/gpt-5-2025-08-07/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/gpt-5-chat",
-      "model_info": {
-        "model": "openai/gpt-5-chat",
-        "name": "OpenAI: GPT-5 Chat",
-        "description": "GPT-5 Chat is designed for advanced, natural, multimodal, and context-aware conversations for enterprise applications.",
-        "context_length": 128000,
-        "max_tokens": 16384,
-        "input_modalities": [
-          "file",
-          "image",
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-5-chat",
-          "https://openrouter.ai/api/v1/models/openai/gpt-5-chat-2025-08-07/endpoints"
         ]
       }
     },
@@ -7807,6 +7780,35 @@
       }
     },
     {
+      "model": "qwen/qwen3.7-flash",
+      "model_info": {
+        "model": "qwen/qwen3.7-flash",
+        "name": "Qwen: Qwen3.7 Flash",
+        "description": "Qwen3.7 Flash is a vision-language reasoning model from Alibaba. It is suited for multimodal agents, visual coding, search, and computer interaction, with strengths in object recognition, spatial understanding, and real-world...",
+        "context_length": 1000000,
+        "max_tokens": 65536,
+        "input_modalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/qwen/qwen3.7-flash",
+          "https://openrouter.ai/api/v1/models/qwen/qwen3.7-flash-20260727/endpoints"
+        ]
+      }
+    },
+    {
       "model": "qwen/qwen3.7-max",
       "model_info": {
         "model": "qwen/qwen3.7-max",
@@ -9098,7 +9100,7 @@
         "name": "MoonshotAI Kimi Latest",
         "description": "This model always redirects to the latest model in the MoonshotAI Kimi family.",
         "context_length": 1048576,
-        "max_tokens": 0,
+        "max_tokens": 262144,
         "input_modalities": [
           "text",
           "image"
