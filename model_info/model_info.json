@@ -7857,7 +7857,7 @@
         "name": "Qwen: Qwen3 Coder Next",
         "description": "Qwen3-Coder-Next is an open-weight causal language model optimized for coding agents and local development workflows. It uses a sparse MoE design with 80B total parameters and only 3B activated per...",
         "context_length": 262144,
-        "max_tokens": 64000,
+        "max_tokens": 262144,
         "input_modalities": [
           "text"
         ],
