@@ -883,35 +883,6 @@
       }
     },
     {
-      "model": "anthropic/claude-opus-5:batch",
-      "model_info": {
-        "model": "anthropic/claude-opus-5:batch",
-        "name": "Claude Opus 5 (batch)",
-        "description": "Claude Opus 5 is Anthropic’s flagship model for demanding reasoning, coding, and long-horizon agentic work. It is particularly strong at end-to-end software tasks, code review and bug finding, visual analysis...",
-        "context_length": 1000000,
-        "max_tokens": 128000,
-        "input_modalities": [
-          "text",
-          "image",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/anthropic/claude-opus-5:batch",
-          "https://openrouter.ai/api/v1/models/anthropic/claude-opus-5-20260723/endpoints"
-        ]
-      }
-    },
-    {
       "model": "anthropic/claude-sonnet-4",
       "model_info": {
         "model": "anthropic/claude-sonnet-4",
@@ -2762,7 +2733,7 @@
         "name": "Google: Gemma 4 26B A4B ",
         "description": "Gemma 4 26B A4B IT is an instruction-tuned Mixture-of-Experts (MoE) model from Google DeepMind. Despite 25.2B total parameters, only 3.8B activate per token during inference — delivering near-31B quality at...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 16384,
         "input_modalities": [
           "image",
           "text",
@@ -3735,6 +3706,35 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/minimax/minimax-m3",
+          "https://openrouter.ai/api/v1/models/minimax/minimax-m3-20260531/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "minimax/minimax-m3:batch",
+      "model_info": {
+        "model": "minimax/minimax-m3:batch",
+        "name": "MiniMax: MiniMax M3 (batch)",
+        "description": "MiniMax-M3 is a multimodal foundation model from MiniMax. It supports text, image, and video inputs with text output, a 1M-token context window, and is suited for long-horizon agentic work, coding,...",
+        "context_length": 524288,
+        "max_tokens": 0,
+        "input_modalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/minimax/minimax-m3:batch",
           "https://openrouter.ai/api/v1/models/minimax/minimax-m3-20260531/endpoints"
         ]
       }
@@ -7907,7 +7907,7 @@
         "name": "Qwen: Qwen3 Max",
         "description": "Qwen3-Max is an updated release built on the Qwen3 series, offering major improvements in reasoning, instruction following, multilingual support, and long-tail knowledge coverage compared to the January 2025 version. It...",
         "context_length": 262144,
-        "max_tokens": 32768,
+        "max_tokens": 65536,
         "input_modalities": [
           "text"
         ],
@@ -7932,7 +7932,7 @@
         "name": "Qwen: Qwen3 Max Thinking",
         "description": "Qwen3-Max-Thinking is the flagship reasoning model in the Qwen3 series, designed for high-stakes cognitive tasks that require deep, multi-step reasoning. By significantly scaling model capacity and reinforcement learning compute, it...",
         "context_length": 262144,
-        "max_tokens": 32768,
+        "max_tokens": 65536,
         "input_modalities": [
           "text"
         ],
@@ -8064,7 +8064,7 @@
         "name": "Qwen: Qwen3 VL 30B A3B Instruct",
         "description": "Qwen3-VL-30B-A3B-Instruct is a multimodal model that unifies strong text generation with visual understanding for images and videos. Its Instruct variant optimizes instruction-following for general multimodal tasks. It excels in perception...",
         "context_length": 262144,
-        "max_tokens": 16384,
+        "max_tokens": 32768,
         "input_modalities": [
           "text",
           "image"
@@ -9889,7 +9889,7 @@
         "name": "MoonshotAI Kimi Latest",
         "description": "This model always redirects to the latest model in the MoonshotAI Kimi family.",
         "context_length": 1048576,
-        "max_tokens": 262144,
+        "max_tokens": 0,
         "input_modalities": [
           "text",
           "image"
