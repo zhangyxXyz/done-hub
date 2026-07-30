@@ -4773,7 +4773,7 @@
         "name": "NVIDIA: Nemotron 3 Ultra",
         "description": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it...",
         "context_length": 512288,
-        "max_tokens": 16384,
+        "max_tokens": 0,
         "input_modalities": [
           "text"
         ],
@@ -9889,7 +9889,7 @@
         "name": "MoonshotAI Kimi Latest",
         "description": "This model always redirects to the latest model in the MoonshotAI Kimi family.",
         "context_length": 1048576,
-        "max_tokens": 1048576,
+        "max_tokens": 0,
         "input_modalities": [
           "text",
           "image"
