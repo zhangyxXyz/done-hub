@@ -5869,8 +5869,8 @@
     "model": "poolside/laguna-s-2.1",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.1,
-    "output": 0.2
+    "input": 0.09,
+    "output": 0.18
   },
   {
     "model": "poolside/laguna-s-2.1:free",
@@ -6037,8 +6037,8 @@
     "model": "qwen/qwen3-235b-a22b-thinking-2507",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.3,
-    "output": 3
+    "input": 0.23,
+    "output": 2.3
   },
   {
     "model": "qwen/qwen3-235b-a22b:free",
@@ -6912,8 +6912,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.966,
-    "output": 3.036
+    "input": 1.19,
+    "output": 3.74
   },
   {
     "model": "z-ai/glm-5v-turbo",
@@ -6968,8 +6968,8 @@
     "model": "~moonshotai/kimi-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 3,
-    "output": 15
+    "input": 2.9,
+    "output": 14
   },
   {
     "model": "~openai/gpt-latest",
