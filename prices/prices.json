@@ -3073,13 +3073,6 @@
     "output": 50
   },
   {
-    "model": "anthropic/claude-fable-5:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 5,
-    "output": 25
-  },
-  {
     "model": "anthropic/claude-haiku-4.5",
     "type": "tokens",
     "channel_type": 20,
@@ -3108,25 +3101,11 @@
     "output": 75
   },
   {
-    "model": "anthropic/claude-opus-4.1:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 7.5,
-    "output": 37.5
-  },
-  {
     "model": "anthropic/claude-opus-4.5",
     "type": "tokens",
     "channel_type": 20,
     "input": 5,
     "output": 25
-  },
-  {
-    "model": "anthropic/claude-opus-4.5:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 2.5,
-    "output": 12.5
   },
   {
     "model": "anthropic/claude-opus-4.6",
@@ -3143,13 +3122,6 @@
     "output": 150
   },
   {
-    "model": "anthropic/claude-opus-4.6:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 2.5,
-    "output": 12.5
-  },
-  {
     "model": "anthropic/claude-opus-4.7",
     "type": "tokens",
     "channel_type": 20,
@@ -3164,13 +3136,6 @@
     "output": 150
   },
   {
-    "model": "anthropic/claude-opus-4.7:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 2.5,
-    "output": 12.5
-  },
-  {
     "model": "anthropic/claude-opus-4.8",
     "type": "tokens",
     "channel_type": 20,
@@ -3183,13 +3148,6 @@
     "channel_type": 20,
     "input": 10,
     "output": 50
-  },
-  {
-    "model": "anthropic/claude-opus-4.8:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 2.5,
-    "output": 12.5
   },
   {
     "model": "anthropic/claude-opus-5",
@@ -3227,13 +3185,6 @@
     "output": 15
   },
   {
-    "model": "anthropic/claude-sonnet-4.5:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 1.5,
-    "output": 7.5
-  },
-  {
     "model": "anthropic/claude-sonnet-4.6",
     "type": "tokens",
     "channel_type": 20,
@@ -3246,13 +3197,6 @@
     "channel_type": 20,
     "input": 2,
     "output": 10
-  },
-  {
-    "model": "anthropic/claude-sonnet-5:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 1,
-    "output": 5
   },
   {
     "model": "arcee-ai/coder-large",
@@ -3633,6 +3577,13 @@
     "output": 0.28
   },
   {
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.14,
+    "output": 0.28
+  },
+  {
     "model": "deepseek/deepseek-v4-pro",
     "type": "tokens",
     "channel_type": 20,
@@ -3710,25 +3661,11 @@
     "output": 0.4
   },
   {
-    "model": "google/gemini-2.5-flash-lite:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 0.05,
-    "output": 0.2
-  },
-  {
     "model": "google/gemini-2.5-flash-preview-09-2025",
     "type": "tokens",
     "channel_type": 20,
     "input": 0.3,
     "output": 2.5
-  },
-  {
-    "model": "google/gemini-2.5-flash:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 0.15,
-    "output": 1.25
   },
   {
     "model": "google/gemini-2.5-pro",
@@ -3752,25 +3689,11 @@
     "output": 10
   },
   {
-    "model": "google/gemini-2.5-pro:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 0.625,
-    "output": 5
-  },
-  {
     "model": "google/gemini-3-flash-preview",
     "type": "tokens",
     "channel_type": 20,
     "input": 0.5,
     "output": 3
-  },
-  {
-    "model": "google/gemini-3-flash-preview:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 0.25,
-    "output": 1.5
   },
   {
     "model": "google/gemini-3-pro-image",
@@ -3829,13 +3752,6 @@
     "output": 1.5
   },
   {
-    "model": "google/gemini-3.1-flash-lite:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 0.125,
-    "output": 0.75
-  },
-  {
     "model": "google/gemini-3.1-pro-preview",
     "type": "tokens",
     "channel_type": 20,
@@ -3848,13 +3764,6 @@
     "channel_type": 20,
     "input": 2,
     "output": 12
-  },
-  {
-    "model": "google/gemini-3.1-pro-preview:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 1,
-    "output": 6
   },
   {
     "model": "google/gemini-3.5-flash",
@@ -3871,32 +3780,11 @@
     "output": 2.5
   },
   {
-    "model": "google/gemini-3.5-flash-lite:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 0.15,
-    "output": 1.25
-  },
-  {
-    "model": "google/gemini-3.5-flash:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 0.75,
-    "output": 4.5
-  },
-  {
     "model": "google/gemini-3.6-flash",
     "type": "tokens",
     "channel_type": 20,
     "input": 1.5,
     "output": 7.5
-  },
-  {
-    "model": "google/gemini-3.6-flash:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 0.75,
-    "output": 3.75
   },
   {
     "model": "google/gemini-embedding-001",
@@ -4529,13 +4417,6 @@
     "output": 1.2
   },
   {
-    "model": "minimax/minimax-m3:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 0.15,
-    "output": 0.6
-  },
-  {
     "model": "mistralai/codestral-2508",
     "type": "tokens",
     "channel_type": 20,
@@ -4756,8 +4637,8 @@
     "model": "mistralai/mistral-small-3.2-24b-instruct",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.1,
-    "output": 0.3
+    "input": 0.075,
+    "output": 0.2
   },
   {
     "model": "mistralai/mistral-small-creative",
@@ -4854,8 +4735,8 @@
     "model": "moonshotai/kimi-k2.6",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.95,
-    "output": 4
+    "input": 0.589,
+    "output": 2.48
   },
   {
     "model": "moonshotai/kimi-k2.7-code",
@@ -5306,25 +5187,11 @@
     "output": 2
   },
   {
-    "model": "openai/gpt-5-mini:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 0.125,
-    "output": 1
-  },
-  {
     "model": "openai/gpt-5-nano",
     "type": "tokens",
     "channel_type": 20,
     "input": 0.05,
     "output": 0.4
-  },
-  {
-    "model": "openai/gpt-5-nano:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 0.025,
-    "output": 0.2
   },
   {
     "model": "openai/gpt-5-pro",
@@ -5369,13 +5236,6 @@
     "output": 2
   },
   {
-    "model": "openai/gpt-5.1:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 0.625,
-    "output": 5
-  },
-  {
     "model": "openai/gpt-5.2",
     "type": "tokens",
     "channel_type": 20,
@@ -5402,13 +5262,6 @@
     "channel_type": 20,
     "input": 21,
     "output": 168
-  },
-  {
-    "model": "openai/gpt-5.2:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 0.875,
-    "output": 7
   },
   {
     "model": "openai/gpt-5.3-chat",
@@ -5453,13 +5306,6 @@
     "output": 4.5
   },
   {
-    "model": "openai/gpt-5.4-mini:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 0.375,
-    "output": 2.25
-  },
-  {
     "model": "openai/gpt-5.4-nano",
     "type": "tokens",
     "channel_type": 20,
@@ -5467,25 +5313,11 @@
     "output": 1.25
   },
   {
-    "model": "openai/gpt-5.4-nano:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 0.1,
-    "output": 0.625
-  },
-  {
     "model": "openai/gpt-5.4-pro",
     "type": "tokens",
     "channel_type": 20,
     "input": 30,
     "output": 180
-  },
-  {
-    "model": "openai/gpt-5.4:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 1.25,
-    "output": 7.5
   },
   {
     "model": "openai/gpt-5.5",
@@ -5500,13 +5332,6 @@
     "channel_type": 20,
     "input": 30,
     "output": 180
-  },
-  {
-    "model": "openai/gpt-5.5:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 2.5,
-    "output": 15
   },
   {
     "model": "openai/gpt-5.6-luna",
@@ -5549,13 +5374,6 @@
     "channel_type": 20,
     "input": 1,
     "output": 6
-  },
-  {
-    "model": "openai/gpt-5:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 0.625,
-    "output": 5
   },
   {
     "model": "openai/gpt-audio",
@@ -5604,7 +5422,7 @@
     "type": "tokens",
     "channel_type": 20,
     "input": 0.03,
-    "output": 0.13
+    "output": 0.14
   },
   {
     "model": "openai/gpt-oss-20b:free",
@@ -6212,8 +6030,8 @@
     "model": "qwen/qwen3-vl-30b-a3b-instruct",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.15,
-    "output": 0.6
+    "input": 0.13,
+    "output": 0.52
   },
   {
     "model": "qwen/qwen3-vl-30b-a3b-thinking",
@@ -6601,6 +6419,13 @@
     "output": 4.05
   },
   {
+    "model": "thinkingmachines/inkling-small",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.58,
+    "output": 1.44
+  },
+  {
     "model": "thudm/glm-4.1v-9b-thinking",
     "type": "tokens",
     "channel_type": 20,
@@ -6912,8 +6737,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 1.19,
-    "output": 3.74
+    "input": 1.12,
+    "output": 3.52
   },
   {
     "model": "z-ai/glm-5v-turbo",
