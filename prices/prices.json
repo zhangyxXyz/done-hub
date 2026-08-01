@@ -3080,13 +3080,6 @@
     "output": 5
   },
   {
-    "model": "anthropic/claude-haiku-4.5:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 0.5,
-    "output": 2.5
-  },
-  {
     "model": "anthropic/claude-opus-4",
     "type": "tokens",
     "channel_type": 20,
@@ -4735,8 +4728,8 @@
     "model": "moonshotai/kimi-k2.6",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.589,
-    "output": 2.48
+    "input": 0.6,
+    "output": 3.41
   },
   {
     "model": "moonshotai/kimi-k2.7-code",
@@ -5422,7 +5415,7 @@
     "type": "tokens",
     "channel_type": 20,
     "input": 0.03,
-    "output": 0.14
+    "output": 0.13
   },
   {
     "model": "openai/gpt-oss-20b:free",
@@ -5926,7 +5919,7 @@
     "type": "tokens",
     "channel_type": 20,
     "input": 0.07,
-    "output": 0.27
+    "output": 0.28
   },
   {
     "model": "qwen/qwen3-coder-flash",
@@ -6422,8 +6415,8 @@
     "model": "thinkingmachines/inkling-small",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.58,
-    "output": 1.44
+    "input": 0.5,
+    "output": 1.2
   },
   {
     "model": "thudm/glm-4.1v-9b-thinking",
@@ -6737,8 +6730,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 1.12,
-    "output": 3.52
+    "input": 0.76006,
+    "output": 2.38876
   },
   {
     "model": "z-ai/glm-5v-turbo",

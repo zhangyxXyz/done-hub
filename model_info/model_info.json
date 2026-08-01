@@ -391,35 +391,6 @@
       }
     },
     {
-      "model": "anthropic/claude-haiku-4.5:batch",
-      "model_info": {
-        "model": "anthropic/claude-haiku-4.5:batch",
-        "name": "Anthropic: Claude Haiku 4.5 (batch)",
-        "description": "Claude Haiku 4.5 is Anthropic’s fastest and most efficient model, delivering near-frontier intelligence at a fraction of the cost and latency of larger Claude models. Matching Claude Sonnet 4’s performance...",
-        "context_length": 200000,
-        "max_tokens": 64000,
-        "input_modalities": [
-          "text",
-          "image",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/anthropic/claude-haiku-4.5:batch",
-          "https://openrouter.ai/api/v1/models/anthropic/claude-4.5-haiku-20251001/endpoints"
-        ]
-      }
-    },
-    {
       "model": "anthropic/claude-opus-4",
       "model_info": {
         "model": "anthropic/claude-opus-4",
@@ -6883,7 +6854,7 @@
         "name": "Qwen: Qwen3 Coder 30B A3B Instruct",
         "description": "Qwen3-Coder-30B-A3B-Instruct is a 30.5B parameter Mixture-of-Experts (MoE) model with 128 experts (8 active per forward pass), designed for advanced code generation, repository-scale understanding, and agentic tool use. Built on the...",
         "context_length": 262144,
-        "max_tokens": 32768,
+        "max_tokens": 262144,
         "input_modalities": [
           "text"
         ],
@@ -8193,7 +8164,7 @@
         "name": "Thinking Machines: Inkling Small",
         "description": "Inkling Small is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 12B active parameters out of 276B total. It is positioned as the smaller, more efficient member of...",
         "context_length": 524288,
-        "max_tokens": 262144,
+        "max_tokens": 0,
         "input_modalities": [
           "text",
           "image",
@@ -8206,6 +8177,7 @@
           "openrouter",
           "vision",
           "audio",
+          "tools",
           "reasoning"
         ],
         "support_url": [
