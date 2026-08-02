@@ -8022,7 +8022,8 @@
         "tags": [
           "openrouter",
           "tools",
-          "reasoning"
+          "reasoning",
+          "structured_outputs"
         ],
         "support_url": [
           "https://openrouter.ai/models/tencent/hy3-preview",
