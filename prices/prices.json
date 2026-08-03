@@ -5919,7 +5919,7 @@
     "type": "tokens",
     "channel_type": 20,
     "input": 0.07,
-    "output": 0.28
+    "output": 0.27
   },
   {
     "model": "qwen/qwen3-coder-flash",
@@ -6058,8 +6058,8 @@
     "model": "qwen/qwen3.5-122b-a10b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.4,
-    "output": 3.2
+    "input": 0.26,
+    "output": 2.08
   },
   {
     "model": "qwen/qwen3.5-27b",
@@ -6114,8 +6114,8 @@
     "model": "qwen/qwen3.6-27b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.3,
-    "output": 2
+    "input": 0.289,
+    "output": 2.4
   },
   {
     "model": "qwen/qwen3.6-35b-a3b",
@@ -6165,6 +6165,13 @@
     "channel_type": 20,
     "input": 0.32,
     "output": 1.28
+  },
+  {
+    "model": "qwen/qwen3.8-max",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 2,
+    "output": 6
   },
   {
     "model": "qwen/qwq-32b",
@@ -6730,8 +6737,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 1.19,
-    "output": 3.74
+    "input": 0.6286,
+    "output": 1.9756
   },
   {
     "model": "z-ai/glm-5v-turbo",
