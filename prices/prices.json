@@ -3923,8 +3923,8 @@
     "model": "gryphe/mythomax-l2-13b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.06,
-    "output": 0.06
+    "input": 0.08,
+    "output": 0.11
   },
   {
     "model": "ibm-granite/granite-4.0-h-micro",
@@ -4217,8 +4217,8 @@
     "model": "meta-llama/llama-3.3-70b-instruct",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.13,
-    "output": 0.4
+    "input": 0.1,
+    "output": 0.32
   },
   {
     "model": "meta-llama/llama-3.3-70b-instruct:free",
@@ -4728,8 +4728,8 @@
     "model": "moonshotai/kimi-k2.6",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.6,
-    "output": 3.41
+    "input": 0.589,
+    "output": 2.48
   },
   {
     "model": "moonshotai/kimi-k2.7-code",
@@ -5988,7 +5988,7 @@
     "model": "qwen/qwen3-next-80b-a3b-instruct",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.1,
+    "input": 0.09,
     "output": 1.1
   },
   {
@@ -6023,8 +6023,8 @@
     "model": "qwen/qwen3-vl-30b-a3b-instruct",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.13,
-    "output": 0.52
+    "input": 0.15,
+    "output": 0.6
   },
   {
     "model": "qwen/qwen3-vl-30b-a3b-thinking",
@@ -6737,8 +6737,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.6286,
-    "output": 1.9756
+    "input": 0.76,
+    "output": 2.42
   },
   {
     "model": "z-ai/glm-5v-turbo",
@@ -9338,11 +9338,25 @@
     "output": 0
   },
   {
+    "model": "us-gov.anthropic.claude-opus-4-8",
+    "type": "tokens",
+    "channel_type": 32,
+    "input": 6,
+    "output": 30
+  },
+  {
     "model": "us-gov.anthropic.claude-sonnet-4-5-20250929-v1:0",
     "type": "tokens",
     "channel_type": 32,
     "input": 3.6,
     "output": 18
+  },
+  {
+    "model": "us-gov.anthropic.claude-sonnet-5",
+    "type": "tokens",
+    "channel_type": 32,
+    "input": 2.4,
+    "output": 12
   },
   {
     "model": "us.amazon.nova-pro-v1",

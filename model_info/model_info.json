@@ -1418,7 +1418,7 @@
       "model": "deepseek/deepseek-v4-flash",
       "model_info": {
         "model": "deepseek/deepseek-v4-flash",
-        "name": "DeepSeek: DeepSeek V4 Flash",
+        "name": "DeepSeek: DeepSeek V4 Flash 0423",
         "description": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and...",
         "context_length": 1048576,
         "max_tokens": 393216,
@@ -2803,7 +2803,7 @@
         "name": "Meta: Llama 3.3 70B Instruct",
         "description": "The Meta Llama 3.3 multilingual large language model (LLM) is a pretrained and instruction tuned generative model in 70B (text in/text out). The Llama 3.3 instruction tuned text only model...",
         "context_length": 131072,
-        "max_tokens": 128000,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -7005,7 +7005,7 @@
         "name": "Qwen: Qwen3 Next 80B A3B Instruct",
         "description": "Qwen3-Next-80B-A3B-Instruct is an instruction-tuned chat model in the Qwen3-Next series optimized for fast, stable responses without “thinking” traces. It targets complex tasks across reasoning, code generation, knowledge QA, and multilingual...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -7030,7 +7030,7 @@
         "name": "Qwen: Qwen3 Next 80B A3B Thinking",
         "description": "Qwen3-Next-80B-A3B-Thinking is a reasoning-first chat model in the Qwen3-Next line that outputs structured “thinking” traces by default. It’s designed for hard multi-step problems; math proofs, code synthesis/debugging, logic, and agentic...",
         "context_length": 262144,
-        "max_tokens": 32768,
+        "max_tokens": 0,
         "input_modalities": [
           "text"
         ],
@@ -7111,7 +7111,7 @@
         "name": "Qwen: Qwen3 VL 30B A3B Instruct",
         "description": "Qwen3-VL-30B-A3B-Instruct is a multimodal model that unifies strong text generation with visual understanding for images and videos. Its Instruct variant optimizes instruction-following for general multimodal tasks. It excels in perception...",
         "context_length": 262144,
-        "max_tokens": 32768,
+        "max_tokens": 16384,
         "input_modalities": [
           "text",
           "image"
@@ -8760,7 +8760,7 @@
         "name": "Z.ai: GLM 5.2",
         "description": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 262144,
         "input_modalities": [
           "text"
         ],
