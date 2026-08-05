@@ -4385,7 +4385,7 @@
     "model": "minimax/minimax-m2.5",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.15,
+    "input": 0.22,
     "output": 0.9
   },
   {
@@ -4735,7 +4735,7 @@
     "model": "moonshotai/kimi-k2.7-code",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.73,
+    "input": 0.7,
     "output": 3.5
   },
   {
@@ -6016,8 +6016,8 @@
     "model": "qwen/qwen3-vl-235b-a22b-thinking",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.98,
-    "output": 3.95
+    "input": 0.4,
+    "output": 4
   },
   {
     "model": "qwen/qwen3-vl-30b-a3b-instruct",
@@ -6730,8 +6730,8 @@
     "model": "z-ai/glm-5.1",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.966,
-    "output": 3.036
+    "input": 0.952,
+    "output": 2.992
   },
   {
     "model": "z-ai/glm-5.2",
@@ -9175,6 +9175,13 @@
     "channel_type": 32,
     "input": 0.3,
     "output": 1.2
+  },
+  {
+    "model": "mistral.devstral-2-123b",
+    "type": "tokens",
+    "channel_type": 32,
+    "input": 0.4,
+    "output": 2
   },
   {
     "model": "mistral.magistral-small-2509",

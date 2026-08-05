@@ -8245,8 +8245,8 @@
         "model": "upstage/solar-pro-3",
         "name": "Upstage: Solar Pro 3",
         "description": "Solar Pro 3 is Upstage's powerful Mixture-of-Experts (MoE) language model. With 102B total parameters and 12B active parameters per forward pass, it delivers exceptional performance while maintaining computational efficiency. Optimized...",
-        "context_length": 128000,
-        "max_tokens": 0,
+        "context_length": 131072,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -8734,7 +8734,7 @@
         "name": "Z.ai: GLM 5.1",
         "description": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on...",
         "context_length": 204800,
-        "max_tokens": 128000,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
