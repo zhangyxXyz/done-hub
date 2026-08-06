@@ -1421,7 +1421,7 @@
         "name": "DeepSeek: DeepSeek V4 Flash 0423",
         "description": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and...",
         "context_length": 1048576,
-        "max_tokens": 393216,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -2525,6 +2525,31 @@
       }
     },
     {
+      "model": "inclusionai/ling-3.0-flash",
+      "model_info": {
+        "model": "inclusionai/ling-3.0-flash",
+        "name": "Ling-3.0-flash",
+        "description": "*Ling-3.0-flash* is a *124B-parameter Mixture-of-Experts (MoE) model*, with approximately *5.1B parameters activated per token*. The model is designed with *token efficiency and production-scale agentic inference* as key priorities, enabling developers...",
+        "context_length": 131072,
+        "max_tokens": 16384,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/inclusionai/ling-3.0-flash",
+          "https://openrouter.ai/api/v1/models/inclusionai/ling-3.0-flash-20260723/endpoints"
+        ]
+      }
+    },
+    {
       "model": "inclusionai/ling-3.0-flash:free",
       "model_info": {
         "model": "inclusionai/ling-3.0-flash:free",
@@ -2930,6 +2955,38 @@
         "support_url": [
           "https://openrouter.ai/models/meta/muse-spark-1.1",
           "https://openrouter.ai/api/v1/models/meta/muse-spark-1.1-20260709/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "meta/muse-spark-1.2",
+      "model_info": {
+        "model": "meta/muse-spark-1.2",
+        "name": "Meta: Muse Spark 1.2",
+        "description": "Muse Spark 1.2 is a reasoning model from Meta, designed for complex agentic tasks. It accepts text, images, video, audio, and PDF documents, returns text, and offers a 1M-token context...",
+        "context_length": 1048576,
+        "max_tokens": 0,
+        "input_modalities": [
+          "text",
+          "image",
+          "video",
+          "file",
+          "audio"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "audio",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/meta/muse-spark-1.2",
+          "https://openrouter.ai/api/v1/models/meta/muse-spark-1.2-20260805/endpoints"
         ]
       }
     },
@@ -6649,7 +6706,7 @@
         "name": "Qwen: Qwen3 235B A22B Instruct 2507",
         "description": "Qwen3-235B-A22B-Instruct-2507 is a multilingual, instruction-tuned mixture-of-experts language model based on the Qwen3-235B architecture, with 22B active parameters per forward pass. It is optimized for general-purpose text generation, including instruction following,...",
         "context_length": 262144,
-        "max_tokens": 32768,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -7480,7 +7537,7 @@
         "name": "Qwen: Qwen3.6 27B",
         "description": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities — accepting text, image, and video inputs...",
         "context_length": 262144,
-        "max_tokens": 131072,
+        "max_tokens": 262144,
         "input_modalities": [
           "text",
           "image",
