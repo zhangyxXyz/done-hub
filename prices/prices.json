@@ -3622,8 +3622,8 @@
     "model": "deepseek/deepseek-v3.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.26,
-    "output": 0.38
+    "input": 0.269,
+    "output": 0.4
   },
   {
     "model": "deepseek/deepseek-v3.2-exp",
@@ -4553,8 +4553,8 @@
     "model": "minimax/minimax-m2.7",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.27,
-    "output": 1.08
+    "input": 0.3,
+    "output": 1.2
   },
   {
     "model": "minimax/minimax-m3",
@@ -6541,7 +6541,7 @@
     "model": "qwen/qwen3.6-35b-a3b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.14,
+    "input": 0.15,
     "output": 1
   },
   {
@@ -7164,8 +7164,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.3206,
-    "output": 1.0076
+    "input": 0.2058,
+    "output": 0.6468
   },
   {
     "model": "z-ai/glm-5.2:batch",
@@ -7213,8 +7213,8 @@
     "model": "~deepseek/deepseek-v4-flash-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.09,
-    "output": 0.18
+    "input": 0.0896,
+    "output": 0.1792
   },
   {
     "model": "~google/gemini-flash-latest",
