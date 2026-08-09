@@ -3622,8 +3622,8 @@
     "model": "deepseek/deepseek-v3.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.26,
-    "output": 0.38
+    "input": 0.269,
+    "output": 0.4
   },
   {
     "model": "deepseek/deepseek-v3.2-exp",
@@ -4063,8 +4063,8 @@
     "model": "gryphe/mythomax-l2-13b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.08,
-    "output": 0.11
+    "input": 0.06,
+    "output": 0.06
   },
   {
     "model": "ibm-granite/granite-4.0-h-micro",
@@ -6499,8 +6499,8 @@
     "model": "qwen/qwen3.5-397b-a17b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.39,
-    "output": 2.34
+    "input": 0.5,
+    "output": 3.6
   },
   {
     "model": "qwen/qwen3.5-9b",
@@ -7164,8 +7164,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.098,
-    "output": 0.308
+    "input": 0.07,
+    "output": 0.22
   },
   {
     "model": "z-ai/glm-5.2:batch",

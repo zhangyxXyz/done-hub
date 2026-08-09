@@ -1687,7 +1687,7 @@
         "name": "DeepSeek: DeepSeek V3.2",
         "description": "DeepSeek-V3.2 is a large language model designed to harmonize high computational efficiency with strong reasoning and agentic tool-use performance. It introduces DeepSeek Sparse Attention (DSA), a fine-grained sparse attention mechanism...",
         "context_length": 163840,
-        "max_tokens": 163840,
+        "max_tokens": 65536,
         "input_modalities": [
           "text"
         ],
@@ -9079,7 +9079,7 @@
         "name": "Qwen: Qwen3.5 397B A17B",
         "description": "The Qwen3.5 series 397B-A17B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. It delivers...",
         "context_length": 262144,
-        "max_tokens": 65536,
+        "max_tokens": 262144,
         "input_modalities": [
           "text",
           "image",
