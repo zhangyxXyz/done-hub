@@ -2816,7 +2816,7 @@
         "name": "Google: Gemma 4 26B A4B ",
         "description": "Gemma 4 26B A4B IT is an instruction-tuned Mixture-of-Experts (MoE) model from Google DeepMind. Despite 25.2B total parameters, only 3.8B activate per token during inference — delivering near-31B quality at...",
         "context_length": 262144,
-        "max_tokens": 16384,
+        "max_tokens": 262144,
         "input_modalities": [
           "image",
           "text",
@@ -3459,7 +3459,7 @@
         "name": "Meta: Llama 4 Maverick",
         "description": "Llama 4 Maverick 17B Instruct (128E) is a high-capacity multimodal language model from Meta, built on a mixture-of-experts (MoE) architecture with 128 experts and 17 billion active parameters per forward...",
         "context_length": 1048576,
-        "max_tokens": 16384,
+        "max_tokens": 0,
         "input_modalities": [
           "text",
           "image"
@@ -4782,7 +4782,7 @@
         "name": "NVIDIA: Nemotron 3 Nano 30B A3B",
         "description": "NVIDIA Nemotron 3 Nano 30B A3B is a small language MoE model with highest compute efficiency and accuracy for developers to build specialized agentic AI systems. The model is fully...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 228000,
         "input_modalities": [
           "text"
         ],
@@ -4863,7 +4863,7 @@
         "name": "NVIDIA: Nemotron 3 Super",
         "description": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer...",
         "context_length": 1000000,
-        "max_tokens": 0,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -8341,7 +8341,7 @@
         "name": "Qwen: Qwen3 14B",
         "description": "Qwen3-14B is a dense 14.8B parameter causal language model from the Qwen3 series, designed for both complex reasoning and efficient dialogue. It supports seamless switching between a \"thinking\" mode for...",
         "context_length": 131072,
-        "max_tokens": 8192,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -8774,7 +8774,7 @@
         "name": "Qwen: Qwen3 Next 80B A3B Thinking",
         "description": "Qwen3-Next-80B-A3B-Thinking is a reasoning-first chat model in the Qwen3-Next line that outputs structured “thinking” traces by default. It’s designed for hard multi-step problems; math proofs, code synthesis/debugging, logic, and agentic...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 32768,
         "input_modalities": [
           "text"
         ],
@@ -9079,7 +9079,7 @@
         "name": "Qwen: Qwen3.5 397B A17B",
         "description": "The Qwen3.5 series 397B-A17B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. It delivers...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 65536,
         "input_modalities": [
           "text",
           "image",
@@ -10534,7 +10534,7 @@
         "name": "Z.ai: GLM 5.2",
         "description": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...",
         "context_length": 1048576,
-        "max_tokens": 128000,
+        "max_tokens": 262144,
         "input_modalities": [
           "text"
         ],
