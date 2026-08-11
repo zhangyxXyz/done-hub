@@ -1247,6 +1247,35 @@
       }
     },
     {
+      "model": "bytedance-seed/seed-2.0-code",
+      "model_info": {
+        "model": "bytedance-seed/seed-2.0-code",
+        "name": "ByteDance Seed: Seed-2.0-Code",
+        "description": "Seed 2.0 Code is a model from ByteDance Seed optimized for agentic coding. It is suited for frontend development, multilingual programming tasks, and coding-agent workflows in tools such as Claude...",
+        "context_length": 262144,
+        "max_tokens": 131072,
+        "input_modalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/bytedance-seed/seed-2.0-code",
+          "https://openrouter.ai/api/v1/models/bytedance-seed/seed-2.0-code-20260730/endpoints"
+        ]
+      }
+    },
+    {
       "model": "bytedance-seed/seed-2.0-lite",
       "model_info": {
         "model": "bytedance-seed/seed-2.0-lite",
@@ -4585,7 +4614,8 @@
         "max_tokens": 0,
         "input_modalities": [
           "text",
-          "image"
+          "image",
+          "video"
         ],
         "output_modalities": [
           "text"
@@ -5036,6 +5066,56 @@
         "support_url": [
           "https://openrouter.ai/models/nvidia/nemotron-3.5-content-safety:free",
           "https://openrouter.ai/api/v1/models/nvidia/nemotron-3.5-content-safety-20260604/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "nvidia/nemotron-3.5-lightning",
+      "model_info": {
+        "model": "nvidia/nemotron-3.5-lightning",
+        "name": "NVIDIA: Nemotron 3.5 Lightning",
+        "description": "NVIDIA Nemotron 3.5 Lightning is an open mixture-of-experts model from NVIDIA, with 3B active parameters out of 30B total. It is suited for high-throughput agentic workloads and specialized tasks that...",
+        "context_length": 262144,
+        "max_tokens": 24576,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/nvidia/nemotron-3.5-lightning",
+          "https://openrouter.ai/api/v1/models/nvidia/nemotron-3.5-lightning-20260807/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "nvidia/nemotron-3.5-lightning:free",
+      "model_info": {
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "name": "NVIDIA: Nemotron 3.5 Lightning (free)",
+        "description": "NVIDIA Nemotron 3.5 Lightning is an open mixture-of-experts model from NVIDIA, with 3B active parameters out of 30B total. It is suited for high-throughput agentic workloads and specialized tasks that...",
+        "context_length": 1000000,
+        "max_tokens": 65536,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/nvidia/nemotron-3.5-lightning:free",
+          "https://openrouter.ai/api/v1/models/nvidia/nemotron-3.5-lightning-20260807/endpoints"
         ]
       }
     },
@@ -10589,7 +10669,7 @@
         "name": "Z.ai: GLM 5.2",
         "description": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...",
         "context_length": 1048576,
-        "max_tokens": 262144,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -10786,7 +10866,7 @@
         "name": "DeepSeek V4 Flash Latest",
         "description": "This model always redirects to the latest model in the DeepSeek V4 Flash family.",
         "context_length": 1048576,
-        "max_tokens": 0,
+        "max_tokens": 262144,
         "input_modalities": [
           "text"
         ],
@@ -10879,7 +10959,8 @@
         "max_tokens": 1048576,
         "input_modalities": [
           "text",
-          "image"
+          "image",
+          "video"
         ],
         "output_modalities": [
           "text"
