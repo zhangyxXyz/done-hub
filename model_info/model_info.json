@@ -3311,6 +3311,32 @@
       }
     },
     {
+      "model": "liquid/lfm-2.5-2.6b:free",
+      "model_info": {
+        "model": "liquid/lfm-2.5-2.6b:free",
+        "name": "LiquidAI: LFM2.5-2.6B (free)",
+        "description": "LFM2.5-2.6B is a compact reasoning model from Liquid AI. It is suited for agent workflows, data extraction, RAG, and long-context processing. Liquid advises against using it for agentic coding or...",
+        "context_length": 128000,
+        "max_tokens": 32768,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/liquid/lfm-2.5-2.6b:free",
+          "https://openrouter.ai/api/v1/models/liquid/lfm-2.5-2.6b-20260811/endpoints"
+        ]
+      }
+    },
+    {
       "model": "mancer/weaver",
       "model_info": {
         "model": "mancer/weaver",
@@ -5076,7 +5102,7 @@
         "name": "NVIDIA: Nemotron 3.5 Lightning",
         "description": "NVIDIA Nemotron 3.5 Lightning is an open mixture-of-experts model from NVIDIA, with 3B active parameters out of 30B total. It is suited for high-throughput agentic workloads and specialized tasks that...",
         "context_length": 262144,
-        "max_tokens": 24576,
+        "max_tokens": 262144,
         "input_modalities": [
           "text"
         ],
@@ -10669,7 +10695,7 @@
         "name": "Z.ai: GLM 5.2",
         "description": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 1048576,
         "input_modalities": [
           "text"
         ],

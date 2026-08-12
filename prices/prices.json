@@ -3616,7 +3616,7 @@
     "type": "tokens",
     "channel_type": 20,
     "input": 0.27,
-    "output": 1
+    "output": 0.95
   },
   {
     "model": "deepseek/deepseek-v3.1-terminus:exacto",
@@ -4243,6 +4243,13 @@
   },
   {
     "model": "liquid/lfm-2.5-1.2b-thinking:free",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0,
+    "output": 0
+  },
+  {
+    "model": "liquid/lfm-2.5-2.6b:free",
     "type": "tokens",
     "channel_type": 20,
     "input": 0,
@@ -4903,8 +4910,8 @@
     "model": "moonshotai/kimi-k2.6",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.5795,
-    "output": 2.44
+    "input": 0.95,
+    "output": 4
   },
   {
     "model": "moonshotai/kimi-k2.7-code",
@@ -5134,8 +5141,8 @@
     "model": "nvidia/nemotron-3.5-lightning",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0,
-    "output": 0
+    "input": 0.1,
+    "output": 0.25
   },
   {
     "model": "nvidia/nemotron-3.5-lightning:free",
@@ -5785,7 +5792,7 @@
     "model": "openai/gpt-oss-120b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.037,
+    "input": 0.03,
     "output": 0.17
   },
   {
@@ -6457,8 +6464,8 @@
     "model": "qwen/qwen3-vl-235b-a22b-instruct",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.21,
-    "output": 1.9
+    "input": 0.26,
+    "output": 1.04
   },
   {
     "model": "qwen/qwen3-vl-235b-a22b-thinking",
@@ -7150,8 +7157,8 @@
     "model": "z-ai/glm-4.6",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.5,
-    "output": 2
+    "input": 0.55,
+    "output": 2.2
   },
   {
     "model": "z-ai/glm-4.6:exacto",
@@ -7199,15 +7206,15 @@
     "model": "z-ai/glm-5.1",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.952,
-    "output": 2.992
+    "input": 1.4,
+    "output": 4.4
   },
   {
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.4886,
-    "output": 1.5356
+    "input": 0.42,
+    "output": 1.4
   },
   {
     "model": "z-ai/glm-5.2:batch",
