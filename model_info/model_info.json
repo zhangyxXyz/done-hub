@@ -288,8 +288,8 @@
         "model": "anthracite-org/magnum-v4-72b",
         "name": "Magnum v4 72B",
         "description": "This is a series of models designed to replicate the prose quality of the Claude 3 models, specifically Sonnet(https://openrouter.ai/anthropic/claude-3.5-sonnet) and Opus(https://openrouter.ai/anthropic/claude-3-opus).\n\nThe model is fine-tuned on top of [Qwen2.5 72B](https://openrouter.ai/qwen/qwen-2.5-72b-instruct).",
-        "context_length": 16384,
-        "max_tokens": 2048,
+        "context_length": 32768,
+        "max_tokens": 4096,
         "input_modalities": [
           "text"
         ],
@@ -1642,7 +1642,7 @@
         "model": "deepseek/deepseek-r1",
         "name": "DeepSeek: R1",
         "description": "DeepSeek R1 is here: Performance on par with [OpenAI o1](/openai/o1), but open-sourced and with fully open reasoning tokens. It's 671B parameters in size, with 37B active in an inference pass....",
-        "context_length": 163840,
+        "context_length": 64000,
         "max_tokens": 16000,
         "input_modalities": [
           "text"
@@ -2766,6 +2766,70 @@
       }
     },
     {
+      "model": "google/gemini-3.7-flash",
+      "model_info": {
+        "model": "google/gemini-3.7-flash",
+        "name": "Google: Gemini 3.7 Flash",
+        "description": "Gemini 3.7 Flash is a multimodal model from Google for fast agentic workflows, coding, and complex multi-step reasoning. It is designed for tasks that require responsive performance and reliable multi-step...",
+        "context_length": 1048576,
+        "max_tokens": 65536,
+        "input_modalities": [
+          "text",
+          "image",
+          "video",
+          "file",
+          "audio"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "audio",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/google/gemini-3.7-flash",
+          "https://openrouter.ai/api/v1/models/google/gemini-3.7-flash-20260813/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "google/gemini-3.7-flash:batch",
+      "model_info": {
+        "model": "google/gemini-3.7-flash:batch",
+        "name": "Google: Gemini 3.7 Flash (batch)",
+        "description": "Gemini 3.7 Flash is a multimodal model from Google for fast agentic workflows, coding, and complex multi-step reasoning. It is designed for tasks that require responsive performance and reliable multi-step...",
+        "context_length": 1048576,
+        "max_tokens": 65536,
+        "input_modalities": [
+          "text",
+          "image",
+          "video",
+          "file",
+          "audio"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "audio",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/google/gemini-3.7-flash:batch",
+          "https://openrouter.ai/api/v1/models/google/gemini-3.7-flash-20260813/endpoints"
+        ]
+      }
+    },
+    {
       "model": "google/gemma-2-27b-it",
       "model_info": {
         "model": "google/gemma-2-27b-it",
@@ -3236,31 +3300,6 @@
         "support_url": [
           "https://openrouter.ai/models/inclusionai/ling-3.0-flash",
           "https://openrouter.ai/api/v1/models/inclusionai/ling-3.0-flash-20260723/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "inclusionai/ling-3.0-tiny:free",
-      "model_info": {
-        "model": "inclusionai/ling-3.0-tiny:free",
-        "name": "inclusionAI: Ling 3.0 Tiny (free)",
-        "description": "Ling 3.0 Tiny is a mixture-of-experts model from InclusionAI, with 1.3B active parameters out of 7.9B total. It is designed for responsive agents, instruction following, and multi-turn conversations, with switchable...",
-        "context_length": 262144,
-        "max_tokens": 32768,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/inclusionai/ling-3.0-tiny:free",
-          "https://openrouter.ai/api/v1/models/inclusionai/ling-3.0-tiny-20260806/endpoints"
         ]
       }
     },
@@ -8911,7 +8950,7 @@
         "name": "Qwen: Qwen3 Next 80B A3B Instruct",
         "description": "Qwen3-Next-80B-A3B-Instruct is an instruction-tuned chat model in the Qwen3-Next series optimized for fast, stable responses without “thinking” traces. It targets complex tasks across reasoning, code generation, knowledge QA, and multilingual...",
         "context_length": 262144,
-        "max_tokens": 16384,
+        "max_tokens": 262144,
         "input_modalities": [
           "text"
         ],
@@ -8936,7 +8975,7 @@
         "name": "Qwen: Qwen3 Next 80B A3B Thinking",
         "description": "Qwen3-Next-80B-A3B-Thinking is a reasoning-first chat model in the Qwen3-Next line that outputs structured “thinking” traces by default. It’s designed for hard multi-step problems; math proofs, code synthesis/debugging, logic, and agentic...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 32768,
         "input_modalities": [
           "text"
         ],
@@ -9611,7 +9650,7 @@
         "name": "Qwen: Qwen3.8 2.4T A95B",
         "description": "Qwen3.8 2.4T A95B is an open-weight sparse mixture-of-experts model from Qwen and the open-weight variant of [Qwen3.8 Max](/qwen/qwen3.8-max), with 95 billion active parameters out of 2.4 trillion total. It is...",
         "context_length": 1000000,
-        "max_tokens": 52429,
+        "max_tokens": 262144,
         "input_modalities": [
           "text"
         ],
@@ -10261,7 +10300,7 @@
       "model_info": {
         "model": "upstage/solar-pro4",
         "name": "Upstage: Solar Pro 4",
-        "description": "Solar Pro 4 is a large language model from Upstage. It is suited for agentic workflows, office productivity, document-intensive work, and coding.",
+        "description": "Solar Pro 4 is Upstage's cost-efficient large language model, featuring a 524K context window. It is built for long-horizon tasks and agentic workflows, with strong capabilities in office productivity, document-intensive...",
         "context_length": 524288,
         "max_tokens": 131072,
         "input_modalities": [
