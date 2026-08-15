@@ -1895,6 +1895,34 @@
       }
     },
     {
+      "model": "dots-studio/dots-3-note-preview:free",
+      "model_info": {
+        "model": "dots-studio/dots-3-note-preview:free",
+        "name": "Dots Studio: Dots3-Note Preview (free)",
+        "description": "Dots3-Note Preview is an open-weight mixture-of-experts model from Dots Studio, with 16B active parameters out of 280B total. It is the lightest model in the Dots 3 family and is...",
+        "context_length": 512000,
+        "max_tokens": 512000,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/dots-studio/dots-3-note-preview:free",
+          "https://openrouter.ai/api/v1/models/dots-studio/dots-3-note-preview-20260813/endpoints"
+        ]
+      }
+    },
+    {
       "model": "google/gemini-2.5-flash",
       "model_info": {
         "model": "google/gemini-2.5-flash",
@@ -9688,6 +9716,7 @@
         "tags": [
           "openrouter",
           "vision",
+          "tools",
           "reasoning",
           "structured_outputs"
         ],
@@ -11070,7 +11099,7 @@
         "name": "DeepSeek V4 Flash Latest",
         "description": "This model always redirects to the latest model in the DeepSeek V4 Flash family.",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 384000,
         "input_modalities": [
           "text"
         ],
