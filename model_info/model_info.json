@@ -1846,7 +1846,7 @@
       "model": "deepseek/deepseek-v4-pro",
       "model_info": {
         "model": "deepseek/deepseek-v4-pro",
-        "name": "DeepSeek: DeepSeek V4 Pro",
+        "name": "DeepSeek: DeepSeek V4 Pro 0423",
         "description": "DeepSeek V4 Pro is a large-scale Mixture-of-Experts model from DeepSeek with 1.6T total parameters and 49B activated parameters, supporting a 1M-token context window. It is designed for advanced reasoning, coding,...",
         "context_length": 1048576,
         "max_tokens": 393216,
@@ -5224,7 +5224,7 @@
         "name": "NVIDIA: Nemotron 3.5 Lightning",
         "description": "NVIDIA Nemotron 3.5 Lightning is an open mixture-of-experts model from NVIDIA, with 3B active parameters out of 30B total. It is suited for high-throughput agentic workloads and specialized tasks that...",
         "context_length": 1000000,
-        "max_tokens": 262144,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -11099,7 +11099,7 @@
         "name": "DeepSeek V4 Flash Latest",
         "description": "This model always redirects to the latest model in the DeepSeek V4 Flash family.",
         "context_length": 1048576,
-        "max_tokens": 384000,
+        "max_tokens": 262144,
         "input_modalities": [
           "text"
         ],

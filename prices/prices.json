@@ -3657,8 +3657,8 @@
     "model": "deepseek/deepseek-v4-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.06286,
-    "output": 0.12572
+    "input": 0.06146,
+    "output": 0.12292
   },
   {
     "model": "deepseek/deepseek-v4-flash-0731",
@@ -3678,8 +3678,8 @@
     "model": "deepseek/deepseek-v4-pro-0813",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.435,
-    "output": 0.87
+    "input": 0.66,
+    "output": 1.98
   },
   {
     "model": "dots-studio/dots-3-note-preview:free",
@@ -4560,7 +4560,7 @@
     "model": "minimax/minimax-m1",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.4,
+    "input": 0.55,
     "output": 2.2
   },
   {
@@ -4938,8 +4938,8 @@
     "model": "moonshotai/kimi-k2.6",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.65,
-    "output": 3.41
+    "input": 0.5415,
+    "output": 2.28
   },
   {
     "model": "moonshotai/kimi-k2.7-code",
@@ -5169,8 +5169,8 @@
     "model": "nvidia/nemotron-3.5-lightning",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.1,
-    "output": 0.25
+    "input": 0.08,
+    "output": 0.2
   },
   {
     "model": "nvidia/nemotron-3.5-lightning:free",
@@ -7311,8 +7311,8 @@
     "model": "~deepseek/deepseek-v4-flash-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.06706,
-    "output": 0.13412
+    "input": 0.0603,
+    "output": 0.1206
   },
   {
     "model": "~google/gemini-flash-latest",
