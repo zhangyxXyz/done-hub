@@ -1719,7 +1719,7 @@
         "name": "DeepSeek: DeepSeek V3.1 Terminus",
         "description": "DeepSeek-V3.1 Terminus is an update to [DeepSeek V3.1](/deepseek/deepseek-chat-v3.1) that maintains the model's original capabilities while addressing issues reported by users, including language consistency and agent capabilities, further optimizing the model's...",
         "context_length": 163840,
-        "max_tokens": 32768,
+        "max_tokens": 163840,
         "input_modalities": [
           "text"
         ],
@@ -1822,7 +1822,7 @@
         "model": "deepseek/deepseek-v4-flash-0731",
         "name": "DeepSeek: DeepSeek V4 Flash 0731",
         "description": "DeepSeek V4 Flash 0731 is a sparse mixture-of-experts model from DeepSeek, with 13B active parameters out of 284B total. This re-post-trained revision is suited for coding, reasoning, and agent workflows....",
-        "context_length": 1048576,
+        "context_length": 1310720,
         "max_tokens": 393216,
         "input_modalities": [
           "text"
@@ -10902,7 +10902,7 @@
         "name": "Z.ai: GLM 5.2",
         "description": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...",
         "context_length": 1048576,
-        "max_tokens": 262144,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -11122,8 +11122,8 @@
         "model": "~deepseek/deepseek-v4-flash-latest",
         "name": "DeepSeek V4 Flash Latest",
         "description": "This model always redirects to the latest model in the DeepSeek V4 Flash family.",
-        "context_length": 1048576,
-        "max_tokens": 262144,
+        "context_length": 1310720,
+        "max_tokens": 384000,
         "input_modalities": [
           "text"
         ],
