@@ -1,31 +1,6 @@
 {
   "data": [
     {
-      "model": "ai21/jamba-large-1.7",
-      "model_info": {
-        "model": "ai21/jamba-large-1.7",
-        "name": "AI21: Jamba Large 1.7",
-        "description": "Jamba Large 1.7 is the latest model in the Jamba open family, offering improvements in grounding, instruction-following, and overall efficiency. Built on a hybrid SSM-Transformer architecture with a 256K context...",
-        "context_length": 256000,
-        "max_tokens": 4096,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/ai21/jamba-large-1.7",
-          "https://openrouter.ai/api/v1/models/ai21/jamba-large-1.7/endpoints"
-        ]
-      }
-    },
-    {
       "model": "aion-labs/aion-2.0",
       "model_info": {
         "model": "aion-labs/aion-2.0",
@@ -1592,7 +1567,7 @@
         "name": "DeepSeek: DeepSeek V3 0324",
         "description": "DeepSeek V3, a 685B-parameter, mixture-of-experts model, is the latest iteration of the flagship chat model family from the DeepSeek team. It succeeds the [DeepSeek V3](/deepseek/deepseek-chat-v3) model and performs really well...",
         "context_length": 163840,
-        "max_tokens": 65536,
+        "max_tokens": 163840,
         "input_modalities": [
           "text"
         ],
@@ -1849,7 +1824,7 @@
         "name": "DeepSeek: DeepSeek V4 Pro 0423",
         "description": "DeepSeek V4 Pro is a large-scale Mixture-of-Experts model from DeepSeek with 1.6T total parameters and 49B activated parameters, supporting a 1M-token context window. It is designed for advanced reasoning, coding,...",
         "context_length": 1048576,
-        "max_tokens": 384000,
+        "max_tokens": 393216,
         "input_modalities": [
           "text"
         ],
@@ -3982,7 +3957,7 @@
         "name": "MiniMax: MiniMax M2.5",
         "description": "MiniMax-M2.5 is a SOTA large language model designed for real-world productivity. Trained in a diverse range of complex real-world digital working environments, M2.5 builds upon the coding expertise of M2.1...",
         "context_length": 204800,
-        "max_tokens": 196608,
+        "max_tokens": 0,
         "input_modalities": [
           "text"
         ],
@@ -9280,7 +9255,7 @@
         "name": "Qwen: Qwen3.5-35B-A3B",
         "description": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall...",
         "context_length": 262144,
-        "max_tokens": 65536,
+        "max_tokens": 262144,
         "input_modalities": [
           "text",
           "image",
@@ -11348,6 +11323,32 @@
         "support_url": [
           "https://openrouter.ai/models/~x-ai/grok-latest",
           "https://openrouter.ai/api/v1/models/~x-ai/grok-latest/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "~z-ai/glm-latest",
+      "model_info": {
+        "model": "~z-ai/glm-latest",
+        "name": "Z.ai: GLM Latest",
+        "description": "This model always redirects to the latest GLM model from Z.ai.",
+        "context_length": 1048576,
+        "max_tokens": 131072,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/~z-ai/glm-latest",
+          "https://openrouter.ai/api/v1/models/~z-ai/glm-latest/endpoints"
         ]
       }
     }
