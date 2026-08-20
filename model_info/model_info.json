@@ -1850,7 +1850,7 @@
         "name": "DeepSeek: DeepSeek V4 Pro 0813",
         "description": "DeepSeek V4 Pro 0813 is a large-scale mixture-of-experts model from DeepSeek. This is the GA release of DeepSeek V4 Pro.",
         "context_length": 1048576,
-        "max_tokens": 384000,
+        "max_tokens": 0,
         "input_modalities": [
           "text"
         ],
@@ -2395,7 +2395,7 @@
         "name": "Google: Nano Banana 2 Lite (Gemini 3.1 Flash Lite Image)",
         "description": "Nano Banana 2 Lite (Gemini 3.1 Flash Lite Image) is Google's fastest, most cost-efficient Gemini image model, built for high-velocity developer pipelines and rapid-fire visual exploration. It delivers text-to-image generation...",
         "context_length": 65536,
-        "max_tokens": 66000,
+        "max_tokens": 65536,
         "input_modalities": [
           "image",
           "text"
@@ -3431,30 +3431,6 @@
         "support_url": [
           "https://openrouter.ai/models/liquid/lfm-2.5-2.6b:free",
           "https://openrouter.ai/api/v1/models/liquid/lfm-2.5-2.6b-20260811/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "mancer/weaver",
-      "model_info": {
-        "model": "mancer/weaver",
-        "name": "Mancer: Weaver (alpha)",
-        "description": "An attempt to recreate Claude-style verbosity, but don't expect the same level of coherence or memory. Meant for use in roleplay/narrative situations.",
-        "context_length": 8000,
-        "max_tokens": 6000,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/mancer/weaver",
-          "https://openrouter.ai/api/v1/models/mancer/weaver/endpoints"
         ]
       }
     },
@@ -9429,7 +9405,7 @@
         "name": "Qwen: Qwen3.6 27B",
         "description": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities — accepting text, image, and video inputs...",
         "context_length": 262144,
-        "max_tokens": 65536,
+        "max_tokens": 262144,
         "input_modalities": [
           "text",
           "image",
@@ -9679,7 +9655,7 @@
         "model": "qwen/qwen3.8-27b",
         "name": "Qwen: Qwen3.8 27B",
         "description": "Qwen3.8 27B is an open-weight dense vision-language model from Qwen. It is suited for coding, professional workflows, research, multimodal interaction, and long-running agent tasks, with flexible thinking that can be...",
-        "context_length": 262144,
+        "context_length": 1000000,
         "max_tokens": 131072,
         "input_modalities": [
           "text",
