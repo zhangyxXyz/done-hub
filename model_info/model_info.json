@@ -1694,7 +1694,7 @@
         "name": "DeepSeek: DeepSeek V3.1 Terminus",
         "description": "DeepSeek-V3.1 Terminus is an update to [DeepSeek V3.1](/deepseek/deepseek-chat-v3.1) that maintains the model's original capabilities while addressing issues reported by users, including language consistency and agent capabilities, further optimizing the model's...",
         "context_length": 163840,
-        "max_tokens": 163840,
+        "max_tokens": 32768,
         "input_modalities": [
           "text"
         ],
@@ -4117,6 +4117,30 @@
       }
     },
     {
+      "model": "mistralai/ministral-8b",
+      "model_info": {
+        "model": "mistralai/ministral-8b",
+        "name": "Mistral: Ministral 8B",
+        "description": "Ministral 8B is an 8B parameter model featuring a unique interleaved sliding-window attention pattern for faster, memory-efficient inference. Designed for edge use cases, it supports up to 128k context length...",
+        "context_length": 128000,
+        "max_tokens": 0,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/mistralai/ministral-8b",
+          "https://openrouter.ai/api/v1/models/mistralai/ministral-8b/endpoints"
+        ]
+      }
+    },
+    {
       "model": "mistralai/ministral-8b-2512",
       "model_info": {
         "model": "mistralai/ministral-8b-2512",
@@ -5175,7 +5199,7 @@
         "model": "nvidia/nemotron-3.5-lightning",
         "name": "NVIDIA: Nemotron 3.5 Lightning",
         "description": "NVIDIA Nemotron 3.5 Lightning is an open mixture-of-experts model from NVIDIA, with 3B active parameters out of 30B total. It is suited for high-throughput agentic workloads and specialized tasks that...",
-        "context_length": 1000000,
+        "context_length": 262144,
         "max_tokens": 131072,
         "input_modalities": [
           "text"
@@ -10014,6 +10038,53 @@
         "support_url": [
           "https://openrouter.ai/models/tencent/hunyuan-a13b-instruct",
           "https://openrouter.ai/api/v1/models/tencent/hunyuan-a13b-instruct/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "tencent/hy-mt2-1.8b",
+      "model_info": {
+        "model": "tencent/hy-mt2-1.8b",
+        "name": "Tencent: Hy-MT2-1.8B",
+        "description": "Hy-MT2-1.8B is a compact 1.8B-parameter translation model from Tencent. It supports 33 language pairs and five Chinese dialect and minority-language pairs, with workflows for structured, delimiter-based, contextual, glossary-based, and style-guided...",
+        "context_length": 8192,
+        "max_tokens": 4096,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/tencent/hy-mt2-1.8b",
+          "https://openrouter.ai/api/v1/models/tencent/hy-mt2-1.8b-20260521/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "tencent/hy-mt2-30b-a3b",
+      "model_info": {
+        "model": "tencent/hy-mt2-30b-a3b",
+        "name": "Tencent: Hy-MT2-30B-A3B",
+        "description": "Hy-MT2-30B-A3B is Tencent's flagship translation model in the Hy-MT2 family. It supports 33 language pairs and five Chinese dialect and minority-language pairs, with workflows for structured, delimiter-based, contextual, glossary-based, and...",
+        "context_length": 8192,
+        "max_tokens": 4096,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/tencent/hy-mt2-30b-a3b",
+          "https://openrouter.ai/api/v1/models/tencent/hy-mt2-30b-a3b-20260521/endpoints"
         ]
       }
     },

@@ -3657,8 +3657,8 @@
     "model": "deepseek/deepseek-v4-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.088606,
-    "output": 0.177212
+    "input": 0.0812,
+    "output": 0.1624
   },
   {
     "model": "deepseek/deepseek-v4-flash-0731",
@@ -3671,8 +3671,8 @@
     "model": "deepseek/deepseek-v4-pro",
     "type": "tokens",
     "channel_type": 20,
-    "input": 1.44,
-    "output": 2.88
+    "input": 1.6,
+    "output": 3.2
   },
   {
     "model": "deepseek/deepseek-v4-pro-0813",
@@ -4693,8 +4693,8 @@
     "model": "mistralai/ministral-8b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.1,
-    "output": 0.1
+    "input": 0.11,
+    "output": 0.11
   },
   {
     "model": "mistralai/ministral-8b-2512",
@@ -4938,8 +4938,8 @@
     "model": "moonshotai/kimi-k2.6",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.95,
-    "output": 4
+    "input": 0.5605,
+    "output": 2.36
   },
   {
     "model": "moonshotai/kimi-k2.7-code",
@@ -6830,6 +6830,20 @@
     "channel_type": 20,
     "input": 0.14,
     "output": 0.57
+  },
+  {
+    "model": "tencent/hy-mt2-1.8b",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.044,
+    "output": 0.177
+  },
+  {
+    "model": "tencent/hy-mt2-30b-a3b",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.074,
+    "output": 0.295
   },
   {
     "model": "tencent/hy3",
