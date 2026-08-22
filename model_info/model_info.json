@@ -1511,31 +1511,6 @@
       }
     },
     {
-      "model": "deepcogito/cogito-v2.1-671b",
-      "model_info": {
-        "model": "deepcogito/cogito-v2.1-671b",
-        "name": "Deep Cogito: Cogito v2.1 671B",
-        "description": "Cogito v2.1 671B MoE represents one of the strongest open models globally, matching performance of frontier closed and open models. This model is trained using self play with reinforcement learning...",
-        "context_length": 128000,
-        "max_tokens": 0,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/deepcogito/cogito-v2.1-671b",
-          "https://openrouter.ai/api/v1/models/deepcogito/cogito-v2.1-671b-20251118/endpoints"
-        ]
-      }
-    },
-    {
       "model": "deepseek/deepseek-chat",
       "model_info": {
         "model": "deepseek/deepseek-chat",
@@ -1592,7 +1567,7 @@
         "name": "DeepSeek: DeepSeek V3.1",
         "description": "DeepSeek-V3.1 is a large hybrid reasoning model (671B parameters, 37B active) that supports both thinking and non-thinking modes via prompt templates. It extends the DeepSeek-V3 base with a two-phase long-context...",
         "context_length": 163840,
-        "max_tokens": 32768,
+        "max_tokens": 161000,
         "input_modalities": [
           "text"
         ],
@@ -1720,7 +1695,7 @@
         "name": "DeepSeek: DeepSeek V3.2",
         "description": "DeepSeek-V3.2 is a large language model designed to harmonize high computational efficiency with strong reasoning and agentic tool-use performance. It introduces DeepSeek Sparse Attention (DSA), a fine-grained sparse attention mechanism...",
         "context_length": 163840,
-        "max_tokens": 65536,
+        "max_tokens": 163840,
         "input_modalities": [
           "text"
         ],
@@ -1852,7 +1827,7 @@
         "name": "DeepSeek: DeepSeek V4 Pro 0423",
         "description": "DeepSeek V4 Pro is a large-scale Mixture-of-Experts model from DeepSeek with 1.6T total parameters and 49B activated parameters, supporting a 1M-token context window. It is designed for advanced reasoning, coding,...",
         "context_length": 1048576,
-        "max_tokens": 393216,
+        "max_tokens": 384000,
         "input_modalities": [
           "text"
         ],
@@ -3806,6 +3781,38 @@
       }
     },
     {
+      "model": "meta/muse-spark-1.2-contributor",
+      "model_info": {
+        "model": "meta/muse-spark-1.2-contributor",
+        "name": "Meta: Muse Spark 1.2 Contributor",
+        "description": "Muse Spark 1.2 contributor tier is a reasoning model from Meta designed for developers who want to start building at an even lower cost. It’s meaningfully cheaper than Muse Spark...",
+        "context_length": 1048576,
+        "max_tokens": 0,
+        "input_modalities": [
+          "text",
+          "image",
+          "video",
+          "file",
+          "audio"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "audio",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/meta/muse-spark-1.2-contributor",
+          "https://openrouter.ai/api/v1/models/meta/muse-spark-1.2-contributor-20260805/endpoints"
+        ]
+      }
+    },
+    {
       "model": "microsoft/phi-4",
       "model_info": {
         "model": "microsoft/phi-4",
@@ -3985,7 +3992,7 @@
         "name": "MiniMax: MiniMax M2.5",
         "description": "MiniMax-M2.5 is a SOTA large language model designed for real-world productivity. Trained in a diverse range of complex real-world digital working environments, M2.5 builds upon the coding expertise of M2.1...",
         "context_length": 204800,
-        "max_tokens": 32768,
+        "max_tokens": 128000,
         "input_modalities": [
           "text"
         ],
@@ -4518,7 +4525,7 @@
         "model": "mistralai/mistral-small-3.2-24b-instruct",
         "name": "Mistral: Mistral Small 3.2 24B",
         "description": "Mistral-Small-3.2-24B-Instruct-2506 is an updated 24B parameter model from Mistral optimized for instruction following, repetition reduction, and improved function calling. Compared to the 3.1 release, version 3.2 significantly improves accuracy on...",
-        "context_length": 256000,
+        "context_length": 131072,
         "max_tokens": 16384,
         "input_modalities": [
           "image",
@@ -7493,32 +7500,6 @@
       }
     },
     {
-      "model": "openai/gpt-oss-20b:free",
-      "model_info": {
-        "model": "openai/gpt-oss-20b:free",
-        "name": "OpenAI: gpt-oss-20b (free)",
-        "description": "gpt-oss-20b is an open-weight 21B parameter model released by OpenAI under the Apache 2.0 license. It uses a Mixture-of-Experts (MoE) architecture with 3.6B active parameters per forward pass, optimized for...",
-        "context_length": 131072,
-        "max_tokens": 32768,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-oss-20b:free",
-          "https://openrouter.ai/api/v1/models/openai/gpt-oss-20b/endpoints"
-        ]
-      }
-    },
-    {
       "model": "openai/gpt-oss-safeguard-20b",
       "model_info": {
         "model": "openai/gpt-oss-safeguard-20b",
@@ -9006,7 +8987,7 @@
         "name": "Qwen: Qwen3 Next 80B A3B Instruct",
         "description": "Qwen3-Next-80B-A3B-Instruct is an instruction-tuned chat model in the Qwen3-Next series optimized for fast, stable responses without “thinking” traces. It targets complex tasks across reasoning, code generation, knowledge QA, and multilingual...",
         "context_length": 262144,
-        "max_tokens": 16384,
+        "max_tokens": 262144,
         "input_modalities": [
           "text"
         ],
@@ -9706,7 +9687,7 @@
         "name": "Qwen: Qwen3.8 2.4T A95B",
         "description": "Qwen3.8 2.4T A95B is an open-weight sparse mixture-of-experts model from Qwen and the open-weight variant of [Qwen3.8 Max](/qwen/qwen3.8-max), with 95 billion active parameters out of 2.4 trillion total. It is...",
         "context_length": 1048576,
-        "max_tokens": 262144,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -10378,6 +10359,35 @@
       }
     },
     {
+      "model": "thinkingmachines/inkling-small:free",
+      "model_info": {
+        "model": "thinkingmachines/inkling-small:free",
+        "name": "Thinking Machines: Inkling Small (free)",
+        "description": "Inkling Small is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 12B active parameters out of 276B total. It is positioned as the smaller, more efficient member of...",
+        "context_length": 262144,
+        "max_tokens": 262144,
+        "input_modalities": [
+          "text",
+          "image",
+          "audio"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "audio",
+          "tools",
+          "reasoning"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/thinkingmachines/inkling-small:free",
+          "https://openrouter.ai/api/v1/models/thinkingmachines/inkling-small-20260730/endpoints"
+        ]
+      }
+    },
+    {
       "model": "thinkingmachines/inkling:batch",
       "model_info": {
         "model": "thinkingmachines/inkling:batch",
@@ -10402,6 +10412,35 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/thinkingmachines/inkling:batch",
+          "https://openrouter.ai/api/v1/models/thinkingmachines/inkling-20260715/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "thinkingmachines/inkling:free",
+      "model_info": {
+        "model": "thinkingmachines/inkling:free",
+        "name": "Thinking Machines: Inkling (free)",
+        "description": "Inkling is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 41B active parameters out of 975B total. It is designed for general-purpose reasoning, coding, agentic and tool-use systems,...",
+        "context_length": 262144,
+        "max_tokens": 262144,
+        "input_modalities": [
+          "text",
+          "image",
+          "audio"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "audio",
+          "tools",
+          "reasoning"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/thinkingmachines/inkling:free",
           "https://openrouter.ai/api/v1/models/thinkingmachines/inkling-20260715/endpoints"
         ]
       }
