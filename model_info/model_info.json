@@ -4710,7 +4710,7 @@
         "name": "MoonshotAI: Kimi K2.6",
         "description": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 0,
         "input_modalities": [
           "text",
           "image"
@@ -8682,7 +8682,7 @@
         "name": "Qwen: Qwen3 30B A3B",
         "description": "Qwen3, the latest generation in the Qwen large language model series, features both dense and mixture-of-experts (MoE) architectures to excel in reasoning, multilingual support, and advanced agent tasks. Its unique...",
         "context_length": 131072,
-        "max_tokens": 8192,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -9230,7 +9230,7 @@
         "name": "Qwen: Qwen3.5-122B-A10B",
         "description": "The Qwen3.5 122B-A10B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. In terms of...",
         "context_length": 262144,
-        "max_tokens": 65536,
+        "max_tokens": 262144,
         "input_modalities": [
           "text",
           "image",
@@ -10151,6 +10151,30 @@
       }
     },
     {
+      "model": "tencent/hy-mt2-7b",
+      "model_info": {
+        "model": "tencent/hy-mt2-7b",
+        "name": "Tencent: Hy-MT2-7B",
+        "description": "Hy-MT2-7B is a 7B-parameter translation model from Tencent. It supports 33 language pairs and five Chinese dialect and minority-language pairs, with workflows for structured, delimiter-based, contextual, glossary-based, and style-guided translation.",
+        "context_length": 8192,
+        "max_tokens": 4096,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/tencent/hy-mt2-7b",
+          "https://openrouter.ai/api/v1/models/tencent/hy-mt2-7b-20260521/endpoints"
+        ]
+      }
+    },
+    {
       "model": "tencent/hy3",
       "model_info": {
         "model": "tencent/hy3",
@@ -10305,7 +10329,7 @@
         "name": "Thinking Machines: Inkling",
         "description": "Inkling is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 41B active parameters out of 975B total. It is designed for general-purpose reasoning, coding, agentic and tool-use systems,...",
         "context_length": 1048576,
-        "max_tokens": 262144,
+        "max_tokens": 0,
         "input_modalities": [
           "text",
           "image",
@@ -11294,7 +11318,7 @@
         "name": "DeepSeek V4 Flash Latest",
         "description": "This model always redirects to the latest model in the DeepSeek V4 Flash family.",
         "context_length": 1310720,
-        "max_tokens": 1048576,
+        "max_tokens": 262144,
         "input_modalities": [
           "text"
         ],
