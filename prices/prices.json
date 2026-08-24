@@ -3657,15 +3657,15 @@
     "model": "deepseek/deepseek-v4-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.0574,
-    "output": 0.1148
+    "input": 0.056,
+    "output": 0.112
   },
   {
     "model": "deepseek/deepseek-v4-flash-0731",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.14,
-    "output": 0.28
+    "input": 0.0658,
+    "output": 0.1316
   },
   {
     "model": "deepseek/deepseek-v4-flash-vision-exp",
@@ -3678,8 +3678,8 @@
     "model": "deepseek/deepseek-v4-pro",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.526176,
-    "output": 1.052352
+    "input": 0.522,
+    "output": 1.044
   },
   {
     "model": "deepseek/deepseek-v4-pro-0813",
@@ -4616,8 +4616,8 @@
     "model": "minimax/minimax-m2.7",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.24,
-    "output": 0.96
+    "input": 0.3,
+    "output": 1.2
   },
   {
     "model": "minimax/minimax-m3",
@@ -4651,8 +4651,8 @@
     "model": "mistralai/devstral-2512",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.4,
-    "output": 2
+    "input": 0.44,
+    "output": 2.2
   },
   {
     "model": "mistralai/devstral-medium",
@@ -4945,8 +4945,8 @@
     "model": "moonshotai/kimi-k2.5",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.45,
-    "output": 2.25
+    "input": 0.6,
+    "output": 3
   },
   {
     "model": "moonshotai/kimi-k2.6",

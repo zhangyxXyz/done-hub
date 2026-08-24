@@ -3235,56 +3235,6 @@
       }
     },
     {
-      "model": "inclusionai/ling-2.6-1t",
-      "model_info": {
-        "model": "inclusionai/ling-2.6-1t",
-        "name": "inclusionAI: Ling-2.6-1T",
-        "description": "Ling-2.6-1T is an instant (instruct) model from inclusionAI and the company’s trillion-parameter flagship, designed for real-world agents that require fast execution and high efficiency at scale. It uses a “fast...",
-        "context_length": 262144,
-        "max_tokens": 32768,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/inclusionai/ling-2.6-1t",
-          "https://openrouter.ai/api/v1/models/inclusionai/ling-2.6-1t-20260423/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "inclusionai/ling-2.6-flash",
-      "model_info": {
-        "model": "inclusionai/ling-2.6-flash",
-        "name": "inclusionAI: Ling-2.6-flash",
-        "description": "Ling-2.6-flash is an instant (instruct) model from inclusionAI with 104B total parameters and 7.4B active parameters, designed for real-world agents that require fast responses, strong execution, and high token efficiency....",
-        "context_length": 262144,
-        "max_tokens": 32768,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/inclusionai/ling-2.6-flash",
-          "https://openrouter.ai/api/v1/models/inclusionai/ling-2.6-flash-20260421/endpoints"
-        ]
-      }
-    },
-    {
       "model": "inclusionai/ling-3.0-flash",
       "model_info": {
         "model": "inclusionai/ling-3.0-flash",
@@ -3307,32 +3257,6 @@
         "support_url": [
           "https://openrouter.ai/models/inclusionai/ling-3.0-flash",
           "https://openrouter.ai/api/v1/models/inclusionai/ling-3.0-flash-20260723/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "inclusionai/ring-2.6-1t",
-      "model_info": {
-        "model": "inclusionai/ring-2.6-1t",
-        "name": "inclusionAI: Ring-2.6-1T",
-        "description": "Ring-2.6-1T is a 1T-parameter-scale thinking model with 63B active parameters, built for real-world agent workflows that require both strong capability and operational efficiency. It is optimized for coding agents, tool...",
-        "context_length": 262144,
-        "max_tokens": 65536,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/inclusionai/ring-2.6-1t",
-          "https://openrouter.ai/api/v1/models/inclusionai/ring-2.6-1t-20260508/endpoints"
         ]
       }
     },
@@ -4122,6 +4046,32 @@
       }
     },
     {
+      "model": "mistralai/devstral-2512",
+      "model_info": {
+        "model": "mistralai/devstral-2512",
+        "name": "Mistral: Devstral 2 2512",
+        "description": "Devstral 2 is a state-of-the-art open-source model by Mistral AI specializing in agentic coding. It is a 123B-parameter dense transformer model supporting a 256K context window. Devstral 2 supports exploring...",
+        "context_length": 262144,
+        "max_tokens": 0,
+        "input_modalities": [
+          "text",
+          "file"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/mistralai/devstral-2512",
+          "https://openrouter.ai/api/v1/models/mistralai/devstral-2512/endpoints"
+        ]
+      }
+    },
+    {
       "model": "mistralai/ministral-14b-2512",
       "model_info": {
         "model": "mistralai/ministral-14b-2512",
@@ -4682,7 +4632,7 @@
         "name": "MoonshotAI: Kimi K2.5",
         "description": "Kimi K2.5 is Moonshot AI's native multimodal model, delivering state-of-the-art visual coding capability and a self-directed agent swarm paradigm. Built on Kimi K2 with continued pretraining over approximately 15T mixed...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 0,
         "input_modalities": [
           "text",
           "image"
@@ -5043,31 +4993,6 @@
       }
     },
     {
-      "model": "nvidia/nemotron-3-nano-30b-a3b:free",
-      "model_info": {
-        "model": "nvidia/nemotron-3-nano-30b-a3b:free",
-        "name": "NVIDIA: Nemotron 3 Nano 30B A3B (free)",
-        "description": "NVIDIA Nemotron 3 Nano 30B A3B is a small language MoE model with highest compute efficiency and accuracy for developers to build specialized agentic AI systems. The model is fully...",
-        "context_length": 256000,
-        "max_tokens": 0,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/nvidia/nemotron-3-nano-30b-a3b:free",
-          "https://openrouter.ai/api/v1/models/nvidia/nemotron-3-nano-30b-a3b/endpoints"
-        ]
-      }
-    },
-    {
       "model": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
       "model_info": {
         "model": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
@@ -5300,60 +5225,6 @@
         "support_url": [
           "https://openrouter.ai/models/nvidia/nemotron-3.5-lightning:free",
           "https://openrouter.ai/api/v1/models/nvidia/nemotron-3.5-lightning-20260807/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "nvidia/nemotron-nano-12b-v2-vl:free",
-      "model_info": {
-        "model": "nvidia/nemotron-nano-12b-v2-vl:free",
-        "name": "NVIDIA: Nemotron Nano 12B 2 VL (free)",
-        "description": "NVIDIA Nemotron Nano 2 VL is a 12-billion-parameter open multimodal reasoning model designed for video understanding and document intelligence. It introduces a hybrid Transformer-Mamba architecture, combining transformer-level accuracy with Mamba’s...",
-        "context_length": 128000,
-        "max_tokens": 128000,
-        "input_modalities": [
-          "image",
-          "text",
-          "video"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/nvidia/nemotron-nano-12b-v2-vl:free",
-          "https://openrouter.ai/api/v1/models/nvidia/nemotron-nano-12b-v2-vl/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "nvidia/nemotron-nano-9b-v2:free",
-      "model_info": {
-        "model": "nvidia/nemotron-nano-9b-v2:free",
-        "name": "NVIDIA: Nemotron Nano 9B V2 (free)",
-        "description": "NVIDIA-Nemotron-Nano-9B-v2 is a large language model (LLM) trained from scratch by NVIDIA, and designed as a unified model for both reasoning and non-reasoning tasks. It responds to user queries and...",
-        "context_length": 128000,
-        "max_tokens": 0,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/nvidia/nemotron-nano-9b-v2:free",
-          "https://openrouter.ai/api/v1/models/nvidia/nemotron-nano-9b-v2/endpoints"
         ]
       }
     },
@@ -8655,7 +8526,7 @@
         "model": "qwen/qwen3-235b-a22b-thinking-2507",
         "name": "Qwen: Qwen3 235B A22B Thinking 2507",
         "description": "Qwen3-235B-A22B-Thinking-2507 is a high-performance, open-weight Mixture-of-Experts (MoE) language model optimized for complex reasoning tasks. It activates 22B of its 235B parameters per forward pass and natively supports up to 262,144...",
-        "context_length": 262144,
+        "context_length": 131072,
         "max_tokens": 0,
         "input_modalities": [
           "text"
@@ -10475,7 +10346,7 @@
         "name": "ReMM SLERP 13B",
         "description": "A recreation trial of the original MythoMax-L2-B13 but with updated models. #merge",
         "context_length": 6144,
-        "max_tokens": 6144,
+        "max_tokens": 4096,
         "input_modalities": [
           "text"
         ],
