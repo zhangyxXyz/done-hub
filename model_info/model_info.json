@@ -1773,7 +1773,7 @@
         "name": "DeepSeek: DeepSeek V4 Flash 0731",
         "description": "DeepSeek V4 Flash 0731 is a sparse mixture-of-experts model from DeepSeek, with 13B active parameters out of 284B total. This re-post-trained revision is suited for coding, reasoning, and agent workflows....",
         "context_length": 1310720,
-        "max_tokens": 384000,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -4794,7 +4794,7 @@
         "name": "MoonshotAI: Kimi K3",
         "description": "Kimi K3 is a 2.8T parameter open-weight multimodal reasoning model from Moonshot AI. It is suited for complex coding, knowledge work, and long-horizon agentic workflows, and is particularly strong at...",
         "context_length": 1048576,
-        "max_tokens": 0,
+        "max_tokens": 1048576,
         "input_modalities": [
           "text",
           "image",
@@ -9230,7 +9230,7 @@
         "name": "Qwen: Qwen3.5-122B-A10B",
         "description": "The Qwen3.5 122B-A10B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. In terms of...",
         "context_length": 262144,
-        "max_tokens": 65536,
+        "max_tokens": 262144,
         "input_modalities": [
           "text",
           "image",
@@ -9317,7 +9317,7 @@
         "name": "Qwen: Qwen3.5 397B A17B",
         "description": "The Qwen3.5 series 397B-A17B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. It delivers...",
         "context_length": 262144,
-        "max_tokens": 65536,
+        "max_tokens": 262144,
         "input_modalities": [
           "text",
           "image",
@@ -9462,7 +9462,7 @@
         "name": "Qwen: Qwen3.6 27B",
         "description": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities — accepting text, image, and video inputs...",
         "context_length": 262144,
-        "max_tokens": 262144,
+        "max_tokens": 81920,
         "input_modalities": [
           "text",
           "image",
@@ -10304,7 +10304,7 @@
         "name": "TheDrummer: UnslopNemo 12B",
         "description": "UnslopNemo v4.1 is the latest addition from the creator of Rocinante, designed for adventure writing and role-play scenarios.",
         "context_length": 1024000,
-        "max_tokens": 1024000,
+        "max_tokens": 32768,
         "input_modalities": [
           "text"
         ],
@@ -10329,7 +10329,7 @@
         "name": "Thinking Machines: Inkling",
         "description": "Inkling is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 41B active parameters out of 975B total. It is designed for general-purpose reasoning, coding, agentic and tool-use systems,...",
         "context_length": 1048576,
-        "max_tokens": 262144,
+        "max_tokens": 0,
         "input_modalities": [
           "text",
           "image",

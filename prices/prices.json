@@ -899,15 +899,15 @@
     "model": "gpt-5.6-sol",
     "type": "tokens",
     "channel_type": 1,
-    "input": 5,
-    "output": 30
+    "input": 4,
+    "output": 20
   },
   {
     "model": "gpt-5.6-sol-2026-07-09",
     "type": "tokens",
     "channel_type": 1,
-    "input": 5,
-    "output": 30
+    "input": 4,
+    "output": 20
   },
   {
     "model": "gpt-5.6-terra",
@@ -3657,15 +3657,15 @@
     "model": "deepseek/deepseek-v4-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.04886,
-    "output": 0.09772
+    "input": 0.0574,
+    "output": 0.1148
   },
   {
     "model": "deepseek/deepseek-v4-flash-0731",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.08,
-    "output": 0.18
+    "input": 0.14,
+    "output": 0.28
   },
   {
     "model": "deepseek/deepseek-v4-flash-vision-exp",
@@ -3678,8 +3678,8 @@
     "model": "deepseek/deepseek-v4-pro",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.396894,
-    "output": 0.793788
+    "input": 0.526176,
+    "output": 1.052352
   },
   {
     "model": "deepseek/deepseek-v4-pro-0813",
@@ -6569,8 +6569,8 @@
     "model": "qwen/qwen3.5-397b-a17b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.39,
-    "output": 2.34
+    "input": 0.5,
+    "output": 3.6
   },
   {
     "model": "qwen/qwen3.5-9b",
@@ -6604,8 +6604,8 @@
     "model": "qwen/qwen3.6-27b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.6,
-    "output": 3.6
+    "input": 0.32,
+    "output": 3.2
   },
   {
     "model": "qwen/qwen3.6-35b-a3b",
@@ -6954,7 +6954,7 @@
     "model": "thinkingmachines/inkling",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.95,
+    "input": 1,
     "output": 4.05
   },
   {
