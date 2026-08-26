@@ -9338,7 +9338,7 @@
         "name": "Qwen: Qwen3.6 27B",
         "description": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities — accepting text, image, and video inputs...",
         "context_length": 262144,
-        "max_tokens": 235929,
+        "max_tokens": 81920,
         "input_modalities": [
           "text",
           "image",
@@ -9868,35 +9868,6 @@
         "support_url": [
           "https://openrouter.ai/models/sao10k/l3.3-euryale-70b",
           "https://openrouter.ai/api/v1/models/sao10k/l3.3-euryale-70b-v2.3/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "stealth/ox-alpha",
-      "model_info": {
-        "model": "stealth/ox-alpha",
-        "name": "Ox Alpha",
-        "description": "Ox Alpha is a reasoning model designed for coding, sustained agentic work, and production workloads. It is suited for long-horizon software engineering, complex reasoning, and workflows that combine text with...",
-        "context_length": 1048576,
-        "max_tokens": 131072,
-        "input_modalities": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/stealth/ox-alpha",
-          "https://openrouter.ai/api/v1/models/stealth/ox-alpha/endpoints"
         ]
       }
     },
@@ -11038,6 +11009,35 @@
         "support_url": [
           "https://openrouter.ai/models/z-ai/glm-5.3",
           "https://openrouter.ai/api/v1/models/z-ai/glm-5.3-20260816/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "z-ai/glm-5.3-flash",
+      "model_info": {
+        "model": "z-ai/glm-5.3-flash",
+        "name": "Z.ai: GLM 5.3 Flash",
+        "description": "GLM-5.3-Flash is a native multimodal model from Z.ai. It is suited for efficient coding and long-horizon agent tasks. Its hybrid sparse and linear attention architecture maintains accurate long-context behavior while...",
+        "context_length": 1048576,
+        "max_tokens": 131072,
+        "input_modalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/z-ai/glm-5.3-flash",
+          "https://openrouter.ai/api/v1/models/z-ai/glm-5.3-flash-20260826/endpoints"
         ]
       }
     },
