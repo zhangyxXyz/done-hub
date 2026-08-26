@@ -2940,30 +2940,6 @@
       }
     },
     {
-      "model": "google/gemma-3n-e4b-it",
-      "model_info": {
-        "model": "google/gemma-3n-e4b-it",
-        "name": "Google: Gemma 3n 4B",
-        "description": "Gemma 3n E4B-it is optimized for efficient execution on mobile and low-resource devices, such as phones, laptops, and tablets. It supports multimodal inputs—including text, visual data, and audio—enabling diverse tasks...",
-        "context_length": 32768,
-        "max_tokens": 29491,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/google/gemma-3n-e4b-it",
-          "https://openrouter.ai/api/v1/models/google/gemma-3n-e4b-it/endpoints"
-        ]
-      }
-    },
-    {
       "model": "google/gemma-4-26b-a4b-it",
       "model_info": {
         "model": "google/gemma-4-26b-a4b-it",
@@ -3028,7 +3004,7 @@
         "name": "Google: Gemma 4 31B",
         "description": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function...",
         "context_length": 262144,
-        "max_tokens": 235929,
+        "max_tokens": 16384,
         "input_modalities": [
           "image",
           "text",
@@ -3514,7 +3490,7 @@
         "name": "Meta: Llama 3.3 70B Instruct",
         "description": "The Meta Llama 3.3 multilingual large language model (LLM) is a pretrained and instruction tuned generative model in 70B (text in/text out). The Llama 3.3 instruction tuned text only model...",
         "context_length": 131072,
-        "max_tokens": 16384,
+        "max_tokens": 115200,
         "input_modalities": [
           "text"
         ],
@@ -3566,7 +3542,7 @@
         "name": "Meta: Llama 4 Scout",
         "description": "Llama 4 Scout 17B Instruct (16E) is a mixture-of-experts (MoE) language model developed by Meta, activating 17 billion parameters out of a total of 109B. It supports native multimodal input...",
         "context_length": 1310720,
-        "max_tokens": 16384,
+        "max_tokens": 8192,
         "input_modalities": [
           "text",
           "image"
@@ -3592,7 +3568,7 @@
         "model": "meta-llama/llama-guard-4-12b",
         "name": "Meta: Llama Guard 4 12B",
         "description": "Llama Guard 4 is a Llama 4 Scout-derived multimodal pretrained model, fine-tuned for content safety classification. Similar to previous versions, it can be used to classify content in both LLM...",
-        "context_length": 1048576,
+        "context_length": 163840,
         "max_tokens": 16384,
         "input_modalities": [
           "image",
@@ -8453,7 +8429,7 @@
         "name": "Qwen: Qwen2.5 VL 72B Instruct",
         "description": "Qwen2.5-VL is proficient in recognizing common objects such as flowers, birds, fish, and insects. It is also highly capable of analyzing texts, charts, icons, graphics, and layouts within images.",
         "context_length": 128000,
-        "max_tokens": 115200,
+        "max_tokens": 28800,
         "input_modalities": [
           "text",
           "image"
@@ -9217,7 +9193,7 @@
         "name": "Qwen: Qwen3.5 397B A17B",
         "description": "The Qwen3.5 series 397B-A17B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. It delivers...",
         "context_length": 262144,
-        "max_tokens": 235929,
+        "max_tokens": 65536,
         "input_modalities": [
           "text",
           "image",
@@ -9362,7 +9338,7 @@
         "name": "Qwen: Qwen3.6 27B",
         "description": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities — accepting text, image, and video inputs...",
         "context_length": 262144,
-        "max_tokens": 81920,
+        "max_tokens": 235929,
         "input_modalities": [
           "text",
           "image",
@@ -11217,7 +11193,7 @@
         "name": "DeepSeek V4 Flash Latest",
         "description": "This model always redirects to the latest model in the DeepSeek V4 Flash family.",
         "context_length": 1310720,
-        "max_tokens": 943718,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
