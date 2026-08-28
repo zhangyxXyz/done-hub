@@ -1695,7 +1695,7 @@
         "name": "DeepSeek: DeepSeek V3.2",
         "description": "DeepSeek-V3.2 is a large language model designed to harmonize high computational efficiency with strong reasoning and agentic tool-use performance. It introduces DeepSeek Sparse Attention (DSA), a fine-grained sparse attention mechanism...",
         "context_length": 163840,
-        "max_tokens": 147456,
+        "max_tokens": 65536,
         "input_modalities": [
           "text"
         ],
@@ -2892,7 +2892,7 @@
         "model": "google/gemma-3-27b-it",
         "name": "Google: Gemma 3 27B",
         "description": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,...",
-        "context_length": 262144,
+        "context_length": 131072,
         "max_tokens": 117964,
         "input_modalities": [
           "text",
@@ -4102,6 +4102,32 @@
       }
     },
     {
+      "model": "mistralai/codestral-2508:batch",
+      "model_info": {
+        "model": "mistralai/codestral-2508:batch",
+        "name": "Mistral: Codestral 2508 (batch)",
+        "description": "Mistral's cutting-edge language model for coding released end of July 2025. Codestral specializes in low-latency, high-frequency tasks such as fill-in-the-middle (FIM), code correction and test generation.\n\n[Blog Post](https://mistral.ai/news/codestral-25-08)",
+        "context_length": 256000,
+        "max_tokens": 204800,
+        "input_modalities": [
+          "text",
+          "file"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/mistralai/codestral-2508:batch",
+          "https://openrouter.ai/api/v1/models/mistralai/codestral-2508/endpoints"
+        ]
+      }
+    },
+    {
       "model": "mistralai/devstral-2512",
       "model_info": {
         "model": "mistralai/devstral-2512",
@@ -4209,6 +4235,33 @@
       }
     },
     {
+      "model": "mistralai/ministral-8b-2512:batch",
+      "model_info": {
+        "model": "mistralai/ministral-8b-2512:batch",
+        "name": "Mistral: Ministral 3 8B 2512 (batch)",
+        "description": "A balanced model in the Ministral 3 family, Ministral 3 8B is a powerful, efficient tiny language model with vision capabilities.",
+        "context_length": 262144,
+        "max_tokens": 209715,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/mistralai/ministral-8b-2512:batch",
+          "https://openrouter.ai/api/v1/models/mistralai/ministral-8b-2512/endpoints"
+        ]
+      }
+    },
+    {
       "model": "mistralai/mistral-large",
       "model_info": {
         "model": "mistralai/mistral-large",
@@ -4289,6 +4342,34 @@
       }
     },
     {
+      "model": "mistralai/mistral-large-2512:batch",
+      "model_info": {
+        "model": "mistralai/mistral-large-2512:batch",
+        "name": "Mistral: Mistral Large 3 2512 (batch)",
+        "description": "Mistral Large 3 2512 is Mistral’s most capable model to date, featuring a sparse mixture-of-experts architecture with 41B active parameters (675B total), and released under the Apache 2.0 license.",
+        "context_length": 262144,
+        "max_tokens": 209715,
+        "input_modalities": [
+          "text",
+          "image",
+          "file"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/mistralai/mistral-large-2512:batch",
+          "https://openrouter.ai/api/v1/models/mistralai/mistral-large-2512/endpoints"
+        ]
+      }
+    },
+    {
       "model": "mistralai/mistral-medium-3",
       "model_info": {
         "model": "mistralai/mistral-medium-3",
@@ -4346,6 +4427,35 @@
       }
     },
     {
+      "model": "mistralai/mistral-medium-3-5:batch",
+      "model_info": {
+        "model": "mistralai/mistral-medium-3-5:batch",
+        "name": "Mistral: Mistral Medium 3.5 (batch)",
+        "description": "Mistral Medium 3.5 is a dense 128B instruction-following model from Mistral AI. It supports text and image inputs with text output, and is designed for agentic workflows, coding, and complex...",
+        "context_length": 262144,
+        "max_tokens": 209715,
+        "input_modalities": [
+          "text",
+          "image",
+          "file"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/mistralai/mistral-medium-3-5:batch",
+          "https://openrouter.ai/api/v1/models/mistralai/mistral-medium-3.5-20260430/endpoints"
+        ]
+      }
+    },
+    {
       "model": "mistralai/mistral-medium-3.1",
       "model_info": {
         "model": "mistralai/mistral-medium-3.1",
@@ -4369,6 +4479,34 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/mistralai/mistral-medium-3.1",
+          "https://openrouter.ai/api/v1/models/mistralai/mistral-medium-3.1/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "mistralai/mistral-medium-3.1:batch",
+      "model_info": {
+        "model": "mistralai/mistral-medium-3.1:batch",
+        "name": "Mistral: Mistral Medium 3.1 (batch)",
+        "description": "Mistral Medium 3.1 is an updated version of Mistral Medium 3, which is a high-performance enterprise-grade language model designed to deliver frontier-level capabilities at significantly reduced operational cost. It balances...",
+        "context_length": 131072,
+        "max_tokens": 104857,
+        "input_modalities": [
+          "text",
+          "image",
+          "file"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/mistralai/mistral-medium-3.1:batch",
           "https://openrouter.ai/api/v1/models/mistralai/mistral-medium-3.1/endpoints"
         ]
       }
@@ -4477,6 +4615,34 @@
       }
     },
     {
+      "model": "mistralai/mistral-small-2603:batch",
+      "model_info": {
+        "model": "mistralai/mistral-small-2603:batch",
+        "name": "Mistral: Mistral Small 4 (batch)",
+        "description": "Mistral Small 4 is the next major release in the Mistral Small family, unifying the capabilities of several flagship Mistral models into a single system. It combines strong reasoning from...",
+        "context_length": 262144,
+        "max_tokens": 209715,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/mistralai/mistral-small-2603:batch",
+          "https://openrouter.ai/api/v1/models/mistralai/mistral-small-2603/endpoints"
+        ]
+      }
+    },
+    {
       "model": "mistralai/mistral-small-3.1-24b-instruct",
       "model_info": {
         "model": "mistralai/mistral-small-3.1-24b-instruct",
@@ -4560,8 +4726,8 @@
         "model": "mistralai/voxtral-small-24b-2507",
         "name": "Mistral: Voxtral Small 24B 2507",
         "description": "Voxtral Small is an enhancement of Mistral Small 3, incorporating state-of-the-art audio input capabilities while retaining best-in-class text performance. It excels at speech transcription, translation and audio understanding. Input audio...",
-        "context_length": 32000,
-        "max_tokens": 25600,
+        "context_length": 32768,
+        "max_tokens": 26214,
         "input_modalities": [
           "text",
           "audio",
@@ -5332,31 +5498,6 @@
       }
     },
     {
-      "model": "openai/gpt-3.5-turbo:batch",
-      "model_info": {
-        "model": "openai/gpt-3.5-turbo:batch",
-        "name": "OpenAI: GPT-3.5 Turbo (batch)",
-        "description": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021.",
-        "context_length": 16385,
-        "max_tokens": 4096,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-3.5-turbo:batch",
-          "https://openrouter.ai/api/v1/models/openai/gpt-3.5-turbo/endpoints"
-        ]
-      }
-    },
-    {
       "model": "openai/gpt-4",
       "model_info": {
         "model": "openai/gpt-4",
@@ -5434,33 +5575,6 @@
       }
     },
     {
-      "model": "openai/gpt-4-turbo:batch",
-      "model_info": {
-        "model": "openai/gpt-4-turbo:batch",
-        "name": "OpenAI: GPT-4 Turbo (batch)",
-        "description": "The latest GPT-4 Turbo model with vision capabilities. Vision requests can now use JSON mode and function calling.\n\nTraining data: up to December 2023.",
-        "context_length": 128000,
-        "max_tokens": 4096,
-        "input_modalities": [
-          "text",
-          "image"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-4-turbo:batch",
-          "https://openrouter.ai/api/v1/models/openai/gpt-4-turbo/endpoints"
-        ]
-      }
-    },
-    {
       "model": "openai/gpt-4.1",
       "model_info": {
         "model": "openai/gpt-4.1",
@@ -5517,41 +5631,13 @@
       }
     },
     {
-      "model": "openai/gpt-4.1-mini:batch",
-      "model_info": {
-        "model": "openai/gpt-4.1-mini:batch",
-        "name": "OpenAI: GPT-4.1 Mini (batch)",
-        "description": "GPT-4.1 Mini is a mid-sized model delivering performance competitive with GPT-4o at substantially lower latency and cost. It retains a 1 million token context window and scores 45.1% on hard...",
-        "context_length": 1047576,
-        "max_tokens": 32768,
-        "input_modalities": [
-          "image",
-          "text",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-4.1-mini:batch",
-          "https://openrouter.ai/api/v1/models/openai/gpt-4.1-mini-2025-04-14/endpoints"
-        ]
-      }
-    },
-    {
       "model": "openai/gpt-4.1-nano",
       "model_info": {
         "model": "openai/gpt-4.1-nano",
         "name": "OpenAI: GPT-4.1 Nano",
         "description": "For tasks that demand low latency, GPT‑4.1 nano is the fastest and cheapest model in the GPT-4.1 series. It delivers exceptional performance at a small size with its 1 million...",
         "context_length": 1047576,
-        "max_tokens": 32768,
+        "max_tokens": 942818,
         "input_modalities": [
           "image",
           "text",
@@ -5569,62 +5655,6 @@
         "support_url": [
           "https://openrouter.ai/models/openai/gpt-4.1-nano",
           "https://openrouter.ai/api/v1/models/openai/gpt-4.1-nano-2025-04-14/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/gpt-4.1-nano:batch",
-      "model_info": {
-        "model": "openai/gpt-4.1-nano:batch",
-        "name": "OpenAI: GPT-4.1 Nano (batch)",
-        "description": "For tasks that demand low latency, GPT‑4.1 nano is the fastest and cheapest model in the GPT-4.1 series. It delivers exceptional performance at a small size with its 1 million...",
-        "context_length": 1047576,
-        "max_tokens": 32768,
-        "input_modalities": [
-          "image",
-          "text",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-4.1-nano:batch",
-          "https://openrouter.ai/api/v1/models/openai/gpt-4.1-nano-2025-04-14/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/gpt-4.1:batch",
-      "model_info": {
-        "model": "openai/gpt-4.1:batch",
-        "name": "OpenAI: GPT-4.1 (batch)",
-        "description": "GPT-4.1 is a flagship large language model optimized for advanced instruction following, real-world software engineering, and long-context reasoning. It supports a 1 million token context window and outperforms GPT-4o and...",
-        "context_length": 1047576,
-        "max_tokens": 32768,
-        "input_modalities": [
-          "image",
-          "text",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-4.1:batch",
-          "https://openrouter.ai/api/v1/models/openai/gpt-4.1-2025-04-14/endpoints"
         ]
       }
     },
@@ -5797,62 +5827,6 @@
       }
     },
     {
-      "model": "openai/gpt-4o-mini:batch",
-      "model_info": {
-        "model": "openai/gpt-4o-mini:batch",
-        "name": "OpenAI: GPT-4o-mini (batch)",
-        "description": "GPT-4o mini is OpenAI's newest model after [GPT-4 Omni](/models/openai/gpt-4o), supporting both text and image inputs with text outputs. As their most advanced small model, it is many multiples more affordable...",
-        "context_length": 128000,
-        "max_tokens": 16384,
-        "input_modalities": [
-          "text",
-          "image",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-4o-mini:batch",
-          "https://openrouter.ai/api/v1/models/openai/gpt-4o-mini/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/gpt-4o:batch",
-      "model_info": {
-        "model": "openai/gpt-4o:batch",
-        "name": "OpenAI: GPT-4o (batch)",
-        "description": "GPT-4o (\"o\" for \"omni\") is OpenAI's latest AI model, supporting both text and image inputs with text outputs. It maintains the intelligence level of [GPT-4 Turbo](/models/openai/gpt-4-turbo) while being twice as...",
-        "context_length": 128000,
-        "max_tokens": 16384,
-        "input_modalities": [
-          "text",
-          "image",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-4o:batch",
-          "https://openrouter.ai/api/v1/models/openai/gpt-4o/endpoints"
-        ]
-      }
-    },
-    {
       "model": "openai/gpt-5",
       "model_info": {
         "model": "openai/gpt-5",
@@ -5878,34 +5852,6 @@
         "support_url": [
           "https://openrouter.ai/models/openai/gpt-5",
           "https://openrouter.ai/api/v1/models/openai/gpt-5-2025-08-07/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/gpt-5-codex:batch",
-      "model_info": {
-        "model": "openai/gpt-5-codex:batch",
-        "name": "OpenAI: GPT-5 Codex (batch)",
-        "description": "GPT-5-Codex is a specialized version of GPT-5 optimized for software engineering and coding workflows. It is designed for both interactive development sessions and long, independent execution of complex engineering tasks....",
-        "context_length": 400000,
-        "max_tokens": 128000,
-        "input_modalities": [
-          "text",
-          "image"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-5-codex:batch",
-          "https://openrouter.ai/api/v1/models/openai/gpt-5-codex/endpoints"
         ]
       }
     },
@@ -5997,35 +5943,6 @@
       }
     },
     {
-      "model": "openai/gpt-5-mini:batch",
-      "model_info": {
-        "model": "openai/gpt-5-mini:batch",
-        "name": "OpenAI: GPT-5 Mini (batch)",
-        "description": "GPT-5 Mini is a compact version of GPT-5, designed to handle lighter-weight reasoning tasks. It provides the same instruction-following and safety-tuning benefits as GPT-5, but with reduced latency and cost....",
-        "context_length": 400000,
-        "max_tokens": 128000,
-        "input_modalities": [
-          "text",
-          "image",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-5-mini:batch",
-          "https://openrouter.ai/api/v1/models/openai/gpt-5-mini-2025-08-07/endpoints"
-        ]
-      }
-    },
-    {
       "model": "openai/gpt-5-nano",
       "model_info": {
         "model": "openai/gpt-5-nano",
@@ -6055,35 +5972,6 @@
       }
     },
     {
-      "model": "openai/gpt-5-nano:batch",
-      "model_info": {
-        "model": "openai/gpt-5-nano:batch",
-        "name": "OpenAI: GPT-5 Nano (batch)",
-        "description": "GPT-5-Nano is the smallest and fastest variant in the GPT-5 system, optimized for developer tools, rapid interactions, and ultra-low latency environments. While limited in reasoning depth compared to its larger...",
-        "context_length": 400000,
-        "max_tokens": 128000,
-        "input_modalities": [
-          "text",
-          "image",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-5-nano:batch",
-          "https://openrouter.ai/api/v1/models/openai/gpt-5-nano-2025-08-07/endpoints"
-        ]
-      }
-    },
-    {
       "model": "openai/gpt-5-pro",
       "model_info": {
         "model": "openai/gpt-5-pro",
@@ -6108,35 +5996,6 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/openai/gpt-5-pro",
-          "https://openrouter.ai/api/v1/models/openai/gpt-5-pro-2025-10-06/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/gpt-5-pro:batch",
-      "model_info": {
-        "model": "openai/gpt-5-pro:batch",
-        "name": "OpenAI: GPT-5 Pro (batch)",
-        "description": "GPT-5 Pro is OpenAI’s most advanced model, offering major improvements in reasoning, code quality, and user experience. It is optimized for complex tasks that require step-by-step reasoning, instruction following, and...",
-        "context_length": 400000,
-        "max_tokens": 128000,
-        "input_modalities": [
-          "image",
-          "text",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-5-pro:batch",
           "https://openrouter.ai/api/v1/models/openai/gpt-5-pro-2025-10-06/endpoints"
         ]
       }
@@ -6255,35 +6114,6 @@
       }
     },
     {
-      "model": "openai/gpt-5.1:batch",
-      "model_info": {
-        "model": "openai/gpt-5.1:batch",
-        "name": "OpenAI: GPT-5.1 (batch)",
-        "description": "GPT-5.1 is the latest frontier-grade model in the GPT-5 series, offering stronger general-purpose reasoning, improved instruction adherence, and a more natural conversational style compared to GPT-5. It uses adaptive reasoning...",
-        "context_length": 400000,
-        "max_tokens": 128000,
-        "input_modalities": [
-          "image",
-          "text",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-5.1:batch",
-          "https://openrouter.ai/api/v1/models/openai/gpt-5.1-20251113/endpoints"
-        ]
-      }
-    },
-    {
       "model": "openai/gpt-5.2",
       "model_info": {
         "model": "openai/gpt-5.2",
@@ -6394,64 +6224,6 @@
         "support_url": [
           "https://openrouter.ai/models/openai/gpt-5.2-pro",
           "https://openrouter.ai/api/v1/models/openai/gpt-5.2-pro-20251211/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/gpt-5.2-pro:batch",
-      "model_info": {
-        "model": "openai/gpt-5.2-pro:batch",
-        "name": "OpenAI: GPT-5.2 Pro (batch)",
-        "description": "GPT-5.2 Pro is OpenAI’s most advanced model, offering major improvements in agentic coding and long context performance over GPT-5 Pro. It is optimized for complex tasks that require step-by-step reasoning,...",
-        "context_length": 400000,
-        "max_tokens": 128000,
-        "input_modalities": [
-          "image",
-          "text",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-5.2-pro:batch",
-          "https://openrouter.ai/api/v1/models/openai/gpt-5.2-pro-20251211/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/gpt-5.2:batch",
-      "model_info": {
-        "model": "openai/gpt-5.2:batch",
-        "name": "OpenAI: GPT-5.2 (batch)",
-        "description": "GPT-5.2 is the latest frontier-grade model in the GPT-5 series, offering stronger agentic and long context perfomance compared to GPT-5.1. It uses adaptive reasoning to allocate computation dynamically, responding quickly...",
-        "context_length": 400000,
-        "max_tokens": 128000,
-        "input_modalities": [
-          "file",
-          "image",
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-5.2:batch",
-          "https://openrouter.ai/api/v1/models/openai/gpt-5.2-20251211/endpoints"
         ]
       }
     },
@@ -6572,35 +6344,6 @@
       }
     },
     {
-      "model": "openai/gpt-5.4-mini:batch",
-      "model_info": {
-        "model": "openai/gpt-5.4-mini:batch",
-        "name": "OpenAI: GPT-5.4 Mini (batch)",
-        "description": "GPT-5.4 mini brings the core capabilities of GPT-5.4 to a faster, more efficient model optimized for high-throughput workloads. It supports text and image inputs with strong performance across reasoning, coding,...",
-        "context_length": 400000,
-        "max_tokens": 128000,
-        "input_modalities": [
-          "file",
-          "image",
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-5.4-mini:batch",
-          "https://openrouter.ai/api/v1/models/openai/gpt-5.4-mini-20260317/endpoints"
-        ]
-      }
-    },
-    {
       "model": "openai/gpt-5.4-nano",
       "model_info": {
         "model": "openai/gpt-5.4-nano",
@@ -6625,35 +6368,6 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/openai/gpt-5.4-nano",
-          "https://openrouter.ai/api/v1/models/openai/gpt-5.4-nano-20260317/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/gpt-5.4-nano:batch",
-      "model_info": {
-        "model": "openai/gpt-5.4-nano:batch",
-        "name": "OpenAI: GPT-5.4 Nano (batch)",
-        "description": "GPT-5.4 nano is the most lightweight and cost-efficient variant of the GPT-5.4 family, optimized for speed-critical and high-volume tasks. It supports text and image inputs and is designed for low-latency...",
-        "context_length": 400000,
-        "max_tokens": 128000,
-        "input_modalities": [
-          "file",
-          "image",
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-5.4-nano:batch",
           "https://openrouter.ai/api/v1/models/openai/gpt-5.4-nano-20260317/endpoints"
         ]
       }
@@ -6684,64 +6398,6 @@
         "support_url": [
           "https://openrouter.ai/models/openai/gpt-5.4-pro",
           "https://openrouter.ai/api/v1/models/openai/gpt-5.4-pro-20260305/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/gpt-5.4-pro:batch",
-      "model_info": {
-        "model": "openai/gpt-5.4-pro:batch",
-        "name": "OpenAI: GPT-5.4 Pro (batch)",
-        "description": "GPT-5.4 Pro is OpenAI's most advanced model, building on GPT-5.4's unified architecture with enhanced reasoning capabilities for complex, high-stakes tasks. It features a 1M+ token context window (922K input, 128K...",
-        "context_length": 1050000,
-        "max_tokens": 128000,
-        "input_modalities": [
-          "text",
-          "image",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-5.4-pro:batch",
-          "https://openrouter.ai/api/v1/models/openai/gpt-5.4-pro-20260305/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/gpt-5.4:batch",
-      "model_info": {
-        "model": "openai/gpt-5.4:batch",
-        "name": "OpenAI: GPT-5.4 (batch)",
-        "description": "GPT-5.4 is OpenAI’s latest frontier model, unifying the Codex and GPT lines into a single system. It features a 1M+ token context window (922K input, 128K output) with support for...",
-        "context_length": 1050000,
-        "max_tokens": 128000,
-        "input_modalities": [
-          "text",
-          "image",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-5.4:batch",
-          "https://openrouter.ai/api/v1/models/openai/gpt-5.4-20260305/endpoints"
         ]
       }
     },
@@ -6804,64 +6460,6 @@
       }
     },
     {
-      "model": "openai/gpt-5.5-pro:batch",
-      "model_info": {
-        "model": "openai/gpt-5.5-pro:batch",
-        "name": "OpenAI: GPT-5.5 Pro (batch)",
-        "description": "GPT-5.5 Pro is OpenAI’s high-capability model optimized for deep reasoning and accuracy on complex, high-stakes workloads. It features a 1M+ token context window (922K input, 128K output) with support for...",
-        "context_length": 1050000,
-        "max_tokens": 128000,
-        "input_modalities": [
-          "file",
-          "image",
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-5.5-pro:batch",
-          "https://openrouter.ai/api/v1/models/openai/gpt-5.5-pro-20260423/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/gpt-5.5:batch",
-      "model_info": {
-        "model": "openai/gpt-5.5:batch",
-        "name": "OpenAI: GPT-5.5 (batch)",
-        "description": "GPT-5.5 is OpenAI’s frontier model designed for complex professional workloads, building on GPT-5.4 with stronger reasoning, higher reliability, and improved token efficiency on hard tasks. It features a 1M+ token...",
-        "context_length": 1050000,
-        "max_tokens": 128000,
-        "input_modalities": [
-          "file",
-          "image",
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-5.5:batch",
-          "https://openrouter.ai/api/v1/models/openai/gpt-5.5-20260423/endpoints"
-        ]
-      }
-    },
-    {
       "model": "openai/gpt-5.6-luna",
       "model_info": {
         "model": "openai/gpt-5.6-luna",
@@ -6916,64 +6514,6 @@
         "support_url": [
           "https://openrouter.ai/models/openai/gpt-5.6-luna-pro",
           "https://openrouter.ai/api/v1/models/openai/gpt-5.6-luna-pro-20260709/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/gpt-5.6-luna-pro:batch",
-      "model_info": {
-        "model": "openai/gpt-5.6-luna-pro:batch",
-        "name": "OpenAI: GPT-5.6 Luna Pro (batch)",
-        "description": "GPT-5.6 Luna Pro is the same underlying model as [GPT-5.6 Luna](https://openrouter.ai/openai/gpt-5.6-luna), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode",
-        "context_length": 1050000,
-        "max_tokens": 128000,
-        "input_modalities": [
-          "file",
-          "image",
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-5.6-luna-pro:batch",
-          "https://openrouter.ai/api/v1/models/openai/gpt-5.6-luna-pro-20260709/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/gpt-5.6-luna:batch",
-      "model_info": {
-        "model": "openai/gpt-5.6-luna:batch",
-        "name": "OpenAI: GPT-5.6 Luna (batch)",
-        "description": "GPT-5.6 Luna is a fast, cost-efficient model in OpenAI's GPT-5.6 series. It is suited for high-volume, latency-sensitive tasks such as chat, classification, and lightweight agentic workflows, providing capable reasoning for...",
-        "context_length": 1050000,
-        "max_tokens": 128000,
-        "input_modalities": [
-          "file",
-          "image",
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-5.6-luna:batch",
-          "https://openrouter.ai/api/v1/models/openai/gpt-5.6-luna-20260709/endpoints"
         ]
       }
     },
@@ -7036,64 +6576,6 @@
       }
     },
     {
-      "model": "openai/gpt-5.6-sol-pro:batch",
-      "model_info": {
-        "model": "openai/gpt-5.6-sol-pro:batch",
-        "name": "OpenAI: GPT-5.6 Sol Pro (batch)",
-        "description": "GPT-5.6 Sol Pro is the same underlying model as [GPT-5.6 Sol](https://openrouter.ai/openai/gpt-5.6-sol), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode",
-        "context_length": 1050000,
-        "max_tokens": 128000,
-        "input_modalities": [
-          "file",
-          "image",
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-5.6-sol-pro:batch",
-          "https://openrouter.ai/api/v1/models/openai/gpt-5.6-sol-pro-20260709/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/gpt-5.6-sol:batch",
-      "model_info": {
-        "model": "openai/gpt-5.6-sol:batch",
-        "name": "OpenAI: GPT-5.6 Sol (batch)",
-        "description": "GPT-5.6 Sol is the flagship model in OpenAI's GPT-5.6 series. It is suited for complex reasoning, coding, and agentic workflows, and is particularly strong at command-line and multi-step coding tasks...",
-        "context_length": 1050000,
-        "max_tokens": 128000,
-        "input_modalities": [
-          "file",
-          "image",
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-5.6-sol:batch",
-          "https://openrouter.ai/api/v1/models/openai/gpt-5.6-sol-20260709/endpoints"
-        ]
-      }
-    },
-    {
       "model": "openai/gpt-5.6-terra",
       "model_info": {
         "model": "openai/gpt-5.6-terra",
@@ -7148,93 +6630,6 @@
         "support_url": [
           "https://openrouter.ai/models/openai/gpt-5.6-terra-pro",
           "https://openrouter.ai/api/v1/models/openai/gpt-5.6-terra-pro-20260709/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/gpt-5.6-terra-pro:batch",
-      "model_info": {
-        "model": "openai/gpt-5.6-terra-pro:batch",
-        "name": "OpenAI: GPT-5.6 Terra Pro (batch)",
-        "description": "GPT-5.6 Terra Pro is the same underlying model as [GPT-5.6 Terra](https://openrouter.ai/openai/gpt-5.6-terra), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode",
-        "context_length": 1050000,
-        "max_tokens": 128000,
-        "input_modalities": [
-          "file",
-          "image",
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-5.6-terra-pro:batch",
-          "https://openrouter.ai/api/v1/models/openai/gpt-5.6-terra-pro-20260709/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/gpt-5.6-terra:batch",
-      "model_info": {
-        "model": "openai/gpt-5.6-terra:batch",
-        "name": "OpenAI: GPT-5.6 Terra (batch)",
-        "description": "GPT-5.6 Terra is a balanced model in OpenAI's GPT-5.6 series, positioned between the flagship Sol tier and the cost-efficient Luna tier. It is suited for everyday coding, reasoning, and agentic...",
-        "context_length": 1050000,
-        "max_tokens": 128000,
-        "input_modalities": [
-          "file",
-          "image",
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-5.6-terra:batch",
-          "https://openrouter.ai/api/v1/models/openai/gpt-5.6-terra-20260709/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/gpt-5:batch",
-      "model_info": {
-        "model": "openai/gpt-5:batch",
-        "name": "OpenAI: GPT-5 (batch)",
-        "description": "GPT-5 is OpenAI’s most advanced model, offering major improvements in reasoning, code quality, and user experience. It is optimized for complex tasks that require step-by-step reasoning, instruction following, and accuracy...",
-        "context_length": 400000,
-        "max_tokens": 128000,
-        "input_modalities": [
-          "text",
-          "image",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-5:batch",
-          "https://openrouter.ai/api/v1/models/openai/gpt-5-2025-08-07/endpoints"
         ]
       }
     },
@@ -7458,63 +6853,6 @@
       }
     },
     {
-      "model": "openai/o1-pro:batch",
-      "model_info": {
-        "model": "openai/o1-pro:batch",
-        "name": "OpenAI: o1-pro (batch)",
-        "description": "The o1 series of models are trained with reinforcement learning to think before they answer and perform complex reasoning. The o1-pro model uses more compute to think harder and provide...",
-        "context_length": 200000,
-        "max_tokens": 100000,
-        "input_modalities": [
-          "text",
-          "image",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/o1-pro:batch",
-          "https://openrouter.ai/api/v1/models/openai/o1-pro/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/o1:batch",
-      "model_info": {
-        "model": "openai/o1:batch",
-        "name": "OpenAI: o1 (batch)",
-        "description": "The latest and strongest model family from OpenAI, o1 is designed to spend more time thinking before responding. The o1 model series is trained with large-scale reinforcement learning to reason...",
-        "context_length": 200000,
-        "max_tokens": 100000,
-        "input_modalities": [
-          "text",
-          "image",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/o1:batch",
-          "https://openrouter.ai/api/v1/models/openai/o1-2024-12-17/endpoints"
-        ]
-      }
-    },
-    {
       "model": "openai/o3",
       "model_info": {
         "model": "openai/o3",
@@ -7598,60 +6936,6 @@
       }
     },
     {
-      "model": "openai/o3-mini-high:batch",
-      "model_info": {
-        "model": "openai/o3-mini-high:batch",
-        "name": "OpenAI: o3 Mini High (batch)",
-        "description": "OpenAI o3-mini-high is the same model as [o3-mini](/openai/o3-mini) with reasoning_effort set to high. o3-mini is a cost-efficient language model optimized for STEM reasoning tasks, particularly excelling in science, mathematics, and...",
-        "context_length": 200000,
-        "max_tokens": 100000,
-        "input_modalities": [
-          "text",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/o3-mini-high:batch",
-          "https://openrouter.ai/api/v1/models/openai/o3-mini-high-2025-01-31/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/o3-mini:batch",
-      "model_info": {
-        "model": "openai/o3-mini:batch",
-        "name": "OpenAI: o3 Mini (batch)",
-        "description": "OpenAI o3-mini is a cost-efficient language model optimized for STEM reasoning tasks, particularly excelling in science, mathematics, and coding. This model supports the `reasoning_effort` parameter, which can be set to...",
-        "context_length": 200000,
-        "max_tokens": 100000,
-        "input_modalities": [
-          "text",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/o3-mini:batch",
-          "https://openrouter.ai/api/v1/models/openai/o3-mini-2025-01-31/endpoints"
-        ]
-      }
-    },
-    {
       "model": "openai/o3-pro",
       "model_info": {
         "model": "openai/o3-pro",
@@ -7677,64 +6961,6 @@
         "support_url": [
           "https://openrouter.ai/models/openai/o3-pro",
           "https://openrouter.ai/api/v1/models/openai/o3-pro-2025-06-10/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/o3-pro:batch",
-      "model_info": {
-        "model": "openai/o3-pro:batch",
-        "name": "OpenAI: o3 Pro (batch)",
-        "description": "The o-series of models are trained with reinforcement learning to think before they answer and perform complex reasoning. The o3-pro model uses more compute to think harder and provide consistently...",
-        "context_length": 200000,
-        "max_tokens": 100000,
-        "input_modalities": [
-          "text",
-          "file",
-          "image"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/o3-pro:batch",
-          "https://openrouter.ai/api/v1/models/openai/o3-pro-2025-06-10/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/o3:batch",
-      "model_info": {
-        "model": "openai/o3:batch",
-        "name": "OpenAI: o3 (batch)",
-        "description": "o3 is a well-rounded and powerful model across domains. It sets a new standard for math, science, coding, and visual reasoning tasks. It also excels at technical writing and instruction-following....",
-        "context_length": 200000,
-        "max_tokens": 100000,
-        "input_modalities": [
-          "image",
-          "text",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/o3:batch",
-          "https://openrouter.ai/api/v1/models/openai/o3-2025-04-16/endpoints"
         ]
       }
     },
@@ -7793,64 +7019,6 @@
         "support_url": [
           "https://openrouter.ai/models/openai/o4-mini-high",
           "https://openrouter.ai/api/v1/models/openai/o4-mini-high-2025-04-16/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/o4-mini-high:batch",
-      "model_info": {
-        "model": "openai/o4-mini-high:batch",
-        "name": "OpenAI: o4 Mini High (batch)",
-        "description": "OpenAI o4-mini-high is the same model as [o4-mini](/openai/o4-mini) with reasoning_effort set to high. OpenAI o4-mini is a compact reasoning model in the o-series, optimized for fast, cost-efficient performance while retaining...",
-        "context_length": 200000,
-        "max_tokens": 100000,
-        "input_modalities": [
-          "image",
-          "text",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/o4-mini-high:batch",
-          "https://openrouter.ai/api/v1/models/openai/o4-mini-high-2025-04-16/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/o4-mini:batch",
-      "model_info": {
-        "model": "openai/o4-mini:batch",
-        "name": "OpenAI: o4 Mini (batch)",
-        "description": "OpenAI o4-mini is a compact reasoning model in the o-series, optimized for fast, cost-efficient performance while retaining strong multimodal and agentic capabilities. It supports tool use and demonstrates competitive reasoning...",
-        "context_length": 200000,
-        "max_tokens": 100000,
-        "input_modalities": [
-          "image",
-          "text",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/o4-mini:batch",
-          "https://openrouter.ai/api/v1/models/openai/o4-mini-2025-04-16/endpoints"
         ]
       }
     },
@@ -9079,7 +8247,7 @@
         "name": "Qwen: Qwen3.5-122B-A10B",
         "description": "The Qwen3.5 122B-A10B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. In terms of...",
         "context_length": 262144,
-        "max_tokens": 235929,
+        "max_tokens": 81920,
         "input_modalities": [
           "text",
           "image",
@@ -9311,7 +8479,7 @@
         "name": "Qwen: Qwen3.6 27B",
         "description": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities — accepting text, image, and video inputs...",
         "context_length": 262144,
-        "max_tokens": 81920,
+        "max_tokens": 235929,
         "input_modalities": [
           "text",
           "image",
@@ -9536,7 +8704,7 @@
         "name": "Qwen: Qwen3.8 2.4T A95B",
         "description": "Qwen3.8 2.4T A95B is an open-weight sparse mixture-of-experts model from Qwen and the open-weight variant of [Qwen3.8 Max](/qwen/qwen3.8-max), with 95 billion active parameters out of 2.4 trillion total. It is...",
         "context_length": 1048576,
-        "max_tokens": 262144,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -9551,6 +8719,32 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/qwen/qwen3.8-2.4t-a95b",
+          "https://openrouter.ai/api/v1/models/qwen/qwen3.8-2.4t-a95b-20260812/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "qwen/qwen3.8-2.4t-a95b:batch",
+      "model_info": {
+        "model": "qwen/qwen3.8-2.4t-a95b:batch",
+        "name": "Qwen: Qwen3.8 2.4T A95B (batch)",
+        "description": "Qwen3.8 2.4T A95B is an open-weight sparse mixture-of-experts model from Qwen and the open-weight variant of [Qwen3.8 Max](/qwen/qwen3.8-max), with 95 billion active parameters out of 2.4 trillion total. It is...",
+        "context_length": 1010000,
+        "max_tokens": 909000,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/qwen/qwen3.8-2.4t-a95b:batch",
           "https://openrouter.ai/api/v1/models/qwen/qwen3.8-2.4t-a95b-20260812/endpoints"
         ]
       }
@@ -10071,6 +9265,32 @@
         "support_url": [
           "https://openrouter.ai/models/tencent/hy3-preview",
           "https://openrouter.ai/api/v1/models/tencent/hy3-preview-20260421/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "tencent/hy4-preview",
+      "model_info": {
+        "model": "tencent/hy4-preview",
+        "name": "Tencent: Hy4 preview",
+        "description": "Tencent: Hy4 preview is a mixture-of-experts model from Tencent, with 49B active parameters out of 770B total. It is designed for coding agents, complex tool-use workflows, and productivity tasks that...",
+        "context_length": 1048576,
+        "max_tokens": 64000,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/tencent/hy4-preview",
+          "https://openrouter.ai/api/v1/models/tencent/hy4-preview-20260827/endpoints"
         ]
       }
     },
@@ -10944,7 +10164,7 @@
         "model": "z-ai/glm-5.3",
         "name": "Z.ai: GLM 5.3",
         "description": "GLM-5.3 is a large-scale reasoning model from Z.ai, built for complex software engineering and long-horizon agent tasks. It supports text input and output with a 1M-token context window, and improves...",
-        "context_length": 1048576,
+        "context_length": 1310720,
         "max_tokens": 131072,
         "input_modalities": [
           "text"
@@ -11350,7 +10570,7 @@
         "model": "~z-ai/glm-latest",
         "name": "Z.ai: GLM Latest",
         "description": "This model always redirects to the latest GLM model from Z.ai.",
-        "context_length": 1048576,
+        "context_length": 1310720,
         "max_tokens": 131072,
         "input_modalities": [
           "text"
