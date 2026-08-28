@@ -3657,15 +3657,15 @@
     "model": "deepseek/deepseek-v4-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.07798,
-    "output": 0.15596
+    "input": 0.088606,
+    "output": 0.177212
   },
   {
     "model": "deepseek/deepseek-v4-flash-0731",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.06,
-    "output": 0.12
+    "input": 0.05,
+    "output": 0.1
   },
   {
     "model": "deepseek/deepseek-v4-flash-vision-exp",
@@ -3685,8 +3685,8 @@
     "model": "deepseek/deepseek-v4-pro-0813",
     "type": "tokens",
     "channel_type": 20,
-    "input": 1.122,
-    "output": 3.366
+    "input": 0.66,
+    "output": 1.98
   },
   {
     "model": "dots-studio/dots-3-note-preview:free",
@@ -4177,6 +4177,13 @@
     "channel_type": 20,
     "input": 0.021,
     "output": 0.063
+  },
+  {
+    "model": "inclusionai/ling-3.0-flash-fin:free",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0,
+    "output": 0
   },
   {
     "model": "inclusionai/ring-2.6-1t",
@@ -4721,8 +4728,8 @@
     "model": "mistralai/ministral-8b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.11,
-    "output": 0.11
+    "input": 0.1,
+    "output": 0.1
   },
   {
     "model": "mistralai/ministral-8b-2512",
@@ -4980,8 +4987,8 @@
     "model": "moonshotai/kimi-k2.7-code:batch",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.95,
-    "output": 4
+    "input": 0.475,
+    "output": 2
   },
   {
     "model": "moonshotai/kimi-k2:free",
@@ -5169,8 +5176,8 @@
     "model": "nvidia/nemotron-3-ultra-550b-a55b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.6,
-    "output": 3.6
+    "input": 0.5,
+    "output": 2.2
   },
   {
     "model": "nvidia/nemotron-3-ultra-550b-a55b:batch",
@@ -5197,8 +5204,8 @@
     "model": "nvidia/nemotron-3.5-lightning",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.08,
-    "output": 0.2
+    "input": 0.1,
+    "output": 0.25
   },
   {
     "model": "nvidia/nemotron-3.5-lightning:free",
@@ -6618,8 +6625,8 @@
     "model": "qwen/qwen3.6-27b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.6,
-    "output": 3.6
+    "input": 0.32,
+    "output": 3.2
   },
   {
     "model": "qwen/qwen3.6-35b-a3b",
@@ -6681,7 +6688,7 @@
     "model": "qwen/qwen3.8-27b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.425,
+    "input": 0.4,
     "output": 2.55
   },
   {

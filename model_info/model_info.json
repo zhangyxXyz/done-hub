@@ -1853,7 +1853,7 @@
         "name": "DeepSeek: DeepSeek V4 Pro 0813",
         "description": "DeepSeek V4 Pro 0813 is a large-scale mixture-of-experts model from DeepSeek. This is the GA release of DeepSeek V4 Pro.",
         "context_length": 1048576,
-        "max_tokens": 943717,
+        "max_tokens": 384000,
         "input_modalities": [
           "text"
         ],
@@ -3237,6 +3237,31 @@
       }
     },
     {
+      "model": "inclusionai/ling-3.0-flash-fin:free",
+      "model_info": {
+        "model": "inclusionai/ling-3.0-flash-fin:free",
+        "name": "Ling 3.0 Flash Fin (free)",
+        "description": "Ling 3.0 Flash Fin is a finance-focused mixture-of-experts model from InclusionAI, built on Ling 3.0 Flash with 5.1B active parameters out of 124B total. It is designed for real-world investment...",
+        "context_length": 262144,
+        "max_tokens": 32768,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/inclusionai/ling-3.0-flash-fin:free",
+          "https://openrouter.ai/api/v1/models/inclusionai/ling-3.0-flash-fin-20260827/endpoints"
+        ]
+      }
+    },
+    {
       "model": "kwaipilot/kat-coder-air-v2.5",
       "model_info": {
         "model": "kwaipilot/kat-coder-air-v2.5",
@@ -3292,7 +3317,7 @@
         "model": "kwaipilot/kat-coder-pro-v2.5",
         "name": "Kwaipilot: KAT-Coder-Pro V2.5",
         "description": "KAT-Coder-Pro V2.5 is a flagship-level Agentic Coding model that can directly hand over an entire issue or an entire business workflow to it, allowing it to autonomously locate and make...",
-        "context_length": 256000,
+        "context_length": 262144,
         "max_tokens": 80000,
         "input_modalities": [
           "text"
@@ -4157,30 +4182,6 @@
       }
     },
     {
-      "model": "mistralai/ministral-8b",
-      "model_info": {
-        "model": "mistralai/ministral-8b",
-        "name": "Mistral: Ministral 8B",
-        "description": "Ministral 8B is an 8B parameter model featuring a unique interleaved sliding-window attention pattern for faster, memory-efficient inference. Designed for edge use cases, it supports up to 128k context length...",
-        "context_length": 128000,
-        "max_tokens": 102400,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/mistralai/ministral-8b",
-          "https://openrouter.ai/api/v1/models/mistralai/ministral-8b/endpoints"
-        ]
-      }
-    },
-    {
       "model": "mistralai/ministral-8b-2512",
       "model_info": {
         "model": "mistralai/ministral-8b-2512",
@@ -4741,34 +4742,6 @@
       }
     },
     {
-      "model": "moonshotai/kimi-k2.7-code:batch",
-      "model_info": {
-        "model": "moonshotai/kimi-k2.7-code:batch",
-        "name": "MoonshotAI: Kimi K2.7 Code (batch)",
-        "description": "MoonshotAI: Kimi K2.7 Code is a coding-focused model in Moonshot AI's Kimi K2 family, built to complete end-to-end programming tasks reliably over long contexts. It uses a native multimodal mixture-of-experts...",
-        "context_length": 262144,
-        "max_tokens": 235929,
-        "input_modalities": [
-          "text",
-          "image"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/moonshotai/kimi-k2.7-code:batch",
-          "https://openrouter.ai/api/v1/models/moonshotai/kimi-k2.7-code-20260612/endpoints"
-        ]
-      }
-    },
-    {
       "model": "moonshotai/kimi-k3",
       "model_info": {
         "model": "moonshotai/kimi-k3",
@@ -5111,8 +5084,8 @@
         "model": "nvidia/nemotron-3-ultra-550b-a55b",
         "name": "NVIDIA: Nemotron 3 Ultra",
         "description": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it...",
-        "context_length": 512288,
-        "max_tokens": 461059,
+        "context_length": 262144,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -5215,7 +5188,7 @@
         "name": "NVIDIA: Nemotron 3.5 Lightning",
         "description": "NVIDIA Nemotron 3.5 Lightning is an open mixture-of-experts model from NVIDIA, with 3B active parameters out of 30B total. It is suited for high-throughput agentic workloads and specialized tasks that...",
         "context_length": 262144,
-        "max_tokens": 131072,
+        "max_tokens": 235929,
         "input_modalities": [
           "text"
         ],
@@ -7886,7 +7859,7 @@
       "model_info": {
         "model": "openrouter/auto",
         "name": "Auto Router",
-        "description": "Your prompt will be processed by a meta-model and routed to one of dozens of models (see below), optimizing for the best possible output. To see which model was used,...",
+        "description": "The Auto Router automatically selects the best model for your prompt, powered by the wisdom of the market. It routes you based on what the OpenRouter community collectively spends on...",
         "context_length": 2000000,
         "max_tokens": 0,
         "input_modalities": [
@@ -9338,7 +9311,7 @@
         "name": "Qwen: Qwen3.6 27B",
         "description": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities — accepting text, image, and video inputs...",
         "context_length": 262144,
-        "max_tokens": 235929,
+        "max_tokens": 81920,
         "input_modalities": [
           "text",
           "image",
@@ -9563,7 +9536,7 @@
         "name": "Qwen: Qwen3.8 2.4T A95B",
         "description": "Qwen3.8 2.4T A95B is an open-weight sparse mixture-of-experts model from Qwen and the open-weight variant of [Qwen3.8 Max](/qwen/qwen3.8-max), with 95 billion active parameters out of 2.4 trillion total. It is...",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 262144,
         "input_modalities": [
           "text"
         ],
@@ -10122,30 +10095,6 @@
         "support_url": [
           "https://openrouter.ai/models/thedrummer/cydonia-24b-v4.1",
           "https://openrouter.ai/api/v1/models/thedrummer/cydonia-24b-v4.1/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "thedrummer/rocinante-12b",
-      "model_info": {
-        "model": "thedrummer/rocinante-12b",
-        "name": "TheDrummer: Rocinante 12B",
-        "description": "Rocinante 12B is designed for engaging storytelling and rich prose. Early testers have reported: - Expanded vocabulary with unique and expressive word choices - Enhanced creativity for vivid narratives -...",
-        "context_length": 65536,
-        "max_tokens": 58982,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/thedrummer/rocinante-12b",
-          "https://openrouter.ai/api/v1/models/thedrummer/rocinante-12b/endpoints"
         ]
       }
     },
