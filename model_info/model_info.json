@@ -102,31 +102,6 @@
       }
     },
     {
-      "model": "allenai/olmo-3-32b-think",
-      "model_info": {
-        "model": "allenai/olmo-3-32b-think",
-        "name": "AllenAI: Olmo 3 32B Think",
-        "description": "Olmo 3 32B Think is a large-scale, 32-billion-parameter model purpose-built for deep reasoning, complex logic chains and advanced instruction-following scenarios. Its capacity enables strong performance on demanding evaluation tasks and...",
-        "context_length": 65536,
-        "max_tokens": 58982,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/allenai/olmo-3-32b-think",
-          "https://openrouter.ai/api/v1/models/allenai/olmo-3-32b-think-20251121/endpoints"
-        ]
-      }
-    },
-    {
       "model": "amazon/nova-2-lite-v1",
       "model_info": {
         "model": "amazon/nova-2-lite-v1",
@@ -1114,30 +1089,6 @@
       }
     },
     {
-      "model": "arcee-ai/virtuoso-large",
-      "model_info": {
-        "model": "arcee-ai/virtuoso-large",
-        "name": "Arcee AI: Virtuoso Large",
-        "description": "Virtuoso‑Large is Arcee's top‑tier general‑purpose LLM at 72 B parameters, tuned to tackle cross‑domain reasoning, creative writing and enterprise QA. Unlike many 70 B peers, it retains the 128 k...",
-        "context_length": 131072,
-        "max_tokens": 64000,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/arcee-ai/virtuoso-large",
-          "https://openrouter.ai/api/v1/models/arcee-ai/virtuoso-large/endpoints"
-        ]
-      }
-    },
-    {
       "model": "baidu/ernie-4.5-vl-424b-a47b",
       "model_info": {
         "model": "baidu/ernie-4.5-vl-424b-a47b",
@@ -1793,6 +1744,32 @@
       }
     },
     {
+      "model": "deepseek/deepseek-v4-flash-0731:batch",
+      "model_info": {
+        "model": "deepseek/deepseek-v4-flash-0731:batch",
+        "name": "DeepSeek: DeepSeek V4 Flash 0731 (batch)",
+        "description": "DeepSeek V4 Flash 0731 is a sparse mixture-of-experts model from DeepSeek, with 13B active parameters out of 284B total. This re-post-trained revision is suited for coding, reasoning, and agent workflows....",
+        "context_length": 1048576,
+        "max_tokens": 943718,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/deepseek/deepseek-v4-flash-0731:batch",
+          "https://openrouter.ai/api/v1/models/deepseek/deepseek-v4-flash-20260731/endpoints"
+        ]
+      }
+    },
+    {
       "model": "deepseek/deepseek-v4-flash-vision-exp",
       "model_info": {
         "model": "deepseek/deepseek-v4-flash-vision-exp",
@@ -1868,6 +1845,32 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/deepseek/deepseek-v4-pro-0813",
+          "https://openrouter.ai/api/v1/models/deepseek/deepseek-v4-pro-20260813/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "deepseek/deepseek-v4-pro-0813:batch",
+      "model_info": {
+        "model": "deepseek/deepseek-v4-pro-0813:batch",
+        "name": "DeepSeek: DeepSeek V4 Pro 0813 (batch)",
+        "description": "DeepSeek V4 Pro 0813 is a large-scale mixture-of-experts model from DeepSeek. This is the GA release of DeepSeek V4 Pro.",
+        "context_length": 1048576,
+        "max_tokens": 943718,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/deepseek/deepseek-v4-pro-0813:batch",
           "https://openrouter.ai/api/v1/models/deepseek/deepseek-v4-pro-20260813/endpoints"
         ]
       }
@@ -3027,6 +3030,35 @@
       }
     },
     {
+      "model": "google/gemma-4-31b-it:batch",
+      "model_info": {
+        "model": "google/gemma-4-31b-it:batch",
+        "name": "Google: Gemma 4 31B (batch)",
+        "description": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function...",
+        "context_length": 262144,
+        "max_tokens": 235929,
+        "input_modalities": [
+          "image",
+          "text",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/google/gemma-4-31b-it:batch",
+          "https://openrouter.ai/api/v1/models/google/gemma-4-31b-it-20260402/endpoints"
+        ]
+      }
+    },
+    {
       "model": "google/gemma-4-31b-it:free",
       "model_info": {
         "model": "google/gemma-4-31b-it:free",
@@ -3620,7 +3652,7 @@
         "name": "Meta: Muse Glimmer 30B",
         "description": "Muse Glimmer 30B is a dense, open-weight multimodal model from Meta Superintelligence Labs, distilled from Muse Spark and optimized for autonomous agents on consumer hardware. It is suited for long-horizon...",
         "context_length": 131072,
-        "max_tokens": 117964,
+        "max_tokens": 16384,
         "input_modalities": [
           "text",
           "image"
@@ -3637,6 +3669,34 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/meta/muse-glimmer-30b",
+          "https://openrouter.ai/api/v1/models/meta/muse-glimmer-30b-20260810/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "meta/muse-glimmer-30b:batch",
+      "model_info": {
+        "model": "meta/muse-glimmer-30b:batch",
+        "name": "Meta: Muse Glimmer 30B (batch)",
+        "description": "Muse Glimmer 30B is a dense, open-weight multimodal model from Meta Superintelligence Labs, distilled from Muse Spark and optimized for autonomous agents on consumer hardware. It is suited for long-horizon...",
+        "context_length": 131072,
+        "max_tokens": 117964,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/meta/muse-glimmer-30b:batch",
           "https://openrouter.ai/api/v1/models/meta/muse-glimmer-30b-20260810/endpoints"
         ]
       }
@@ -4937,6 +4997,35 @@
       }
     },
     {
+      "model": "moonshotai/kimi-k3:batch",
+      "model_info": {
+        "model": "moonshotai/kimi-k3:batch",
+        "name": "MoonshotAI: Kimi K3 (batch)",
+        "description": "Kimi K3 is a 2.8T parameter open-weight multimodal reasoning model from Moonshot AI. It is suited for complex coding, knowledge work, and long-horizon agentic workflows, and is particularly strong at...",
+        "context_length": 1048576,
+        "max_tokens": 943718,
+        "input_modalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/moonshotai/kimi-k3:batch",
+          "https://openrouter.ai/api/v1/models/moonshotai/kimi-k3-20260715/endpoints"
+        ]
+      }
+    },
+    {
       "model": "morph/morph-v3-fast",
       "model_info": {
         "model": "morph/morph-v3-fast",
@@ -5354,7 +5443,7 @@
         "name": "NVIDIA: Nemotron 3.5 Lightning",
         "description": "NVIDIA Nemotron 3.5 Lightning is an open mixture-of-experts model from NVIDIA, with 3B active parameters out of 30B total. It is suited for high-throughput agentic workloads and specialized tasks that...",
         "context_length": 262144,
-        "max_tokens": 235929,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -6744,6 +6833,32 @@
       }
     },
     {
+      "model": "openai/gpt-oss-120b:batch",
+      "model_info": {
+        "model": "openai/gpt-oss-120b:batch",
+        "name": "OpenAI: gpt-oss-120b (batch)",
+        "description": "gpt-oss-120b is an open-weight, 117B-parameter Mixture-of-Experts (MoE) language model from OpenAI designed for high-reasoning, agentic, and general-purpose production use cases. It activates 5.1B parameters per forward pass and is optimized...",
+        "context_length": 131072,
+        "max_tokens": 117964,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/openai/gpt-oss-120b:batch",
+          "https://openrouter.ai/api/v1/models/openai/gpt-oss-120b/endpoints"
+        ]
+      }
+    },
+    {
       "model": "openai/gpt-oss-20b",
       "model_info": {
         "model": "openai/gpt-oss-20b",
@@ -6765,6 +6880,31 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/openai/gpt-oss-20b",
+          "https://openrouter.ai/api/v1/models/openai/gpt-oss-20b/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "openai/gpt-oss-20b:batch",
+      "model_info": {
+        "model": "openai/gpt-oss-20b:batch",
+        "name": "OpenAI: gpt-oss-20b (batch)",
+        "description": "gpt-oss-20b is an open-weight 21B parameter model released by OpenAI under the Apache 2.0 license. It uses a Mixture-of-Experts (MoE) architecture with 3.6B active parameters per forward pass, optimized for...",
+        "context_length": 131072,
+        "max_tokens": 117964,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/openai/gpt-oss-20b:batch",
           "https://openrouter.ai/api/v1/models/openai/gpt-oss-20b/endpoints"
         ]
       }
@@ -8110,7 +8250,7 @@
         "name": "Qwen: Qwen3 VL 30B A3B Instruct",
         "description": "Qwen3-VL-30B-A3B-Instruct is a multimodal model that unifies strong text generation with visual understanding for images and videos. Its Instruct variant optimizes instruction-following for general multimodal tasks. It excels in perception...",
         "context_length": 262144,
-        "max_tokens": 32768,
+        "max_tokens": 16384,
         "input_modalities": [
           "text",
           "image"
@@ -8381,6 +8521,35 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/qwen/qwen3.5-9b",
+          "https://openrouter.ai/api/v1/models/qwen/qwen3.5-9b-20260310/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "qwen/qwen3.5-9b:batch",
+      "model_info": {
+        "model": "qwen/qwen3.5-9b:batch",
+        "name": "Qwen: Qwen3.5-9B (batch)",
+        "description": "Qwen3.5-9B is a multimodal foundation model from the Qwen3.5 family, designed to deliver strong reasoning, coding, and visual understanding in an efficient 9B-parameter architecture. It uses a unified vision-language design...",
+        "context_length": 262144,
+        "max_tokens": 235929,
+        "input_modalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/qwen/qwen3.5-9b:batch",
           "https://openrouter.ai/api/v1/models/qwen/qwen3.5-9b-20260310/endpoints"
         ]
       }
@@ -8704,7 +8873,7 @@
         "name": "Qwen: Qwen3.8 2.4T A95B",
         "description": "Qwen3.8 2.4T A95B is an open-weight sparse mixture-of-experts model from Qwen and the open-weight variant of [Qwen3.8 Max](/qwen/qwen3.8-max), with 95 billion active parameters out of 2.4 trillion total. It is...",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 262144,
         "input_modalities": [
           "text"
         ],
@@ -9422,6 +9591,35 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/thinkingmachines/inkling-small",
+          "https://openrouter.ai/api/v1/models/thinkingmachines/inkling-small-20260730/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "thinkingmachines/inkling-small:batch",
+      "model_info": {
+        "model": "thinkingmachines/inkling-small:batch",
+        "name": "Thinking Machines: Inkling Small (batch)",
+        "description": "Inkling Small is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 12B active parameters out of 276B total. It is positioned as the smaller, more efficient member of...",
+        "context_length": 524288,
+        "max_tokens": 471859,
+        "input_modalities": [
+          "text",
+          "image",
+          "audio"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "audio",
+          "tools",
+          "reasoning"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/thinkingmachines/inkling-small:batch",
           "https://openrouter.ai/api/v1/models/thinkingmachines/inkling-small-20260730/endpoints"
         ]
       }
@@ -10214,6 +10412,35 @@
       }
     },
     {
+      "model": "z-ai/glm-5.3-flash:batch",
+      "model_info": {
+        "model": "z-ai/glm-5.3-flash:batch",
+        "name": "Z.ai: GLM 5.3 Flash (batch)",
+        "description": "GLM-5.3-Flash is a native multimodal model from Z.ai. It is suited for efficient coding and long-horizon agent tasks. Its hybrid sparse and linear attention architecture maintains accurate long-context behavior while...",
+        "context_length": 1048575,
+        "max_tokens": 943717,
+        "input_modalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/z-ai/glm-5.3-flash:batch",
+          "https://openrouter.ai/api/v1/models/z-ai/glm-5.3-flash-20260826/endpoints"
+        ]
+      }
+    },
+    {
       "model": "z-ai/glm-5v-turbo",
       "model_info": {
         "model": "z-ai/glm-5v-turbo",
@@ -10571,7 +10798,7 @@
         "name": "Z.ai: GLM Latest",
         "description": "This model always redirects to the latest GLM model from Z.ai.",
         "context_length": 1310720,
-        "max_tokens": 131072,
+        "max_tokens": 943718,
         "input_modalities": [
           "text"
         ],
