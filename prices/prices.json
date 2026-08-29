@@ -3657,8 +3657,8 @@
     "model": "deepseek/deepseek-v4-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.08372,
-    "output": 0.16744
+    "input": 0.08232,
+    "output": 0.16464
   },
   {
     "model": "deepseek/deepseek-v4-flash-0731",
@@ -3685,8 +3685,8 @@
     "model": "deepseek/deepseek-v4-pro",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.630054,
-    "output": 1.260108
+    "input": 0.559062,
+    "output": 1.118124
   },
   {
     "model": "deepseek/deepseek-v4-pro-0813",
@@ -7003,8 +7003,8 @@
     "model": "tencent/hy3",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.132,
-    "output": 0.528
+    "input": 0.0825,
+    "output": 0.33
   },
   {
     "model": "tencent/hy3-preview",
@@ -7577,8 +7577,8 @@
     "model": "~z-ai/glm-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 1.2,
-    "output": 4
+    "input": 1.1875,
+    "output": 4.18
   },
   {
     "model": "deep-research-pro-preview-12-2025-gt-128k",

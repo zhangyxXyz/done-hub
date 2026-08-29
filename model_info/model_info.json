@@ -10592,7 +10592,7 @@
         "name": "DeepSeek V4 Flash Latest",
         "description": "This model always redirects to the latest model in the DeepSeek V4 Flash family.",
         "context_length": 1310720,
-        "max_tokens": 131072,
+        "max_tokens": 393216,
         "input_modalities": [
           "text"
         ],
@@ -10798,7 +10798,7 @@
         "name": "Z.ai: GLM Latest",
         "description": "This model always redirects to the latest GLM model from Z.ai.",
         "context_length": 1310720,
-        "max_tokens": 943718,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
