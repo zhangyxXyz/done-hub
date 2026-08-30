@@ -1069,7 +1069,7 @@
         "name": "Arcee AI: Trinity Large Thinking",
         "description": "Trinity Large Thinking is a powerful open source reasoning model from the team at Arcee AI. It shows strong performance in PinchBench, agentic workloads, and reasoning tasks. Launch video: https://youtu.be/Gc82AXLa0Rg?si=4RLn6WBz33qT--B7...",
         "context_length": 262144,
-        "max_tokens": 235929,
+        "max_tokens": 80000,
         "input_modalities": [
           "text"
         ],
@@ -8144,7 +8144,7 @@
         "name": "Qwen: Qwen3 Next 80B A3B Instruct",
         "description": "Qwen3-Next-80B-A3B-Instruct is an instruction-tuned chat model in the Qwen3-Next series optimized for fast, stable responses without “thinking” traces. It targets complex tasks across reasoning, code generation, knowledge QA, and multilingual...",
         "context_length": 262144,
-        "max_tokens": 235929,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -9543,7 +9543,7 @@
         "name": "Thinking Machines: Inkling",
         "description": "Inkling is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 41B active parameters out of 975B total. It is designed for general-purpose reasoning, coding, agentic and tool-use systems,...",
         "context_length": 1048576,
-        "max_tokens": 262144,
+        "max_tokens": 471859,
         "input_modalities": [
           "text",
           "image",
@@ -10285,7 +10285,7 @@
         "name": "Z.ai: GLM 5.1",
         "description": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on...",
         "context_length": 204800,
-        "max_tokens": 182476,
+        "max_tokens": 128000,
         "input_modalities": [
           "text"
         ],
