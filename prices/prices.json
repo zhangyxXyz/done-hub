@@ -3657,8 +3657,8 @@
     "model": "deepseek/deepseek-v4-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.08008,
-    "output": 0.16016
+    "input": 0.07868,
+    "output": 0.15736
   },
   {
     "model": "deepseek/deepseek-v4-flash-0731",
@@ -3685,8 +3685,8 @@
     "model": "deepseek/deepseek-v4-pro",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.437436,
-    "output": 0.874872
+    "input": 0.417252,
+    "output": 0.834504
   },
   {
     "model": "deepseek/deepseek-v4-pro-0813",
@@ -4707,8 +4707,8 @@
     "model": "mistralai/devstral-2512",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.44,
-    "output": 2.2
+    "input": 0.4,
+    "output": 2
   },
   {
     "model": "mistralai/devstral-medium",
@@ -7003,8 +7003,8 @@
     "model": "tencent/hy3",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.132,
-    "output": 0.528
+    "input": 0.0825,
+    "output": 0.33
   },
   {
     "model": "tencent/hy3-preview",
