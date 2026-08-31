@@ -3572,7 +3572,7 @@
         "name": "Meta: Llama 4 Maverick",
         "description": "Llama 4 Maverick 17B Instruct (128E) is a high-capacity multimodal language model from Meta, built on a mixture-of-experts (MoE) architecture with 128 experts and 17 billion active parameters per forward...",
         "context_length": 1048576,
-        "max_tokens": 16384,
+        "max_tokens": 115200,
         "input_modalities": [
           "text",
           "image"
@@ -5726,7 +5726,7 @@
         "name": "OpenAI: GPT-4.1 Nano",
         "description": "For tasks that demand low latency, GPT‑4.1 nano is the fastest and cheapest model in the GPT-4.1 series. It delivers exceptional performance at a small size with its 1 million...",
         "context_length": 1047576,
-        "max_tokens": 942818,
+        "max_tokens": 32768,
         "input_modalities": [
           "image",
           "text",
