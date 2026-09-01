@@ -312,6 +312,35 @@
       }
     },
     {
+      "model": "anthropic/claude-fable-5.1",
+      "model_info": {
+        "model": "anthropic/claude-fable-5.1",
+        "name": "Anthropic: Claude Fable 5.1",
+        "description": "Claude Fable 5.1 improves on Claude Fable 5 across the board, with the biggest gains in agentic coding, long-running agentic workflows, and knowledge work: long code refactors, front-end and visual...",
+        "context_length": 1000000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "text",
+          "image",
+          "file"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/anthropic/claude-fable-5.1",
+          "https://openrouter.ai/api/v1/models/anthropic/claude-fable-5.1-20260831/endpoints"
+        ]
+      }
+    },
+    {
       "model": "anthropic/claude-fable-5:batch",
       "model_info": {
         "model": "anthropic/claude-fable-5:batch",
@@ -629,35 +658,6 @@
       }
     },
     {
-      "model": "anthropic/claude-opus-4.7-fast",
-      "model_info": {
-        "model": "anthropic/claude-opus-4.7-fast",
-        "name": "Anthropic: Claude Opus 4.7 (Fast)",
-        "description": "Fast-mode variant of [Opus 4.7](/anthropic/claude-opus-4.7) - identical capabilities with higher output speed at premium 6x pricing.\n\nLearn more in Anthropic's docs: https://platform.claude.com/docs/en/build-with-claude/fast-mode",
-        "context_length": 1000000,
-        "max_tokens": 128000,
-        "input_modalities": [
-          "text",
-          "image",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/anthropic/claude-opus-4.7-fast",
-          "https://openrouter.ai/api/v1/models/anthropic/claude-4.7-opus-fast-20260512/endpoints"
-        ]
-      }
-    },
-    {
       "model": "anthropic/claude-opus-4.7:batch",
       "model_info": {
         "model": "anthropic/claude-opus-4.7:batch",
@@ -716,35 +716,6 @@
       }
     },
     {
-      "model": "anthropic/claude-opus-4.8-fast",
-      "model_info": {
-        "model": "anthropic/claude-opus-4.8-fast",
-        "name": "Anthropic: Claude Opus 4.8 (Fast)",
-        "description": "Fast-mode variant of [Opus 4.8](/anthropic/claude-opus-4.8) - identical capabilities with higher output speed at 2x pricing relative to regular Opus 4.8.\n\nLearn more in Anthropic's docs: https://platform.claude.com/docs/en/build-with-claude/fast-mode",
-        "context_length": 1000000,
-        "max_tokens": 128000,
-        "input_modalities": [
-          "text",
-          "image",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/anthropic/claude-opus-4.8-fast",
-          "https://openrouter.ai/api/v1/models/anthropic/claude-4.8-opus-fast-20260528/endpoints"
-        ]
-      }
-    },
-    {
       "model": "anthropic/claude-opus-4.8:batch",
       "model_info": {
         "model": "anthropic/claude-opus-4.8:batch",
@@ -799,35 +770,6 @@
         "support_url": [
           "https://openrouter.ai/models/anthropic/claude-opus-5",
           "https://openrouter.ai/api/v1/models/anthropic/claude-opus-5-20260723/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "anthropic/claude-opus-5-fast",
-      "model_info": {
-        "model": "anthropic/claude-opus-5-fast",
-        "name": "Claude Opus 5 (Fast)",
-        "description": "Fast-mode variant of [Opus 5](/anthropic/claude-opus-5) - identical capabilities with higher output speed at 2x pricing relative to regular Opus 5.\n\nLearn more in Anthropic's docs: https://platform.claude.com/docs/en/build-with-claude/fast-mode",
-        "context_length": 1000000,
-        "max_tokens": 128000,
-        "input_modalities": [
-          "text",
-          "image",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/anthropic/claude-opus-5-fast",
-          "https://openrouter.ai/api/v1/models/anthropic/claude-opus-5-fast-20260723/endpoints"
         ]
       }
     },
@@ -3264,6 +3206,32 @@
         "support_url": [
           "https://openrouter.ai/models/inception/mercury-2",
           "https://openrouter.ai/api/v1/models/inception/mercury-2-20260304/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "inception/mercury-2.5-preview",
+      "model_info": {
+        "model": "inception/mercury-2.5-preview",
+        "name": "Inception: Mercury 2.5 Preview",
+        "description": "Mercury 2.5 is the fastest reasoning LLM, and the latest diffusion LLM (dLLM) from Inception. Instead of generating tokens sequentially, Mercury 2.5 produces and refines multiple tokens in parallel, achieving...",
+        "context_length": 260000,
+        "max_tokens": 65536,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/inception/mercury-2.5-preview",
+          "https://openrouter.ai/api/v1/models/inception/mercury-2.5-preview-20260831/endpoints"
         ]
       }
     },
@@ -11283,7 +11251,7 @@
         "name": "DeepSeek V4 Flash Latest",
         "description": "This model always redirects to the latest model in the DeepSeek V4 Flash family.",
         "context_length": 1310720,
-        "max_tokens": 393216,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
