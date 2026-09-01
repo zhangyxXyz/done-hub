@@ -3013,7 +3013,7 @@
     "model": "anthracite-org/magnum-v4-72b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 3,
+    "input": 2.5,
     "output": 5
   },
   {
@@ -3678,22 +3678,22 @@
     "model": "deepseek/deepseek-v4-flash-vision-exp",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.22,
-    "output": 0.66
+    "input": 0.44,
+    "output": 1.32
   },
   {
     "model": "deepseek/deepseek-v4-pro",
     "type": "tokens",
     "channel_type": 20,
-    "input": 1.02747,
-    "output": 2.05494
+    "input": 1.6,
+    "output": 3.2
   },
   {
     "model": "deepseek/deepseek-v4-pro-0813",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.66,
-    "output": 1.98
+    "input": 1.1154,
+    "output": 3.3462
   },
   {
     "model": "deepseek/deepseek-v4-pro-0813:batch",
@@ -4336,7 +4336,7 @@
     "model": "mancer/weaver",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.5,
+    "input": 0.4,
     "output": 0.75
   },
   {
@@ -4469,8 +4469,8 @@
     "model": "meta-llama/llama-4-scout",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.11,
-    "output": 0.34
+    "input": 0.1,
+    "output": 0.3
   },
   {
     "model": "meta-llama/llama-guard-2-8b",
@@ -4697,13 +4697,6 @@
     "output": 0.9
   },
   {
-    "model": "mistralai/codestral-2508:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 0.3,
-    "output": 0.9
-  },
-  {
     "model": "mistralai/codestral-embed-2505",
     "type": "tokens",
     "channel_type": 20,
@@ -4781,13 +4774,6 @@
     "output": 0.15
   },
   {
-    "model": "mistralai/ministral-8b-2512:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 0.15,
-    "output": 0.15
-  },
-  {
     "model": "mistralai/mistral-7b-instruct",
     "type": "tokens",
     "channel_type": 20,
@@ -4858,13 +4844,6 @@
     "output": 1.5
   },
   {
-    "model": "mistralai/mistral-large-2512:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 0.5,
-    "output": 1.5
-  },
-  {
     "model": "mistralai/mistral-medium-3",
     "type": "tokens",
     "channel_type": 20,
@@ -4893,13 +4872,6 @@
     "output": 2
   },
   {
-    "model": "mistralai/mistral-medium-3.1:batch",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 0.4,
-    "output": 2
-  },
-  {
     "model": "mistralai/mistral-nemo",
     "type": "tokens",
     "channel_type": 20,
@@ -4922,13 +4894,6 @@
   },
   {
     "model": "mistralai/mistral-small-2603",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 0.15,
-    "output": 0.6
-  },
-  {
-    "model": "mistralai/mistral-small-2603:batch",
     "type": "tokens",
     "channel_type": 20,
     "input": 0.15,
@@ -7010,8 +6975,8 @@
     "model": "tencent/hy3",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.0825,
-    "output": 0.33
+    "input": 0.132,
+    "output": 0.528
   },
   {
     "model": "tencent/hy3-preview",

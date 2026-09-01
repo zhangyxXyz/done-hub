@@ -1803,7 +1803,7 @@
         "name": "DeepSeek: DeepSeek V4 Pro 0423",
         "description": "DeepSeek V4 Pro is a large-scale Mixture-of-Experts model from DeepSeek with 1.6T total parameters and 49B activated parameters, supporting a 1M-token context window. It is designed for advanced reasoning, coding,...",
         "context_length": 1048576,
-        "max_tokens": 384000,
+        "max_tokens": 393216,
         "input_modalities": [
           "text"
         ],
@@ -3599,7 +3599,7 @@
         "name": "Meta: Llama 4 Scout",
         "description": "Llama 4 Scout 17B Instruct (16E) is a mixture-of-experts (MoE) language model developed by Meta, activating 17 billion parameters out of a total of 109B. It supports native multimodal input...",
         "context_length": 1310720,
-        "max_tokens": 8192,
+        "max_tokens": 16384,
         "input_modalities": [
           "text",
           "image"
@@ -4162,32 +4162,6 @@
       }
     },
     {
-      "model": "mistralai/codestral-2508:batch",
-      "model_info": {
-        "model": "mistralai/codestral-2508:batch",
-        "name": "Mistral: Codestral 2508 (batch)",
-        "description": "Mistral's cutting-edge language model for coding released end of July 2025. Codestral specializes in low-latency, high-frequency tasks such as fill-in-the-middle (FIM), code correction and test generation.\n\n[Blog Post](https://mistral.ai/news/codestral-25-08)",
-        "context_length": 256000,
-        "max_tokens": 204800,
-        "input_modalities": [
-          "text",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/mistralai/codestral-2508:batch",
-          "https://openrouter.ai/api/v1/models/mistralai/codestral-2508/endpoints"
-        ]
-      }
-    },
-    {
       "model": "mistralai/devstral-2512",
       "model_info": {
         "model": "mistralai/devstral-2512",
@@ -4295,33 +4269,6 @@
       }
     },
     {
-      "model": "mistralai/ministral-8b-2512:batch",
-      "model_info": {
-        "model": "mistralai/ministral-8b-2512:batch",
-        "name": "Mistral: Ministral 3 8B 2512 (batch)",
-        "description": "A balanced model in the Ministral 3 family, Ministral 3 8B is a powerful, efficient tiny language model with vision capabilities.",
-        "context_length": 262144,
-        "max_tokens": 209715,
-        "input_modalities": [
-          "text",
-          "image"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/mistralai/ministral-8b-2512:batch",
-          "https://openrouter.ai/api/v1/models/mistralai/ministral-8b-2512/endpoints"
-        ]
-      }
-    },
-    {
       "model": "mistralai/mistral-large",
       "model_info": {
         "model": "mistralai/mistral-large",
@@ -4397,34 +4344,6 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/mistralai/mistral-large-2512",
-          "https://openrouter.ai/api/v1/models/mistralai/mistral-large-2512/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "mistralai/mistral-large-2512:batch",
-      "model_info": {
-        "model": "mistralai/mistral-large-2512:batch",
-        "name": "Mistral: Mistral Large 3 2512 (batch)",
-        "description": "Mistral Large 3 2512 is Mistral’s most capable model to date, featuring a sparse mixture-of-experts architecture with 41B active parameters (675B total), and released under the Apache 2.0 license.",
-        "context_length": 262144,
-        "max_tokens": 209715,
-        "input_modalities": [
-          "text",
-          "image",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/mistralai/mistral-large-2512:batch",
           "https://openrouter.ai/api/v1/models/mistralai/mistral-large-2512/endpoints"
         ]
       }
@@ -4544,34 +4463,6 @@
       }
     },
     {
-      "model": "mistralai/mistral-medium-3.1:batch",
-      "model_info": {
-        "model": "mistralai/mistral-medium-3.1:batch",
-        "name": "Mistral: Mistral Medium 3.1 (batch)",
-        "description": "Mistral Medium 3.1 is an updated version of Mistral Medium 3, which is a high-performance enterprise-grade language model designed to deliver frontier-level capabilities at significantly reduced operational cost. It balances...",
-        "context_length": 131072,
-        "max_tokens": 104857,
-        "input_modalities": [
-          "text",
-          "image",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/mistralai/mistral-medium-3.1:batch",
-          "https://openrouter.ai/api/v1/models/mistralai/mistral-medium-3.1/endpoints"
-        ]
-      }
-    },
-    {
       "model": "mistralai/mistral-nemo",
       "model_info": {
         "model": "mistralai/mistral-nemo",
@@ -4670,34 +4561,6 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/mistralai/mistral-small-2603",
-          "https://openrouter.ai/api/v1/models/mistralai/mistral-small-2603/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "mistralai/mistral-small-2603:batch",
-      "model_info": {
-        "model": "mistralai/mistral-small-2603:batch",
-        "name": "Mistral: Mistral Small 4 (batch)",
-        "description": "Mistral Small 4 is the next major release in the Mistral Small family, unifying the capabilities of several flagship Mistral models into a single system. It combines strong reasoning from...",
-        "context_length": 262144,
-        "max_tokens": 209715,
-        "input_modalities": [
-          "text",
-          "image"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/mistralai/mistral-small-2603:batch",
           "https://openrouter.ai/api/v1/models/mistralai/mistral-small-2603/endpoints"
         ]
       }
