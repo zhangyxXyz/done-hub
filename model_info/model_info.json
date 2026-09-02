@@ -2809,6 +2809,70 @@
       }
     },
     {
+      "model": "google/gemini-3.8-flash",
+      "model_info": {
+        "model": "google/gemini-3.8-flash",
+        "name": "Google: Gemini 3.8 Flash",
+        "description": "Gemini 3.8 Flash is Google's most intelligent Flash model with significant gains from 3.7 Flash across software engineering, agentic tasks, and multi-step reasoning.",
+        "context_length": 1048576,
+        "max_tokens": 65536,
+        "input_modalities": [
+          "text",
+          "image",
+          "video",
+          "file",
+          "audio"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "audio",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/google/gemini-3.8-flash",
+          "https://openrouter.ai/api/v1/models/google/gemini-3.8-flash-20260902/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "google/gemini-3.8-flash:batch",
+      "model_info": {
+        "model": "google/gemini-3.8-flash:batch",
+        "name": "Google: Gemini 3.8 Flash (batch)",
+        "description": "Gemini 3.8 Flash is Google's most intelligent Flash model with significant gains from 3.7 Flash across software engineering, agentic tasks, and multi-step reasoning.",
+        "context_length": 1048576,
+        "max_tokens": 65536,
+        "input_modalities": [
+          "text",
+          "image",
+          "video",
+          "file",
+          "audio"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "audio",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/google/gemini-3.8-flash:batch",
+          "https://openrouter.ai/api/v1/models/google/gemini-3.8-flash-20260902/endpoints"
+        ]
+      }
+    },
+    {
       "model": "google/gemma-2-27b-it",
       "model_info": {
         "model": "google/gemma-2-27b-it",
@@ -11515,7 +11579,7 @@
         "name": "Z.ai: GLM Latest",
         "description": "This model always redirects to the latest GLM model from Z.ai.",
         "context_length": 1310720,
-        "max_tokens": 943718,
+        "max_tokens": 235929,
         "input_modalities": [
           "text"
         ],
