@@ -341,6 +341,35 @@
       }
     },
     {
+      "model": "anthropic/claude-fable-5.1:batch",
+      "model_info": {
+        "model": "anthropic/claude-fable-5.1:batch",
+        "name": "Anthropic: Claude Fable 5.1 (batch)",
+        "description": "Claude Fable 5.1 improves on Claude Fable 5 across the board, with the biggest gains in agentic coding, long-running agentic workflows, and knowledge work: long code refactors, front-end and visual...",
+        "context_length": 1000000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "text",
+          "image",
+          "file"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/anthropic/claude-fable-5.1:batch",
+          "https://openrouter.ai/api/v1/models/anthropic/claude-fable-5.1-20260831/endpoints"
+        ]
+      }
+    },
+    {
       "model": "anthropic/claude-fable-5:batch",
       "model_info": {
         "model": "anthropic/claude-fable-5:batch",
@@ -1459,7 +1488,7 @@
         "name": "DeepSeek: DeepSeek V3.1",
         "description": "DeepSeek-V3.1 is a large hybrid reasoning model (671B parameters, 37B active) that supports both thinking and non-thinking modes via prompt templates. It extends the DeepSeek-V3 base with a two-phase long-context...",
         "context_length": 163840,
-        "max_tokens": 144900,
+        "max_tokens": 32768,
         "input_modalities": [
           "text"
         ],
@@ -1745,7 +1774,7 @@
         "name": "DeepSeek: DeepSeek V4 Pro 0423",
         "description": "DeepSeek V4 Pro is a large-scale Mixture-of-Experts model from DeepSeek with 1.6T total parameters and 49B activated parameters, supporting a 1M-token context window. It is designed for advanced reasoning, coding,...",
         "context_length": 1048576,
-        "max_tokens": 393216,
+        "max_tokens": 384000,
         "input_modalities": [
           "text"
         ],
@@ -5171,7 +5200,7 @@
         "name": "NVIDIA: Nemotron 3 Ultra",
         "description": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it...",
         "context_length": 262144,
-        "max_tokens": 16384,
+        "max_tokens": 32768,
         "input_modalities": [
           "text"
         ],
@@ -9532,7 +9561,7 @@
         "name": "Qwen: Qwen3.8 2.4T A95B",
         "description": "Qwen3.8 2.4T A95B is an open-weight sparse mixture-of-experts model from Qwen and the open-weight variant of [Qwen3.8 Max](/qwen/qwen3.8-max), with 95 billion active parameters out of 2.4 trillion total. It is...",
         "context_length": 1048576,
-        "max_tokens": 262144,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -10970,7 +10999,7 @@
         "name": "Z.ai: GLM 5.2",
         "description": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...",
         "context_length": 1048576,
-        "max_tokens": 262144,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -11251,7 +11280,7 @@
         "name": "DeepSeek V4 Flash Latest",
         "description": "This model always redirects to the latest model in the DeepSeek V4 Flash family.",
         "context_length": 1310720,
-        "max_tokens": 131072,
+        "max_tokens": 393216,
         "input_modalities": [
           "text"
         ],
@@ -11447,6 +11476,35 @@
         "support_url": [
           "https://openrouter.ai/models/~x-ai/grok-latest",
           "https://openrouter.ai/api/v1/models/~x-ai/grok-latest/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "~z-ai/glm-flash-latest",
+      "model_info": {
+        "model": "~z-ai/glm-flash-latest",
+        "name": "Z.ai: GLM Flash Latest",
+        "description": "This model always redirects to the latest model in the GLM Flash family.",
+        "context_length": 1310720,
+        "max_tokens": 131072,
+        "input_modalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/~z-ai/glm-flash-latest",
+          "https://openrouter.ai/api/v1/models/~z-ai/glm-flash-latest/endpoints"
         ]
       }
     },
