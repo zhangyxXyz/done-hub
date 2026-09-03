@@ -1438,7 +1438,7 @@
         "name": "DeepSeek: DeepSeek V3",
         "description": "DeepSeek-V3 is the latest model from the DeepSeek team, building upon the instruction following and coding abilities of the previous versions. Pre-trained on nearly 15 trillion tokens, the reported evaluations...",
         "context_length": 163840,
-        "max_tokens": 16000,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -1488,7 +1488,7 @@
         "name": "DeepSeek: DeepSeek V3.1",
         "description": "DeepSeek-V3.1 is a large hybrid reasoning model (671B parameters, 37B active) that supports both thinking and non-thinking modes via prompt templates. It extends the DeepSeek-V3 base with a two-phase long-context...",
         "context_length": 163840,
-        "max_tokens": 32768,
+        "max_tokens": 144900,
         "input_modalities": [
           "text"
         ],
@@ -3351,6 +3351,32 @@
         "support_url": [
           "https://openrouter.ai/models/inclusionai/ling-3.0-flash",
           "https://openrouter.ai/api/v1/models/inclusionai/ling-3.0-flash-20260723/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "inclusionai/ling-3.0-flash-fin",
+      "model_info": {
+        "model": "inclusionai/ling-3.0-flash-fin",
+        "name": "Ling 3.0 Flash Fin",
+        "description": "Ling 3.0 Flash Fin is a finance-focused mixture-of-experts model from InclusionAI, built on Ling 3.0 Flash with 5.1B active parameters out of 124B total. It is designed for real-world investment...",
+        "context_length": 262144,
+        "max_tokens": 235929,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/inclusionai/ling-3.0-flash-fin",
+          "https://openrouter.ai/api/v1/models/inclusionai/ling-3.0-flash-fin-20260827/endpoints"
         ]
       }
     },
@@ -8500,7 +8526,7 @@
         "name": "Qwen: Qwen2.5 VL 72B Instruct",
         "description": "Qwen2.5-VL is proficient in recognizing common objects such as flowers, birds, fish, and insects. It is also highly capable of analyzing texts, charts, icons, graphics, and layouts within images.",
         "context_length": 128000,
-        "max_tokens": 28800,
+        "max_tokens": 115200,
         "input_modalities": [
           "text",
           "image"
@@ -11588,7 +11614,7 @@
         "name": "Z.ai: GLM Flash Latest",
         "description": "This model always redirects to the latest model in the GLM Flash family.",
         "context_length": 1310720,
-        "max_tokens": 943718,
+        "max_tokens": 131072,
         "input_modalities": [
           "text",
           "image",
