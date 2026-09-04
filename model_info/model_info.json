@@ -3226,31 +3226,6 @@
       }
     },
     {
-      "model": "ibm-granite/granite-4.1-8b",
-      "model_info": {
-        "model": "ibm-granite/granite-4.1-8b",
-        "name": "IBM: Granite 4.1 8B",
-        "description": "Granite 4.1 8B is a dense, decoder-only 8-billion-parameter language model from IBM, part of the Granite 4.1 family. It supports a 131K-token context window and is designed for enterprise tasks...",
-        "context_length": 131072,
-        "max_tokens": 117964,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/ibm-granite/granite-4.1-8b",
-          "https://openrouter.ai/api/v1/models/ibm-granite/granite-4.1-8b-20260429/endpoints"
-        ]
-      }
-    },
-    {
       "model": "ibm-granite/granite-4.2-8b",
       "model_info": {
         "model": "ibm-granite/granite-4.2-8b",
@@ -3332,7 +3307,7 @@
       "model": "inclusionai/ling-3.0-flash",
       "model_info": {
         "model": "inclusionai/ling-3.0-flash",
-        "name": "Ling-3.0-flash",
+        "name": "inclusionAI: Ling 3.0 Flash",
         "description": "*Ling-3.0-flash* is a *124B-parameter Mixture-of-Experts (MoE) model*, with approximately *5.1B parameters activated per token*. The model is designed with *token efficiency and production-scale agentic inference* as key priorities, enabling developers...",
         "context_length": 262144,
         "max_tokens": 32768,
@@ -3358,7 +3333,7 @@
       "model": "inclusionai/ling-3.0-flash-fin",
       "model_info": {
         "model": "inclusionai/ling-3.0-flash-fin",
-        "name": "Ling 3.0 Flash Fin",
+        "name": "inclusionAI: Ling 3.0 Flash Fin",
         "description": "Ling 3.0 Flash Fin is a finance-focused mixture-of-experts model from InclusionAI, built on Ling 3.0 Flash with 5.1B active parameters out of 124B total. It is designed for real-world investment...",
         "context_length": 262144,
         "max_tokens": 235929,
@@ -3384,7 +3359,7 @@
       "model": "inclusionai/ling-3.0-flash-fin:free",
       "model_info": {
         "model": "inclusionai/ling-3.0-flash-fin:free",
-        "name": "Ling 3.0 Flash Fin (free)",
+        "name": "inclusionAI: Ling 3.0 Flash Fin (free)",
         "description": "Ling 3.0 Flash Fin is a finance-focused mixture-of-experts model from InclusionAI, built on Ling 3.0 Flash with 5.1B active parameters out of 124B total. It is designed for real-world investment...",
         "context_length": 262144,
         "max_tokens": 32768,
@@ -3402,6 +3377,31 @@
         "support_url": [
           "https://openrouter.ai/models/inclusionai/ling-3.0-flash-fin:free",
           "https://openrouter.ai/api/v1/models/inclusionai/ling-3.0-flash-fin-20260827/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "inclusionai/ling-3.0-flash-sante:free",
+      "model_info": {
+        "model": "inclusionai/ling-3.0-flash-sante:free",
+        "name": "inclusionAI: Ling 3.0 Flash Sante (free)",
+        "description": "Ling 3.0 Flash Sante is a health and medicine-focused mixture-of-experts model from InclusionAI, built on Ling 3.0 Flash with 5.1B active parameters out of 124B total. It is designed for...",
+        "context_length": 262144,
+        "max_tokens": 32768,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/inclusionai/ling-3.0-flash-sante:free",
+          "https://openrouter.ai/api/v1/models/inclusionai/ling-3.0-flash-sante-20260904/endpoints"
         ]
       }
     },
@@ -7481,6 +7481,35 @@
       }
     },
     {
+      "model": "openai/gpt-6-astra",
+      "model_info": {
+        "model": "openai/gpt-6-astra",
+        "name": "OpenAI: GPT-6 Astra",
+        "description": "GPT-6 Astra is a frontier reasoning model from OpenAI, suited for complex reasoning, coding, and agentic workflows.",
+        "context_length": 1050000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "file",
+          "image",
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/openai/gpt-6-astra",
+          "https://openrouter.ai/api/v1/models/openai/gpt-6-astra-20260903/endpoints"
+        ]
+      }
+    },
+    {
       "model": "openai/gpt-audio",
       "model_info": {
         "model": "openai/gpt-audio",
@@ -9288,7 +9317,7 @@
         "name": "Qwen: Qwen3.5-35B-A3B",
         "description": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall...",
         "context_length": 262144,
-        "max_tokens": 235929,
+        "max_tokens": 16384,
         "input_modalities": [
           "text",
           "image",
@@ -9491,7 +9520,7 @@
         "name": "Qwen: Qwen3.6 27B",
         "description": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities — accepting text, image, and video inputs...",
         "context_length": 262144,
-        "max_tokens": 235929,
+        "max_tokens": 65536,
         "input_modalities": [
           "text",
           "image",
@@ -11464,7 +11493,7 @@
         "name": "DeepSeek V4 Flash Latest",
         "description": "This model always redirects to the latest model in the DeepSeek V4 Flash family.",
         "context_length": 1310720,
-        "max_tokens": 393216,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
