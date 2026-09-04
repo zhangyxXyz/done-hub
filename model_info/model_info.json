@@ -4562,8 +4562,8 @@
         "model": "mistralai/mistral-medium-3-5:batch",
         "name": "Mistral: Mistral Medium 3.5 (batch)",
         "description": "Mistral Medium 3.5 is a dense 128B instruction-following model from Mistral AI. It supports text and image inputs with text output, and is designed for agentic workflows, coding, and complex...",
-        "context_length": 262144,
-        "max_tokens": 209715,
+        "context_length": 32768,
+        "max_tokens": 26214,
         "input_modalities": [
           "text",
           "image",
@@ -5354,7 +5354,7 @@
         "name": "NVIDIA: Nemotron 3 Ultra",
         "description": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it...",
         "context_length": 262144,
-        "max_tokens": 182520,
+        "max_tokens": 32768,
         "input_modalities": [
           "text"
         ],
@@ -5395,6 +5395,33 @@
         "support_url": [
           "https://openrouter.ai/models/nvidia/nemotron-3-ultra-550b-a55b:free",
           "https://openrouter.ai/api/v1/models/nvidia/nemotron-3-ultra-550b-a55b-20260604/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "nvidia/nemotron-3.5-content-safety",
+      "model_info": {
+        "model": "nvidia/nemotron-3.5-content-safety",
+        "name": "NVIDIA: Nemotron 3.5 Content Safety",
+        "description": "NVIDIA Nemotron 3.5 Content Safety is a compact 4B-parameter multimodal guardrail model from NVIDIA, fine-tuned from Google Gemma-3-4B. It moderates both inputs to and responses from LLMs and VLMs, accepting...",
+        "context_length": 131072,
+        "max_tokens": 117964,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/nvidia/nemotron-3.5-content-safety",
+          "https://openrouter.ai/api/v1/models/nvidia/nemotron-3.5-content-safety-20260604/endpoints"
         ]
       }
     },
@@ -10534,7 +10561,7 @@
         "name": "ReMM SLERP 13B",
         "description": "A recreation trial of the original MythoMax-L2-B13 but with updated models. #merge",
         "context_length": 6144,
-        "max_tokens": 4096,
+        "max_tokens": 5529,
         "input_modalities": [
           "text"
         ],
@@ -10708,6 +10735,35 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/x-ai/grok-4.3",
+          "https://openrouter.ai/api/v1/models/x-ai/grok-4.3-20260430/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "x-ai/grok-4.3:batch",
+      "model_info": {
+        "model": "x-ai/grok-4.3:batch",
+        "name": "SpaceXAI: Grok 4.3 (batch)",
+        "description": "Grok 4.3 is a reasoning model from SpaceXAI. It accepts text and image inputs with text output, and is suited for agentic workflows, instruction-following tasks, and applications requiring high factual...",
+        "context_length": 1000000,
+        "max_tokens": 900000,
+        "input_modalities": [
+          "text",
+          "image",
+          "file"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/x-ai/grok-4.3:batch",
           "https://openrouter.ai/api/v1/models/x-ai/grok-4.3-20260430/endpoints"
         ]
       }
@@ -11614,7 +11670,7 @@
         "name": "Z.ai: GLM Flash Latest",
         "description": "This model always redirects to the latest model in the GLM Flash family.",
         "context_length": 1310720,
-        "max_tokens": 131072,
+        "max_tokens": 943718,
         "input_modalities": [
           "text",
           "image",
@@ -11643,7 +11699,7 @@
         "name": "Z.ai: GLM Latest",
         "description": "This model always redirects to the latest GLM model from Z.ai.",
         "context_length": 1310720,
-        "max_tokens": 943718,
+        "max_tokens": 235929,
         "input_modalities": [
           "text"
         ],
