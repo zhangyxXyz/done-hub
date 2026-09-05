@@ -7485,7 +7485,7 @@
       "model_info": {
         "model": "openai/gpt-6-astra",
         "name": "OpenAI: GPT-6 Astra",
-        "description": "GPT-6 Astra is a frontier reasoning model from OpenAI, suited for complex reasoning, coding, and agentic workflows.",
+        "description": "GPT-6 Astra is OpenAI's flagship model for demanding end-to-end work. It is suited for advanced analysis, software engineering, deep research, scientific work, and document creation, with particular strengths in long-horizon...",
         "context_length": 1050000,
         "max_tokens": 128000,
         "input_modalities": [
@@ -7505,6 +7505,93 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/openai/gpt-6-astra",
+          "https://openrouter.ai/api/v1/models/openai/gpt-6-astra-20260903/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "openai/gpt-6-astra-pro",
+      "model_info": {
+        "model": "openai/gpt-6-astra-pro",
+        "name": "OpenAI: GPT-6 Astra Pro",
+        "description": "GPT-6 Astra Pro is the same underlying model as [GPT-6 Astra](https://openrouter.ai/openai/gpt-6-astra), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode",
+        "context_length": 1050000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "file",
+          "image",
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/openai/gpt-6-astra-pro",
+          "https://openrouter.ai/api/v1/models/openai/gpt-6-astra-pro-20260903/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "openai/gpt-6-astra-pro:batch",
+      "model_info": {
+        "model": "openai/gpt-6-astra-pro:batch",
+        "name": "OpenAI: GPT-6 Astra Pro (batch)",
+        "description": "GPT-6 Astra Pro is the same underlying model as [GPT-6 Astra](https://openrouter.ai/openai/gpt-6-astra), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode",
+        "context_length": 1050000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "file",
+          "image",
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/openai/gpt-6-astra-pro:batch",
+          "https://openrouter.ai/api/v1/models/openai/gpt-6-astra-pro-20260903/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "openai/gpt-6-astra:batch",
+      "model_info": {
+        "model": "openai/gpt-6-astra:batch",
+        "name": "OpenAI: GPT-6 Astra (batch)",
+        "description": "GPT-6 Astra is OpenAI's flagship model for demanding end-to-end work. It is suited for advanced analysis, software engineering, deep research, scientific work, and document creation, with particular strengths in long-horizon...",
+        "context_length": 1050000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "file",
+          "image",
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/openai/gpt-6-astra:batch",
           "https://openrouter.ai/api/v1/models/openai/gpt-6-astra-20260903/endpoints"
         ]
       }
@@ -8660,7 +8747,7 @@
         "name": "Qwen: Qwen3 235B A22B Instruct 2507",
         "description": "Qwen3-235B-A22B-Instruct-2507 is a multilingual, instruction-tuned mixture-of-experts language model based on the Qwen3-235B architecture, with 22B active parameters per forward pass. It is optimized for general-purpose text generation, including instruction following,...",
         "context_length": 262144,
-        "max_tokens": 235929,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -9849,11 +9936,11 @@
       }
     },
     {
-      "model": "qwen/qwen3.8-max",
+      "model": "qwen/qwen3.8-max-0902",
       "model_info": {
-        "model": "qwen/qwen3.8-max",
-        "name": "Qwen: Qwen3.8 Max",
-        "description": "Qwen3.8 Max is the flagship model in Alibaba's Qwen3.8 series, the general-availability successor to the Qwen3.8 Max Preview. It is a multimodal reasoning model intended for complex reasoning, visual understanding,...",
+        "model": "qwen/qwen3.8-max-0902",
+        "name": "Qwen: Qwen3.8 Max (0902)",
+        "description": "Qwen3.8 Max 0902 is an updated snapshot of Qwen3.8 Max from Alibaba's Qwen team. It is a 2.4-trillion-parameter mixture-of-experts model that accepts text, image, and video input and returns text,...",
         "context_length": 1000000,
         "max_tokens": 131072,
         "input_modalities": [
@@ -9872,8 +9959,8 @@
           "structured_outputs"
         ],
         "support_url": [
-          "https://openrouter.ai/models/qwen/qwen3.8-max",
-          "https://openrouter.ai/api/v1/models/qwen/qwen3.8-max-20260803/endpoints"
+          "https://openrouter.ai/models/qwen/qwen3.8-max-0902",
+          "https://openrouter.ai/api/v1/models/qwen/qwen3.8-max-20260902/endpoints"
         ]
       }
     },
