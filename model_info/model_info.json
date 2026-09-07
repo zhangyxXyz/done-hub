@@ -4174,32 +4174,6 @@
       }
     },
     {
-      "model": "minimax/minimax-m2.7:free",
-      "model_info": {
-        "model": "minimax/minimax-m2.7:free",
-        "name": "MiniMax: MiniMax M2.7 (free)",
-        "description": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent...",
-        "context_length": 196608,
-        "max_tokens": 176947,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/minimax/minimax-m2.7:free",
-          "https://openrouter.ai/api/v1/models/minimax/minimax-m2.7-20260318/endpoints"
-        ]
-      }
-    },
-    {
       "model": "minimax/minimax-m3",
       "model_info": {
         "model": "minimax/minimax-m3",
@@ -4253,35 +4227,6 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/minimax/minimax-m3:batch",
-          "https://openrouter.ai/api/v1/models/minimax/minimax-m3-20260531/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "minimax/minimax-m3:free",
-      "model_info": {
-        "model": "minimax/minimax-m3:free",
-        "name": "MiniMax: MiniMax M3 (free)",
-        "description": "MiniMax-M3 is a multimodal foundation model from MiniMax. It supports text, image, and video inputs with text output, a 1M-token context window, and is suited for long-horizon agentic work, coding,...",
-        "context_length": 1048576,
-        "max_tokens": 943718,
-        "input_modalities": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/minimax/minimax-m3:free",
           "https://openrouter.ai/api/v1/models/minimax/minimax-m3-20260531/endpoints"
         ]
       }
@@ -4562,8 +4507,8 @@
         "model": "mistralai/mistral-medium-3-5:batch",
         "name": "Mistral: Mistral Medium 3.5 (batch)",
         "description": "Mistral Medium 3.5 is a dense 128B instruction-following model from Mistral AI. It supports text and image inputs with text output, and is designed for agentic workflows, coding, and complex...",
-        "context_length": 32768,
-        "max_tokens": 26214,
+        "context_length": 262144,
+        "max_tokens": 209715,
         "input_modalities": [
           "text",
           "image",

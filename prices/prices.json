@@ -3608,8 +3608,8 @@
     "model": "deepseek/deepseek-chat-v3-0324",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.25,
-    "output": 1
+    "input": 0.29,
+    "output": 1.14
   },
   {
     "model": "deepseek/deepseek-chat-v3.1",
@@ -3734,8 +3734,8 @@
     "model": "deepseek/deepseek-v4-flash-vision-exp",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.44,
-    "output": 1.32
+    "input": 0.22,
+    "output": 0.66
   },
   {
     "model": "deepseek/deepseek-v4-pro",
@@ -3748,8 +3748,8 @@
     "model": "deepseek/deepseek-v4-pro-0813",
     "type": "tokens",
     "channel_type": 20,
-    "input": 1.0494,
-    "output": 3.1482
+    "input": 0.66,
+    "output": 1.98
   },
   {
     "model": "deepseek/deepseek-v4-pro-0813:batch",
@@ -4767,13 +4767,6 @@
     "output": 1.2
   },
   {
-    "model": "minimax/minimax-m2.7:free",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 0,
-    "output": 0
-  },
-  {
     "model": "minimax/minimax-m3",
     "type": "tokens",
     "channel_type": 20,
@@ -4786,13 +4779,6 @@
     "channel_type": 20,
     "input": 0.3,
     "output": 1.2
-  },
-  {
-    "model": "minimax/minimax-m3:free",
-    "type": "tokens",
-    "channel_type": 20,
-    "input": 0,
-    "output": 0
   },
   {
     "model": "mistralai/codestral-2508",
@@ -7122,8 +7108,8 @@
     "model": "tencent/hy3",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.132,
-    "output": 0.528
+    "input": 0.0825,
+    "output": 0.33
   },
   {
     "model": "tencent/hy3-preview",
