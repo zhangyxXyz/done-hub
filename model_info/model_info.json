@@ -9128,7 +9128,7 @@
         "name": "Qwen: Qwen3 Next 80B A3B Thinking",
         "description": "Qwen3-Next-80B-A3B-Thinking is a reasoning-first chat model in the Qwen3-Next line that outputs structured “thinking” traces by default. It’s designed for hard multi-step problems; math proofs, code synthesis/debugging, logic, and agentic...",
         "context_length": 262144,
-        "max_tokens": 32768,
+        "max_tokens": 235929,
         "input_modalities": [
           "text"
         ],
@@ -11114,7 +11114,7 @@
         "name": "Z.ai: GLM 4.6",
         "description": "Compared with GLM-4.5, this generation brings several key improvements: Longer context window: The context window has been expanded from 128K to 200K tokens, enabling the model to handle more complex...",
         "context_length": 204800,
-        "max_tokens": 131072,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -11325,7 +11325,7 @@
         "name": "Z.ai: GLM 5.3",
         "description": "GLM-5.3 is a large-scale reasoning model from Z.ai, built for complex software engineering and long-horizon agent tasks. It supports text input and output with a 1M-token context window, and improves...",
         "context_length": 1310720,
-        "max_tokens": 262144,
+        "max_tokens": 943718,
         "input_modalities": [
           "text"
         ],
@@ -11554,7 +11554,7 @@
         "name": "DeepSeek V4 Flash Latest",
         "description": "This model always redirects to the latest model in the DeepSeek V4 Flash family.",
         "context_length": 1310720,
-        "max_tokens": 943718,
+        "max_tokens": 393216,
         "input_modalities": [
           "text"
         ],
@@ -11760,7 +11760,7 @@
         "name": "Z.ai: GLM Flash Latest",
         "description": "This model always redirects to the latest model in the GLM Flash family.",
         "context_length": 1310720,
-        "max_tokens": 943718,
+        "max_tokens": 131072,
         "input_modalities": [
           "text",
           "image",
@@ -11789,7 +11789,7 @@
         "name": "Z.ai: GLM Latest",
         "description": "This model always redirects to the latest GLM model from Z.ai.",
         "context_length": 1310720,
-        "max_tokens": 235929,
+        "max_tokens": 943718,
         "input_modalities": [
           "text"
         ],
