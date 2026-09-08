@@ -1488,7 +1488,7 @@
         "name": "DeepSeek: DeepSeek V3.1",
         "description": "DeepSeek-V3.1 is a large hybrid reasoning model (671B parameters, 37B active) that supports both thinking and non-thinking modes via prompt templates. It extends the DeepSeek-V3 base with a two-phase long-context...",
         "context_length": 163840,
-        "max_tokens": 144900,
+        "max_tokens": 32768,
         "input_modalities": [
           "text"
         ],
@@ -1694,7 +1694,7 @@
         "name": "DeepSeek: DeepSeek V4 Flash 0731",
         "description": "DeepSeek V4 Flash 0731 is a sparse mixture-of-experts model from DeepSeek, with 13B active parameters out of 284B total. This re-post-trained revision is suited for coding, reasoning, and agent workflows....",
         "context_length": 1310720,
-        "max_tokens": 131072,
+        "max_tokens": 943718,
         "input_modalities": [
           "text"
         ],
@@ -4823,7 +4823,7 @@
         "name": "MoonshotAI: Kimi K2 Thinking",
         "description": "Kimi K2 Thinking is Moonshot AI’s most advanced open reasoning model to date, extending the K2 series into agentic, long-horizon reasoning. Built on the trillion-parameter Mixture-of-Experts (MoE) architecture introduced in...",
         "context_length": 262144,
-        "max_tokens": 100352,
+        "max_tokens": 235929,
         "input_modalities": [
           "text"
         ],
@@ -8640,7 +8640,7 @@
         "name": "Qwen: Qwen3 14B",
         "description": "Qwen3-14B is a dense 14.8B parameter causal language model from the Qwen3 series, designed for both complex reasoning and efficient dialogue. It supports seamless switching between a \"thinking\" mode for...",
         "context_length": 131072,
-        "max_tokens": 16384,
+        "max_tokens": 8192,
         "input_modalities": [
           "text"
         ],
@@ -11059,7 +11059,7 @@
         "name": "Z.ai: GLM 4.6",
         "description": "Compared with GLM-4.5, this generation brings several key improvements: Longer context window: The context window has been expanded from 128K to 200K tokens, enabling the model to handle more complex...",
         "context_length": 204800,
-        "max_tokens": 16384,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -11140,7 +11140,7 @@
         "name": "Z.ai: GLM 4.7 Flash",
         "description": "As a 30B-class SOTA model, GLM-4.7-Flash offers a new option that balances performance and efficiency. It is further optimized for agentic coding use cases, strengthening coding capabilities, long-horizon task planning,...",
         "context_length": 202752,
-        "max_tokens": 16384,
+        "max_tokens": 117964,
         "input_modalities": [
           "text"
         ],
