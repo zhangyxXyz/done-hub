@@ -1768,6 +1768,34 @@
       }
     },
     {
+      "model": "deepseek/deepseek-v4-flash-vision-exp:batch",
+      "model_info": {
+        "model": "deepseek/deepseek-v4-flash-vision-exp:batch",
+        "name": "DeepSeek: DeepSeek V4 Flash Vision Exp (batch)",
+        "description": "DeepSeek V4 Flash Vision Exp is an experimental vision-enabled version of [DeepSeek V4 Flash 0731](https://openrouter.ai/deepseek/deepseek-v4-flash-0731) from DeepSeek, adding image understanding while matching the base model on text capabilities including agents,...",
+        "context_length": 1048576,
+        "max_tokens": 943718,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/deepseek/deepseek-v4-flash-vision-exp:batch",
+          "https://openrouter.ai/api/v1/models/deepseek/deepseek-v4-flash-vision-exp-20260821/endpoints"
+        ]
+      }
+    },
+    {
       "model": "deepseek/deepseek-v4-pro",
       "model_info": {
         "model": "deepseek/deepseek-v4-pro",
@@ -1800,7 +1828,7 @@
         "name": "DeepSeek: DeepSeek V4 Pro 0813",
         "description": "DeepSeek V4 Pro 0813 is a large-scale mixture-of-experts model from DeepSeek. This is the GA release of DeepSeek V4 Pro.",
         "context_length": 1048576,
-        "max_tokens": 384000,
+        "max_tokens": 393216,
         "input_modalities": [
           "text"
         ],
@@ -3278,10 +3306,10 @@
       }
     },
     {
-      "model": "inception/mercury-2.5-preview",
+      "model": "inception/mercury-2.5",
       "model_info": {
-        "model": "inception/mercury-2.5-preview",
-        "name": "Inception: Mercury 2.5 Preview",
+        "model": "inception/mercury-2.5",
+        "name": "Inception: Mercury 2.5",
         "description": "Mercury 2.5 is the fastest reasoning LLM, and the latest diffusion LLM (dLLM) from Inception. Instead of generating tokens sequentially, Mercury 2.5 produces and refines multiple tokens in parallel, achieving...",
         "context_length": 260000,
         "max_tokens": 65536,
@@ -3298,8 +3326,8 @@
           "structured_outputs"
         ],
         "support_url": [
-          "https://openrouter.ai/models/inception/mercury-2.5-preview",
-          "https://openrouter.ai/api/v1/models/inception/mercury-2.5-preview-20260831/endpoints"
+          "https://openrouter.ai/models/inception/mercury-2.5",
+          "https://openrouter.ai/api/v1/models/inception/mercury-2.5-20260908/endpoints"
         ]
       }
     },
@@ -4823,7 +4851,7 @@
         "name": "MoonshotAI: Kimi K2 Thinking",
         "description": "Kimi K2 Thinking is Moonshot AI’s most advanced open reasoning model to date, extending the K2 series into agentic, long-horizon reasoning. Built on the trillion-parameter Mixture-of-Experts (MoE) architecture introduced in...",
         "context_length": 262144,
-        "max_tokens": 235929,
+        "max_tokens": 100352,
         "input_modalities": [
           "text"
         ],
@@ -5032,11 +5060,37 @@
       }
     },
     {
-      "model": "nex-agi/nex-n2-mini",
+      "model": "nex-agi/nex-n2.5-mini:free",
       "model_info": {
-        "model": "nex-agi/nex-n2-mini",
-        "name": "Nex AGI: Nex-N2-Mini",
-        "description": "Nex-N2-Mini is an open-source agentic mixture-of-experts model from Nex AGI, the smaller sibling in the Nex-N2 series. It accepts text and image input and is built for coding, tool use,...",
+        "model": "nex-agi/nex-n2.5-mini:free",
+        "name": "Nex AGI: Nex-N2.5-Mini (free)",
+        "description": "Nex-N2.5 is an agentic model built to turn goals into working, verified outcomes. Its core strength is agentic coding within a visual feedback loop: it can explore codebases, implement multi-file...",
+        "context_length": 262144,
+        "max_tokens": 235929,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/nex-agi/nex-n2.5-mini:free",
+          "https://openrouter.ai/api/v1/models/nex-agi/nex-n2.5-mini-20260908/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "nex-agi/nex-n2.5-pro:free",
+      "model_info": {
+        "model": "nex-agi/nex-n2.5-pro:free",
+        "name": "Nex AGI: Nex-N2.5-Pro (free)",
+        "description": "Nex-N2.5 is an agentic model built to turn goals into working, verified outcomes. Its core strength is agentic coding within a visual feedback loop: it can explore codebases, implement multi-file...",
         "context_length": 262144,
         "max_tokens": 235929,
         "input_modalities": [
@@ -5054,35 +5108,8 @@
           "structured_outputs"
         ],
         "support_url": [
-          "https://openrouter.ai/models/nex-agi/nex-n2-mini",
-          "https://openrouter.ai/api/v1/models/nex-agi/nex-n2-mini/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "nex-agi/nex-n2-pro",
-      "model_info": {
-        "model": "nex-agi/nex-n2-pro",
-        "name": "Nex AGI: Nex-N2-Pro",
-        "description": "Nex-N2-Pro is an agentic mixture-of-experts model from Nex AGI, with 17B active parameters out of 397B total. Built on the Qwen3.5 architecture, it accepts text and image input and produces...",
-        "context_length": 262144,
-        "max_tokens": 235929,
-        "input_modalities": [
-          "text",
-          "image"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/nex-agi/nex-n2-pro",
-          "https://openrouter.ai/api/v1/models/nex-agi/nex-n2-pro/endpoints"
+          "https://openrouter.ai/models/nex-agi/nex-n2.5-pro:free",
+          "https://openrouter.ai/api/v1/models/nex-agi/nex-n2.5-pro-20260907/endpoints"
         ]
       }
     },
@@ -9378,7 +9405,7 @@
         "name": "Qwen: Qwen3.5 397B A17B",
         "description": "The Qwen3.5 series 397B-A17B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. It delivers...",
         "context_length": 262144,
-        "max_tokens": 65536,
+        "max_tokens": 235929,
         "input_modalities": [
           "text",
           "image",
@@ -11264,6 +11291,32 @@
       }
     },
     {
+      "model": "z-ai/glm-5.2:batch",
+      "model_info": {
+        "model": "z-ai/glm-5.2:batch",
+        "name": "Z.ai: GLM 5.2 (batch)",
+        "description": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...",
+        "context_length": 1048576,
+        "max_tokens": 943718,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/z-ai/glm-5.2:batch",
+          "https://openrouter.ai/api/v1/models/z-ai/glm-5.2-20260616/endpoints"
+        ]
+      }
+    },
+    {
       "model": "z-ai/glm-5.3",
       "model_info": {
         "model": "z-ai/glm-5.3",
@@ -11324,8 +11377,8 @@
         "model": "z-ai/glm-5.3-flash:batch",
         "name": "Z.ai: GLM 5.3 Flash (batch)",
         "description": "GLM-5.3-Flash is a native multimodal model from Z.ai. It is suited for efficient coding and long-horizon agent tasks. Its hybrid sparse and linear attention architecture maintains accurate long-context behavior while...",
-        "context_length": 1048575,
-        "max_tokens": 943717,
+        "context_length": 1048576,
+        "max_tokens": 943718,
         "input_modalities": [
           "text",
           "image",
@@ -11344,6 +11397,32 @@
         "support_url": [
           "https://openrouter.ai/models/z-ai/glm-5.3-flash:batch",
           "https://openrouter.ai/api/v1/models/z-ai/glm-5.3-flash-20260826/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "z-ai/glm-5.3:batch",
+      "model_info": {
+        "model": "z-ai/glm-5.3:batch",
+        "name": "Z.ai: GLM 5.3 (batch)",
+        "description": "GLM-5.3 is a large-scale reasoning model from Z.ai, built for complex software engineering and long-horizon agent tasks. It supports text input and output with a 1M-token context window, and improves...",
+        "context_length": 1048576,
+        "max_tokens": 943718,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/z-ai/glm-5.3:batch",
+          "https://openrouter.ai/api/v1/models/z-ai/glm-5.3-20260816/endpoints"
         ]
       }
     },
@@ -11705,7 +11784,7 @@
         "name": "Z.ai: GLM Flash Latest",
         "description": "This model always redirects to the latest model in the GLM Flash family.",
         "context_length": 1310720,
-        "max_tokens": 131072,
+        "max_tokens": 943718,
         "input_modalities": [
           "text",
           "image",
@@ -11734,7 +11813,7 @@
         "name": "Z.ai: GLM Latest",
         "description": "This model always redirects to the latest GLM model from Z.ai.",
         "context_length": 1310720,
-        "max_tokens": 943718,
+        "max_tokens": 128000,
         "input_modalities": [
           "text"
         ],
