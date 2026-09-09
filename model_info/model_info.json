@@ -1828,7 +1828,7 @@
         "name": "DeepSeek: DeepSeek V4 Pro 0813",
         "description": "DeepSeek V4 Pro 0813 is a large-scale mixture-of-experts model from DeepSeek. This is the GA release of DeepSeek V4 Pro.",
         "context_length": 1048576,
-        "max_tokens": 384000,
+        "max_tokens": 393216,
         "input_modalities": [
           "text"
         ],
@@ -5068,13 +5068,15 @@
         "context_length": 262144,
         "max_tokens": 235929,
         "input_modalities": [
-          "text"
+          "text",
+          "image"
         ],
         "output_modalities": [
           "text"
         ],
         "tags": [
           "openrouter",
+          "vision",
           "tools",
           "reasoning",
           "structured_outputs"
@@ -5183,31 +5185,6 @@
         "support_url": [
           "https://openrouter.ai/models/nousresearch/hermes-4-405b",
           "https://openrouter.ai/api/v1/models/nousresearch/hermes-4-405b/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "nousresearch/hermes-4-70b",
-      "model_info": {
-        "model": "nousresearch/hermes-4-70b",
-        "name": "Nous: Hermes 4 70B",
-        "description": "Hermes 4 70B is a hybrid reasoning model from Nous Research, built on Meta-Llama-3.1-70B. It introduces the same hybrid mode as the larger 405B release, allowing the model to either...",
-        "context_length": 131072,
-        "max_tokens": 117964,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/nousresearch/hermes-4-70b",
-          "https://openrouter.ai/api/v1/models/nousresearch/hermes-4-70b/endpoints"
         ]
       }
     },
@@ -11271,7 +11248,7 @@
         "name": "Z.ai: GLM 5.2",
         "description": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 128000,
         "input_modalities": [
           "text"
         ],
@@ -11322,7 +11299,7 @@
         "model": "z-ai/glm-5.3",
         "name": "Z.ai: GLM 5.3",
         "description": "GLM-5.3 is a large-scale reasoning model from Z.ai, built for complex software engineering and long-horizon agent tasks. It supports text input and output with a 1M-token context window, and improves...",
-        "context_length": 1310720,
+        "context_length": 1048576,
         "max_tokens": 943718,
         "input_modalities": [
           "text"
@@ -11784,7 +11761,7 @@
         "name": "Z.ai: GLM Flash Latest",
         "description": "This model always redirects to the latest model in the GLM Flash family.",
         "context_length": 1310720,
-        "max_tokens": 943718,
+        "max_tokens": 131072,
         "input_modalities": [
           "text",
           "image",
@@ -11812,7 +11789,7 @@
         "model": "~z-ai/glm-latest",
         "name": "Z.ai: GLM Latest",
         "description": "This model always redirects to the latest GLM model from Z.ai.",
-        "context_length": 1310720,
+        "context_length": 1048576,
         "max_tokens": 128000,
         "input_modalities": [
           "text"
