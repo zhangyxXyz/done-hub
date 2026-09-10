@@ -1828,7 +1828,7 @@
         "name": "DeepSeek: DeepSeek V4 Pro 0813",
         "description": "DeepSeek V4 Pro 0813 is a large-scale mixture-of-experts model from DeepSeek. This is the GA release of DeepSeek V4 Pro.",
         "context_length": 1048576,
-        "max_tokens": 384000,
+        "max_tokens": 393216,
         "input_modalities": [
           "text"
         ],
@@ -1878,7 +1878,7 @@
       "model_info": {
         "model": "deepseek/deepseek-v4.1-flash",
         "name": "DeepSeek: DeepSeek V4.1 Flash",
-        "description": "DeepSeek V4.1 Flash is a sparse mixture-of-experts model from DeepSeek, and the cost-efficient tier of the V4.1 family. DeepSeek reports that it exceeds V4 Pro on performance, speed, and task...",
+        "description": "DeepSeek V4.1 Flash is a sparse mixture-of-experts model from DeepSeek, and the first built on the company's Causal Encoder-Decoder (CED) architecture. It activates 8B parameters on input and 16B on...",
         "context_length": 1048576,
         "max_tokens": 384000,
         "input_modalities": [
@@ -3039,7 +3039,7 @@
         "name": "Google: Gemma 4 26B A4B ",
         "description": "Gemma 4 26B A4B IT is an instruction-tuned Mixture-of-Experts (MoE) model from Google DeepMind. Despite 25.2B total parameters, only 3.8B activate per token during inference — delivering near-31B quality at...",
         "context_length": 262144,
-        "max_tokens": 16384,
+        "max_tokens": 32768,
         "input_modalities": [
           "image",
           "text",
@@ -3458,6 +3458,34 @@
         "support_url": [
           "https://openrouter.ai/models/inclusionai/ling-3.0-flash-sante:free",
           "https://openrouter.ai/api/v1/models/inclusionai/ling-3.0-flash-sante-20260904/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "inclusionai/ling-3.0-flash-vl:free",
+      "model_info": {
+        "model": "inclusionai/ling-3.0-flash-vl:free",
+        "name": "inclusionAI: Ling 3.0 Flash VL (free)",
+        "description": "Ling 3.0 Flash VL builds on Ling 3.0 Flash (124B total / 5.5B active MoE from InclusionAI), further strengthening its language capabilities while adding native visual perception and advanced visual...",
+        "context_length": 262144,
+        "max_tokens": 32768,
+        "input_modalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/inclusionai/ling-3.0-flash-vl:free",
+          "https://openrouter.ai/api/v1/models/inclusionai/ling-3.0-flash-vl-20260910/endpoints"
         ]
       }
     },
@@ -4184,7 +4212,7 @@
         "name": "MiniMax: MiniMax M2.5",
         "description": "MiniMax-M2.5 is a SOTA large language model designed for real-world productivity. Trained in a diverse range of complex real-world digital working environments, M2.5 builds upon the coding expertise of M2.1...",
         "context_length": 204800,
-        "max_tokens": 131072,
+        "max_tokens": 128000,
         "input_modalities": [
           "text"
         ],
@@ -8938,7 +8966,7 @@
         "name": "Qwen: Qwen3 30B A3B Instruct 2507",
         "description": "Qwen3-30B-A3B-Instruct-2507 is a 30.5B-parameter mixture-of-experts language model from Qwen, with 3.3B active parameters per inference. It operates in non-thinking mode and is designed for high-quality instruction following, multilingual understanding, and...",
         "context_length": 262144,
-        "max_tokens": 235929,
+        "max_tokens": 32000,
         "input_modalities": [
           "text"
         ],
@@ -11308,7 +11336,7 @@
         "model": "z-ai/glm-4.7-flash",
         "name": "Z.ai: GLM 4.7 Flash",
         "description": "As a 30B-class SOTA model, GLM-4.7-Flash offers a new option that balances performance and efficiency. It is further optimized for agentic coding use cases, strengthening coding capabilities, long-horizon task planning,...",
-        "context_length": 202752,
+        "context_length": 200000,
         "max_tokens": 117964,
         "input_modalities": [
           "text"
@@ -11413,7 +11441,7 @@
         "name": "Z.ai: GLM 5.2",
         "description": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 128000,
         "input_modalities": [
           "text"
         ],
