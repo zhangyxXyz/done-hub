@@ -3601,8 +3601,8 @@
     "model": "deepseek/deepseek-chat",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.32,
-    "output": 0.89
+    "input": 0.2574,
+    "output": 1.0287
   },
   {
     "model": "deepseek/deepseek-chat-v3-0324",
@@ -3713,8 +3713,8 @@
     "model": "deepseek/deepseek-v4-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.07,
-    "output": 0.14
+    "input": 0.088606,
+    "output": 0.177212
   },
   {
     "model": "deepseek/deepseek-v4-flash-0731",
@@ -3748,15 +3748,15 @@
     "model": "deepseek/deepseek-v4-pro",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.87,
-    "output": 1.74
+    "input": 0.95526,
+    "output": 1.91052
   },
   {
     "model": "deepseek/deepseek-v4-pro-0813",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.57948,
-    "output": 1.73844
+    "input": 1.0494,
+    "output": 3.1482
   },
   {
     "model": "deepseek/deepseek-v4-pro-0813:batch",
@@ -3764,6 +3764,13 @@
     "channel_type": 20,
     "input": 0.66,
     "output": 1.98
+  },
+  {
+    "model": "deepseek/deepseek-v4.1-flash",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.3,
+    "output": 1.2
   },
   {
     "model": "dots-studio/dots-3-note-preview:free",
@@ -4756,8 +4763,8 @@
     "model": "minimax/minimax-m2.5",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.27,
-    "output": 1.08
+    "input": 0.3,
+    "output": 1.2
   },
   {
     "model": "minimax/minimax-m2.5:free",
@@ -4793,6 +4800,13 @@
     "channel_type": 20,
     "input": 0.3,
     "output": 0.9
+  },
+  {
+    "model": "mistralai/codestral-2508:batch",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.15,
+    "output": 0.45
   },
   {
     "model": "mistralai/codestral-embed-2505",
@@ -4872,6 +4886,13 @@
     "output": 0.15
   },
   {
+    "model": "mistralai/ministral-8b-2512:batch",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.075,
+    "output": 0.075
+  },
+  {
     "model": "mistralai/mistral-7b-instruct",
     "type": "tokens",
     "channel_type": 20,
@@ -4942,6 +4963,13 @@
     "output": 1.5
   },
   {
+    "model": "mistralai/mistral-large-2512:batch",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.25,
+    "output": 0.75
+  },
+  {
     "model": "mistralai/mistral-medium-3",
     "type": "tokens",
     "channel_type": 20,
@@ -4970,6 +4998,13 @@
     "output": 2
   },
   {
+    "model": "mistralai/mistral-medium-3.1:batch",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.2,
+    "output": 1
+  },
+  {
     "model": "mistralai/mistral-nemo",
     "type": "tokens",
     "channel_type": 20,
@@ -4996,6 +5031,13 @@
     "channel_type": 20,
     "input": 0.15,
     "output": 0.6
+  },
+  {
+    "model": "mistralai/mistral-small-2603:batch",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.075,
+    "output": 0.3
   },
   {
     "model": "mistralai/mistral-small-3.1-24b-instruct",
@@ -6590,8 +6632,8 @@
     "model": "qwen/qwen3-30b-a3b-instruct-2507",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.04815,
-    "output": 0.19305
+    "input": 0.09,
+    "output": 0.3
   },
   {
     "model": "qwen/qwen3-30b-a3b-thinking-2507",
@@ -6779,8 +6821,8 @@
     "model": "qwen/qwen3.5-122b-a10b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.29,
-    "output": 2.4
+    "input": 0.26,
+    "output": 2.08
   },
   {
     "model": "qwen/qwen3.5-27b",
@@ -7129,8 +7171,8 @@
     "model": "tencent/hy3",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.0825,
-    "output": 0.33
+    "input": 0.132,
+    "output": 0.528
   },
   {
     "model": "tencent/hy3-preview",
@@ -7584,8 +7626,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.28,
-    "output": 0.88
+    "input": 0.966,
+    "output": 3.036
   },
   {
     "model": "z-ai/glm-5.2:batch",
@@ -7724,8 +7766,8 @@
     "model": "~z-ai/glm-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 1.113,
-    "output": 3.498
+    "input": 1.085,
+    "output": 3.41
   },
   {
     "model": "deep-research-pro-preview-12-2025-gt-128k",

@@ -1438,7 +1438,7 @@
         "name": "DeepSeek: DeepSeek V3",
         "description": "DeepSeek-V3 is the latest model from the DeepSeek team, building upon the instruction following and coding abilities of the previous versions. Pre-trained on nearly 15 trillion tokens, the reported evaluations...",
         "context_length": 163840,
-        "max_tokens": 16384,
+        "max_tokens": 16000,
         "input_modalities": [
           "text"
         ],
@@ -1828,7 +1828,7 @@
         "name": "DeepSeek: DeepSeek V4 Pro 0813",
         "description": "DeepSeek V4 Pro 0813 is a large-scale mixture-of-experts model from DeepSeek. This is the GA release of DeepSeek V4 Pro.",
         "context_length": 1048576,
-        "max_tokens": 393216,
+        "max_tokens": 384000,
         "input_modalities": [
           "text"
         ],
@@ -1870,6 +1870,34 @@
         "support_url": [
           "https://openrouter.ai/models/deepseek/deepseek-v4-pro-0813:batch",
           "https://openrouter.ai/api/v1/models/deepseek/deepseek-v4-pro-20260813/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "deepseek/deepseek-v4.1-flash",
+      "model_info": {
+        "model": "deepseek/deepseek-v4.1-flash",
+        "name": "DeepSeek: DeepSeek V4.1 Flash",
+        "description": "DeepSeek V4.1 Flash is a sparse mixture-of-experts model from DeepSeek, and the cost-efficient tier of the V4.1 family. DeepSeek reports that it exceeds V4 Pro on performance, speed, and task...",
+        "context_length": 1048576,
+        "max_tokens": 384000,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/deepseek/deepseek-v4.1-flash",
+          "https://openrouter.ai/api/v1/models/deepseek/deepseek-v4.1-flash-20260910/endpoints"
         ]
       }
     },
@@ -4156,7 +4184,7 @@
         "name": "MiniMax: MiniMax M2.5",
         "description": "MiniMax-M2.5 is a SOTA large language model designed for real-world productivity. Trained in a diverse range of complex real-world digital working environments, M2.5 builds upon the coding expertise of M2.1...",
         "context_length": 204800,
-        "max_tokens": 128000,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -4286,6 +4314,32 @@
       }
     },
     {
+      "model": "mistralai/codestral-2508:batch",
+      "model_info": {
+        "model": "mistralai/codestral-2508:batch",
+        "name": "Mistral: Codestral 2508 (batch)",
+        "description": "Mistral's cutting-edge language model for coding released end of July 2025. Codestral specializes in low-latency, high-frequency tasks such as fill-in-the-middle (FIM), code correction and test generation.\n\n[Blog Post](https://mistral.ai/news/codestral-25-08)",
+        "context_length": 256000,
+        "max_tokens": 204800,
+        "input_modalities": [
+          "text",
+          "file"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/mistralai/codestral-2508:batch",
+          "https://openrouter.ai/api/v1/models/mistralai/codestral-2508/endpoints"
+        ]
+      }
+    },
+    {
       "model": "mistralai/devstral-2512",
       "model_info": {
         "model": "mistralai/devstral-2512",
@@ -4393,6 +4447,33 @@
       }
     },
     {
+      "model": "mistralai/ministral-8b-2512:batch",
+      "model_info": {
+        "model": "mistralai/ministral-8b-2512:batch",
+        "name": "Mistral: Ministral 3 8B 2512 (batch)",
+        "description": "A balanced model in the Ministral 3 family, Ministral 3 8B is a powerful, efficient tiny language model with vision capabilities.",
+        "context_length": 262144,
+        "max_tokens": 209715,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/mistralai/ministral-8b-2512:batch",
+          "https://openrouter.ai/api/v1/models/mistralai/ministral-8b-2512/endpoints"
+        ]
+      }
+    },
+    {
       "model": "mistralai/mistral-large",
       "model_info": {
         "model": "mistralai/mistral-large",
@@ -4468,6 +4549,34 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/mistralai/mistral-large-2512",
+          "https://openrouter.ai/api/v1/models/mistralai/mistral-large-2512/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "mistralai/mistral-large-2512:batch",
+      "model_info": {
+        "model": "mistralai/mistral-large-2512:batch",
+        "name": "Mistral: Mistral Large 3 2512 (batch)",
+        "description": "Mistral Large 3 2512 is Mistral’s most capable model to date, featuring a sparse mixture-of-experts architecture with 41B active parameters (675B total), and released under the Apache 2.0 license.",
+        "context_length": 262144,
+        "max_tokens": 209715,
+        "input_modalities": [
+          "text",
+          "image",
+          "file"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/mistralai/mistral-large-2512:batch",
           "https://openrouter.ai/api/v1/models/mistralai/mistral-large-2512/endpoints"
         ]
       }
@@ -4587,6 +4696,34 @@
       }
     },
     {
+      "model": "mistralai/mistral-medium-3.1:batch",
+      "model_info": {
+        "model": "mistralai/mistral-medium-3.1:batch",
+        "name": "Mistral: Mistral Medium 3.1 (batch)",
+        "description": "Mistral Medium 3.1 is an updated version of Mistral Medium 3, which is a high-performance enterprise-grade language model designed to deliver frontier-level capabilities at significantly reduced operational cost. It balances...",
+        "context_length": 131072,
+        "max_tokens": 104857,
+        "input_modalities": [
+          "text",
+          "image",
+          "file"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/mistralai/mistral-medium-3.1:batch",
+          "https://openrouter.ai/api/v1/models/mistralai/mistral-medium-3.1/endpoints"
+        ]
+      }
+    },
+    {
       "model": "mistralai/mistral-nemo",
       "model_info": {
         "model": "mistralai/mistral-nemo",
@@ -4685,6 +4822,34 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/mistralai/mistral-small-2603",
+          "https://openrouter.ai/api/v1/models/mistralai/mistral-small-2603/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "mistralai/mistral-small-2603:batch",
+      "model_info": {
+        "model": "mistralai/mistral-small-2603:batch",
+        "name": "Mistral: Mistral Small 4 (batch)",
+        "description": "Mistral Small 4 is the next major release in the Mistral Small family, unifying the capabilities of several flagship Mistral models into a single system. It combines strong reasoning from...",
+        "context_length": 262144,
+        "max_tokens": 209715,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/mistralai/mistral-small-2603:batch",
           "https://openrouter.ai/api/v1/models/mistralai/mistral-small-2603/endpoints"
         ]
       }
@@ -4851,7 +5016,7 @@
         "name": "MoonshotAI: Kimi K2 Thinking",
         "description": "Kimi K2 Thinking is Moonshot AI’s most advanced open reasoning model to date, extending the K2 series into agentic, long-horizon reasoning. Built on the trillion-parameter Mixture-of-Experts (MoE) architecture introduced in...",
         "context_length": 262144,
-        "max_tokens": 235929,
+        "max_tokens": 100352,
         "input_modalities": [
           "text"
         ],
@@ -8773,7 +8938,7 @@
         "name": "Qwen: Qwen3 30B A3B Instruct 2507",
         "description": "Qwen3-30B-A3B-Instruct-2507 is a 30.5B-parameter mixture-of-experts language model from Qwen, with 3.3B active parameters per inference. It operates in non-thinking mode and is designed for high-quality instruction following, multilingual understanding, and...",
         "context_length": 262144,
-        "max_tokens": 32000,
+        "max_tokens": 235929,
         "input_modalities": [
           "text"
         ],
@@ -9295,7 +9460,7 @@
         "name": "Qwen: Qwen3.5-122B-A10B",
         "description": "The Qwen3.5 122B-A10B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. In terms of...",
         "context_length": 262144,
-        "max_tokens": 81920,
+        "max_tokens": 65536,
         "input_modalities": [
           "text",
           "image",
@@ -10451,7 +10616,7 @@
         "name": "Thinking Machines: Inkling",
         "description": "Inkling is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 41B active parameters out of 975B total. It is designed for general-purpose reasoning, coding, agentic and tool-use systems,...",
         "context_length": 1048576,
-        "max_tokens": 471859,
+        "max_tokens": 32768,
         "input_modalities": [
           "text",
           "image",
@@ -11248,7 +11413,7 @@
         "name": "Z.ai: GLM 5.2",
         "description": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...",
         "context_length": 1048576,
-        "max_tokens": 128000,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -11299,7 +11464,7 @@
         "model": "z-ai/glm-5.3",
         "name": "Z.ai: GLM 5.3",
         "description": "GLM-5.3 is a large-scale reasoning model from Z.ai, built for complex software engineering and long-horizon agent tasks. It supports text input and output with a 1M-token context window, and improves...",
-        "context_length": 1048576,
+        "context_length": 1310720,
         "max_tokens": 943718,
         "input_modalities": [
           "text"
@@ -11789,7 +11954,7 @@
         "model": "~z-ai/glm-latest",
         "name": "Z.ai: GLM Latest",
         "description": "This model always redirects to the latest GLM model from Z.ai.",
-        "context_length": 1048576,
+        "context_length": 1310720,
         "max_tokens": 128000,
         "input_modalities": [
           "text"
