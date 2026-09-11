@@ -1828,7 +1828,7 @@
         "name": "DeepSeek: DeepSeek V4 Pro 0813",
         "description": "DeepSeek V4 Pro 0813 is a large-scale mixture-of-experts model from DeepSeek. This is the GA release of DeepSeek V4 Pro.",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 384000,
         "input_modalities": [
           "text"
         ],
@@ -3462,6 +3462,35 @@
       }
     },
     {
+      "model": "inclusionai/ling-3.0-flash-vl",
+      "model_info": {
+        "model": "inclusionai/ling-3.0-flash-vl",
+        "name": "inclusionAI: Ling 3.0 Flash VL",
+        "description": "Ling 3.0 Flash VL builds on Ling 3.0 Flash (124B total / 5.5B active MoE from InclusionAI), further strengthening its language capabilities while adding native visual perception and advanced visual...",
+        "context_length": 131072,
+        "max_tokens": 32768,
+        "input_modalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/inclusionai/ling-3.0-flash-vl",
+          "https://openrouter.ai/api/v1/models/inclusionai/ling-3.0-flash-vl-20260910/endpoints"
+        ]
+      }
+    },
+    {
       "model": "inclusionai/ling-3.0-flash-vl:free",
       "model_info": {
         "model": "inclusionai/ling-3.0-flash-vl:free",
@@ -3621,7 +3650,7 @@
         "name": "Meta: Llama 3.1 70B Instruct",
         "description": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 70B instruct-tuned version is optimized for high quality dialogue usecases. It has demonstrated strong...",
         "context_length": 131072,
-        "max_tokens": 8192,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -4212,7 +4241,7 @@
         "name": "MiniMax: MiniMax M2.5",
         "description": "MiniMax-M2.5 is a SOTA large language model designed for real-world productivity. Trained in a diverse range of complex real-world digital working environments, M2.5 builds upon the coding expertise of M2.1...",
         "context_length": 204800,
-        "max_tokens": 131072,
+        "max_tokens": 128000,
         "input_modalities": [
           "text"
         ],
@@ -11499,7 +11528,7 @@
         "name": "Z.ai: GLM 5.2",
         "description": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 182476,
         "input_modalities": [
           "text"
         ],
@@ -11919,11 +11948,11 @@
       }
     },
     {
-      "model": "~openai/gpt-latest",
+      "model": "~openai/gpt-astra-latest",
       "model_info": {
-        "model": "~openai/gpt-latest",
-        "name": "OpenAI GPT Latest",
-        "description": "This model always redirects to the latest model in the OpenAI GPT family.",
+        "model": "~openai/gpt-astra-latest",
+        "name": "OpenAI GPT Astra Latest",
+        "description": "This model always redirects to the latest model in the OpenAI GPT Astra family.",
         "context_length": 1050000,
         "max_tokens": 128000,
         "input_modalities": [
@@ -11942,8 +11971,37 @@
           "structured_outputs"
         ],
         "support_url": [
-          "https://openrouter.ai/models/~openai/gpt-latest",
-          "https://openrouter.ai/api/v1/models/~openai/gpt-latest/endpoints"
+          "https://openrouter.ai/models/~openai/gpt-astra-latest",
+          "https://openrouter.ai/api/v1/models/~openai/gpt-astra-latest/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "~openai/gpt-luna-latest",
+      "model_info": {
+        "model": "~openai/gpt-luna-latest",
+        "name": "OpenAI GPT Luna Latest",
+        "description": "This model always redirects to the latest model in the OpenAI GPT Luna family.",
+        "context_length": 1050000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "file",
+          "image",
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/~openai/gpt-luna-latest",
+          "https://openrouter.ai/api/v1/models/~openai/gpt-luna-latest/endpoints"
         ]
       }
     },
@@ -11973,6 +12031,64 @@
         "support_url": [
           "https://openrouter.ai/models/~openai/gpt-mini-latest",
           "https://openrouter.ai/api/v1/models/~openai/gpt-mini-latest/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "~openai/gpt-sol-latest",
+      "model_info": {
+        "model": "~openai/gpt-sol-latest",
+        "name": "OpenAI GPT Sol Latest",
+        "description": "This model always redirects to the latest model in the OpenAI GPT Sol family.",
+        "context_length": 1050000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "file",
+          "image",
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/~openai/gpt-sol-latest",
+          "https://openrouter.ai/api/v1/models/~openai/gpt-sol-latest/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "~openai/gpt-terra-latest",
+      "model_info": {
+        "model": "~openai/gpt-terra-latest",
+        "name": "OpenAI GPT Terra Latest",
+        "description": "This model always redirects to the latest model in the OpenAI GPT Terra family.",
+        "context_length": 1050000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "file",
+          "image",
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/~openai/gpt-terra-latest",
+          "https://openrouter.ai/api/v1/models/~openai/gpt-terra-latest/endpoints"
         ]
       }
     },
