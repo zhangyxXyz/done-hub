@@ -1802,7 +1802,7 @@
         "name": "DeepSeek: DeepSeek V4 Pro 0423",
         "description": "DeepSeek V4 Pro is a large-scale Mixture-of-Experts model from DeepSeek with 1.6T total parameters and 49B activated parameters, supporting a 1M-token context window. It is designed for advanced reasoning, coding,...",
         "context_length": 1048576,
-        "max_tokens": 384000,
+        "max_tokens": 393216,
         "input_modalities": [
           "text"
         ],
@@ -1828,7 +1828,7 @@
         "name": "DeepSeek: DeepSeek V4 Pro 0813",
         "description": "DeepSeek V4 Pro 0813 is a large-scale mixture-of-experts model from DeepSeek. This is the GA release of DeepSeek V4 Pro.",
         "context_length": 1048576,
-        "max_tokens": 393216,
+        "max_tokens": 384000,
         "input_modalities": [
           "text"
         ],
@@ -3698,7 +3698,7 @@
         "name": "Meta: Llama 3.1 70B Instruct",
         "description": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 70B instruct-tuned version is optimized for high quality dialogue usecases. It has demonstrated strong...",
         "context_length": 131072,
-        "max_tokens": 8192,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -4289,7 +4289,7 @@
         "name": "MiniMax: MiniMax M2.5",
         "description": "MiniMax-M2.5 is a SOTA large language model designed for real-world productivity. Trained in a diverse range of complex real-world digital working environments, M2.5 builds upon the coding expertise of M2.1...",
         "context_length": 204800,
-        "max_tokens": 131072,
+        "max_tokens": 128000,
         "input_modalities": [
           "text"
         ],
@@ -11793,8 +11793,8 @@
       "model": "~anthropic/claude-haiku-latest",
       "model_info": {
         "model": "~anthropic/claude-haiku-latest",
-        "name": "Anthropic Claude Haiku Latest",
-        "description": "This model always redirects to the latest model in the Anthropic Claude Haiku family.",
+        "name": "Anthropic: Claude Haiku Latest",
+        "description": "This model always redirects to the latest model in the Claude Haiku family.",
         "context_length": 200000,
         "max_tokens": 64000,
         "input_modalities": [
@@ -11851,8 +11851,8 @@
       "model": "~anthropic/claude-sonnet-latest",
       "model_info": {
         "model": "~anthropic/claude-sonnet-latest",
-        "name": "Anthropic Claude Sonnet Latest",
-        "description": "This model always redirects to the latest model in the Anthropic Claude Sonnet family.",
+        "name": "Anthropic: Claude Sonnet Latest",
+        "description": "This model always redirects to the latest model in the Claude Sonnet family.",
         "context_length": 1000000,
         "max_tokens": 128000,
         "input_modalities": [
@@ -11880,7 +11880,7 @@
       "model": "~deepseek/deepseek-v4-flash-latest",
       "model_info": {
         "model": "~deepseek/deepseek-v4-flash-latest",
-        "name": "DeepSeek V4 Flash Latest",
+        "name": "DeepSeek: DeepSeek V4 Flash Latest",
         "description": "This model always redirects to the latest model in the DeepSeek V4 Flash family.",
         "context_length": 1310720,
         "max_tokens": 393216,
@@ -11906,8 +11906,8 @@
       "model": "~google/gemini-flash-latest",
       "model_info": {
         "model": "~google/gemini-flash-latest",
-        "name": "Google Gemini Flash Latest",
-        "description": "This model always redirects to the latest model in the Google Gemini Flash family.",
+        "name": "Google: Gemini Flash Latest",
+        "description": "This model always redirects to the latest model in the Gemini Flash family.",
         "context_length": 1048576,
         "max_tokens": 65536,
         "input_modalities": [
@@ -11938,8 +11938,8 @@
       "model": "~google/gemini-pro-latest",
       "model_info": {
         "model": "~google/gemini-pro-latest",
-        "name": "Google Gemini Pro Latest",
-        "description": "This model always redirects to the latest model in the Google Gemini Pro family.",
+        "name": "Google: Gemini Pro Latest",
+        "description": "This model always redirects to the latest model in the Gemini Pro family.",
         "context_length": 1048576,
         "max_tokens": 65536,
         "input_modalities": [
@@ -11970,8 +11970,8 @@
       "model": "~moonshotai/kimi-latest",
       "model_info": {
         "model": "~moonshotai/kimi-latest",
-        "name": "MoonshotAI Kimi Latest",
-        "description": "This model always redirects to the latest model in the MoonshotAI Kimi family.",
+        "name": "MoonshotAI: Kimi Latest",
+        "description": "This model always redirects to the latest model in the Kimi family.",
         "context_length": 1048576,
         "max_tokens": 943718,
         "input_modalities": [
@@ -11999,8 +11999,8 @@
       "model": "~openai/gpt-astra-latest",
       "model_info": {
         "model": "~openai/gpt-astra-latest",
-        "name": "OpenAI GPT Astra Latest",
-        "description": "This model always redirects to the latest model in the OpenAI GPT Astra family.",
+        "name": "OpenAI: GPT Astra Latest",
+        "description": "This model always redirects to the latest model in the GPT Astra family.",
         "context_length": 1050000,
         "max_tokens": 128000,
         "input_modalities": [
@@ -12028,8 +12028,8 @@
       "model": "~openai/gpt-luna-latest",
       "model_info": {
         "model": "~openai/gpt-luna-latest",
-        "name": "OpenAI GPT Luna Latest",
-        "description": "This model always redirects to the latest model in the OpenAI GPT Luna family.",
+        "name": "OpenAI: GPT Luna Latest",
+        "description": "This model always redirects to the latest model in the GPT Luna family.",
         "context_length": 1050000,
         "max_tokens": 128000,
         "input_modalities": [
@@ -12057,8 +12057,8 @@
       "model": "~openai/gpt-mini-latest",
       "model_info": {
         "model": "~openai/gpt-mini-latest",
-        "name": "OpenAI GPT Mini Latest",
-        "description": "This model always redirects to the latest model in the OpenAI GPT Mini family.",
+        "name": "OpenAI: GPT Mini Latest",
+        "description": "This model always redirects to the latest model in the GPT Mini family.",
         "context_length": 400000,
         "max_tokens": 128000,
         "input_modalities": [
@@ -12086,8 +12086,8 @@
       "model": "~openai/gpt-sol-latest",
       "model_info": {
         "model": "~openai/gpt-sol-latest",
-        "name": "OpenAI GPT Sol Latest",
-        "description": "This model always redirects to the latest model in the OpenAI GPT Sol family.",
+        "name": "OpenAI: GPT Sol Latest",
+        "description": "This model always redirects to the latest model in the GPT Sol family.",
         "context_length": 1050000,
         "max_tokens": 128000,
         "input_modalities": [
@@ -12115,8 +12115,8 @@
       "model": "~openai/gpt-terra-latest",
       "model_info": {
         "model": "~openai/gpt-terra-latest",
-        "name": "OpenAI GPT Terra Latest",
-        "description": "This model always redirects to the latest model in the OpenAI GPT Terra family.",
+        "name": "OpenAI: GPT Terra Latest",
+        "description": "This model always redirects to the latest model in the GPT Terra family.",
         "context_length": 1050000,
         "max_tokens": 128000,
         "input_modalities": [
