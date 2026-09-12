@@ -1828,7 +1828,7 @@
         "name": "DeepSeek: DeepSeek V4 Pro 0813",
         "description": "DeepSeek V4 Pro 0813 is a large-scale mixture-of-experts model from DeepSeek. This is the GA release of DeepSeek V4 Pro.",
         "context_length": 1048576,
-        "max_tokens": 384000,
+        "max_tokens": 393216,
         "input_modalities": [
           "text"
         ],
@@ -3519,6 +3519,54 @@
       }
     },
     {
+      "model": "inference-net/schematron-v2-small",
+      "model_info": {
+        "model": "inference-net/schematron-v2-small",
+        "name": "Inference.net: Schematron V2 Small",
+        "description": "Schematron V2 Small is a 3B-parameter HTML-to-JSON extraction model from Inference.net. It prioritizes extraction quality for complex schemas and long pages. Extraction instructions must be supplied through a JSON schema...",
+        "context_length": 128000,
+        "max_tokens": 4096,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/inference-net/schematron-v2-small",
+          "https://openrouter.ai/api/v1/models/inference-net/schematron-v2-small-20260902/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "inference-net/schematron-v2-turbo",
+      "model_info": {
+        "model": "inference-net/schematron-v2-turbo",
+        "name": "Inference.net: Schematron V2 Turbo",
+        "description": "Schematron V2 Turbo is a 3B-parameter HTML-to-JSON extraction model from Inference.net. It prioritizes throughput for high-volume extraction workloads. Extraction instructions must be supplied through a JSON schema in response_format rather...",
+        "context_length": 128000,
+        "max_tokens": 8192,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/inference-net/schematron-v2-turbo",
+          "https://openrouter.ai/api/v1/models/inference-net/schematron-v2-turbo-20260902/endpoints"
+        ]
+      }
+    },
+    {
       "model": "kwaipilot/kat-coder-pro-v2",
       "model_info": {
         "model": "kwaipilot/kat-coder-pro-v2",
@@ -3650,7 +3698,7 @@
         "name": "Meta: Llama 3.1 70B Instruct",
         "description": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 70B instruct-tuned version is optimized for high quality dialogue usecases. It has demonstrated strong...",
         "context_length": 131072,
-        "max_tokens": 16384,
+        "max_tokens": 8192,
         "input_modalities": [
           "text"
         ],
@@ -4241,7 +4289,7 @@
         "name": "MiniMax: MiniMax M2.5",
         "description": "MiniMax-M2.5 is a SOTA large language model designed for real-world productivity. Trained in a diverse range of complex real-world digital working environments, M2.5 builds upon the coding expertise of M2.1...",
         "context_length": 204800,
-        "max_tokens": 128000,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -4942,7 +4990,7 @@
         "model": "mistralai/mistral-small-3.2-24b-instruct",
         "name": "Mistral: Mistral Small 3.2 24B",
         "description": "Mistral-Small-3.2-24B-Instruct-2506 is an updated 24B parameter model from Mistral optimized for instruction following, repetition reduction, and improved function calling. Compared to the 3.1 release, version 3.2 significantly improves accuracy on...",
-        "context_length": 131072,
+        "context_length": 256000,
         "max_tokens": 16384,
         "input_modalities": [
           "image",
@@ -5073,7 +5121,7 @@
         "name": "MoonshotAI: Kimi K2 Thinking",
         "description": "Kimi K2 Thinking is Moonshot AI’s most advanced open reasoning model to date, extending the K2 series into agentic, long-horizon reasoning. Built on the trillion-parameter Mixture-of-Experts (MoE) architecture introduced in...",
         "context_length": 262144,
-        "max_tokens": 100352,
+        "max_tokens": 235929,
         "input_modalities": [
           "text"
         ],
@@ -8918,7 +8966,7 @@
         "name": "Qwen: Qwen3 235B A22B Instruct 2507",
         "description": "Qwen3-235B-A22B-Instruct-2507 is a multilingual, instruction-tuned mixture-of-experts language model based on the Qwen3-235B architecture, with 22B active parameters per forward pass. It is optimized for general-purpose text generation, including instruction following,...",
         "context_length": 262144,
-        "max_tokens": 16384,
+        "max_tokens": 235929,
         "input_modalities": [
           "text"
         ],
@@ -10731,7 +10779,7 @@
         "name": "Thinking Machines: Inkling",
         "description": "Inkling is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 41B active parameters out of 975B total. It is designed for general-purpose reasoning, coding, agentic and tool-use systems,...",
         "context_length": 1048576,
-        "max_tokens": 32768,
+        "max_tokens": 471859,
         "input_modalities": [
           "text",
           "image",
