@@ -1828,7 +1828,7 @@
         "name": "DeepSeek: DeepSeek V4 Pro 0813",
         "description": "DeepSeek V4 Pro 0813 is a large-scale mixture-of-experts model from DeepSeek. This is the GA release of DeepSeek V4 Pro.",
         "context_length": 1048576,
-        "max_tokens": 384000,
+        "max_tokens": 393216,
         "input_modalities": [
           "text"
         ],
@@ -3820,7 +3820,7 @@
         "name": "Meta: Llama 4 Maverick",
         "description": "Llama 4 Maverick 17B Instruct (128E) is a high-capacity multimodal language model from Meta, built on a mixture-of-experts (MoE) architecture with 128 experts and 17 billion active parameters per forward...",
         "context_length": 1048576,
-        "max_tokens": 115200,
+        "max_tokens": 16384,
         "input_modalities": [
           "text",
           "image"
@@ -5521,7 +5521,7 @@
         "name": "NVIDIA: Nemotron 3 Super",
         "description": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer...",
         "context_length": 262144,
-        "max_tokens": 16384,
+        "max_tokens": 235929,
         "input_modalities": [
           "text"
         ],
@@ -11877,13 +11877,67 @@
       }
     },
     {
+      "model": "~deepseek/deepseek-flash-latest",
+      "model_info": {
+        "model": "~deepseek/deepseek-flash-latest",
+        "name": "DeepSeek: DeepSeek Flash Latest",
+        "description": "This model always redirects to the latest model in the DeepSeek Flash family.",
+        "context_length": 1048576,
+        "max_tokens": 943718,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/~deepseek/deepseek-flash-latest",
+          "https://openrouter.ai/api/v1/models/~deepseek/deepseek-flash-latest/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "~deepseek/deepseek-pro-latest",
+      "model_info": {
+        "model": "~deepseek/deepseek-pro-latest",
+        "name": "DeepSeek: DeepSeek Pro Latest",
+        "description": "This model always redirects to the latest model in the DeepSeek Pro family.",
+        "context_length": 1048576,
+        "max_tokens": 393216,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/~deepseek/deepseek-pro-latest",
+          "https://openrouter.ai/api/v1/models/~deepseek/deepseek-pro-latest/endpoints"
+        ]
+      }
+    },
+    {
       "model": "~deepseek/deepseek-v4-flash-latest",
       "model_info": {
         "model": "~deepseek/deepseek-v4-flash-latest",
         "name": "DeepSeek: DeepSeek V4 Flash Latest",
         "description": "This model always redirects to the latest model in the DeepSeek V4 Flash family.",
         "context_length": 1310720,
-        "max_tokens": 131072,
+        "max_tokens": 393216,
         "input_modalities": [
           "text"
         ],

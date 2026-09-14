@@ -3713,8 +3713,8 @@
     "model": "deepseek/deepseek-v4-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.088606,
-    "output": 0.177212
+    "input": 0.07938,
+    "output": 0.15876
   },
   {
     "model": "deepseek/deepseek-v4-flash-0731",
@@ -3755,8 +3755,8 @@
     "model": "deepseek/deepseek-v4-pro-0813",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.9834,
-    "output": 2.9502
+    "input": 0.57948,
+    "output": 1.73844
   },
   {
     "model": "deepseek/deepseek-v4-pro-0813:batch",
@@ -4595,8 +4595,8 @@
     "model": "meta-llama/llama-4-maverick",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.2,
-    "output": 0.696
+    "input": 0.1875,
+    "output": 0.6525
   },
   {
     "model": "meta-llama/llama-4-scout",
@@ -5393,8 +5393,8 @@
     "model": "nvidia/nemotron-3-super-120b-a12b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.085,
-    "output": 0.4
+    "input": 0.08,
+    "output": 0.45
   },
   {
     "model": "nvidia/nemotron-3-super-120b-a12b:free",
@@ -7213,8 +7213,8 @@
     "model": "tencent/hy3",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.132,
-    "output": 0.528
+    "input": 0.0825,
+    "output": 0.33
   },
   {
     "model": "tencent/hy3-preview",
@@ -7749,11 +7749,25 @@
     "output": 10
   },
   {
+    "model": "~deepseek/deepseek-flash-latest",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.15,
+    "output": 0.6
+  },
+  {
+    "model": "~deepseek/deepseek-pro-latest",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.57948,
+    "output": 1.73844
+  },
+  {
     "model": "~deepseek/deepseek-v4-flash-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.0352,
-    "output": 0.1056
+    "input": 0.04,
+    "output": 0.1
   },
   {
     "model": "~google/gemini-flash-latest",
@@ -7773,8 +7787,8 @@
     "model": "~moonshotai/kimi-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 2.1,
-    "output": 10.95
+    "input": 1.975,
+    "output": 11.06
   },
   {
     "model": "~openai/gpt-astra-latest",
@@ -7836,8 +7850,8 @@
     "model": "~z-ai/glm-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.92,
-    "output": 3.1372
+    "input": 0.9,
+    "output": 3.069
   },
   {
     "model": "deep-research-pro-preview-12-2025-gt-128k",
