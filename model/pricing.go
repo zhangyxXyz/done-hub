@@ -308,62 +308,24 @@ func UpdatePriceByPriceService() error {
 		// 使用程序内置更新
 		return nil
 	}
+	if updatePriceMode != string(PriceUpdateModeAdd) &&
+		updatePriceMode != string(PriceUpdateModeUpdate) &&
+		updatePriceMode != string(PriceUpdateModeOverwrite) &&
+		updatePriceMode != string(PriceUpdateModeReplace) {
+		return errors.New("更新模式错误，更新模式仅能选择：add、update、overwrite、replace、system")
+	}
+	if PricingInstance == nil {
+		return errors.New("pricing is not initialized")
+	}
+
 	prices, err := GetPriceByPriceService()
 	if err != nil {
 		return err
 	}
-	if updatePriceMode == string(PriceUpdateModeAdd) {
-		// 仅仅新增
-		p := &Pricing{
-			Prices: make(map[string]*Price),
-			Match:  make([]string, 0),
-		}
-		err := p.Init()
-		if err != nil {
-			logger.SysError("Failed to initialize Pricing:" + err.Error())
-			return err
-		}
-		err = p.SyncPriceWithoutOverwrite(prices)
-		if err != nil {
-			return err
-		}
-		return nil
-	}
-	if updatePriceMode == string(PriceUpdateModeOverwrite) || updatePriceMode == string(PriceUpdateModeReplace) {
-		// 覆盖所有
-		p := &Pricing{
-			Prices: make(map[string]*Price),
-			Match:  make([]string, 0),
-		}
-		err := p.Init()
-		if err != nil {
-			logger.SysError("Failed to initialize Pricing:" + err.Error())
-			return err
-		}
-		err = p.SyncPriceWithOverwrite(prices)
-		if err != nil {
-			return err
-		}
-		return nil
-	}
-	if updatePriceMode == string(PriceUpdateModeUpdate) {
-		// 只更新现有数据
-		p := &Pricing{
-			Prices: make(map[string]*Price),
-			Match:  make([]string, 0),
-		}
-		err := p.Init()
-		if err != nil {
-			logger.SysError("Failed to initialize Pricing:" + err.Error())
-			return err
-		}
-		err = p.SyncPriceOnlyUpdate(prices)
-		if err != nil {
-			return err
-		}
-		return nil
-	}
-	return errors.New("更新模式错误，更新模式仅能选择：add、overwrite、system，详见配置文件auto_price_updates_mode部分的说明")
+
+	// 自动更新与手动 /api/prices/sync 共用全局实例，确保数据库落库后
+	// 当前进程的查询与计费缓存立即刷新，而不是只刷新一个临时 Pricing。
+	return PricingInstance.SyncPricing(prices, updatePriceMode)
 }
 
 // GetPriceByPriceService 只插入系统没有的数据
