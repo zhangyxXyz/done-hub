@@ -5573,7 +5573,7 @@
         "name": "NVIDIA: Nemotron 3 Ultra",
         "description": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it...",
         "context_length": 262144,
-        "max_tokens": 32768,
+        "max_tokens": 182520,
         "input_modalities": [
           "text"
         ],
@@ -8914,7 +8914,7 @@
         "name": "Qwen: Qwen3 14B",
         "description": "Qwen3-14B is a dense 14.8B parameter causal language model from the Qwen3 series, designed for both complex reasoning and efficient dialogue. It supports seamless switching between a \"thinking\" mode for...",
         "context_length": 131072,
-        "max_tokens": 8192,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -11576,7 +11576,7 @@
         "name": "Z.ai: GLM 5.2",
         "description": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...",
         "context_length": 1048576,
-        "max_tokens": 182476,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -11628,7 +11628,7 @@
         "name": "Z.ai: GLM 5.3",
         "description": "GLM-5.3 is a large-scale reasoning model from Z.ai, built for complex software engineering and long-horizon agent tasks. It supports text input and output with a 1M-token context window, and improves...",
         "context_length": 1310720,
-        "max_tokens": 131072,
+        "max_tokens": 943717,
         "input_modalities": [
           "text"
         ],
@@ -12205,7 +12205,7 @@
         "name": "Z.ai: GLM Latest",
         "description": "This model always redirects to the latest GLM model from Z.ai.",
         "context_length": 1310720,
-        "max_tokens": 235929,
+        "max_tokens": 943718,
         "input_modalities": [
           "text"
         ],

@@ -3713,15 +3713,15 @@
     "model": "deepseek/deepseek-v4-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.04732,
-    "output": 0.09464
+    "input": 0.088606,
+    "output": 0.177212
   },
   {
     "model": "deepseek/deepseek-v4-flash-0731",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.04,
-    "output": 0.08
+    "input": 0.06,
+    "output": 0.12
   },
   {
     "model": "deepseek/deepseek-v4-flash-0731:batch",
@@ -3755,8 +3755,8 @@
     "model": "deepseek/deepseek-v4-pro-0813",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.57948,
-    "output": 1.73844
+    "input": 0.9834,
+    "output": 2.9502
   },
   {
     "model": "deepseek/deepseek-v4-pro-0813:batch",
@@ -5407,8 +5407,8 @@
     "model": "nvidia/nemotron-3-ultra-550b-a55b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.625,
-    "output": 3.125
+    "input": 0.6,
+    "output": 2.4
   },
   {
     "model": "nvidia/nemotron-3-ultra-550b-a55b:batch",
@@ -6618,8 +6618,8 @@
     "model": "qwen/qwen3-14b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.2275,
-    "output": 0.91
+    "input": 0.12,
+    "output": 0.24
   },
   {
     "model": "qwen/qwen3-235b-a22b",
@@ -7213,8 +7213,8 @@
     "model": "tencent/hy3",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.0825,
-    "output": 0.33
+    "input": 0.132,
+    "output": 0.528
   },
   {
     "model": "tencent/hy3-preview",
@@ -7668,8 +7668,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.6,
-    "output": 2
+    "input": 0.6832,
+    "output": 2.1472
   },
   {
     "model": "z-ai/glm-5.2:batch",
@@ -7689,8 +7689,8 @@
     "model": "z-ai/glm-5.3",
     "type": "tokens",
     "channel_type": 20,
-    "input": 1.092,
-    "output": 3.432
+    "input": 1.4,
+    "output": 4.4
   },
   {
     "model": "z-ai/glm-5.3-flash",
@@ -7836,8 +7836,8 @@
     "model": "~z-ai/glm-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.936,
-    "output": 3.168
+    "input": 0.92,
+    "output": 3.1372
   },
   {
     "model": "deep-research-pro-preview-12-2025-gt-128k",
