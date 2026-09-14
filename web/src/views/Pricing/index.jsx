@@ -13,6 +13,7 @@ import { ScheduleModal } from './component/ScheduleModal';
 import EditeModal from './component/EditModal';
 import { useTranslation } from 'react-i18next';
 import { createPriceModelMatcher } from 'utils/modelPriceAliases';
+import usePriceLatestFallback from 'hooks/usePriceLatestFallback';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -38,6 +39,7 @@ function a11yProps(index) {
 }
 
 const Pricing = () => {
+  const latestFallbackEnabled = usePriceLatestFallback();
   const { t } = useTranslation();
   const [ownedby, setOwnedby] = useState([]);
   const [modelList, setModelList] = useState([]);
@@ -105,10 +107,10 @@ const Pricing = () => {
   };
 
   useEffect(() => {
-    const hasConfiguredPrice = createPriceModelMatcher(prices);
+    const hasConfiguredPrice = createPriceModelMatcher(prices, latestFallbackEnabled);
     const missingModels = modelList.filter((model) => !hasConfiguredPrice(model));
     setNoPriceModel(missingModels);
-  }, [modelList, prices]);
+  }, [modelList, prices, latestFallbackEnabled]);
 
   useEffect(() => {
     // check if there is any price that is not valid

@@ -37,8 +37,10 @@ import { useTranslation } from 'react-i18next';
 import { Icon } from '@iconify/react';
 import { useSelector } from 'react-redux';
 import { createPriceModelFinder, inferModelProviderName } from 'utils/modelPriceAliases';
+import usePriceLatestFallback from 'hooks/usePriceLatestFallback';
 
 const ModelSelectorModal = ({ open, onClose, onConfirm, channelValues, prices }) => {
+  const latestFallbackEnabled = usePriceLatestFallback();
   const { t } = useTranslation();
 
   const [loading, setLoading] = useState(false);
@@ -62,7 +64,7 @@ const ModelSelectorModal = ({ open, onClose, onConfirm, channelValues, prices })
   const [mappingPreview, setMappingPreview] = useState({});
   const [modelsListCollapsed, setModelsListCollapsed] = useState(false);
   const otherModelsGroup = t('channel_edit.otherModels');
-  const findPriceModel = useMemo(() => createPriceModelFinder(prices), [prices]);
+  const findPriceModel = useMemo(() => createPriceModelFinder(prices, latestFallbackEnabled), [prices, latestFallbackEnabled]);
   const isClaudeCodeChannel = Number(channelValues?.type) === 58;
   const showOpenAIModeSwitch = !isClaudeCodeChannel;
 

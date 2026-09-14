@@ -11,6 +11,12 @@ type modelProviderRule struct {
 }
 
 var modelProviderRules = []modelProviderRule{
+	{prefix: "grok", channelType: config.ChannelTypeXAI},
+	{prefix: "x-ai", channelType: config.ChannelTypeXAI},
+	{prefix: "xai", channelType: config.ChannelTypeXAI},
+	{prefix: "global.xai", channelType: config.ChannelTypeXAI},
+	{prefix: "us.xai", channelType: config.ChannelTypeXAI},
+	{prefix: "eu.xai", channelType: config.ChannelTypeXAI},
 	{prefix: "gemini", channelType: config.ChannelTypeGemini},
 	{prefix: "anthropic", channelType: config.ChannelTypeAnthropic},
 	{prefix: "claude", channelType: config.ChannelTypeAnthropic},
@@ -29,6 +35,7 @@ var modelProviderRules = []modelProviderRule{
 	{prefix: "glm", channelType: config.ChannelTypeZhipu},
 	{prefix: "z-ai", channelType: config.ChannelTypeZhipu},
 	{prefix: "zhipu", channelType: config.ChannelTypeZhipu},
+	{prefix: "zhipuai", channelType: config.ChannelTypeZhipu},
 	{prefix: "deepseek", channelType: config.ChannelTypeDeepseek},
 	{prefix: "ernie", channelType: config.ChannelTypeBaidu},
 	{prefix: "cobuddy", channelType: config.ChannelTypeBaidu},
@@ -36,7 +43,7 @@ var modelProviderRules = []modelProviderRule{
 	{prefix: "wenxin", channelType: config.ChannelTypeBaidu},
 	{prefix: "baidu", channelType: config.ChannelTypeBaidu},
 	{prefix: "hunyuan", channelType: config.ChannelTypeHunyuan},
-	{prefix: "hy3", channelType: config.ChannelTypeTencent},
+	{prefix: "hy", channelType: config.ChannelTypeTencent},
 	{prefix: "tencent", channelType: config.ChannelTypeTencent},
 	{prefix: "doubao", channelType: config.ChannelTypeDoubao},
 	{prefix: "seed", channelType: config.ChannelTypeDoubao},
@@ -91,6 +98,8 @@ func GetModelPriceAliases(modelName string) []string {
 		}
 
 		switch {
+		case hasModelProviderPrefix(candidate, "grok"):
+			addAlias("x-ai/" + candidate)
 		case hasModelProviderPrefix(candidate, "kimi"):
 			addAliasVariants("moonshotai/" + candidate)
 			addAlias("~moonshotai/" + candidate)
@@ -108,7 +117,7 @@ func GetModelPriceAliases(modelName string) []string {
 			addAliasVariants("deepseek/" + candidate)
 		case hasModelProviderPrefix(candidate, "mimo"):
 			addAliasVariants("xiaomi/" + candidate)
-		case hasModelProviderPrefix(candidate, "hy3"):
+		case hasModelProviderPrefix(candidate, "hy"):
 			addAlias("tencent/" + candidate)
 			addAlias("tencent/" + candidate + ":free")
 		case hasModelProviderPrefix(candidate, "hunyuan"):
@@ -156,11 +165,20 @@ func isNumericModelVersionPart(part string) bool {
 }
 
 func hasModelProviderPrefix(modelName, prefix string) bool {
-	return modelName == prefix ||
-		strings.HasPrefix(modelName, prefix+"-") ||
-		strings.HasPrefix(modelName, prefix+"_") ||
-		strings.HasPrefix(modelName, prefix+".") ||
-		(len(prefix) >= 3 && strings.HasPrefix(modelName, prefix))
+	// HY model versions attach digits directly to the short family name.
+	// Do not classify unrelated names such as hyper or hybrid as Tencent.
+	if prefix == "hy" {
+		return strings.HasPrefix(modelName, prefix) && len(modelName) > len(prefix) &&
+			modelName[len(prefix)] >= '0' && modelName[len(prefix)] <= '9'
+	}
+	if !strings.HasPrefix(modelName, prefix) {
+		return false
+	}
+	if len(modelName) == len(prefix) {
+		return true
+	}
+	next := modelName[len(prefix)]
+	return next >= '0' && next <= '9' || strings.ContainsRune("-_.:/", rune(next))
 }
 
 func modelNameCandidates(modelName string) []string {

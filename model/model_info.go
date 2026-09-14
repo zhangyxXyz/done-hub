@@ -99,7 +99,7 @@ func CreateModelInfo(modelInfo *ModelInfo) error {
 	if err != nil {
 		return err
 	}
-	return nil
+	return refreshPricingModelInfoCache()
 }
 
 func UpdateModelInfo(modelInfo *ModelInfo) error {
@@ -107,7 +107,7 @@ func UpdateModelInfo(modelInfo *ModelInfo) error {
 	if err != nil {
 		return err
 	}
-	return nil
+	return refreshPricingModelInfoCache()
 }
 
 func GetModelInfo(id int) (*ModelInfo, error) {
@@ -142,7 +142,14 @@ func DeleteModelInfo(id int) error {
 	if err != nil {
 		return err
 	}
-	return nil
+	return refreshPricingModelInfoCache()
+}
+
+func refreshPricingModelInfoCache() error {
+	if PricingInstance == nil {
+		return nil
+	}
+	return PricingInstance.Init()
 }
 
 func ImportModelInfo(items []*ModelInfo, strategy string) (*ModelInfoImportResult, error) {
@@ -220,6 +227,9 @@ func ImportModelInfo(items []*ModelInfo, strategy string) (*ModelInfoImportResul
 		return nil
 	})
 	if err != nil {
+		return nil, err
+	}
+	if err := refreshPricingModelInfoCache(); err != nil {
 		return nil, err
 	}
 

@@ -180,3 +180,131 @@ func TestShouldReplaceDuplicatePriceWithInferredProvider(t *testing.T) {
 		t.Fatal("expected duplicate GLM price to prefer Zhipu over Ali")
 	}
 }
+
+func TestHYAndGrokProviderCompatibility(t *testing.T) {
+	tests := []struct {
+		name string
+		want int
+	}{
+		{"hy3-preview", config.ChannelTypeTencent},
+		{"hy4-preview", config.ChannelTypeTencent},
+		{"hy10", config.ChannelTypeTencent},
+		{" +~Tencent/HY4-preview ", config.ChannelTypeTencent},
+		{"hunyuan-turbos-latest", config.ChannelTypeHunyuan},
+		{"hyper-model", config.ChannelTypeUnknown},
+		{"hybrid-model", config.ChannelTypeUnknown},
+		{"hy", config.ChannelTypeUnknown},
+		{"hy-preview", config.ChannelTypeUnknown},
+		{"grok-4.6", config.ChannelTypeXAI},
+		{"x-ai/grok-4.6", config.ChannelTypeXAI},
+		{"xai.grok-4.6", config.ChannelTypeXAI},
+		{"global.xai.grok-4.6", config.ChannelTypeXAI},
+		{"us.xai.grok-4.6", config.ChannelTypeXAI},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := InferModelChannelType(tt.name); got != tt.want {
+				t.Fatalf("provider = %d, want %d", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestHYAndGrokPriceCompatibility(t *testing.T) {
+	pricing := &Pricing{Prices: map[string]*Price{
+		"tencent/hy4-preview": {Model: "tencent/hy4-preview", ChannelType: config.ChannelTypeOpenRouter, Input: 0.834, Output: 2.501},
+		"x-ai/grok-4.6":       {Model: "x-ai/grok-4.6", ChannelType: config.ChannelTypeOpenRouter, Input: 2, Output: 6},
+		"us.xai.grok-4.6":     {Model: "us.xai.grok-4.6", ChannelType: config.ChannelTypeBedrock, Input: 2.2, Output: 6.6},
+	}}
+	for _, tt := range []struct {
+		name          string
+		input, output float64
+	}{
+		{"hy4-preview", 0.834, 2.501},
+		{"grok-4.6", 2, 6},
+		{"us.xai.grok-4.6", 2.2, 6.6},
+	} {
+		t.Run(tt.name, func(t *testing.T) {
+			price := pricing.GetPrice(tt.name)
+			if price.Input != tt.input || price.Output != tt.output {
+				t.Fatalf("price = %g/%g, want %g/%g", price.Input, price.Output, tt.input, tt.output)
+			}
+		})
+	}
+	// Exact platform prices take priority over aliases, and reads do not rewrite stored records.
+	if pricing.Prices["us.xai.grok-4.6"].ChannelType != config.ChannelTypeBedrock {
+		t.Fatal("GetPrice mutated the stored provider")
+	}
+	pricing.Prices["hy4-preview"] = &Price{Model: "hy4-preview", Input: 7, Output: 8}
+	if price := pricing.GetPrice("hy4-preview"); price.Input != 7 || price.Output != 8 {
+		t.Fatal("alias overrode an exact price")
+	}
+	for _, name := range []string{"hyper-model", "hybrid-model"} {
+		if aliases := GetModelPriceAliases(name); len(aliases) != 0 {
+			t.Fatalf("unexpected aliases for %s: %v", name, aliases)
+		}
+	}
+}
+
+func TestGrokDuplicatePrefersOriginalProvider(t *testing.T) {
+	vertex := &Price{Model: "grok-4.6", ChannelType: config.ChannelTypeVertexAI}
+	xai := &Price{Model: "grok-4.6", ChannelType: config.ChannelTypeXAI}
+	if !shouldReplaceDuplicatePrice(vertex, xai) || shouldReplaceDuplicatePrice(xai, vertex) {
+		t.Fatal("duplicate Grok prices must prefer xAI in either input order")
+	}
+}
+
+func TestDeepseekFlashLatestPriceAlias(t *testing.T) {
+	for _, name := range []string{"~deepseek/deepseek-flash-latest", "deepseek/deepseek-flash-latest"} {
+		t.Run(name, func(t *testing.T) {
+			latest := &Price{Model: name, ChannelType: config.ChannelTypeOpenRouter, Input: 0.15, Output: 0.6}
+			pricing := &Pricing{Prices: map[string]*Price{name: latest}}
+			price := pricing.GetPrice("deepseek-flash")
+			if price.Model != "deepseek-flash" || price.ChannelType != config.ChannelTypeDeepseek || price.Input != 0.15 || price.Output != 0.6 {
+				t.Fatalf("unexpected alias price: %+v", price)
+			}
+			if latest.Model != name || latest.ChannelType != config.ChannelTypeOpenRouter {
+				t.Fatal("alias lookup mutated the stored price")
+			}
+			pricing.Prices["deepseek-flash"] = &Price{Model: "deepseek-flash", Input: 0.2, Output: 0.8}
+			price = pricing.GetPrice("deepseek-flash")
+			if price.Input != 0.2 || price.Output != 0.8 {
+				t.Fatal("latest alias overrode the exact price")
+			}
+		})
+	}
+	for _, name := range []string{"deepseek-v4-flash", "deepseek-flash-preview", "other-model"} {
+		for _, alias := range GetModelPriceAliases(name) {
+			if alias == "~deepseek/deepseek-flash-latest" || alias == "deepseek/deepseek-flash-latest" || alias == name+"-latest" {
+				t.Fatalf("unexpected latest alias for %s: %s", name, alias)
+			}
+		}
+	}
+}
+
+func TestProviderRuleBoundaries(t *testing.T) {
+	for _, rule := range modelProviderRules {
+		t.Run(rule.prefix, func(t *testing.T) {
+			for _, suffix := range []string{"3.5-preview", "10"} {
+				if got := InferModelChannelType(rule.prefix + suffix); got != rule.channelType {
+					t.Errorf("numeric suffix %q: got %d, want %d", suffix, got, rule.channelType)
+				}
+			}
+			if rule.prefix != "hy" {
+				for _, suffix := range []string{"", "-preview", "_preview", ".preview", ":free", "/model"} {
+					if got := InferModelChannelType(rule.prefix + suffix); got != rule.channelType {
+						t.Errorf("suffix %q: got %d, want %d", suffix, got, rule.channelType)
+					}
+				}
+			}
+			if hasModelProviderPrefix(rule.prefix+"unrelated", rule.prefix) {
+				t.Error("matched an unrelated word")
+			}
+		})
+	}
+	for _, name := range []string{"seedling", "kimiko", "grokking", "hyper-model", "hybrid-model"} {
+		if got := InferModelChannelType(name); got != config.ChannelTypeUnknown {
+			t.Errorf("%s: got %d, want unknown", name, got)
+		}
+	}
+}

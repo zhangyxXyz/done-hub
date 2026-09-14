@@ -370,6 +370,9 @@ const OperationSetting = () => {
           const newCooldownJson = Object.keys(cooldownObj).length ? JSON.stringify(cooldownObj) : '';
 
           // 校验通过后再开始 updateOption 序列
+          if (originInputs.ModelPriceLatestFallbackEnabled !== inputs.ModelPriceLatestFallbackEnabled) {
+            await updateOption('ModelPriceLatestFallbackEnabled', inputs.ModelPriceLatestFallbackEnabled);
+          }
           if (originInputs['TopUpLink'] !== inputs.TopUpLink) {
             await updateOption('TopUpLink', inputs.TopUpLink);
           }
@@ -821,6 +824,22 @@ const OperationSetting = () => {
             </Tooltip>
           </Grid>
 
+          <Grid item xs={12}>
+            <FormControlLabel
+              label="未匹配价格时尝试 -latest 版本"
+              control={
+                <Checkbox
+                  name="ModelPriceLatestFallbackEnabled"
+                  checked={dataLoaded && inputs.ModelPriceLatestFallbackEnabled === 'true'}
+                  onChange={handleInputChange}
+                  disabled={!dataLoaded || loading}
+                />
+              }
+            />
+            <Typography variant="body2" color="text.secondary">
+              对所有模型生效：精确价格、已有别名及通配符未命中后，尝试追加 -latest；保留平台前缀，不反向去掉后缀。
+            </Typography>
+          </Grid>
           <Grid item xs={12}>
             <Button
               variant="contained"

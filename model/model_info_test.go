@@ -37,8 +37,10 @@ func TestModelInfoFromRemoteSerializesArrayFields(t *testing.T) {
 
 func TestImportModelInfoReplaceDeletesStaleRows(t *testing.T) {
 	originalDB := DB
+	originalPricingInstance := PricingInstance
 	t.Cleanup(func() {
 		DB = originalDB
+		PricingInstance = originalPricingInstance
 	})
 
 	db, err := gorm.Open(sqlite.Open("file:model_info_replace?mode=memory&cache=shared"), &gorm.Config{})
@@ -73,6 +75,49 @@ func TestImportModelInfoReplaceDeletesStaleRows(t *testing.T) {
 	}
 	if count != 0 {
 		t.Fatalf("stale row count = %d", count)
+	}
+}
+
+func TestImportModelInfoRefreshesPricingModelInfoCache(t *testing.T) {
+	originalDB := DB
+	originalPricingInstance := PricingInstance
+	t.Cleanup(func() {
+		DB = originalDB
+		PricingInstance = originalPricingInstance
+	})
+
+	db, err := gorm.Open(sqlite.Open("file:model_info_cache_refresh?mode=memory&cache=shared"), &gorm.Config{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	DB = db
+	if err := DB.AutoMigrate(&Price{}, &ModelInfo{}); err != nil {
+		t.Fatal(err)
+	}
+	if err := DB.Create(&Price{
+		Model: "cache-model", Type: TokensPriceType, ChannelType: config.ChannelTypeOpenAI, Input: 1, Output: 1,
+	}).Error; err != nil {
+		t.Fatal(err)
+	}
+	if err := DB.Create(&ModelInfo{Model: "cache-model", ContextLength: 1024}).Error; err != nil {
+		t.Fatal(err)
+	}
+
+	PricingInstance = &Pricing{Prices: make(map[string]*Price), Match: make([]string, 0)}
+	if err := PricingInstance.Init(); err != nil {
+		t.Fatal(err)
+	}
+	if got := PricingInstance.GetPrice("cache-model").ModelInfo.ContextLength; got != 1024 {
+		t.Fatalf("initial cached context length = %d", got)
+	}
+
+	_, err = ImportModelInfo([]*ModelInfo{{Model: "cache-model", ContextLength: 8192}}, "overwrite")
+	if err != nil {
+		t.Fatal(err)
+	}
+	price := PricingInstance.GetPrice("cache-model")
+	if price.ModelInfo == nil || price.ModelInfo.ContextLength != 8192 {
+		t.Fatalf("cached model info was not refreshed: %+v", price.ModelInfo)
 	}
 }
 

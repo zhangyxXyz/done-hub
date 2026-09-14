@@ -271,6 +271,7 @@ var FingerprintPassThroughEnabled = true
 
 // 模型名称大小写不敏感匹配
 var ModelNameCaseInsensitiveEnabled = false
+var ModelPriceLatestFallbackEnabled = true
 
 var DefaultChannelWeight = uint(1)
 var RetryCooldownSeconds = 5

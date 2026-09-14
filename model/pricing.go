@@ -169,6 +169,21 @@ func (p *Pricing) GetPrice(modelName string) *Price {
 		return priceForModel(modelName, price)
 	}
 
+	// Latest fallback has lower priority than existing aliases and wildcards.
+	if config.ModelPriceLatestFallbackEnabled {
+		for _, target := range GetLatestPriceAliases(modelName) {
+			if price, ok := p.Prices[target]; ok {
+				return priceForModel(modelName, price)
+			}
+			if config.ModelNameCaseInsensitiveEnabled {
+				for name, price := range p.Prices {
+					if strings.EqualFold(name, target) {
+						return priceForModel(modelName, price)
+					}
+				}
+			}
+		}
+	}
 	channelType := InferModelChannelType(modelName)
 	return &Price{
 		Type:        TokensPriceType,

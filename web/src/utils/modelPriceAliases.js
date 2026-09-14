@@ -1,9 +1,9 @@
-const hasModelProviderPrefix = (modelName, prefix) =>
-  modelName === prefix ||
-  modelName.startsWith(`${prefix}-`) ||
-  modelName.startsWith(`${prefix}_`) ||
-  modelName.startsWith(`${prefix}.`) ||
-  (prefix.length >= 3 && modelName.startsWith(prefix));
+const hasModelProviderPrefix = (modelName, prefix) => {
+  if (!modelName.startsWith(prefix)) return false;
+  const next = modelName[prefix.length];
+  if (prefix === 'hy') return next !== undefined && next >= '0' && next <= '9';
+  return next === undefined || (next >= '0' && next <= '9') || '-_.:/'.includes(next);
+};
 
 const normalizeModelName = (modelName) => String(modelName || '').trim().toLowerCase().replace(/^[+~]+/, '');
 
@@ -53,16 +53,18 @@ const getModelNameCandidates = (modelName) => {
 };
 
 const modelProviderRules = [
+  { prefixes: ['grok', 'x-ai', 'xai', 'global.xai', 'us.xai', 'eu.xai'], provider: 'xAI' },
+  { prefixes: ['gemini'], provider: 'Google Gemini' },
   { prefixes: ['anthropic', 'claude'], provider: 'Anthropic' },
   { prefixes: ['moonshot', 'moonshotai', 'kimi'], provider: 'Moonshot' },
   { prefixes: ['minimax', 'abab'], provider: 'MiniMax' },
   { prefixes: ['mimo', 'xiaomi'], provider: 'Xiaomi' },
   { prefixes: ['qwen', 'qwq', 'qvq', 'tongyi', 'dashscope', 'alibaba'], provider: 'Qwen' },
-  { prefixes: ['glm', 'z-ai', 'zhipu'], provider: 'Zhipu' },
+  { prefixes: ['glm', 'z-ai', 'zhipu', 'zhipuai'], provider: 'Zhipu' },
   { prefixes: ['deepseek'], provider: 'Deepseek' },
   { prefixes: ['ernie', 'cobuddy', 'qianfan', 'wenxin', 'baidu'], provider: 'Baidu' },
   { prefixes: ['hunyuan'], provider: 'Hunyuan' },
-  { prefixes: ['hy3', 'tencent'], provider: 'Tencent' },
+  { prefixes: ['hy', 'tencent'], provider: 'Tencent' },
   { prefixes: ['doubao', 'seed', 'ui-tars', 'volcengine', 'bytedance-seed', 'bytedance'], provider: 'Doubao' },
   { prefixes: ['baichuan'], provider: 'Baichuan' },
   { prefixes: ['yi', 'lingyi', '01-ai'], provider: 'Yi' },
@@ -105,7 +107,9 @@ export const getModelPriceAliases = (modelName) => {
       return;
     }
 
-    if (hasModelProviderPrefix(candidate, 'kimi')) {
+    if (hasModelProviderPrefix(candidate, 'grok')) {
+      aliases.add(`x-ai/${candidate}`);
+    } else if (hasModelProviderPrefix(candidate, 'kimi')) {
       addAliasVariants(aliases, `moonshotai/${candidate}`);
       aliases.add(`~moonshotai/${candidate}`);
     } else if (hasModelProviderPrefix(candidate, 'claude')) {
@@ -131,7 +135,10 @@ export const getModelPriceAliases = (modelName) => {
       addProviderAliasVariants(aliases, ['deepseek'], candidate);
     } else if (hasModelProviderPrefix(candidate, 'mimo')) {
       addProviderAliasVariants(aliases, ['xiaomi'], candidate);
-    } else if (hasModelProviderPrefix(candidate, 'hy3') || hasModelProviderPrefix(candidate, 'hunyuan')) {
+    } else if (hasModelProviderPrefix(candidate, 'hy')) {
+      aliases.add(`tencent/${candidate}`);
+      aliases.add(`tencent/${candidate}:free`);
+    } else if (hasModelProviderPrefix(candidate, 'hunyuan')) {
       addAliasVariants(aliases, `tencent/${candidate}`);
     } else if (hasModelProviderPrefix(candidate, 'minimax') || hasModelProviderPrefix(candidate, 'abab')) {
       addProviderAliasVariants(aliases, ['minimax'], candidate);
@@ -163,15 +170,15 @@ export const getModelPriceAliases = (modelName) => {
   return aliases;
 };
 
-export const createPriceModelMatcher = (prices) => {
-  const findPriceModel = createPriceModelFinder(prices);
+export const createPriceModelMatcher = (prices, latestEnabled = false) => {
+  const findPriceModel = createPriceModelFinder(prices, latestEnabled);
 
   return (modelName) => {
     return Boolean(findPriceModel(modelName));
   };
 };
 
-export const createPriceModelFinder = (prices = []) => {
+export const createPriceModelFinder = (prices = [], latestEnabled = false) => {
   const exactModels = new Map();
   const wildcardPrices = [];
 
@@ -198,6 +205,19 @@ export const createPriceModelFinder = (prices = []) => {
     }
 
     const wildcard = wildcardPrices.find(({ prefix }) => aliases.some((alias) => alias.startsWith(prefix)));
-    return wildcard?.price || null;
+    if (wildcard) return wildcard.price;
+    const normalized = normalizeModelName(modelName);
+    if (latestEnabled && !normalized.endsWith('-latest')) {
+      const target = `${normalized}-latest`;
+      const targets = [target];
+      if (!normalized.includes('/')) {
+        targets.push(...Array.from(getModelPriceAliases(target)).filter((alias) => alias.endsWith('-latest')));
+      }
+      for (const name of targets) {
+        const price = exactModels.get(normalizeModelName(name));
+        if (price) return price;
+      }
+    }
+    return null;
   };
 };

@@ -206,6 +206,7 @@ func InitOptionMap() {
 
 	// 注册模型名称大小写不敏感配置项
 	config.GlobalOption.RegisterBool("ModelNameCaseInsensitiveEnabled", &config.ModelNameCaseInsensitiveEnabled)
+	config.GlobalOption.RegisterBool("ModelPriceLatestFallbackEnabled", &config.ModelPriceLatestFallbackEnabled)
 
 	loadOptionsFromDatabase()
 }

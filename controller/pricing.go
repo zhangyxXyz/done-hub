@@ -64,6 +64,10 @@ func GetAllModelList(c *gin.Context) {
 	})
 }
 
+func GetPriceFallbackConfig(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{"success": true, "data": gin.H{"latest_enabled": config.ModelPriceLatestFallbackEnabled}})
+}
+
 func AddPrice(c *gin.Context) {
 	var price model.Price
 	if err := c.ShouldBindJSON(&price); err != nil {
