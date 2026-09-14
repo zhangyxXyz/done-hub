@@ -61,24 +61,20 @@ var claudeUpstreamHeaderExact = map[string]struct{}{
 
 // filterClaudeUpstreamHeaders 从上游 Claude 响应头中挑出可透传给客户端的指纹头，
 // 目的是让 done-hub 中转的响应尽量贴近直连 Anthropic（携带 anthropic-ratelimit-* /
-// retry-after 等）。request-id / x-request-id 不直透（避免覆盖本地追踪 ID），单独提取
-// 为字符串返回，由 relay 层以 X-Upstream-Request-Id 回写。大小写不敏感；多值 header 全部
-// 保留；无命中时返回的 http.Header 为 nil。
-func filterClaudeUpstreamHeaders(src http.Header) (http.Header, string) {
+// retry-after 等）。request-id / x-request-id 不直透（避免覆盖本地追踪 ID），由
+// Requester.ResponseHook 统一采集后经 relay 层以 X-Upstream-Request-Id 回写。
+// 大小写不敏感；多值 header 全部保留；无命中时返回的 http.Header 为 nil。
+func filterClaudeUpstreamHeaders(src http.Header) http.Header {
 	if len(src) == 0 {
-		return nil, ""
+		return nil
 	}
 	out := http.Header{}
-	var requestID string
 	for name, values := range src {
 		lower := strings.ToLower(name)
 		if _, excluded := claudeUpstreamHeaderExcluded[lower]; excluded {
 			continue
 		}
 		if lower == "request-id" || lower == "x-request-id" {
-			if requestID == "" && len(values) > 0 {
-				requestID = values[0]
-			}
 			continue
 		}
 		matched := false
@@ -102,21 +98,18 @@ func filterClaudeUpstreamHeaders(src http.Header) (http.Header, string) {
 	if len(out) == 0 {
 		out = nil
 	}
-	return out, requestID
+	return out
 }
 
-// storeClaudeUpstreamHeaders 过滤上游响应头并暂存到 gin.Context，供 relay 层透传写出。
+// storeClaudeUpstreamHeaders 过滤上游响应头并暂存到 gin.Context，供 relay 层透传写出，
+// 受 FingerprintPassThroughEnabled 开关控制；上游 request-id 由 Requester.ResponseHook 统一采集。
 // 流式与非流式共用。
 func (p *ClaudeProvider) storeClaudeUpstreamHeaders(header http.Header) {
-	if p.Context == nil {
+	if !config.FingerprintPassThroughEnabled || p.Context == nil {
 		return
 	}
-	headers, requestID := filterClaudeUpstreamHeaders(header)
-	if headers != nil {
+	if headers := filterClaudeUpstreamHeaders(header); headers != nil {
 		p.Context.Set(config.GinPassThroughHeaders, headers)
-	}
-	if requestID != "" {
-		p.Context.Set(config.GinUpstreamRequestIdKey, requestID)
 	}
 }
 
@@ -148,16 +141,19 @@ func (p *ClaudeProvider) CreateClaudeChat(request *ClaudeRequest) (*ClaudeRespon
 
 	// 字节透传保留字段顺序 / 未知字段。有别名映射需改回请求名时，在原始字节上就地 sjson
 	// 改写顶层 model（不改字段顺序 / 不丢未知字段）；无映射时 UnifyModelInJSONBytes 恒 no-op。
-	if passThrough && resp != nil {
+	if resp != nil {
 		// 透传上游响应头（限流 / 退避等）：无论字节是否改写都需要。
+		// request-id 由 Requester.ResponseHook 统一采集。
 		p.storeClaudeUpstreamHeaders(resp.Header)
-		if rawBytes, readErr := io.ReadAll(resp.Body); readErr == nil && len(rawBytes) > 0 {
-			if patched, changed := base.UnifyModelInJSONBytes(p.Context, rawBytes, "model"); changed {
-				rawBytes = patched
+		if passThrough {
+			if rawBytes, readErr := io.ReadAll(resp.Body); readErr == nil && len(rawBytes) > 0 {
+				if patched, changed := base.UnifyModelInJSONBytes(p.Context, rawBytes, "model"); changed {
+					rawBytes = patched
+				}
+				p.Context.Set(config.GinRawResponseBodyKey, rawBytes)
 			}
-			p.Context.Set(config.GinRawResponseBodyKey, rawBytes)
+			resp.Body.Close()
 		}
-		resp.Body.Close()
 	}
 
 	return claudeResponse, nil
@@ -183,9 +179,9 @@ func (p *ClaudeProvider) CreateClaudeChatStream(request *ClaudeRequest) (request
 		return nil, errWithCode
 	}
 
-	// 指纹保真：此刻 resp.Header 已就绪、resp.Body 尚未被消费，先透传上游响应头。
-	// 守卫条件与非流式 CreateClaudeChat 的 passThrough 对齐。
-	if config.FingerprintPassThroughEnabled && p.Context != nil {
+	// 此刻 resp.Header 已就绪、resp.Body 尚未被消费：透传上游响应头。
+	// request-id 由 Requester.ResponseHook 统一采集。
+	if resp != nil {
 		p.storeClaudeUpstreamHeaders(resp.Header)
 	}
 
@@ -241,6 +237,12 @@ func (h *ClaudeRelayStreamHandler) HandlerStream(rawLine *[]byte, dataChan chan 
 	case "message_start":
 		ClaudeUsageToOpenaiUsage(&claudeResponse.Message.Usage, h.Usage)
 		h.StartUsage = &claudeResponse.Message.Usage
+		// message_start 的 output_tokens 仅为占位(1)，非真实产出。清零 CompletionTokens，
+		// 使流式中断(message_delta 未达)时 relay/main.go 全局兜底的 ==0 条件可达，
+		// 用累积文本估算避免计费归零。StartUsage 保留原值，供 message_delta 的 merge 取大者。
+		h.Usage.CompletionTokens = 0
+		h.Usage.TotalTokens = h.Usage.PromptTokens
+
 		// 统一请求响应模型：model 仅出现在 message_start 的 message.model。
 		// 在剥离前缀的纯 JSON 上字节级改写（gjson 读 + sjson 改，仅动 model 一个字段，
 		// 其余字段顺序/内容不变），再把改写后的 JSON 回填到 rawStr，保留其原有的 data: 前缀与尾部。
@@ -254,7 +256,10 @@ func (h *ClaudeRelayStreamHandler) HandlerStream(rawLine *[]byte, dataChan chan 
 		ClaudeUsageMerge(&claudeResponse.Usage, h.StartUsage)
 		ClaudeUsageToOpenaiUsage(&claudeResponse.Usage, h.Usage)
 	case "content_block_delta":
+		// text_delta / thinking_delta / input_json_delta 均为计费的 output token，一并累积用于兜底估算。
 		h.Usage.TextBuilder.WriteString(claudeResponse.Delta.Text)
+		h.Usage.TextBuilder.WriteString(claudeResponse.Delta.Thinking)
+		h.Usage.TextBuilder.WriteString(claudeResponse.Delta.PartialJson)
 	}
 
 	dataChan <- rawStr

@@ -252,14 +252,28 @@ type ConsumeSnapshot struct {
 	Ctx       context.Context
 }
 
+// WithUpstreamRequestID 把 provider 在响应阶段暂存到 gin.Context 的上游 request id
+// （如 bedrock x-amzn-requestid）注入 ctx。model.RecordConsumeLog 约定从 ctx 读该值，
+// 因此每个 RecordConsumeLog 调用方都必须经本函数派生 ctx，否则 upstream_request_id
+// 列会静默留空。未暂存时原样返回 ctx（realtime/WS 的快照先于上游响应，拿不到值，
+// 日志该列留空即可）。
+func WithUpstreamRequestID(ctx context.Context, c *gin.Context) context.Context {
+	if upstreamRequestID := c.GetString(config.GinUpstreamRequestIdKey); upstreamRequestID != "" {
+		return context.WithValue(ctx, config.GinUpstreamRequestIdKey, upstreamRequestID)
+	}
+	return ctx
+}
+
 // NewConsumeSnapshot 立即从 c 抓取计费所需字段，构造不再持有 c 指针的快照。
 // 必须在 handler 还在调用栈上（c 仍归本请求所有）时调用。
 func NewConsumeSnapshot(c *gin.Context) ConsumeSnapshot {
+	// 上游 request id 随快照带走，供异步消费日志落库。普通 HTTP 路径在 send 之后取快照能拿到。
+	ctx := WithUpstreamRequestID(c.Request.Context(), c)
 	return ConsumeSnapshot{
 		TokenName: c.GetString("token_name"),
 		SourceIP:  c.ClientIP(),
 		StartTime: c.GetTime("requestStartTime"),
-		Ctx:       c.Request.Context(),
+		Ctx:       ctx,
 	}
 }
 
@@ -374,8 +388,10 @@ func (q *Quota) calcQuota(promptTokens, completionTokens int, inputRatio, output
 		quota = 0
 	}
 
-	// 如果禁用了空回复计费且没有输出token，则不计费
-	if !config.EmptyResponseBillingEnabled && completionTokens == 0 {
+	// 空回复计费闸对按次计费（times）属于误伤：按次语义是"调用成功即全额收"，
+	// 与 completion token 无关（Lyria 等音乐模型成功返回音频时 completionTokens 常为 0）。
+	// 仅对 token 计费类型生效；闸1（totalTokens==0，上游未成功返回）对两类都保留。
+	if q.price.Type != model.TimesPriceType && !config.EmptyResponseBillingEnabled && completionTokens == 0 {
 		quota = 0
 	}
 

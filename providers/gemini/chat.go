@@ -9,7 +9,6 @@ import (
 	"done-hub/providers/base"
 	"done-hub/types"
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"strings"
 
@@ -531,7 +530,7 @@ func ConvertFromChatOpenai(request *types.ChatCompletionRequest) (*GeminiChatReq
 		},
 	}
 
-	if model_utils.HasPrefixCaseInsensitive(request.Model, "gemini-2.0-flash-exp") || model_utils.HasPrefixCaseInsensitive(request.Model, "gemini-2.5-flash-image") || model_utils.HasPrefixCaseInsensitive(request.Model, "gemini-3-pro-image") {
+	if model_utils.IsGeminiNativeImageModel(request.Model) {
 		geminiRequest.GenerationConfig.ResponseModalities = []string{"Text", "Image"}
 	}
 
@@ -741,6 +740,28 @@ func removeAdditionalPropertiesWithDepth(schema interface{}, depth int) interfac
 	return v
 }
 
+// BillingPartsText 汇总 candidates 里计入 output token 计费的文本：正文、thought（计入
+// ThoughtsTokenCount）、functionCall 的 name/args。用于上游 usageMetadata 缺失/被裁时的兜底估算。
+// 不走 ToOpenAIChoice/ToOpenAIStreamChoice 的 Content：那里会拼 base64 图片、ing 引用
+// markdown、代码块围栏等网关合成文本，算进 output token 会失真（base64 更会打飞量级）。
+// 遍历 parts 天然避开，gemini 及其衍生渠道（geminicli/antigravity）的计费兜底点共用，避免各处重复维护。
+func BillingPartsText(candidates []GeminiChatCandidate) string {
+	var sb strings.Builder
+	for _, candidate := range candidates {
+		for _, part := range candidate.Content.Parts {
+			sb.WriteString(part.Text)
+			if part.FunctionCall != nil {
+				sb.WriteString(part.FunctionCall.Name)
+				if len(part.FunctionCall.Args) > 0 {
+					args, _ := json.Marshal(part.FunctionCall.Args)
+					sb.Write(args)
+				}
+			}
+		}
+	}
+	return sb.String()
+}
+
 func ConvertToChatOpenai(provider base.ProviderInterface, response *GeminiChatResponse, request *types.ChatCompletionRequest) (openaiResponse *types.ChatCompletionResponse, errWithCode *types.OpenAIErrorWithStatusCode) {
 	// 获取响应中应该使用的模型名称
 	responseModel := provider.GetResponseModelName(request.Model)
@@ -753,28 +774,23 @@ func ConvertToChatOpenai(provider base.ProviderInterface, response *GeminiChatRe
 		Choices: make([]types.ChatCompletionChoice, 0, len(response.Candidates)),
 	}
 
-	// 检查是否是 countTokens 请求
-	// Gemini 直连：有 UsageMetadata 且 Candidates 为空
-	// Vertex AI：有 TotalTokens 且 Candidates 为空
-	isCountTokens := len(response.Candidates) == 0 &&
-		(response.UsageMetadata != nil || response.TotalTokens > 0)
-
-	if !isCountTokens && len(response.Candidates) == 0 {
-		errWithCode = common.StringErrorWrapper("no candidates", "no_candidates", http.StatusInternalServerError)
-		return
-	}
-
-	// 如果是 countTokens 请求，创建一个特殊的响应
-	if isCountTokens {
-		// 为 countTokens 创建一个包含 token 信息的响应
+	// 空 candidates 一律按成功响应处理并照常计 input 费——绝不退款白嫖。
+	// OpenAI 兼容路径没有 countTokens 语义（原生 :countTokens 走 relay.go 的 CreateGeminiChat，永不到这里），
+	// 所以旧代码靠“空 candidates + usage”猜 countTokens、回传伪造的 "Token count: N" 是错的。真实语义只有
+	// 两种：prompt 被安全策略拦截、或上游已处理但空返回——两者 Gemini 都按 promptTokenCount 对平台计 input 费。
+	// 因此这里返回空内容的成功响应，落到下面的 usage 计费路径：有真实 usage 用真实值，被中转商裁成 0 或纯空
+	// 则用本地预估兜底（见下方 *usage 赋值前）。与 new-api、以及本文件流式路径口径一致。
+	// blocked 用 content_filter 如实告知客户端；其余空返回用 stop。
+	if len(response.Candidates) == 0 {
+		finishReason := types.FinishReasonStop
+		if response.PromptFeedback != nil && response.PromptFeedback.BlockReason != "" {
+			finishReason = types.FinishReasonContentFilter
+		}
 		openaiResponse.Choices = []types.ChatCompletionChoice{
 			{
-				Index: 0,
-				Message: types.ChatCompletionMessage{
-					Role:    types.ChatMessageRoleAssistant,
-					Content: fmt.Sprintf("Token count: %d", response.UsageMetadata.TotalTokenCount),
-				},
-				FinishReason: types.FinishReasonStop,
+				Index:        0,
+				Message:      types.ChatCompletionMessage{Role: types.ChatMessageRoleAssistant, Content: ""},
+				FinishReason: finishReason,
 			},
 		}
 	} else {
@@ -804,6 +820,17 @@ func ConvertToChatOpenai(provider base.ProviderInterface, response *GeminiChatRe
 	}
 	*usage = upstreamUsage
 	openaiResponse.Usage = usage
+
+	// 与 providers/openai/chat.go:CreateChatCompletion 的非流式兜底对齐：上游漏返 usageMetadata 时
+	// completion 会被 ConvertOpenAIUsageWithFallback 归零，此处用响应内容估算，避免计费归零。
+	// 走 billingPartsText 而非 GetContent：口径与流式 TextBuilder 一致，避免把 base64 图片/grounding
+	// 引用/代码块围栏等网关合成文本算进 output token。
+	if usage.CompletionTokens == 0 {
+		if text := BillingPartsText(response.Candidates); text != "" {
+			usage.CompletionTokens = common.CountTokenText(text, request.Model)
+			usage.TotalTokens = usage.PromptTokens + usage.CompletionTokens
+		}
+	}
 
 	return
 }
@@ -860,13 +887,9 @@ func (h *GeminiStreamHandler) convertToOpenaiStream(geminiResponse *GeminiChatRe
 			candidate.FinishReason = nil
 		}
 		choices = append(choices, candidate.ToOpenAIStreamChoice(h.Request))
-		// 累积流式内容到 TextBuilder，用于 UsageMetadata 缺失或不准确时的 token 计算备用
-		for _, part := range candidate.Content.Parts {
-			if part.Text != "" && !part.Thought {
-				h.Usage.TextBuilder.WriteString(part.Text)
-			}
-		}
 	}
+	// 累积流式内容到 TextBuilder，用于 UsageMetadata 缺失或不准确时的 token 计算备用（见 billingPartsText）。
+	h.Usage.TextBuilder.WriteString(BillingPartsText(geminiResponse.Candidates))
 
 	if len(choices) > 0 && (choices[0].Delta.ToolCalls != nil || choices[0].Delta.FunctionCall != nil) {
 		choices := choices[0].ConvertOpenaiStream()

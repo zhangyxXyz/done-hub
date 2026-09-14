@@ -29,6 +29,7 @@ const config = {
     start_time: 0,
     system_name: 'Done Hub',
     language: 'zh_CN',
+    language_switch_prompt_enabled: true,
     top_up_link: '',
     register_enabled: true,
     turnstile_check: false,

@@ -1,22 +1,17 @@
 package bedrock
 
 import (
-	"bytes"
-	"crypto/sha256"
 	"done-hub/common/requester"
 	"done-hub/model"
 	"done-hub/providers/base"
-	"done-hub/types"
-	"encoding/json"
-	"errors"
+	"done-hub/providers/openai"
 	"fmt"
-	"io"
 	"net/http"
 	"strings"
-	"time"
 
 	"done-hub/providers/bedrock/category"
-	"done-hub/providers/bedrock/sigv4"
+
+	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime"
 )
 
 type BedrockProviderFactory struct{}
@@ -26,9 +21,14 @@ func (f BedrockProviderFactory) Create(channel *model.Channel) base.ProviderInte
 
 	bedrockProvider := &BedrockProvider{
 		BaseProvider: base.BaseProvider{
-			Config:    getConfig(),
-			Channel:   channel,
-			Requester: requester.NewHTTPRequester(channel.GetProxy(), requestErrorHandle),
+			Config:  getConfig(),
+			Channel: channel,
+			// chat（InvokeModel）路径仅借 Requester 复用 NewRequestWithCustomParams* 的
+			// 请求体构造逻辑，实际发送走 bedrockruntime SDK；responses 路径则直接经
+			// Requester 发 HTTP（AWS 的 /openai/v1/responses 返回标准 OpenAI 错误格式），
+			// 故错误回调用 openai.RequestErrorHandle。
+			Requester:       requester.NewHTTPRequester(channel.GetProxy(), openai.RequestErrorHandle),
+			SupportResponse: true,
 		},
 	}
 
@@ -45,49 +45,31 @@ type BedrockProvider struct {
 	SessionToken    string
 	APIToken        string
 	Category        *category.Category
+	client          *bedrockruntime.Client
+	// errBody 缓存最近一次上游错误响应的原始 body（由 captureResponseMiddleware 在
+	// Deserialize 前 tee 出来）。用于在 SDK 反序列化失败（如中间层返回 HTML）时，
+	// 让 awsErrorToOpenAI 拿到上游真实返回而非 SDK 的解析器噪声。
+	errBody []byte
 }
 
 func getConfig() base.ProviderConfig {
 	return base.ProviderConfig{
 		BaseURL:         "https://bedrock-runtime.%s.amazonaws.com",
 		ChatCompletions: "/model/%s/invoke",
+		Responses:       "/openai/v1/responses",
 	}
 }
 
-// 请求错误处理
-func requestErrorHandle(resp *http.Response) *types.OpenAIError {
-	bedrockError := &BedrockError{}
-	err := json.NewDecoder(resp.Body).Decode(bedrockError)
-	if err != nil {
-		return nil
-	}
-
-	return errorHandle(bedrockError)
-}
-
-// 错误处理
-func errorHandle(bedrockError *BedrockError) *types.OpenAIError {
-	if bedrockError.Message == "" {
-		return nil
-	}
-	return &types.OpenAIError{
-		Message: bedrockError.Message,
-		Type:    "Bedrock Error",
-	}
-}
-
-func (p *BedrockProvider) GetFullRequestURL(requestURL string, modelName string) string {
+// GetFullRequestURL 拼接完整 URL（BaseURL 含 region 占位符）。仅 responses 等
+// 走 HTTPRequester 的路径使用；chat（InvokeModel）路径由 SDK 自行构造 URL，不经这里。
+func (p *BedrockProvider) GetFullRequestURL(requestURL string, _ string) string {
 	baseURL := strings.TrimSuffix(p.GetBaseURL(), "/")
-
-	return fmt.Sprintf(baseURL+requestURL, p.Region, modelName)
+	return fmt.Sprintf(baseURL, p.Region) + requestURL
 }
 
 func (p *BedrockProvider) GetRequestHeaders() (headers map[string]string) {
 	headers = make(map[string]string)
 	p.CommonRequestHeaders(headers)
-	if p.APIToken != "" {
-		headers["Authorization"] = "Bearer " + p.APIToken
-	}
 	headers["Accept"] = "*/*"
 
 	return headers
@@ -149,30 +131,4 @@ func filterAWSResponseHeaders(src http.Header) http.Header {
 		return nil
 	}
 	return out
-}
-
-func (p *BedrockProvider) Sign(req *http.Request) error {
-	var body []byte
-	if req.Body == nil {
-		body = []byte("")
-	} else {
-		var err error
-		body, err = io.ReadAll(req.Body)
-		if err != nil {
-			return errors.New("error getting request body: " + err.Error())
-		}
-		req.Body = io.NopCloser(bytes.NewReader(body))
-	}
-	if p.APIToken != "" {
-		return nil
-	}
-	sig, err := sigv4.New(sigv4.WithCredential(p.AccessKeyID, p.SecretAccessKey, p.SessionToken), sigv4.WithRegionService(p.Region, awsService))
-	if err != nil {
-		return err
-	}
-
-	reqBodyHashHex := fmt.Sprintf("%x", sha256.Sum256(body))
-	sig.Sign(req, reqBodyHashHex, sigv4.NewTime(time.Now()))
-
-	return nil
 }

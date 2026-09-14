@@ -3,6 +3,8 @@ package codex
 import (
 	"bufio"
 	"done-hub/common"
+	"done-hub/common/requester"
+	"done-hub/providers/base"
 	"done-hub/providers/openai"
 	"done-hub/types"
 	"encoding/base64"
@@ -14,10 +16,12 @@ import (
 	"strings"
 )
 
-// Codex 内部 Responses + image_generation 工具的编排模型，硬编码为 ChatGPT 内部
+// Codex 内部 Responses + image_generation 工具的编排模型默认值，
 // 专门承担"决定调用 image_generation 工具并选参"的轻量模型；真正的图像模型在 tools[0].model 指定。
+// 上游会按 ChatGPT 账号套餐下线旧编排模型（如 gpt-5.4-mini），可在渠道插件参数
+// images_main_model 里覆盖，留空使用此默认值。
 const (
-	imagesResponsesMainModel = "gpt-5.4-mini"
+	imagesResponsesMainModel = "gpt-5.6-luna"
 	imageToolActionGenerate  = "generate"
 	imageToolActionEdit      = "edit"
 )
@@ -75,6 +79,17 @@ type imagesMaskImageURL struct {
 	ImageURL string `json:"image_url"`
 }
 
+// CreateImageGenerationsStream / CreateImageEditsStream：codex 图像走内部 Responses 工具协议，
+// 嵌入的 OpenAIProvider 流式方法会把 images 格式请求体发到 /backend-api/codex/responses，
+// 覆写返回哨兵让 relay 层降级为非流式 + 合成 SSE。
+func (p *CodexProvider) CreateImageGenerationsStream(request *types.ImageRequest) (requester.StreamReaderInterface[string], *types.OpenAIErrorWithStatusCode) {
+	return nil, base.ImageStreamNotSupportedError()
+}
+
+func (p *CodexProvider) CreateImageEditsStream(request *types.ImageEditRequest) (requester.StreamReaderInterface[string], *types.OpenAIErrorWithStatusCode) {
+	return nil, base.ImageStreamNotSupportedError()
+}
+
 // CreateImageGenerations 走 /backend-api/codex/responses + image_generation 工具实现 /v1/images/generations。
 func (p *CodexProvider) CreateImageGenerations(request *types.ImageRequest) (*types.ImageResponse, *types.OpenAIErrorWithStatusCode) {
 	prompt := strings.TrimSpace(request.Prompt)
@@ -82,7 +97,7 @@ func (p *CodexProvider) CreateImageGenerations(request *types.ImageRequest) (*ty
 		return nil, common.StringErrorWrapperLocal("prompt is required", "invalid_request_error", http.StatusBadRequest)
 	}
 
-	body, err := json.Marshal(buildImagesRequestBody(imageToolActionGenerate, prompt, buildToolFromImageRequest(request), nil, ""))
+	body, err := json.Marshal(buildImagesRequestBody(imageToolActionGenerate, prompt, buildToolFromImageRequest(request), nil, "", p.ImagesMainModel))
 	if err != nil {
 		return nil, common.ErrorWrapperLocal(err, "build_request_failed", http.StatusBadRequest)
 	}
@@ -125,15 +140,17 @@ func (p *CodexProvider) CreateImageEdits(request *types.ImageEditRequest) (*type
 		tool.N = &n
 	}
 	tool.Size = strings.TrimSpace(request.Size)
+	tool.Quality = strings.TrimSpace(request.Quality)
 
-	body, err := json.Marshal(buildImagesRequestBody(imageToolActionEdit, prompt, tool, inputImages, maskURL))
+	body, err := json.Marshal(buildImagesRequestBody(imageToolActionEdit, prompt, tool, inputImages, maskURL, p.ImagesMainModel))
 	if err != nil {
 		return nil, common.ErrorWrapperLocal(err, "build_request_failed", http.StatusBadRequest)
 	}
 
 	return p.executeImagesResponses(body, request.ResponseFormat, imagesUsageFallback{
-		Model: request.Model,
-		Size:  request.Size,
+		Model:   request.Model,
+		Quality: request.Quality,
+		Size:    request.Size,
 	})
 }
 
@@ -168,6 +185,7 @@ func buildImagesRequestBody(
 	tool imageGenerateTool,
 	inputImages []string,
 	maskURL string,
+	mainModel string,
 ) imagesRequestBody {
 	tool.Type = "image_generation"
 	tool.Action = action
@@ -187,7 +205,7 @@ func buildImagesRequestBody(
 		Reasoning:         imagesReasoning{Effort: "medium", Summary: "auto"},
 		ParallelToolCalls: true,
 		Include:           []string{"reasoning.encrypted_content"},
-		Model:             imagesResponsesMainModel,
+		Model:             mainModel,
 		Store:             false,
 		ToolChoice:        imagesToolChoice{Type: "image_generation"},
 		Input: []imagesInputItem{{
@@ -291,10 +309,8 @@ func (p *CodexProvider) parseImagesStream(body io.Reader, responseFormat string,
 		*p.Usage = *usage.ToOpenAIUsage()
 	}
 	if p.Usage.TotalTokens == 0 {
-		perImage := 258
-		if openai.IsGPTImageModel(fallback.Model) {
-			perImage = openai.GPTImageOutputTokens(fallback.Quality, fallback.Size)
-		}
+		// 与 openai/image_generations.go 共用同一兜底口径，避免三处拷贝靠注释维系而漂移。
+		perImage := openai.ImageFallbackOutputTokens(fallback.Model, fallback.Quality, fallback.Size)
 		p.Usage.CompletionTokens = len(items) * perImage
 		p.Usage.TotalTokens = p.Usage.PromptTokens + p.Usage.CompletionTokens
 	}

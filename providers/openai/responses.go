@@ -288,13 +288,16 @@ func (p *OpenAIProvider) patchResponsesCompactRequestBody(request *types.OpenAIR
 func (h *OpenAIResponsesStreamHandler) HandlerResponsesStream(rawLine *[]byte, dataChan chan string, errChan chan error) {
 	rawStr := string(*rawLine)
 
+	// NoTrim 流：ReadBytes 保留行尾 \n，缓冲/转发时不能再手动补换行，
+	// 否则 event 行与 data 行之间会多出空行，严格按空行切块的 SSE 解析器
+	// 会把 event 行当成空 data 的独立事件，对空串做 JSON 解析直接报错。
+
 	// 处理 SSE 事件格式
 	if strings.HasPrefix(rawStr, "event: ") {
 		// 开始新的事件，保存事件类型
-		h.eventType = strings.TrimPrefix(rawStr, "event: ")
+		h.eventType = strings.TrimSpace(strings.TrimPrefix(rawStr, "event: "))
 		h.eventBuffer.Reset()
 		h.eventBuffer.WriteString(rawStr)
-		h.eventBuffer.WriteString("\n")
 		return
 	}
 
@@ -302,9 +305,14 @@ func (h *OpenAIResponsesStreamHandler) HandlerResponsesStream(rawLine *[]byte, d
 	if !strings.HasPrefix(rawStr, h.Prefix) {
 		if h.eventBuffer.Len() > 0 {
 			h.eventBuffer.WriteString(rawStr)
-			h.eventBuffer.WriteString("\n")
+			// 空行是 SSE 事件块的终止符：无 data 行的事件在此完整下发
+			if strings.TrimSpace(rawStr) == "" {
+				dataChan <- h.eventBuffer.String()
+				h.eventBuffer.Reset()
+				h.eventType = ""
+			}
 		} else {
-			// 没有事件类型的行，直接转发
+			// 没有事件类型的行（含上游事件分隔空行），直接转发
 			dataChan <- rawStr
 		}
 		return
@@ -348,7 +356,8 @@ func (h *OpenAIResponsesStreamHandler) HandlerResponsesStream(rawLine *[]byte, d
 			getResponsesExtraBilling(openaiResponse.Response, h.Usage)
 		}
 
-		// 添加数据行到缓冲区
+		// 添加数据行到缓冲区（rawStr 自带行尾 \n）；
+		// 终止事件随即关闭流，上游的事件分隔空行不会再被读到，这里补一个事件终止空行。
 		h.eventBuffer.WriteString(rawStr)
 		h.eventBuffer.WriteString("\n")
 
@@ -363,6 +372,9 @@ func (h *OpenAIResponsesStreamHandler) HandlerResponsesStream(rawLine *[]byte, d
 		return
 	}
 
+	// 累积计费 output 文本（正文/推理/函数调用参数）：终止事件未带 usage 时，relay 层据此估算 completion，避免计费归零。
+	base.AccumulateResponsesStreamText(&openaiResponse, h.Usage)
+
 	switch openaiResponse.Type {
 	case "response.created":
 		if len(openaiResponse.Response.Tools) > 0 {
@@ -374,11 +386,6 @@ func (h *OpenAIResponsesStreamHandler) HandlerResponsesStream(rawLine *[]byte, d
 					}
 				}
 			}
-		}
-	case "response.output_text.delta":
-		delta, ok := openaiResponse.Delta.(string)
-		if ok {
-			h.Usage.TextBuilder.WriteString(delta)
 		}
 	case "response.output_item.added":
 		if openaiResponse.Item != nil {
@@ -396,11 +403,10 @@ func (h *OpenAIResponsesStreamHandler) HandlerResponsesStream(rawLine *[]byte, d
 		}
 	}
 
-	// 添加数据行到缓冲区
+	// 添加数据行到缓冲区（rawStr 自带行尾 \n，事件终止空行由上游后续的分隔空行原样转发提供）
 	h.eventBuffer.WriteString(rawStr)
-	h.eventBuffer.WriteString("\n")
 
-	// 发送完整的 SSE 事件块
+	// 发送 SSE 事件块
 	dataChan <- h.eventBuffer.String()
 
 	// 重置缓冲区为下一个事件做准备
@@ -433,6 +439,10 @@ func (h *OpenAIResponsesStreamHandler) HandlerChatStream(rawLine *[]byte, dataCh
 		Choices: make([]types.ChatCompletionStreamChoice, 0),
 	}
 	needOutput := false
+
+	// 累积计费 output 文本（正文/推理/函数调用参数）：与 HandlerResponsesStream 口径一致，集中登记于 helper，
+	// 避免新增 delta 事件时此处漏累积（终止事件不在 helper case 列表，上提到 switch 前不会误累积）。
+	base.AccumulateResponsesStreamText(&openaiResponse, h.Usage)
 
 	switch openaiResponse.Type {
 	case "response.created":
@@ -483,7 +493,7 @@ func (h *OpenAIResponsesStreamHandler) HandlerChatStream(rawLine *[]byte, dataCh
 			})
 			needOutput = true
 		}
-	case "response.reasoning_summary_text.delta": // 处理文本输出的增量
+	case "response.reasoning_summary_text.delta", "response.reasoning_text.delta": // 推理文本（summary 与原始 reasoning）增量
 		delta, ok := openaiResponse.Delta.(string)
 		if ok {
 			h.Usage.TextBuilder.WriteString(delta)
@@ -496,10 +506,7 @@ func (h *OpenAIResponsesStreamHandler) HandlerChatStream(rawLine *[]byte, dataCh
 		})
 		needOutput = true
 	case "response.function_call_arguments.delta": // 处理函数调用参数的增量
-		delta, ok := openaiResponse.Delta.(string)
-		if ok {
-			h.Usage.TextBuilder.WriteString(delta)
-		}
+		delta, _ := openaiResponse.Delta.(string)
 		chatRes.Choices = append(chatRes.Choices, types.ChatCompletionStreamChoice{
 			Index: 0,
 			Delta: types.ChatCompletionStreamChoiceDelta{

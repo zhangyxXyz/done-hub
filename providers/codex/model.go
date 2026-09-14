@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	codexFallbackClientVersion      = "0.134.0"
+	codexFallbackClientVersion      = "0.144.1"
 	codexNPMRegistryURL             = "https://registry.npmjs.org/@openai%2Fcodex"
 	codexClientVersionCacheDuration = 6 * time.Hour
 )
@@ -37,7 +37,7 @@ type codexModelDetails struct {
 }
 
 func (p *CodexProvider) GetModelList() ([]string, error) {
-	clientVersion := p.getCodexModelListClientVersion()
+	clientVersion := p.getCodexClientVersion()
 	fullRequestURL := withCodexModelListClientVersion(p.GetFullRequestURL(p.Config.ModelList, ""), clientVersion)
 	headers, err := p.getRequestHeadersInternal()
 	if err != nil {
@@ -67,7 +67,7 @@ func (p *CodexProvider) GetModelList() ([]string, error) {
 	return modelList, nil
 }
 
-func (p *CodexProvider) getCodexModelListClientVersion() string {
+func (p *CodexProvider) getCodexClientVersion() string {
 	proxyURL := ""
 	if p != nil && p.Channel != nil {
 		proxyURL = p.Channel.GetProxy()

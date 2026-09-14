@@ -26,17 +26,6 @@ const (
 	DefaultClientID = "pdlLIX2Y72MIl2rhLhTE9VV9bN905kBh"
 	TokenEndpoint   = "https://auth0.openai.com/oauth/token"
 
-	// DefaultCodexVersion 是伪装的 Codex CLI 版本号。
-	// 上游 chatgpt.com/backend-api/codex/responses 会用该版本号对模型访问做灰度门控：
-	// 修改时必须同步更新 DefaultCodexUserAgent 中内嵌的版本号。
-	DefaultCodexVersion = "0.144.1"
-
-	// DefaultCodexUserAgent 是 Codex CLI 伪装 UA 的统一来源，
-	// 同时被 chat/responses 请求头、Token Refresh、OAuth 授权码换 token 三处复用，
-	// 避免单点升级时漏改导致 auth0 灰度场景下行为不一致。
-	// 版本号必须与 DefaultCodexVersion 保持一致。
-	DefaultCodexUserAgent = "codex_cli_rs/" + DefaultCodexVersion + " (Ubuntu 22.4.0; x86_64) xterm-256color"
-
 	// DefaultCodexOriginator 是官方 Codex CLI 的 originator 标识，
 	// 上游据此识别请求来自官方客户端。缺失时新模型可能被拒或降级。
 	DefaultCodexOriginator = "codex_cli_rs"
@@ -69,12 +58,26 @@ func (f CodexProviderFactory) Create(channel *model.Channel) base.ProviderInterf
 	return provider
 }
 
-// parseCodexConfig 解析 Codex 配置
-// 支持两种输入格式：
+// parseCodexConfig 解析 Codex 配置：先读插件参数，再解析 Key。
+// Key 支持两种输入格式：
 // 1. 完整的 JSON 格式（包含 access_token, refresh_token 等）- 支持自动刷新
 // 2. 纯文本格式（直接输入 access_token）- 不支持自动刷新，但更简单
 func parseCodexConfig(provider *CodexProvider) {
 	channel := provider.Channel
+
+	// 插件参数：图像编排模型覆盖（上游按套餐下线旧编排模型时无需改代码）
+	mainModel := imagesResponsesMainModel
+	if channel.Plugin != nil {
+		plugin := channel.Plugin.Data()
+		if codexConfig, ok := plugin["codex"]; ok {
+			if m, ok := codexConfig["images_main_model"].(string); ok {
+				if m = strings.TrimSpace(m); m != "" {
+					mainModel = m
+				}
+			}
+		}
+	}
+	provider.ImagesMainModel = mainModel
 
 	if channel.Key == "" {
 		return
@@ -117,7 +120,8 @@ func parseCodexConfig(provider *CodexProvider) {
 
 type CodexProvider struct {
 	openai.OpenAIProvider
-	Credentials *OAuth2Credentials // OAuth2 凭证（包含 refresh_token）
+	Credentials     *OAuth2Credentials // OAuth2 凭证（包含 refresh_token）
+	ImagesMainModel string             // 图像请求的 Responses 编排模型，parseCodexConfig 已填默认值
 }
 
 func getConfig() base.ProviderConfig {

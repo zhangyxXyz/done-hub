@@ -467,9 +467,10 @@ type ResponsesTools struct {
 	MaxNumResults  uint     `json:"max_num_results,omitempty"`
 	RankingOptions any      `json:"ranking_options,omitempty"`
 	// Computer Use
-	DisplayWidth  uint   `json:"display_width,omitempty"`
-	DisplayHeight uint   `json:"display_height,omitempty"`
-	Environment   string `json:"environment,omitempty"`
+	DisplayWidth  uint `json:"display_width,omitempty"`
+	DisplayHeight uint `json:"display_height,omitempty"`
+	// environment 为 string（computer_use 枚举）或 object（shell 工具的 {type, skills...}），故用 any 兼容两种形态
+	Environment any `json:"environment,omitempty"`
 	// Function / Namespace shared
 	Name        string `json:"name,omitempty"`
 	Description string `json:"description,omitempty"`
@@ -566,9 +567,13 @@ type TextResponses struct {
 }
 
 func (cc *OpenAIResponsesResponses) GetContent() string {
+	// 兼容推理模型/纯 tool_call：非流式输出可能落在 reasoning summary 或 function_call arguments 而非 message。
+	// 仅用于 completion token 兜底估算（billing），reasoning 与 tool_call arguments 均为计费的 output token。
 	var content string
 	for _, output := range cc.Output {
 		content += output.StringContent()
+		content += output.GetSummaryString()
+		content += output.ArgumentsString()
 	}
 	return content
 }
@@ -752,6 +757,11 @@ type ResponsesUsage struct {
 
 type ResponsesUsageOutputTokensDetails struct {
 	ReasoningTokens int `json:"reasoning_tokens"`
+	// image/text 明细：image generation 端点（gpt-image-*）的 output_tokens_details
+	// 官方同时返回 image_tokens 与 text_tokens。omitempty 使 Responses 端点（输出侧
+	// 仅有 reasoning）不多输出零值字段，保持与官方对齐。
+	ImageTokens int `json:"image_tokens,omitempty"`
+	TextTokens  int `json:"text_tokens,omitempty"`
 }
 
 type ResponsesUsageInputTokensDetails struct {
@@ -769,6 +779,8 @@ func (u *ResponsesUsage) ToOpenAIUsage() *Usage {
 
 	if u.OutputTokensDetails != nil {
 		usage.CompletionTokensDetails.ReasoningTokens = u.OutputTokensDetails.ReasoningTokens
+		usage.CompletionTokensDetails.ImageTokens = u.OutputTokensDetails.ImageTokens
+		usage.CompletionTokensDetails.TextTokens = u.OutputTokensDetails.TextTokens
 	}
 
 	if u.InputTokensDetails != nil {
@@ -787,9 +799,13 @@ func (u *Usage) ToResponsesUsage() *ResponsesUsage {
 		TotalTokens:  u.TotalTokens,
 	}
 
-	if u.CompletionTokensDetails.ReasoningTokens > 0 {
+	if u.CompletionTokensDetails.ReasoningTokens > 0 ||
+		u.CompletionTokensDetails.ImageTokens > 0 ||
+		u.CompletionTokensDetails.TextTokens > 0 {
 		responsesUsage.OutputTokensDetails = &ResponsesUsageOutputTokensDetails{
 			ReasoningTokens: u.CompletionTokensDetails.ReasoningTokens,
+			ImageTokens:     u.CompletionTokensDetails.ImageTokens,
+			TextTokens:      u.CompletionTokensDetails.TextTokens,
 		}
 	}
 

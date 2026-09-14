@@ -1,9 +1,37 @@
 package codex
 
 import (
+	"done-hub/model"
 	"reflect"
 	"testing"
+	"time"
 )
+
+func TestApplyDefaultHeadersUsesOneDynamicClientVersion(t *testing.T) {
+	codexClientVersionCache.Lock()
+	previousVersion := codexClientVersionCache.version
+	previousExpiry := codexClientVersionCache.expiresAt
+	codexClientVersionCache.version = "9.8.7"
+	codexClientVersionCache.expiresAt = time.Now().Add(time.Minute)
+	codexClientVersionCache.Unlock()
+	t.Cleanup(func() {
+		codexClientVersionCache.Lock()
+		codexClientVersionCache.version = previousVersion
+		codexClientVersionCache.expiresAt = previousExpiry
+		codexClientVersionCache.Unlock()
+	})
+
+	provider := CodexProviderFactory{}.Create(&model.Channel{}).(*CodexProvider)
+	headers := map[string]string{}
+	provider.applyDefaultHeaders(headers)
+
+	if got, want := headers["version"], "9.8.7"; got != want {
+		t.Fatalf("version header = %q, want %q", got, want)
+	}
+	if got, want := headers["User-Agent"], "codex_cli_rs/9.8.7 (Ubuntu 22.4.0; x86_64) WindowsTerminal"; got != want {
+		t.Fatalf("User-Agent header = %q, want %q", got, want)
+	}
+}
 
 func TestParseCodexModelListUsesSlugAndDeduplicates(t *testing.T) {
 	response := &codexModelListResponse{

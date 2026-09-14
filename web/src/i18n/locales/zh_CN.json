@@ -143,7 +143,9 @@
     "console": "控制台",
     "error": "错误",
     "unknownVersion": "未知版本",
-    "welcomeBack": "欢迎回来"
+    "welcomeBack": "欢迎回来",
+    "userAgreement": "用户协议",
+    "privacyPolicy": "隐私政策"
   },
   "sidebar": {
     "totalQuota": "总额度",
@@ -214,8 +216,7 @@
     "RPM": "当前RPM",
     "TPM": "当前TPM",
     "availability": "可用率",
-    "status_normal": "正常",
-    "status_abnormal": "异常"
+    "week_total_consumption": "本周总消费"
   },
   "analytics_index": {
     "startTime": "开始时间",
@@ -368,7 +369,8 @@
     "deleting": "删除中...",
     "modelToDelete": "要删除的模型名（完整匹配）",
     "delModelEmptyHint": "请在上方输入要删除的模型名后按 Enter 搜索匹配渠道",
-    "azureApiSearchPlaceholder": "输入要查找的 API 版本（留空查询全部 Azure 渠道）"
+    "azureApiSearchPlaceholder": "输入要查找的 API 版本（留空查询全部 Azure 渠道）",
+    "showAll": "显示全部"
   },
   "channel_usage": {
     "panelTitle": "渠道额度",
@@ -474,7 +476,9 @@
     "openaiBaseUrlTip": "请输入OpenAI格式的API地址，例如：https://api.openai.com",
     "fetchModels": "获取模型",
     "selectAll": "全选",
+    "selectAllTooltip": "选择全部模型",
     "invertSelection": "反选",
+    "invertSelectionTooltip": "反转当前选择",
     "noModels": "没有模型",
     "noMatchingModels": "没有匹配的模型",
     "selectedCount": "已选{{count}}个模型",
@@ -503,6 +507,7 @@
     "overwriteMappingsTip": "启用后将清空原有的映射关系，仅保留此次创建的映射",
     "clearModels": "重置",
     "clearModelsTip": "重置所有已选择的模型",
+    "clearSearch": "清除",
     "tagMembersTitle": "组内共 {{count}} 个成员渠道",
     "tagMembersHint": "各成员的 Key 相互独立、不受共享配置影响；如需增删成员，请在列表中展开该标签行逐个管理。"
   },
@@ -598,7 +603,9 @@
     "createdSuccessTip": "请妥善保存此令牌，请勿泄露给他人。",
     "done": "完成",
     "showKey": "显示密钥",
-    "hideKey": "隐藏密钥"
+    "hideKey": "隐藏密钥",
+    "apiRate": "API速率",
+    "apiRateTip": "每分钟允许的请求数，当速率小于60时，使用计数器限制器，当速率大于等于60时，使用令牌桶限制器，仅在启用Redis时有效"
   },
   "invoice_index": {
     "invoice": "月度账单",
@@ -632,7 +639,8 @@
     "userinfo": "用户信息",
     "usage_statistics": "使用统计",
     "download": "下载PDF",
-    "usage_details": "账单详情"
+    "usage_details": "账单详情",
+    "summary": "摘要"
   },
   "logPage": {
     "title": "日志",
@@ -676,6 +684,9 @@
     "totalInputTokens": "计算输入Tokens",
     "totalOutputTokens": "计算输出Tokens",
     "sourceIp": "来源IP",
+    "requestId": "请求ID",
+    "upstreamRequestId": "上游请求ID",
+    "requestIdentifier": "请求标识",
     "logType": {
       "all": "全部",
       "recharge": "充值",
@@ -716,7 +727,8 @@
       "profit": "利润",
       "calculationNote": "PS：本系统按照积分计算，所有金额均为积分换算而来，1积分=$0.000002，最低消费为1积分，本计算步骤仅供参考，以实际扣费为准",
       "times": "倍"
-    }
+    },
+    "unknown": "未知"
   },
   "redemptionPage": {
     "pageTitle": "兑换",
@@ -788,7 +800,9 @@
     "taskId": "任务ID",
     "taskIdPlaceholder": "任务ID",
     "username": "用户名称",
-    "sourceIp": "来源IP"
+    "sourceIp": "来源IP",
+    "requestId": "请求ID",
+    "upstreamRequestId": "上游请求ID"
   },
   "midjourneyPage": {
     "midjourney": "Midjourney",
@@ -1484,6 +1498,13 @@
     },
     "otherSettings": {
       "title": "其他设置",
+      "languageSettings": {
+        "title": "语言设置",
+        "defaultLanguageLabel": "默认语言",
+        "setDefaultLanguage": "设置默认语言",
+        "switchPromptEnabled": "根据浏览器语言提示用户切换语言",
+        "switchPromptTip": "开启后，若访客的浏览器语言与当前显示语言不一致，将提示一次是否切换。除非其浏览器语言再次发生变化，否则不会重复提示。"
+      },
       "generalSettings": {
         "title": "通用设置",
         "currentVersion": "当前版本",
@@ -1637,7 +1658,9 @@
     "longContextOutput": "输出倍率",
     "added": "新增",
     "removed": "删除",
-    "modified": "修改"
+    "modified": "修改",
+    "addNewOnly": "仅添加新增",
+    "overwriteData": "覆盖数据"
   },
   "error": {
     "unknownError": "未知错误"
@@ -1664,6 +1687,9 @@
     "processing": "处理中...",
     "serverError": "服务器错误",
     "again": "重试 ({{count}})",
+    "languageSwitchPrompt": "检测到您的浏览器语言为{{language}}，是否切换为{{language}}？",
+    "languageSwitchConfirm": "切换",
+    "languageSwitchDismiss": "暂不",
     "back": "返回",
     "none": "无",
     "show": "显示",
@@ -1699,7 +1725,8 @@
       "toggleToCurrency": "按美元输入",
       "toggleToToken": "按 token 数输入",
       "overDeductLimit": "⚠ 超出可减扣上限（{{max}}）"
-    }
+    },
+    "currency": "USD"
   },
   "channel_row": {
     "priorityTip": "优先级不能小于 0",
@@ -2022,6 +2049,10 @@
   "请求模型时的知识库模板, 请查看文档填写，否则不用填写": "请求模型时的知识库模板, 请查看文档填写，否则不用填写",
   "网页搜索": "网页搜索",
   "使用网页搜索功能，对用户输入的内容进行搜索": "使用网页搜索功能，对用户输入的内容进行搜索",
+  "Codex 设置": "Codex 设置",
+  "Codex 渠道专属配置": "Codex 渠道专属配置",
+  "图像编排模型": "图像编排模型",
+  "生图请求使用的 Responses 编排模型（非图像模型本身），留空使用默认 gpt-5.6-luna；上游下线默认模型时可在此切换为账号支持的文本模型": "生图请求使用的 Responses 编排模型（非图像模型本身），留空使用默认 gpt-5.6-luna；上游下线默认模型时可在此切换为账号支持的文本模型",
   "启用": "启用",
   "是否启用网页搜索": "是否启用网页搜索",
   "声音映射": "声音映射",

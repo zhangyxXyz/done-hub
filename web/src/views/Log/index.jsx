@@ -58,7 +58,9 @@ export default function Log() {
     end_timestamp: dayjs().unix() + 3600,
     log_type: '0',
     channel_id: '',
-    source_ip: ''
+    source_ip: '',
+    request_id: '',
+    upstream_request_id: ''
   }
 
   const [page, setPage] = useState(0)
@@ -102,6 +104,8 @@ export default function Log() {
     completion: true,
     quota: true,
     source_ip: true,
+    request_id: false,
+    upstream_request_id: false,
     detail: true
   })
   const [columnMenuAnchor, setColumnMenuAnchor] = useState(null)
@@ -195,6 +199,7 @@ export default function Log() {
         if (!userIsAdmin) {
           delete keyword.username
           delete keyword.channel_id
+          delete keyword.upstream_request_id
         }
 
         const res = await API.get(url, {
@@ -239,6 +244,7 @@ export default function Log() {
       if (!userIsAdmin) {
         delete cleaned.username
         delete cleaned.channel_id
+        delete cleaned.upstream_request_id
       }
 
       // 请求前清零（避免显示旧值），同时用 reqId 防 race：
@@ -303,6 +309,7 @@ export default function Log() {
       if (!userIsAdmin) {
         delete params.username
         delete params.channel_id
+        delete params.upstream_request_id
       }
 
       // 使用fetch进行同步请求，提供更好的错误处理
@@ -583,6 +590,8 @@ export default function Log() {
                 { id: 'completion', label: t('logPage.outputLabel') },
                 { id: 'quota', label: t('logPage.quotaLabel') },
                 { id: 'source_ip', label: t('logPage.sourceIp') },
+                { id: 'request_id', label: t('logPage.requestId') },
+                { id: 'upstream_request_id', label: t('logPage.upstreamRequestId'), adminOnly: true },
                 { id: 'detail', label: t('logPage.detailLabel') }
               ].map(
                 (column) =>
@@ -677,6 +686,18 @@ export default function Log() {
                     label: t('logPage.sourceIp'),
                     disableSort: true,
                     hide: !columnVisibility.source_ip
+                  },
+                  {
+                    id: 'request_id',
+                    label: t('logPage.requestId'),
+                    disableSort: true,
+                    hide: !columnVisibility.request_id
+                  },
+                  {
+                    id: 'upstream_request_id',
+                    label: t('logPage.upstreamRequestId'),
+                    disableSort: true,
+                    hide: !columnVisibility.upstream_request_id || !userIsAdmin
                   },
                   {
                     id: 'detail',

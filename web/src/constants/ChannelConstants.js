@@ -320,6 +320,13 @@ export const CHANNEL_OPTIONS = {
     color: 'primary',
     url: 'https://opencode.ai/'
   },
+  66: {
+    key: 66,
+    text: 'Amazon Bedrock (Messages)',
+    value: 66,
+    color: 'orange',
+    url: 'https://console.aws.amazon.com/bedrock/home'
+  },
   8: {
     key: 8,
     text: '自定义渠道',

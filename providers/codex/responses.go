@@ -289,13 +289,16 @@ func (p *CodexProvider) getResponsesRequest(request *types.OpenAIResponsesReques
 func (h *CodexResponsesStreamHandler) HandlerResponsesStream(rawLine *[]byte, dataChan chan string, errChan chan error) {
 	rawStr := string(*rawLine)
 
+	// NoTrim 流：ReadBytes 保留行尾 \n，缓冲/转发时不能再手动补换行，
+	// 否则 event 行与 data 行之间会多出空行，严格按空行切块的 SSE 解析器
+	// 会把 event 行当成空 data 的独立事件，对空串做 JSON 解析直接报错。
+
 	// 处理 SSE 事件格式
 	if strings.HasPrefix(rawStr, "event: ") {
 		// 开始新的事件，保存事件类型
-		h.eventType = strings.TrimPrefix(rawStr, "event: ")
+		h.eventType = strings.TrimSpace(strings.TrimPrefix(rawStr, "event: "))
 		h.eventBuffer.Reset()
 		h.eventBuffer.WriteString(rawStr)
-		h.eventBuffer.WriteString("\n")
 		return
 	}
 
@@ -303,9 +306,14 @@ func (h *CodexResponsesStreamHandler) HandlerResponsesStream(rawLine *[]byte, da
 	if !strings.HasPrefix(rawStr, "data: ") {
 		if h.eventBuffer.Len() > 0 {
 			h.eventBuffer.WriteString(rawStr)
-			h.eventBuffer.WriteString("\n")
+			// 空行是 SSE 事件块的终止符：无 data 行的事件在此完整下发
+			if strings.TrimSpace(rawStr) == "" {
+				dataChan <- h.eventBuffer.String()
+				h.eventBuffer.Reset()
+				h.eventType = ""
+			}
 		} else {
-			// 没有事件类型的行，直接转发
+			// 没有事件类型的行（含上游事件分隔空行），直接转发
 			dataChan <- rawStr
 		}
 		return
@@ -336,29 +344,20 @@ func (h *CodexResponsesStreamHandler) HandlerResponsesStream(rawLine *[]byte, da
 	// 解析 JSON 以提取 usage 信息（但不修改响应）
 	var responsesEvent types.OpenAIResponsesStreamResponses
 	if err := json.Unmarshal([]byte(dataLine), &responsesEvent); err == nil {
-		// 累积输出文本：终止事件未带 usage 时，relay 层据此估算 completion，避免计费归零。
-		if responsesEvent.Type == "response.output_text.delta" {
-			if delta, ok := responsesEvent.Delta.(string); ok {
-				h.Usage.TextBuilder.WriteString(delta)
-			}
-		}
+		// 累积计费 output 文本（正文/推理/函数调用参数）：终止事件未带 usage 时，relay 层据此估算 completion，避免计费归零。
+		base.AccumulateResponsesStreamText(&responsesEvent, h.Usage)
 		// 终止事件 usage 提取统一走 base helper（覆盖 completed/done/incomplete/failed）。
 		base.ExtractResponsesStreamUsage(&responsesEvent, h.Usage)
 	}
 
 	// 完全透传：将原始数据添加到缓冲区或直接发送
+	// （rawStr 自带行尾 \n，事件终止空行由上游后续的分隔空行原样转发提供）
 	if h.eventBuffer.Len() > 0 {
-		// 有事件类型，添加 data 行到缓冲区
+		// 有事件类型，添加 data 行到缓冲区并发送
 		h.eventBuffer.WriteString(rawStr)
-		h.eventBuffer.WriteString("\n")
-
-		// 检查是否是完整的事件（以空行结束）
-		if strings.HasSuffix(h.eventBuffer.String(), "\n\n") {
-			// 发送完整的事件
-			dataChan <- h.eventBuffer.String()
-			h.eventBuffer.Reset()
-			h.eventType = ""
-		}
+		dataChan <- h.eventBuffer.String()
+		h.eventBuffer.Reset()
+		h.eventType = ""
 	} else {
 		// 没有事件类型，直接转发 data 行
 		dataChan <- rawStr

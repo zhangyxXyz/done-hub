@@ -127,7 +127,7 @@ func (p *CodexProvider) applyDefaultHeaders(headers map[string]string) {
 
 	// 设置 version（上游据此对新模型做灰度门控，缺失时 gpt-5.6 等可能 404）
 	if _, exists := headers["version"]; !exists {
-		headers["version"] = DefaultCodexVersion
+		headers["version"] = p.getCodexClientVersion()
 	}
 
 	// 设置 originator（官方 Codex CLI 标识，缺失时可能被拒或降级）
@@ -199,7 +199,10 @@ func (h *CodexStreamHandler) HandlerStream(rawLine *[]byte, dataChan chan string
 		return
 	}
 
-	// 处理 response.output_text.delta 事件（文本增量）
+	// 累积计费 output 文本（正文/推理/函数调用参数）：终止事件未带 usage 时，relay 层据此估算 completion，避免计费归零。
+	base.AccumulateResponsesStreamText(&responsesStream, h.Usage)
+
+	// 处理 response.output_text.delta 事件（文本增量）：转换为 Chat 格式下发给客户端。
 	if responsesStream.Type == "response.output_text.delta" {
 		delta, ok := responsesStream.Delta.(string)
 		if !ok {
@@ -208,7 +211,6 @@ func (h *CodexStreamHandler) HandlerStream(rawLine *[]byte, dataChan chan string
 		if delta != "" {
 			h.textDelta = true
 		}
-
 		// 累积输出文本：终止事件未带 usage 时，relay 层据此估算 completion，避免计费归零。
 		h.Usage.TextBuilder.WriteString(delta)
 		// 转换为 Chat 格式的流式响应

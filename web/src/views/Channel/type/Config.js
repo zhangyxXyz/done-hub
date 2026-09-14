@@ -353,7 +353,12 @@ const typeConfig = {
         'claude-2.1',
         'claude-3-opus-20240229',
         'claude-3-sonnet-20240229',
-        'claude-3-haiku-20240307'
+        'claude-3-haiku-20240307',
+        'gpt-oss-120b',
+        'gpt-oss-20b',
+        'gpt-5.6-sol',
+        'gpt-5.6-terra',
+        'gpt-5.6-luna'
       ],
       test_model: 'claude-3-haiku-20240307'
     },
@@ -670,6 +675,16 @@ const typeConfig = {
       provider_models_list: 'channel_edit.openCodeFetchModelsHelp'
     },
     modelGroup: 'OpenCode Go'
+  },
+  66: {
+    input: {
+      models: ['claude-opus-4-8', 'claude-sonnet-5', 'claude-opus-4-7', 'claude-haiku-4-5', 'claude-fable-5'],
+      test_model: 'claude-haiku-4-5'
+    },
+    prompt: {
+      key: '按照如下格式输入：Region|AccessKeyID|SecretAccessKey|SessionToken 其中SessionToken可不填空；或 Region|BearerToken'
+    },
+    modelGroup: 'Anthropic'
   }
 };
 

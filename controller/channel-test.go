@@ -3,11 +3,13 @@ package controller
 import (
 	"done-hub/common/config"
 	"done-hub/common/logger"
+	"done-hub/common/model_utils"
 	"done-hub/common/notify"
 	"done-hub/common/utils"
 	"done-hub/model"
 	"done-hub/providers"
 	providers_base "done-hub/providers/base"
+	"done-hub/providers/claude"
 	"done-hub/types"
 	"encoding/json"
 	"errors"
@@ -137,22 +139,35 @@ func testChannel(channel *model.Channel, testModel string) (openaiErr *types.Ope
 
 		response, openAIErrorWithStatusCode = responseProvider.CreateResponses(testRequest)
 	case "chat":
-		chatProvider, ok := provider.(providers_base.ChatInterface)
-		if !ok {
+		// 仅实现 Claude 原生 Messages 接口的渠道（如 Bedrock Messages）不满足 ChatInterface，
+		// 回退到 Claude 接口测速。
+		if chatProvider, ok := provider.(providers_base.ChatInterface); ok {
+			testRequest := &types.ChatCompletionRequest{
+				Messages: []types.ChatCompletionMessage{
+					{
+						Role:    "user",
+						Content: "You just need to output 'hi' next.",
+					},
+				},
+				Model:  newModelName,
+				Stream: false,
+			}
+			response, openAIErrorWithStatusCode = chatProvider.CreateChatCompletion(testRequest)
+		} else if claudeProvider, ok := provider.(claude.ClaudeChatInterface); ok {
+			testRequest := &claude.ClaudeRequest{
+				Model:     newModelName,
+				MaxTokens: 512,
+				Messages: []claude.Message{
+					{
+						Role:    "user",
+						Content: "You just need to output 'hi' next.",
+					},
+				},
+			}
+			response, openAIErrorWithStatusCode = claudeProvider.CreateClaudeChat(testRequest)
+		} else {
 			return nil, errors.New("channel not implemented")
 		}
-		testRequest := &types.ChatCompletionRequest{
-			Messages: []types.ChatCompletionMessage{
-				{
-					Role:    "user",
-					Content: "You just need to output 'hi' next.",
-				},
-			},
-			Model:  newModelName,
-			Stream: false,
-		}
-
-		response, openAIErrorWithStatusCode = chatProvider.CreateChatCompletion(testRequest)
 	default:
 		return nil, errors.New("不支持的模型类型")
 	}
@@ -176,6 +191,13 @@ func getModelType(modelName string) string {
 
 	if embeddingsRegex.MatchString(modelName) {
 		return "embeddings"
+	}
+
+	// Gemini 原生生图模型只支持 generateContent，必须走 chat 测速；
+	// 否则会被下面 imageRegex 的 image 关键词吞进 image(predict) 分支 → 404 → 自动禁用。
+	// 放在 imageRegex 之前；imagen-* 不在此名单，仍落到 imageRegex 走 image(predict)。
+	if model_utils.IsGeminiNativeImageModel(modelName) {
+		return "chat"
 	}
 
 	if imageRegex.MatchString(modelName) {
