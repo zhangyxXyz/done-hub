@@ -1,6 +1,12 @@
 name: Delete old workflow runs
 
 on:
+  push:
+    branches: [dev]
+    paths:
+      - .github/workflows/delete-old-workflow-runs.yml
+      - scripts/cleanup-workflow-runs.py
+      - scripts/tests/test_cleanup_workflow_runs.py
   workflow_dispatch:
     inputs:
       dry_run:
@@ -31,5 +37,5 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
-          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+          DRY_RUN: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.dry_run) }}
         run: python3 scripts/cleanup-workflow-runs.py
