@@ -777,7 +777,7 @@
       "model": "anthropic/claude-opus-5",
       "model_info": {
         "model": "anthropic/claude-opus-5",
-        "name": "Claude Opus 5",
+        "name": "Anthropic: Claude Opus 5",
         "description": "Claude Opus 5 is Anthropic’s flagship model for demanding reasoning, coding, and long-horizon agentic work. It is particularly strong at end-to-end software tasks, code review and bug finding, visual analysis...",
         "context_length": 1000000,
         "max_tokens": 128000,
@@ -806,7 +806,7 @@
       "model": "anthropic/claude-opus-5:batch",
       "model_info": {
         "model": "anthropic/claude-opus-5:batch",
-        "name": "Claude Opus 5 (batch)",
+        "name": "Anthropic: Claude Opus 5 (batch)",
         "description": "Claude Opus 5 is Anthropic’s flagship model for demanding reasoning, coding, and long-horizon agentic work. It is particularly strong at end-to-end software tasks, code review and bug finding, visual analysis...",
         "context_length": 1000000,
         "max_tokens": 128000,
@@ -1828,7 +1828,7 @@
         "name": "DeepSeek: DeepSeek V4 Pro 0813",
         "description": "DeepSeek V4 Pro 0813 is a large-scale mixture-of-experts model from DeepSeek. This is the GA release of DeepSeek V4 Pro.",
         "context_length": 1048576,
-        "max_tokens": 393216,
+        "max_tokens": 384000,
         "input_modalities": [
           "text"
         ],
@@ -3083,35 +3083,6 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/google/gemma-4-31b-it",
-          "https://openrouter.ai/api/v1/models/google/gemma-4-31b-it-20260402/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "google/gemma-4-31b-it:batch",
-      "model_info": {
-        "model": "google/gemma-4-31b-it:batch",
-        "name": "Google: Gemma 4 31B (batch)",
-        "description": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function...",
-        "context_length": 262144,
-        "max_tokens": 235929,
-        "input_modalities": [
-          "image",
-          "text",
-          "video"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/google/gemma-4-31b-it:batch",
           "https://openrouter.ai/api/v1/models/google/gemma-4-31b-it-20260402/endpoints"
         ]
       }
@@ -5540,7 +5511,7 @@
         "name": "NVIDIA: Nemotron 3 Ultra",
         "description": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it...",
         "context_length": 262144,
-        "max_tokens": 182520,
+        "max_tokens": 32768,
         "input_modalities": [
           "text"
         ],
@@ -7914,31 +7885,6 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/openai/gpt-oss-20b",
-          "https://openrouter.ai/api/v1/models/openai/gpt-oss-20b/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/gpt-oss-20b:batch",
-      "model_info": {
-        "model": "openai/gpt-oss-20b:batch",
-        "name": "OpenAI: gpt-oss-20b (batch)",
-        "description": "gpt-oss-20b is an open-weight 21B parameter model released by OpenAI under the Apache 2.0 license. It uses a Mixture-of-Experts (MoE) architecture with 3.6B active parameters per forward pass, optimized for...",
-        "context_length": 131072,
-        "max_tokens": 117964,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-oss-20b:batch",
           "https://openrouter.ai/api/v1/models/openai/gpt-oss-20b/endpoints"
         ]
       }
@@ -10772,35 +10718,6 @@
       }
     },
     {
-      "model": "thinkingmachines/inkling-small:batch",
-      "model_info": {
-        "model": "thinkingmachines/inkling-small:batch",
-        "name": "Thinking Machines: Inkling Small (batch)",
-        "description": "Inkling Small is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 12B active parameters out of 276B total. It is positioned as the smaller, more efficient member of...",
-        "context_length": 524288,
-        "max_tokens": 471859,
-        "input_modalities": [
-          "text",
-          "image",
-          "audio"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "audio",
-          "tools",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/thinkingmachines/inkling-small:batch",
-          "https://openrouter.ai/api/v1/models/thinkingmachines/inkling-small-20260730/endpoints"
-        ]
-      }
-    },
-    {
       "model": "thinkingmachines/inkling-small:free",
       "model_info": {
         "model": "thinkingmachines/inkling-small:free",
@@ -11847,7 +11764,7 @@
         "name": "DeepSeek: DeepSeek Flash Latest",
         "description": "This model always redirects to the latest model in the DeepSeek Flash family.",
         "context_length": 1048576,
-        "max_tokens": 393216,
+        "max_tokens": 943718,
         "input_modalities": [
           "text",
           "image"
@@ -11875,7 +11792,7 @@
         "name": "DeepSeek: DeepSeek Pro Latest",
         "description": "This model always redirects to the latest model in the DeepSeek Pro family.",
         "context_length": 1048576,
-        "max_tokens": 393216,
+        "max_tokens": 943718,
         "input_modalities": [
           "text"
         ],
