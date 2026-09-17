@@ -1438,7 +1438,7 @@
         "name": "DeepSeek: DeepSeek V3",
         "description": "DeepSeek-V3 is the latest model from the DeepSeek team, building upon the instruction following and coding abilities of the previous versions. Pre-trained on nearly 15 trillion tokens, the reported evaluations...",
         "context_length": 163840,
-        "max_tokens": 16000,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -1828,7 +1828,7 @@
         "name": "DeepSeek: DeepSeek V4 Pro 0813",
         "description": "DeepSeek V4 Pro 0813 is a large-scale mixture-of-experts model from DeepSeek. This is the GA release of DeepSeek V4 Pro.",
         "context_length": 1048576,
-        "max_tokens": 384000,
+        "max_tokens": 393216,
         "input_modalities": [
           "text"
         ],
@@ -10013,6 +10013,35 @@
       }
     },
     {
+      "model": "qwen/qwen3.8-27b:free",
+      "model_info": {
+        "model": "qwen/qwen3.8-27b:free",
+        "name": "Qwen: Qwen3.8 27B (free)",
+        "description": "Qwen3.8 27B is an open-weight dense vision-language model from Qwen. It is suited for coding, professional workflows, research, multimodal interaction, and long-running agent tasks, with flexible thinking that can be...",
+        "context_length": 262144,
+        "max_tokens": 235929,
+        "input_modalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/qwen/qwen3.8-27b:free",
+          "https://openrouter.ai/api/v1/models/qwen/qwen3.8-27b-20260814/endpoints"
+        ]
+      }
+    },
+    {
       "model": "qwen/qwen3.8-flash",
       "model_info": {
         "model": "qwen/qwen3.8-flash",
@@ -11790,7 +11819,7 @@
         "name": "DeepSeek: DeepSeek Flash Latest",
         "description": "This model always redirects to the latest model in the DeepSeek Flash family.",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 393216,
         "input_modalities": [
           "text",
           "image"
@@ -11818,7 +11847,7 @@
         "name": "DeepSeek: DeepSeek Pro Latest",
         "description": "This model always redirects to the latest model in the DeepSeek Pro family.",
         "context_length": 1048576,
-        "max_tokens": 384000,
+        "max_tokens": 393216,
         "input_modalities": [
           "text"
         ],
