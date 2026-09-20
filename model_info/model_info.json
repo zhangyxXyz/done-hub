@@ -1740,32 +1740,6 @@
       }
     },
     {
-      "model": "deepseek/deepseek-v4-flash-0731:free",
-      "model_info": {
-        "model": "deepseek/deepseek-v4-flash-0731:free",
-        "name": "DeepSeek: DeepSeek V4 Flash 0731 (free)",
-        "description": "DeepSeek V4 Flash 0731 is a sparse mixture-of-experts model from DeepSeek, with 13B active parameters out of 284B total. This re-post-trained revision is suited for coding, reasoning, and agent workflows....",
-        "context_length": 1048576,
-        "max_tokens": 393216,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/deepseek/deepseek-v4-flash-0731:free",
-          "https://openrouter.ai/api/v1/models/deepseek/deepseek-v4-flash-20260731/endpoints"
-        ]
-      }
-    },
-    {
       "model": "deepseek/deepseek-v4-flash-vision-exp",
       "model_info": {
         "model": "deepseek/deepseek-v4-flash-vision-exp",
@@ -1854,7 +1828,7 @@
         "name": "DeepSeek: DeepSeek V4 Pro 0813",
         "description": "DeepSeek V4 Pro 0813 is a large-scale mixture-of-experts model from DeepSeek. This is the GA release of DeepSeek V4 Pro.",
         "context_length": 1048576,
-        "max_tokens": 393216,
+        "max_tokens": 384000,
         "input_modalities": [
           "text"
         ],
@@ -3864,7 +3838,7 @@
         "name": "Meta: Muse Glimmer 30B",
         "description": "Muse Glimmer 30B is a dense, open-weight multimodal model from Meta Superintelligence Labs, distilled from Muse Spark and optimized for autonomous agents on consumer hardware. It is suited for long-horizon...",
         "context_length": 131072,
-        "max_tokens": 117964,
+        "max_tokens": 16384,
         "input_modalities": [
           "text",
           "image"
@@ -4912,7 +4886,8 @@
         ],
         "tags": [
           "openrouter",
-          "vision"
+          "vision",
+          "tools"
         ],
         "support_url": [
           "https://openrouter.ai/models/mistralai/mistral-small-3.1-24b-instruct",
@@ -9536,7 +9511,7 @@
         "name": "Qwen: Qwen3.5-35B-A3B",
         "description": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall...",
         "context_length": 262144,
-        "max_tokens": 65536,
+        "max_tokens": 16384,
         "input_modalities": [
           "text",
           "image",
@@ -9594,7 +9569,7 @@
         "name": "Qwen: Qwen3.5-9B",
         "description": "Qwen3.5-9B is a multimodal foundation model from the Qwen3.5 family, designed to deliver strong reasoning, coding, and visual understanding in an efficient 9B-parameter architecture. It uses a unified vision-language design...",
         "context_length": 262144,
-        "max_tokens": 235929,
+        "max_tokens": 32768,
         "input_modalities": [
           "text",
           "image",
@@ -12220,7 +12195,7 @@
         "name": "Z.ai: GLM Flash Latest",
         "description": "This model always redirects to the latest model in the GLM Flash family.",
         "context_length": 1310720,
-        "max_tokens": 131072,
+        "max_tokens": 943718,
         "input_modalities": [
           "text",
           "image",
