@@ -8711,7 +8711,8 @@
           "text"
         ],
         "tags": [
-          "openrouter"
+          "openrouter",
+          "structured_outputs"
         ],
         "support_url": [
           "https://openrouter.ai/models/qwen/qwen-2.5-coder-32b-instruct",
@@ -11876,7 +11877,7 @@
         "name": "DeepSeek: DeepSeek Pro Latest",
         "description": "This model always redirects to the latest model in the DeepSeek Pro family.",
         "context_length": 1048576,
-        "max_tokens": 393216,
+        "max_tokens": 384000,
         "input_modalities": [
           "text"
         ],
