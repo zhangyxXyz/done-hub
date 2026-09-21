@@ -457,34 +457,6 @@
       }
     },
     {
-      "model": "anthropic/claude-opus-4",
-      "model_info": {
-        "model": "anthropic/claude-opus-4",
-        "name": "Anthropic: Claude Opus 4",
-        "description": "Claude Opus 4 is benchmarked as the world’s best coding model, at time of release, bringing sustained performance on complex, long-running tasks and agent workflows. It sets new benchmarks in...",
-        "context_length": 200000,
-        "max_tokens": 32000,
-        "input_modalities": [
-          "image",
-          "text",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/anthropic/claude-opus-4",
-          "https://openrouter.ai/api/v1/models/anthropic/claude-4-opus-20250522/endpoints"
-        ]
-      }
-    },
-    {
       "model": "anthropic/claude-opus-4.1",
       "model_info": {
         "model": "anthropic/claude-opus-4.1",
@@ -837,7 +809,7 @@
         "model": "anthropic/claude-sonnet-4",
         "name": "Anthropic: Claude Sonnet 4",
         "description": "Claude Sonnet 4 significantly enhances the capabilities of its predecessor, Sonnet 3.7, excelling in both coding and reasoning tasks with improved precision and controllability. Achieving state-of-the-art performance on SWE-bench (72.7%),...",
-        "context_length": 1000000,
+        "context_length": 200000,
         "max_tokens": 64000,
         "input_modalities": [
           "image",
@@ -3637,7 +3609,7 @@
         "name": "Meta: Llama 3.1 70B Instruct",
         "description": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 70B instruct-tuned version is optimized for high quality dialogue usecases. It has demonstrated strong...",
         "context_length": 131072,
-        "max_tokens": 8192,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -4297,35 +4269,6 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/minimax/minimax-m3",
-          "https://openrouter.ai/api/v1/models/minimax/minimax-m3-20260531/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "minimax/minimax-m3:batch",
-      "model_info": {
-        "model": "minimax/minimax-m3:batch",
-        "name": "MiniMax: MiniMax M3 (batch)",
-        "description": "MiniMax-M3 is a multimodal foundation model from MiniMax. It supports text, image, and video inputs with text output, a 1M-token context window, and is suited for long-horizon agentic work, coding,...",
-        "context_length": 524288,
-        "max_tokens": 471859,
-        "input_modalities": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/minimax/minimax-m3:batch",
           "https://openrouter.ai/api/v1/models/minimax/minimax-m3-20260531/endpoints"
         ]
       }
@@ -5160,35 +5103,6 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/moonshotai/kimi-k3",
-          "https://openrouter.ai/api/v1/models/moonshotai/kimi-k3-20260715/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "moonshotai/kimi-k3:batch",
-      "model_info": {
-        "model": "moonshotai/kimi-k3:batch",
-        "name": "MoonshotAI: Kimi K3 (batch)",
-        "description": "Kimi K3 is a 2.8T parameter open-weight multimodal reasoning model from Moonshot AI. It is suited for complex coding, knowledge work, and long-horizon agentic workflows, and is particularly strong at...",
-        "context_length": 1048576,
-        "max_tokens": 943718,
-        "input_modalities": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/moonshotai/kimi-k3:batch",
           "https://openrouter.ai/api/v1/models/moonshotai/kimi-k3-20260715/endpoints"
         ]
       }
@@ -7811,32 +7725,6 @@
       }
     },
     {
-      "model": "openai/gpt-oss-120b:batch",
-      "model_info": {
-        "model": "openai/gpt-oss-120b:batch",
-        "name": "OpenAI: gpt-oss-120b (batch)",
-        "description": "gpt-oss-120b is an open-weight, 117B-parameter Mixture-of-Experts (MoE) language model from OpenAI designed for high-reasoning, agentic, and general-purpose production use cases. It activates 5.1B parameters per forward pass and is optimized...",
-        "context_length": 131072,
-        "max_tokens": 117964,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-oss-120b:batch",
-          "https://openrouter.ai/api/v1/models/openai/gpt-oss-120b/endpoints"
-        ]
-      }
-    },
-    {
       "model": "openai/gpt-oss-20b",
       "model_info": {
         "model": "openai/gpt-oss-20b",
@@ -9593,35 +9481,6 @@
       }
     },
     {
-      "model": "qwen/qwen3.5-9b:batch",
-      "model_info": {
-        "model": "qwen/qwen3.5-9b:batch",
-        "name": "Qwen: Qwen3.5-9B (batch)",
-        "description": "Qwen3.5-9B is a multimodal foundation model from the Qwen3.5 family, designed to deliver strong reasoning, coding, and visual understanding in an efficient 9B-parameter architecture. It uses a unified vision-language design...",
-        "context_length": 262144,
-        "max_tokens": 235929,
-        "input_modalities": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/qwen/qwen3.5-9b:batch",
-          "https://openrouter.ai/api/v1/models/qwen/qwen3.5-9b-20260310/endpoints"
-        ]
-      }
-    },
-    {
       "model": "qwen/qwen3.5-flash-02-23",
       "model_info": {
         "model": "qwen/qwen3.5-flash-02-23",
@@ -9955,32 +9814,6 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/qwen/qwen3.8-2.4t-a95b",
-          "https://openrouter.ai/api/v1/models/qwen/qwen3.8-2.4t-a95b-20260812/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "qwen/qwen3.8-2.4t-a95b:batch",
-      "model_info": {
-        "model": "qwen/qwen3.8-2.4t-a95b:batch",
-        "name": "Qwen: Qwen3.8 2.4T A95B (batch)",
-        "description": "Qwen3.8 2.4T A95B is an open-weight sparse mixture-of-experts model from Qwen and the open-weight variant of [Qwen3.8 Max](/qwen/qwen3.8-max), with 95 billion active parameters out of 2.4 trillion total. It is...",
-        "context_length": 1010000,
-        "max_tokens": 909000,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/qwen/qwen3.8-2.4t-a95b:batch",
           "https://openrouter.ai/api/v1/models/qwen/qwen3.8-2.4t-a95b-20260812/endpoints"
         ]
       }
@@ -10777,35 +10610,6 @@
       }
     },
     {
-      "model": "thinkingmachines/inkling:batch",
-      "model_info": {
-        "model": "thinkingmachines/inkling:batch",
-        "name": "Thinking Machines: Inkling (batch)",
-        "description": "Inkling is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 41B active parameters out of 975B total. It is designed for general-purpose reasoning, coding, agentic and tool-use systems,...",
-        "context_length": 524288,
-        "max_tokens": 471859,
-        "input_modalities": [
-          "text",
-          "image",
-          "audio"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "audio",
-          "tools",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/thinkingmachines/inkling:batch",
-          "https://openrouter.ai/api/v1/models/thinkingmachines/inkling-20260715/endpoints"
-        ]
-      }
-    },
-    {
       "model": "thinkingmachines/inkling:free",
       "model_info": {
         "model": "thinkingmachines/inkling:free",
@@ -11108,7 +10912,7 @@
       "model_info": {
         "model": "x-ai/grok-4.6",
         "name": "SpaceXAI: Grok 4.6",
-        "description": "Grok 4.6 is SpaceXAI's smartest model with frontier performance on coding, knowledge work, and STEM.",
+        "description": "Grok 4.6 is a model from SpaceXAI with frontier performance on coding, knowledge work, and STEM. It is succeeded by [Grok 4.7](/x-ai/grok-4.7).",
         "context_length": 500000,
         "max_tokens": 450000,
         "input_modalities": [
@@ -11129,6 +10933,35 @@
         "support_url": [
           "https://openrouter.ai/models/x-ai/grok-4.6",
           "https://openrouter.ai/api/v1/models/x-ai/grok-4.6-20260810/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "x-ai/grok-4.7",
+      "model_info": {
+        "model": "x-ai/grok-4.7",
+        "name": "SpaceXAI: Grok 4.7",
+        "description": "Grok 4.7 is SpaceXAI's flagship model for coding, agentic tasks, and knowledge work, succeeding Grok 4.6. It is particularly strong at long-running software engineering tasks, verifying its own work, and...",
+        "context_length": 500000,
+        "max_tokens": 450000,
+        "input_modalities": [
+          "text",
+          "image",
+          "file"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/x-ai/grok-4.7",
+          "https://openrouter.ai/api/v1/models/x-ai/grok-4.7-20260916/endpoints"
         ]
       }
     },
@@ -11215,6 +11048,99 @@
         "support_url": [
           "https://openrouter.ai/models/xiaomi/mimo-v2.5-pro",
           "https://openrouter.ai/api/v1/models/xiaomi/mimo-v2.5-pro-20260422/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "xiaomi/mimo-v2.6-flash",
+      "model_info": {
+        "model": "xiaomi/mimo-v2.6-flash",
+        "name": "Xiaomi: MiMo-V2.6-Flash",
+        "description": "MiMo-V2.6-Flash is an open-source foundation model developed by Xiaomi. Built on a Mixture-of-Experts architecture with 309B total parameters and 15B activated per token, it employs a hybrid attention mechanism for...",
+        "context_length": 1048576,
+        "max_tokens": 131072,
+        "input_modalities": [
+          "text",
+          "image",
+          "video",
+          "audio"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "audio",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/xiaomi/mimo-v2.6-flash",
+          "https://openrouter.ai/api/v1/models/xiaomi/mimo-v2.6-flash-20260921/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "xiaomi/mimo-v2.6-pro",
+      "model_info": {
+        "model": "xiaomi/mimo-v2.6-pro",
+        "name": "Xiaomi: MiMo-V2.6-Pro",
+        "description": "MiMo-V2.6-Pro is the flagship foundation model developed by Xiaomi. Built at a scale of over 1T parameters, it is designed to push the ceiling of capability for the most demanding...",
+        "context_length": 1048576,
+        "max_tokens": 131072,
+        "input_modalities": [
+          "text",
+          "image",
+          "video",
+          "audio"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "audio",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/xiaomi/mimo-v2.6-pro",
+          "https://openrouter.ai/api/v1/models/xiaomi/mimo-v2.6-pro-20260921/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "xiaomi/mimo-v2.6-pro-ultraspeed",
+      "model_info": {
+        "model": "xiaomi/mimo-v2.6-pro-ultraspeed",
+        "name": "Xiaomi: MiMo-V2.6-Pro-UltraSpeed",
+        "description": "MiMo-V2.6-Pro-UltraSpeed is the fast speed edition of Xiaomi's flagship foundation model, MiMo-V2.6-Pro. Built from the same 1T MiMo-V2.6-Pro checkpoint, it matches the original model in quality while delivering roughly 10x...",
+        "context_length": 1048576,
+        "max_tokens": 131072,
+        "input_modalities": [
+          "text",
+          "image",
+          "video",
+          "audio"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "audio",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/xiaomi/mimo-v2.6-pro-ultraspeed",
+          "https://openrouter.ai/api/v1/models/xiaomi/mimo-v2.6-pro-ultraspeed-20260921/endpoints"
         ]
       }
     },
@@ -11591,7 +11517,7 @@
         "name": "Z.ai: GLM 5.3 Flash",
         "description": "GLM-5.3-Flash is a native multimodal model from Z.ai. It is suited for efficient coding and long-horizon agent tasks. Its hybrid sparse and linear attention architecture maintains accurate long-context behavior while...",
         "context_length": 1310720,
-        "max_tokens": 131072,
+        "max_tokens": 102400,
         "input_modalities": [
           "text",
           "image",
@@ -11877,7 +11803,7 @@
         "name": "DeepSeek: DeepSeek Pro Latest",
         "description": "This model always redirects to the latest model in the DeepSeek Pro family.",
         "context_length": 1048576,
-        "max_tokens": 384000,
+        "max_tokens": 393216,
         "input_modalities": [
           "text"
         ],
@@ -12196,7 +12122,7 @@
         "name": "Z.ai: GLM Flash Latest",
         "description": "This model always redirects to the latest model in the GLM Flash family.",
         "context_length": 1310720,
-        "max_tokens": 943718,
+        "max_tokens": 102400,
         "input_modalities": [
           "text",
           "image",
@@ -12225,7 +12151,7 @@
         "name": "Z.ai: GLM Latest",
         "description": "This model always redirects to the latest GLM model from Z.ai.",
         "context_length": 1310720,
-        "max_tokens": 943718,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
