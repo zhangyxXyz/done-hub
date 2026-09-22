@@ -6,7 +6,7 @@
         "model": "aion-labs/aion-2.0",
         "name": "AionLabs: Aion-2.0",
         "description": "Aion-2.0 is a variant of DeepSeek V3.2 optimized for immersive roleplaying and storytelling. It is particularly strong at introducing tension, crises, and conflict into stories, making narratives feel more engaging....",
-        "context_length": 131072,
+        "context_length": 1048576,
         "max_tokens": 32768,
         "input_modalities": [
           "text"
@@ -32,7 +32,7 @@
         "model": "aion-labs/aion-3.0",
         "name": "AionLabs: Aion-3.0",
         "description": "Aion-3.0 is a multi-model roleplaying and storytelling system from AionLabs, built on the GLM family of models. It uses a collaborative generation process in which multiple specialized models each contribute...",
-        "context_length": 131072,
+        "context_length": 1048576,
         "max_tokens": 32768,
         "input_modalities": [
           "text"
@@ -58,7 +58,7 @@
         "model": "aion-labs/aion-3.0-mini",
         "name": "AionLabs: Aion-3.0-Mini",
         "description": "Aion-3.0 Mini is a multi-model roleplaying and storytelling system from AionLabs, built on the DeepSeek family of models. It uses a collaborative generation process in which multiple specialized models each...",
-        "context_length": 131072,
+        "context_length": 1048576,
         "max_tokens": 32768,
         "input_modalities": [
           "text"
@@ -771,6 +771,64 @@
         "support_url": [
           "https://openrouter.ai/models/anthropic/claude-opus-5",
           "https://openrouter.ai/api/v1/models/anthropic/claude-opus-5-20260723/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "anthropic/claude-opus-5.5",
+      "model_info": {
+        "model": "anthropic/claude-opus-5.5",
+        "name": "Anthropic: Claude Opus 5.5",
+        "description": "Claude Opus 5.5 is Anthropic's flagship model for demanding reasoning, coding, and long-horizon agentic work, succeeding Claude Opus 5. It is particularly strong at multi-step changes in large codebases, code...",
+        "context_length": 1000000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "text",
+          "image",
+          "file"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/anthropic/claude-opus-5.5",
+          "https://openrouter.ai/api/v1/models/anthropic/claude-opus-5.5-20260921/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "anthropic/claude-opus-5.5:batch",
+      "model_info": {
+        "model": "anthropic/claude-opus-5.5:batch",
+        "name": "Anthropic: Claude Opus 5.5 (batch)",
+        "description": "Claude Opus 5.5 is Anthropic's flagship model for demanding reasoning, coding, and long-horizon agentic work, succeeding Claude Opus 5. It is particularly strong at multi-step changes in large codebases, code...",
+        "context_length": 1000000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "text",
+          "image",
+          "file"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/anthropic/claude-opus-5.5:batch",
+          "https://openrouter.ai/api/v1/models/anthropic/claude-opus-5.5-20260921/endpoints"
         ]
       }
     },
@@ -1686,32 +1744,6 @@
       }
     },
     {
-      "model": "deepseek/deepseek-v4-flash-0731:batch",
-      "model_info": {
-        "model": "deepseek/deepseek-v4-flash-0731:batch",
-        "name": "DeepSeek: DeepSeek V4 Flash 0731 (batch)",
-        "description": "DeepSeek V4 Flash 0731 is a sparse mixture-of-experts model from DeepSeek, with 13B active parameters out of 284B total. This re-post-trained revision is suited for coding, reasoning, and agent workflows....",
-        "context_length": 1048576,
-        "max_tokens": 943718,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/deepseek/deepseek-v4-flash-0731:batch",
-          "https://openrouter.ai/api/v1/models/deepseek/deepseek-v4-flash-20260731/endpoints"
-        ]
-      }
-    },
-    {
       "model": "deepseek/deepseek-v4-flash-vision-exp",
       "model_info": {
         "model": "deepseek/deepseek-v4-flash-vision-exp",
@@ -1735,34 +1767,6 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/deepseek/deepseek-v4-flash-vision-exp",
-          "https://openrouter.ai/api/v1/models/deepseek/deepseek-v4-flash-vision-exp-20260821/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "deepseek/deepseek-v4-flash-vision-exp:batch",
-      "model_info": {
-        "model": "deepseek/deepseek-v4-flash-vision-exp:batch",
-        "name": "DeepSeek: DeepSeek V4 Flash Vision Exp (batch)",
-        "description": "DeepSeek V4 Flash Vision Exp is an experimental vision-enabled version of [DeepSeek V4 Flash 0731](https://openrouter.ai/deepseek/deepseek-v4-flash-0731) from DeepSeek, adding image understanding while matching the base model on text capabilities including agents,...",
-        "context_length": 1048576,
-        "max_tokens": 943718,
-        "input_modalities": [
-          "text",
-          "image"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/deepseek/deepseek-v4-flash-vision-exp:batch",
           "https://openrouter.ai/api/v1/models/deepseek/deepseek-v4-flash-vision-exp-20260821/endpoints"
         ]
       }
@@ -1820,32 +1824,6 @@
       }
     },
     {
-      "model": "deepseek/deepseek-v4-pro-0813:batch",
-      "model_info": {
-        "model": "deepseek/deepseek-v4-pro-0813:batch",
-        "name": "DeepSeek: DeepSeek V4 Pro 0813 (batch)",
-        "description": "DeepSeek V4 Pro 0813 is a large-scale mixture-of-experts model from DeepSeek. This is the GA release of DeepSeek V4 Pro.",
-        "context_length": 1048576,
-        "max_tokens": 943718,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/deepseek/deepseek-v4-pro-0813:batch",
-          "https://openrouter.ai/api/v1/models/deepseek/deepseek-v4-pro-20260813/endpoints"
-        ]
-      }
-    },
-    {
       "model": "deepseek/deepseek-v4.1-flash",
       "model_info": {
         "model": "deepseek/deepseek-v4.1-flash",
@@ -1869,6 +1847,34 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/deepseek/deepseek-v4.1-flash",
+          "https://openrouter.ai/api/v1/models/deepseek/deepseek-v4.1-flash-20260910/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "deepseek/deepseek-v4.1-flash:batch",
+      "model_info": {
+        "model": "deepseek/deepseek-v4.1-flash:batch",
+        "name": "DeepSeek: DeepSeek V4.1 Flash (batch)",
+        "description": "DeepSeek V4.1 Flash is a sparse mixture-of-experts model from DeepSeek, and the first built on the company's Causal Encoder-Decoder (CED) architecture. It activates 8B parameters on input and 16B on...",
+        "context_length": 1048576,
+        "max_tokens": 131072,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/deepseek/deepseek-v4.1-flash:batch",
           "https://openrouter.ai/api/v1/models/deepseek/deepseek-v4.1-flash-20260910/endpoints"
         ]
       }
@@ -3807,34 +3813,6 @@
       }
     },
     {
-      "model": "meta/muse-glimmer-30b:batch",
-      "model_info": {
-        "model": "meta/muse-glimmer-30b:batch",
-        "name": "Meta: Muse Glimmer 30B (batch)",
-        "description": "Muse Glimmer 30B is a dense, open-weight multimodal model from Meta Superintelligence Labs, distilled from Muse Spark and optimized for autonomous agents on consumer hardware. It is suited for long-horizon...",
-        "context_length": 131072,
-        "max_tokens": 117964,
-        "input_modalities": [
-          "text",
-          "image"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/meta/muse-glimmer-30b:batch",
-          "https://openrouter.ai/api/v1/models/meta/muse-glimmer-30b-20260810/endpoints"
-        ]
-      }
-    },
-    {
       "model": "meta/muse-spark-1.1",
       "model_info": {
         "model": "meta/muse-spark-1.1",
@@ -5078,6 +5056,35 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/moonshotai/kimi-k3",
+          "https://openrouter.ai/api/v1/models/moonshotai/kimi-k3-20260715/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "moonshotai/kimi-k3:batch",
+      "model_info": {
+        "model": "moonshotai/kimi-k3:batch",
+        "name": "MoonshotAI: Kimi K3 (batch)",
+        "description": "Kimi K3 is a 2.8T parameter open-weight multimodal reasoning model from Moonshot AI. It is suited for complex coding, knowledge work, and long-horizon agentic workflows, and is particularly strong at...",
+        "context_length": 1048576,
+        "max_tokens": 16384,
+        "input_modalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/moonshotai/kimi-k3:batch",
           "https://openrouter.ai/api/v1/models/moonshotai/kimi-k3-20260715/endpoints"
         ]
       }
@@ -7645,6 +7652,238 @@
       }
     },
     {
+      "model": "openai/gpt-6-luna",
+      "model_info": {
+        "model": "openai/gpt-6-luna",
+        "name": "OpenAI: GPT-6 Luna",
+        "description": "GPT-6 Luna is the fast, cost-efficient model in OpenAI's GPT-6 series, positioned below GPT-6 Sol. It is suited for high-volume and latency-sensitive workloads such as chat, classification, and lightweight agentic...",
+        "context_length": 1050000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "file",
+          "image",
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/openai/gpt-6-luna",
+          "https://openrouter.ai/api/v1/models/openai/gpt-6-luna-20260922/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "openai/gpt-6-luna-pro",
+      "model_info": {
+        "model": "openai/gpt-6-luna-pro",
+        "name": "OpenAI: GPT-6 Luna Pro",
+        "description": "GPT-6 Luna Pro is the same underlying model as [GPT-6 Luna](https://openrouter.ai/openai/gpt-6-luna), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode",
+        "context_length": 1050000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "file",
+          "image",
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/openai/gpt-6-luna-pro",
+          "https://openrouter.ai/api/v1/models/openai/gpt-6-luna-pro-20260922/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "openai/gpt-6-luna-pro:batch",
+      "model_info": {
+        "model": "openai/gpt-6-luna-pro:batch",
+        "name": "OpenAI: GPT-6 Luna Pro (batch)",
+        "description": "GPT-6 Luna Pro is the same underlying model as [GPT-6 Luna](https://openrouter.ai/openai/gpt-6-luna), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode",
+        "context_length": 1050000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "file",
+          "image",
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/openai/gpt-6-luna-pro:batch",
+          "https://openrouter.ai/api/v1/models/openai/gpt-6-luna-pro-20260922/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "openai/gpt-6-luna:batch",
+      "model_info": {
+        "model": "openai/gpt-6-luna:batch",
+        "name": "OpenAI: GPT-6 Luna (batch)",
+        "description": "GPT-6 Luna is the fast, cost-efficient model in OpenAI's GPT-6 series, positioned below GPT-6 Sol. It is suited for high-volume and latency-sensitive workloads such as chat, classification, and lightweight agentic...",
+        "context_length": 1050000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "file",
+          "image",
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/openai/gpt-6-luna:batch",
+          "https://openrouter.ai/api/v1/models/openai/gpt-6-luna-20260922/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "openai/gpt-6-sol",
+      "model_info": {
+        "model": "openai/gpt-6-sol",
+        "name": "OpenAI: GPT-6 Sol",
+        "description": "GPT-6 Sol is the cost-efficient high-end model in OpenAI's GPT-6 series, positioned below the flagship GPT-6 Astra and above the fast GPT-6 Luna tier. It is suited for demanding professional...",
+        "context_length": 1050000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "file",
+          "image",
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/openai/gpt-6-sol",
+          "https://openrouter.ai/api/v1/models/openai/gpt-6-sol-20260922/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "openai/gpt-6-sol-pro",
+      "model_info": {
+        "model": "openai/gpt-6-sol-pro",
+        "name": "OpenAI: GPT-6 Sol Pro",
+        "description": "GPT-6 Sol Pro is the same underlying model as [GPT-6 Sol](https://openrouter.ai/openai/gpt-6-sol), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode",
+        "context_length": 1050000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "file",
+          "image",
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/openai/gpt-6-sol-pro",
+          "https://openrouter.ai/api/v1/models/openai/gpt-6-sol-pro-20260922/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "openai/gpt-6-sol-pro:batch",
+      "model_info": {
+        "model": "openai/gpt-6-sol-pro:batch",
+        "name": "OpenAI: GPT-6 Sol Pro (batch)",
+        "description": "GPT-6 Sol Pro is the same underlying model as [GPT-6 Sol](https://openrouter.ai/openai/gpt-6-sol), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode",
+        "context_length": 1050000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "file",
+          "image",
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/openai/gpt-6-sol-pro:batch",
+          "https://openrouter.ai/api/v1/models/openai/gpt-6-sol-pro-20260922/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "openai/gpt-6-sol:batch",
+      "model_info": {
+        "model": "openai/gpt-6-sol:batch",
+        "name": "OpenAI: GPT-6 Sol (batch)",
+        "description": "GPT-6 Sol is the cost-efficient high-end model in OpenAI's GPT-6 series, positioned below the flagship GPT-6 Astra and above the fast GPT-6 Luna tier. It is suited for demanding professional...",
+        "context_length": 1050000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "file",
+          "image",
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/openai/gpt-6-sol:batch",
+          "https://openrouter.ai/api/v1/models/openai/gpt-6-sol-20260922/endpoints"
+        ]
+      }
+    },
+    {
       "model": "openai/gpt-audio",
       "model_info": {
         "model": "openai/gpt-audio",
@@ -7761,7 +8000,7 @@
         "name": "OpenAI: gpt-oss-20b",
         "description": "gpt-oss-20b is an open-weight 21B parameter model released by OpenAI under the Apache 2.0 license. It uses a Mixture-of-Experts (MoE) architecture with 3.6B active parameters per forward pass, optimized for...",
         "context_length": 131072,
-        "max_tokens": 117964,
+        "max_tokens": 32768,
         "input_modalities": [
           "text"
         ],
@@ -7776,6 +8015,32 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/openai/gpt-oss-20b",
+          "https://openrouter.ai/api/v1/models/openai/gpt-oss-20b/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "openai/gpt-oss-20b:batch",
+      "model_info": {
+        "model": "openai/gpt-oss-20b:batch",
+        "name": "OpenAI: gpt-oss-20b (batch)",
+        "description": "gpt-oss-20b is an open-weight 21B parameter model released by OpenAI under the Apache 2.0 license. It uses a Mixture-of-Experts (MoE) architecture with 3.6B active parameters per forward pass, optimized for...",
+        "context_length": 131072,
+        "max_tokens": 117964,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/openai/gpt-oss-20b:batch",
           "https://openrouter.ai/api/v1/models/openai/gpt-oss-20b/endpoints"
         ]
       }
@@ -9604,7 +9869,7 @@
         "name": "Qwen: Qwen3.6 27B",
         "description": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities — accepting text, image, and video inputs...",
         "context_length": 262144,
-        "max_tokens": 65536,
+        "max_tokens": 262140,
         "input_modalities": [
           "text",
           "image",
@@ -9961,6 +10226,37 @@
         "support_url": [
           "https://openrouter.ai/models/qwen/qwen3.8-max-0902",
           "https://openrouter.ai/api/v1/models/qwen/qwen3.8-max-20260902/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "qwen/qwen3.8-omni-flash",
+      "model_info": {
+        "model": "qwen/qwen3.8-omni-flash",
+        "name": "Qwen: Qwen3.8 Omni Flash",
+        "description": "Qwen3.8 Omni Flash is an omni-modal reasoning model from Alibaba, the first Qwen model built around agentic capabilities with native audio-video understanding. It is suited for audio-video analysis and summarization,...",
+        "context_length": 1000000,
+        "max_tokens": 131072,
+        "input_modalities": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "audio",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/qwen/qwen3.8-omni-flash",
+          "https://openrouter.ai/api/v1/models/qwen/qwen3.8-omni-flash-20260918/endpoints"
         ]
       }
     },
@@ -11465,32 +11761,6 @@
       }
     },
     {
-      "model": "z-ai/glm-5.2:batch",
-      "model_info": {
-        "model": "z-ai/glm-5.2:batch",
-        "name": "Z.ai: GLM 5.2 (batch)",
-        "description": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...",
-        "context_length": 1048576,
-        "max_tokens": 943718,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/z-ai/glm-5.2:batch",
-          "https://openrouter.ai/api/v1/models/z-ai/glm-5.2-20260616/endpoints"
-        ]
-      }
-    },
-    {
       "model": "z-ai/glm-5.2:free",
       "model_info": {
         "model": "z-ai/glm-5.2:free",
@@ -11576,7 +11846,7 @@
         "name": "Z.ai: GLM 5.3 Flash (batch)",
         "description": "GLM-5.3-Flash is a native multimodal model from Z.ai. It is suited for efficient coding and long-horizon agent tasks. Its hybrid sparse and linear attention architecture maintains accurate long-context behavior while...",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 131072,
         "input_modalities": [
           "text",
           "image",
@@ -11634,7 +11904,7 @@
         "name": "Z.ai: GLM 5.3 (batch)",
         "description": "GLM-5.3 is a large-scale reasoning model from Z.ai, built for complex software engineering and long-horizon agent tasks. It supports text input and output with a 1M-token context window, and improves...",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -11833,7 +12103,7 @@
         "name": "DeepSeek: DeepSeek Pro Latest",
         "description": "This model always redirects to the latest model in the DeepSeek Pro family.",
         "context_length": 1048576,
-        "max_tokens": 384000,
+        "max_tokens": 393216,
         "input_modalities": [
           "text"
         ],
@@ -12181,7 +12451,7 @@
         "name": "Z.ai: GLM Latest",
         "description": "This model always redirects to the latest GLM model from Z.ai.",
         "context_length": 1310720,
-        "max_tokens": 943718,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
