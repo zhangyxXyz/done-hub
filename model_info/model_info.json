@@ -79,6 +79,58 @@
       }
     },
     {
+      "model": "aion-labs/aion-3.5",
+      "model_info": {
+        "model": "aion-labs/aion-3.5",
+        "name": "AionLabs: Aion 3.5",
+        "description": "Aion 3.5 is a multi-model roleplaying and storytelling system from AionLabs, built on the GLM family of models. It uses a collaborative generation process in which multiple specialized models each...",
+        "context_length": 262144,
+        "max_tokens": 32768,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/aion-labs/aion-3.5",
+          "https://openrouter.ai/api/v1/models/aion-labs/aion-3.5-20260923/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "aion-labs/aion-3.5-mini",
+      "model_info": {
+        "model": "aion-labs/aion-3.5-mini",
+        "name": "AionLabs: Aion 3.5 Mini",
+        "description": "Aion 3.5 Mini is a multi-model roleplaying and storytelling system from AionLabs, built on the GLM family of models. It is the smaller, lower-cost sibling of Aion 3.5 and uses...",
+        "context_length": 262144,
+        "max_tokens": 32768,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/aion-labs/aion-3.5-mini",
+          "https://openrouter.ai/api/v1/models/aion-labs/aion-3.5-mini-20260923/endpoints"
+        ]
+      }
+    },
+    {
       "model": "aion-labs/aion-rp-llama-3.1-8b",
       "model_info": {
         "model": "aion-labs/aion-rp-llama-3.1-8b",
@@ -3412,7 +3464,7 @@
         "model": "inclusionai/ling-3.0-flash-vl",
         "name": "inclusionAI: Ling 3.0 Flash VL",
         "description": "Ling 3.0 Flash VL builds on Ling 3.0 Flash (124B total / 5.5B active MoE from InclusionAI), further strengthening its language capabilities while adding native visual perception and advanced visual...",
-        "context_length": 131072,
+        "context_length": 262144,
         "max_tokens": 32768,
         "input_modalities": [
           "text",
@@ -3431,34 +3483,6 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/inclusionai/ling-3.0-flash-vl",
-          "https://openrouter.ai/api/v1/models/inclusionai/ling-3.0-flash-vl-20260910/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "inclusionai/ling-3.0-flash-vl:free",
-      "model_info": {
-        "model": "inclusionai/ling-3.0-flash-vl:free",
-        "name": "inclusionAI: Ling 3.0 Flash VL (free)",
-        "description": "Ling 3.0 Flash VL builds on Ling 3.0 Flash (124B total / 5.5B active MoE from InclusionAI), further strengthening its language capabilities while adding native visual perception and advanced visual...",
-        "context_length": 262144,
-        "max_tokens": 32768,
-        "input_modalities": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/inclusionai/ling-3.0-flash-vl:free",
           "https://openrouter.ai/api/v1/models/inclusionai/ling-3.0-flash-vl-20260910/endpoints"
         ]
       }
@@ -4303,32 +4327,6 @@
         "support_url": [
           "https://openrouter.ai/models/mistralai/codestral-2508:batch",
           "https://openrouter.ai/api/v1/models/mistralai/codestral-2508/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "mistralai/devstral-2512",
-      "model_info": {
-        "model": "mistralai/devstral-2512",
-        "name": "Mistral: Devstral 2 2512",
-        "description": "Devstral 2 is a state-of-the-art open-source model by Mistral AI specializing in agentic coding. It is a 123B-parameter dense transformer model supporting a 256K context window. Devstral 2 supports exploring...",
-        "context_length": 262144,
-        "max_tokens": 209715,
-        "input_modalities": [
-          "text",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/mistralai/devstral-2512",
-          "https://openrouter.ai/api/v1/models/mistralai/devstral-2512/endpoints"
         ]
       }
     },
@@ -10258,6 +10256,35 @@
       }
     },
     {
+      "model": "qwen/qwen3.8-max-prime",
+      "model_info": {
+        "model": "qwen/qwen3.8-max-prime",
+        "name": "Qwen: Qwen3.8 Max Prime",
+        "description": "Qwen3.8 Max Prime is a higher-throughput variant of Qwen3.8 Max from Alibaba's Qwen team, served as a separate SKU at a higher price point. It accepts text, image, and video...",
+        "context_length": 1000000,
+        "max_tokens": 131072,
+        "input_modalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/qwen/qwen3.8-max-prime",
+          "https://openrouter.ai/api/v1/models/qwen/qwen3.8-max-prime-20260923/endpoints"
+        ]
+      }
+    },
+    {
       "model": "qwen/qwen3.8-omni-flash",
       "model_info": {
         "model": "qwen/qwen3.8-omni-flash",
@@ -10574,6 +10601,35 @@
         "support_url": [
           "https://openrouter.ai/models/sao10k/l3.3-euryale-70b",
           "https://openrouter.ai/api/v1/models/sao10k/l3.3-euryale-70b-v2.3/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "stealth/space-bunny-alpha",
+      "model_info": {
+        "model": "stealth/space-bunny-alpha",
+        "name": "Space Bunny Alpha",
+        "description": "Space Bunny Alpha is an anonymous large model with blazing-fast inference, strong coding capabilities and native multimodal input support. It delivers adjustable reasoning effort, and a 1M-token context window. Space...",
+        "context_length": 1000000,
+        "max_tokens": 524288,
+        "input_modalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/stealth/space-bunny-alpha",
+          "https://openrouter.ai/api/v1/models/stealth/space-bunny-alpha/endpoints"
         ]
       }
     },
@@ -11039,6 +11095,32 @@
         "support_url": [
           "https://openrouter.ai/models/undi95/remm-slerp-l2-13b",
           "https://openrouter.ai/api/v1/models/undi95/remm-slerp-l2-13b/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "upstage/solar-mini4",
+      "model_info": {
+        "model": "upstage/solar-mini4",
+        "name": "Upstage: Solar Mini 4",
+        "description": "Solar Mini 4 is Upstage's compact, cost-efficient language model, a 35B-parameter mixture-of-experts with 3B active parameters and a 524K context window. It is built for agentic use cases where response...",
+        "context_length": 524288,
+        "max_tokens": 131072,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/upstage/solar-mini4",
+          "https://openrouter.ai/api/v1/models/upstage/solar-mini4-20260922/endpoints"
         ]
       }
     },
@@ -12131,7 +12213,7 @@
         "name": "DeepSeek: DeepSeek Pro Latest",
         "description": "This model always redirects to the latest model in the DeepSeek Pro family.",
         "context_length": 1048576,
-        "max_tokens": 384000,
+        "max_tokens": 943718,
         "input_modalities": [
           "text"
         ],
