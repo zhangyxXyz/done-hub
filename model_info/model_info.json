@@ -1910,7 +1910,7 @@
         "name": "DeepSeek: DeepSeek V4.1 Flash",
         "description": "DeepSeek V4.1 Flash is a sparse mixture-of-experts model from DeepSeek, and the first built on the company's Causal Encoder-Decoder (CED) architecture. It activates 8B parameters on input and 16B on...",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 393216,
         "input_modalities": [
           "text",
           "image"
@@ -11900,7 +11900,7 @@
         "name": "Z.ai: GLM 5.3",
         "description": "GLM-5.3 is a large-scale reasoning model from Z.ai, built for complex software engineering and long-horizon agent tasks. It supports text input and output with a 1M-token context window, and improves...",
         "context_length": 1310720,
-        "max_tokens": 131072,
+        "max_tokens": 943717,
         "input_modalities": [
           "text"
         ],
@@ -11926,7 +11926,7 @@
         "name": "Z.ai: GLM 5.3 Flash",
         "description": "GLM-5.3-Flash is a native multimodal model from Z.ai. It is suited for efficient coding and long-horizon agent tasks. Its hybrid sparse and linear attention architecture maintains accurate long-context behavior while...",
         "context_length": 1310720,
-        "max_tokens": 943718,
+        "max_tokens": 131072,
         "input_modalities": [
           "text",
           "image",
@@ -12238,7 +12238,7 @@
         "name": "DeepSeek: DeepSeek Pro Latest",
         "description": "This model always redirects to the latest model in the DeepSeek Pro family.",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 393216,
         "input_modalities": [
           "text"
         ],
