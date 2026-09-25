@@ -1910,7 +1910,7 @@
         "name": "DeepSeek: DeepSeek V4.1 Flash",
         "description": "DeepSeek V4.1 Flash is a sparse mixture-of-experts model from DeepSeek, and the first built on the company's Causal Encoder-Decoder (CED) architecture. It activates 8B parameters on input and 16B on...",
         "context_length": 1048576,
-        "max_tokens": 393216,
+        "max_tokens": 943718,
         "input_modalities": [
           "text",
           "image"
@@ -5245,62 +5245,6 @@
       }
     },
     {
-      "model": "nex-agi/nex-n2.5-mini:free",
-      "model_info": {
-        "model": "nex-agi/nex-n2.5-mini:free",
-        "name": "Nex AGI: Nex-N2.5-Mini (free)",
-        "description": "Nex-N2.5 is an agentic model built to turn goals into working, verified outcomes. Its core strength is agentic coding within a visual feedback loop: it can explore codebases, implement multi-file...",
-        "context_length": 262144,
-        "max_tokens": 235929,
-        "input_modalities": [
-          "text",
-          "image"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/nex-agi/nex-n2.5-mini:free",
-          "https://openrouter.ai/api/v1/models/nex-agi/nex-n2.5-mini-20260908/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "nex-agi/nex-n2.5-pro:free",
-      "model_info": {
-        "model": "nex-agi/nex-n2.5-pro:free",
-        "name": "Nex AGI: Nex-N2.5-Pro (free)",
-        "description": "Nex-N2.5 is an agentic model built to turn goals into working, verified outcomes. Its core strength is agentic coding within a visual feedback loop: it can explore codebases, implement multi-file...",
-        "context_length": 262144,
-        "max_tokens": 235929,
-        "input_modalities": [
-          "text",
-          "image"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/nex-agi/nex-n2.5-pro:free",
-          "https://openrouter.ai/api/v1/models/nex-agi/nex-n2.5-pro-20260907/endpoints"
-        ]
-      }
-    },
-    {
       "model": "nousresearch/hermes-3-llama-3.1-405b",
       "model_info": {
         "model": "nousresearch/hermes-3-llama-3.1-405b",
@@ -5590,8 +5534,8 @@
         "model": "nvidia/nemotron-3.5-lightning",
         "name": "NVIDIA: Nemotron 3.5 Lightning",
         "description": "NVIDIA Nemotron 3.5 Lightning is an open mixture-of-experts model from NVIDIA, with 3B active parameters out of 30B total. It is suited for high-throughput agentic workloads and specialized tasks that...",
-        "context_length": 262144,
-        "max_tokens": 131072,
+        "context_length": 1000000,
+        "max_tokens": 235929,
         "input_modalities": [
           "text"
         ],
@@ -8650,6 +8594,37 @@
         "support_url": [
           "https://openrouter.ai/models/perceptron/perceptron-mk1",
           "https://openrouter.ai/api/v1/models/perceptron/perceptron-mk1-20260512/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "perceptron/perceptron-mk1.5",
+      "model_info": {
+        "model": "perceptron/perceptron-mk1.5",
+        "name": "Perceptron: Perceptron Mk1.5",
+        "description": "Perceptron Mk1.5 is Perceptron's embodied reasoning model for physical agents. It accepts text, image, video, and audio input, and answers with text plus optional structured annotations: points, boxes, polygons, tracks,...",
+        "context_length": 36864,
+        "max_tokens": 8192,
+        "input_modalities": [
+          "text",
+          "image",
+          "video",
+          "audio"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "audio",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/perceptron/perceptron-mk1.5",
+          "https://openrouter.ai/api/v1/models/perceptron/perceptron-mk1.5-20260925/endpoints"
         ]
       }
     },
@@ -11919,30 +11894,6 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/z-ai/glm-5.2",
-          "https://openrouter.ai/api/v1/models/z-ai/glm-5.2-20260616/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "z-ai/glm-5.2:free",
-      "model_info": {
-        "model": "z-ai/glm-5.2:free",
-        "name": "Z.ai: GLM 5.2 (free)",
-        "description": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...",
-        "context_length": 32768,
-        "max_tokens": 29491,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/z-ai/glm-5.2:free",
           "https://openrouter.ai/api/v1/models/z-ai/glm-5.2-20260616/endpoints"
         ]
       }
