@@ -4359,6 +4359,32 @@
       }
     },
     {
+      "model": "mistralai/devstral-2512",
+      "model_info": {
+        "model": "mistralai/devstral-2512",
+        "name": "Mistral: Devstral 2 2512",
+        "description": "Devstral 2 is a state-of-the-art open-source model by Mistral AI specializing in agentic coding. It is a 123B-parameter dense transformer model supporting a 256K context window. Devstral 2 supports exploring...",
+        "context_length": 262144,
+        "max_tokens": 209715,
+        "input_modalities": [
+          "text",
+          "file"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/mistralai/devstral-2512",
+          "https://openrouter.ai/api/v1/models/mistralai/devstral-2512/endpoints"
+        ]
+      }
+    },
+    {
       "model": "mistralai/ministral-14b-2512",
       "model_info": {
         "model": "mistralai/ministral-14b-2512",
@@ -4515,6 +4541,34 @@
         "support_url": [
           "https://openrouter.ai/models/mistralai/mistral-large-2407",
           "https://openrouter.ai/api/v1/models/mistralai/mistral-large-2407/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "mistralai/mistral-large-2512",
+      "model_info": {
+        "model": "mistralai/mistral-large-2512",
+        "name": "Mistral: Mistral Large 3 2512",
+        "description": "Mistral Large 3 2512 is Mistral’s most capable model to date, featuring a sparse mixture-of-experts architecture with 41B active parameters (675B total), and released under the Apache 2.0 license.",
+        "context_length": 262144,
+        "max_tokens": 209715,
+        "input_modalities": [
+          "text",
+          "image",
+          "file"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/mistralai/mistral-large-2512",
+          "https://openrouter.ai/api/v1/models/mistralai/mistral-large-2512/endpoints"
         ]
       }
     },
@@ -9525,7 +9579,7 @@
         "name": "Qwen: Qwen3 VL 30B A3B Instruct",
         "description": "Qwen3-VL-30B-A3B-Instruct is a multimodal model that unifies strong text generation with visual understanding for images and videos. Its Instruct variant optimizes instruction-following for general multimodal tasks. It excels in perception...",
         "context_length": 262144,
-        "max_tokens": 32768,
+        "max_tokens": 16384,
         "input_modalities": [
           "text",
           "image"
@@ -11824,7 +11878,7 @@
         "name": "Z.ai: GLM 5.1",
         "description": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on...",
         "context_length": 204800,
-        "max_tokens": 128000,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -11926,7 +11980,7 @@
         "name": "Z.ai: GLM 5.3 Flash",
         "description": "GLM-5.3-Flash is a native multimodal model from Z.ai. It is suited for efficient coding and long-horizon agent tasks. Its hybrid sparse and linear attention architecture maintains accurate long-context behavior while...",
         "context_length": 1310720,
-        "max_tokens": 131072,
+        "max_tokens": 128000,
         "input_modalities": [
           "text",
           "image",
@@ -12238,7 +12292,7 @@
         "name": "DeepSeek: DeepSeek Pro Latest",
         "description": "This model always redirects to the latest model in the DeepSeek Pro family.",
         "context_length": 1048576,
-        "max_tokens": 393216,
+        "max_tokens": 943718,
         "input_modalities": [
           "text"
         ],
