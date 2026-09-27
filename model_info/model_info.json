@@ -1752,7 +1752,7 @@
         "name": "DeepSeek: DeepSeek V4 Flash 0423",
         "description": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and...",
         "context_length": 1048576,
-        "max_tokens": 384000,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -1804,7 +1804,7 @@
         "name": "DeepSeek: DeepSeek V4 Flash Vision Exp",
         "description": "DeepSeek V4 Flash Vision Exp is an experimental vision-enabled version of [DeepSeek V4 Flash 0731](https://openrouter.ai/deepseek/deepseek-v4-flash-0731) from DeepSeek, adding image understanding while matching the base model on text capabilities including agents,...",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 262144,
         "input_modalities": [
           "text",
           "image"
@@ -1858,7 +1858,7 @@
         "name": "DeepSeek: DeepSeek V4 Pro 0813",
         "description": "DeepSeek V4 Pro 0813 is a large-scale mixture-of-experts model from DeepSeek. This is the GA release of DeepSeek V4 Pro.",
         "context_length": 1048576,
-        "max_tokens": 384000,
+        "max_tokens": 943718,
         "input_modalities": [
           "text"
         ],
@@ -4131,7 +4131,7 @@
         "name": "MiniMax: MiniMax M2",
         "description": "MiniMax-M2 is a compact, high-efficiency large language model optimized for end-to-end coding and agentic workflows. With 10 billion activated parameters (230 billion total), it delivers near-frontier intelligence across general reasoning,...",
         "context_length": 204800,
-        "max_tokens": 176947,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -4232,7 +4232,7 @@
         "name": "MiniMax: MiniMax M2.7",
         "description": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent...",
         "context_length": 204800,
-        "max_tokens": 131072,
+        "max_tokens": 176947,
         "input_modalities": [
           "text"
         ],
@@ -11908,7 +11908,7 @@
         "name": "Z.ai: GLM 5.3",
         "description": "GLM-5.3 is a large-scale reasoning model from Z.ai, built for complex software engineering and long-horizon agent tasks. It supports text input and output with a 1M-token context window, and improves...",
         "context_length": 1310720,
-        "max_tokens": 131072,
+        "max_tokens": 943717,
         "input_modalities": [
           "text"
         ],
@@ -11934,7 +11934,7 @@
         "name": "Z.ai: GLM 5.3 Flash",
         "description": "GLM-5.3-Flash is a native multimodal model from Z.ai. It is suited for efficient coding and long-horizon agent tasks. Its hybrid sparse and linear attention architecture maintains accurate long-context behavior while...",
         "context_length": 1310720,
-        "max_tokens": 131072,
+        "max_tokens": 128000,
         "input_modalities": [
           "text",
           "image",
@@ -12565,7 +12565,7 @@
         "name": "Z.ai: GLM Flash Latest",
         "description": "This model always redirects to the latest model in the GLM Flash family.",
         "context_length": 1310720,
-        "max_tokens": 131072,
+        "max_tokens": 128000,
         "input_modalities": [
           "text",
           "image",
@@ -12594,7 +12594,7 @@
         "name": "Z.ai: GLM Latest",
         "description": "This model always redirects to the latest GLM model from Z.ai.",
         "context_length": 1310720,
-        "max_tokens": 131072,
+        "max_tokens": 235929,
         "input_modalities": [
           "text"
         ],
