@@ -1061,6 +1061,64 @@
       }
     },
     {
+      "model": "anthropic/claude-sonnet-5.5",
+      "model_info": {
+        "model": "anthropic/claude-sonnet-5.5",
+        "name": "Anthropic: Claude Sonnet 5.5",
+        "description": "Claude Sonnet 5.5 is Anthropic's Sonnet-class model for well-scoped everyday work, succeeding Claude Sonnet 5 as a direct upgrade. It is especially strong at building features, fixing bugs, and producing...",
+        "context_length": 1000000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "text",
+          "image",
+          "file"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/anthropic/claude-sonnet-5.5",
+          "https://openrouter.ai/api/v1/models/anthropic/claude-sonnet-5.5-20260928/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "anthropic/claude-sonnet-5.5:batch",
+      "model_info": {
+        "model": "anthropic/claude-sonnet-5.5:batch",
+        "name": "Anthropic: Claude Sonnet 5.5 (batch)",
+        "description": "Claude Sonnet 5.5 is Anthropic's Sonnet-class model for well-scoped everyday work, succeeding Claude Sonnet 5 as a direct upgrade. It is especially strong at building features, fixing bugs, and producing...",
+        "context_length": 1000000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "text",
+          "image",
+          "file"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/anthropic/claude-sonnet-5.5:batch",
+          "https://openrouter.ai/api/v1/models/anthropic/claude-sonnet-5.5-20260928/endpoints"
+        ]
+      }
+    },
+    {
       "model": "anthropic/claude-sonnet-5:batch",
       "model_info": {
         "model": "anthropic/claude-sonnet-5:batch",
@@ -1644,37 +1702,13 @@
       }
     },
     {
-      "model": "deepseek/deepseek-r1-distill-llama-70b",
-      "model_info": {
-        "model": "deepseek/deepseek-r1-distill-llama-70b",
-        "name": "DeepSeek: R1 Distill Llama 70B",
-        "description": "DeepSeek R1 Distill Llama 70B is a distilled large language model based on [Llama-3.3-70B-Instruct](/meta-llama/llama-3.3-70b-instruct), using outputs from [DeepSeek R1](/deepseek/deepseek-r1). The model combines advanced distillation techniques to achieve high performance across...",
-        "context_length": 8192,
-        "max_tokens": 7372,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/deepseek/deepseek-r1-distill-llama-70b",
-          "https://openrouter.ai/api/v1/models/deepseek/deepseek-r1-distill-llama-70b/endpoints"
-        ]
-      }
-    },
-    {
       "model": "deepseek/deepseek-v3.1-terminus",
       "model_info": {
         "model": "deepseek/deepseek-v3.1-terminus",
         "name": "DeepSeek: DeepSeek V3.1 Terminus",
         "description": "DeepSeek-V3.1 Terminus is an update to [DeepSeek V3.1](/deepseek/deepseek-chat-v3.1) that maintains the model's original capabilities while addressing issues reported by users, including language consistency and agent capabilities, further optimizing the model's...",
         "context_length": 163840,
-        "max_tokens": 32768,
+        "max_tokens": 147456,
         "input_modalities": [
           "text"
         ],
@@ -1726,7 +1760,7 @@
         "name": "DeepSeek: DeepSeek V3.2 Exp",
         "description": "DeepSeek-V3.2-Exp is an experimental large language model released by DeepSeek as an intermediate step between V3.1 and future architectures. It introduces DeepSeek Sparse Attention (DSA), a fine-grained sparse attention mechanism...",
         "context_length": 163840,
-        "max_tokens": 65536,
+        "max_tokens": 147456,
         "input_modalities": [
           "text"
         ],
@@ -1804,7 +1838,7 @@
         "name": "DeepSeek: DeepSeek V4 Flash Vision Exp",
         "description": "DeepSeek V4 Flash Vision Exp is an experimental vision-enabled version of [DeepSeek V4 Flash 0731](https://openrouter.ai/deepseek/deepseek-v4-flash-0731) from DeepSeek, adding image understanding while matching the base model on text capabilities including agents,...",
         "context_length": 1048576,
-        "max_tokens": 943717,
+        "max_tokens": 262144,
         "input_modalities": [
           "text",
           "image"
@@ -1884,7 +1918,7 @@
         "name": "DeepSeek: DeepSeek V4.1 Flash",
         "description": "DeepSeek V4.1 Flash is a sparse mixture-of-experts model from DeepSeek, and the first built on the company's Causal Encoder-Decoder (CED) architecture. It activates 8B parameters on input and 16B on...",
         "context_length": 1048576,
-        "max_tokens": 384000,
+        "max_tokens": 943718,
         "input_modalities": [
           "text",
           "image"
@@ -3406,31 +3440,6 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/inclusionai/ling-3.0-flash-fin",
-          "https://openrouter.ai/api/v1/models/inclusionai/ling-3.0-flash-fin-20260827/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "inclusionai/ling-3.0-flash-fin:free",
-      "model_info": {
-        "model": "inclusionai/ling-3.0-flash-fin:free",
-        "name": "inclusionAI: Ling 3.0 Flash Fin (free)",
-        "description": "Ling 3.0 Flash Fin is a finance-focused mixture-of-experts model from InclusionAI, built on Ling 3.0 Flash with 5.1B active parameters out of 124B total. It is designed for real-world investment...",
-        "context_length": 262144,
-        "max_tokens": 32768,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/inclusionai/ling-3.0-flash-fin:free",
           "https://openrouter.ai/api/v1/models/inclusionai/ling-3.0-flash-fin-20260827/endpoints"
         ]
       }
@@ -5209,6 +5218,61 @@
       }
     },
     {
+      "model": "nex-agi/nex-n2.5-mini",
+      "model_info": {
+        "model": "nex-agi/nex-n2.5-mini",
+        "name": "Nex AGI: Nex-N2.5-Mini",
+        "description": "Nex-N2.5 is an agentic model built to turn goals into working, verified outcomes. Its core strength is agentic coding within a visual feedback loop: it can explore codebases, implement multi-file...",
+        "context_length": 262144,
+        "max_tokens": 235929,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/nex-agi/nex-n2.5-mini",
+          "https://openrouter.ai/api/v1/models/nex-agi/nex-n2.5-mini-20260908/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "nex-agi/nex-n2.5-pro",
+      "model_info": {
+        "model": "nex-agi/nex-n2.5-pro",
+        "name": "Nex AGI: Nex-N2.5-Pro",
+        "description": "Nex-N2.5 is an agentic model built to turn goals into working, verified outcomes. Its core strength is agentic coding within a visual feedback loop: it can explore codebases, implement multi-file...",
+        "context_length": 262144,
+        "max_tokens": 235929,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/nex-agi/nex-n2.5-pro",
+          "https://openrouter.ai/api/v1/models/nex-agi/nex-n2.5-pro-20260907/endpoints"
+        ]
+      }
+    },
+    {
       "model": "nousresearch/hermes-3-llama-3.1-405b",
       "model_info": {
         "model": "nousresearch/hermes-3-llama-3.1-405b",
@@ -5499,7 +5563,7 @@
         "name": "NVIDIA: Nemotron 3.5 Lightning",
         "description": "NVIDIA Nemotron 3.5 Lightning is an open mixture-of-experts model from NVIDIA, with 3B active parameters out of 30B total. It is suited for high-throughput agentic workloads and specialized tasks that...",
         "context_length": 1000000,
-        "max_tokens": 131072,
+        "max_tokens": 32768,
         "input_modalities": [
           "text"
         ],
@@ -9133,7 +9197,7 @@
         "name": "Qwen: Qwen3 30B A3B Instruct 2507",
         "description": "Qwen3-30B-A3B-Instruct-2507 is a 30.5B-parameter mixture-of-experts language model from Qwen, with 3.3B active parameters per inference. It operates in non-thinking mode and is designed for high-quality instruction following, multilingual understanding, and...",
         "context_length": 262144,
-        "max_tokens": 235929,
+        "max_tokens": 32000,
         "input_modalities": [
           "text"
         ],
@@ -11898,7 +11962,7 @@
         "name": "Z.ai: GLM 5.3",
         "description": "GLM-5.3 is a large-scale reasoning model from Z.ai, built for complex software engineering and long-horizon agent tasks. It supports text input and output with a 1M-token context window, and improves...",
         "context_length": 1310720,
-        "max_tokens": 943717,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -12208,7 +12272,7 @@
         "name": "DeepSeek: DeepSeek Flash Latest",
         "description": "This model always redirects to the latest model in the DeepSeek Flash family.",
         "context_length": 1048576,
-        "max_tokens": 384000,
+        "max_tokens": 943718,
         "input_modalities": [
           "text",
           "image"
@@ -12584,7 +12648,7 @@
         "name": "Z.ai: GLM Latest",
         "description": "This model always redirects to the latest GLM model from Z.ai.",
         "context_length": 1310720,
-        "max_tokens": 943718,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
