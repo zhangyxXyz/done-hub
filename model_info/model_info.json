@@ -1804,7 +1804,7 @@
         "name": "DeepSeek: DeepSeek V4 Flash Vision Exp",
         "description": "DeepSeek V4 Flash Vision Exp is an experimental vision-enabled version of [DeepSeek V4 Flash 0731](https://openrouter.ai/deepseek/deepseek-v4-flash-0731) from DeepSeek, adding image understanding while matching the base model on text capabilities including agents,...",
         "context_length": 1048576,
-        "max_tokens": 262144,
+        "max_tokens": 943717,
         "input_modalities": [
           "text",
           "image"
@@ -3871,15 +3871,14 @@
       "model_info": {
         "model": "meta/muse-spark-1.1",
         "name": "Meta: Muse Spark 1.1",
-        "description": "Muse Spark 1.1 is a multimodal reasoning model from Meta, built for agentic tasks. It accepts text, images, video, audio, and PDF documents and returns text, with a 1M-token context...",
+        "description": "Muse Spark 1.1 is a multimodal reasoning model from Meta, built for agentic tasks. It accepts text, images, video, and PDF documents and returns text, with a 1M-token context window....",
         "context_length": 1048576,
         "max_tokens": 943718,
         "input_modalities": [
           "text",
           "image",
           "video",
-          "file",
-          "audio"
+          "file"
         ],
         "output_modalities": [
           "text"
@@ -3887,7 +3886,6 @@
         "tags": [
           "openrouter",
           "vision",
-          "audio",
           "tools",
           "reasoning",
           "structured_outputs"
@@ -3903,15 +3901,14 @@
       "model_info": {
         "model": "meta/muse-spark-1.2",
         "name": "Meta: Muse Spark 1.2",
-        "description": "Muse Spark 1.2 is a reasoning model from Meta, designed for complex agentic tasks. It accepts text, images, video, audio, and PDF documents, returns text, and offers a 1M-token context...",
+        "description": "Muse Spark 1.2 is a reasoning model from Meta, designed for complex agentic tasks. It accepts text, images, video, and PDF documents, returns text, and offers a 1M-token context window....",
         "context_length": 1048576,
         "max_tokens": 943718,
         "input_modalities": [
           "text",
           "image",
           "video",
-          "file",
-          "audio"
+          "file"
         ],
         "output_modalities": [
           "text"
@@ -3919,7 +3916,6 @@
         "tags": [
           "openrouter",
           "vision",
-          "audio",
           "tools",
           "reasoning",
           "structured_outputs"
@@ -3942,8 +3938,7 @@
           "text",
           "image",
           "video",
-          "file",
-          "audio"
+          "file"
         ],
         "output_modalities": [
           "text"
@@ -3951,7 +3946,6 @@
         "tags": [
           "openrouter",
           "vision",
-          "audio",
           "tools",
           "reasoning",
           "structured_outputs"
@@ -3974,8 +3968,7 @@
           "text",
           "image",
           "video",
-          "file",
-          "audio"
+          "file"
         ],
         "output_modalities": [
           "text"
@@ -3983,7 +3976,6 @@
         "tags": [
           "openrouter",
           "vision",
-          "audio",
           "tools",
           "reasoning",
           "structured_outputs"
@@ -4006,8 +3998,7 @@
           "text",
           "image",
           "video",
-          "file",
-          "audio"
+          "file"
         ],
         "output_modalities": [
           "text"
@@ -4015,7 +4006,6 @@
         "tags": [
           "openrouter",
           "vision",
-          "audio",
           "tools",
           "reasoning",
           "structured_outputs"
@@ -4232,7 +4222,7 @@
         "name": "MiniMax: MiniMax M2.7",
         "description": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent...",
         "context_length": 204800,
-        "max_tokens": 176947,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -9723,7 +9713,7 @@
         "name": "Qwen: Qwen3.5-35B-A3B",
         "description": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall...",
         "context_length": 262144,
-        "max_tokens": 16384,
+        "max_tokens": 65536,
         "input_modalities": [
           "text",
           "image",
@@ -11934,7 +11924,7 @@
         "name": "Z.ai: GLM 5.3 Flash",
         "description": "GLM-5.3-Flash is a native multimodal model from Z.ai. It is suited for efficient coding and long-horizon agent tasks. Its hybrid sparse and linear attention architecture maintains accurate long-context behavior while...",
         "context_length": 1310720,
-        "max_tokens": 128000,
+        "max_tokens": 943717,
         "input_modalities": [
           "text",
           "image",
@@ -12246,7 +12236,7 @@
         "name": "DeepSeek: DeepSeek Pro Latest",
         "description": "This model always redirects to the latest model in the DeepSeek Pro family.",
         "context_length": 1048576,
-        "max_tokens": 393216,
+        "max_tokens": 943718,
         "input_modalities": [
           "text"
         ],
@@ -12594,7 +12584,7 @@
         "name": "Z.ai: GLM Latest",
         "description": "This model always redirects to the latest GLM model from Z.ai.",
         "context_length": 1310720,
-        "max_tokens": 131072,
+        "max_tokens": 943718,
         "input_modalities": [
           "text"
         ],
