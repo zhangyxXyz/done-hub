@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-29T21:10:29.238662+00:00",
+  "generated_at": "2026-09-30T10:49:01.632338+00:00",
   "sources": {
     "openrouter_models_api": "https://openrouter.ai/api/v1/models",
     "portkey_base": "https://configs.portkey.ai/pricing",
@@ -23,7 +23,7 @@
       "zhipu"
     ]
   },
-  "portkey_converted_count": 1794,
+  "portkey_converted_count": 1795,
   "portkey_provider_counts": {
     "anthropic": 36,
     "bedrock": 228,
@@ -34,7 +34,7 @@
     "groq": 28,
     "jina": 10,
     "mistral-ai": 56,
-    "openai": 187,
+    "openai": 188,
     "openrouter": 654,
     "palm": 2,
     "perplexity-ai": 28,
@@ -52,7 +52,7 @@
   "openrouter_model_info_skipped": {
     "missing_model_id": 0
   },
-  "output_count": 1889,
+  "output_count": 1890,
   "skipped": {
     "anthropic": {
       "unknown_provider": 0,

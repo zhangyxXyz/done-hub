@@ -1811,7 +1811,7 @@
         "model": "deepseek/deepseek-v4-flash-0731",
         "name": "DeepSeek: DeepSeek V4 Flash 0731",
         "description": "DeepSeek V4 Flash 0731 is a sparse mixture-of-experts model from DeepSeek, with 13B active parameters out of 284B total. This re-post-trained revision is suited for coding, reasoning, and agent workflows....",
-        "context_length": 1310720,
+        "context_length": 1048576,
         "max_tokens": 943718,
         "input_modalities": [
           "text"
@@ -1892,7 +1892,7 @@
         "name": "DeepSeek: DeepSeek V4 Pro 0813",
         "description": "DeepSeek V4 Pro 0813 is a large-scale mixture-of-experts model from DeepSeek. This is the GA release of DeepSeek V4 Pro.",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 393216,
         "input_modalities": [
           "text"
         ],
@@ -3854,7 +3854,7 @@
         "name": "Meta: Muse Glimmer 30B",
         "description": "Muse Glimmer 30B is a dense, open-weight multimodal model from Meta Superintelligence Labs, distilled from Muse Spark and optimized for autonomous agents on consumer hardware. It is suited for long-horizon...",
         "context_length": 131072,
-        "max_tokens": 16384,
+        "max_tokens": 117964,
         "input_modalities": [
           "text",
           "image"
@@ -9287,7 +9287,7 @@
         "name": "Qwen: Qwen3 30B A3B",
         "description": "Qwen3, the latest generation in the Qwen large language model series, features both dense and mixture-of-experts (MoE) architectures to excel in reasoning, multilingual support, and advanced agent tasks. Its unique...",
         "context_length": 131072,
-        "max_tokens": 16384,
+        "max_tokens": 8192,
         "input_modalities": [
           "text"
         ],
@@ -11267,7 +11267,8 @@
         "tags": [
           "openrouter",
           "vision",
-          "tools"
+          "tools",
+          "structured_outputs"
         ],
         "support_url": [
           "https://openrouter.ai/models/unbiased/pareto",
@@ -11694,7 +11695,7 @@
         "model": "xiaomi/mimo-v2.6-flash",
         "name": "Xiaomi: MiMo-V2.6-Flash",
         "description": "MiMo-V2.6-Flash is an open-source foundation model developed by Xiaomi. Built on a Mixture-of-Experts architecture with 309B total parameters and 15B activated per token, it employs a hybrid attention mechanism for...",
-        "context_length": 1048576,
+        "context_length": 1050000,
         "max_tokens": 131072,
         "input_modalities": [
           "text",
@@ -12077,7 +12078,7 @@
         "model": "z-ai/glm-5.3",
         "name": "Z.ai: GLM 5.3",
         "description": "GLM-5.3 is a large-scale reasoning model from Z.ai, built for complex software engineering and long-horizon agent tasks. It supports text input and output with a 1M-token context window, and improves...",
-        "context_length": 1310720,
+        "context_length": 1048576,
         "max_tokens": 943717,
         "input_modalities": [
           "text"
@@ -12103,7 +12104,7 @@
         "model": "z-ai/glm-5.3-flash",
         "name": "Z.ai: GLM 5.3 Flash",
         "description": "GLM-5.3-Flash is a native multimodal model from Z.ai. It is suited for efficient coding and long-horizon agent tasks. Its hybrid sparse and linear attention architecture maintains accurate long-context behavior while...",
-        "context_length": 1310720,
+        "context_length": 1048576,
         "max_tokens": 943717,
         "input_modalities": [
           "text",
@@ -12441,7 +12442,7 @@
         "model": "~deepseek/deepseek-v4-flash-latest",
         "name": "DeepSeek: DeepSeek V4 Flash Latest",
         "description": "This model always redirects to the latest model in the DeepSeek V4 Flash family.",
-        "context_length": 1310720,
+        "context_length": 1048576,
         "max_tokens": 943718,
         "input_modalities": [
           "text"
@@ -12734,7 +12735,7 @@
         "model": "~z-ai/glm-flash-latest",
         "name": "Z.ai: GLM Flash Latest",
         "description": "This model always redirects to the latest model in the GLM Flash family.",
-        "context_length": 1310720,
+        "context_length": 1048576,
         "max_tokens": 943718,
         "input_modalities": [
           "text",
@@ -12763,8 +12764,8 @@
         "model": "~z-ai/glm-latest",
         "name": "Z.ai: GLM Latest",
         "description": "This model always redirects to the latest GLM model from Z.ai.",
-        "context_length": 1310720,
-        "max_tokens": 943718,
+        "context_length": 1048576,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
