@@ -1786,7 +1786,7 @@
         "name": "DeepSeek: DeepSeek V4 Flash 0423",
         "description": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and...",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 384000,
         "input_modalities": [
           "text"
         ],
@@ -9287,7 +9287,7 @@
         "name": "Qwen: Qwen3 30B A3B",
         "description": "Qwen3, the latest generation in the Qwen large language model series, features both dense and mixture-of-experts (MoE) architectures to excel in reasoning, multilingual support, and advanced agent tasks. Its unique...",
         "context_length": 131072,
-        "max_tokens": 8192,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -10318,7 +10318,7 @@
         "name": "Qwen: Qwen3.8 27B",
         "description": "Qwen3.8 27B is an open-weight dense vision-language model from Qwen. It is suited for coding, professional workflows, research, multimodal interaction, and long-running agent tasks, with flexible thinking that can be...",
         "context_length": 1000000,
-        "max_tokens": 235929,
+        "max_tokens": 131072,
         "input_modalities": [
           "text",
           "image",
@@ -11241,7 +11241,10 @@
         "tags": [
           "openrouter",
           "vision",
-          "audio"
+          "audio",
+          "tools",
+          "reasoning",
+          "structured_outputs"
         ],
         "support_url": [
           "https://openrouter.ai/models/typesafe/jev-router",
