@@ -5009,7 +5009,7 @@
         "name": "MoonshotAI: Kimi K2 Thinking",
         "description": "Kimi K2 Thinking is Moonshot AI’s most advanced open reasoning model to date, extending the K2 series into agentic, long-horizon reasoning. Built on the trillion-parameter Mixture-of-Experts (MoE) architecture introduced in...",
         "context_length": 262144,
-        "max_tokens": 98304,
+        "max_tokens": 235929,
         "input_modalities": [
           "text"
         ],
@@ -5563,7 +5563,7 @@
         "name": "NVIDIA: Nemotron 3.5 Lightning",
         "description": "NVIDIA Nemotron 3.5 Lightning is an open mixture-of-experts model from NVIDIA, with 3B active parameters out of 30B total. It is suited for high-throughput agentic workloads and specialized tasks that...",
         "context_length": 262144,
-        "max_tokens": 32768,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -7963,64 +7963,6 @@
         "support_url": [
           "https://openrouter.ai/models/openai/gpt-6.1-sol-pro",
           "https://openrouter.ai/api/v1/models/openai/gpt-6.1-sol-pro-20260929/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/gpt-6.1-sol-pro:batch",
-      "model_info": {
-        "model": "openai/gpt-6.1-sol-pro:batch",
-        "name": "OpenAI: GPT-6.1 Sol Pro (batch)",
-        "description": "GPT-6.1 Sol Pro is the same underlying model as [GPT-6.1 Sol](https://openrouter.ai/openai/gpt-6.1-sol), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks. **Cost note:** pro mode spends far more...",
-        "context_length": 1050000,
-        "max_tokens": 128000,
-        "input_modalities": [
-          "file",
-          "image",
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-6.1-sol-pro:batch",
-          "https://openrouter.ai/api/v1/models/openai/gpt-6.1-sol-pro-20260929/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/gpt-6.1-sol:batch",
-      "model_info": {
-        "model": "openai/gpt-6.1-sol:batch",
-        "name": "OpenAI: GPT-6.1 Sol (batch)",
-        "description": "GPT-6.1 Sol is an upgrade to GPT-6 Sol from OpenAI, positioned below the flagship GPT-6 Astra in the GPT-6 series. It is suited for agentic coding, computer use, document-heavy professional...",
-        "context_length": 1050000,
-        "max_tokens": 128000,
-        "input_modalities": [
-          "file",
-          "image",
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-6.1-sol:batch",
-          "https://openrouter.ai/api/v1/models/openai/gpt-6.1-sol-20260929/endpoints"
         ]
       }
     },
@@ -12082,7 +12024,7 @@
         "name": "Z.ai: GLM 5.3",
         "description": "GLM-5.3 is a large-scale reasoning model from Z.ai, built for complex software engineering and long-horizon agent tasks. It supports text input and output with a 1M-token context window, and improves...",
         "context_length": 1048576,
-        "max_tokens": 943717,
+        "max_tokens": 943718,
         "input_modalities": [
           "text"
         ],
@@ -12768,7 +12710,7 @@
         "name": "Z.ai: GLM Latest",
         "description": "This model always redirects to the latest GLM model from Z.ai.",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 943718,
         "input_modalities": [
           "text"
         ],
