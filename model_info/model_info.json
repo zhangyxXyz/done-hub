@@ -1148,6 +1148,32 @@
       }
     },
     {
+      "model": "apodex/apodex-1.1-mini:free",
+      "model_info": {
+        "model": "apodex/apodex-1.1-mini:free",
+        "name": "Apodex: Apodex 1.1 Mini (free)",
+        "description": "Apodex 1.1 Mini is a reasoning-first model from Apodex, built for complex, long-horizon research and forecasting tasks. It works directly with files, data, code, and tools to produce verifiable results,...",
+        "context_length": 262144,
+        "max_tokens": 235929,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/apodex/apodex-1.1-mini:free",
+          "https://openrouter.ai/api/v1/models/apodex/apodex-1.1-mini-20261001/endpoints"
+        ]
+      }
+    },
+    {
       "model": "arcee-ai/trinity-large-thinking",
       "model_info": {
         "model": "arcee-ai/trinity-large-thinking",
@@ -1786,7 +1812,7 @@
         "name": "DeepSeek: DeepSeek V4 Flash 0423",
         "description": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and...",
         "context_length": 1048576,
-        "max_tokens": 384000,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -11218,6 +11244,32 @@
         "support_url": [
           "https://openrouter.ai/models/unbiased/pareto",
           "https://openrouter.ai/api/v1/models/unbiased/pareto-20260917/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "unbiased/pareto-26.10-preview",
+      "model_info": {
+        "model": "unbiased/pareto-26.10-preview",
+        "name": "Pareto 26.10 Preview",
+        "description": "Pareto is a multimodal composite model built for research, coding, and agentic workflows, while delivering frontier-level performance across a broad range of general-purpose tasks. This is a preview of the...",
+        "context_length": 1048576,
+        "max_tokens": 131072,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/unbiased/pareto-26.10-preview",
+          "https://openrouter.ai/api/v1/models/unbiased/pareto-26.10-preview-20260929/endpoints"
         ]
       }
     },
