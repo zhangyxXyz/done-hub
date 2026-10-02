@@ -3451,7 +3451,7 @@
         "name": "inclusionAI: Ling 3.0 Flash Fin",
         "description": "Ling 3.0 Flash Fin is a finance-focused mixture-of-experts model from InclusionAI, built on Ling 3.0 Flash with 5.1B active parameters out of 124B total. It is designed for real-world investment...",
         "context_length": 262144,
-        "max_tokens": 235929,
+        "max_tokens": 32768,
         "input_modalities": [
           "text"
         ],
@@ -3521,6 +3521,31 @@
         "support_url": [
           "https://openrouter.ai/models/inclusionai/ling-3.0-flash-vl",
           "https://openrouter.ai/api/v1/models/inclusionai/ling-3.0-flash-vl-20260910/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "inclusionai/ling-3.1-flash",
+      "model_info": {
+        "model": "inclusionai/ling-3.1-flash",
+        "name": "inclusionAI: Ling 3.1 Flash",
+        "description": "Ling 3.1 Flash is a hybrid reasoning mixture-of-experts model from inclusionAI, with 25B active parameters out of 560B total.",
+        "context_length": 262144,
+        "max_tokens": 32768,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/inclusionai/ling-3.1-flash",
+          "https://openrouter.ai/api/v1/models/inclusionai/ling-3.1-flash-20261002/endpoints"
         ]
       }
     },
@@ -5486,7 +5511,7 @@
         "name": "NVIDIA: Nemotron 3 Ultra",
         "description": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it...",
         "context_length": 262144,
-        "max_tokens": 16384,
+        "max_tokens": 182520,
         "input_modalities": [
           "text"
         ],
@@ -9281,7 +9306,7 @@
         "name": "Qwen: Qwen3 30B A3B Instruct 2507",
         "description": "Qwen3-30B-A3B-Instruct-2507 is a 30.5B-parameter mixture-of-experts language model from Qwen, with 3.3B active parameters per inference. It operates in non-thinking mode and is designed for high-quality instruction following, multilingual understanding, and...",
         "context_length": 262144,
-        "max_tokens": 235929,
+        "max_tokens": 32000,
         "input_modalities": [
           "text"
         ],
