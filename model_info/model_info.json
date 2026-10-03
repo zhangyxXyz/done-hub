@@ -1734,7 +1734,7 @@
         "name": "DeepSeek: DeepSeek V3.1 Terminus",
         "description": "DeepSeek-V3.1 Terminus is an update to [DeepSeek V3.1](/deepseek/deepseek-chat-v3.1) that maintains the model's original capabilities while addressing issues reported by users, including language consistency and agent capabilities, further optimizing the model's...",
         "context_length": 163840,
-        "max_tokens": 65536,
+        "max_tokens": 147456,
         "input_modalities": [
           "text"
         ],
@@ -5060,7 +5060,7 @@
         "name": "MoonshotAI: Kimi K2 Thinking",
         "description": "Kimi K2 Thinking is Moonshot AI’s most advanced open reasoning model to date, extending the K2 series into agentic, long-horizon reasoning. Built on the trillion-parameter Mixture-of-Experts (MoE) architecture introduced in...",
         "context_length": 262144,
-        "max_tokens": 98304,
+        "max_tokens": 235929,
         "input_modalities": [
           "text"
         ],
@@ -5511,7 +5511,7 @@
         "name": "NVIDIA: Nemotron 3 Ultra",
         "description": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it...",
         "context_length": 262144,
-        "max_tokens": 182520,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -5614,7 +5614,7 @@
         "name": "NVIDIA: Nemotron 3.5 Lightning",
         "description": "NVIDIA Nemotron 3.5 Lightning is an open mixture-of-experts model from NVIDIA, with 3B active parameters out of 30B total. It is suited for high-throughput agentic workloads and specialized tasks that...",
         "context_length": 262144,
-        "max_tokens": 32768,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -5655,6 +5655,29 @@
         "support_url": [
           "https://openrouter.ai/models/nvidia/nemotron-3.5-lightning:free",
           "https://openrouter.ai/api/v1/models/nvidia/nemotron-3.5-lightning-20260807/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "nvidia/switchyard",
+      "model_info": {
+        "model": "nvidia/switchyard",
+        "name": "NVIDIA: Switchyard",
+        "description": "Switchyard is an open-source model router that switches between multiple models to optimize the cost of requests. By default it will use OpenRouter market data to select the most popular...",
+        "context_length": 1000000,
+        "max_tokens": 0,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/nvidia/switchyard",
+          "https://openrouter.ai/api/v1/models/nvidia/switchyard/endpoints"
         ]
       }
     },
@@ -9610,7 +9633,7 @@
         "name": "Qwen: Qwen3 Next 80B A3B Thinking",
         "description": "Qwen3-Next-80B-A3B-Thinking is a reasoning-first chat model in the Qwen3-Next line that outputs structured “thinking” traces by default. It’s designed for hard multi-step problems; math proofs, code synthesis/debugging, logic, and agentic...",
         "context_length": 262144,
-        "max_tokens": 235929,
+        "max_tokens": 32768,
         "input_modalities": [
           "text"
         ],
@@ -12439,7 +12462,7 @@
         "name": "DeepSeek: DeepSeek Pro Latest",
         "description": "This model always redirects to the latest model in the DeepSeek Pro family.",
         "context_length": 1048576,
-        "max_tokens": 393216,
+        "max_tokens": 943718,
         "input_modalities": [
           "text"
         ],
@@ -12758,7 +12781,7 @@
         "name": "Z.ai: GLM Flash Latest",
         "description": "This model always redirects to the latest model in the GLM Flash family.",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 131072,
         "input_modalities": [
           "text",
           "image",
