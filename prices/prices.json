@@ -7437,8 +7437,8 @@
     "model": "tencent/hy3",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.132,
-    "output": 0.528
+    "input": 0.0825,
+    "output": 0.33
   },
   {
     "model": "tencent/hy3-preview",
@@ -7465,8 +7465,8 @@
     "model": "tencent/hy4-preview",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.834,
-    "output": 2.501
+    "input": 0.7506,
+    "output": 2.2509
   },
   {
     "model": "thedrummer/anubis-70b-v1.1",
@@ -7941,8 +7941,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.38,
-    "output": 3.49
+    "input": 0.104,
+    "output": 8
   },
   {
     "model": "z-ai/glm-5.2:batch",
@@ -8074,7 +8074,7 @@
     "model": "~moonshotai/kimi-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.6756,
+    "input": 0.6356,
     "output": 13
   },
   {
@@ -8144,7 +8144,7 @@
     "model": "~z-ai/glm-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.05,
+    "input": 0.08,
     "output": 5
   },
   {
