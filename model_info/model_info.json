@@ -1734,7 +1734,7 @@
         "name": "DeepSeek: DeepSeek V3.1 Terminus",
         "description": "DeepSeek-V3.1 Terminus is an update to [DeepSeek V3.1](/deepseek/deepseek-chat-v3.1) that maintains the model's original capabilities while addressing issues reported by users, including language consistency and agent capabilities, further optimizing the model's...",
         "context_length": 163840,
-        "max_tokens": 147456,
+        "max_tokens": 65536,
         "input_modalities": [
           "text"
         ],
@@ -1760,7 +1760,7 @@
         "name": "DeepSeek: DeepSeek V3.2",
         "description": "DeepSeek-V3.2 is a large language model designed to harmonize high computational efficiency with strong reasoning and agentic tool-use performance. It introduces DeepSeek Sparse Attention (DSA), a fine-grained sparse attention mechanism...",
         "context_length": 163840,
-        "max_tokens": 65536,
+        "max_tokens": 147456,
         "input_modalities": [
           "text"
         ],
@@ -1918,7 +1918,7 @@
         "name": "DeepSeek: DeepSeek V4 Pro 0813",
         "description": "DeepSeek V4 Pro 0813 is a large-scale mixture-of-experts model from DeepSeek. This is the GA release of DeepSeek V4 Pro.",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 393216,
         "input_modalities": [
           "text"
         ],
@@ -10358,35 +10358,6 @@
       }
     },
     {
-      "model": "qwen/qwen3.8-27b:free",
-      "model_info": {
-        "model": "qwen/qwen3.8-27b:free",
-        "name": "Qwen: Qwen3.8 27B (free)",
-        "description": "Qwen3.8 27B is an open-weight dense vision-language model from Qwen. It is suited for coding, professional workflows, research, multimodal interaction, and long-running agent tasks, with flexible thinking that can be...",
-        "context_length": 262144,
-        "max_tokens": 235929,
-        "input_modalities": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/qwen/qwen3.8-27b:free",
-          "https://openrouter.ai/api/v1/models/qwen/qwen3.8-27b-20260814/endpoints"
-        ]
-      }
-    },
-    {
       "model": "qwen/qwen3.8-flash",
       "model_info": {
         "model": "qwen/qwen3.8-flash",
@@ -10790,35 +10761,6 @@
         "support_url": [
           "https://openrouter.ai/models/sao10k/l3.3-euryale-70b",
           "https://openrouter.ai/api/v1/models/sao10k/l3.3-euryale-70b-v2.3/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "stealth/space-bunny-alpha",
-      "model_info": {
-        "model": "stealth/space-bunny-alpha",
-        "name": "Space Bunny Alpha",
-        "description": "Space Bunny Alpha is an anonymous large model with blazing-fast inference, strong coding capabilities and native multimodal input support. It delivers adjustable reasoning effort, and a 1M-token context window. Space...",
-        "context_length": 1000000,
-        "max_tokens": 524288,
-        "input_modalities": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/stealth/space-bunny-alpha",
-          "https://openrouter.ai/api/v1/models/stealth/space-bunny-alpha/endpoints"
         ]
       }
     },
@@ -12151,7 +12093,7 @@
         "name": "Z.ai: GLM 5.3 Flash",
         "description": "GLM-5.3-Flash is a native multimodal model from Z.ai. It is suited for efficient coding and long-horizon agent tasks. Its hybrid sparse and linear attention architecture maintains accurate long-context behavior while...",
         "context_length": 1048576,
-        "max_tokens": 943717,
+        "max_tokens": 131072,
         "input_modalities": [
           "text",
           "image",
