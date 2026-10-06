@@ -3017,6 +3017,35 @@
       }
     },
     {
+      "model": "google/gemini-nano-banana-2.1",
+      "model_info": {
+        "model": "google/gemini-nano-banana-2.1",
+        "name": "Google: Nano Banana 2.1",
+        "description": "Nano Banana 2.1 (Gemini Nano Banana 2.1) is Google's image generation and editing model on the Flash tier, succeeding Nano Banana 2 and Nano Banana Pro. It improves product recontextualization,...",
+        "context_length": 65536,
+        "max_tokens": 58982,
+        "input_modalities": [
+          "image",
+          "text"
+        ],
+        "output_modalities": [
+          "image",
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/google/gemini-nano-banana-2.1",
+          "https://openrouter.ai/api/v1/models/google/gemini-nano-banana-2.1-20261006/endpoints"
+        ]
+      }
+    },
+    {
       "model": "google/gemma-2-27b-it",
       "model_info": {
         "model": "google/gemma-2-27b-it",
@@ -4621,6 +4650,34 @@
         "support_url": [
           "https://openrouter.ai/models/mistralai/mistral-large-2512:batch",
           "https://openrouter.ai/api/v1/models/mistralai/mistral-large-2512/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "mistralai/mistral-large-4-0",
+      "model_info": {
+        "model": "mistralai/mistral-large-4-0",
+        "name": "Mistral: Mistral Large 4",
+        "description": "Mistral Large 4 is a frontier multimodal (text and image input) model from Mistral AI built for reasoning, coding, and agentic workloads. It offers a 512K-token context window with up...",
+        "context_length": 524288,
+        "max_tokens": 262144,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/mistralai/mistral-large-4-0",
+          "https://openrouter.ai/api/v1/models/mistralai/mistral-large-4-0-20261006/endpoints"
         ]
       }
     },
@@ -12724,7 +12781,7 @@
         "name": "Z.ai: GLM Flash Latest",
         "description": "This model always redirects to the latest model in the GLM Flash family.",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 943718,
         "input_modalities": [
           "text",
           "image",
