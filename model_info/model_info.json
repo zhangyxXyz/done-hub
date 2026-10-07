@@ -483,6 +483,64 @@
       }
     },
     {
+      "model": "anthropic/claude-haiku-5.5",
+      "model_info": {
+        "model": "anthropic/claude-haiku-5.5",
+        "name": "Anthropic: Claude Haiku 5.5",
+        "description": "Claude Haiku 5.5 is Anthropic's small, fast model for high-volume, cost-sensitive work such as summarization, subagents, and browser use. It succeeds Claude Haiku 4.5 with stronger coding, computer use, and...",
+        "context_length": 1000000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "text",
+          "image",
+          "file"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/anthropic/claude-haiku-5.5",
+          "https://openrouter.ai/api/v1/models/anthropic/claude-haiku-5.5-20261007/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "anthropic/claude-haiku-5.5:batch",
+      "model_info": {
+        "model": "anthropic/claude-haiku-5.5:batch",
+        "name": "Anthropic: Claude Haiku 5.5 (batch)",
+        "description": "Claude Haiku 5.5 is Anthropic's small, fast model for high-volume, cost-sensitive work such as summarization, subagents, and browser use. It succeeds Claude Haiku 4.5 with stronger coding, computer use, and...",
+        "context_length": 1000000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "text",
+          "image",
+          "file"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/anthropic/claude-haiku-5.5:batch",
+          "https://openrouter.ai/api/v1/models/anthropic/claude-haiku-5.5-20261007/endpoints"
+        ]
+      }
+    },
+    {
       "model": "anthropic/claude-opus-4.1",
       "model_info": {
         "model": "anthropic/claude-opus-4.1",
@@ -1760,7 +1818,7 @@
         "name": "DeepSeek: DeepSeek V3.2",
         "description": "DeepSeek-V3.2 is a large language model designed to harmonize high computational efficiency with strong reasoning and agentic tool-use performance. It introduces DeepSeek Sparse Attention (DSA), a fine-grained sparse attention mechanism...",
         "context_length": 163840,
-        "max_tokens": 65536,
+        "max_tokens": 147456,
         "input_modalities": [
           "text"
         ],
@@ -5436,7 +5494,7 @@
         "name": "NVIDIA: Nemotron 3 Nano 30B A3B",
         "description": "NVIDIA Nemotron 3 Nano 30B A3B is a small language MoE model with highest compute efficiency and accuracy for developers to build specialized agentic AI systems. The model is fully...",
         "context_length": 262144,
-        "max_tokens": 235929,
+        "max_tokens": 32768,
         "input_modalities": [
           "text"
         ],
@@ -5647,7 +5705,7 @@
         "name": "NVIDIA: Nemotron 3.5 Lightning",
         "description": "NVIDIA Nemotron 3.5 Lightning is an open mixture-of-experts model from NVIDIA, with 3B active parameters out of 30B total. It is suited for high-throughput agentic workloads and specialized tasks that...",
         "context_length": 262144,
-        "max_tokens": 32768,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -12321,8 +12379,8 @@
         "model": "~anthropic/claude-haiku-latest",
         "name": "Anthropic: Claude Haiku Latest",
         "description": "This model always redirects to the latest model in the Claude Haiku family.",
-        "context_length": 200000,
-        "max_tokens": 64000,
+        "context_length": 1000000,
+        "max_tokens": 128000,
         "input_modalities": [
           "text",
           "image",
@@ -12437,7 +12495,7 @@
         "name": "DeepSeek: DeepSeek Pro Latest",
         "description": "This model always redirects to the latest model in the DeepSeek Pro family.",
         "context_length": 1048576,
-        "max_tokens": 384000,
+        "max_tokens": 393216,
         "input_modalities": [
           "text"
         ],
@@ -12785,7 +12843,7 @@
         "name": "Z.ai: GLM Latest",
         "description": "This model always redirects to the latest GLM model from Z.ai.",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 943718,
         "input_modalities": [
           "text"
         ],
