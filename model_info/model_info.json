@@ -3627,31 +3627,6 @@
       }
     },
     {
-      "model": "kwaipilot/kat-coder-pro-v2.5",
-      "model_info": {
-        "model": "kwaipilot/kat-coder-pro-v2.5",
-        "name": "Kwaipilot: KAT-Coder-Pro V2.5",
-        "description": "KAT-Coder-Pro V2.5 is a flagship-level Agentic Coding model that can directly hand over an entire issue or an entire business workflow to it, allowing it to autonomously locate and make...",
-        "context_length": 262144,
-        "max_tokens": 235929,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/kwaipilot/kat-coder-pro-v2.5",
-          "https://openrouter.ai/api/v1/models/kwaipilot/kat-coder-pro-v2.5-20260710/endpoints"
-        ]
-      }
-    },
-    {
       "model": "liquid/lfm-2.5-2.6b:free",
       "model_info": {
         "model": "liquid/lfm-2.5-2.6b:free",
@@ -9387,7 +9362,7 @@
         "name": "Qwen: Qwen3 30B A3B Instruct 2507",
         "description": "Qwen3-30B-A3B-Instruct-2507 is a 30.5B-parameter mixture-of-experts language model from Qwen, with 3.3B active parameters per inference. It operates in non-thinking mode and is designed for high-quality instruction following, multilingual understanding, and...",
         "context_length": 262144,
-        "max_tokens": 235929,
+        "max_tokens": 32000,
         "input_modalities": [
           "text"
         ],
@@ -9967,7 +9942,7 @@
         "name": "Qwen: Qwen3.5-35B-A3B",
         "description": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall...",
         "context_length": 262144,
-        "max_tokens": 32768,
+        "max_tokens": 235929,
         "input_modalities": [
           "text",
           "image",
@@ -10141,7 +10116,7 @@
         "name": "Qwen: Qwen3.6 27B",
         "description": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities — accepting text, image, and video inputs...",
         "context_length": 262144,
-        "max_tokens": 262140,
+        "max_tokens": 65536,
         "input_modalities": [
           "text",
           "image",
@@ -11127,7 +11102,7 @@
         "name": "Thinking Machines: Inkling",
         "description": "Inkling is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 41B active parameters out of 975B total. It is designed for general-purpose reasoning, coding, agentic and tool-use systems,...",
         "context_length": 524288,
-        "max_tokens": 262144,
+        "max_tokens": 471859,
         "input_modalities": [
           "text",
           "image",
@@ -12072,7 +12047,7 @@
         "name": "Z.ai: GLM 5.1",
         "description": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on...",
         "context_length": 204800,
-        "max_tokens": 131072,
+        "max_tokens": 128000,
         "input_modalities": [
           "text"
         ],
@@ -12462,7 +12437,7 @@
         "name": "DeepSeek: DeepSeek Pro Latest",
         "description": "This model always redirects to the latest model in the DeepSeek Pro family.",
         "context_length": 1048576,
-        "max_tokens": 393216,
+        "max_tokens": 384000,
         "input_modalities": [
           "text"
         ],
@@ -12781,7 +12756,7 @@
         "name": "Z.ai: GLM Flash Latest",
         "description": "This model always redirects to the latest model in the GLM Flash family.",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 131072,
         "input_modalities": [
           "text",
           "image",
