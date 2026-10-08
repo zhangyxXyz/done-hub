@@ -1257,32 +1257,6 @@
       }
     },
     {
-      "model": "baidu/ernie-4.5-vl-424b-a47b",
-      "model_info": {
-        "model": "baidu/ernie-4.5-vl-424b-a47b",
-        "name": "Baidu: ERNIE 4.5 VL 424B A47B ",
-        "description": "ERNIE-4.5-VL-424B-A47B is a multimodal Mixture-of-Experts (MoE) model from Baidu’s ERNIE 4.5 series, featuring 424B total parameters with 47B active per token. It is trained jointly on text and image data...",
-        "context_length": 123000,
-        "max_tokens": 16000,
-        "input_modalities": [
-          "image",
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/baidu/ernie-4.5-vl-424b-a47b",
-          "https://openrouter.ai/api/v1/models/baidu/ernie-4.5-vl-424b-a47b/endpoints"
-        ]
-      }
-    },
-    {
       "model": "bytedance-seed/seed-1.6",
       "model_info": {
         "model": "bytedance-seed/seed-1.6",
@@ -3558,10 +3532,10 @@
       }
     },
     {
-      "model": "inclusionai/ling-3.0-flash-sante:free",
+      "model": "inclusionai/ling-3.0-flash-sante",
       "model_info": {
-        "model": "inclusionai/ling-3.0-flash-sante:free",
-        "name": "inclusionAI: Ling 3.0 Flash Sante (free)",
+        "model": "inclusionai/ling-3.0-flash-sante",
+        "name": "inclusionAI: Ling 3.0 Flash Sante",
         "description": "Ling 3.0 Flash Sante is a health and medicine-focused mixture-of-experts model from InclusionAI, built on Ling 3.0 Flash with 5.1B active parameters out of 124B total. It is designed for...",
         "context_length": 262144,
         "max_tokens": 32768,
@@ -3577,7 +3551,7 @@
           "reasoning"
         ],
         "support_url": [
-          "https://openrouter.ai/models/inclusionai/ling-3.0-flash-sante:free",
+          "https://openrouter.ai/models/inclusionai/ling-3.0-flash-sante",
           "https://openrouter.ai/api/v1/models/inclusionai/ling-3.0-flash-sante-20260904/endpoints"
         ]
       }
@@ -4691,8 +4665,8 @@
       "model_info": {
         "model": "mistralai/mistral-large-4-0",
         "name": "Mistral: Mistral Large 4",
-        "description": "Mistral Large 4 is a frontier multimodal (text and image input) model from Mistral AI built for reasoning, coding, and agentic workloads. It offers a 512K-token context window with up...",
-        "context_length": 524288,
+        "description": "Mistral Large 4 is a frontier multimodal (text and image input) model from Mistral AI built for reasoning, coding, and agentic workloads. It offers a 1M-token context window with up...",
+        "context_length": 1048576,
         "max_tokens": 262144,
         "input_modalities": [
           "text",
@@ -5550,7 +5524,7 @@
         "name": "NVIDIA: Nemotron 3 Super",
         "description": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer...",
         "context_length": 262144,
-        "max_tokens": 16384,
+        "max_tokens": 235929,
         "input_modalities": [
           "text"
         ],
@@ -8132,6 +8106,64 @@
       }
     },
     {
+      "model": "openai/gpt-6.1-sol-pro:batch",
+      "model_info": {
+        "model": "openai/gpt-6.1-sol-pro:batch",
+        "name": "OpenAI: GPT-6.1 Sol Pro (batch)",
+        "description": "GPT-6.1 Sol Pro is the same underlying model as [GPT-6.1 Sol](https://openrouter.ai/openai/gpt-6.1-sol), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks. **Cost note:** pro mode spends far more...",
+        "context_length": 1050000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "file",
+          "image",
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/openai/gpt-6.1-sol-pro:batch",
+          "https://openrouter.ai/api/v1/models/openai/gpt-6.1-sol-pro-20260929/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "openai/gpt-6.1-sol:batch",
+      "model_info": {
+        "model": "openai/gpt-6.1-sol:batch",
+        "name": "OpenAI: GPT-6.1 Sol (batch)",
+        "description": "GPT-6.1 Sol is an upgrade to GPT-6 Sol from OpenAI, positioned below the flagship GPT-6 Astra in the GPT-6 series. It is suited for agentic coding, computer use, document-heavy professional...",
+        "context_length": 1050000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "file",
+          "image",
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/openai/gpt-6.1-sol:batch",
+          "https://openrouter.ai/api/v1/models/openai/gpt-6.1-sol-20260929/endpoints"
+        ]
+      }
+    },
+    {
       "model": "openai/gpt-audio",
       "model_info": {
         "model": "openai/gpt-audio",
@@ -9420,7 +9452,7 @@
         "name": "Qwen: Qwen3 30B A3B Instruct 2507",
         "description": "Qwen3-30B-A3B-Instruct-2507 is a 30.5B-parameter mixture-of-experts language model from Qwen, with 3.3B active parameters per inference. It operates in non-thinking mode and is designed for high-quality instruction following, multilingual understanding, and...",
         "context_length": 262144,
-        "max_tokens": 32000,
+        "max_tokens": 235929,
         "input_modalities": [
           "text"
         ],
@@ -9699,7 +9731,7 @@
         "name": "Qwen: Qwen3 Next 80B A3B Instruct",
         "description": "Qwen3-Next-80B-A3B-Instruct is an instruction-tuned chat model in the Qwen3-Next series optimized for fast, stable responses without “thinking” traces. It targets complex tasks across reasoning, code generation, knowledge QA, and multilingual...",
         "context_length": 262144,
-        "max_tokens": 32768,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -10821,7 +10853,6 @@
         ],
         "tags": [
           "openrouter",
-          "tools",
           "structured_outputs"
         ],
         "support_url": [
@@ -10905,6 +10936,35 @@
         "support_url": [
           "https://openrouter.ai/models/stepfun/step-3.7-flash",
           "https://openrouter.ai/api/v1/models/stepfun/step-3.7-flash-20260528/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "stepfun/step-5-preview",
+      "model_info": {
+        "model": "stepfun/step-5-preview",
+        "name": "StepFun: Step 5 Preview",
+        "description": "Step 5 Preview is StepFun's flagship model for agentic work, built on a sparse Mixture-of-Experts architecture (27B active / 600B total parameters). It performs strongly in software engineering and professional...",
+        "context_length": 1000000,
+        "max_tokens": 64000,
+        "input_modalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/stepfun/step-5-preview",
+          "https://openrouter.ai/api/v1/models/stepfun/step-5-preview-20261008/endpoints"
         ]
       }
     },
