@@ -5494,7 +5494,7 @@
         "name": "NVIDIA: Nemotron 3 Nano 30B A3B",
         "description": "NVIDIA Nemotron 3 Nano 30B A3B is a small language MoE model with highest compute efficiency and accuracy for developers to build specialized agentic AI systems. The model is fully...",
         "context_length": 262144,
-        "max_tokens": 32768,
+        "max_tokens": 235929,
         "input_modalities": [
           "text"
         ],
@@ -5550,7 +5550,7 @@
         "name": "NVIDIA: Nemotron 3 Super",
         "description": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer...",
         "context_length": 262144,
-        "max_tokens": 235929,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -9699,7 +9699,7 @@
         "name": "Qwen: Qwen3 Next 80B A3B Instruct",
         "description": "Qwen3-Next-80B-A3B-Instruct is an instruction-tuned chat model in the Qwen3-Next series optimized for fast, stable responses without “thinking” traces. It targets complex tasks across reasoning, code generation, knowledge QA, and multilingual...",
         "context_length": 262144,
-        "max_tokens": 235929,
+        "max_tokens": 32768,
         "input_modalities": [
           "text"
         ],
@@ -9971,7 +9971,7 @@
         "name": "Qwen: Qwen3.5-27B",
         "description": "The Qwen3.5 27B native vision-language Dense model incorporates a linear attention mechanism, delivering fast response times while balancing inference speed and performance. Its overall capabilities are comparable to those of...",
         "context_length": 262144,
-        "max_tokens": 65536,
+        "max_tokens": 81920,
         "input_modalities": [
           "text",
           "image",
@@ -12814,7 +12814,7 @@
         "name": "Z.ai: GLM Flash Latest",
         "description": "This model always redirects to the latest model in the GLM Flash family.",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 943718,
         "input_modalities": [
           "text",
           "image",
@@ -12843,7 +12843,7 @@
         "name": "Z.ai: GLM Latest",
         "description": "This model always redirects to the latest GLM model from Z.ai.",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
