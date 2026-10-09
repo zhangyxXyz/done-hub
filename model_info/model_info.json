@@ -3522,8 +3522,7 @@
         "tags": [
           "openrouter",
           "tools",
-          "reasoning",
-          "structured_outputs"
+          "reasoning"
         ],
         "support_url": [
           "https://openrouter.ai/models/inclusionai/ling-3.0-flash-fin",
@@ -5125,7 +5124,7 @@
         "name": "MoonshotAI: Kimi K2 Thinking",
         "description": "Kimi K2 Thinking is Moonshot AI’s most advanced open reasoning model to date, extending the K2 series into agentic, long-horizon reasoning. Built on the trillion-parameter Mixture-of-Experts (MoE) architecture introduced in...",
         "context_length": 262144,
-        "max_tokens": 235929,
+        "max_tokens": 98304,
         "input_modalities": [
           "text"
         ],
@@ -9266,31 +9265,6 @@
       }
     },
     {
-      "model": "qwen/qwen-plus-2025-07-28",
-      "model_info": {
-        "model": "qwen/qwen-plus-2025-07-28",
-        "name": "Qwen: Qwen Plus 0728",
-        "description": "Qwen Plus 0728, based on the Qwen3 foundation model, is a 1 million context hybrid reasoning model with a balanced performance, speed, and cost combination.",
-        "context_length": 1000000,
-        "max_tokens": 32768,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/qwen/qwen-plus-2025-07-28",
-          "https://openrouter.ai/api/v1/models/qwen/qwen-plus-2025-07-28/endpoints"
-        ]
-      }
-    },
-    {
       "model": "qwen/qwen2.5-vl-72b-instruct",
       "model_info": {
         "model": "qwen/qwen2.5-vl-72b-instruct",
@@ -9322,7 +9296,7 @@
         "model": "qwen/qwen3-14b",
         "name": "Qwen: Qwen3 14B",
         "description": "Qwen3-14B is a dense 14.8B parameter causal language model from the Qwen3 series, designed for both complex reasoning and efficient dialogue. It supports seamless switching between a \"thinking\" mode for...",
-        "context_length": 131072,
+        "context_length": 40960,
         "max_tokens": 16384,
         "input_modalities": [
           "text"
@@ -9339,32 +9313,6 @@
         "support_url": [
           "https://openrouter.ai/models/qwen/qwen3-14b",
           "https://openrouter.ai/api/v1/models/qwen/qwen3-14b-04-28/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "qwen/qwen3-235b-a22b",
-      "model_info": {
-        "model": "qwen/qwen3-235b-a22b",
-        "name": "Qwen: Qwen3 235B A22B",
-        "description": "Qwen3-235B-A22B is a 235B parameter mixture-of-experts (MoE) model developed by Qwen, activating 22B parameters per forward pass. It supports seamless switching between a \"thinking\" mode for complex reasoning, math, and...",
-        "context_length": 131072,
-        "max_tokens": 8192,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/qwen/qwen3-235b-a22b",
-          "https://openrouter.ai/api/v1/models/qwen/qwen3-235b-a22b-04-28/endpoints"
         ]
       }
     },
@@ -9399,8 +9347,8 @@
         "model": "qwen/qwen3-235b-a22b-thinking-2507",
         "name": "Qwen: Qwen3 235B A22B Thinking 2507",
         "description": "Qwen3-235B-A22B-Thinking-2507 is a high-performance, open-weight Mixture-of-Experts (MoE) language model optimized for complex reasoning tasks. It activates 22B of its 235B parameters per forward pass and natively supports up to 262,144...",
-        "context_length": 131072,
-        "max_tokens": 117964,
+        "context_length": 128000,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -9410,8 +9358,7 @@
         "tags": [
           "openrouter",
           "tools",
-          "reasoning",
-          "structured_outputs"
+          "reasoning"
         ],
         "support_url": [
           "https://openrouter.ai/models/qwen/qwen3-235b-a22b-thinking-2507",
@@ -9425,7 +9372,7 @@
         "model": "qwen/qwen3-30b-a3b",
         "name": "Qwen: Qwen3 30B A3B",
         "description": "Qwen3, the latest generation in the Qwen large language model series, features both dense and mixture-of-experts (MoE) architectures to excel in reasoning, multilingual support, and advanced agent tasks. Its unique...",
-        "context_length": 131072,
+        "context_length": 40960,
         "max_tokens": 16384,
         "input_modalities": [
           "text"
@@ -9471,32 +9418,6 @@
       }
     },
     {
-      "model": "qwen/qwen3-30b-a3b-thinking-2507",
-      "model_info": {
-        "model": "qwen/qwen3-30b-a3b-thinking-2507",
-        "name": "Qwen: Qwen3 30B A3B Thinking 2507",
-        "description": "Qwen3-30B-A3B-Thinking-2507 is a 30B parameter Mixture-of-Experts reasoning model optimized for complex tasks requiring extended multi-step thinking. The model is designed specifically for “thinking mode,” where internal reasoning traces are separated...",
-        "context_length": 81920,
-        "max_tokens": 32768,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/qwen/qwen3-30b-a3b-thinking-2507",
-          "https://openrouter.ai/api/v1/models/qwen/qwen3-30b-a3b-thinking-2507/endpoints"
-        ]
-      }
-    },
-    {
       "model": "qwen/qwen3-32b",
       "model_info": {
         "model": "qwen/qwen3-32b",
@@ -9519,32 +9440,6 @@
         "support_url": [
           "https://openrouter.ai/models/qwen/qwen3-32b",
           "https://openrouter.ai/api/v1/models/qwen/qwen3-32b-04-28/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "qwen/qwen3-8b",
-      "model_info": {
-        "model": "qwen/qwen3-8b",
-        "name": "Qwen: Qwen3 8B",
-        "description": "Qwen3-8B is a dense 8.2B parameter causal language model from the Qwen3 series, designed for both reasoning-heavy tasks and efficient dialogue. It supports seamless switching between \"thinking\" mode for math,...",
-        "context_length": 131072,
-        "max_tokens": 8192,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/qwen/qwen3-8b",
-          "https://openrouter.ai/api/v1/models/qwen/qwen3-8b-04-28/endpoints"
         ]
       }
     },
@@ -9649,82 +9544,6 @@
       }
     },
     {
-      "model": "qwen/qwen3-coder-plus",
-      "model_info": {
-        "model": "qwen/qwen3-coder-plus",
-        "name": "Qwen: Qwen3 Coder Plus",
-        "description": "Qwen3 Coder Plus is Alibaba's proprietary version of the Open Source Qwen3 Coder 480B A35B. It is a powerful coding agent model specializing in autonomous programming via tool calling and...",
-        "context_length": 1000000,
-        "max_tokens": 65536,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/qwen/qwen3-coder-plus",
-          "https://openrouter.ai/api/v1/models/qwen/qwen3-coder-plus/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "qwen/qwen3-max",
-      "model_info": {
-        "model": "qwen/qwen3-max",
-        "name": "Qwen: Qwen3 Max",
-        "description": "Qwen3-Max is an updated release built on the Qwen3 series, offering major improvements in reasoning, instruction following, multilingual support, and long-tail knowledge coverage compared to the January 2025 version. It...",
-        "context_length": 262144,
-        "max_tokens": 65536,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/qwen/qwen3-max",
-          "https://openrouter.ai/api/v1/models/qwen/qwen3-max/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "qwen/qwen3-max-thinking",
-      "model_info": {
-        "model": "qwen/qwen3-max-thinking",
-        "name": "Qwen: Qwen3 Max Thinking",
-        "description": "Qwen3-Max-Thinking is the flagship reasoning model in the Qwen3 series, designed for high-stakes cognitive tasks that require deep, multi-step reasoning. By significantly scaling model capacity and reinforcement learning compute, it...",
-        "context_length": 262144,
-        "max_tokens": 65536,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/qwen/qwen3-max-thinking",
-          "https://openrouter.ai/api/v1/models/qwen/qwen3-max-thinking-20260123/endpoints"
-        ]
-      }
-    },
-    {
       "model": "qwen/qwen3-next-80b-a3b-instruct",
       "model_info": {
         "model": "qwen/qwen3-next-80b-a3b-instruct",
@@ -9756,7 +9575,7 @@
         "name": "Qwen: Qwen3 Next 80B A3B Thinking",
         "description": "Qwen3-Next-80B-A3B-Thinking is a reasoning-first chat model in the Qwen3-Next line that outputs structured “thinking” traces by default. It’s designed for hard multi-step problems; math proofs, code synthesis/debugging, logic, and agentic...",
         "context_length": 262144,
-        "max_tokens": 32768,
+        "max_tokens": 235929,
         "input_modalities": [
           "text"
         ],
@@ -9803,34 +9622,6 @@
       }
     },
     {
-      "model": "qwen/qwen3-vl-235b-a22b-thinking",
-      "model_info": {
-        "model": "qwen/qwen3-vl-235b-a22b-thinking",
-        "name": "Qwen: Qwen3 VL 235B A22B Thinking",
-        "description": "Qwen3-VL-235B-A22B Thinking is a multimodal model that unifies strong text generation with visual understanding across images and video. The Thinking model is optimized for multimodal reasoning in STEM and math....",
-        "context_length": 131072,
-        "max_tokens": 32768,
-        "input_modalities": [
-          "text",
-          "image"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/qwen/qwen3-vl-235b-a22b-thinking",
-          "https://openrouter.ai/api/v1/models/qwen/qwen3-vl-235b-a22b-thinking/endpoints"
-        ]
-      }
-    },
-    {
       "model": "qwen/qwen3-vl-30b-a3b-instruct",
       "model_info": {
         "model": "qwen/qwen3-vl-30b-a3b-instruct",
@@ -9864,7 +9655,7 @@
         "name": "Qwen: Qwen3 VL 30B A3B Thinking",
         "description": "Qwen3-VL-30B-A3B-Thinking is a multimodal model that unifies strong text generation with visual understanding for images and videos. Its Thinking variant enhances reasoning in STEM, math, and complex tasks. It excels...",
         "context_length": 262144,
-        "max_tokens": 32768,
+        "max_tokens": 235929,
         "input_modalities": [
           "text",
           "image"
@@ -9886,40 +9677,13 @@
       }
     },
     {
-      "model": "qwen/qwen3-vl-32b-instruct",
-      "model_info": {
-        "model": "qwen/qwen3-vl-32b-instruct",
-        "name": "Qwen: Qwen3 VL 32B Instruct",
-        "description": "Qwen3-VL-32B-Instruct is a large-scale multimodal vision-language model designed for high-precision understanding and reasoning across text, images, and video. With 32 billion parameters, it combines deep visual perception with advanced text...",
-        "context_length": 131072,
-        "max_tokens": 32768,
-        "input_modalities": [
-          "text",
-          "image"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/qwen/qwen3-vl-32b-instruct",
-          "https://openrouter.ai/api/v1/models/qwen/qwen3-vl-32b-instruct/endpoints"
-        ]
-      }
-    },
-    {
       "model": "qwen/qwen3-vl-8b-instruct",
       "model_info": {
         "model": "qwen/qwen3-vl-8b-instruct",
         "name": "Qwen: Qwen3 VL 8B Instruct",
         "description": "Qwen3-VL-8B-Instruct is a multimodal vision-language model from the Qwen3-VL series, built for high-fidelity understanding and reasoning across text, images, and video. It features improved multimodal fusion with Interleaved-MRoPE for long-horizon...",
         "context_length": 262144,
-        "max_tokens": 32768,
+        "max_tokens": 235929,
         "input_modalities": [
           "image",
           "text"
@@ -9936,34 +9700,6 @@
         "support_url": [
           "https://openrouter.ai/models/qwen/qwen3-vl-8b-instruct",
           "https://openrouter.ai/api/v1/models/qwen/qwen3-vl-8b-instruct/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "qwen/qwen3-vl-8b-thinking",
-      "model_info": {
-        "model": "qwen/qwen3-vl-8b-thinking",
-        "name": "Qwen: Qwen3 VL 8B Thinking",
-        "description": "Qwen3-VL-8B-Thinking is the reasoning-optimized variant of the Qwen3-VL-8B multimodal model, designed for advanced visual and textual reasoning across complex scenes, documents, and temporal sequences. It integrates enhanced multimodal alignment and...",
-        "context_length": 131072,
-        "max_tokens": 32768,
-        "input_modalities": [
-          "image",
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/qwen/qwen3-vl-8b-thinking",
-          "https://openrouter.ai/api/v1/models/qwen/qwen3-vl-8b-thinking/endpoints"
         ]
       }
     },
@@ -10206,7 +9942,7 @@
         "name": "Qwen: Qwen3.6 27B",
         "description": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities — accepting text, image, and video inputs...",
         "context_length": 262144,
-        "max_tokens": 65536,
+        "max_tokens": 81920,
         "input_modalities": [
           "text",
           "image",
@@ -10283,32 +10019,6 @@
         "support_url": [
           "https://openrouter.ai/models/qwen/qwen3.6-flash",
           "https://openrouter.ai/api/v1/models/qwen/qwen3.6-flash/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "qwen/qwen3.6-max-preview",
-      "model_info": {
-        "model": "qwen/qwen3.6-max-preview",
-        "name": "Qwen: Qwen3.6 Max Preview",
-        "description": "Qwen3.6-Max-Preview is a proprietary frontier model from Alibaba Cloud built on a sparse mixture-of-experts architecture with approximately 1 trillion total parameters. It is optimized for agentic coding, tool use, and...",
-        "context_length": 262144,
-        "max_tokens": 65536,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/qwen/qwen3.6-max-preview",
-          "https://openrouter.ai/api/v1/models/qwen/qwen3.6-max-preview-20260420/endpoints"
         ]
       }
     },
@@ -12006,7 +11716,7 @@
         "name": "Z.ai: GLM 4.6",
         "description": "Compared with GLM-4.5, this generation brings several key improvements: Longer context window: The context window has been expanded from 128K to 200K tokens, enabling the model to handle more complex...",
         "context_length": 204800,
-        "max_tokens": 16384,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -12903,7 +12613,7 @@
         "name": "Z.ai: GLM Latest",
         "description": "This model always redirects to the latest GLM model from Z.ai.",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 943718,
         "input_modalities": [
           "text"
         ],
