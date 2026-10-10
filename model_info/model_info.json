@@ -5678,7 +5678,7 @@
         "name": "NVIDIA: Nemotron 3.5 Lightning",
         "description": "NVIDIA Nemotron 3.5 Lightning is an open mixture-of-experts model from NVIDIA, with 3B active parameters out of 30B total. It is suited for high-throughput agentic workloads and specialized tasks that...",
         "context_length": 262144,
-        "max_tokens": 131072,
+        "max_tokens": 235929,
         "input_modalities": [
           "text"
         ],
@@ -12265,7 +12265,7 @@
         "name": "DeepSeek: DeepSeek Pro Latest",
         "description": "This model always redirects to the latest model in the DeepSeek Pro family.",
         "context_length": 1048576,
-        "max_tokens": 393216,
+        "max_tokens": 943718,
         "input_modalities": [
           "text"
         ],
@@ -12584,7 +12584,7 @@
         "name": "Z.ai: GLM Flash Latest",
         "description": "This model always redirects to the latest model in the GLM Flash family.",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 131072,
         "input_modalities": [
           "text",
           "image",
