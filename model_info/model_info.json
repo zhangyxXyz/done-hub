@@ -9971,7 +9971,7 @@
         "name": "Qwen: Qwen3.6 35B A3B",
         "description": "Qwen3.6-35B-A3B is an open-weight multimodal model from Alibaba Cloud with 35 billion total parameters and 3 billion active parameters per token. It uses a hybrid sparse mixture-of-experts architecture combining Gated...",
         "context_length": 262144,
-        "max_tokens": 235929,
+        "max_tokens": 65536,
         "input_modalities": [
           "text",
           "image",
@@ -12265,7 +12265,7 @@
         "name": "DeepSeek: DeepSeek Pro Latest",
         "description": "This model always redirects to the latest model in the DeepSeek Pro family.",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 393216,
         "input_modalities": [
           "text"
         ],
