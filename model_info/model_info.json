@@ -4112,6 +4112,38 @@
       }
     },
     {
+      "model": "meta/muse-wonder",
+      "model_info": {
+        "model": "meta/muse-wonder",
+        "name": "Meta: Muse Wonder",
+        "description": "Muse Wonder is a frontier reasoning model from Meta, designed for complex personal and professional agentic tasks. It accepts text, images, video, audio, and PDF documents and returns text, with...",
+        "context_length": 1048576,
+        "max_tokens": 943718,
+        "input_modalities": [
+          "text",
+          "image",
+          "video",
+          "file",
+          "audio"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "audio",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/meta/muse-wonder",
+          "https://openrouter.ai/api/v1/models/meta/muse-wonder-20261012/endpoints"
+        ]
+      }
+    },
+    {
       "model": "microsoft/phi-4",
       "model_info": {
         "model": "microsoft/phi-4",
@@ -8253,7 +8285,7 @@
         "name": "OpenAI: gpt-oss-120b",
         "description": "gpt-oss-120b is an open-weight, 117B-parameter Mixture-of-Experts (MoE) language model from OpenAI designed for high-reasoning, agentic, and general-purpose production use cases. It activates 5.1B parameters per forward pass and is optimized...",
         "context_length": 131072,
-        "max_tokens": 117964,
+        "max_tokens": 65536,
         "input_modalities": [
           "text"
         ],
@@ -12265,7 +12297,7 @@
         "name": "DeepSeek: DeepSeek Pro Latest",
         "description": "This model always redirects to the latest model in the DeepSeek Pro family.",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 393216,
         "input_modalities": [
           "text"
         ],
