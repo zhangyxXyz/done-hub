@@ -1976,7 +1976,7 @@
         "name": "DeepSeek: DeepSeek V4.1 Flash",
         "description": "DeepSeek V4.1 Flash is a sparse mixture-of-experts model from DeepSeek, and the first built on the company's Causal Encoder-Decoder (CED) architecture. It activates 8B parameters on input and 16B on...",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 393216,
         "input_modalities": [
           "text",
           "image"
@@ -3591,7 +3591,7 @@
         "name": "inclusionAI: Ling 3.1 Flash",
         "description": "Ling 3.1 Flash is a hybrid reasoning mixture-of-experts model from inclusionAI, with 25B active parameters out of 560B total.",
         "context_length": 262144,
-        "max_tokens": 32768,
+        "max_tokens": 235929,
         "input_modalities": [
           "text"
         ],
@@ -3888,7 +3888,7 @@
         "name": "Meta: Llama 4 Scout",
         "description": "Llama 4 Scout 17B Instruct (16E) is a mixture-of-experts (MoE) language model developed by Meta, activating 17 billion parameters out of a total of 109B. It supports native multimodal input...",
         "context_length": 1310720,
-        "max_tokens": 16384,
+        "max_tokens": 117964,
         "input_modalities": [
           "text",
           "image"
@@ -11953,7 +11953,7 @@
         "name": "Z.ai: GLM 5.3 Flash",
         "description": "GLM-5.3-Flash is a native multimodal model from Z.ai. It is suited for efficient coding and long-horizon agent tasks. Its hybrid sparse and linear attention architecture maintains accurate long-context behavior while...",
         "context_length": 1048576,
-        "max_tokens": 943717,
+        "max_tokens": 943718,
         "input_modalities": [
           "text",
           "image",
@@ -12237,7 +12237,7 @@
         "name": "DeepSeek: DeepSeek Flash Latest",
         "description": "This model always redirects to the latest model in the DeepSeek Flash family.",
         "context_length": 1048576,
-        "max_tokens": 393216,
+        "max_tokens": 943718,
         "input_modalities": [
           "text",
           "image"
@@ -12584,7 +12584,7 @@
         "name": "Z.ai: GLM Flash Latest",
         "description": "This model always redirects to the latest model in the GLM Flash family.",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 943718,
         "input_modalities": [
           "text",
           "image",
