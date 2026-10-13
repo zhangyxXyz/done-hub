@@ -1206,32 +1206,6 @@
       }
     },
     {
-      "model": "apodex/apodex-1.1-mini:free",
-      "model_info": {
-        "model": "apodex/apodex-1.1-mini:free",
-        "name": "Apodex: Apodex 1.1 Mini (free)",
-        "description": "Apodex 1.1 Mini is a reasoning-first model from Apodex, built for complex, long-horizon research and forecasting tasks. It works directly with files, data, code, and tools to produce verifiable results,...",
-        "context_length": 262144,
-        "max_tokens": 235929,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/apodex/apodex-1.1-mini:free",
-          "https://openrouter.ai/api/v1/models/apodex/apodex-1.1-mini-20261001/endpoints"
-        ]
-      }
-    },
-    {
       "model": "arcee-ai/trinity-large-thinking",
       "model_info": {
         "model": "arcee-ai/trinity-large-thinking",
@@ -1844,7 +1818,7 @@
         "name": "DeepSeek: DeepSeek V4 Flash 0423",
         "description": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and...",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 943717,
         "input_modalities": [
           "text"
         ],
@@ -1976,7 +1950,7 @@
         "name": "DeepSeek: DeepSeek V4.1 Flash",
         "description": "DeepSeek V4.1 Flash is a sparse mixture-of-experts model from DeepSeek, and the first built on the company's Causal Encoder-Decoder (CED) architecture. It activates 8B parameters on input and 16B on...",
         "context_length": 1048576,
-        "max_tokens": 393216,
+        "max_tokens": 943718,
         "input_modalities": [
           "text",
           "image"
@@ -3049,6 +3023,70 @@
       }
     },
     {
+      "model": "google/gemini-4-argon",
+      "model_info": {
+        "model": "google/gemini-4-argon",
+        "name": "Google: Gemini 4 Argon",
+        "description": "Gemini 4 Argon is Google's flagship reasoning model, built for complex software engineering, deep mathematical and scientific problem solving, and autonomous multi-step agents. Google trained it to keep context across...",
+        "context_length": 1048576,
+        "max_tokens": 65536,
+        "input_modalities": [
+          "audio",
+          "file",
+          "image",
+          "text",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "audio",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/google/gemini-4-argon",
+          "https://openrouter.ai/api/v1/models/google/gemini-4-argon-20261013/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "google/gemini-4-argon:batch",
+      "model_info": {
+        "model": "google/gemini-4-argon:batch",
+        "name": "Google: Gemini 4 Argon (batch)",
+        "description": "Gemini 4 Argon is Google's flagship reasoning model, built for complex software engineering, deep mathematical and scientific problem solving, and autonomous multi-step agents. Google trained it to keep context across...",
+        "context_length": 1048576,
+        "max_tokens": 943718,
+        "input_modalities": [
+          "audio",
+          "file",
+          "image",
+          "text",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "audio",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/google/gemini-4-argon:batch",
+          "https://openrouter.ai/api/v1/models/google/gemini-4-argon-20261013/endpoints"
+        ]
+      }
+    },
+    {
       "model": "google/gemini-nano-banana-2.1",
       "model_info": {
         "model": "google/gemini-nano-banana-2.1",
@@ -3506,62 +3544,12 @@
       }
     },
     {
-      "model": "inclusionai/ling-3.0-flash-fin",
-      "model_info": {
-        "model": "inclusionai/ling-3.0-flash-fin",
-        "name": "inclusionAI: Ling 3.0 Flash Fin",
-        "description": "Ling 3.0 Flash Fin is a finance-focused mixture-of-experts model from InclusionAI, built on Ling 3.0 Flash with 5.1B active parameters out of 124B total. It is designed for real-world investment...",
-        "context_length": 262144,
-        "max_tokens": 32768,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/inclusionai/ling-3.0-flash-fin",
-          "https://openrouter.ai/api/v1/models/inclusionai/ling-3.0-flash-fin-20260827/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "inclusionai/ling-3.0-flash-sante",
-      "model_info": {
-        "model": "inclusionai/ling-3.0-flash-sante",
-        "name": "inclusionAI: Ling 3.0 Flash Sante",
-        "description": "Ling 3.0 Flash Sante is a health and medicine-focused mixture-of-experts model from InclusionAI, built on Ling 3.0 Flash with 5.1B active parameters out of 124B total. It is designed for...",
-        "context_length": 262144,
-        "max_tokens": 32768,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/inclusionai/ling-3.0-flash-sante",
-          "https://openrouter.ai/api/v1/models/inclusionai/ling-3.0-flash-sante-20260904/endpoints"
-        ]
-      }
-    },
-    {
       "model": "inclusionai/ling-3.0-flash-vl",
       "model_info": {
         "model": "inclusionai/ling-3.0-flash-vl",
         "name": "inclusionAI: Ling 3.0 Flash VL",
         "description": "Ling 3.0 Flash VL builds on Ling 3.0 Flash (124B total / 5.5B active MoE from InclusionAI), further strengthening its language capabilities while adding native visual perception and advanced visual...",
-        "context_length": 262144,
+        "context_length": 131072,
         "max_tokens": 32768,
         "input_modalities": [
           "text",
@@ -3680,6 +3668,32 @@
         "support_url": [
           "https://openrouter.ai/models/liquid/lfm-2.5-2.6b:free",
           "https://openrouter.ai/api/v1/models/liquid/lfm-2.5-2.6b-20260811/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "liquid/lfm-2.5-24b-a2b",
+      "model_info": {
+        "model": "liquid/lfm-2.5-24b-a2b",
+        "name": "LiquidAI: LFM2.5-24B-A2B",
+        "description": "LFM2.5-24B-A2B is a mixture-of-experts reasoning model from Liquid AI with 24B total and 2.45B active parameters. It always reasons before answering and is built for agents that call tools. Liquid...",
+        "context_length": 128000,
+        "max_tokens": 8192,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/liquid/lfm-2.5-24b-a2b",
+          "https://openrouter.ai/api/v1/models/liquid/lfm-2.5-24b-a2b-20261012/endpoints"
         ]
       }
     },
@@ -9800,7 +9814,7 @@
         "name": "Qwen: Qwen3.5-35B-A3B",
         "description": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall...",
         "context_length": 262144,
-        "max_tokens": 32768,
+        "max_tokens": 16384,
         "input_modalities": [
           "text",
           "image",
@@ -12349,7 +12363,7 @@
         "name": "DeepSeek: DeepSeek Pro Latest",
         "description": "This model always redirects to the latest model in the DeepSeek Pro family.",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 393216,
         "input_modalities": [
           "text"
         ],
