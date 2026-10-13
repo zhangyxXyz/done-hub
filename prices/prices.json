@@ -3888,7 +3888,7 @@
     "model": "deepseek/deepseek-v4-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.0099,
+    "input": 0.0489,
     "output": 1.28
   },
   {
@@ -3909,8 +3909,8 @@
     "model": "deepseek/deepseek-v4-pro",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.41238,
-    "output": 0.82476
+    "input": 0.95526,
+    "output": 1.91052
   },
   {
     "model": "deepseek/deepseek-v4-pro-0813",
@@ -4343,8 +4343,8 @@
     "model": "google/gemma-4-26b-a4b-it",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.0765,
-    "output": 0.255
+    "input": 0.09,
+    "output": 0.3
   },
   {
     "model": "google/gemma-4-26b-a4b-it:free",
@@ -4756,8 +4756,8 @@
     "model": "meta-llama/llama-3.3-70b-instruct",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.22,
-    "output": 0.5
+    "input": 0.59,
+    "output": 0.79
   },
   {
     "model": "meta-llama/llama-3.3-70b-instruct:free",
@@ -4980,8 +4980,8 @@
     "model": "minimax/minimax-m2.7",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.21,
-    "output": 0.84
+    "input": 0.3,
+    "output": 1.2
   },
   {
     "model": "minimax/minimax-m3",
@@ -7406,6 +7406,20 @@
     "output": 0.75
   },
   {
+    "model": "scaledown/extract",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.04,
+    "output": 0
+  },
+  {
+    "model": "scaledown/summarize",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.04,
+    "output": 0
+  },
+  {
     "model": "sentence-transformers/all-minilm-l12-v2",
     "type": "tokens",
     "channel_type": 20,
@@ -7514,8 +7528,8 @@
     "model": "tencent/hy3",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.0825,
-    "output": 0.33
+    "input": 0.132,
+    "output": 0.528
   },
   {
     "model": "tencent/hy3-preview",
@@ -7542,8 +7556,8 @@
     "model": "tencent/hy4-preview",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.7506,
-    "output": 2.2509
+    "input": 0.834,
+    "output": 2.501
   },
   {
     "model": "thedrummer/anubis-70b-v1.1",
@@ -8088,8 +8102,8 @@
     "model": "z-ai/glm-5.3-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.0232,
-    "output": 1.2
+    "input": 0.0261,
+    "output": 0.9
   },
   {
     "model": "z-ai/glm-5.3-flash:batch",
@@ -8158,22 +8172,22 @@
     "model": "~deepseek/deepseek-flash-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.0336,
-    "output": 1.188
+    "input": 0.0441,
+    "output": 0.765
   },
   {
     "model": "~deepseek/deepseek-pro-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.24948,
-    "output": 0.74844
+    "input": 0.25,
+    "output": 5
   },
   {
     "model": "~deepseek/deepseek-v4-flash-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.0128,
-    "output": 0.768
+    "input": 0.0144,
+    "output": 0.576
   },
   {
     "model": "~google/gemini-flash-latest",
@@ -8256,8 +8270,8 @@
     "model": "~z-ai/glm-flash-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.0232,
-    "output": 1.2
+    "input": 0.0261,
+    "output": 0.9
   },
   {
     "model": "~z-ai/glm-latest",
