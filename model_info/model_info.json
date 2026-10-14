@@ -1950,7 +1950,7 @@
         "name": "DeepSeek: DeepSeek V4.1 Flash",
         "description": "DeepSeek V4.1 Flash is a sparse mixture-of-experts model from DeepSeek, and the first built on the company's Causal Encoder-Decoder (CED) architecture. It activates 8B parameters on input and 16B on...",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 393216,
         "input_modalities": [
           "text",
           "image"
@@ -3589,7 +3589,8 @@
         "tags": [
           "openrouter",
           "tools",
-          "reasoning"
+          "reasoning",
+          "structured_outputs"
         ],
         "support_url": [
           "https://openrouter.ai/models/inclusionai/ling-3.1-flash",
@@ -12054,7 +12055,7 @@
         "name": "Z.ai: GLM 5.3 Flash",
         "description": "GLM-5.3-Flash is a native multimodal model from Z.ai. It is suited for efficient coding and long-horizon agent tasks. Its hybrid sparse and linear attention architecture maintains accurate long-context behavior while...",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 943717,
         "input_modalities": [
           "text",
           "image",
