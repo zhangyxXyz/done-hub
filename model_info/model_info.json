@@ -4262,7 +4262,7 @@
         "name": "MiniMax: MiniMax M2",
         "description": "MiniMax-M2 is a compact, high-efficiency large language model optimized for end-to-end coding and agentic workflows. With 10 billion activated parameters (230 billion total), it delivers near-frontier intelligence across general reasoning,...",
         "context_length": 204800,
-        "max_tokens": 176947,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -8299,7 +8299,7 @@
         "name": "OpenAI: gpt-oss-120b",
         "description": "gpt-oss-120b is an open-weight, 117B-parameter Mixture-of-Experts (MoE) language model from OpenAI designed for high-reasoning, agentic, and general-purpose production use cases. It activates 5.1B parameters per forward pass and is optimized...",
         "context_length": 131072,
-        "max_tokens": 65536,
+        "max_tokens": 117964,
         "input_modalities": [
           "text"
         ],
@@ -8889,7 +8889,10 @@
           "text"
         ],
         "tags": [
-          "openrouter"
+          "openrouter",
+          "tools",
+          "reasoning",
+          "structured_outputs"
         ],
         "support_url": [
           "https://openrouter.ai/models/openrouter/pareto-code",
@@ -11170,33 +11173,6 @@
       }
     },
     {
-      "model": "unbiased/pareto",
-      "model_info": {
-        "model": "unbiased/pareto",
-        "name": "Pareto",
-        "description": "Pareto is a multimodal composite model built for research, coding, and agentic workflows, while delivering frontier-level performance across a broad range of general-purpose tasks.",
-        "context_length": 262144,
-        "max_tokens": 131072,
-        "input_modalities": [
-          "text",
-          "image"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/unbiased/pareto",
-          "https://openrouter.ai/api/v1/models/unbiased/pareto-20260917/endpoints"
-        ]
-      }
-    },
-    {
       "model": "unbiased/pareto-26.10-preview",
       "model_info": {
         "model": "unbiased/pareto-26.10-preview",
@@ -11219,6 +11195,33 @@
         "support_url": [
           "https://openrouter.ai/models/unbiased/pareto-26.10-preview",
           "https://openrouter.ai/api/v1/models/unbiased/pareto-26.10-preview-20260929/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "unbiased/pareto-26.9",
+      "model_info": {
+        "model": "unbiased/pareto-26.9",
+        "name": "Pareto 26.9",
+        "description": "Pareto is a multimodal composite model built for research, coding, and agentic workflows, while delivering frontier-level performance across a broad range of general-purpose tasks.",
+        "context_length": 262144,
+        "max_tokens": 131072,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/unbiased/pareto-26.9",
+          "https://openrouter.ai/api/v1/models/unbiased/pareto-26.9-20260917/endpoints"
         ]
       }
     },
@@ -11973,7 +11976,7 @@
         "name": "Z.ai: GLM 5.1",
         "description": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on...",
         "context_length": 204800,
-        "max_tokens": 128000,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -12647,6 +12650,33 @@
       }
     },
     {
+      "model": "~unbiased/pareto-latest",
+      "model_info": {
+        "model": "~unbiased/pareto-latest",
+        "name": "Pareto Latest",
+        "description": "This model always redirects to the latest model in the Pareto family.",
+        "context_length": 262144,
+        "max_tokens": 131072,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/~unbiased/pareto-latest",
+          "https://openrouter.ai/api/v1/models/~unbiased/pareto-latest/endpoints"
+        ]
+      }
+    },
+    {
       "model": "~x-ai/grok-latest",
       "model_info": {
         "model": "~x-ai/grok-latest",
@@ -12711,7 +12741,7 @@
         "name": "Z.ai: GLM Latest",
         "description": "This model always redirects to the latest GLM model from Z.ai.",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],

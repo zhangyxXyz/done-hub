@@ -3909,22 +3909,22 @@
     "model": "deepseek/deepseek-v4-pro",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.400548,
-    "output": 0.801096
+    "input": 0.95526,
+    "output": 1.91052
   },
   {
     "model": "deepseek/deepseek-v4-pro-0813",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.66,
-    "output": 1.98
+    "input": 1.32,
+    "output": 3.96
   },
   {
     "model": "deepseek/deepseek-v4.1-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.0441,
-    "output": 0.765
+    "input": 0.02016,
+    "output": 0.891
   },
   {
     "model": "deepseek/deepseek-v4.1-flash:batch",
@@ -4357,8 +4357,8 @@
     "model": "google/gemma-4-26b-a4b-it",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.0765,
-    "output": 0.255
+    "input": 0.09,
+    "output": 0.3
   },
   {
     "model": "google/gemma-4-26b-a4b-it:free",
@@ -4959,8 +4959,8 @@
     "model": "minimax/minimax-m2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.3,
-    "output": 1.2
+    "input": 0.255,
+    "output": 1.02
   },
   {
     "model": "minimax/minimax-m2-her",
@@ -5407,8 +5407,8 @@
     "model": "moonshotai/kimi-k3",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.73,
-    "output": 10
+    "input": 0.62,
+    "output": 15
   },
   {
     "model": "moonshotai/kimi-k3:batch",
@@ -6415,8 +6415,8 @@
     "model": "openai/gpt-oss-120b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.15,
-    "output": 0.6
+    "input": 0.037,
+    "output": 0.17
   },
   {
     "model": "openai/gpt-oss-120b:batch",
@@ -7178,8 +7178,8 @@
     "model": "qwen/qwen3.5-397b-a17b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.55,
-    "output": 3.5
+    "input": 0.5,
+    "output": 3.6
   },
   {
     "model": "qwen/qwen3.5-9b",
@@ -7542,8 +7542,8 @@
     "model": "tencent/hy3",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.0825,
-    "output": 0.33
+    "input": 0.132,
+    "output": 0.528
   },
   {
     "model": "tencent/hy3-preview",
@@ -7570,8 +7570,8 @@
     "model": "tencent/hy4-preview",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.7506,
-    "output": 2.2509
+    "input": 0.834,
+    "output": 2.501
   },
   {
     "model": "thedrummer/anubis-70b-v1.1",
@@ -7733,6 +7733,13 @@
     "channel_type": 20,
     "input": 0.8,
     "output": 3.2
+  },
+  {
+    "model": "unbiased/pareto-26.9",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 2.5,
+    "output": 7.5
   },
   {
     "model": "undi95/remm-slerp-l2-13b",
@@ -8081,14 +8088,14 @@
     "model": "z-ai/glm-5.1",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.966,
-    "output": 3.036
+    "input": 1.33,
+    "output": 4.18
   },
   {
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.06,
+    "input": 0.05,
     "output": 7
   },
   {
@@ -8116,7 +8123,7 @@
     "model": "z-ai/glm-5.3-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.0261,
+    "input": 0.0351,
     "output": 0.9
   },
   {
@@ -8186,15 +8193,15 @@
     "model": "~deepseek/deepseek-flash-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.0441,
-    "output": 0.765
+    "input": 0.02016,
+    "output": 0.891
   },
   {
     "model": "~deepseek/deepseek-pro-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.24948,
-    "output": 0.74844
+    "input": 0.225,
+    "output": 8
   },
   {
     "model": "~deepseek/deepseek-v4-flash-latest",
@@ -8221,8 +8228,8 @@
     "model": "~moonshotai/kimi-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.72,
-    "output": 24
+    "input": 0.496,
+    "output": 14
   },
   {
     "model": "~openai/gpt-astra-latest",
@@ -8274,6 +8281,13 @@
     "output": 0
   },
   {
+    "model": "~unbiased/pareto-latest",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 2.5,
+    "output": 7.5
+  },
+  {
     "model": "~x-ai/grok-latest",
     "type": "tokens",
     "channel_type": 20,
@@ -8284,15 +8298,15 @@
     "model": "~z-ai/glm-flash-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.0261,
+    "input": 0.0351,
     "output": 0.9
   },
   {
     "model": "~z-ai/glm-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.079,
-    "output": 4.8
+    "input": 0.0576,
+    "output": 4.4
   },
   {
     "model": "deep-research-pro-preview-12-2025-gt-128k",
