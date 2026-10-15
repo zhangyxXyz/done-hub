@@ -946,34 +946,6 @@
       }
     },
     {
-      "model": "anthropic/claude-sonnet-4",
-      "model_info": {
-        "model": "anthropic/claude-sonnet-4",
-        "name": "Anthropic: Claude Sonnet 4",
-        "description": "Claude Sonnet 4 significantly enhances the capabilities of its predecessor, Sonnet 3.7, excelling in both coding and reasoning tasks with improved precision and controllability. Achieving state-of-the-art performance on SWE-bench (72.7%),...",
-        "context_length": 200000,
-        "max_tokens": 64000,
-        "input_modalities": [
-          "image",
-          "text",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/anthropic/claude-sonnet-4",
-          "https://openrouter.ai/api/v1/models/anthropic/claude-4-sonnet-20250522/endpoints"
-        ]
-      }
-    },
-    {
       "model": "anthropic/claude-sonnet-4.5",
       "model_info": {
         "model": "anthropic/claude-sonnet-4.5",
@@ -4127,6 +4099,38 @@
       }
     },
     {
+      "model": "meta/muse-spark-open",
+      "model_info": {
+        "model": "meta/muse-spark-open",
+        "name": "Meta: Muse Spark Open",
+        "description": "Muse Spark Open is a coding-optimized open-weight model. Trained specifically for agentic coding workflows, it delivers higher first-attempt accuracy, reliable tool calling, and deep codebase understanding across the repos developers...",
+        "context_length": 1048576,
+        "max_tokens": 943718,
+        "input_modalities": [
+          "text",
+          "image",
+          "video",
+          "file",
+          "audio"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "audio",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/meta/muse-spark-open",
+          "https://openrouter.ai/api/v1/models/meta/muse-spark-open-20261015/endpoints"
+        ]
+      }
+    },
+    {
       "model": "meta/muse-wonder",
       "model_info": {
         "model": "meta/muse-wonder",
@@ -5766,6 +5770,64 @@
         "support_url": [
           "https://openrouter.ai/models/nvidia/nemotron-3.5-lightning:free",
           "https://openrouter.ai/api/v1/models/nvidia/nemotron-3.5-lightning-20260807/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "nvidia/nemotron-3.5-super-vl",
+      "model_info": {
+        "model": "nvidia/nemotron-3.5-super-vl",
+        "name": "NVIDIA: Nemotron 3.5 Super VL",
+        "description": "NVIDIA Nemotron 3.5 Super VL is an open multimodal mixture-of-experts model from NVIDIA, with 12B active parameters out of 120B total. It takes text, images, documents, GUI screenshots, and video...",
+        "context_length": 1048576,
+        "max_tokens": 235929,
+        "input_modalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/nvidia/nemotron-3.5-super-vl",
+          "https://openrouter.ai/api/v1/models/nvidia/nemotron-3.5-super-vl-20261015/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "nvidia/nemotron-3.5-super-vl:free",
+      "model_info": {
+        "model": "nvidia/nemotron-3.5-super-vl:free",
+        "name": "NVIDIA: Nemotron 3.5 Super VL (free)",
+        "description": "NVIDIA Nemotron 3.5 Super VL is an open multimodal mixture-of-experts model from NVIDIA, with 12B active parameters out of 120B total. It takes text, images, documents, GUI screenshots, and video...",
+        "context_length": 1000000,
+        "max_tokens": 131072,
+        "input_modalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/nvidia/nemotron-3.5-super-vl:free",
+          "https://openrouter.ai/api/v1/models/nvidia/nemotron-3.5-super-vl-20261015/endpoints"
         ]
       }
     },
@@ -9992,7 +10054,7 @@
         "name": "Qwen: Qwen3.6 27B",
         "description": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities — accepting text, image, and video inputs...",
         "context_length": 262144,
-        "max_tokens": 81920,
+        "max_tokens": 65536,
         "input_modalities": [
           "text",
           "image",
@@ -11170,32 +11232,6 @@
         "support_url": [
           "https://openrouter.ai/models/typesafe/jev-router",
           "https://openrouter.ai/api/v1/models/typesafe/jev-router/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "unbiased/pareto-26.10-preview",
-      "model_info": {
-        "model": "unbiased/pareto-26.10-preview",
-        "name": "Pareto 26.10 Preview",
-        "description": "Pareto is a multimodal composite model built for research, coding, and agentic workflows, while delivering frontier-level performance across a broad range of general-purpose tasks. This is a preview of the...",
-        "context_length": 1048576,
-        "max_tokens": 131072,
-        "input_modalities": [
-          "text",
-          "image"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/unbiased/pareto-26.10-preview",
-          "https://openrouter.ai/api/v1/models/unbiased/pareto-26.10-preview-20260929/endpoints"
         ]
       }
     },
