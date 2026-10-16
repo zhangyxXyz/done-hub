@@ -1584,7 +1584,7 @@
         "name": "DeepSeek: DeepSeek V3",
         "description": "DeepSeek-V3 is the latest model from the DeepSeek team, building upon the instruction following and coding abilities of the previous versions. Pre-trained on nearly 15 trillion tokens, the reported evaluations...",
         "context_length": 163840,
-        "max_tokens": 16000,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -1950,7 +1950,7 @@
         "name": "DeepSeek: DeepSeek V4.1 Flash (batch)",
         "description": "DeepSeek V4.1 Flash is a sparse mixture-of-experts model from DeepSeek, and the first built on the company's Causal Encoder-Decoder (CED) architecture. It activates 8B parameters on input and 16B on...",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 384000,
         "input_modalities": [
           "text",
           "image"
@@ -3875,7 +3875,7 @@
         "name": "Meta: Llama 4 Scout",
         "description": "Llama 4 Scout 17B Instruct (16E) is a mixture-of-experts (MoE) language model developed by Meta, activating 17 billion parameters out of a total of 109B. It supports native multimodal input...",
         "context_length": 1310720,
-        "max_tokens": 117964,
+        "max_tokens": 16384,
         "input_modalities": [
           "text",
           "image"
@@ -10472,6 +10472,32 @@
       }
     },
     {
+      "model": "reflection/beam-1.0-501b-a23b",
+      "model_info": {
+        "model": "reflection/beam-1.0-501b-a23b",
+        "name": "Reflection: Beam 1.0 501B A23B",
+        "description": "Beam 1.0 is Reflection's open-weight reasoning model for coding and long-horizon agentic workflows. It uses a sparse mixture-of-experts architecture with 501B total and 23B active parameters per token, and a...",
+        "context_length": 1048576,
+        "max_tokens": 131072,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/reflection/beam-1.0-501b-a23b",
+          "https://openrouter.ai/api/v1/models/reflection/beam-1.0-501b-a23b-20261016/endpoints"
+        ]
+      }
+    },
+    {
       "model": "rekaai/reka-edge",
       "model_info": {
         "model": "rekaai/reka-edge",
@@ -11821,6 +11847,32 @@
       }
     },
     {
+      "model": "xingchen-agi/xing4.0-29b-a4b:free",
+      "model_info": {
+        "model": "xingchen-agi/xing4.0-29b-a4b:free",
+        "name": "XingChen: Xing4.0 29B A4B (free)",
+        "description": "Xing4.0-29B-A4B is an open-weight mixture-of-experts language model from China Telecom's AI team (TeleAI) and the successor to the TeleChat series. It has 29B total parameters with 4B active per token...",
+        "context_length": 262144,
+        "max_tokens": 235929,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/xingchen-agi/xing4.0-29b-a4b:free",
+          "https://openrouter.ai/api/v1/models/xingchen-agi/xing4.0-29b-a4b-20261015/endpoints"
+        ]
+      }
+    },
+    {
       "model": "z-ai/glm-4.5",
       "model_info": {
         "model": "z-ai/glm-4.5",
@@ -12143,7 +12195,7 @@
         "name": "Z.ai: GLM 5.3 Flash",
         "description": "GLM-5.3-Flash is a native multimodal model from Z.ai. It is suited for efficient coding and long-horizon agent tasks. Its hybrid sparse and linear attention architecture maintains accurate long-context behavior while...",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 131072,
         "input_modalities": [
           "text",
           "image",
@@ -12455,7 +12507,7 @@
         "name": "DeepSeek: DeepSeek Pro Latest",
         "description": "This model always redirects to the latest model in the DeepSeek Pro family.",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 393216,
         "input_modalities": [
           "text"
         ],
@@ -12801,7 +12853,7 @@
         "name": "Z.ai: GLM Flash Latest",
         "description": "This model always redirects to the latest model in the GLM Flash family.",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 131072,
         "input_modalities": [
           "text",
           "image",

@@ -3776,8 +3776,8 @@
     "model": "deepseek/deepseek-chat",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.2574,
-    "output": 1.0287
+    "input": 0.32,
+    "output": 0.89
   },
   {
     "model": "deepseek/deepseek-chat-v3-0324",
@@ -3895,7 +3895,7 @@
     "model": "deepseek/deepseek-v4-flash-0731",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.0154,
+    "input": 0.0049,
     "output": 1.28
   },
   {
@@ -3909,29 +3909,29 @@
     "model": "deepseek/deepseek-v4-pro",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.95526,
-    "output": 1.91052
+    "input": 0.297192,
+    "output": 0.594384
   },
   {
     "model": "deepseek/deepseek-v4-pro-0813",
     "type": "tokens",
     "channel_type": 20,
-    "input": 1.32,
-    "output": 3.96
+    "input": 0.66,
+    "output": 1.98
   },
   {
     "model": "deepseek/deepseek-v4.1-flash",
     "type": "tokens",
     "channel_type": 20,
     "input": 0.036,
-    "output": 0.684
+    "output": 0.6435
   },
   {
     "model": "deepseek/deepseek-v4.1-flash:batch",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.112,
-    "output": 0.336
+    "input": 0.05,
+    "output": 0.15
   },
   {
     "model": "dots-studio/dots-3-note-preview:free",
@@ -4357,8 +4357,8 @@
     "model": "google/gemma-4-26b-a4b-it",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.09,
-    "output": 0.3
+    "input": 0.0675,
+    "output": 0.225
   },
   {
     "model": "google/gemma-4-26b-a4b-it:free",
@@ -4791,8 +4791,8 @@
     "model": "meta-llama/llama-4-scout",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.18,
-    "output": 0.59
+    "input": 0.1,
+    "output": 0.3
   },
   {
     "model": "meta-llama/llama-guard-2-8b",
@@ -7364,6 +7364,13 @@
     "output": 4.5
   },
   {
+    "model": "reflection/beam-1.0-501b-a23b",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0.25,
+    "output": 1
+  },
+  {
     "model": "rekaai/reka-edge",
     "type": "tokens",
     "channel_type": 20,
@@ -7577,8 +7584,8 @@
     "model": "tencent/hy3",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.132,
-    "output": 0.528
+    "input": 0.0825,
+    "output": 0.33
   },
   {
     "model": "tencent/hy3-preview",
@@ -7605,8 +7612,8 @@
     "model": "tencent/hy4-preview",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.834,
-    "output": 2.501
+    "input": 0.7506,
+    "output": 2.2509
   },
   {
     "model": "thedrummer/anubis-70b-v1.1",
@@ -8036,6 +8043,13 @@
     "output": 8.7
   },
   {
+    "model": "xingchen-agi/xing4.0-29b-a4b:free",
+    "type": "tokens",
+    "channel_type": 20,
+    "input": 0,
+    "output": 0
+  },
+  {
     "model": "z-ai/glm-4-32b",
     "type": "tokens",
     "channel_type": 20,
@@ -8130,8 +8144,8 @@
     "model": "z-ai/glm-5.2",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.037,
-    "output": 9
+    "input": 0.62,
+    "output": 2.42
   },
   {
     "model": "z-ai/glm-5.2:batch",
@@ -8158,8 +8172,8 @@
     "model": "z-ai/glm-5.3-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.02403,
-    "output": 0.9
+    "input": 0.021,
+    "output": 0.728
   },
   {
     "model": "z-ai/glm-5.3-flash:batch",
@@ -8229,21 +8243,21 @@
     "type": "tokens",
     "channel_type": 20,
     "input": 0.036,
-    "output": 0.684
+    "output": 0.6435
   },
   {
     "model": "~deepseek/deepseek-pro-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.25,
-    "output": 5
+    "input": 0.24948,
+    "output": 0.74844
   },
   {
     "model": "~deepseek/deepseek-v4-flash-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.0154,
-    "output": 1.28
+    "input": 0.00441,
+    "output": 1.152
   },
   {
     "model": "~google/gemini-flash-latest",
@@ -8333,8 +8347,8 @@
     "model": "~z-ai/glm-flash-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.02403,
-    "output": 0.9
+    "input": 0.021,
+    "output": 0.728
   },
   {
     "model": "~z-ai/glm-latest",
@@ -9091,6 +9105,20 @@
     "channel_type": 25,
     "input": 0.75,
     "output": 3.75
+  },
+  {
+    "model": "gemini-4-argon-gt-128k",
+    "type": "tokens",
+    "channel_type": 25,
+    "input": 2,
+    "output": 10
+  },
+  {
+    "model": "gemini-4-argon-lte-128k",
+    "type": "tokens",
+    "channel_type": 25,
+    "input": 2,
+    "output": 10
   },
   {
     "model": "gemini-embedding-001",
@@ -12519,8 +12547,8 @@
     "model": "gemini-4-argon-cyber-permissive",
     "type": "tokens",
     "channel_type": 42,
-    "input": 2,
-    "output": 10
+    "input": 4,
+    "output": 20
   },
   {
     "model": "gemini-embedding-001",
