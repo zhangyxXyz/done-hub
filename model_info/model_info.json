@@ -1584,7 +1584,7 @@
         "name": "DeepSeek: DeepSeek V3",
         "description": "DeepSeek-V3 is the latest model from the DeepSeek team, building upon the instruction following and coding abilities of the previous versions. Pre-trained on nearly 15 trillion tokens, the reported evaluations...",
         "context_length": 163840,
-        "max_tokens": 16384,
+        "max_tokens": 16000,
         "input_modalities": [
           "text"
         ],
@@ -3823,7 +3823,7 @@
         "name": "Meta: Llama 3.3 70B Instruct",
         "description": "The Meta Llama 3.3 multilingual large language model (LLM) is a pretrained and instruction tuned generative model in 70B (text in/text out). The Llama 3.3 instruction tuned text only model...",
         "context_length": 131072,
-        "max_tokens": 32768,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -5116,6 +5116,58 @@
         "support_url": [
           "https://openrouter.ai/models/mistralai/voxtral-small-24b-2507",
           "https://openrouter.ai/api/v1/models/mistralai/voxtral-small-24b-2507/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "moondream/moondream3-preview",
+      "model_info": {
+        "model": "moondream/moondream3-preview",
+        "name": "Moondream: Moondream 3 Preview",
+        "description": "Moondream 3 Preview is a vision-language model from Moondream with 9B total parameters and 2B active (mixture-of-experts). It handles visual question answering, captioning, OCR, and visual reasoning over images, with...",
+        "context_length": 32000,
+        "max_tokens": 4096,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "reasoning"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/moondream/moondream3-preview",
+          "https://openrouter.ai/api/v1/models/moondream/moondream3-preview-20261013/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "moondream/moondream3.1-9b-a2b",
+      "model_info": {
+        "model": "moondream/moondream3.1-9b-a2b",
+        "name": "Moondream: Moondream 3.1",
+        "description": "Moondream 3.1 is a vision-language model from Moondream, the successor to Moondream 3 Preview, with 9B total parameters and 2B active (mixture-of-experts). It handles visual question answering, captioning, OCR, and...",
+        "context_length": 32000,
+        "max_tokens": 4096,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "reasoning"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/moondream/moondream3.1-9b-a2b",
+          "https://openrouter.ai/api/v1/models/moondream/moondream3.1-9b-a2b-20261013/endpoints"
         ]
       }
     },
@@ -9662,7 +9714,7 @@
         "name": "Qwen: Qwen3 Next 80B A3B Instruct",
         "description": "Qwen3-Next-80B-A3B-Instruct is an instruction-tuned chat model in the Qwen3-Next series optimized for fast, stable responses without “thinking” traces. It targets complex tasks across reasoning, code generation, knowledge QA, and multilingual...",
         "context_length": 262144,
-        "max_tokens": 235929,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -12091,7 +12143,7 @@
         "name": "Z.ai: GLM 5.3 Flash",
         "description": "GLM-5.3-Flash is a native multimodal model from Z.ai. It is suited for efficient coding and long-horizon agent tasks. Its hybrid sparse and linear attention architecture maintains accurate long-context behavior while...",
         "context_length": 1048576,
-        "max_tokens": 943717,
+        "max_tokens": 943718,
         "input_modalities": [
           "text",
           "image",
@@ -12403,7 +12455,7 @@
         "name": "DeepSeek: DeepSeek Pro Latest",
         "description": "This model always redirects to the latest model in the DeepSeek Pro family.",
         "context_length": 1048576,
-        "max_tokens": 393216,
+        "max_tokens": 943718,
         "input_modalities": [
           "text"
         ],
