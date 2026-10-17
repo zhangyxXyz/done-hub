@@ -1738,7 +1738,7 @@
         "name": "DeepSeek: DeepSeek V3.2",
         "description": "DeepSeek-V3.2 is a large language model designed to harmonize high computational efficiency with strong reasoning and agentic tool-use performance. It introduces DeepSeek Sparse Attention (DSA), a fine-grained sparse attention mechanism...",
         "context_length": 163840,
-        "max_tokens": 147456,
+        "max_tokens": 65536,
         "input_modalities": [
           "text"
         ],
@@ -1922,7 +1922,7 @@
         "name": "DeepSeek: DeepSeek V4.1 Flash",
         "description": "DeepSeek V4.1 Flash is a sparse mixture-of-experts model from DeepSeek, and the first built on the company's Causal Encoder-Decoder (CED) architecture. It activates 8B parameters on input and 16B on...",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 393216,
         "input_modalities": [
           "text",
           "image"
@@ -1940,6 +1940,34 @@
         "support_url": [
           "https://openrouter.ai/models/deepseek/deepseek-v4.1-flash",
           "https://openrouter.ai/api/v1/models/deepseek/deepseek-v4.1-flash-20260910/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "deepseek/deepseek-v4.1-flash-1017",
+      "model_info": {
+        "model": "deepseek/deepseek-v4.1-flash-1017",
+        "name": "DeepSeek: DeepSeek V4.1 Flash 1017",
+        "description": "DeepSeek V4.1 Flash 1017 is the October 17, 2026 snapshot of DeepSeek V4.1 Flash, served by DeepSeek under the `deepseek-flash` API model name. V4.1 Flash is a sparse mixture-of-experts model...",
+        "context_length": 1048576,
+        "max_tokens": 393216,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/deepseek/deepseek-v4.1-flash-1017",
+          "https://openrouter.ai/api/v1/models/deepseek/deepseek-v4.1-flash-20261017/endpoints"
         ]
       }
     },
@@ -1996,6 +2024,35 @@
         "support_url": [
           "https://openrouter.ai/models/dots-studio/dots-3-note-preview:free",
           "https://openrouter.ai/api/v1/models/dots-studio/dots-3-note-preview-20260813/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "elorian/glimpse",
+      "model_info": {
+        "model": "elorian/glimpse",
+        "name": "Elorian: Glimpse",
+        "description": "Glimpse is a multimodal visual reasoning model from Elorian, built for visual understanding and complex visual reasoning in the physical world. It reasons directly over images and video rather than...",
+        "context_length": 262144,
+        "max_tokens": 256000,
+        "input_modalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/elorian/glimpse",
+          "https://openrouter.ai/api/v1/models/elorian/glimpse-20261016/endpoints"
         ]
       }
     },
@@ -10299,6 +10356,34 @@
       }
     },
     {
+      "model": "qwen/qwen3.7-plus:batch",
+      "model_info": {
+        "model": "qwen/qwen3.7-plus:batch",
+        "name": "Qwen: Qwen3.7 Plus (batch)",
+        "description": "Qwen3.7-Plus is a cost-effective model in Alibaba's Qwen3.7 series. It supports text and image input with text output, building on the series' text capabilities with a comprehensive upgrade to its...",
+        "context_length": 262144,
+        "max_tokens": 131072,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/qwen/qwen3.7-plus:batch",
+          "https://openrouter.ai/api/v1/models/qwen/qwen3.7-plus-20260602/endpoints"
+        ]
+      }
+    },
+    {
       "model": "qwen/qwen3.8-2.4t-a95b",
       "model_info": {
         "model": "qwen/qwen3.8-2.4t-a95b",
@@ -10478,7 +10563,7 @@
         "name": "Reflection: Beam 1.0 501B A23B",
         "description": "Beam 1.0 is Reflection's open-weight reasoning model for coding and long-horizon agentic workflows. It uses a sparse mixture-of-experts architecture with 501B total and 23B active parameters per token, and a...",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 943718,
         "input_modalities": [
           "text"
         ],
@@ -12195,7 +12280,7 @@
         "name": "Z.ai: GLM 5.3 Flash",
         "description": "GLM-5.3-Flash is a native multimodal model from Z.ai. It is suited for efficient coding and long-horizon agent tasks. Its hybrid sparse and linear attention architecture maintains accurate long-context behavior while...",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 943718,
         "input_modalities": [
           "text",
           "image",
@@ -12479,7 +12564,7 @@
         "name": "DeepSeek: DeepSeek Flash Latest",
         "description": "This model always redirects to the latest model in the DeepSeek Flash family.",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 393216,
         "input_modalities": [
           "text",
           "image"
@@ -12853,7 +12938,7 @@
         "name": "Z.ai: GLM Flash Latest",
         "description": "This model always redirects to the latest model in the GLM Flash family.",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 943718,
         "input_modalities": [
           "text",
           "image",
