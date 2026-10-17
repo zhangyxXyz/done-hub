@@ -9989,7 +9989,7 @@
         "name": "Qwen: Qwen3.5-35B-A3B",
         "description": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall...",
         "context_length": 262144,
-        "max_tokens": 16384,
+        "max_tokens": 235929,
         "input_modalities": [
           "text",
           "image",
@@ -12280,7 +12280,7 @@
         "name": "Z.ai: GLM 5.3 Flash",
         "description": "GLM-5.3-Flash is a native multimodal model from Z.ai. It is suited for efficient coding and long-horizon agent tasks. Its hybrid sparse and linear attention architecture maintains accurate long-context behavior while...",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 943717,
         "input_modalities": [
           "text",
           "image",
@@ -12564,7 +12564,7 @@
         "name": "DeepSeek: DeepSeek Flash Latest",
         "description": "This model always redirects to the latest model in the DeepSeek Flash family.",
         "context_length": 1048576,
-        "max_tokens": 393216,
+        "max_tokens": 943718,
         "input_modalities": [
           "text",
           "image"
