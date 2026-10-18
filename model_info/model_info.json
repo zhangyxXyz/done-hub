@@ -1896,7 +1896,7 @@
         "name": "DeepSeek: DeepSeek V4 Pro 0813",
         "description": "DeepSeek V4 Pro 0813 is a large-scale mixture-of-experts model from DeepSeek. This is the GA release of DeepSeek V4 Pro.",
         "context_length": 1048576,
-        "max_tokens": 393216,
+        "max_tokens": 384000,
         "input_modalities": [
           "text"
         ],
@@ -1922,7 +1922,7 @@
         "name": "DeepSeek: DeepSeek V4.1 Flash",
         "description": "DeepSeek V4.1 Flash is a sparse mixture-of-experts model from DeepSeek, and the first built on the company's Causal Encoder-Decoder (CED) architecture. It activates 8B parameters on input and 16B on...",
         "context_length": 1048576,
-        "max_tokens": 393216,
+        "max_tokens": 943718,
         "input_modalities": [
           "text",
           "image"
@@ -11399,6 +11399,32 @@
       }
     },
     {
+      "model": "unbiased/pareto-26.10",
+      "model_info": {
+        "model": "unbiased/pareto-26.10",
+        "name": "Pareto 26.10",
+        "description": "Pareto is a multimodal composite model built for research, coding, and agentic workflows, while delivering frontier-level performance across a broad range of general-purpose tasks.",
+        "context_length": 1048576,
+        "max_tokens": 131072,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/unbiased/pareto-26.10",
+          "https://openrouter.ai/api/v1/models/unbiased/pareto-26.10-20261015/endpoints"
+        ]
+      }
+    },
+    {
       "model": "unbiased/pareto-26.9",
       "model_info": {
         "model": "unbiased/pareto-26.9",
@@ -12280,7 +12306,7 @@
         "name": "Z.ai: GLM 5.3 Flash",
         "description": "GLM-5.3-Flash is a native multimodal model from Z.ai. It is suited for efficient coding and long-horizon agent tasks. Its hybrid sparse and linear attention architecture maintains accurate long-context behavior while...",
         "context_length": 1048576,
-        "max_tokens": 943717,
+        "max_tokens": 943718,
         "input_modalities": [
           "text",
           "image",
@@ -12881,7 +12907,7 @@
         "model": "~unbiased/pareto-latest",
         "name": "Pareto Latest",
         "description": "This model always redirects to the latest model in the Pareto family.",
-        "context_length": 262144,
+        "context_length": 1048576,
         "max_tokens": 131072,
         "input_modalities": [
           "text",
@@ -12893,8 +12919,7 @@
         "tags": [
           "openrouter",
           "vision",
-          "tools",
-          "structured_outputs"
+          "tools"
         ],
         "support_url": [
           "https://openrouter.ai/models/~unbiased/pareto-latest",
