@@ -3058,7 +3058,7 @@
         "name": "Google: Gemini 4 Argon",
         "description": "Gemini 4 Argon is Google's flagship reasoning model, built for complex software engineering, deep mathematical and scientific problem solving, and autonomous multi-step agents. Google trained it to keep context across...",
         "context_length": 1048576,
-        "max_tokens": 65536,
+        "max_tokens": 943718,
         "input_modalities": [
           "audio",
           "file",
@@ -3856,7 +3856,7 @@
         "name": "Meta: Llama 3.2 3B Instruct",
         "description": "Llama 3.2 3B is a 3-billion-parameter multilingual large language model, optimized for advanced natural language processing tasks like dialogue generation, reasoning, and summarization. Designed with the latest transformer architecture, it...",
         "context_length": 131072,
-        "max_tokens": 117964,
+        "max_tokens": 72000,
         "input_modalities": [
           "text"
         ],
@@ -5451,8 +5451,8 @@
         "model": "morph/morph-v3-fast",
         "name": "Morph: Morph V3 Fast",
         "description": "Morph's fastest apply model for code edits. ~10,500 tokens/sec with 96% accuracy for rapid code transformations. The model requires the prompt to be in the following format: <instruction>{instruction}</instruction> <code>{initial_code}</code> <update>{edit_snippet}</update>...",
-        "context_length": 81920,
-        "max_tokens": 38000,
+        "context_length": 262144,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -5460,7 +5460,8 @@
           "text"
         ],
         "tags": [
-          "openrouter"
+          "openrouter",
+          "structured_outputs"
         ],
         "support_url": [
           "https://openrouter.ai/models/morph/morph-v3-fast",
@@ -9960,7 +9961,7 @@
         "name": "Qwen: Qwen3.5-27B",
         "description": "The Qwen3.5 27B native vision-language Dense model incorporates a linear attention mechanism, delivering fast response times while balancing inference speed and performance. Its overall capabilities are comparable to those of...",
         "context_length": 262144,
-        "max_tokens": 81920,
+        "max_tokens": 65536,
         "input_modalities": [
           "text",
           "image",
@@ -10843,30 +10844,6 @@
         "support_url": [
           "https://openrouter.ai/models/sao10k/l3.1-euryale-70b",
           "https://openrouter.ai/api/v1/models/sao10k/l3.1-euryale-70b/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "sao10k/l3.3-euryale-70b",
-      "model_info": {
-        "model": "sao10k/l3.3-euryale-70b",
-        "name": "Sao10K: Llama 3.3 Euryale 70B",
-        "description": "Euryale L3.3 70B is a model focused on creative roleplay from [Sao10k](https://ko-fi.com/sao10k). It is the successor of [Euryale L3 70B v2.2](/models/sao10k/l3-euryale-70b).",
-        "context_length": 131072,
-        "max_tokens": 16384,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/sao10k/l3.3-euryale-70b",
-          "https://openrouter.ai/api/v1/models/sao10k/l3.3-euryale-70b-v2.3/endpoints"
         ]
       }
     },
@@ -12702,7 +12679,7 @@
         "name": "Google: Gemini Pro Latest",
         "description": "This model always redirects to the latest model in the Gemini Pro family.",
         "context_length": 1048576,
-        "max_tokens": 65536,
+        "max_tokens": 943718,
         "input_modalities": [
           "audio",
           "file",
@@ -12992,7 +12969,7 @@
         "name": "Z.ai: GLM Latest",
         "description": "This model always redirects to the latest GLM model from Z.ai.",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 943718,
         "input_modalities": [
           "text"
         ],
