@@ -1654,32 +1654,6 @@
       }
     },
     {
-      "model": "deepseek/deepseek-r1",
-      "model_info": {
-        "model": "deepseek/deepseek-r1",
-        "name": "DeepSeek: R1",
-        "description": "DeepSeek R1 is here: Performance on par with [OpenAI o1](/openai/o1), but open-sourced and with fully open reasoning tokens. It's 671B parameters in size, with 37B active in an inference pass....",
-        "context_length": 64000,
-        "max_tokens": 16000,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/deepseek/deepseek-r1",
-          "https://openrouter.ai/api/v1/models/deepseek/deepseek-r1/endpoints"
-        ]
-      }
-    },
-    {
       "model": "deepseek/deepseek-r1-0528",
       "model_info": {
         "model": "deepseek/deepseek-r1-0528",
@@ -1816,7 +1790,7 @@
         "name": "DeepSeek: DeepSeek V4 Flash 0731",
         "description": "DeepSeek V4 Flash 0731 is a sparse mixture-of-experts model from DeepSeek, with 13B active parameters out of 284B total. This re-post-trained revision is suited for coding, reasoning, and agent workflows....",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -3547,6 +3521,32 @@
       }
     },
     {
+      "model": "inception/mercury-3",
+      "model_info": {
+        "model": "inception/mercury-3",
+        "name": "Inception: Mercury 3",
+        "description": "Mercury 3 is a diffusion-based language model from Inception, and the lab's most capable model to date. It is suited for agentic workflows and real-time applications where latency compounds, such...",
+        "context_length": 1000000,
+        "max_tokens": 131072,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/inception/mercury-3",
+          "https://openrouter.ai/api/v1/models/inception/mercury-3-20261019/endpoints"
+        ]
+      }
+    },
+    {
       "model": "inclusionai/ling-3.0-flash",
       "model_info": {
         "model": "inclusionai/ling-3.0-flash",
@@ -3904,7 +3904,7 @@
         "model": "meta-llama/llama-4-maverick",
         "name": "Meta: Llama 4 Maverick",
         "description": "Llama 4 Maverick 17B Instruct (128E) is a high-capacity multimodal language model from Meta, built on a mixture-of-experts (MoE) architecture with 128 experts and 17 billion active parameters per forward...",
-        "context_length": 1048576,
+        "context_length": 524288,
         "max_tokens": 16384,
         "input_modalities": [
           "text",
@@ -4244,30 +4244,6 @@
       }
     },
     {
-      "model": "microsoft/wizardlm-2-8x22b",
-      "model_info": {
-        "model": "microsoft/wizardlm-2-8x22b",
-        "name": "WizardLM-2 8x22B",
-        "description": "WizardLM-2 8x22B is Microsoft AI's most advanced Wizard model. It demonstrates highly competitive performance compared to leading proprietary models, and it consistently outperforms all existing state-of-the-art opensource models. It is...",
-        "context_length": 65535,
-        "max_tokens": 8000,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/microsoft/wizardlm-2-8x22b",
-          "https://openrouter.ai/api/v1/models/microsoft/wizardlm-2-8x22b/endpoints"
-        ]
-      }
-    },
-    {
       "model": "minimax/minimax-01",
       "model_info": {
         "model": "minimax/minimax-01",
@@ -4470,6 +4446,35 @@
         "support_url": [
           "https://openrouter.ai/models/minimax/minimax-m3",
           "https://openrouter.ai/api/v1/models/minimax/minimax-m3-20260531/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "minimax/minimax-m3.1-flash:free",
+      "model_info": {
+        "model": "minimax/minimax-m3.1-flash:free",
+        "name": "MiniMax: MiniMax M3.1 Flash (free)",
+        "description": "MiniMax-M3.1-Flash is a multimodal model from MiniMax. Compared with M3, it delivers significant improvements across multiple benchmarks, particularly in complex agentic tasks, coding, and cybersecurity. It is built for complex,...",
+        "context_length": 1000000,
+        "max_tokens": 524288,
+        "input_modalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/minimax/minimax-m3.1-flash:free",
+          "https://openrouter.ai/api/v1/models/minimax/minimax-m3.1-flash-20261019/endpoints"
         ]
       }
     },
