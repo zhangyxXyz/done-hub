@@ -3895,8 +3895,8 @@
     "model": "deepseek/deepseek-v4-flash-0731",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.44,
-    "output": 1.32
+    "input": 0.1298,
+    "output": 0.3894
   },
   {
     "model": "deepseek/deepseek-v4-flash-vision-exp",
@@ -3909,8 +3909,8 @@
     "model": "deepseek/deepseek-v4-pro",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.95526,
-    "output": 1.91052
+    "input": 0.365052,
+    "output": 0.730104
   },
   {
     "model": "deepseek/deepseek-v4-pro-0813",
@@ -3923,15 +3923,15 @@
     "model": "deepseek/deepseek-v4.1-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.056,
+    "input": 0.02832,
     "output": 0.12
   },
   {
     "model": "deepseek/deepseek-v4.1-flash-1017",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.3,
-    "output": 1.2
+    "input": 0.15,
+    "output": 0.6
   },
   {
     "model": "deepseek/deepseek-v4.1-flash:batch",
@@ -4371,8 +4371,8 @@
     "model": "google/gemma-4-26b-a4b-it",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.09,
-    "output": 0.3
+    "input": 0.0765,
+    "output": 0.255
   },
   {
     "model": "google/gemma-4-26b-a4b-it:free",
@@ -5225,8 +5225,8 @@
     "model": "mistralai/mistral-large-4-0",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.68,
-    "output": 2.09
+    "input": 1.36,
+    "output": 4.18
   },
   {
     "model": "mistralai/mistral-medium-3",
@@ -7150,7 +7150,7 @@
     "model": "qwen/qwen3-next-80b-a3b-instruct",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.09,
+    "input": 0.1,
     "output": 1.1
   },
   {
@@ -7234,7 +7234,7 @@
     "model": "qwen/qwen3.5-35b-a3b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.15,
+    "input": 0.14,
     "output": 1
   },
   {
@@ -7619,8 +7619,8 @@
     "model": "tencent/hy3",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.132,
-    "output": 0.528
+    "input": 0.0825,
+    "output": 0.33
   },
   {
     "model": "tencent/hy3-preview",
@@ -7647,8 +7647,8 @@
     "model": "tencent/hy4-preview",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.834,
-    "output": 2.501
+    "input": 0.7506,
+    "output": 2.2509
   },
   {
     "model": "thedrummer/anubis-70b-v1.1",
@@ -8165,8 +8165,8 @@
     "model": "z-ai/glm-5",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.6,
-    "output": 1.92
+    "input": 1,
+    "output": 3.2
   },
   {
     "model": "z-ai/glm-5-turbo",
@@ -8214,8 +8214,8 @@
     "model": "z-ai/glm-5.3-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.047076,
-    "output": 0.16
+    "input": 0.048,
+    "output": 0.12
   },
   {
     "model": "z-ai/glm-5.3-flash:batch",
@@ -8291,15 +8291,15 @@
     "model": "~deepseek/deepseek-pro-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.225,
+    "input": 0.1307,
     "output": 8
   },
   {
     "model": "~deepseek/deepseek-v4-flash-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.0049,
-    "output": 0.45
+    "input": 0.00392,
+    "output": 0.12
   },
   {
     "model": "~google/gemini-flash-latest",
@@ -8320,7 +8320,7 @@
     "type": "tokens",
     "channel_type": 20,
     "input": 0.238,
-    "output": 16
+    "output": 24
   },
   {
     "model": "~openai/gpt-astra-latest",
@@ -8389,8 +8389,8 @@
     "model": "~z-ai/glm-flash-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.047076,
-    "output": 0.16
+    "input": 0.048,
+    "output": 0.12
   },
   {
     "model": "~z-ai/glm-latest",
@@ -10643,29 +10643,29 @@
     "model": "eu.anthropic.claude-fable-5",
     "type": "tokens",
     "channel_type": 32,
-    "input": 10,
-    "output": 50
+    "input": 11,
+    "output": 55
   },
   {
     "model": "eu.anthropic.claude-fable-5-1",
     "type": "tokens",
     "channel_type": 32,
-    "input": 10,
-    "output": 50
+    "input": 11,
+    "output": 55
   },
   {
     "model": "eu.anthropic.claude-fable-5-1-v1",
     "type": "tokens",
     "channel_type": 32,
-    "input": 10,
-    "output": 50
+    "input": 11,
+    "output": 55
   },
   {
     "model": "eu.anthropic.claude-fable-5-v1",
     "type": "tokens",
     "channel_type": 32,
-    "input": 10,
-    "output": 50
+    "input": 11,
+    "output": 55
   },
   {
     "model": "eu.anthropic.claude-haiku-5-5",
@@ -10678,50 +10678,50 @@
     "model": "eu.anthropic.claude-opus-4-6-v1",
     "type": "tokens",
     "channel_type": 32,
-    "input": 5,
-    "output": 25
+    "input": 5.5,
+    "output": 27.5
   },
   {
     "model": "eu.anthropic.claude-opus-4-6-v1:0",
     "type": "tokens",
     "channel_type": 32,
-    "input": 5,
-    "output": 25
+    "input": 5.5,
+    "output": 27.5
   },
   {
     "model": "eu.anthropic.claude-opus-4-7",
     "type": "tokens",
     "channel_type": 32,
-    "input": 5,
-    "output": 25
+    "input": 5.5,
+    "output": 27.5
   },
   {
     "model": "eu.anthropic.claude-opus-4-7-v1",
     "type": "tokens",
     "channel_type": 32,
-    "input": 5,
-    "output": 25
+    "input": 5.5,
+    "output": 27.5
   },
   {
     "model": "eu.anthropic.claude-opus-4-8",
     "type": "tokens",
     "channel_type": 32,
-    "input": 5,
-    "output": 25
+    "input": 5.5,
+    "output": 27.5
   },
   {
     "model": "eu.anthropic.claude-opus-4-8-v1",
     "type": "tokens",
     "channel_type": 32,
-    "input": 5,
-    "output": 25
+    "input": 5.5,
+    "output": 27.5
   },
   {
     "model": "eu.anthropic.claude-opus-5",
     "type": "tokens",
     "channel_type": 32,
-    "input": 5,
-    "output": 25
+    "input": 5.5,
+    "output": 27.5
   },
   {
     "model": "eu.anthropic.claude-opus-5-5",
@@ -10741,43 +10741,43 @@
     "model": "eu.anthropic.claude-opus-5-v1",
     "type": "tokens",
     "channel_type": 32,
-    "input": 5,
-    "output": 25
+    "input": 5.5,
+    "output": 27.5
   },
   {
     "model": "eu.anthropic.claude-sonnet-4-6",
     "type": "tokens",
     "channel_type": 32,
-    "input": 3,
-    "output": 15
+    "input": 3.3,
+    "output": 16.5
   },
   {
     "model": "eu.anthropic.claude-sonnet-4-6-v1",
     "type": "tokens",
     "channel_type": 32,
-    "input": 3,
-    "output": 15
+    "input": 3.3,
+    "output": 16.5
   },
   {
     "model": "eu.anthropic.claude-sonnet-4-6-v1:0",
     "type": "tokens",
     "channel_type": 32,
-    "input": 3,
-    "output": 15
+    "input": 3.3,
+    "output": 16.5
   },
   {
     "model": "eu.anthropic.claude-sonnet-5",
     "type": "tokens",
     "channel_type": 32,
-    "input": 2,
-    "output": 10
+    "input": 2.2,
+    "output": 11
   },
   {
     "model": "eu.anthropic.claude-sonnet-5-v1",
     "type": "tokens",
     "channel_type": 32,
-    "input": 2,
-    "output": 10
+    "input": 2.2,
+    "output": 11
   },
   {
     "model": "eu.openai.gpt-6-astra",
@@ -11427,29 +11427,29 @@
     "model": "us.anthropic.claude-fable-5",
     "type": "tokens",
     "channel_type": 32,
-    "input": 10,
-    "output": 50
+    "input": 11,
+    "output": 55
   },
   {
     "model": "us.anthropic.claude-fable-5-1",
     "type": "tokens",
     "channel_type": 32,
-    "input": 10,
-    "output": 50
+    "input": 11,
+    "output": 55
   },
   {
     "model": "us.anthropic.claude-fable-5-1-v1",
     "type": "tokens",
     "channel_type": 32,
-    "input": 10,
-    "output": 50
+    "input": 11,
+    "output": 55
   },
   {
     "model": "us.anthropic.claude-fable-5-v1",
     "type": "tokens",
     "channel_type": 32,
-    "input": 10,
-    "output": 50
+    "input": 11,
+    "output": 55
   },
   {
     "model": "us.anthropic.claude-haiku-5-5",
@@ -11462,50 +11462,50 @@
     "model": "us.anthropic.claude-opus-4-6-v1",
     "type": "tokens",
     "channel_type": 32,
-    "input": 5,
-    "output": 25
+    "input": 5.5,
+    "output": 27.5
   },
   {
     "model": "us.anthropic.claude-opus-4-6-v1:0",
     "type": "tokens",
     "channel_type": 32,
-    "input": 5,
-    "output": 25
+    "input": 5.5,
+    "output": 27.5
   },
   {
     "model": "us.anthropic.claude-opus-4-7",
     "type": "tokens",
     "channel_type": 32,
-    "input": 5,
-    "output": 25
+    "input": 5.5,
+    "output": 27.5
   },
   {
     "model": "us.anthropic.claude-opus-4-7-v1",
     "type": "tokens",
     "channel_type": 32,
-    "input": 5,
-    "output": 25
+    "input": 5.5,
+    "output": 27.5
   },
   {
     "model": "us.anthropic.claude-opus-4-8",
     "type": "tokens",
     "channel_type": 32,
-    "input": 5,
-    "output": 25
+    "input": 5.5,
+    "output": 27.5
   },
   {
     "model": "us.anthropic.claude-opus-4-8-v1",
     "type": "tokens",
     "channel_type": 32,
-    "input": 5,
-    "output": 25
+    "input": 5.5,
+    "output": 27.5
   },
   {
     "model": "us.anthropic.claude-opus-5",
     "type": "tokens",
     "channel_type": 32,
-    "input": 5,
-    "output": 25
+    "input": 5.5,
+    "output": 27.5
   },
   {
     "model": "us.anthropic.claude-opus-5-5",
@@ -11525,43 +11525,43 @@
     "model": "us.anthropic.claude-opus-5-v1",
     "type": "tokens",
     "channel_type": 32,
-    "input": 5,
-    "output": 25
+    "input": 5.5,
+    "output": 27.5
   },
   {
     "model": "us.anthropic.claude-sonnet-4-6",
     "type": "tokens",
     "channel_type": 32,
-    "input": 3,
-    "output": 15
+    "input": 3.3,
+    "output": 16.5
   },
   {
     "model": "us.anthropic.claude-sonnet-4-6-v1",
     "type": "tokens",
     "channel_type": 32,
-    "input": 3,
-    "output": 15
+    "input": 3.3,
+    "output": 16.5
   },
   {
     "model": "us.anthropic.claude-sonnet-4-6-v1:0",
     "type": "tokens",
     "channel_type": 32,
-    "input": 3,
-    "output": 15
+    "input": 3.3,
+    "output": 16.5
   },
   {
     "model": "us.anthropic.claude-sonnet-5",
     "type": "tokens",
     "channel_type": 32,
-    "input": 2,
-    "output": 10
+    "input": 2.2,
+    "output": 11
   },
   {
     "model": "us.anthropic.claude-sonnet-5-v1",
     "type": "tokens",
     "channel_type": 32,
-    "input": 2,
-    "output": 10
+    "input": 2.2,
+    "output": 11
   },
   {
     "model": "us.moonshotai.kimi-k3",

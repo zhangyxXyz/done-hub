@@ -2182,38 +2182,6 @@
       }
     },
     {
-      "model": "google/gemini-2.5-flash:batch",
-      "model_info": {
-        "model": "google/gemini-2.5-flash:batch",
-        "name": "Google: Gemini 2.5 Flash (batch)",
-        "description": "Gemini 2.5 Flash is Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks. It includes built-in \"thinking\" capabilities, enabling it to provide responses with greater...",
-        "context_length": 1048576,
-        "max_tokens": 65535,
-        "input_modalities": [
-          "file",
-          "image",
-          "text",
-          "audio",
-          "video"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "audio",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/google/gemini-2.5-flash:batch",
-          "https://openrouter.ai/api/v1/models/google/gemini-2.5-flash/endpoints"
-        ]
-      }
-    },
-    {
       "model": "google/gemini-2.5-pro",
       "model_info": {
         "model": "google/gemini-2.5-pro",
@@ -2273,38 +2241,6 @@
         "support_url": [
           "https://openrouter.ai/models/google/gemini-2.5-pro-preview",
           "https://openrouter.ai/api/v1/models/google/gemini-2.5-pro-preview-06-05/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "google/gemini-2.5-pro:batch",
-      "model_info": {
-        "model": "google/gemini-2.5-pro:batch",
-        "name": "Google: Gemini 2.5 Pro (batch)",
-        "description": "Gemini 2.5 Pro is Google’s state-of-the-art AI model designed for advanced reasoning, coding, mathematics, and scientific tasks. It employs “thinking” capabilities, enabling it to reason through responses with enhanced accuracy...",
-        "context_length": 1048576,
-        "max_tokens": 65536,
-        "input_modalities": [
-          "text",
-          "image",
-          "file",
-          "audio",
-          "video"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "audio",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/google/gemini-2.5-pro:batch",
-          "https://openrouter.ai/api/v1/models/google/gemini-2.5-pro/endpoints"
         ]
       }
     },
@@ -9777,7 +9713,7 @@
         "name": "Qwen: Qwen3 Next 80B A3B Instruct",
         "description": "Qwen3-Next-80B-A3B-Instruct is an instruction-tuned chat model in the Qwen3-Next series optimized for fast, stable responses without “thinking” traces. It targets complex tasks across reasoning, code generation, knowledge QA, and multilingual...",
         "context_length": 262144,
-        "max_tokens": 16384,
+        "max_tokens": 235929,
         "input_modalities": [
           "text"
         ],
@@ -9995,7 +9931,7 @@
         "name": "Qwen: Qwen3.5-35B-A3B",
         "description": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall...",
         "context_length": 262144,
-        "max_tokens": 235929,
+        "max_tokens": 81920,
         "input_modalities": [
           "text",
           "image",
@@ -12158,7 +12094,7 @@
         "name": "Z.ai: GLM 5",
         "description": "GLM-5 is Z.ai’s flagship open-source foundation model engineered for complex systems design and long-horizon agent workflows. Built for expert developers, it delivers production-grade performance on large-scale programming tasks, rivaling leading...",
         "context_length": 204800,
-        "max_tokens": 128000,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
