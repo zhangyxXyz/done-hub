@@ -1584,7 +1584,7 @@
         "name": "DeepSeek: DeepSeek V3",
         "description": "DeepSeek-V3 is the latest model from the DeepSeek team, building upon the instruction following and coding abilities of the previous versions. Pre-trained on nearly 15 trillion tokens, the reported evaluations...",
         "context_length": 163840,
-        "max_tokens": 16384,
+        "max_tokens": 16000,
         "input_modalities": [
           "text"
         ],
@@ -3203,7 +3203,7 @@
         "name": "Google: Gemma 3 4B",
         "description": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,...",
         "context_length": 131072,
-        "max_tokens": 16384,
+        "max_tokens": 117964,
         "input_modalities": [
           "text",
           "image"
@@ -10024,7 +10024,7 @@
         "name": "Qwen: Qwen3.5 397B A17B",
         "description": "The Qwen3.5 series 397B-A17B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. It delivers...",
         "context_length": 262144,
-        "max_tokens": 235929,
+        "max_tokens": 65536,
         "input_modalities": [
           "text",
           "image",
@@ -10422,7 +10422,7 @@
         "name": "Qwen: Qwen3.8 27B",
         "description": "Qwen3.8 27B is an open-weight dense vision-language model from Qwen. It is suited for coding, professional workflows, research, multimodal interaction, and long-running agent tasks, with flexible thinking that can be...",
         "context_length": 1000000,
-        "max_tokens": 235929,
+        "max_tokens": 65536,
         "input_modalities": [
           "text",
           "image",
@@ -12158,7 +12158,7 @@
         "name": "Z.ai: GLM 5",
         "description": "GLM-5 is Z.ai’s flagship open-source foundation model engineered for complex systems design and long-horizon agent workflows. Built for expert developers, it delivers production-grade performance on large-scale programming tasks, rivaling leading...",
         "context_length": 204800,
-        "max_tokens": 131072,
+        "max_tokens": 128000,
         "input_modalities": [
           "text"
         ],
