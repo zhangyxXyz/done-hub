@@ -9713,7 +9713,7 @@
         "name": "Qwen: Qwen3 Next 80B A3B Instruct",
         "description": "Qwen3-Next-80B-A3B-Instruct is an instruction-tuned chat model in the Qwen3-Next series optimized for fast, stable responses without “thinking” traces. It targets complex tasks across reasoning, code generation, knowledge QA, and multilingual...",
         "context_length": 262144,
-        "max_tokens": 235929,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -9989,7 +9989,7 @@
         "name": "Qwen: Qwen3.5-9B",
         "description": "Qwen3.5-9B is a multimodal foundation model from the Qwen3.5 family, designed to deliver strong reasoning, coding, and visual understanding in an efficient 9B-parameter architecture. It uses a unified vision-language design...",
         "context_length": 262144,
-        "max_tokens": 32768,
+        "max_tokens": 65536,
         "input_modalities": [
           "text",
           "image",
@@ -10332,7 +10332,7 @@
         "name": "Qwen: Qwen3.8 2.4T A95B",
         "description": "Qwen3.8 2.4T A95B is an open-weight sparse mixture-of-experts model from Qwen and the open-weight variant of [Qwen3.8 Max](/qwen/qwen3.8-max), with 95 billion active parameters out of 2.4 trillion total. It is...",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 909000,
         "input_modalities": [
           "text"
         ],
@@ -11732,7 +11732,7 @@
         "name": "Xiaomi: MiMo-V2.5",
         "description": "MiMo-V2.5 is a native omnimodal model by Xiaomi. It delivers Pro-level agentic performance at roughly half the inference cost, while surpassing MiMo-V2-Omni in multimodal perception across image and video understanding...",
         "context_length": 1050000,
-        "max_tokens": 131072,
+        "max_tokens": 945000,
         "input_modalities": [
           "text",
           "audio",
@@ -11763,7 +11763,7 @@
         "name": "Xiaomi: MiMo-V2.5-Pro",
         "description": "MiMo-V2.5-Pro is Xiaomi’s flagship model, delivering strong performance in general agentic capabilities, complex software engineering, and long-horizon tasks, with top rankings on benchmarks such as ClawEval, GDPVal, and SWE-bench Pro....",
         "context_length": 1050000,
-        "max_tokens": 131072,
+        "max_tokens": 945000,
         "input_modalities": [
           "text"
         ],
@@ -12146,7 +12146,7 @@
         "name": "Z.ai: GLM 5.1",
         "description": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on...",
         "context_length": 204800,
-        "max_tokens": 128000,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
