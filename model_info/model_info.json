@@ -2150,38 +2150,6 @@
       }
     },
     {
-      "model": "google/gemini-2.5-flash-lite:batch",
-      "model_info": {
-        "model": "google/gemini-2.5-flash-lite:batch",
-        "name": "Google: Gemini 2.5 Flash Lite (batch)",
-        "description": "Gemini 2.5 Flash-Lite is a lightweight reasoning model in the Gemini 2.5 family, optimized for ultra-low latency and cost efficiency. It offers improved throughput, faster token generation, and better performance...",
-        "context_length": 1048576,
-        "max_tokens": 65535,
-        "input_modalities": [
-          "text",
-          "image",
-          "file",
-          "audio",
-          "video"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "audio",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/google/gemini-2.5-flash-lite:batch",
-          "https://openrouter.ai/api/v1/models/google/gemini-2.5-flash-lite/endpoints"
-        ]
-      }
-    },
-    {
       "model": "google/gemini-2.5-pro",
       "model_info": {
         "model": "google/gemini-2.5-pro",
@@ -9960,7 +9928,7 @@
         "name": "Qwen: Qwen3.5 397B A17B",
         "description": "The Qwen3.5 series 397B-A17B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. It delivers...",
         "context_length": 262144,
-        "max_tokens": 65536,
+        "max_tokens": 235929,
         "input_modalities": [
           "text",
           "image",
@@ -12250,7 +12218,7 @@
         "name": "Z.ai: GLM 5.3 Flash",
         "description": "GLM-5.3-Flash is a native multimodal model from Z.ai. It is suited for efficient coding and long-horizon agent tasks. Its hybrid sparse and linear attention architecture maintains accurate long-context behavior while...",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 131072,
         "input_modalities": [
           "text",
           "image",
@@ -12907,7 +12875,7 @@
         "name": "Z.ai: GLM Flash Latest",
         "description": "This model always redirects to the latest model in the GLM Flash family.",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 131072,
         "input_modalities": [
           "text",
           "image",
