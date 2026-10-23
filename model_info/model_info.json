@@ -5326,6 +5326,35 @@
       }
     },
     {
+      "model": "moonshotai/kimi-k3.1-pro",
+      "model_info": {
+        "model": "moonshotai/kimi-k3.1-pro",
+        "name": "MoonshotAI: Kimi K3.1 Pro",
+        "description": "Kimi K3.1 Pro is Moonshot AI's flagship open-weight multimodal reasoning model and a post-trained successor to Kimi K3, with a 1M-token context window. It is built for long-horizon coding, 3D...",
+        "context_length": 1048576,
+        "max_tokens": 943718,
+        "input_modalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/moonshotai/kimi-k3.1-pro",
+          "https://openrouter.ai/api/v1/models/moonshotai/kimi-k3.1-pro-20261023/endpoints"
+        ]
+      }
+    },
+    {
       "model": "moonshotai/kimi-k3:batch",
       "model_info": {
         "model": "moonshotai/kimi-k3:batch",
@@ -12218,7 +12247,7 @@
         "name": "Z.ai: GLM 5.3 Flash",
         "description": "GLM-5.3-Flash is a native multimodal model from Z.ai. It is suited for efficient coding and long-horizon agent tasks. Its hybrid sparse and linear attention architecture maintains accurate long-context behavior while...",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 943717,
         "input_modalities": [
           "text",
           "image",
