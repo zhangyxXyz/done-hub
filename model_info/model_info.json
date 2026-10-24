@@ -4279,7 +4279,7 @@
         "name": "MiniMax: MiniMax M2.5",
         "description": "MiniMax-M2.5 is a SOTA large language model designed for real-world productivity. Trained in a diverse range of complex real-world digital working environments, M2.5 builds upon the coding expertise of M2.1...",
         "context_length": 204800,
-        "max_tokens": 32768,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -5903,31 +5903,6 @@
       }
     },
     {
-      "model": "openai/gpt-3.5-turbo",
-      "model_info": {
-        "model": "openai/gpt-3.5-turbo",
-        "name": "OpenAI: GPT-3.5 Turbo",
-        "description": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021.",
-        "context_length": 16385,
-        "max_tokens": 4096,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-3.5-turbo",
-          "https://openrouter.ai/api/v1/models/openai/gpt-3.5-turbo/endpoints"
-        ]
-      }
-    },
-    {
       "model": "openai/gpt-3.5-turbo-0613",
       "model_info": {
         "model": "openai/gpt-3.5-turbo-0613",
@@ -5974,55 +5949,6 @@
         "support_url": [
           "https://openrouter.ai/models/openai/gpt-3.5-turbo-16k",
           "https://openrouter.ai/api/v1/models/openai/gpt-3.5-turbo-16k/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/gpt-3.5-turbo-instruct",
-      "model_info": {
-        "model": "openai/gpt-3.5-turbo-instruct",
-        "name": "OpenAI: GPT-3.5 Turbo Instruct",
-        "description": "This model is a variant of GPT-3.5 Turbo tuned for instructional prompts and omitting chat-related optimizations. Training data: up to Sep 2021.",
-        "context_length": 4095,
-        "max_tokens": 3685,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-3.5-turbo-instruct",
-          "https://openrouter.ai/api/v1/models/openai/gpt-3.5-turbo-instruct/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/gpt-3.5-turbo:batch",
-      "model_info": {
-        "model": "openai/gpt-3.5-turbo:batch",
-        "name": "OpenAI: GPT-3.5 Turbo (batch)",
-        "description": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021.",
-        "context_length": 16385,
-        "max_tokens": 4096,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-3.5-turbo:batch",
-          "https://openrouter.ai/api/v1/models/openai/gpt-3.5-turbo/endpoints"
         ]
       }
     },
