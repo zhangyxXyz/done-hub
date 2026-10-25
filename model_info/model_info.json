@@ -1790,7 +1790,7 @@
         "name": "DeepSeek: DeepSeek V4 Flash 0731",
         "description": "DeepSeek V4 Flash 0731 is a sparse mixture-of-experts model from DeepSeek, with 13B active parameters out of 284B total. This re-post-trained revision is suited for coding, reasoning, and agent workflows....",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 943718,
         "input_modalities": [
           "text"
         ],
@@ -3580,6 +3580,32 @@
       }
     },
     {
+      "model": "liquid/lfm-2.5-2.6b",
+      "model_info": {
+        "model": "liquid/lfm-2.5-2.6b",
+        "name": "LiquidAI: LFM2.5-2.6B",
+        "description": "LFM2.5-2.6B is a compact reasoning model from Liquid AI. It is suited for agent workflows, data extraction, RAG, and long-context processing. Liquid advises against using it for agentic coding or...",
+        "context_length": 128000,
+        "max_tokens": 8192,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/liquid/lfm-2.5-2.6b",
+          "https://openrouter.ai/api/v1/models/liquid/lfm-2.5-2.6b-20260811/endpoints"
+        ]
+      }
+    },
+    {
       "model": "liquid/lfm-2.5-2.6b:free",
       "model_info": {
         "model": "liquid/lfm-2.5-2.6b:free",
@@ -3760,7 +3786,7 @@
         "name": "Meta: Llama 3.2 3B Instruct",
         "description": "Llama 3.2 3B is a 3-billion-parameter multilingual large language model, optimized for advanced natural language processing tasks like dialogue generation, reasoning, and summarization. Designed with the latest transformer architecture, it...",
         "context_length": 131072,
-        "max_tokens": 72000,
+        "max_tokens": 117964,
         "input_modalities": [
           "text"
         ],
