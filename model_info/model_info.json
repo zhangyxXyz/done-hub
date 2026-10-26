@@ -1178,31 +1178,6 @@
       }
     },
     {
-      "model": "arcee-ai/trinity-large-thinking",
-      "model_info": {
-        "model": "arcee-ai/trinity-large-thinking",
-        "name": "Arcee AI: Trinity Large Thinking",
-        "description": "Trinity Large Thinking is a powerful open source reasoning model from the team at Arcee AI. It shows strong performance in PinchBench, agentic workloads, and reasoning tasks. Launch video: https://youtu.be/Gc82AXLa0Rg?si=4RLn6WBz33qT--B7...",
-        "context_length": 262144,
-        "max_tokens": 80000,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/arcee-ai/trinity-large-thinking",
-          "https://openrouter.ai/api/v1/models/arcee-ai/trinity-large-thinking/endpoints"
-        ]
-      }
-    },
-    {
       "model": "bytedance-seed/seed-1.6",
       "model_info": {
         "model": "bytedance-seed/seed-1.6",
@@ -1896,7 +1871,7 @@
         "name": "DeepSeek: DeepSeek V4.1 Flash",
         "description": "DeepSeek V4.1 Flash is a sparse mixture-of-experts model from DeepSeek, and the first built on the company's Causal Encoder-Decoder (CED) architecture. It activates 8B parameters on input and 16B on...",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 393216,
         "input_modalities": [
           "text",
           "image"
@@ -3191,7 +3166,7 @@
         "name": "Google: Gemma 4 31B",
         "description": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function...",
         "context_length": 262144,
-        "max_tokens": 235929,
+        "max_tokens": 16384,
         "input_modalities": [
           "image",
           "text",
@@ -8272,6 +8247,64 @@
       }
     },
     {
+      "model": "openai/gpt-6.1-terra",
+      "model_info": {
+        "model": "openai/gpt-6.1-terra",
+        "name": "OpenAI: GPT-6.1 Terra",
+        "description": "GPT-6.1 Terra is the mid-tier model in OpenAI's GPT-6.1 series, priced below GPT-6.1 Sol. It is suited for everyday agentic, coding, and writing work, is particularly strong at understanding screenshots...",
+        "context_length": 1050000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "file",
+          "image",
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/openai/gpt-6.1-terra",
+          "https://openrouter.ai/api/v1/models/openai/gpt-6.1-terra-20261026/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "openai/gpt-6.1-terra:batch",
+      "model_info": {
+        "model": "openai/gpt-6.1-terra:batch",
+        "name": "OpenAI: GPT-6.1 Terra (batch)",
+        "description": "GPT-6.1 Terra is the mid-tier model in OpenAI's GPT-6.1 series, priced below GPT-6.1 Sol. It is suited for everyday agentic, coding, and writing work, is particularly strong at understanding screenshots...",
+        "context_length": 1050000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "file",
+          "image",
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/openai/gpt-6.1-terra:batch",
+          "https://openrouter.ai/api/v1/models/openai/gpt-6.1-terra-20261026/endpoints"
+        ]
+      }
+    },
+    {
       "model": "openai/gpt-audio",
       "model_info": {
         "model": "openai/gpt-audio",
@@ -12483,7 +12516,7 @@
         "name": "DeepSeek: DeepSeek Flash Latest",
         "description": "This model always redirects to the latest model in the DeepSeek Flash family.",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 393216,
         "input_modalities": [
           "text",
           "image"
