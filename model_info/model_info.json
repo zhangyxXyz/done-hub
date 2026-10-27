@@ -1739,7 +1739,7 @@
         "name": "DeepSeek: DeepSeek V4 Flash 0423",
         "description": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and...",
         "context_length": 1048576,
-        "max_tokens": 943717,
+        "max_tokens": 943718,
         "input_modalities": [
           "text"
         ],
@@ -1765,7 +1765,7 @@
         "name": "DeepSeek: DeepSeek V4 Flash 0731",
         "description": "DeepSeek V4 Flash 0731 is a sparse mixture-of-experts model from DeepSeek, with 13B active parameters out of 284B total. This re-post-trained revision is suited for coding, reasoning, and agent workflows....",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 943718,
         "input_modalities": [
           "text"
         ],
@@ -1871,7 +1871,7 @@
         "name": "DeepSeek: DeepSeek V4.1 Flash",
         "description": "DeepSeek V4.1 Flash is a sparse mixture-of-experts model from DeepSeek, and the first built on the company's Causal Encoder-Decoder (CED) architecture. It activates 8B parameters on input and 16B on...",
         "context_length": 1048576,
-        "max_tokens": 393216,
+        "max_tokens": 131072,
         "input_modalities": [
           "text",
           "image"
@@ -3082,7 +3082,7 @@
         "name": "Google: Gemma 3 4B",
         "description": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,...",
         "context_length": 131072,
-        "max_tokens": 117964,
+        "max_tokens": 16384,
         "input_modalities": [
           "text",
           "image"
@@ -3294,30 +3294,6 @@
         "support_url": [
           "https://openrouter.ai/models/gryphe/mythomax-l2-13b",
           "https://openrouter.ai/api/v1/models/gryphe/mythomax-l2-13b/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "ibm-granite/granite-4.0-h-micro",
-      "model_info": {
-        "model": "ibm-granite/granite-4.0-h-micro",
-        "name": "IBM: Granite 4.0 Micro",
-        "description": "Granite-4.0-H-Micro is a 3B parameter from the Granite 4 family of models. These models are the latest in a series of models released by IBM. They are fine-tuned for long...",
-        "context_length": 131000,
-        "max_tokens": 117900,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/ibm-granite/granite-4.0-h-micro",
-          "https://openrouter.ai/api/v1/models/ibm-granite/granite-4.0-h-micro/endpoints"
         ]
       }
     },
@@ -4410,32 +4386,6 @@
       }
     },
     {
-      "model": "mistralai/codestral-2508:batch",
-      "model_info": {
-        "model": "mistralai/codestral-2508:batch",
-        "name": "Mistral: Codestral 2508 (batch)",
-        "description": "Mistral's cutting-edge language model for coding released end of July 2025. Codestral specializes in low-latency, high-frequency tasks such as fill-in-the-middle (FIM), code correction and test generation.\n\n[Blog Post](https://mistral.ai/news/codestral-25-08)",
-        "context_length": 256000,
-        "max_tokens": 204800,
-        "input_modalities": [
-          "text",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/mistralai/codestral-2508:batch",
-          "https://openrouter.ai/api/v1/models/mistralai/codestral-2508/endpoints"
-        ]
-      }
-    },
-    {
       "model": "mistralai/devstral-2512",
       "model_info": {
         "model": "mistralai/devstral-2512",
@@ -4543,33 +4493,6 @@
       }
     },
     {
-      "model": "mistralai/ministral-8b-2512:batch",
-      "model_info": {
-        "model": "mistralai/ministral-8b-2512:batch",
-        "name": "Mistral: Ministral 3 8B 2512 (batch)",
-        "description": "A balanced model in the Ministral 3 family, Ministral 3 8B is a powerful, efficient tiny language model with vision capabilities.",
-        "context_length": 262144,
-        "max_tokens": 209715,
-        "input_modalities": [
-          "text",
-          "image"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/mistralai/ministral-8b-2512:batch",
-          "https://openrouter.ai/api/v1/models/mistralai/ministral-8b-2512/endpoints"
-        ]
-      }
-    },
-    {
       "model": "mistralai/mistral-large",
       "model_info": {
         "model": "mistralai/mistral-large",
@@ -4645,34 +4568,6 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/mistralai/mistral-large-2512",
-          "https://openrouter.ai/api/v1/models/mistralai/mistral-large-2512/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "mistralai/mistral-large-2512:batch",
-      "model_info": {
-        "model": "mistralai/mistral-large-2512:batch",
-        "name": "Mistral: Mistral Large 3 2512 (batch)",
-        "description": "Mistral Large 3 2512 is Mistral’s most capable model to date, featuring a sparse mixture-of-experts architecture with 41B active parameters (675B total), and released under the Apache 2.0 license.",
-        "context_length": 262144,
-        "max_tokens": 209715,
-        "input_modalities": [
-          "text",
-          "image",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/mistralai/mistral-large-2512:batch",
           "https://openrouter.ai/api/v1/models/mistralai/mistral-large-2512/endpoints"
         ]
       }
@@ -4820,34 +4715,6 @@
       }
     },
     {
-      "model": "mistralai/mistral-medium-3.1:batch",
-      "model_info": {
-        "model": "mistralai/mistral-medium-3.1:batch",
-        "name": "Mistral: Mistral Medium 3.1 (batch)",
-        "description": "Mistral Medium 3.1 is an updated version of Mistral Medium 3, which is a high-performance enterprise-grade language model designed to deliver frontier-level capabilities at significantly reduced operational cost. It balances...",
-        "context_length": 131072,
-        "max_tokens": 104857,
-        "input_modalities": [
-          "text",
-          "image",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/mistralai/mistral-medium-3.1:batch",
-          "https://openrouter.ai/api/v1/models/mistralai/mistral-medium-3.1/endpoints"
-        ]
-      }
-    },
-    {
       "model": "mistralai/mistral-nemo",
       "model_info": {
         "model": "mistralai/mistral-nemo",
@@ -4946,34 +4813,6 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/mistralai/mistral-small-2603",
-          "https://openrouter.ai/api/v1/models/mistralai/mistral-small-2603/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "mistralai/mistral-small-2603:batch",
-      "model_info": {
-        "model": "mistralai/mistral-small-2603:batch",
-        "name": "Mistral: Mistral Small 4 (batch)",
-        "description": "Mistral Small 4 is the next major release in the Mistral Small family, unifying the capabilities of several flagship Mistral models into a single system. It combines strong reasoning from...",
-        "context_length": 262144,
-        "max_tokens": 209715,
-        "input_modalities": [
-          "text",
-          "image"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/mistralai/mistral-small-2603:batch",
           "https://openrouter.ai/api/v1/models/mistralai/mistral-small-2603/endpoints"
         ]
       }
@@ -5643,32 +5482,6 @@
       }
     },
     {
-      "model": "nvidia/nemotron-3-super-120b-a12b:free",
-      "model_info": {
-        "model": "nvidia/nemotron-3-super-120b-a12b:free",
-        "name": "NVIDIA: Nemotron 3 Super (free)",
-        "description": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer...",
-        "context_length": 262144,
-        "max_tokens": 235929,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/nvidia/nemotron-3-super-120b-a12b:free",
-          "https://openrouter.ai/api/v1/models/nvidia/nemotron-3-super-120b-a12b-20230311/endpoints"
-        ]
-      }
-    },
-    {
       "model": "nvidia/nemotron-3-ultra-550b-a55b",
       "model_info": {
         "model": "nvidia/nemotron-3-ultra-550b-a55b",
@@ -5885,7 +5698,7 @@
       "model_info": {
         "model": "nvidia/switchyard",
         "name": "NVIDIA: Switchyard",
-        "description": "Switchyard is an open-source model router that switches between multiple models to optimize the cost of requests. By default it will use OpenRouter market data to select the most popular...",
+        "description": "Switchyard is an open-source model routing system that switches between multiple models to optimize the cost of requests. By default it will use OpenRouter market data to select the most...",
         "context_length": 1000000,
         "max_tokens": 0,
         "input_modalities": [
@@ -8276,6 +8089,64 @@
       }
     },
     {
+      "model": "openai/gpt-6.1-terra-pro",
+      "model_info": {
+        "model": "openai/gpt-6.1-terra-pro",
+        "name": "OpenAI: GPT-6.1 Terra Pro",
+        "description": "GPT-6.1 Terra Pro is the same underlying model as [GPT-6.1 Terra](https://openrouter.ai/openai/gpt-6.1-terra), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks. **Cost note:** pro mode spends far more...",
+        "context_length": 1050000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "file",
+          "image",
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/openai/gpt-6.1-terra-pro",
+          "https://openrouter.ai/api/v1/models/openai/gpt-6.1-terra-pro-20261026/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "openai/gpt-6.1-terra-pro:batch",
+      "model_info": {
+        "model": "openai/gpt-6.1-terra-pro:batch",
+        "name": "OpenAI: GPT-6.1 Terra Pro (batch)",
+        "description": "GPT-6.1 Terra Pro is the same underlying model as [GPT-6.1 Terra](https://openrouter.ai/openai/gpt-6.1-terra), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks. **Cost note:** pro mode spends far more...",
+        "context_length": 1050000,
+        "max_tokens": 128000,
+        "input_modalities": [
+          "file",
+          "image",
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/openai/gpt-6.1-terra-pro:batch",
+          "https://openrouter.ai/api/v1/models/openai/gpt-6.1-terra-pro-20261026/endpoints"
+        ]
+      }
+    },
+    {
       "model": "openai/gpt-6.1-terra:batch",
       "model_info": {
         "model": "openai/gpt-6.1-terra:batch",
@@ -9884,7 +9755,7 @@
         "name": "Qwen: Qwen3.5-27B",
         "description": "The Qwen3.5 27B native vision-language Dense model incorporates a linear attention mechanism, delivering fast response times while balancing inference speed and performance. Its overall capabilities are comparable to those of...",
         "context_length": 262144,
-        "max_tokens": 65536,
+        "max_tokens": 81920,
         "input_modalities": [
           "text",
           "image",
@@ -11740,7 +11611,7 @@
         "name": "Xiaomi: MiMo-V2.5",
         "description": "MiMo-V2.5 is a native omnimodal model by Xiaomi. It delivers Pro-level agentic performance at roughly half the inference cost, while surpassing MiMo-V2-Omni in multimodal perception across image and video understanding...",
         "context_length": 1050000,
-        "max_tokens": 945000,
+        "max_tokens": 65536,
         "input_modalities": [
           "text",
           "audio",
@@ -11771,7 +11642,7 @@
         "name": "Xiaomi: MiMo-V2.5-Pro",
         "description": "MiMo-V2.5-Pro is Xiaomi’s flagship model, delivering strong performance in general agentic capabilities, complex software engineering, and long-horizon tasks, with top rankings on benchmarks such as ClawEval, GDPVal, and SWE-bench Pro....",
         "context_length": 1050000,
-        "max_tokens": 945000,
+        "max_tokens": 235929,
         "input_modalities": [
           "text"
         ],
@@ -12154,7 +12025,7 @@
         "name": "Z.ai: GLM 5.1",
         "description": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on...",
         "context_length": 204800,
-        "max_tokens": 131072,
+        "max_tokens": 128000,
         "input_modalities": [
           "text"
         ],
@@ -12516,7 +12387,7 @@
         "name": "DeepSeek: DeepSeek Flash Latest",
         "description": "This model always redirects to the latest model in the DeepSeek Flash family.",
         "context_length": 1048576,
-        "max_tokens": 393216,
+        "max_tokens": 943718,
         "input_modalities": [
           "text",
           "image"
