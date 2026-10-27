@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-27T10:07:34.900862+00:00",
+  "generated_at": "2026-10-27T21:02:54.844005+00:00",
   "sources": {
     "openrouter_models_api": "https://openrouter.ai/api/v1/models",
     "portkey_base": "https://configs.portkey.ai/pricing",
@@ -23,10 +23,10 @@
       "zhipu"
     ]
   },
-  "portkey_converted_count": 1921,
+  "portkey_converted_count": 1928,
   "portkey_provider_counts": {
     "anthropic": 37,
-    "bedrock": 238,
+    "bedrock": 240,
     "cohere": 19,
     "dashscope": 143,
     "deepseek": 4,
@@ -34,8 +34,8 @@
     "groq": 28,
     "jina": 10,
     "mistral-ai": 56,
-    "openai": 189,
-    "openrouter": 751,
+    "openai": 191,
+    "openrouter": 754,
     "palm": 2,
     "perplexity-ai": 28,
     "stability-ai": 0,
@@ -44,15 +44,15 @@
     "zhipu": 17
   },
   "portkey_errors": {},
-  "openrouter_api_converted_count": 456,
-  "openrouter_api_added_count": 41,
-  "openrouter_api_overridden_count": 415,
+  "openrouter_api_converted_count": 457,
+  "openrouter_api_added_count": 39,
+  "openrouter_api_overridden_count": 418,
   "openrouter_api_error": null,
-  "openrouter_model_info_count": 463,
+  "openrouter_model_info_count": 464,
   "openrouter_model_info_skipped": {
     "missing_model_id": 0
   },
-  "output_count": 1963,
+  "output_count": 1968,
   "skipped": {
     "anthropic": {
       "unknown_provider": 0,

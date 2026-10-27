@@ -1739,7 +1739,7 @@
         "name": "DeepSeek: DeepSeek V4 Flash 0423",
         "description": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and...",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -9178,6 +9178,34 @@
         "support_url": [
           "https://openrouter.ai/models/prism-ml/ternary-bonsai-2-27b",
           "https://openrouter.ai/api/v1/models/prism-ml/ternary-bonsai-2-27b-20260918/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "prism-ml/ternary-bonsai-2-9b",
+      "model_info": {
+        "model": "prism-ml/ternary-bonsai-2-9b",
+        "name": "PrismML: Ternary Bonsai 2 9B",
+        "description": "Ternary Bonsai 2 9B is PrismML’s compact, open-weight language model for conversational AI, reasoning, and tool use. Built on Qwen3.5, it uses ternary weights packed into 2 bits for efficient...",
+        "context_length": 262144,
+        "max_tokens": 65536,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/prism-ml/ternary-bonsai-2-9b",
+          "https://openrouter.ai/api/v1/models/prism-ml/ternary-bonsai-2-9b-20261015/endpoints"
         ]
       }
     },
