@@ -1871,7 +1871,7 @@
         "name": "DeepSeek: DeepSeek V4.1 Flash",
         "description": "DeepSeek V4.1 Flash is a sparse mixture-of-experts model from DeepSeek, and the first built on the company's Causal Encoder-Decoder (CED) architecture. It activates 8B parameters on input and 16B on...",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 943718,
         "input_modalities": [
           "text",
           "image"
@@ -3689,7 +3689,7 @@
         "name": "Meta: Llama 3.1 8B Instruct",
         "description": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 8B instruct-tuned version is fast and efficient. It has demonstrated strong performance compared to...",
         "context_length": 131072,
-        "max_tokens": 16384,
+        "max_tokens": 117964,
         "input_modalities": [
           "text"
         ],
@@ -4043,7 +4043,7 @@
         "name": "Meta: Muse Spark Open",
         "description": "Muse Spark Open is a coding-optimized open-weight model. Trained specifically for agentic coding workflows, it delivers higher first-attempt accuracy, reliable tool calling, and deep codebase understanding across the repos developers...",
         "context_length": 1048576,
-        "max_tokens": 943718,
+        "max_tokens": 131072,
         "input_modalities": [
           "text",
           "image",
@@ -4191,8 +4191,7 @@
         "tags": [
           "openrouter",
           "tools",
-          "reasoning",
-          "structured_outputs"
+          "reasoning"
         ],
         "support_url": [
           "https://openrouter.ai/models/minimax/minimax-m2",
@@ -5461,8 +5460,8 @@
         "model": "nvidia/nemotron-3-super-120b-a12b",
         "name": "NVIDIA: Nemotron 3 Super",
         "description": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer...",
-        "context_length": 262144,
-        "max_tokens": 235929,
+        "context_length": 1048576,
+        "max_tokens": 262144,
         "input_modalities": [
           "text"
         ],
@@ -5788,33 +5787,6 @@
         "support_url": [
           "https://openrouter.ai/models/openai/gpt-4",
           "https://openrouter.ai/api/v1/models/openai/gpt-4/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/gpt-4-turbo",
-      "model_info": {
-        "model": "openai/gpt-4-turbo",
-        "name": "OpenAI: GPT-4 Turbo",
-        "description": "The latest GPT-4 Turbo model with vision capabilities. Vision requests can now use JSON mode and function calling.\n\nTraining data: up to December 2023.",
-        "context_length": 128000,
-        "max_tokens": 4096,
-        "input_modalities": [
-          "text",
-          "image"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/gpt-4-turbo",
-          "https://openrouter.ai/api/v1/models/openai/gpt-4-turbo/endpoints"
         ]
       }
     },
@@ -8390,63 +8362,6 @@
       }
     },
     {
-      "model": "openai/o1",
-      "model_info": {
-        "model": "openai/o1",
-        "name": "OpenAI: o1",
-        "description": "The latest and strongest model family from OpenAI, o1 is designed to spend more time thinking before responding. The o1 model series is trained with large-scale reinforcement learning to reason...",
-        "context_length": 200000,
-        "max_tokens": 100000,
-        "input_modalities": [
-          "text",
-          "image",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/o1",
-          "https://openrouter.ai/api/v1/models/openai/o1-2024-12-17/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/o1-pro",
-      "model_info": {
-        "model": "openai/o1-pro",
-        "name": "OpenAI: o1-pro",
-        "description": "The o1 series of models are trained with reinforcement learning to think before they answer and perform complex reasoning. The o1-pro model uses more compute to think harder and provide...",
-        "context_length": 200000,
-        "max_tokens": 100000,
-        "input_modalities": [
-          "text",
-          "image",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/o1-pro",
-          "https://openrouter.ai/api/v1/models/openai/o1-pro/endpoints"
-        ]
-      }
-    },
-    {
       "model": "openai/o3",
       "model_info": {
         "model": "openai/o3",
@@ -8472,60 +8387,6 @@
         "support_url": [
           "https://openrouter.ai/models/openai/o3",
           "https://openrouter.ai/api/v1/models/openai/o3-2025-04-16/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/o3-mini",
-      "model_info": {
-        "model": "openai/o3-mini",
-        "name": "OpenAI: o3 Mini",
-        "description": "OpenAI o3-mini is a cost-efficient language model optimized for STEM reasoning tasks, particularly excelling in science, mathematics, and coding. This model supports the `reasoning_effort` parameter, which can be set to...",
-        "context_length": 200000,
-        "max_tokens": 100000,
-        "input_modalities": [
-          "text",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/o3-mini",
-          "https://openrouter.ai/api/v1/models/openai/o3-mini-2025-01-31/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/o3-mini-high",
-      "model_info": {
-        "model": "openai/o3-mini-high",
-        "name": "OpenAI: o3 Mini High",
-        "description": "OpenAI o3-mini-high is the same model as [o3-mini](/openai/o3-mini) with reasoning_effort set to high. o3-mini is a cost-efficient language model optimized for STEM reasoning tasks, particularly excelling in science, mathematics, and...",
-        "context_length": 200000,
-        "max_tokens": 100000,
-        "input_modalities": [
-          "text",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/o3-mini-high",
-          "https://openrouter.ai/api/v1/models/openai/o3-mini-high-2025-01-31/endpoints"
         ]
       }
     },
@@ -8611,64 +8472,6 @@
         "support_url": [
           "https://openrouter.ai/models/openai/o3:batch",
           "https://openrouter.ai/api/v1/models/openai/o3-2025-04-16/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/o4-mini",
-      "model_info": {
-        "model": "openai/o4-mini",
-        "name": "OpenAI: o4 Mini",
-        "description": "OpenAI o4-mini is a compact reasoning model in the o-series, optimized for fast, cost-efficient performance while retaining strong multimodal and agentic capabilities. It supports tool use and demonstrates competitive reasoning...",
-        "context_length": 200000,
-        "max_tokens": 100000,
-        "input_modalities": [
-          "image",
-          "text",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/o4-mini",
-          "https://openrouter.ai/api/v1/models/openai/o4-mini-2025-04-16/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "openai/o4-mini-high",
-      "model_info": {
-        "model": "openai/o4-mini-high",
-        "name": "OpenAI: o4 Mini High",
-        "description": "OpenAI o4-mini-high is the same model as [o4-mini](/openai/o4-mini) with reasoning_effort set to high. OpenAI o4-mini is a compact reasoning model in the o-series, optimized for fast, cost-efficient performance while retaining...",
-        "context_length": 200000,
-        "max_tokens": 100000,
-        "input_modalities": [
-          "image",
-          "text",
-          "file"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/openai/o4-mini-high",
-          "https://openrouter.ai/api/v1/models/openai/o4-mini-high-2025-04-16/endpoints"
         ]
       }
     },
@@ -8864,6 +8667,34 @@
         "support_url": [
           "https://openrouter.ai/models/openrouter/pareto-code",
           "https://openrouter.ai/api/v1/models/openrouter/pareto-code/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "particle-ai/particle-1",
+      "model_info": {
+        "model": "particle-ai/particle-1",
+        "name": "Particle AI: Particle-1",
+        "description": "Particle-1 is a token-efficient agentic coding model from Particle AI, post-trained on DeepSeek V4.1 Flash. It is suited for software engineering work such as terminal workflows, codebase changes, and data...",
+        "context_length": 1048576,
+        "max_tokens": 131072,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/particle-ai/particle-1",
+          "https://openrouter.ai/api/v1/models/particle-ai/particle-1-20261027/endpoints"
         ]
       }
     },
@@ -9609,32 +9440,6 @@
         "support_url": [
           "https://openrouter.ai/models/qwen/qwen3-next-80b-a3b-instruct",
           "https://openrouter.ai/api/v1/models/qwen/qwen3-next-80b-a3b-instruct-2509/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "qwen/qwen3-next-80b-a3b-thinking",
-      "model_info": {
-        "model": "qwen/qwen3-next-80b-a3b-thinking",
-        "name": "Qwen: Qwen3 Next 80B A3B Thinking",
-        "description": "Qwen3-Next-80B-A3B-Thinking is a reasoning-first chat model in the Qwen3-Next line that outputs structured “thinking” traces by default. It’s designed for hard multi-step problems; math proofs, code synthesis/debugging, logic, and agentic...",
-        "context_length": 262144,
-        "max_tokens": 235929,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/qwen/qwen3-next-80b-a3b-thinking",
-          "https://openrouter.ai/api/v1/models/qwen/qwen3-next-80b-a3b-thinking-2509/endpoints"
         ]
       }
     },
@@ -12131,7 +11936,7 @@
         "name": "Z.ai: GLM 5.3 Flash",
         "description": "GLM-5.3-Flash is a native multimodal model from Z.ai. It is suited for efficient coding and long-horizon agent tasks. Its hybrid sparse and linear attention architecture maintains accurate long-context behavior while...",
         "context_length": 1048576,
-        "max_tokens": 943717,
+        "max_tokens": 131072,
         "input_modalities": [
           "text",
           "image",
