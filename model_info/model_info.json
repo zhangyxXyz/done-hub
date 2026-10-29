@@ -1609,7 +1609,7 @@
         "name": "DeepSeek: DeepSeek V3.1",
         "description": "DeepSeek-V3.1 is a large hybrid reasoning model (671B parameters, 37B active) that supports both thinking and non-thinking modes via prompt templates. It extends the DeepSeek-V3 base with a two-phase long-context...",
         "context_length": 163840,
-        "max_tokens": 32768,
+        "max_tokens": 147456,
         "input_modalities": [
           "text"
         ],
@@ -10612,7 +10612,7 @@
         "model": "stepfun/step-5-preview",
         "name": "StepFun: Step 5 Preview",
         "description": "Step 5 Preview is StepFun's flagship model for agentic work, built on a sparse Mixture-of-Experts architecture (27B active / 600B total parameters). It performs strongly in software engineering and professional...",
-        "context_length": 1048576,
+        "context_length": 1000000,
         "max_tokens": 64000,
         "input_modalities": [
           "text",
@@ -11003,7 +11003,7 @@
         "name": "TypeSafe: Jev Router",
         "description": "Jev Router picks the best model and reasoning effort for each request, balancing quality, speed, and cost. It runs on [Jev](https://openrouter.ai/~typesafe/jev-latest), TypeSafe's first System One model, and adapts as your...",
         "context_length": 1000000,
-        "max_tokens": 65536,
+        "max_tokens": 64000,
         "input_modalities": [
           "audio",
           "file",
