@@ -1819,7 +1819,7 @@
         "name": "DeepSeek: DeepSeek V4 Pro 0423",
         "description": "DeepSeek V4 Pro is a large-scale Mixture-of-Experts model from DeepSeek with 1.6T total parameters and 49B activated parameters, supporting a 1M-token context window. It is designed for advanced reasoning, coding,...",
         "context_length": 1048576,
-        "max_tokens": 384000,
+        "max_tokens": 393216,
         "input_modalities": [
           "text"
         ],
@@ -8544,7 +8544,7 @@
         "name": "Auto Router (Beta)",
         "description": "The experimental version of our Auto Router where we test new improvements. Use it to get the latest and greatest version of our general purpose auto router, but expect beta...",
         "context_length": 2000000,
-        "max_tokens": 0,
+        "max_tokens": 65536,
         "input_modalities": [
           "text",
           "image",
@@ -10044,7 +10044,7 @@
         "name": "Qwen: Qwen3.8 27B",
         "description": "Qwen3.8 27B is an open-weight dense vision-language model from Qwen. It is suited for coding, professional workflows, research, multimodal interaction, and long-running agent tasks, with flexible thinking that can be...",
         "context_length": 1000000,
-        "max_tokens": 65536,
+        "max_tokens": 262144,
         "input_modalities": [
           "text",
           "image",
@@ -10612,7 +10612,7 @@
         "model": "stepfun/step-5-preview",
         "name": "StepFun: Step 5 Preview",
         "description": "Step 5 Preview is StepFun's flagship model for agentic work, built on a sparse Mixture-of-Experts architecture (27B active / 600B total parameters). It performs strongly in software engineering and professional...",
-        "context_length": 1000000,
+        "context_length": 1048576,
         "max_tokens": 64000,
         "input_modalities": [
           "text",
@@ -11003,7 +11003,7 @@
         "name": "TypeSafe: Jev Router",
         "description": "Jev Router picks the best model and reasoning effort for each request, balancing quality, speed, and cost. It runs on [Jev](https://openrouter.ai/~typesafe/jev-latest), TypeSafe's first System One model, and adapts as your...",
         "context_length": 1000000,
-        "max_tokens": 64000,
+        "max_tokens": 65536,
         "input_modalities": [
           "audio",
           "file",
@@ -11128,32 +11128,6 @@
         "support_url": [
           "https://openrouter.ai/models/upstage/solar-mini4",
           "https://openrouter.ai/api/v1/models/upstage/solar-mini4-20260922/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "upstage/solar-pro-3",
-      "model_info": {
-        "model": "upstage/solar-pro-3",
-        "name": "Upstage: Solar Pro 3",
-        "description": "Solar Pro 3 is Upstage's powerful Mixture-of-Experts (MoE) language model. With 102B total parameters and 12B active parameters per forward pass, it delivers exceptional performance while maintaining computational efficiency. Optimized...",
-        "context_length": 131072,
-        "max_tokens": 117964,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/upstage/solar-pro-3",
-          "https://openrouter.ai/api/v1/models/upstage/solar-pro-3/endpoints"
         ]
       }
     },
@@ -11936,7 +11910,7 @@
         "name": "Z.ai: GLM 5.3 Flash",
         "description": "GLM-5.3-Flash is a native multimodal model from Z.ai. It is suited for efficient coding and long-horizon agent tasks. Its hybrid sparse and linear attention architecture maintains accurate long-context behavior while...",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 943717,
         "input_modalities": [
           "text",
           "image",
