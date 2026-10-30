@@ -1819,7 +1819,7 @@
         "name": "DeepSeek: DeepSeek V4 Pro 0423",
         "description": "DeepSeek V4 Pro is a large-scale Mixture-of-Experts model from DeepSeek with 1.6T total parameters and 49B activated parameters, supporting a 1M-token context window. It is designed for advanced reasoning, coding,...",
         "context_length": 1048576,
-        "max_tokens": 393216,
+        "max_tokens": 384000,
         "input_modalities": [
           "text"
         ],
@@ -9791,7 +9791,7 @@
         "name": "Qwen: Qwen3.6 27B",
         "description": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities — accepting text, image, and video inputs...",
         "context_length": 262144,
-        "max_tokens": 65536,
+        "max_tokens": 81920,
         "input_modalities": [
           "text",
           "image",
@@ -10018,7 +10018,7 @@
         "name": "Qwen: Qwen3.8 2.4T A95B",
         "description": "Qwen3.8 2.4T A95B is an open-weight sparse mixture-of-experts model from Qwen and the open-weight variant of [Qwen3.8 Max](/qwen/qwen3.8-max), with 95 billion active parameters out of 2.4 trillion total. It is...",
         "context_length": 1048576,
-        "max_tokens": 909000,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
@@ -10044,7 +10044,7 @@
         "name": "Qwen: Qwen3.8 27B",
         "description": "Qwen3.8 27B is an open-weight dense vision-language model from Qwen. It is suited for coding, professional workflows, research, multimodal interaction, and long-running agent tasks, with flexible thinking that can be...",
         "context_length": 1000000,
-        "max_tokens": 262144,
+        "max_tokens": 235929,
         "input_modalities": [
           "text",
           "image",
