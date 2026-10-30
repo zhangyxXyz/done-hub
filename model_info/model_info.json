@@ -1687,7 +1687,7 @@
         "name": "DeepSeek: DeepSeek V3.2",
         "description": "DeepSeek-V3.2 is a large language model designed to harmonize high computational efficiency with strong reasoning and agentic tool-use performance. It introduces DeepSeek Sparse Attention (DSA), a fine-grained sparse attention mechanism...",
         "context_length": 163840,
-        "max_tokens": 65536,
+        "max_tokens": 147456,
         "input_modalities": [
           "text"
         ],
@@ -1819,7 +1819,7 @@
         "name": "DeepSeek: DeepSeek V4 Pro 0423",
         "description": "DeepSeek V4 Pro is a large-scale Mixture-of-Experts model from DeepSeek with 1.6T total parameters and 49B activated parameters, supporting a 1M-token context window. It is designed for advanced reasoning, coding,...",
         "context_length": 1048576,
-        "max_tokens": 384000,
+        "max_tokens": 393216,
         "input_modalities": [
           "text"
         ],
@@ -11910,7 +11910,7 @@
         "name": "Z.ai: GLM 5.3 Flash",
         "description": "GLM-5.3-Flash is a native multimodal model from Z.ai. It is suited for efficient coding and long-horizon agent tasks. Its hybrid sparse and linear attention architecture maintains accurate long-context behavior while...",
         "context_length": 1048576,
-        "max_tokens": 943717,
+        "max_tokens": 131072,
         "input_modalities": [
           "text",
           "image",
