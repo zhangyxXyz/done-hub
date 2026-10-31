@@ -1845,7 +1845,7 @@
         "name": "DeepSeek: DeepSeek V4 Pro 0813",
         "description": "DeepSeek V4 Pro 0813 is a large-scale mixture-of-experts model from DeepSeek. This is the GA release of DeepSeek V4 Pro.",
         "context_length": 1048576,
-        "max_tokens": 393216,
+        "max_tokens": 943718,
         "input_modalities": [
           "text"
         ],
@@ -8885,106 +8885,6 @@
       }
     },
     {
-      "model": "poolside/laguna-s-2.1",
-      "model_info": {
-        "model": "poolside/laguna-s-2.1",
-        "name": "Poolside: Laguna S 2.1",
-        "description": "Laguna S 2.1 is the latest coding agent model from [Poolside](<https://poolside.ai/>). Laguna S 2.1 is a 118B total parameter model with 8B active parameters, scoring 70.2% on Terminal-Bench 2.1 and...",
-        "context_length": 1048576,
-        "max_tokens": 131072,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/poolside/laguna-s-2.1",
-          "https://openrouter.ai/api/v1/models/poolside/laguna-s-2.1-20260720/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "poolside/laguna-s-2.1:free",
-      "model_info": {
-        "model": "poolside/laguna-s-2.1:free",
-        "name": "Poolside: Laguna S 2.1 (free)",
-        "description": "Laguna S 2.1 is the latest coding agent model from [Poolside](<https://poolside.ai/>). Laguna S 2.1 is a 118B total parameter model with 8B active parameters, scoring 70.2% on Terminal-Bench 2.1 and...",
-        "context_length": 262144,
-        "max_tokens": 32768,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/poolside/laguna-s-2.1:free",
-          "https://openrouter.ai/api/v1/models/poolside/laguna-s-2.1-20260720/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "poolside/laguna-xs-2.1",
-      "model_info": {
-        "model": "poolside/laguna-xs-2.1",
-        "name": "Poolside: Laguna XS 2.1",
-        "description": "Laguna XS 2.1 is the latest coding agent model in the 33B-A3B category from [Poolside](https://poolside.ai/) and a step forward from their Laguna XS.2 model (released in April 2026). It combines...",
-        "context_length": 262144,
-        "max_tokens": 32768,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/poolside/laguna-xs-2.1",
-          "https://openrouter.ai/api/v1/models/poolside/laguna-xs-2.1-20260625/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "poolside/laguna-xs-2.1:free",
-      "model_info": {
-        "model": "poolside/laguna-xs-2.1:free",
-        "name": "Poolside: Laguna XS 2.1 (free)",
-        "description": "Laguna XS 2.1 is the latest coding agent model in the 33B-A3B category from [Poolside](https://poolside.ai/) and a step forward from their Laguna XS.2 model (released in April 2026). It combines...",
-        "context_length": 262144,
-        "max_tokens": 32768,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/poolside/laguna-xs-2.1:free",
-          "https://openrouter.ai/api/v1/models/poolside/laguna-xs-2.1-20260625/endpoints"
-        ]
-      }
-    },
-    {
       "model": "prism-ml/ternary-bonsai-2-27b",
       "model_info": {
         "model": "prism-ml/ternary-bonsai-2-27b",
@@ -12248,7 +12148,7 @@
         "name": "DeepSeek: DeepSeek V4 Flash Latest",
         "description": "This model always redirects to the latest model in the DeepSeek V4 Flash family.",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 943718,
         "input_modalities": [
           "text"
         ],
