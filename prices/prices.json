@@ -5064,8 +5064,8 @@
     "model": "minimax/minimax-m3.1-flash",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.15,
-    "output": 0.6
+    "input": 0.075,
+    "output": 0.3
   },
   {
     "model": "minimax/minimax-m3:batch",
@@ -6541,8 +6541,8 @@
     "model": "openai/gpt-oss-120b",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.018,
-    "output": 0.065
+    "input": 0.016,
+    "output": 0.059
   },
   {
     "model": "openai/gpt-oss-120b:batch",
@@ -7703,8 +7703,8 @@
     "model": "tencent/hy3",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.132,
-    "output": 0.528
+    "input": 0.0825,
+    "output": 0.33
   },
   {
     "model": "tencent/hy3-preview",
@@ -7731,8 +7731,8 @@
     "model": "tencent/hy4-preview",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.834,
-    "output": 2.501
+    "input": 0.7506,
+    "output": 2.2509
   },
   {
     "model": "thedrummer/anubis-70b-v1.1",
@@ -8389,7 +8389,7 @@
     "model": "~deepseek/deepseek-v4-flash-latest",
     "type": "tokens",
     "channel_type": 20,
-    "input": 0.0434,
+    "input": 0.059,
     "output": 0.3
   },
   {
