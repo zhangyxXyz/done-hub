@@ -3672,9 +3672,7 @@
           "text"
         ],
         "tags": [
-          "openrouter",
-          "tools",
-          "structured_outputs"
+          "openrouter"
         ],
         "support_url": [
           "https://openrouter.ai/models/meta-llama/llama-3.1-70b-instruct",
@@ -5593,7 +5591,7 @@
         "name": "NVIDIA: Nemotron 3.5 Super VL",
         "description": "NVIDIA Nemotron 3.5 Super VL is an open multimodal mixture-of-experts model from NVIDIA, with 12B active parameters out of 120B total. It takes text, images, documents, GUI screenshots, and video...",
         "context_length": 1048576,
-        "max_tokens": 235929,
+        "max_tokens": 943718,
         "input_modalities": [
           "text",
           "image",
@@ -8242,7 +8240,7 @@
         "name": "OpenAI: gpt-oss-20b",
         "description": "gpt-oss-20b is an open-weight 21B parameter model released by OpenAI under the Apache 2.0 license. It uses a Mixture-of-Experts (MoE) architecture with 3.6B active parameters per forward pass, optimized for...",
         "context_length": 131072,
-        "max_tokens": 117964,
+        "max_tokens": 32768,
         "input_modalities": [
           "text"
         ],
@@ -9050,7 +9048,7 @@
         "name": "Qwen: Qwen3 235B A22B Instruct 2507",
         "description": "Qwen3-235B-A22B-Instruct-2507 is a multilingual, instruction-tuned mixture-of-experts language model based on the Qwen3-235B architecture, with 22B active parameters per forward pass. It is optimized for general-purpose text generation, including instruction following,...",
         "context_length": 262144,
-        "max_tokens": 16384,
+        "max_tokens": 117964,
         "input_modalities": [
           "text"
         ],
@@ -10405,6 +10403,38 @@
       }
     },
     {
+      "model": "stealth/crouton-alpha",
+      "model_info": {
+        "model": "stealth/crouton-alpha",
+        "name": "Crouton Alpha",
+        "description": "Crouton Alpha is a lightweight model built for scalable coding, agentic, and multimodal workflows. It's ideal for executing agentic sub-tasks, tool use, and document analysis in high-volume, repeated work. Developers...",
+        "context_length": 1048576,
+        "max_tokens": 943718,
+        "input_modalities": [
+          "text",
+          "image",
+          "video",
+          "file",
+          "audio"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "audio",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/stealth/crouton-alpha",
+          "https://openrouter.ai/api/v1/models/stealth/crouton-alpha/endpoints"
+        ]
+      }
+    },
+    {
       "model": "stepfun/step-3.5-flash",
       "model_info": {
         "model": "stepfun/step-3.5-flash",
@@ -11206,6 +11236,35 @@
       }
     },
     {
+      "model": "x-ai/grok-4.6:batch",
+      "model_info": {
+        "model": "x-ai/grok-4.6:batch",
+        "name": "SpaceXAI: Grok 4.6 (batch)",
+        "description": "Grok 4.6 is a model from SpaceXAI with frontier performance on coding, knowledge work, and STEM. It is succeeded by [Grok 4.7](/x-ai/grok-4.7).",
+        "context_length": 500000,
+        "max_tokens": 450000,
+        "input_modalities": [
+          "text",
+          "image",
+          "file"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/x-ai/grok-4.6:batch",
+          "https://openrouter.ai/api/v1/models/x-ai/grok-4.6-20260810/endpoints"
+        ]
+      }
+    },
+    {
       "model": "x-ai/grok-4.7",
       "model_info": {
         "model": "x-ai/grok-4.7",
@@ -11230,6 +11289,35 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/x-ai/grok-4.7",
+          "https://openrouter.ai/api/v1/models/x-ai/grok-4.7-20260916/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "x-ai/grok-4.7:batch",
+      "model_info": {
+        "model": "x-ai/grok-4.7:batch",
+        "name": "SpaceXAI: Grok 4.7 (batch)",
+        "description": "Grok 4.7 is SpaceXAI's flagship model for coding, agentic tasks, and knowledge work, succeeding Grok 4.6. It is particularly strong at long-running software engineering tasks, verifying its own work, and...",
+        "context_length": 500000,
+        "max_tokens": 450000,
+        "input_modalities": [
+          "text",
+          "image",
+          "file"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/x-ai/grok-4.7:batch",
           "https://openrouter.ai/api/v1/models/x-ai/grok-4.7-20260916/endpoints"
         ]
       }
