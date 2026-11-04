@@ -8240,7 +8240,7 @@
         "name": "OpenAI: gpt-oss-20b",
         "description": "gpt-oss-20b is an open-weight 21B parameter model released by OpenAI under the Apache 2.0 license. It uses a Mixture-of-Experts (MoE) architecture with 3.6B active parameters per forward pass, optimized for...",
         "context_length": 131072,
-        "max_tokens": 117964,
+        "max_tokens": 32768,
         "input_modalities": [
           "text"
         ],
@@ -10188,6 +10188,31 @@
       }
     },
     {
+      "model": "ricursiveai/ripple-65b-preview",
+      "model_info": {
+        "model": "ricursiveai/ripple-65b-preview",
+        "name": "ricursiveAI/Ripple-65B-Preview",
+        "description": "Ripple-65B-Preview by ricursiveAI, a 65B model with native tool calling, served in BF16.",
+        "context_length": 16384,
+        "max_tokens": 14745,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/ricursiveai/ripple-65b-preview",
+          "https://openrouter.ai/api/v1/models/ricursiveai/ripple-65b-preview-20261104/endpoints"
+        ]
+      }
+    },
+    {
       "model": "sakana/fugu-max",
       "model_info": {
         "model": "sakana/fugu-max",
@@ -10845,64 +10870,6 @@
         "support_url": [
           "https://openrouter.ai/models/thinkingmachines/inkling-small",
           "https://openrouter.ai/api/v1/models/thinkingmachines/inkling-small-20260730/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "thinkingmachines/inkling-small:free",
-      "model_info": {
-        "model": "thinkingmachines/inkling-small:free",
-        "name": "Thinking Machines: Inkling Small (free)",
-        "description": "Inkling Small is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 12B active parameters out of 276B total. It is positioned as the smaller, more efficient member of...",
-        "context_length": 1048576,
-        "max_tokens": 262144,
-        "input_modalities": [
-          "text",
-          "image",
-          "audio"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "audio",
-          "tools",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/thinkingmachines/inkling-small:free",
-          "https://openrouter.ai/api/v1/models/thinkingmachines/inkling-small-20260730/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "thinkingmachines/inkling:free",
-      "model_info": {
-        "model": "thinkingmachines/inkling:free",
-        "name": "Thinking Machines: Inkling (free)",
-        "description": "Inkling is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 41B active parameters out of 975B total. It is designed for general-purpose reasoning, coding, agentic and tool-use systems,...",
-        "context_length": 1048576,
-        "max_tokens": 262144,
-        "input_modalities": [
-          "text",
-          "image",
-          "audio"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "audio",
-          "tools",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/thinkingmachines/inkling:free",
-          "https://openrouter.ai/api/v1/models/thinkingmachines/inkling-20260715/endpoints"
         ]
       }
     },
@@ -11878,7 +11845,7 @@
         "name": "Z.ai: GLM 5.3 Flash",
         "description": "GLM-5.3-Flash is a native multimodal model from Z.ai. It is suited for efficient coding and long-horizon agent tasks. Its hybrid sparse and linear attention architecture maintains accurate long-context behavior while...",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 943717,
         "input_modalities": [
           "text",
           "image",
