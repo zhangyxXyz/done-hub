@@ -3759,7 +3759,7 @@
         "name": "Meta: Llama 3.3 70B Instruct",
         "description": "The Meta Llama 3.3 multilingual large language model (LLM) is a pretrained and instruction tuned generative model in 70B (text in/text out). The Llama 3.3 instruction tuned text only model...",
         "context_length": 131072,
-        "max_tokens": 128000,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -8240,7 +8240,7 @@
         "name": "OpenAI: gpt-oss-20b",
         "description": "gpt-oss-20b is an open-weight 21B parameter model released by OpenAI under the Apache 2.0 license. It uses a Mixture-of-Experts (MoE) architecture with 3.6B active parameters per forward pass, optimized for...",
         "context_length": 131072,
-        "max_tokens": 32768,
+        "max_tokens": 117964,
         "input_modalities": [
           "text"
         ],
@@ -10665,6 +10665,34 @@
       }
     },
     {
+      "model": "tencent/hy4",
+      "model_info": {
+        "model": "tencent/hy4",
+        "name": "Tencent: Hy4",
+        "description": "The official release of Hy4 delivers comprehensive and substantial improvements over Hy4 Preview, with particularly strong gains in agentic capabilities and performance across a wide range of long-horizon, real-world productivity...",
+        "context_length": 1048576,
+        "max_tokens": 65536,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/tencent/hy4",
+          "https://openrouter.ai/api/v1/models/tencent/hy4-20261104/endpoints"
+        ]
+      }
+    },
+    {
       "model": "tencent/hy4-preview",
       "model_info": {
         "model": "tencent/hy4-preview",
@@ -11357,7 +11385,7 @@
         "model": "xiaomi/mimo-v2.5",
         "name": "Xiaomi: MiMo-V2.5",
         "description": "MiMo-V2.5 is a native omnimodal model by Xiaomi. It delivers Pro-level agentic performance at roughly half the inference cost, while surpassing MiMo-V2-Omni in multimodal perception across image and video understanding...",
-        "context_length": 1050000,
+        "context_length": 1000000,
         "max_tokens": 65536,
         "input_modalities": [
           "text",
