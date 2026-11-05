@@ -1927,7 +1927,7 @@
         "name": "DeepSeek: DeepSeek V4.1 Flash (batch)",
         "description": "DeepSeek V4.1 Flash is a sparse mixture-of-experts model from DeepSeek, and the first built on the company's Causal Encoder-Decoder (CED) architecture. It activates 8B parameters on input and 16B on...",
         "context_length": 1048576,
-        "max_tokens": 384000,
+        "max_tokens": 131072,
         "input_modalities": [
           "text",
           "image"
@@ -3457,6 +3457,32 @@
       }
     },
     {
+      "model": "inclusionai/ling-3.0-tiny",
+      "model_info": {
+        "model": "inclusionai/ling-3.0-tiny",
+        "name": "inclusionAI: Ling 3.0 Tiny",
+        "description": "Ling 3.0 Tiny is a mixture-of-experts model from InclusionAI, with 1.3B active parameters out of 7.9B total. It is designed for responsive agents, instruction following, and multi-turn conversations, with switchable...",
+        "context_length": 262144,
+        "max_tokens": 250000,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/inclusionai/ling-3.0-tiny",
+          "https://openrouter.ai/api/v1/models/inclusionai/ling-3.0-tiny-20260806/endpoints"
+        ]
+      }
+    },
+    {
       "model": "inclusionai/ling-3.1-flash",
       "model_info": {
         "model": "inclusionai/ling-3.1-flash",
@@ -3489,7 +3515,7 @@
         "name": "Inference.net: Schematron V2 Small",
         "description": "Schematron V2 Small is a 3B-parameter HTML-to-JSON extraction model from Inference.net. It prioritizes extraction quality for complex schemas and long pages. Extraction instructions must be supplied through a JSON schema...",
         "context_length": 128000,
-        "max_tokens": 4096,
+        "max_tokens": 8192,
         "input_modalities": [
           "text"
         ],
@@ -3759,7 +3785,7 @@
         "name": "Meta: Llama 3.3 70B Instruct",
         "description": "The Meta Llama 3.3 multilingual large language model (LLM) is a pretrained and instruction tuned generative model in 70B (text in/text out). The Llama 3.3 instruction tuned text only model...",
         "context_length": 131072,
-        "max_tokens": 16384,
+        "max_tokens": 128000,
         "input_modalities": [
           "text"
         ],
@@ -3784,7 +3810,7 @@
         "name": "Meta: Llama 4 Maverick",
         "description": "Llama 4 Maverick 17B Instruct (128E) is a high-capacity multimodal language model from Meta, built on a mixture-of-experts (MoE) architecture with 128 experts and 17 billion active parameters per forward...",
         "context_length": 524288,
-        "max_tokens": 16384,
+        "max_tokens": 32768,
         "input_modalities": [
           "text",
           "image"
@@ -8240,7 +8266,7 @@
         "name": "OpenAI: gpt-oss-20b",
         "description": "gpt-oss-20b is an open-weight 21B parameter model released by OpenAI under the Apache 2.0 license. It uses a Mixture-of-Experts (MoE) architecture with 3.6B active parameters per forward pass, optimized for...",
         "context_length": 131072,
-        "max_tokens": 32768,
+        "max_tokens": 117964,
         "input_modalities": [
           "text"
         ],
@@ -8459,7 +8485,7 @@
       "model_info": {
         "model": "openrouter/auto",
         "name": "Auto Router",
-        "description": "The Auto Router automatically selects the best model for your prompt, powered by the wisdom of the market. It routes you based on what the OpenRouter community collectively spends on...",
+        "description": "Auto is OpenRouter’s general-purpose router, now powered by [Jev Router](https://openrouter.ai/typesafe/jev-router). It replaces market-spend rankings with request-aware selection of both the model and reasoning effort, weighing task difficulty, measured benchmark results,...",
         "context_length": 2000000,
         "max_tokens": 0,
         "input_modalities": [
@@ -9275,7 +9301,7 @@
         "name": "Qwen: Qwen3 Next 80B A3B Instruct",
         "description": "Qwen3-Next-80B-A3B-Instruct is an instruction-tuned chat model in the Qwen3-Next series optimized for fast, stable responses without “thinking” traces. It targets complex tasks across reasoning, code generation, knowledge QA, and multilingual...",
         "context_length": 262144,
-        "max_tokens": 235929,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -10193,8 +10219,8 @@
         "model": "ricursiveai/ripple-65b-preview",
         "name": "ricursiveAI/Ripple-65B-Preview",
         "description": "Ripple-65B-Preview by ricursiveAI, a 65B model with native tool calling, served in BF16.",
-        "context_length": 16384,
-        "max_tokens": 14745,
+        "context_length": 1048576,
+        "max_tokens": 131072,
         "input_modalities": [
           "text"
         ],
