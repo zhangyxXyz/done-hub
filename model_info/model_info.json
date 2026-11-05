@@ -2998,6 +2998,62 @@
       }
     },
     {
+      "model": "google/gemini-omni-1.1-flash",
+      "model_info": {
+        "model": "google/gemini-omni-1.1-flash",
+        "name": "Google: Gemini Omni 1.1 Flash",
+        "description": "Gemini Omni 1.1 Flash is Google's native multimodal video generation and editing model, the generally available successor to Gemini Omni Flash Preview. It is suited for text-to-video, image-to-video, first and...",
+        "context_length": 131072,
+        "max_tokens": 65536,
+        "input_modalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output_modalities": [
+          "text",
+          "video"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "reasoning"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/google/gemini-omni-1.1-flash",
+          "https://openrouter.ai/api/v1/models/google/gemini-omni-1.1-flash-20260911/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "google/gemini-omni-1.2-flash",
+      "model_info": {
+        "model": "google/gemini-omni-1.2-flash",
+        "name": "Google: Gemini Omni 1.2 Flash",
+        "description": "Gemini Omni 1.2 Flash is Google's native multimodal video generation and editing model, the successor to Gemini Omni 1.1 Flash. It generates clips up to 15 seconds long with native...",
+        "context_length": 131072,
+        "max_tokens": 65536,
+        "input_modalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output_modalities": [
+          "text",
+          "video"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "reasoning"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/google/gemini-omni-1.2-flash",
+          "https://openrouter.ai/api/v1/models/google/gemini-omni-1.2-flash-20261105/endpoints"
+        ]
+      }
+    },
+    {
       "model": "google/gemma-2-27b-it",
       "model_info": {
         "model": "google/gemma-2-27b-it",
@@ -3108,7 +3164,7 @@
         "name": "Google: Gemma 4 26B A4B ",
         "description": "Gemma 4 26B A4B IT is an instruction-tuned Mixture-of-Experts (MoE) model from Google DeepMind. Despite 25.2B total parameters, only 3.8B activate per token during inference — delivering near-31B quality at...",
         "context_length": 262144,
-        "max_tokens": 32768,
+        "max_tokens": 235929,
         "input_modalities": [
           "image",
           "text",
@@ -3785,7 +3841,7 @@
         "name": "Meta: Llama 3.3 70B Instruct",
         "description": "The Meta Llama 3.3 multilingual large language model (LLM) is a pretrained and instruction tuned generative model in 70B (text in/text out). The Llama 3.3 instruction tuned text only model...",
         "context_length": 131072,
-        "max_tokens": 128000,
+        "max_tokens": 32768,
         "input_modalities": [
           "text"
         ],
@@ -4149,31 +4205,6 @@
       }
     },
     {
-      "model": "minimax/minimax-01",
-      "model_info": {
-        "model": "minimax/minimax-01",
-        "name": "MiniMax: MiniMax-01",
-        "description": "MiniMax-01 is a combines MiniMax-Text-01 for text generation and MiniMax-VL-01 for image understanding. It has 456 billion parameters, with 45.9 billion parameters activated per inference, and can handle a context...",
-        "context_length": 1000192,
-        "max_tokens": 900172,
-        "input_modalities": [
-          "text",
-          "image"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/minimax/minimax-01",
-          "https://openrouter.ai/api/v1/models/minimax/minimax-01/endpoints"
-        ]
-      }
-    },
-    {
       "model": "minimax/minimax-m1",
       "model_info": {
         "model": "minimax/minimax-m1",
@@ -4195,80 +4226,6 @@
         "support_url": [
           "https://openrouter.ai/models/minimax/minimax-m1",
           "https://openrouter.ai/api/v1/models/minimax/minimax-m1/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "minimax/minimax-m2",
-      "model_info": {
-        "model": "minimax/minimax-m2",
-        "name": "MiniMax: MiniMax M2",
-        "description": "MiniMax-M2 is a compact, high-efficiency large language model optimized for end-to-end coding and agentic workflows. With 10 billion activated parameters (230 billion total), it delivers near-frontier intelligence across general reasoning,...",
-        "context_length": 204800,
-        "max_tokens": 131072,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/minimax/minimax-m2",
-          "https://openrouter.ai/api/v1/models/minimax/minimax-m2/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "minimax/minimax-m2-her",
-      "model_info": {
-        "model": "minimax/minimax-m2-her",
-        "name": "MiniMax: MiniMax M2-her",
-        "description": "MiniMax M2-her is a dialogue-first large language model built for immersive roleplay, character-driven chat, and expressive multi-turn conversations. Designed to stay consistent in tone and personality, it supports rich message...",
-        "context_length": 65536,
-        "max_tokens": 2048,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/minimax/minimax-m2-her",
-          "https://openrouter.ai/api/v1/models/minimax/minimax-m2-her-20260123/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "minimax/minimax-m2.1",
-      "model_info": {
-        "model": "minimax/minimax-m2.1",
-        "name": "MiniMax: MiniMax M2.1",
-        "description": "MiniMax-M2.1 is a lightweight, state-of-the-art large language model optimized for coding, agentic workflows, and modern application development. With only 10 billion activated parameters, it delivers a major jump in real-world...",
-        "context_length": 204800,
-        "max_tokens": 131072,
-        "input_modalities": [
-          "text"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "tools",
-          "reasoning",
-          "structured_outputs"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/minimax/minimax-m2.1",
-          "https://openrouter.ai/api/v1/models/minimax/minimax-m2.1/endpoints"
         ]
       }
     },
@@ -4305,7 +4262,7 @@
         "name": "MiniMax: MiniMax M2.7",
         "description": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent...",
         "context_length": 204800,
-        "max_tokens": 131072,
+        "max_tokens": 176947,
         "input_modalities": [
           "text"
         ],
@@ -8485,7 +8442,7 @@
       "model_info": {
         "model": "openrouter/auto",
         "name": "Auto Router",
-        "description": "Auto is OpenRouter’s general-purpose router, now powered by [Jev Router](https://openrouter.ai/typesafe/jev-router). It replaces market-spend rankings with request-aware selection of both the model and reasoning effort, weighing task difficulty, measured benchmark results,...",
+        "description": "Auto is OpenRouter’s flagship model router, built for general-purpose usage. It adapts to each request, choosing cost-optimal models and adjusting reasoning effort. It balances task difficulty, benchmark results, live prices,...",
         "context_length": 2000000,
         "max_tokens": 0,
         "input_modalities": [
@@ -8543,6 +8500,39 @@
         "support_url": [
           "https://openrouter.ai/models/openrouter/auto-beta",
           "https://openrouter.ai/api/v1/models/openrouter/auto-beta/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "openrouter/auto-code",
+      "model_info": {
+        "model": "openrouter/auto-code",
+        "name": "Auto Code",
+        "description": "Auto Code is OpenRouter’s router built specifically for coding agents and harnesses. It uses the same routing engine as the [Auto Router](https://openrouter.ai/openrouter/auto), with every request treated as part of an...",
+        "context_length": 2000000,
+        "max_tokens": 65536,
+        "input_modalities": [
+          "text",
+          "image",
+          "audio",
+          "file",
+          "video"
+        ],
+        "output_modalities": [
+          "text",
+          "image"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "audio",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/openrouter/auto-code",
+          "https://openrouter.ai/api/v1/models/openrouter/auto-code/endpoints"
         ]
       }
     },
@@ -10093,7 +10083,7 @@
         "name": "Reflection: Beam 1.0 501B A23B",
         "description": "Beam 1.0 is Reflection's open-weight reasoning model for coding and long-horizon agentic workflows. It uses a sparse mixture-of-experts architecture with 501B total and 23B active parameters per token, and a...",
         "context_length": 1048576,
-        "max_tokens": 131072,
+        "max_tokens": 943718,
         "input_modalities": [
           "text"
         ],
