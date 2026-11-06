@@ -1559,7 +1559,7 @@
         "name": "DeepSeek: DeepSeek V3",
         "description": "DeepSeek-V3 is the latest model from the DeepSeek team, building upon the instruction following and coding abilities of the previous versions. Pre-trained on nearly 15 trillion tokens, the reported evaluations...",
         "context_length": 163840,
-        "max_tokens": 16000,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -1791,7 +1791,7 @@
         "name": "DeepSeek: DeepSeek V4 Flash Vision Exp",
         "description": "DeepSeek V4 Flash Vision Exp is an experimental vision-enabled version of [DeepSeek V4 Flash 0731](https://openrouter.ai/deepseek/deepseek-v4-flash-0731) from DeepSeek, adding image understanding while matching the base model on text capabilities including agents,...",
         "context_length": 1048576,
-        "max_tokens": 262144,
+        "max_tokens": 943717,
         "input_modalities": [
           "text",
           "image"
@@ -1819,7 +1819,7 @@
         "name": "DeepSeek: DeepSeek V4 Pro 0423",
         "description": "DeepSeek V4 Pro is a large-scale Mixture-of-Experts model from DeepSeek with 1.6T total parameters and 49B activated parameters, supporting a 1M-token context window. It is designed for advanced reasoning, coding,...",
         "context_length": 1048576,
-        "max_tokens": 393216,
+        "max_tokens": 384000,
         "input_modalities": [
           "text"
         ],
@@ -5394,7 +5394,7 @@
         "name": "NVIDIA: Nemotron 3 Super",
         "description": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer...",
         "context_length": 1048576,
-        "max_tokens": 262144,
+        "max_tokens": 16384,
         "input_modalities": [
           "text"
         ],
@@ -5486,32 +5486,6 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/nvidia/nemotron-3.5-content-safety",
-          "https://openrouter.ai/api/v1/models/nvidia/nemotron-3.5-content-safety-20260604/endpoints"
-        ]
-      }
-    },
-    {
-      "model": "nvidia/nemotron-3.5-content-safety:free",
-      "model_info": {
-        "model": "nvidia/nemotron-3.5-content-safety:free",
-        "name": "NVIDIA: Nemotron 3.5 Content Safety (free)",
-        "description": "NVIDIA Nemotron 3.5 Content Safety is a compact 4B-parameter multimodal guardrail model from NVIDIA, fine-tuned from Google Gemma-3-4B. It moderates both inputs to and responses from LLMs and VLMs, accepting...",
-        "context_length": 128000,
-        "max_tokens": 8192,
-        "input_modalities": [
-          "text",
-          "image"
-        ],
-        "output_modalities": [
-          "text"
-        ],
-        "tags": [
-          "openrouter",
-          "vision",
-          "reasoning"
-        ],
-        "support_url": [
-          "https://openrouter.ai/models/nvidia/nemotron-3.5-content-safety:free",
           "https://openrouter.ai/api/v1/models/nvidia/nemotron-3.5-content-safety-20260604/endpoints"
         ]
       }
