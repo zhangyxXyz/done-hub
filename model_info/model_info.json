@@ -1785,6 +1785,32 @@
       }
     },
     {
+      "model": "deepseek/deepseek-v4-flash-0731:batch",
+      "model_info": {
+        "model": "deepseek/deepseek-v4-flash-0731:batch",
+        "name": "DeepSeek: DeepSeek V4 Flash 0731 (batch)",
+        "description": "DeepSeek V4 Flash 0731 is a sparse mixture-of-experts model from DeepSeek, with 13B active parameters out of 284B total. This re-post-trained revision is suited for coding, reasoning, and agent workflows....",
+        "context_length": 1048576,
+        "max_tokens": 384000,
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/deepseek/deepseek-v4-flash-0731:batch",
+          "https://openrouter.ai/api/v1/models/deepseek/deepseek-v4-flash-20260731/endpoints"
+        ]
+      }
+    },
+    {
       "model": "deepseek/deepseek-v4-flash-vision-exp",
       "model_info": {
         "model": "deepseek/deepseek-v4-flash-vision-exp",
@@ -3967,6 +3993,34 @@
       }
     },
     {
+      "model": "meta/muse-glimmer-30b:batch",
+      "model_info": {
+        "model": "meta/muse-glimmer-30b:batch",
+        "name": "Meta: Muse Glimmer 30B (batch)",
+        "description": "Muse Glimmer 30B is a dense, open-weight multimodal model from Meta Superintelligence Labs, distilled from Muse Spark and optimized for autonomous agents on consumer hardware. It is suited for long-horizon...",
+        "context_length": 131072,
+        "max_tokens": 16384,
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/meta/muse-glimmer-30b:batch",
+          "https://openrouter.ai/api/v1/models/meta/muse-glimmer-30b-20260810/endpoints"
+        ]
+      }
+    },
+    {
       "model": "meta/muse-spark-1.1",
       "model_info": {
         "model": "meta/muse-spark-1.1",
@@ -4336,6 +4390,35 @@
         "support_url": [
           "https://openrouter.ai/models/minimax/minimax-m3.1-flash",
           "https://openrouter.ai/api/v1/models/minimax/minimax-m3.1-flash-20261019/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "minimax/minimax-m3:batch",
+      "model_info": {
+        "model": "minimax/minimax-m3:batch",
+        "name": "MiniMax: MiniMax M3 (batch)",
+        "description": "MiniMax-M3 is a multimodal foundation model from MiniMax. It supports text, image, and video inputs with text output, a 1M-token context window, and is suited for long-horizon agentic work, coding,...",
+        "context_length": 524288,
+        "max_tokens": 512000,
+        "input_modalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/minimax/minimax-m3:batch",
+          "https://openrouter.ai/api/v1/models/minimax/minimax-m3-20260531/endpoints"
         ]
       }
     },
@@ -9907,6 +9990,35 @@
       }
     },
     {
+      "model": "qwen/qwen3.8-27b:batch",
+      "model_info": {
+        "model": "qwen/qwen3.8-27b:batch",
+        "name": "Qwen: Qwen3.8 27B (batch)",
+        "description": "Qwen3.8 27B is an open-weight dense vision-language model from Qwen. It is suited for coding, professional workflows, research, multimodal interaction, and long-running agent tasks, with flexible thinking that can be...",
+        "context_length": 262144,
+        "max_tokens": 235929,
+        "input_modalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "tools",
+          "reasoning",
+          "structured_outputs"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/qwen/qwen3.8-27b:batch",
+          "https://openrouter.ai/api/v1/models/qwen/qwen3.8-27b-20260814/endpoints"
+        ]
+      }
+    },
+    {
       "model": "qwen/qwen3.8-flash",
       "model_info": {
         "model": "qwen/qwen3.8-flash",
@@ -10181,7 +10293,7 @@
       "model": "ricursiveai/ripple-65b-preview",
       "model_info": {
         "model": "ricursiveai/ripple-65b-preview",
-        "name": "ricursiveAI/Ripple-65B-Preview",
+        "name": "Ricursive: Ripple 65B Preview",
         "description": "Ripple-65B-Preview by ricursiveAI, a 65B model with native tool calling, served in BF16.",
         "context_length": 1048576,
         "max_tokens": 131072,
@@ -10859,6 +10971,35 @@
         ],
         "support_url": [
           "https://openrouter.ai/models/thinkingmachines/inkling-small",
+          "https://openrouter.ai/api/v1/models/thinkingmachines/inkling-small-20260730/endpoints"
+        ]
+      }
+    },
+    {
+      "model": "thinkingmachines/inkling-small:batch",
+      "model_info": {
+        "model": "thinkingmachines/inkling-small:batch",
+        "name": "Thinking Machines: Inkling Small (batch)",
+        "description": "Inkling Small is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 12B active parameters out of 276B total. It is positioned as the smaller, more efficient member of...",
+        "context_length": 524288,
+        "max_tokens": 262144,
+        "input_modalities": [
+          "text",
+          "image",
+          "audio"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tags": [
+          "openrouter",
+          "vision",
+          "audio",
+          "tools",
+          "reasoning"
+        ],
+        "support_url": [
+          "https://openrouter.ai/models/thinkingmachines/inkling-small:batch",
           "https://openrouter.ai/api/v1/models/thinkingmachines/inkling-small-20260730/endpoints"
         ]
       }
